@@ -23,7 +23,8 @@ sudo gem install locomotivecms_wagon
 sudo bundle install
 
 # finalize
-wagon serve
 cp config/site.yml.demo config/site.yml
+# edit config/site.yml with your sites data
+wagon serve
 ```
 
