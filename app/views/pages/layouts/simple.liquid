@@ -1,0 +1,75 @@
+---
+title: Simple
+is_layout: true
+---
+{% extends 'layouts/default' %}
+
+{% block content %}
+
+
+  <div class="row store-advantage text-size-1xl text-uppercase text text-center text-primary">
+    <div class="col-xs-3 text-center ">
+      <span class="fa-stack fa-lg text-danger">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rocket fa-stack-1x fa-inverse"></i>
+      </span>
+      <div class="">
+        {{'store_advantage_shipping' | translate }}
+      </div>
+
+    </div>
+    <div class="col-xs-3 text-center">
+      <span class="fa-stack fa-lg text-danger">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
+      </span>
+      <div class="">
+        {{'store_advantage_return' | translate }}
+      </div>
+    </div>
+    <div class="col-xs-3 text-center">
+      <span class="fa-stack fa-lg text-danger">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-tag fa-stack-1x fa-inverse"></i>
+      </span>
+      <div class="">
+        {{'store_advantage_price' | translate }}
+      </div>
+    </div>
+    <div class="col-xs-3 text-center ">
+      <span class="fa-stack fa-lg text-danger">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-volume-control-phone fa-stack-1x fa-inverse"></i>
+      </span>
+      <div class="">
+        {{'store_advantage_hotline' | translate }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12" id="slider">
+      <div class="carousel slide" id="main-carousel">
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+          <div class="active item" data-slide-number="0">
+            <img src="/samples/assets/slide-1.png">
+            
+          </div>
+          <div class="item" data-slide-number="1">
+            <img src="/samples/assets/slide-1.png">
+          </div>
+        </div>
+        <!-- Carousel nav -->
+        <a class="left carousel-control" href="#main-carousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#main-carousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+  {% block main %}
+  {% endblock %}
+{% endblock %}

@@ -1,0 +1,98 @@
+{% block "address_form" %}
+
+{% action 'set prefix and suffix element name' %}
+  var input_group = getProp('input_group');
+  if(input_group == null) {
+    var input_group = '';
+  }
+  var suffix = '';
+  var prefix_id= '';
+  var prefix = '';
+  if(input_group != '') {
+    prefix = input_group+'[';
+    suffix = ']';
+    prefix_id = input_group+'_';
+  }
+
+  setProp('prefix', prefix);
+  setProp('suffix', suffix);
+  setProp('prefix_id', prefix_id);
+  var with_require = getProp('with_require');
+  if(with_require == true) {
+    setProp('require', 'required="required"');
+  }
+  else {
+    setProp('require', 'data-required="required"');
+  }
+
+{% endaction %}
+<div class="address-form">
+  <input type="hidden" id="id" name="{{ 'id' | prepend: prefix | append: suffix }}" value="{{address.id | round}}">
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="form-group">
+        <label for="{{ 'firstname' | prepend: prefix_id }}" class="required">{{ "partner_firstname" | translate }}</label>
+        <input type="text" name="{{ 'firstname' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'firstname' | prepend: prefix_id }}" placeholder="{{ 'partner_firstname' | translate }}" {{require}} value="{{address.firstname}}" autocomplete="off">
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="form-group">
+        <label for="{{ 'lastname' | prepend: prefix_id }}" class="required">{{ 'partner_lastname' | translate }}</label>
+        <input type="text" name="{{ 'lastname' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'lastname' | prepend: prefix_id }}" placeholder="{{ 'partner_lastname' | translate }}" {{require}} value="{{address.lastname}}" autocomplete="off">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="{{ 'street' | prepend: prefix_id }}" >{{ 'partner_address1' | translate }}</label>
+        <input type="text" name="{{ 'street' | prepend: prefix | append: suffix }}" class="form-control" data-toggle="autocomplete" id="{{ 'street' | prepend: prefix_id }}" placeholder="{{ 'partner_address1' | translate }}" {{require}} data-bind="route" autocomplete="off" value="{{address.street}}">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="{{ 'street2' | prepend: prefix_id }}"> {{ 'partner_address2' | translate }}</label>
+        <input type="text" name="{{ 'street2' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'street2' | prepend: prefix_id }}" value="{{address.street2}}" placeholder="{{ 'partner_address2' | translate }}" autocomplete="off">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-5 col-sm-3">
+      <div class="form-group">
+        <label for="{{ 'zip' | prepend: prefix_id }}" class="required">{{ 'partner_zipcode' | translate }}</label>
+        <input type="text" name="{{ 'zip' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'zip' | prepend: prefix_id }}" value="{{address.zip}}" placeholder="{{ 'partner_zipcode' | translate }}" {{require}} data-bind="postal_code" autocomplete="off">
+      </div>
+    </div>
+    <div class="col-xs-7 col-sm-6">
+      <div class="form-group">
+        <label for="{{ 'city' | prepend: prefix_id }}" class="required">{{ 'partner_city' | translate }}</label>
+        <input type="text" name="{{ 'city' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'city' | prepend: prefix_id }}" value="{{address.city}}" placeholder="{{ 'partner_city' | translate }}" {{require}} data-bind="locality" autocomplete="off">
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      <div class="form-group">
+        <label for="{{ 'country_id' | prepend: prefix_id }}" class="required">{{ 'partner_country' | translate }}</label>
+        <select class="form-control" id="{{ 'country_id' | prepend: prefix_id }}" name="{{ 'country_id' | prepend: prefix | append: suffix }}">
+        {% for country in contents.countries %}
+          <option value="{{country.erp_id}}" {%if country.erp_id == adresse.country_id %}selected="selected"{%endif%}>{{country.name}}</option>
+        {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="form-group">
+        <label for="{{ 'phone' | prepend: prefix_id }}" class="required">{{ 'partner_phone' | translate }}</label>
+        <input type="tel" class="form-control" id="{{ 'phone' | prepend: prefix_id }}" name="{{ 'phone' | prepend: prefix | append: suffix }}" placeholder="{{ 'partner_phone' | translate }}" value="{{address.phone}}" autocomplete="off" {{require}}>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="form-group">
+        <label for="{{ 'company' | prepend: prefix_id }}">{{ 'partner_business' | translate }}</label>
+        <input type="text" class="form-control" id="{{ 'company' | prepend: prefix_id }}" name="{{ 'company' | prepend: prefix | append: suffix }}" placeholder="{{ 'partner_business' | translate }}" value="{{address.company}}" autocomplete="off">
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+<div class="rating" >
+  {% if rating_value > 0%}
+    {% for i in (1..5) %}
+      {% if i > rating_value %}
+        <i class="fa fa-star-o" aria-hidden="true"></i>
+      {% else %}
+        <i class="fa fa-star" aria-hidden="true"></i>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    &nbsp;
+  {% endif %}
+  {% if rating_nbr > 0%}
+    <span class="small">{{'rating_count' | translate: count: rating_nbr}}</span>
+  {% endif %}
+</div>

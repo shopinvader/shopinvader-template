@@ -1,0 +1,58 @@
+.navbar-brand {
+  padding: 0;
+
+  .navbar-baseline {
+    display : inline-block;
+
+  }
+}
+
+.store-advantage {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.navbar-header {
+  background-color: #efefef;
+  padding-top: 10px;
+
+  .header-cart {
+    position: relative;
+
+    .header-cart-itemcount {
+
+      position: absolute;
+      top: 15px;
+    }
+  }
+
+  .header-login {
+
+  }
+}
+.categories-menu {
+  padding: 10px;
+    li {
+      border-right: 1px solid $gray-lighter ;
+      text-align: center;
+      &:last-child {
+        border: 0;
+        a {
+          padding-right: 0;
+        }
+      }
+
+      &:first-child {
+        a {
+          padding-left: 0;
+        }
+      }
+
+      a {
+        padding-bottom: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 5px;
+      }
+    }
+}

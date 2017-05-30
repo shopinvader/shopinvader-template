@@ -1,0 +1,89 @@
+---
+title: Category
+published: true
+handle: category
+---
+{% extends 'layouts/default' %}
+
+{% block content %}
+<div class="container">
+  <div class="row row-same-height">
+    <div class="col-xs-3">
+      <div id="filter" class="sidebar">
+        <h3>{{'search_filter_title' | translate}}</h3>
+        <div
+          id="filter-categories_ids"
+          data-filter-widget-type="menu"
+          data-filter-attr="categories_ids"
+          data-filter-name="categories_ids"
+          class="hidden">
+        </div>
+      {% for filter in category.filter %}
+        <div
+          id="filter-{{filter.attribute}}"
+          data-filter-widget-type="refinementList"
+          data-filter-attr="{{filter.attribute}}"
+          data-filter-name="{{filter.name}}"
+          data-show-more-label="{{'search_show_more' | translate}}"
+          data-filter-hit-limit='10'
+          class="small">
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+    <div class="col-xs-9">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="title-decorator">{{category.name}}</h1>
+          <p>{{category.subtitle}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="search-result" class="hidden"></div>
+          <div id="all-result">
+            {% with_scope category_level1: category.id%}
+            {% paginate store.products by 18 %}
+            <div class="row separator-bottom">
+              <div class="col-xs-12 text-right ">
+                {% include 'paginate' with paginate %}
+              </div>
+            </div>
+            <div class="row row-same-height">
+            {% for product in paginate.collection %}
+            <div class="product-thumbnail col-xs-12 col-sm-4 col-md-4">
+              {% include 'product_thumbnail' with product %}
+            </div>
+            {% endfor %}
+            </div>
+            <div class="row">
+              <div class="col-xs-12 text-right">
+                {% include 'paginate' with paginate %}
+              </div>
+            </div>
+            {% endpaginate %}
+            {% endwith_scope %}
+          </div>
+
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <div id="pagination"  class="hidden"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block 'css' %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css">
+{% endblock %}
+
+{% block 'javascripts'%}
+  <script type="text/javascript">
+    var category_id = "{{category.objectID}}";
+  </script>
+  <script src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
+  <script src="{{ 'search.js' | javascript_url }}?category={{category.name}}"></script>
+{% endblock %}

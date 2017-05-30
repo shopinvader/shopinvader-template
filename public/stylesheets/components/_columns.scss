@@ -1,0 +1,136 @@
+/* columns of same height styles */
+.row-full-height {
+  height: 100%;
+}
+
+.col-full-height {
+  height: 100%;
+  vertical-align: middle;
+}
+
+.row-same-height {
+  &::before,
+  &::after {
+    display:unset;
+    /*Safari fix*/
+  }
+
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+
+  justify-content: flex-start;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-align: top;
+  -ms-flex-align: top;
+  align-items: top;
+
+  & > div[class*='col-'] {
+    -ms-flex-item-align: auto;
+        -ms-grid-row-align: auto;
+        align-self: auto;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 auto;
+            flex: 0 1 auto;
+
+    .block-text,
+    .thumbnails {
+      height: calc(100% - 20px);
+
+      &.full-line-xs {
+        @media (max-width: $screen-sm-min) {
+          height: calc(100%);
+        }
+      }
+    }
+  }
+}
+/*
+.row-same-height {
+  //display: -webkit-box;
+  //display: -ms-flexbox;
+  //display: flex;
+  //flex-wrap: wrap;
+  //-webkit-flex-wrap: nowrap;
+  [class*='col-'] {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex:1 1 auto;
+    /*box-flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+
+    .block-text {
+      height: 100%;
+    }
+  }
+}
+*/
+
+.media {
+  .media-left {
+    vertical-align: middle;
+    .fa {
+      font-size: 60px;
+    }
+  }
+}
+
+.row-same-height-old {
+  display: table;
+  width: 100%;
+  /* fix overflow */
+  table-layout: fixed;
+}
+.col-xs-height {
+  display: table-cell;
+  float: none !important;
+}
+@media (min-width: 768px) {
+  .col-sm-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+
+/* vertical alignment styles */
+.col-top {
+  vertical-align: top;
+}
+.col-middle {
+  vertical-align: middle;
+}
+.col-bottom {
+  vertical-align: bottom;
+}

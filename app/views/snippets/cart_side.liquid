@@ -1,0 +1,41 @@
+{% block cart_side %}
+{% if cart.order_line.size > 0 %}
+  <div class="row" class="side_cart_content">
+    <div class="col-xs-12">
+    {% include cart_list with cart %}
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-xs-6 text-left">{{ 'cart_shipping_cost' | translate }}</div>
+    <div class="col-xs-6 text-right">
+      {% if cart.shipping_cost %}
+        {{cart.shipping_cost | money }}
+      {% else %}
+        {{ 'cart_free_delivery' | translate }}
+      {% endif %}
+    </div>
+  </div>
+  {% if display_total == true %}
+  <div class="row ">
+    <div class="col-xs-6 text-lg text-left bold">{{ 'cart_amount_total' | translate }}</div>
+    <div class="col-xs-6 text-1xl text-right bold">{{cart.amount_total | money }}</div>
+  </div>
+  {% endif %}
+  <div class="row">
+    <div class="col-xs-12 text-center checkout">
+      <a class="btn btn-success text-lg btn-cart-checkout" href="{% path_to cart_index %}" >
+        {{ 'cart_checkout' | translate }}
+        <i class="fa fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+{% else %}
+  <div class="col-xs-12">
+    <div class="text-center text-1xl cart-empty">
+      {% editable_text cart_empty, rows: 1, format:'raw' %}
+        Votre panier est vide.
+      {% endeditable_text %}
+    </div>
+  </div>
+{% endif %}
+{% endblock %}

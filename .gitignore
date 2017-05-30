@@ -1,0 +1,4 @@
+log
+bundle
+dev.docker-compose.yml
+config/deploy.yml

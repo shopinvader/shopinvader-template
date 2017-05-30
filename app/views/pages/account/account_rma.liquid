@@ -1,0 +1,159 @@
+---
+title: Claims
+handle: account_rma
+slug: claims
+seo_title: Claims | Space Discount
+---
+{% extends 'layouts/account '%}
+
+{% block 'content/tabcontent' %}
+
+<div class="row  tab-header">
+  <div class="col-xs-12">
+
+  </div>
+</div>
+{% if params.selected_order_id != null %}
+  {% with_scope id: params.selected_order_id %}
+    {% assign selected_order = store.orders.first%}
+  {% endwith_scope%}
+{%endif%}
+
+<div class="row address-form">
+  <div class="col-md-3 text-center">
+    <p class="text-1xl">
+      {% editable_text 'phone_details', inline: true, rows: 1 %}
+        <div class="bold text-2xl">Besoin d'aide ?</div>
+        Vous pouvez aussi nous contacter par téléphone au
+      {% endeditable_text %}
+    </p>
+    <a href="tel:{{ site.metafields.store.phone_number }}" class="text-2xl bold  color-warning ">
+        {{ site.metafields.store.phone_number }}
+    </a>
+    <p class="small">
+      {{ site.metafields.store.phone_hours }}
+    </p>
+  </div>
+  <div class="well col-xs-12 col-md-7" id="form-rma-container" data-shopinvader-container>
+    <h2>{{'account_rma_title' | translate}}</h2>
+    <p>
+      {% editable_text subtitle, rows: 1, format:'raw', hint: "Subtitle" %}
+      Vous pouvez demander le retour de marchandise via le formulaire ci-dessous.
+      {% endeditable_text %}
+    </p>
+    <form method="post" id="form_rma_order" action="{% path_to page.handle %}" data-shopinvader-form>
+      <div class="row">
+        <div class="col-xs-12">
+          <span class="text-2xl form-rma-title">
+            <span class="form-rma-step">1</span>
+            {{ 'account_rma_order' | translate }}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 form-rma-content">
+          <p class="help-block">
+            {% editable_text help_step1, rows: 1, format:'raw', hint: "Help step 1" %}
+            Je sélectionne la commande concernée par le retour de mon article.
+            {% endeditable_text %}
+          </p>
+          <select class="form-control" name="selected_order_id" id="selected_order_id">
+          {% for order in store.orders %}
+            <option value="{{order.id}}" {% if order.id == selected_order.id %}selected="selected"{% endif%}> {{order.date_order | append:'2017-02-06' | date:"%d/%m/%Y" }} - {{order.name}}</option>
+          {% endfor %}
+          </select>
+        </div>
+      </div>
+    </form>
+    <form class="form-rma {% if selected_order == null%}form-rma-inactive{% endif%}" action="{% path_to page.handle %}" method="post">
+      <input type="hidden" name="action_proxy" value="rma/{{selected_order.id}}">
+      <input type="hidden" name="action_method" value="post">
+      <div class="row ">
+        <div class="col-xs-12">
+          <span class="text-2xl form-rma-title">
+            <span class="form-rma-step">2</span>
+            {{ 'account_rma_return' | translate }}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 form-rma-content">
+          <p class="help-block">
+            {% editable_text help_step2, rows: 1, format:'raw', hint: "Help step 2" %}
+            Je sélectionne le ou les articles à retourner.
+            {% endeditable_text %}
+          </p>
+
+          <table class="table table-striped table-responsive">
+            <thead>
+              <th colspan="2">{{'account_rma_item' | translate }}</th>
+              <th class="text-center">{{'account_rma_qty' | translate }}</th>
+            </thead>
+            <tbody>
+            {% if selected_order %}
+              {% for order_line in selected_order.order_line %}
+              <tr>
+                <td>
+                  <img src="{{order_line.product_url | resize: '50x50'}}" class="img-responsive img-thumbnail" alt="" />
+                </td>
+                <td>
+                  {{order_line.product_id.name}}
+                  <div class="text-small">
+                    <i>{{order_line.product_id.prefix_code}}</i>
+                  </div>
+                </td>
+                <td class="text-center" align="center">
+                  <select class="form-control input-sm" name="">
+                    {% for i in (0..order_line.product_uom_qty) %}
+                    <option value="{{i}}">{{i}}</option>
+                    {% endfor %}
+                  </select>
+                </td>
+              </tr>
+              {% endfor %}
+            {% endif%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <span class="text-2xl form-rma-title">
+            <span class="form-rma-step">3</span>
+            {{ 'account_rma_message' | translate }}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 form-rma-content">
+          <p class="help-block">
+            {% editable_text help_step3, rows: 1, format:'raw', hint: "Help step 3" %}
+            J'indique le motif de retour pour chacun de mes articles retournés.
+            {% endeditable_text %}
+          </p>
+          <textarea name="message" class="form-control" rows="8" cols="80" {% if selected_order == null%}disabled="disabled"{% endif %}></textarea>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <p class="help-block">
+          {% editable_text help_message, rows: 1, format:'raw', hint: "Help message" %}
+            Une fois validée, votre demande de retour d'article va être analysée au plus vite par nos services.
+          {% endeditable_text %}
+          </p>
+        </div>
+        <div class="col-xs-6">
+          <button type="submit" class="btn btn-success btn-lg pull-right" {% if selected_order == null%}disabled="disabled"{% endif %}>
+            {{'account_rma_submit' | translate }} <i class="fa fa-angle-right"></i>
+          </button>
+        </div>
+      </div>
+
+
+
+
+    </form>
+  </div>
+</div>
+{% endblock %}

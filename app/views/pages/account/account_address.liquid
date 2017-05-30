@@ -1,0 +1,98 @@
+---
+title: Account addresses
+handle: account_address
+slug: addresses
+seo_title: Shipping addresses | Space Discount
+---
+{% extends 'layouts/account '%}
+
+{% block 'content/tabcontent' %}
+  {% if params.address_id or params.add  == "true" %}
+    <div class="col-xs-12 ">
+    {% if params.add == "true" %}
+      {% assign action_method = 'post'%}
+      {% assign action_proxy = 'contacts'%}
+    {% else %}
+      {% with_scope id: params.address_id %}
+        {% assign address = store.contacts.first %}
+      {% endwith_scope%}
+      {% assign action_method = 'put'%}
+      {% assign action_proxy = 'contacts/' | append: address.id | round%}
+    {% endif %}
+      <div class="row">
+        <h2>{{'account_address_update' | translate  }}</h2>
+        <div class="well" id="address-form">
+          <form class="" action="{% path_to page.handle %}" method="post" data-autocomplete="address">
+            <input type="hidden" name="action_method" value="{{action_method}}">
+            <input type="hidden" name="action_proxy" value="{{action_proxy}}">
+            {% include 'address_form' with address, with_require: true %}
+            <div class="row">
+              <div class="col-xs-6 text-left">
+                <a href="{% path_to account_address %}" class="btn btn-default " >{{'account_address_cancel' | translate}}</a>
+              </div>
+              <div class="col-xs-6 text-right">
+                <input type="submit" name="submit" class="btn btn-success " value="{{'account_address_submit' | translate}}">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="row tab-header">
+      <div class="col-xs-6">
+        <h2>{{'account_address_lists' | translate  }}</h2>
+      </div>
+      <div class="col-xs-6 text-right">
+        <form action="{% path_to page.handle %}" method="post">
+          <input type="hidden" name="add" value="true">
+          <button type="submit" name="button" class="btn btn-success">
+            <i class="fa fa-plus"></i> {{'account_address_add' | translate}}
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="row row-same-height">
+    {% with_scope contact_type: "address"%}
+      {% for address in store.contacts%}
+        <div class="col-xs-12 col-sm-6 col-md-4 address">
+          <div class="well well-full-height">
+            <address>
+              <span class="bold">{{address.display_name}} {{address.contact_type}}</span>
+              <div class="">{{address.street}}</div>
+              <div class="">{{address.street2}}</div>
+              <div class="">{{address.zip}} - {{address.city}}</div>
+              <div class="">{{address.state_id}} {{address.country_id.name}}</div>
+            {% if address.phone != ""%}
+              <div class=""><i class="fa-fw fa fa-phone"></i>{{address.phone}}</div>
+            {% endif %}
+            </address>
+            <div class="text-right">
+              <ul class="menu">
+                <li>
+                  <a href="{% path_to account_address %}?address_id={{address.id | round}}" class="address-update">
+                    <i class="fa fa-pencil fa-fw"></i>
+                    {{ "account_address_update" | translate }}
+                  </a>
+                </li>
+                <li>
+                  <form class="" action="{% path_to page.handle%}" method="post"  data-form-address-delete="true">
+                    <input type="hidden" name="action_proxy" value="contacts/{{address.id | round}}">
+                    <input type="hidden" name="action_method" value="delete">
+                    <button type="submit" class="btn btn-link">
+                      <i class="fa fa-trash-o fa-fw"></i>
+                      {{ "account_address_delete" | translate }}
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endwith_scope%}
+    </div>
+  {% endif%}
+</div>
+{% endblock %}

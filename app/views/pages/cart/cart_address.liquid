@@ -1,0 +1,153 @@
+---
+title: Shipping address | Space Discount
+slug: address
+handle: cart_address
+position: 4
+listed: false
+published: true
+is_layout: false
+---
+{% extends "layouts/checkout" %}
+{% block content/main %}
+<div class="row">
+  <div class="col-xs-12 col-md-9">
+    {% if session.address_validation_error == 'invalid_address'%}
+    {% action 'reset session'%}
+    setSessionProp('address_validation_error', '');
+    {% endaction %}
+    <div class="row">
+      <div class="col-xs-12 text-danger text-center text-1xl">
+        {{'cart_address_error' | translate }}
+      </div>
+    </div>
+    {% endif %}
+    <div id="template_error" class=" hidden">
+      <div class="title">
+        {{'cart_address_error_title' | translate}}
+      </div>
+      <div class="body">
+        <div class="text-center text-2xl">
+          <i class="fa fa-exclamation-triangle fa-w color-warning"></i>
+          {{'cart_address_error_details' | translate}}
+        </div>
+      </div>
+      <div class="footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          {{'modal_close' | translate}}
+        </button>
+      </div>
+    </div>
+    {% if address_book == null or address_book.size == 0  %}
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="form-group">
+          <label for="email">{{ "partner_email" | translate }}</label>
+          <input type="email" name="partner_shipping_id[email]" value="{{cart.anonymous_email}}" class="form-control" id="email" placeholder="{{ 'cart_login' | translate }}" required="required" autocomplete="off">
+        </div>
+      </div>
+    </div>
+    {%endif%}
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>{{ 'cart_customer_shipping' | translate }}</h2>
+        {% if address_book == null or address_book.size == 0  %}
+        <div data-autocomplete="address">
+          {%include "address_form"
+          with input_group: 'partner_shipping_id',
+          with_require: true,
+          address: session.partner_shipping_id
+          %}
+        </div>
+        {% else %}
+        <div id="shipping_address_book">
+          {% include "address_book" with
+          input_group: 'shipping',
+          input_name: 'partner_shipping_id',
+          address_list: address_book
+          %}
+        </div>
+        <div id="templates-modal-title" class="hidden">
+          {{'cart_address_update' | translate }}
+        </div>
+        <div id="templates-modal-body" class="hidden">
+          {% include "address_form" with
+          input_group: '',
+          address_book,
+          with_require: false
+          %}
+        </div>
+        <div id="templates-modal-footer" class="hidden">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            {{'modal_close' | translate}}
+          </button>
+          <button type="button" id="save-address" class="btn btn-warning">
+            {{'modal_save' | translate}}
+          </button>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input name="use_different_invoice_address" class="form-check-input" type="checkbox" autocomplete="off" >
+            {{ 'cart_invoice_address_different' | translate }}
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="invoice_address_block hidden">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>{{ 'cart_customer_invoice' | translate }}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          {% if address_book.size == 0  %}
+          <div class="invoice_address_book" data-autocomplete="address">
+            {% include "address_form"
+            with input_group: 'partner_invoice_id',
+            with_require: false,
+            address: session.partner_shipping_id
+            %}
+          </div>
+          {% else %}
+          <div class="invoice_address_book row row-same-height address_book"></div>
+          <div id="invoice_address_book">
+            {% include "address_book" with
+            input_group: 'invoice',
+            input_name: 'partner_invoice_id',
+            address_list: address_book,
+            selected_address_id: cart.partner_shipping_id.id
+            %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6 text-left">
+        <a href="{% path_to cart_index %}">
+          <i class="fa fa-arrow-circle-left"></i>
+          {{'cart_return' | translate}}
+        </a>
+      </div>
+      <div class="col-xs-6 text-right address-submit-form ">
+        <button class="btn btn-warning text-lg" type="submit" class="bg-color-success text-1xl color-white">
+          {{'cart_shipping_method' | translate}}
+          <i class="fa fa-arrow-circle-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-3">
+    {% include 'cart_total' %}
+  </div>
+</div>
+{% endblock %}
+{% block 'javascripts' %}
+  {{ 'address_autocomplete.js' | javascript_tag }}
+  <script src="https://maps.googleapis.com/maps/api/js?key={{site.metafields.google.maps_api_key}}&libraries=places&callback=initAutocomplete" async defer></script>
+{% endblock %}

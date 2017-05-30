@@ -1,0 +1,75 @@
+$icon-font-path: "../fonts/bootstrap/" !default;
+@import 'bootstrap/variables';
+
+@import 'components/algolia';
+@import 'components/cart';
+@import 'components/columns';
+@import 'components/editable';
+@import 'components/nav';
+@import 'components/product';
+@import 'components/rating';
+@import 'components/typo';
+@import 'components/slide';
+@import 'components/wait_overlay';
+@import 'components/wells';
+
+footer {
+  margin-top: 70px;
+}
+
+.navbar-fixed-top + main {
+  padding-top: 150px;
+}
+
+.debug [class*='col-'] {
+  border: 1px dotted $brand-danger !important;
+  background-clip: content-box !important;
+  min-height: 20px !important;
+}
+
+.sidebar {
+  border-right : 1px solid $gray-lighter;
+  padding-right: 10px;
+  height:100%;
+}
+
+.turbolinks-progress-bar {
+  height: 5px;
+  background-color: $brand-danger;
+}
+
+.pagination-block {
+  padding-bottom: 20px;
+}
+
+.modal-lg {
+    max-width: 1400px;
+    width: 100%;
+}
+
+@media (min-width: 1200px) {
+    .container{
+        max-width: 1400px;
+        width: 100%;
+    }
+}
+
+.nav-stacked {
+  li{
+    background-color: $gray-lighter;
+    position: relative;
+    a {
+      color: $gray-darker;
+      font-size: 14px;
+    }
+    &.active {
+      background-color: $brand-danger;
+      a {
+        background-color : transparent;
+        border: 0;
+      }
+
+
+    }
+  }
+}

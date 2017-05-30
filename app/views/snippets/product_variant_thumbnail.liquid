@@ -1,0 +1,38 @@
+{% assign product_price = product.pricelist.values.first %}
+<div class="product-thumbnail col-xs-12 col-md-6 col-lg-2">
+  <div class="thumbnail">
+    <div class="product-thumbnail-slide">
+      <a href="{{product.url_key | prepend: url_base}}?ref={{product.default_code}}">
+      <img class="group list-group-image" src="{{product.images.first.medium  | default: site.metafields.theme.noimage }}" alt="" />
+      {%if product_price.discount_value != false%}
+      <div class="discount-value">
+         <strong class="text-bold">
+          - {{product_price.discount_value }} % !
+        </strong>
+      </div>
+      {%endif%}
+      </a>
+    </div>
+    <div class="caption">
+      <div class="">
+        {{product.variant_name}}
+      </div>
+
+      <div class="row product-price-line">
+        <div class="col-xs-12  text-left">
+          {{'product_price_from' | translate}}
+          {%if product_price.discount_value != false%}
+            <s>
+              {{product_price.discount_old_price | money }}
+            </s>
+          {% endif %}
+          <div class="text-heading text-size-4xl">
+            <span class=" {%if product_price.discount_value != false%} text-warning{% endif %}">
+              {{product_price.price | money}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>

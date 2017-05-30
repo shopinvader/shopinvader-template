@@ -1,0 +1,28 @@
+{% if product.images.size > 1 %}
+<div  class="carousel slide" id="slide-{{product.erp_id}}">
+  <!-- Carousel items -->
+  <div class="carousel-inner" >
+    {% assign image_id = 0  %}
+    {% for image in product.images %}
+    <div class="item {%if forloop.index == 1 %}active{%endif%}"   data-target="#slide-{{product.erp_id}}" data-slide-number="{{forloop.index}}">
+      <img src="{{image.large}}" alt=""/>
+    </div>
+    {% endfor %}
+  </div>
+  <a class="left carousel-control" href="#slide-{{product.erp_id}}" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#slide-{{product.erp_id}}" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+{% for image in product.images %}
+<div class="{%if forloop.index == 1 %}active{%endif%} carousel-thumbails"   data-target="#slide-{{product.erp_id}}" data-slide-number="{{forloop.index}}">
+  <a class="" href="#slide-{{product.erp_id}}" role="button" data-slide-number="{{forloop.index}}">
+    <img src="{{image.small}}" alt=""/>
+  </a>
+</div>
+{% endfor %}
+{% else %}
+<img class="group list-group-image" src="{{product.data.images.first.large  | default: site.metafields.theme.noimage }}" alt="" />
+{% endif %}

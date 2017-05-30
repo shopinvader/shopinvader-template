@@ -1,0 +1,34 @@
+# Site metafield schema
+store:
+  label: My store
+  fields:
+    phone_number:
+      type: string
+theme:
+  label: Theme
+  fields:
+    logo:
+      hint: "Displayed at the top right corner, right before the name of the site."
+      type: image
+    noimage:
+      hint: Default placeholder image (categories, products...)
+      type: image
+algolia:
+  label: Algolia
+  fields:
+    application_id:
+      hint: "Algolia application ID"
+      type: string
+    api_key:
+      hint: "Algolia API Key"
+      type: string
+
+erp:
+  label: Odoo ERP Integration
+  fields:
+    api_key:
+      type: string
+    api_url:
+      type: string
+    default_pricelist:
+      type: string

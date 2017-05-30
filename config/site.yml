@@ -1,0 +1,47 @@
+# The name of this site
+# This text displays in the back-office and
+# can be used in templates through the site.name global variable
+name: "Space Discount (Shopinvader Demo)"
+
+# An array of domain aliases for the site
+# This option is for sites on multi-site engines
+# domains: [www.example.com, example.com]
+
+# An array of locales (languages) the site is available in
+# The locale listed first is the site's default locale
+# Locales are specified using ISO language codes
+# Possible locales include: en, de, fr, pl, pt-BR, it, nl, nb, es, ru, et, ja, zh-CN
+locales: [en, fr]
+
+seo_title: Space Discount | May the discount be with you
+meta_keywords: "Space Discount the Shop Invader demo web store"
+meta_description: "Space Discount the Shop Invader demo web store"
+
+metafields_ui:
+  label:
+    en: Store settings # use a hash for localized versions
+  icon: shopping-cart # FontAwesome icons without the leading "fa-" string.
+  hint: ""
+metafields:
+  store:
+    phone_number: < Your Store Hotline number >
+  theme:
+    logo: "/samples/assets/shop-logo.png"
+    noimage: "/samples/assets/no-image.jpg"
+  algolia:
+    application_id: < Your Algolia APP ID >
+    api_key: < Your Algolia API KEY >
+    indices: >
+      [
+        { "name": "categories", "index": "category" },
+        { "name": "products", "index": "product" }
+      ]
+    routes: >
+      [
+          ["*", { "name": "category", "template_handle": "category", "index": "categories" } ],
+          ["*", { "name": "product", "template_handle": "product", "index": "products" } ]
+      ]
+  erp:
+    api_key: < Your ERP API Key>
+    api_url: < Your ERP URL >
+    default_pricelist: < Your default pricelist name >

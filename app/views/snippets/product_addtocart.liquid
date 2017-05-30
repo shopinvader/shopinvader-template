@@ -1,0 +1,66 @@
+{% assign product_price = product.price[site.metafields.erp.default_pricelist] %}
+<form class="" action="{{product.url_key  | prepend: url_base}}" method="post" data-shopinvader-form>
+  <input type="hidden" name="action_proxy" value="cart/item">
+  <input type="hidden" name="action_method" value="post">
+  <input type="hidden" name="product_id" value="{{product.objectID }}">
+    {% assign product_price = product.pricelist.values.first %}
+    <div class="row">
+      <div class="col-xs-12 text-size-4xl text-right">
+        {%if product_price.discount_value != false%}
+          <s>
+            {{product_price.discount_old_price | money }}
+          </s>
+        {% endif %}
+        <span class="text-size-6xl text-heading text-warning">
+          {{ product_price.price | money}}
+        </span>
+        {% if product.pricelist.tax_included == true %}
+          <sub class="text-size-base">{{'product_vat_inc' | translate}}</sub>
+        {% endif %}
+        <div class="text-size-2xl ">
+          {% include 'rating_stars'
+            with
+            rating_value: product.rating_value,
+            rating_nbr: product.rating_nbr
+          %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        {{'product_code' | translate }}
+        <strong>{{product.default_code}}</strong>
+
+        <div class="">
+          {{product.variant_name}}
+        </div>
+      </div>
+    </div>
+    <div class="row form-horizontal product-form-qty">
+      <label for="qty" class="col-sm-5 control-label text-right text-size-lg">
+        {{'product_quantity' | translate}}
+      </label>
+      <div class="col-xs-4">
+        {% include 'product_qty_input' with qty:1 %}
+      </div>
+    </div>
+    <div class="row row-same-height ">
+      <div class="col-xs-6 col-lg-6  text-left product-stock-state">
+        <span class="{{product.stock_state}} text-size-1xl">
+          {{product.stock_state | prepend: 'product_stock_state_' | translate}}
+        </span>
+      </div>
+      <div class="col-xs-6 col-lg-6  text-right ">
+      {%if product_price.discount_value == false%}
+        <button type="submit" class="btn btn-success btn-lg">
+          {{"product_add_to_cart" | translate }}
+        </button>
+      {%else%}
+        <button type="submit" class="btn btn-warning btn-lg">
+          {{"product_add_to_cart_discount" | translate }}
+        </button>
+      {% endif %}
+      </div>
+    </div>
+
+</form>

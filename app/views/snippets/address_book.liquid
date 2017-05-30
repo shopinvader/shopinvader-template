@@ -1,0 +1,61 @@
+{% action 'set prefix and suffix element name' %}
+  var input_group = getProp('input_group');
+  var suffix = '';
+  var prefix = '';
+  if(input_group != '') {
+    prefix = input_group+'[';
+    suffix = ']';
+  }
+  setProp('prefix', prefix);
+  setProp('suffix', suffix);
+{% endaction %}
+{%if address_list %}
+  <div class="row row-same-height address_book {{input_group}}_address_book">
+    <script type="text/javascript">
+    var address_book = {{ address_list | json }};
+    </script>
+    {% if selected_address_id %}
+      {%assign selected_address = selected_address_id %}
+    {% else %}
+      {%assign selected_address = address_list.first.id %}
+    {% endif %}
+    {% for address in address_list %}
+    <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4" data-address-id="{{address.id | round}}">
+      <div class="block-text full-line-xs selectable {%if address.id == selected_address %}selected{%endif%} address" >
+        <div class="radio">
+          <label class="text-lg bold">
+            <input type="radio" value="{{address.id | round}}" {%if address.id == selected_address %} checked="checked" {%endif%} name="{{ input_name }}" autocomplete="off"/>
+            <b>{{address.name}}</b>
+          </label>
+        </div>
+        <address>
+          <div>{{address.street}}</div>
+          <div>{{address.street2}}</div>
+          <div>
+            <span>{{address.zip}}</span>,
+            <span>{{address.city}}</span>
+          </div>
+          <div>{{address.country_id.name}}</div>
+          <div>{{address.phone}}</div>
+        </address>
+        <div class="bottom-link">
+          <a href="#" class="address-update text-left" data-address-id="{{address.id | round}}">
+            {{'cart_address_update' | translate }}
+          </a>
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+      <div class="block-text full-line-xs address address-add selectable">
+        <div class="add-icon ">
+          <i class="fa fa-plus-circle fa-5x"></i>
+        </div>
+        <div class="bottom-link">
+          <a>{{ 'cart_address_add' | translate }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

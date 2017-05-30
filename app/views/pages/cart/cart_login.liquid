@@ -1,0 +1,101 @@
+---
+title: Signin or Register
+slug: login
+handle: cart_login
+position: 4
+listed: false
+published: true
+is_layout: false
+seo_title: "Sign in or register | Space Discount"
+---
+{% extends 'layouts/checkout' %}
+
+{% block content/main %}
+
+<div class="row row-same-height cart-login">
+  <div class="col-xs-12 col-sm-6">
+    <div class="well well-full-height">
+      <form method="post" action="{% path_to cart_address %}">
+        <input type="hidden" name="cart_step" value="{{ page.handle }}">
+        <input type="hidden" name="action_method" value="put">
+        <input type="hidden" name="action_proxy" value="cart">
+        <h3 class="bold text-size-3xl text-center text-info">
+          {% editable_text guest_title, inline: true, rows: 3 %}
+            Guest Checkout
+          {% endeditable_text %}
+        </h3>
+        <p>
+          {% editable_text guest_details, inline: true, rows: 3 %}
+            You will have the opportunity to create an account and track your order once you complete your checkout.
+          {% endeditable_text %}
+        </p>
+        <div class="form-group">
+          <div class="has-feedback">
+            <label for="email" class="control-label">{{ 'partner_email' | translate }}</label>
+            <input type="email" class="form-control" id="anonymous_email" name="anonymous_email" placeholder="{{ 'partner_email' | translate }}" value="" required= "required">
+          </div>
+        </div>
+        <div class="text-right">
+          <button type="submit" class="btn btn-success text-size-lg" value="continue_anonymously">
+            {{'cart_without_account_btn' | translate }} <i class="fa fa-angle-right"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <div class="well well-full-height">
+      <form method="post" action="{% path_to cart_update %}"  id="cart_update_form">
+        <h3 class="bold text-size-3xl text-center text-info">
+          {% editable_text account_title, inline: true, rows: 3 %}
+            I'm a Returning User
+          {% endeditable_text %}
+        </h3>
+        <input type="hidden" name="auth_action" value="sign_in" />
+        <input type="hidden" name="auth_content_type" value="customers" />
+        <input type="hidden" name="auth_id_field" value="email" />
+        <input type="hidden" name="auth_password_field" value="password" />
+        <input type="hidden" name="auth_callback" value="{% path_to cart_address %}" />
+        <input type="hidden" name="cart_step" value="{{ page.handle }}">
+        <div class="form-group">
+          <label for="login">{{ 'partner_email' | translate }}</label>
+          <input type="email" class="form-control" id="login" name="auth_id" placeholder="{{ 'partner_email' | translate }}" required="required">
+        </div>
+        <div class="form-group">
+          <label for="password">{{ 'cart_password' | translate }}</label>
+          <input type="password" class="form-control" id="password" name="auth_password" placeholder="{{ 'cart_password' | translate }}" required="required">
+        </div>
+        <div class="text-center text-warning">
+          {% if auth_wrong_credentials  %}
+            {{ 'signin_wrong' | translate }}
+          {% endif %}
+        </div>
+        <div class="text-left">
+          <a href="{% path_to forgot_password %}" class="small">{{'cart_reset_password' | translate }}</a>
+        </div>
+        <div class="text-right">
+          <button type="submit" class="btn btn-success text-size-lg" value="continue_anonymously">
+            {{'cart_login_btn' | translate }} <i class="fa fa-angle-right"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block 'main/bottom' %}
+<div class="row separator-right">
+  <div class="col-sm-3">
+    {% include widget_payment %}
+  </div>
+  <div class="col-sm-3">
+    {% include widget_phone %}
+  </div>
+  <div class="col-sm-3">
+    {% include widget_delivery %}
+  </div>
+  <div class="col-sm-3">
+    {% include widget_rating %}
+  </div>
+</div>
+{% endblock %}

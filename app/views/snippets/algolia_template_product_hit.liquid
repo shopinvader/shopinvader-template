@@ -1,0 +1,72 @@
+<script type="text/html" id="product-hit-template">
+  {% raw %}
+  {{=<% %>=}}
+  {% endraw %}
+  <a href="{{ url_base }}/<% url_key %>?ref=<% default_code %>">
+    <div class="well well-full-height well-white">
+      <div class="well-content">
+        <div class="row">
+          <div class="col-xs-12">
+            <img class="group list-group-image img-responsive" src="<%#helpers.imageDefault%>
+              <% images.0.medium  %>
+            <%/helpers.imageDefault%>" alt="" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="text-size-1xl text-bold">
+              <%#name%>
+                <% name %>
+              <%/name%>
+            </div>
+            <div class="">
+              <small>
+                <%#variant_name%>
+                  <% variant_name %>
+                <%/variant_name%>
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <p class="group inner list-group-item-text">
+              <%#brand%>
+                <% brand %>
+              <%/brand%>
+            </p>
+          </div>
+          <div class="col-xs-6">
+            <%#helpers.ratingsStars%>
+              <% rating_value  %>
+            <%/helpers.ratingsStars%>
+            <%#rating_nbr%>
+              <span class="badge"><% rating_nbr  %></span>
+            <%/rating_nbr%>
+          </div>
+        </div>
+        <div class="row product-price-line">
+          <div class="col-xs-12 text-left">
+            {{'product_price_from' | translate}}
+            <div class="text-heading text-size-4xl">
+            <%#helpers.currency%>
+              <% public_tax_inc.from_price %>
+            <%/helpers.currency%>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="well-footer text-center">
+        {%if product_price.discount_value == false%}
+         <a class="btn btn-success" href="#">
+           {{"product_add_to_cart" | translate }}
+         </a>
+        {%else%}
+         <a class="btn btn-warning" href="#">
+           {{"product_add_to_cart_discount" | translate }}
+         </a>
+        {% endif %}
+      </div>
+    </div>
+  </a>
+</script>

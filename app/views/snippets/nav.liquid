@@ -1,0 +1,62 @@
+{% block 'header'%}
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 navbar-header">
+        <div class="container">
+          <div class="row  row-same-height">
+            <div class="col-xs-2">
+              <a class="navbar-brand" href="{% path_to home %}">
+              {% if site.metafields.theme.logo %}
+                <img src="{{ site.metafields.theme.logo }}" alt="{{ site.name }}"  class="img-responsive"/>
+              {% endif %}
+              </a>
+            </div>
+            <div class="col-xs-7">
+              <div class="row">
+                <div class="col-xs-6 text-primary text-bold text-size-1xl" >
+                  {% editable_text "baseline", hint: "Website header baseline" %}
+                  May the discount be with you !
+                  {% endeditable_text %}
+                </div>
+                <div class="col-xs-6 text-right">
+                  {% locale_switcher label: 'locale', sep: ' - ' %}
+                </div>
+                <div class="col-xs-12">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% include 'header_controls' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12  menu-categories">
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav text-capitalize categories-menu">
+        {% with_scope level: 1%}
+          {% for category in store.categories %}
+            <li class="{% if page.fullpath == page_in_nav.fullpath %}active{% endif %}">
+              <a href="{{category.url_key  | prepend: url_base }}"> {{ category.name }}</a>
+            </li>
+          {% endfor %}
+        {% endwith_scope%}
+          <li>
+            <a href="#" class="text-bold text-warning">FLASH <i class="fa fa-bolt text-danger"></i> SOLD</a>
+          </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+</nav>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% assign item_count = cart.item_number | round%}
+<table class="table {% if product_id == null %}table-striped{% endif %} cart-list">
+  <thead>
+    <th>
+    {% if product_id != null %}
+      {{'cart_item_desc' | translate }}
+    {% else %}
+      {{'cart_item_count' | translate: count : item_count }}
+    {% endif %}
+    </th>
+    <th>{{'cart_head_price' | translate }}</th>
+    <th>{{'cart_head_qty' | translate }}</th>
+    <th><div class="">
+      {{'cart_head_total' | translate }}
+    </div></th>
+  </thead>
+  <tbody>
+  {% for cart_line in cart.order_line %}
+    {% if product_id == null or cart_line.product_id.id == product_id %}
+    <tr class="cart-line">
+      <td class="cart-line-desc">
+        <img src="{{cart_line.product_url | default: site.metafields.theme.noimage}}" alt="" title="{{cart_line.product_id.name}}" height="100" class="thumbnail">
+        <span class="text-size-2xl cart-line-label">
+          {{cart_line.product_id.name}}
+        </span>
+      </td>
+      <td class="cart-line-price">{{cart_line.price_unit | money}}</td>
+      <td class="cart-line-qty">
+      {% if readonly == true%}
+        <center>{{cart_line.product_uom_qty | round }}</center>
+      {% else %}
+        {% include 'product_qty_input' with qty: cart_line.product_uom_qty%}
+      {% endif %}
+      </td>
+      <td  class="cart-line-subtotal">{{cart_line.price_subtotal | money}}</td>
+      {% if readonly != true%}
+      <td class="cart-line-deletel">
+        <form class="" action="#" method="post" data-shopinvader-form>
+          <input type="hidden" name="action_proxy" value="cart/item">
+          <input type="hidden" name="action_method" value="delete">
+          <input type="hidden" name="item_id" value="{{cart_line.id}}">
+          <button type="submit" class="btn btn-primary">
+            <i class="fa fa-trash"></i>
+          </button>
+        </form>
+      </td>
+      {% endif %}
+    </tr>
+    {% endif %}
+  {% endfor%}
+  </tbody>
+</table>

@@ -1,0 +1,120 @@
+---
+title: My shopping cart | Space discount
+published: true
+listed: false
+handle: cart_index
+slug: shopping-cart
+---
+{% extends 'layouts/default' %}
+
+{% block "content" %}
+
+{% assign cart = store.cart | first %}
+<form method="post" action="{% path_to cart_login %}"  id="cart_update_form">
+  <input type="hidden" name="action_proxy" value="cart">
+  <input type="hidden" name="action_method" value="PUT">
+  <input type="hidden" name="cart_state" value="{{ page.handle }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        {% include 'cart_breadcrumbs'%}
+      </div>
+    </div>
+  </div>
+  <div class="row" data-shopinvader-container>
+    <div class="col-xs-12">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <h1 class="title-decorator">
+              {% editable_text "cart_title", hint: "Cart title in homepage" %}
+              My shopping cart
+              {% endeditable_text %}
+            </h1>
+          </div>
+        </div>
+      </div>
+    {% if cart.item_number > 0%}
+      <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              {% include 'cart_list' with cart%}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-8">
+              {% editable_text "cart_help", hint: "Cart help message" %}
+              <strong>Questions? We can help</strong>
+              <div class="">
+                Online Customer Support: <br>
+                +33 (0)1 00 00 00 07
+                <br><br>
+                Email : contact@spacediscount.yeah
+              </div>
+
+              {% endeditable_text %}
+            </div>
+            <div class="col-xs-4">
+              {% include 'cart_total' %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 text-left">
+              <a href="{% path_to home%}" class="btn btn-default text-size-1xl">
+                <i class="fa fa-chevron-left "></i>
+                {{'cart_continue_shopping' | translate}}
+              </a>
+            </div>
+            <div class="col-xs-6 text-right">
+              <button type="submit" class="btn btn-success btn-lg">
+                {{'cart_checkout' | translate}}
+                <i class="fa fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+    {% else %}
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            {% editable_text "cart_empty", hint: "Cart empty" %}
+            Your shopping cart is empty :(
+            {% endeditable_text %}
+            <div class="text-center">
+              <a href="{% path_to home%}" class="btn btn-lg btn-primary">
+                {{'cart_continue_shopping' | translate}}
+                <i class="fa fa-chevron-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+        <section class="row bg-gray-lighter">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <h2 class="text-center text-gray-dark text-size-6xl">
+                  {% editable_text "product_list_title", hint: "Produt list title in cart" %}
+                  Customers Also Purchased...
+                  {% endeditable_text %}
+                </h2>
+              </div>
+            </div>
+            <div class="row dev row-same-height">
+            {% with_scope bestseller: true%}
+              {% paginate store.products by 6%}
+                {% for product in paginate.collection %}
+                  <div class="product-thumbnail col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                  {% include 'product_thumbnail' with product %}
+                  </div>
+                {% endfor %}
+              {% endpaginate %}
+            {% endwith_scope%}
+            </div>
+          </div>
+        </section>
+    {% endif %}
+    </div>
+  </div>
+</form>
+{% endblock %}

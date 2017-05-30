@@ -1,0 +1,25 @@
+
+{% if site.metafields.algolia %}
+
+  <script type="text/javascript">
+    var algolia_api_key = {{site.metafields.algolia.api_key | json}};
+    var algolia_app_id = {{site.metafields.algolia.application_id | json}};
+    {% action 'get algolia parameters' %}
+      setProp('algolia_indexes', JSON.parse(site.metafields.algolia.indices));
+    {% endaction %}
+
+    {% for role in algolia_indexes %}
+      var algolia_{{role.name}}_index = {{role.index | prepend: "fr_FR_" | json}}
+    {% endfor %}
+    var default_img_url = "{{site.metafields.theme.noimage }}";
+  </script>
+  {% include 'algolia_template_product_hit' %}
+  {% include 'algolia_template_category_hit' %}
+  {% include 'algolia_template_noresult' %}
+  {% include 'algolia_template_stat' %}
+
+  <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hogan.js/3.0.2/hogan.min.js"></script>
+
+{% endif %}

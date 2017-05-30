@@ -1,0 +1,66 @@
+---
+title: account
+handle: account
+is_layout: false
+---
+{% authorize "customers", "account_login" %}
+{% extends 'layouts/default' %}
+
+{% block 'content' %}
+<div class="container-fluid main-content account-page">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="account-header">
+
+        <div class="account-title">
+          <h1>{{'account_title' | translate}} <span class="text-danger">{{current_customer.name}}</span></h1>
+          <p>
+          {% editable_text "account_intro", hint: "intro" %}
+            Happy to see you again ;)
+          {% endeditable_text %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-3 col-lg-2">
+      <ul class="nav nav-tabs nav-pills nav-stacked nav">
+        <li {%if page.handle == 'account_index'%}class="active"{% endif%}>
+          <a href="{%path_to account_index%}" >{{ "account_order_title" | translate }}</a>
+        </li>
+        <li {%if page.handle == 'account_profil'%}class="active"{% endif%}>
+          <a href="{%path_to account_profil%}" >{{ "account_profil_title" | translate }}</a>
+        </li>
+        <li {%if page.handle == 'account_address'%}class="active"{% endif%}>
+          <a href="{%path_to account_address%}" >{{ "account_address_lists" | translate }}</a>
+        </li>
+        <li {%if page.handle == 'account_password'%}class="active"{% endif%}>
+          <a href="{%path_to account_password%}" >{{ "account_password_title" | translate }}</a>
+        </li>
+        <li {%if page.handle == 'account_rma'%}class="active"{% endif%}>
+          <a href="{%path_to account_rma %}" >{{ "account_rma_title" | translate }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content col-xs-12 col-sm-9 col-xs-10">
+      <div class="tab-pane active">
+        {% block 'tabcontent' %}
+        {% endblock %}
+    	</div>
+  	</div>
+  </div>
+
+
+</div>
+{% endblock %}
+
+{% block 'css' %}
+  {{ 'jquery.webui-popover.css' | stylesheet_tag }}
+{% endblock %}
+{% block 'javascripts' %}
+  {{ 'jquery.webui-popover.js' | javascript_tag }}
+  {{ 'application.account.js' | javascript_tag }}
+  {{ 'address_autocomplete.js' | javascript_tag }}
+  <script src="https://maps.googleapis.com/maps/api/js?key={{site.metafields.google.maps_api_key}}&libraries=places&callback=initAddressAutocomplete"></script>
+{% endblock %}

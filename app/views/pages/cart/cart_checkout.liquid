@@ -1,0 +1,203 @@
+---
+title: Checkout
+seo_title: Checkout | Space Discount
+slug: checkout
+handle: cart_checkout
+position: 4
+listed: false
+published: true
+is_layout: false
+editable_elements:
+  main/title: Checkout
+---
+{% extends 'layouts/checkout' %}
+
+{% block content/main %}
+{% assign cart = store.cart | first %}
+
+{% assign selected_payment = cart.available_payment_method_ids | first %}
+{% assign selected_carrier = cart.available_carriers | first %}
+
+  <div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>{{ 'cart_carrier_title' | translate }}</h2>
+      </div>
+    </div>
+    <div class="row row-same-height carrier-list">
+      {% if cart.available_carriers %}
+        {%for carrier in cart.available_carriers%}
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+          <div class="well well-full-height selectable carrier {% if carrier.id == selected_carrier.id %}selected{% endif %}" data-carrier-id="{{carrier.id | round}}">
+            <div class="row">
+              <div class="col-xs-8 col-sm-12 radio text-lg">
+                <label>
+                  <input type="radio" value="{{carrier.id | round}}" {%if carrier.id == selected_carrier.id %} checked="checked" {%endif%} name="carrier_id" autocomplete="off"/>
+                  <b>{{carrier.name}}</b>
+                </label>
+              </div>
+              <div class="col-xs-4  col-sm-12 text-center text-size-2xl">
+                {% if carrier.price > 0 %}
+                  {{carrier.price | money}}
+                {% else %}
+                  {{ 'cart_free_delivery' | translate }}
+                {% endif %}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4 col-sm-12 text-center">
+              {% if  carrier.logo_url  %}
+                <img src="{{carrier.logo_url | theme_image_url }}" />
+              {% endif %}
+              </div>
+              <div class="col-xs-8 col-sm-12">
+                {{carrier.description}}
+              </div>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      {% else %}
+        <div class="col-xs-12 text-lg text-center text-danger">
+          {{ 'cart_carrier_unavailable' | translate }}
+        </div>
+      {% endif %}
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>{{ 'cart_comment_title' | translate }}</h2>
+        <textarea
+        name="message" rows="8" cols="80" class="form-control"
+        placeholder="{{cart_comment_placeholder | translate}}"
+        autocomplete="off"></textarea>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <h2>{{ 'cart_payment_title' | translate }}</h2>
+      </div>
+      <div class="col-xs-12 col-md-6 text-right cart-security-message">
+        <i class="fa fa-lock color-positive"></i>
+        {{'cart_payment_secure' | translate }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12  panel-group" role="tablist" aria-multiselectable="false">
+        <p class="base">
+          {{'cart_payment_desc' | translate }}
+        </p>
+        <input type='hidden' id="payment_method_id" name="payment_method_id" value="{{selected_payment.id}}" autocomplete="off"/>
+        <input type='hidden' id="payment_method_code" name="payment_method_code" value="{{selected_payment.code}}" autocomplete="off"/>
+
+        <div class="panel-group " id="payment-tabs" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default with-nav-tabs cart-payment">
+            <div class="panel-heading navtab hidden-xs">
+              <ul class="nav nav-tabs nav-justified" data-tabs="tabs">
+                {% for payment_method_id in cart.available_payment_method_ids%}
+                <li role="presentation" {% if selected_payment.id == payment_method_id.id %} class="active"{% endif %}>
+                  <a data-toggle="tab" href="#collapse-{{payment_method_id.code}}" data-payment-method="{{payment_method_id.id}}" data-code="{{payment_method_id.code}}">
+                    <i class="fa fa-cc-{{payment_method_id.code}} text-lg"></i>
+                    {{ 'cart_payment_' | append: payment_method_id.code | translate }}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            {% for payment_method_id in cart.available_payment_method_ids%}
+            <div class="panel-heading visible-xs" role="tab" id="head-{{payment_method_id.code}}">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#payment-tabs" href="#collapse-{{payment_method_id.code}}" aria-expanded="true" aria-controls="collapse-{{payment_method_id.code}}">
+                  <i class="fa fa-cc-{{payment_method_id.code}} text-lg"></i>
+                  {{ 'cart_payment_' | append: payment_method_id.code | translate }}
+                </a>
+              </h4>
+            </div>
+            <div id="collapse-{{payment_method_id.code}}" class="panel-collapse collapse {% if selected_payment.id == payment_method_id.id %}in active{% endif %}" role="tabpanel" aria-labelledby="head-{{payment_method_id.code}}" data-payment-method="{{payment_method_id.id}}" data-code="{{payment_method_id.code}}">
+              <div class="panel-body">
+                <div class="tab-payment-body">
+                  <p class="text-center">{{payment_method_id.description}}</p>
+
+                  {% case payment_method_id.code %}
+                    {% when 'stripe' %}
+                    <form class="" method="post" action="#" id="payment-form">
+                      {% include 'creditcard_form' with address: cart.partner_shipping_id, cart_total: cart.amount_total %}
+                    </form>
+                    {% when 'paypal' %}
+                      <input type="hidden" id="paypal_return_url" value="{{base_url}}{% path_to cart_paypal_return %}"/>
+                      <input type="hidden" id="paypal_cancel_url" value="{{base_url}}{% path_to cart_checkout %}"/>
+                  {% endcase %}
+                </div>
+
+                {% if payment_method_id.code != 'stripe'%}
+                  <div class="tab-payment-footer text-center">
+                    <input class="btn btn-success text-lg" type="submit" value="{{payment_method_id.code | append: '_checkout'  | translate }}">
+                  </div>
+                {% endif %}
+                <p class="text-center payment-mention">
+                  {% editable_text 'payment mentions', inline: true, rows: 1 %}
+                    En payant votre commande vous acceptez sans réserve les conditions générales de ventes.
+                  {% endeditable_text %}
+                </p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block 'main/cart/side' %}
+&nbsp;
+{% endblock %}
+
+{% block 'main/cart/under_total' %}
+<div class="col-xs-12">
+  <div class="row separator-bottom row-same-height hidden-sm">
+    <div class="col-xs-6 col-md-12">
+      <h3>{{'cart_shipping_address' | translate}}</h3>
+      <address>
+        <div class="bold">
+          {{cart.partner_shipping_id.firstname}}
+          {{cart.partner_shipping_id.lastname}}
+        </div>
+        <div>{{cart.partner_shipping_id.street}}</div>
+        <div>{{cart.partner_shipping_id.street2}}</div>
+        <div>
+          <span>{{cart.partner_shipping_id.zip}}</span>,
+          <span>{{cart.partner_shipping_id.city}}</span>
+        </div>
+        <div>{{cart.partner_shipping_id.country_id.name}}</div>
+        <div>{{cart.partner_shipping_id.phone}}</div>
+      </address>
+    </div>
+    <div class="col-xs-6 col-md-12">
+      <h3>{{'cart_invoice_address' | translate}}</h3>
+      <address>
+        <div class="bold">
+          {{cart.partner_invoice_id.firstname}}
+          {{cart.partner_invoice_id.lastname}}
+        </div>
+        <div>{{cart.partner_invoice_id.street}}</div>
+        <div>{{cart.partner_invoice_id.street2}}</div>
+        <div>
+          <span>{{cart.partner_invoice_id.zip}}</span>,
+          <span>{{cart.partner_invoice_id.city}}</span>
+        </div>
+        <div>{{cart.partner_invoice_id.country_id.name}}</div>
+        <div>{{cart.partner_invoice_id.phone}}</div>
+      </address>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block 'javascripts' %}
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+{{ 'cart_checkout.js' | javascript_tag }}
+
+{% endblock %}

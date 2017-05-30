@@ -1,0 +1,129 @@
+.carousel-inner {
+  .carousel-content {
+    position: absolute;
+    right: 28%;
+    top: 20%;
+    padding-left: 10px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 3px;
+    padding-left:20px;
+    padding-right:20px;
+    padding-top: 10px;
+    //max-width: 350px;
+  }
+}
+
+.carousel .carousel-control {
+  background: none;
+  color: $brand-primary;
+
+  span {
+    font-size: 15px;
+  }
+}
+
+.carousel-thumbails {
+  display: inline-block;
+  cursor: pointer;
+  &.active {
+    border: 1px solid $gray;
+  }
+}
+.carousel-multi-item {
+  .carousel-inner {
+    .carousel-control {
+      background-image: none;
+      width: 4%;
+    }
+    .carousel-control.left {
+      margin-left: 15px;
+    }
+    .carousel-control.right {
+      margin-right: 15px;
+    }
+    .cloneditem-1,
+    .cloneditem-2,
+    .cloneditem-3 {
+      display: none;
+    }
+
+
+    @media all and (min-width: 768px) {
+      & > .active.left,
+      & > .prev {
+        left: -50%;
+      }
+      & > .active.right,
+      & > .next {
+        left: 50%;
+      }
+      & > .left,
+      & > .prev.right,
+      & > .active {
+        left: 0;
+      }
+      .cloneditem-1 {
+        display: block;
+      }
+    }
+
+
+    @media all and (min-width: 768px) and (transform-3d), all and (min-width: 768px) and (-webkit-transform-3d) {
+      & > .item.active.right,
+      & > .item.next {
+        left: 0;
+        transform: translate3d(50%, 0, 0);
+      }
+      & > .item.active.left,
+      & > .item.prev {
+        left: 0;
+        transform: translate3d(-50%, 0, 0);
+      }
+      & > .item.left,
+      & > .item.prev.right,
+      & > .item.active {
+        left: 0;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @media all and (min-width: 992px) {
+      & > .active.left,
+      & > .prev {
+        left: -25%;
+      }
+      & > .active.right,
+      & > .next {
+        left: 25%;
+      }
+      & > .left,
+      & > .prev.right,
+      & > .active {
+        left: 0;
+      }
+      .cloneditem-2,
+      .cloneditem-3 {
+        display: block;
+      }
+    }
+
+    @media all and (min-width: 992px) and (transform-3d), all and (min-width: 992px) and (-webkit-transform-3d) {
+      & > .item.active.right,
+      & > .item.next {
+        left: 0;
+        transform: translate3d(25%, 0, 0);
+      }
+      & > .item.active.left,
+      & > .item.prev {
+        left: 0;
+        transform: translate3d(-25%, 0, 0);
+      }
+      & > .item.left,
+      & > .item.prev.right,
+      & > .item.active {
+        left: 0;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+---
+title: Account profile
+handle: account_profil
+slug: account-profile
+seo_title: My account profile | Space Discount
+---
+{% extends 'layouts/account '%}
+
+{% block 'content/tabcontent' %}
+<div class="row  tab-header">
+  <div class="col-xs-12">
+    <h2>{{'account_profil_update' | translate}}</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 ">
+    {% with_scope contact_type: "profile"%}
+    {% assign profile = store.contacts.first %}
+
+    <div class="well">
+      <form class="" action="#" method="post" data-autocomplete="address">
+        <input type="hidden" name="action_method" value="put">
+        <input type="hidden" name="action_proxy" value="contacts/{{profile.id | round}}">
+        {% include 'address_form' with address: profile %}
+        <div class="text-right">
+          <input type="submit" name="submit" class="btn btn-success " value="{{'account_address_submit' | translate}}">
+        </div>
+      </form>
+
+    </div>
+    {% endwith_scope%}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+<script type="text/html" id="stats-template">
+  {% raw %}
+  {{=<% %>=}}
+  {% endraw %}
+  <div class="row" >
+    <div class="col-xs-12 text-right" id="stats-template">
+        <%#hasManyResults %>
+          <strong><% nbHits %> {{"search_results" | translate }}</strong>
+        <%/hasManyResults %>
+        <%#hasOneResult %>
+          <strong><% nbHits %> {{"search_result" | translate }}</strong>
+        <%/hasOneResult %>
+    </div>
+  </div>
+</script>

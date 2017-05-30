@@ -1,0 +1,54 @@
+---
+title: Cart
+checkout: checkout
+is_layout: true
+---
+
+{% extends 'layouts/default' %}
+{% block 'header' %}
+  <div class="container cart-header">
+    <div class="row">
+      <div class="col-xs-6 brand">
+      {% if site.metafields.theme.logo %}
+      <a href="{% path_to home %}">
+        <img src="{{ site.metafields.theme.logo }}" alt="{{ site.name }}"  class="img-responsive"/>
+      </a>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block 'content' %}
+{% assign cart = store.cart | first %}
+{% case page.handle %}
+  {% when 'cart_login' %}
+    {% assign cart_step = 2 %}
+  {% when 'cart_address' %}
+    {% assign cart_step = 2 %}
+  {% when 'cart_checkout' %}
+    {% assign cart_step = 3 %}
+  {% when 'cart_end' %}
+    {% assign cart_step = 4 %}
+  {% else %}
+    {% assign cart_step = 1 %}
+{% endcase %}
+  <main class="container">
+
+    <div class="row">
+      <div class="col-xs-12">
+        {% include 'cart_breadcrumbs' with cart_step%}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h1 class="title-decorator text-primary">
+          {% editable_text "cart_title", hint: "Cart title in homepage" %}
+          My shopping cart
+          {% endeditable_text %}
+        </h1>
+      </div>
+    </div>
+    {% block main %}
+    {% endblock %}
+  </main>
+{% endblock %}

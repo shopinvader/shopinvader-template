@@ -1,0 +1,38 @@
+
+<div class="row">
+  <div class="col-xs-12">
+     <ul class="list-inline product-liste-section">
+       <li class="{% if step == 'overview' %}active{% endif %} text-uppercase">
+         <a href="#product-section-overview" data-scrollto="#product-section-overview">
+           {{'product_overview_tab' | translate }}
+         </a>
+       </li>
+       {% if product.technical_details %}
+       <li class="{% if step == 'spec' %}active{% endif %} text-uppercase">
+         <a href="#product-section-spec" data-scrollto="#product-section-spec">
+           {{'product_spec_tab' | translate }}
+         </a>
+       </li>
+       {% endif %}
+       {% if product.relateds.size > 0%}
+       <li class="{% if step == 'related' %}active{% endif %} text-uppercase">
+         <a href="#product-section-related" data-scrollto="#product-section-related">
+           {{'product_related_tab' | translate }}
+         </a>
+       </li>
+       {% endif %}
+       <li class="{% if step == 'advice' %}active{% endif %} text-uppercase">
+         <a href="#product-section-advice" data-scrollto="#product-section-advice">
+           {{'product_advice_tab' | translate }}
+         </a>
+       </li>
+       {% if product.comments %}
+       <li class="{% if step == 'reviews' %}active{% endif %} text-uppercase">
+         <a href="#product-section-reviews" data-scrollto="#product-section-reviews">
+           {{'product_reviews_tab' | translate }}
+         </a>
+       </li>
+       {% endif %}
+     </ul>
+  </div>
+</div>
