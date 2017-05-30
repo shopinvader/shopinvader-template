@@ -3,7 +3,7 @@
   <div class="well-content">
     <a href="{{product.url_key | prepend: url_base}}">
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 product-image">
         {% if product.images.size > 1 %}
           <div class="product-thumbnail-slide">
             <div  class="carousel slide" id="slide-{{product.erp_id}}">
@@ -35,9 +35,7 @@
           </div>
         {%endif%}
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 product-desc">
           <div class="text-size-1xl text-bold">
             {{product.name}}
           </div>
@@ -45,33 +43,33 @@
             <small>{{product.variant_name}}</small>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-6">
-          <p class="group inner list-group-item-text">
-            {{product.brand}}
-          </p>
+        <div class="row">
+          <div class="col-xs-6">
+            <p class="group inner list-group-item-text">
+              {{product.brand}}
+            </p>
+          </div>
+          <div class="col-xs-6">
+          {%if product.rating_value%}
+            {% include 'rating_stars' with rating_value: product.rating_value, rating_nbr: product.rating_nbr%}
+          {% else %}
+            &nbsp;
+          {% endif%}
+          </div>
         </div>
-        <div class="col-xs-6">
-        {%if product.rating_value%}
-          {% include 'rating_stars' with rating_value: product.rating_value, rating_nbr: product.rating_nbr%}
-        {% else %}
-          &nbsp;
-        {% endif%}
-        </div>
-      </div>
-      <div class="row product-price-line">
-        <div class="col-xs-12 text-left">
-          {{'product_price_from' | translate}}
-          {%if product_price.discount_value > 0%}
-            <s>
-              {{product_price.discount_old_price | money }}
-            </s>
-          {% endif %}
-          <div class="text-heading text-size-4xl">
-            <span class=" {%if product_price.discount_value > 0%} text-warning{% endif %}">
-              {{product_price.value | money}}
-            </span>
+        <div class="row product-price-line">
+          <div class="col-xs-12 text-left">
+            {{'product_price_from' | translate}}
+            {%if product_price.discount_value > 0%}
+              <s>
+                {{product_price.discount_old_price | money }}
+              </s>
+            {% endif %}
+            <div class="text-heading text-size-4xl">
+              <span class=" {%if product_price.discount_value > 0%} text-warning{% endif %}">
+                {{product_price.value | money}}
+              </span>
+            </div>
           </div>
         </div>
       </div>

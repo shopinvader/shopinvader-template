@@ -73,3 +73,29 @@ footer {
     }
   }
 }
+.row,
+.row-fluid {
+  &.nopadding {
+    [class*='col-'] {
+      padding: 0;
+    }
+  }
+
+  .nopadding {
+    padding: 0;
+  }
+
+  &.separator-right > [class*='col-'] {
+    border-right: 1px solid $gray-lighter;
+
+    &:last-child {
+      border-color: transparent;
+    }
+  }
+
+  &.separator-bottom > [class*='col-'] {
+    border-bottom: 1px solid $gray-lighter;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+  }
+}

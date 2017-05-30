@@ -24,10 +24,71 @@
                 </div>
                 <div class="col-xs-12">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input type="text" class="form-control" placeholder="Search for..." id="header-search-input" autocomplete="off">
                     <span class="input-group-btn">
                       <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
                     </span>
+                    <div id="header-search-hit" class="hidden">
+                      <div id="header-search-product-title">
+                        <div class="row">
+                          <div class="col-xs-12 search-title">
+                            <span class="text-size-2xl title-decorator">
+                              {{ 'search_product' | translate }}
+                            </span>
+                            <span class="nb_hits"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="header-search-product-link">
+                        <div class="row">
+                          <div class="col-xs-12 text-right ">
+                            <a data-href="{% path_to search %}" href="#" class="btn btn-success btn-search-product">
+                              {{ 'search_product_all' | translate }}
+                              <span class="nb_hits"></span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="header-search-product-empty">
+                        <div class="row">
+                          <div class="col-xs-12 text-center">
+                            {{ 'search_product_empty' | translate }}
+                          </div>
+                        </div>
+                      </div>
+                      <div id="header-search-category-title">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <div class="text-size-2xl title-decorator">
+                              {{ 'search_category' | translate }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="header-search-category-empty">
+                        <div class="row">
+                          <div class="col-xs-12 text-center">
+                            {{ 'search_category_empty' | translate }}
+                          </div>
+                        </div>
+                      </div>
+                      <div id="header-search-category-link">
+                        <div class="row">
+                          <div class="col-xs-12 text-right ">
+                            <a href="#" class="btn btn-success">
+                              {{ 'search_category_all' | translate }}
+                              <span class="nb_hits"></span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="header-search-hit-content">
+                        <div class="row separator-right">
+                          <div class="aa-dataset-product col-xs-12  col-md-7"></div>
+                          <div class="aa-dataset-category col-xs-12 col-md-5"></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

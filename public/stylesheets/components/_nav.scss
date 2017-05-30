@@ -56,3 +56,21 @@
       }
     }
 }
+
+.header-dropdown-menu {
+  background-color: $white-base;
+  border: 1px solid $gray-lighter;
+  box-shadow: 2px 2px 15px 8px rgba(35, 47, 62, 0.3);
+  color: $gray;
+  content: '';
+  display: block;
+  margin: 0;
+  margin-top: 34px;
+  min-height: 150px;
+  padding-bottom: 15px;
+  top: 10px;
+  width: 100%;
+  .product-image {
+    max-width: 100px;
+  }
+}

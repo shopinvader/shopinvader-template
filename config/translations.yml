@@ -301,6 +301,21 @@ signin_forgotpassword:
 signin_create_account:
   en: Register my account
   fr: Créer un compte
+search_product:
+  en: Products
+  fr: Produits
+search_product_empty:
+  en: No product found.
+  fr: Aucun produit trouvé.
+search_product_all:
+  en: View all results
+  fr: Voir tous les résultats 
+search_category:
+  en: Categories
+  fr: Categories
+search_category_empty:
+  en: No category found.
+  fr: Aucune catégorie trouvée.
 store_advantage_shipping:
   en: free shipping
   fr: livraison gratuite

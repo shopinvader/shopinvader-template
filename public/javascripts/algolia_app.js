@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  var client = algoliasearch(algolia_api_key, algolia_app_id);
+  var client = algoliasearch(algolia_app_id, algolia_api_key);
   var product_index = client.initIndex(algolia_products_index);
   var category_index = client.initIndex(algolia_categories_index);
   autocomplete('#header-search-input',
@@ -16,12 +16,12 @@ $(document).ready(function() {
     },
     [
       {
-        source: autocomplete.sources.hits(product_index, { hitsPerPage: 8 }),
+        source: autocomplete.sources.hits(product_index, { hitsPerPage: 4 }),
         displayKey: 'name',
         name: 'product',
         cssClasses: {
           suggestions:"product-list",
-          suggestion: "product col-xs-12 col-sm-6 col-lg-3 product-thumbnail product-compact",
+          suggestion: " col-xs-12 product-compact",
         },
         templates: {
           header: function(query, result) {
