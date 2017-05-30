@@ -1,7 +1,5 @@
 log
 bundle
-<<<<<<< HEAD
 dev.docker-compose.yml
 config/deploy.yml
-=======
->>>>>>> first template files commit
+config/site.yml
