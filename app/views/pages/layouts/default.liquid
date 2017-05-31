@@ -18,12 +18,13 @@ is_layout: false
     {{ 'bootstrap.css' | stylesheet_tag }}
     {{ 'application.css' | stylesheet_tag }}
     {{ 'font-awesome.min.css' | stylesheet_tag }}
+
     {{ 'turbolinks.js' | javascript_tag }}
     {{ 'jquery.min.js' | javascript_tag }}
     {{ 'jquery.slidereveal.min.js' | javascript_tag }}
     {{ 'shopinvader.jquery.js' | javascript_tag }}
     {{ 'bootstrap.min.js' | javascript_tag }}
-    {{ 'application.js' | javascript_tag }}
+
   </head>
   <body>
     {% include 'nav' %}
@@ -57,9 +58,15 @@ is_layout: false
         </div>
       </div>
       <div data-cart-id="side_cart_items" class="wait-loader" id="side-cart-items" data-shopinvader-container>
-        {% if cart %}
+      {% if cart %}
         {% include cart_side with cart %}
-        {% endif %}
+      {% else %}
+        <div class="text-center">
+        {% editable_text "cart_empty", hint: "Side cart empty" %}
+          Your shopping cart is empty :(
+        {% endeditable_text %}
+        </div>
+      {% endif %}
       </div>
     </div>
     <div id="product-modal-add" class="hidden" data-shopinvader-container>
@@ -106,7 +113,7 @@ is_layout: false
     </div>
     {% endblock %}
     {% include 'footer' %}
-
+    {{ 'application.js' | javascript_tag }}
     {% block 'javascripts', short_name: true %}
     {% endblock %}
     {% block 'javascripts_algolia', short_name: true %}

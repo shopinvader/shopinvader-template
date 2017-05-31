@@ -1,7 +1,9 @@
+
 {% if product.images.size > 1 %}
 <div  class="carousel slide" id="slide-{{product.erp_id}}">
   <!-- Carousel items -->
   <div class="carousel-inner" >
+
     {% assign image_id = 0  %}
     {% for image in product.images %}
     <div class="item {%if forloop.index == 1 %}active{%endif%}"   data-target="#slide-{{product.erp_id}}" data-slide-number="{{forloop.index}}">
@@ -24,5 +26,5 @@
 </div>
 {% endfor %}
 {% else %}
-<img class="group list-group-image" src="{{product.data.images.first.large  | default: site.metafields.theme.noimage }}" alt="" />
+<img class="group list-group-image" src="{{product.images.first.large  | default: site.metafields.theme.noimage }}" alt="" />
 {% endif %}

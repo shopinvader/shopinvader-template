@@ -35,16 +35,14 @@ $(document).ready(function () {
       }
     }
   );
-
   $('.side-cart').slideReveal({
     trigger: $(".display-side-cart"),
     position: "right",
     width: "360px",
-    push: true,
+    push: false,
     zIndex: 3000,
-    shown: function(sidecart){
+    show: function(sidecart){
       sidecart.addClass("left-shadow-overlay");
-      //cart.refresh_sidecart();
     },
     hidden: function(sidecart){
       sidecart.removeClass("left-shadow-overlay");

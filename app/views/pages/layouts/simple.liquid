@@ -48,27 +48,27 @@ is_layout: true
   </div>
 
   <div class="row">
+  {% if content.slides.size > 0%}
     <div class="col-xs-12" id="slider">
       <div class="carousel slide" id="main-carousel">
-        <!-- Carousel items -->
         <div class="carousel-inner">
-          <div class="active item" data-slide-number="0">
-            <img src="/samples/assets/slide-1.png">
-            
+        {% for slide in content.slides%}
+          <div class="{%if forloop.index0 == 0%}active{%endif%} item" data-slide-number="{{forloop.index0}}">
+            <a href="{{slide.link}}"><img src="{{slide.picture.url}}" alt="{{slide.name}}"></a>
           </div>
-          <div class="item" data-slide-number="1">
-            <img src="/samples/assets/slide-1.png">
-          </div>
+        {% endfor %}
         </div>
-        <!-- Carousel nav -->
+      {% if content.slides.size > 1%}
         <a class="left carousel-control" href="#main-carousel" role="button" data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left"></span>
         </a>
         <a class="right carousel-control" href="#main-carousel" role="button" data-slide="next">
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
+      {% endif %}
       </div>
     </div>
+  {% endif %}
   </div>
   {% block main %}
   {% endblock %}
