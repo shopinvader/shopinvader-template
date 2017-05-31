@@ -13,7 +13,6 @@ editable_elements:
 {% extends 'layouts/checkout' %}
 
 {% block content/main %}
-{% assign cart = store.cart | first %}
 
 {% assign selected_payment = cart.available_payment_method_ids | first %}
 {% assign selected_carrier = cart.available_carriers | first %}
@@ -25,8 +24,8 @@ editable_elements:
       </div>
     </div>
     <div class="row row-same-height carrier-list">
-      {% if cart.available_carriers %}
-        {%for carrier in cart.available_carriers%}
+      {% if store.cart.available_carriers %}
+        {%for carrier in store.cart.available_carriers%}
 
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
           <div class="well well-full-height selectable carrier {% if carrier.id == selected_carrier.id %}selected{% endif %}" data-carrier-id="{{carrier.id | round}}">
@@ -163,34 +162,34 @@ editable_elements:
       <h3>{{'cart_shipping_address' | translate}}</h3>
       <address>
         <div class="bold">
-          {{cart.partner_shipping_id.firstname}}
-          {{cart.partner_shipping_id.lastname}}
+          {{store.cart.partner_shipping_id.firstname}}
+          {{store.cart.partner_shipping_id.lastname}}
         </div>
-        <div>{{cart.partner_shipping_id.street}}</div>
-        <div>{{cart.partner_shipping_id.street2}}</div>
+        <div>{{store.cart.partner_shipping_id.street}}</div>
+        <div>{{store.cart.partner_shipping_id.street2}}</div>
         <div>
-          <span>{{cart.partner_shipping_id.zip}}</span>,
-          <span>{{cart.partner_shipping_id.city}}</span>
+          <span>{{store.cart.partner_shipping_id.zip}}</span>,
+          <span>{{store.cart.partner_shipping_id.city}}</span>
         </div>
-        <div>{{cart.partner_shipping_id.country_id.name}}</div>
-        <div>{{cart.partner_shipping_id.phone}}</div>
+        <div>{{store.cart.partner_shipping_id.country_id.name}}</div>
+        <div>{{store.cart.partner_shipping_id.phone}}</div>
       </address>
     </div>
     <div class="col-xs-6 col-md-12">
       <h3>{{'cart_invoice_address' | translate}}</h3>
       <address>
         <div class="bold">
-          {{cart.partner_invoice_id.firstname}}
-          {{cart.partner_invoice_id.lastname}}
+          {{store.cart.partner_invoice_id.firstname}}
+          {{store.cart.partner_invoice_id.lastname}}
         </div>
-        <div>{{cart.partner_invoice_id.street}}</div>
-        <div>{{cart.partner_invoice_id.street2}}</div>
+        <div>{{store.cart.partner_invoice_id.street}}</div>
+        <div>{{store.cart.partner_invoice_id.street2}}</div>
         <div>
-          <span>{{cart.partner_invoice_id.zip}}</span>,
-          <span>{{cart.partner_invoice_id.city}}</span>
+          <span>{{store.cart.partner_invoice_id.zip}}</span>,
+          <span>{{store.cart.partner_invoice_id.city}}</span>
         </div>
-        <div>{{cart.partner_invoice_id.country_id.name}}</div>
-        <div>{{cart.partner_invoice_id.phone}}</div>
+        <div>{{store.cart.partner_invoice_id.country_id.name}}</div>
+        <div>{{store.cart.partner_invoice_id.phone}}</div>
       </address>
     </div>
   </div>

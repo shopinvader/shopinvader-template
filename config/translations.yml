@@ -61,6 +61,9 @@ cart_head_total:
 cart_continue_shopping:
   en: "Continue shopping"
   fr: "Poursuivre mes achats"
+cart_customer_shipping:
+  en: My shipping address
+  fr: Mon adresse de livraison
 cart_total_subtotal:
   en: "Subtotal"
   fr: "Sous-total"
@@ -82,6 +85,9 @@ cart_password:
 cart_reset_password:
   en: Reset Password
   fr: Mot de passe oublié ?
+cart_login:
+  en: Email
+  fr: Email
 cart_login_btn:
   en: Login
   fr: Connexion
@@ -89,16 +95,16 @@ cart_without_account_btn:
   en: Continue
   fr: Continuer
 cart_step_step1:
-  en:
+  en: Shopping cart
   fr: Panier
 cart_step_step2:
-  en:
+  en: Shipping address
   fr: Coordonnées
 cart_step_step3:
-  en:
+  en: Checkout
   fr: Paiement
 cart_step_step4:
-  en:
+  en: End
   fr: Terminé
 cart_carrier_title:
   en: Shipping
@@ -127,9 +133,6 @@ cart_address_update:
 cart_return:
   en: Cancel
   fr: Retour
-cart_customer_shipping:
-  en:
-  fr: Je choisis mon adresse de livraison
 cart_customer_invoice:
   en:
   fr: Je choisis mon adresse de facturation
@@ -178,6 +181,9 @@ partner_business_info:
 product_add_to_cart:
   en: Add to cart
   fr: Ajouter au panier
+product_display_variant:
+  en: View all versions
+  fr: Voir toutes les versions
 product_add_to_cart_discount:
   en: Shop now !
   fr: J'en profite !

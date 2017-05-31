@@ -1,5 +1,4 @@
 - john.doe@shopinvader.com:
-    _slug: john-doe-at-shopinvader-dot-com
+    _slug: john-dot-doe-at-shopinvader-dot-com
     name: John Doe
     email: john.doe@shopinvader.com
-    password: password

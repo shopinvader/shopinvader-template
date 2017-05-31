@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/akretion/shopinvader.git
-  revision: e21b72b2fb744b49d8f5da3202edd0f85e3f9baa
-  ref: e21b72b2fb744b49d8f5da3202edd0f85e3f9baa
+  revision: 326c50ae2d39a5211307419e918a9c2c6ee51fe0
+  ref: 326c50ae2d39a5211307419e918a9c2c6ee51fe0
   branch: add-erp-proxy
   specs:
     shop_invader (0.1.0)
@@ -21,7 +21,7 @@ GIT
 
 GIT
   remote: git://github.com/locomotivecms/engine.git
-  revision: 71f0b0c5c42b6d35751e81ca9d66ac1317b115e4
+  revision: 6feb761a79e5fe2fb3000c485118e15df06629bb
   specs:
     locomotivecms (3.3.0.rc2)
       actionmailer-with-request (~> 0.4.0)

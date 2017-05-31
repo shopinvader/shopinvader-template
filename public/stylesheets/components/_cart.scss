@@ -217,6 +217,7 @@
 
     tbody {
       tr {
+        background: transparent;
         border-bottom: 1px solid $gray-light;
         & > * {
           border-color: transparent;
@@ -254,7 +255,7 @@
 
           &.cart-line-qty {
             display: inline-block;
-            width: 124px;
+            width: 144px;
             .input-item-qty {
               input {
                 width: 36px;

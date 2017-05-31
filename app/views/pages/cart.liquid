@@ -9,7 +9,6 @@ slug: shopping-cart
 
 {% block "content" %}
 
-{% assign cart = store.cart | first %}
 <form method="post" action="{% path_to cart_login %}"  id="cart_update_form">
   <input type="hidden" name="action_proxy" value="cart">
   <input type="hidden" name="action_method" value="PUT">
@@ -34,11 +33,12 @@ slug: shopping-cart
           </div>
         </div>
       </div>
+
     {% if store.cart.item_number > 0%}
       <div class="container">
           <div class="row">
             <div class="col-md-12">
-              {% include 'cart_list' with cart%}
+              {% include 'cart_list' %}
             </div>
           </div>
           <div class="row">

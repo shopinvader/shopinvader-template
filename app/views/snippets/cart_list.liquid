@@ -1,4 +1,4 @@
-{% assign item_count = cart.item_number | round%}
+{% assign item_count = store.cart.item_number | round%}
 <table class="table {% if product_id == null %}table-striped{% endif %} cart-list">
   <thead>
     <th>
@@ -15,7 +15,7 @@
     </div></th>
   </thead>
   <tbody>
-  {% for cart_line in cart.order_line %}
+  {% for cart_line in store.cart.order_line %}
     {% if product_id == null or cart_line.product_id.id == product_id %}
     <tr class="cart-line">
       <td class="cart-line-desc">

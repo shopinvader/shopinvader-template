@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  cookie_alert.init();
   $('.carousel-multi-item .item').each(function(){
     var itemToClone = $(this);
 
@@ -29,9 +30,16 @@ $(document).ready(function () {
     {
       console.log('HIDE OVERLAY');
       $('body').wait_overlay('hide');
-      console.log(element);
+      console.log($(element.target));
+      var new_document = $('<div></div>').append($.parseHTML(element.ajaxpage));
+
       if($(element.target).find('[name=action_method]').val() == 'post' && $(element.target).find('[name=action_proxy]').val() == 'cart/item') {
-        main_modal.show( $(element.ajaxpage).find('#product-modal-add .title').html(), $(element.ajaxpage).find('#product-modal-add .content').html(), '');
+        console.log(new_document.find('#product-modal-add'));
+        main_modal.show(
+          new_document.find('#product-modal-add .title').html(),
+          new_document.find('#product-modal-add .content').html(),
+          ''
+        );
       }
     }
   );
@@ -40,7 +48,7 @@ $(document).ready(function () {
     position: "right",
     width: "360px",
     push: false,
-    zIndex: 3000,
+    zIndex: 800,
     show: function(sidecart){
       sidecart.addClass("left-shadow-overlay");
     },
@@ -50,7 +58,7 @@ $(document).ready(function () {
   });
 
   /*cart*/
-  $('body').on('change', '.cart-items .input-item-qty input',
+  $('body').on('change', '.product-qty input',
     function(event) {
       //$('form#'+$(this).data('form-submit')).submit();
     });
@@ -59,7 +67,7 @@ $(document).ready(function () {
       $('form#'+$(this).data('form-submit')).submit();
     }
   );
-  $('body').on('click', '.cart-items .input-item-qty button[data-type]',
+  $('body').on('click', '.product-qty .input-group-addon[data-type]',
     function(event) {
       var input_qty = $('#'+$(this).attr('data-field'));
       if(input_qty.length > 0) {
@@ -104,14 +112,14 @@ $(document).ready(function () {
 
 (function ( $ ) {
 
-    var template = '<div class="wait-overlay"><i class="fa fa-spinner fa-pulse text-danger"></i></div>';
+    var template = '<div class="wait-overlay-section modal-backdrop fade in text-center text-danger"><i class="fa fa-spinner fa-pulse fa-5x  text-danger"></i></div>';
 
     $.fn.wait_overlay = function(action) {
       if ( action === "show") {
         $(template).appendTo(this);
       }
       else {
-        this.find('.wait-overlay').remove();
+        this.find('.wait-overlay-section').remove();
       }
         return this;
     };

@@ -108,16 +108,22 @@
   padding-bottom: 20px;
   padding-top: 20px;
   .input-group {
+
     .input-group-addon {
       background-color: $brand-primary;
       border-color: $brand-primary;
       color: $white-base;
+      cursor: pointer;
     }
     .form-control {
       border-color: $brand-primary;
     }
   }
-
+}
+.product-qty {
+  .input-group-addon {
+    cursor: pointer;
+  }
 }
 .product-review {
   .product-average-review {

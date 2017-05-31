@@ -42,7 +42,8 @@ handle: category
         <div class="col-xs-12">
           <div id="search-result" class="hidden"></div>
           <div id="all-result">
-            {% with_scope category_level1: category.id%}
+
+            {% with_scope categories: {id: category.id}%}
             {% paginate store.products by 18 %}
             <div class="row separator-bottom">
               <div class="col-xs-12 text-right ">
@@ -73,7 +74,6 @@ handle: category
     </div>
   </div>
 </div>
-
 {% endblock %}
 
 {% block 'css' %}

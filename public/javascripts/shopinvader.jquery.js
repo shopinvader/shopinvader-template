@@ -13,11 +13,14 @@
 
             $this.target = $(event.target);
             $this.originalEvent = event;
+            console.log("target", $this.target.serializeArray());
             $this.trigger_before_submit_ajaxpage();
+            var form = new FormData(event.target);
+            console.log(form);
             $.ajax({
               "method": $this.target.attr('method'),
               "url": $this.target.attr('action'),
-              "data": $this.target.serialize(),
+              "data": $(event.target).serialize(),
               "dataType": 'html',
               "success": function(ajaxpage) {
                 $this.render_ajaxpage(ajaxpage);

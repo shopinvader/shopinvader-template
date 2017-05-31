@@ -1,4 +1,3 @@
-{% assign item_count = cart.item_number | round%}
 <div class="well well-sm bg-success">
   <h1 >TOTAL</h1>
   <table class="table">
@@ -9,12 +8,12 @@
             {{'cart_total_subtotal' | translate }}
         </td>
         <td class="text-bold text-right">
-          {{cart.item_amount_total | money }}
+          {{store.cart.item_amount_total | money }}
         </td>
       </tr>
       <tr>
         <td class="text-">{{'cart_total_shipping' | translate }}</td>
-        <td class="text- text-right">{{cart.shipping_amount_total | money }}</td>
+        <td class="text- text-right">{{store.cart.shipping_amount_total | money }}</td>
       </tr>
       <tr>
         <td class="text-bold">
@@ -27,10 +26,10 @@
         </td>
         <td class="text-bold text-right">
           <div class="text-size-lg">
-            {{cart.amount_total | money }}
+            {{store.cart.amount_total | money }}
           </div>
           <div class="">
-            {{cart.amount_tax | money }}
+            {{store.cart.amount_tax | money }}
           </div>
         </td>
       </tr>

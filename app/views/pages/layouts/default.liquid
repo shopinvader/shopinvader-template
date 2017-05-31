@@ -2,12 +2,12 @@
 title: Default layout
 is_layout: false
 ---
-<!DOCTYPE html>
 {% if locale != default_locale %}
   {% assign url_base ="/" | append: locale %}
 {% endif%}
 {% assign url_base =url_base | prepend: base_url | append:"/"%}
-<html lang="en">
+<!DOCTYPE html>
+<html lang="{{locale}}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +24,6 @@ is_layout: false
     {{ 'jquery.slidereveal.min.js' | javascript_tag }}
     {{ 'shopinvader.jquery.js' | javascript_tag }}
     {{ 'bootstrap.min.js' | javascript_tag }}
-
   </head>
   <body>
     {% include 'nav' %}
@@ -34,6 +33,15 @@ is_layout: false
       {% endblock %}
       </div>
     </main>
+    <div class="alert bg-color-info color-white text-center alert-cookie hidden" role="alert">
+      {% editable_text cookie_notice, fixed: true, rows: 1 %}
+        En poursuivant votre navigation sur ce site, vous acceptez l'utilisation
+        de cookies pour vous proposer des services et offres adaptés à vos centres d'intérêts.
+      {% endeditable_text %}
+      <button type="button" class="btn btn-success" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">OK</span>
+      </button>
+    </div>
     <div class="modal fade" id="main-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -58,8 +66,8 @@ is_layout: false
         </div>
       </div>
       <div data-cart-id="side_cart_items" class="wait-loader" id="side-cart-items" data-shopinvader-container>
-      {% if cart %}
-        {% include cart_side with cart %}
+      {% if store.cart %}
+        {% include cart_side %}
       {% else %}
         <div class="text-center">
         {% editable_text "cart_empty", hint: "Side cart empty" %}
@@ -69,7 +77,8 @@ is_layout: false
       {% endif %}
       </div>
     </div>
-    <div id="product-modal-add" class="hidden" data-shopinvader-container>
+    {% endblock %}
+    <div id="product-modal-add" class="hidden" data-shopinvader-container>.
       {% if params.product_id %}
         {% assign product_id = params.product_id | round %}
         <div class="title">
@@ -78,8 +87,8 @@ is_layout: false
         <div class="content">
           <div class="">
             <div class="row">
-              {% assign cart = store.cart | first %}
-              {% include 'cart_list' with cart, product_id, readonly: true %}
+
+              {% include 'cart_list' with cart:store.cart, product_id, readonly: true %}
             </div>
             <div class="row">
               <div class="col-xs-6">
@@ -111,7 +120,6 @@ is_layout: false
         </div>
       {% endif %}
     </div>
-    {% endblock %}
     {% include 'footer' %}
     {{ 'application.js' | javascript_tag }}
     {% block 'javascripts', short_name: true %}

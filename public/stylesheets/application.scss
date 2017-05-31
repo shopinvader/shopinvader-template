@@ -1,4 +1,16 @@
 $icon-font-path: "../fonts/bootstrap/" !default;
+@font-face {
+    font-family: 'sf-distant-galaxy';
+    src: url('../fonts/sf-distant-galaxy.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Lato';
+    src: url('../fonts/lato-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 @import 'bootstrap/variables';
 
 @import 'components/algolia';
@@ -98,5 +110,22 @@ footer {
     border-bottom: 1px solid $gray-lighter;
     margin-bottom: 15px;
     padding-bottom: 15px;
+  }
+}
+
+.alert-cookie {
+  background-color: $gray-dark;
+  color: $white-base;
+  border: 0;
+  bottom: 0;
+  margin-bottom: 0;
+  padding: 10px;
+  position: fixed;
+  top: unset;
+  width: 100%;
+  z-index: 100;
+  .btn {
+    min-width: 50px;
+    margin-left: 50px;
   }
 }

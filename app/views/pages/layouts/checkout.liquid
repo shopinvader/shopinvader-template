@@ -19,7 +19,6 @@ is_layout: true
   </div>
 {% endblock %}
 {% block 'content' %}
-{% assign cart = store.cart | first %}
 {% case page.handle %}
   {% when 'cart_login' %}
     {% assign cart_step = 2 %}

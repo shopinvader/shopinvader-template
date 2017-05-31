@@ -32,3 +32,9 @@ erp:
       type: string
     default_pricelist:
       type: string
+google:
+  label: Google API Integration
+  fields:
+    maps_api_key:
+      hint: Google MAPS API Authentication for autocomplete address
+      type: string

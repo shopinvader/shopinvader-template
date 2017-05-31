@@ -42,50 +42,59 @@
           <div class="">
             <small>{{product.variant_name}}</small>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-6">
-            <p class="group inner list-group-item-text">
-              {{product.brand}}
-            </p>
+          <div class="row">
+            <div class="col-xs-6">
+              <p class="group inner list-group-item-text">
+                {{product.brand}}
+              </p>
+            </div>
+            <div class="col-xs-6">
+            {%if product.rating_value%}
+              {% include 'rating_stars' with rating_value: product.rating_value, rating_nbr: product.rating_nbr%}
+            {% else %}
+              &nbsp;
+            {% endif%}
+            </div>
           </div>
-          <div class="col-xs-6">
-          {%if product.rating_value%}
-            {% include 'rating_stars' with rating_value: product.rating_value, rating_nbr: product.rating_nbr%}
-          {% else %}
-            &nbsp;
-          {% endif%}
-          </div>
-        </div>
-        <div class="row product-price-line">
-          <div class="col-xs-12 text-left">
-            {{'product_price_from' | translate}}
-            {%if product_price.discount_value > 0%}
-              <s>
-                {{product_price.discount_old_price | money }}
-              </s>
-            {% endif %}
-            <div class="text-heading text-size-4xl">
-              <span class=" {%if product_price.discount_value > 0%} text-warning{% endif %}">
-                {{product_price.value | money}}
-              </span>
+          <div class="row product-price-line">
+            <div class="col-xs-12 text-left">
+              {{'product_price_from' | translate}}
+              {%if product_price.discount_value > 0%}
+                <s>
+                  {{product_price.discount_old_price | money }}
+                </s>
+              {% endif %}
+              <div class="text-heading text-size-4xl">
+                <span class=" {%if product_price.discount_value > 0%} text-warning{% endif %}">
+                  {{product_price.value | money}}
+                </span>
+              </div>
             </div>
           </div>
         </div>
+
+
       </div>
     </a>
   </div>
   <div class="well-footer text-center">
+
     <div class="product-btn-addtocart">
       <form class="" action="#" method="post"  data-shopinvader-form>
-       <input type="hidden" name="item_qty" value="1">
-       <input type="hidden" name="action_proxy" value="cart/item">
-       <input type="hidden" name="product_id" value="{{product.objectID}}">
-    {%if product_price.discount_value > 0%}
-      <button type="submit" class="btn btn-danger btn-lg" >{{'product_add_to_cart_discount' | translate}}</button>
-    {% else %}
-      <button type="submit" class="btn btn-success btn-lg" >{{'product_add_to_cart' | translate}}  <i class="fa fa-shopping-basket"></i></button>
-    {% endif %}
+      {% if product.variant_count > 1%}
+        <input type="hidden" name="display_variant" value="{{product.objectID}}">
+        <a class="btn btn-default btn-lg" href="{{product.url_key | prepend: url_base}}">{{'product_display_variant' | translate}}</a>
+      {% else %}
+        <input type="hidden" name="item_qty" value="1">
+        <input type="hidden" name="action_proxy" value="cart/item">
+
+
+        {%if product_price.discount_value > 0%}
+          <button type="submit" class="btn btn-danger btn-lg" >{{'product_add_to_cart_discount' | translate}}</button>
+        {% else %}
+          <button type="submit" class="btn btn-success btn-lg" >{{'product_add_to_cart' | translate}}  <i class="fa fa-shopping-basket"></i></button>
+        {% endif %}
+      {% endif %}
       </form>
     </div>
   </div>

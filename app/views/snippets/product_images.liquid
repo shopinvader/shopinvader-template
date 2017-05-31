@@ -7,7 +7,7 @@
     {% assign image_id = 0  %}
     {% for image in product.images %}
     <div class="item {%if forloop.index == 1 %}active{%endif%}"   data-target="#slide-{{product.erp_id}}" data-slide-number="{{forloop.index}}">
-      <img src="{{image.large}}" alt=""/>
+      <img src="{{image.large | default: site.metafields.theme.noimage}}" alt=""/>
     </div>
     {% endfor %}
   </div>
