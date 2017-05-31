@@ -2,3 +2,4 @@ log
 bundle
 dev.docker-compose.yml
 config/deploy.yml
+config/site.yml
