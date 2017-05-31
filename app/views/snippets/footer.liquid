@@ -1,5 +1,14 @@
-<div class="container">
-  <footer class="footer">
-    <p>&copy; Company {{ now | localized_date: '%Y' }} </p>
-  </footer>
+<div class="container-fluid">
+  <div class="row">
+    <footer class="footer text*center">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <p>&copy; {{site.name}} {{ now | localized_date: '%Y' }} </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
 </div>

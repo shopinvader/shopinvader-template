@@ -29,8 +29,8 @@ metafields:
     logo: "/samples/assets/shop-logo.png"
     noimage: "/samples/assets/no-image.jpg"
   algolia:
-    application_id: < Your Algolia APP ID >
-    api_key: < Your Algolia API KEY >
+    application_id: 'GH41KF783Z'
+    api_key: "75575d3910b3ac55428bcdfa1b0e6784"
     indices: >
       [
         { "name": "categories", "index": "category" },
@@ -42,6 +42,6 @@ metafields:
           ["*", { "name": "product", "template_handle": "product", "index": "products" } ]
       ]
   erp:
-    api_key: < Your ERP API Key>
-    api_url: < Your ERP URL >
-    default_pricelist: < Your default pricelist name >
+    api_key: < Your ERP API KEY >
+    api_url: < Your ERP API URL >
+    default_pricelist: < Your ERP PRICELIST >

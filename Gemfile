@@ -7,7 +7,7 @@ gem 'locomotivecms_steam', git: 'git://github.com/locomotivecms/steam.git', requ
 
 group :misc do
   #gem 'shop_invader', path: 'shopinvader'
-  gem 'shop_invader', github: 'akretion/shopinvader', ref: 'afca3850b91403518cbec168bbfea37db55ba32d', branch: 'add-erp-proxy'
+  gem 'shop_invader', github: 'akretion/shopinvader', ref: 'e21b72b2fb744b49d8f5da3202edd0f85e3f9baa', branch: 'add-erp-proxy'
 end
 
 # gem 'locomotivecms_wagon', '~> 2.3.0.rc1'
