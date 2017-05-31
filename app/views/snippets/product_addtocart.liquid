@@ -3,7 +3,6 @@
   <input type="hidden" name="action_proxy" value="cart/item">
   <input type="hidden" name="action_method" value="post">
   <input type="hidden" name="product_id" value="{{product.objectID }}">
-    {% assign product_price = product.pricelist.values.first %}
     <div class="row">
       <div class="col-xs-12 text-size-4xl text-right">
         {%if product_price.discount_value != false%}
@@ -12,7 +11,7 @@
           </s>
         {% endif %}
         <span class="text-size-6xl text-heading text-warning">
-          {{ product_price.price | money}}
+          {{ product_price.value | money}}
         </span>
         {% if product.pricelist.tax_included == true %}
           <sub class="text-size-base">{{'product_vat_inc' | translate}}</sub>
@@ -28,12 +27,12 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
+        <div class="">
+          {{product.name}} {{product.variant_name}}
+        </div>
         {{'product_code' | translate }}
         <strong>{{product.default_code}}</strong>
 
-        <div class="">
-          {{product.variant_name}}
-        </div>
       </div>
     </div>
     <div class="row form-horizontal product-form-qty">

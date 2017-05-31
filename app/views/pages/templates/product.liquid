@@ -54,6 +54,7 @@ handle: product
       </div>
     </div>
   </div>
+  {% if variant_list.size > 0%}
   <div class="row">
     <div class="col-xs-12">
       <h2>{{'product_variant_title' | translate }}</h2>
@@ -65,7 +66,7 @@ handle: product
       </div>
     </div>
   </div>
-
+  {% endif %}
   <div id="product-section-overview">
     {% include 'product_page_section' with step: 'overview' %}
     <div class="row">
@@ -77,6 +78,7 @@ handle: product
       </div>
     </div>
   </div>
+  {% if product.technical_details %}
   <div id="product-section-spec">
     {% include 'product_page_section' with step: 'spec' %}
     <div class="row">
@@ -112,6 +114,8 @@ handle: product
       </div>
     </div>
   </div>
+  {% endif %}
+  {% if product.relateds.size > 0%}
   <div id="product-section-related">
     {% include 'product_page_section' with step: 'related' %}
     <div class="row">
@@ -129,17 +133,7 @@ handle: product
       </div>
     </div>
   </div>
-  <div id="product-section-advice">
-    {% include 'product_page_section' with step: 'advice' %}
-    <div class="row">
-      <div class="col-lg-12" >
-        <h2>{{'product_advice_title' | translate }}</h2>
-        <div class="editable_content">
-          {{variant.description}}
-        </div>
-      </div>
-    </div>
-  </div>
+  {% endif %}
   {% if variant.comments %}
   <div id="product-section-advice" class="product-review">
     {% include 'product_page_section' with step: 'reviews' %}

@@ -71,7 +71,7 @@
   }
 //Stock stock
 .product-stock-state {
-  .in_stock {
+  .in_stock, .in_limited_stock {
     color: $brand-success;
     &:before {
       content: "";

@@ -21,11 +21,6 @@
          </a>
        </li>
        {% endif %}
-       <li class="{% if step == 'advice' %}active{% endif %} text-uppercase">
-         <a href="#product-section-advice" data-scrollto="#product-section-advice">
-           {{'product_advice_tab' | translate }}
-         </a>
-       </li>
        {% if product.comments %}
        <li class="{% if step == 'reviews' %}active{% endif %} text-uppercase">
          <a href="#product-section-reviews" data-scrollto="#product-section-reviews">
