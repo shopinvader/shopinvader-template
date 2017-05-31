@@ -139,6 +139,9 @@ cart_free_delivery:
 cart_shipping_method:
   en: Continue
   fr: Continuer
+home:
+  en: Home
+  fr: Accueil
 partner_email:
   en: Email
   fr: Adresse e-mail
@@ -309,7 +312,7 @@ search_product_empty:
   fr: Aucun produit trouvé.
 search_product_all:
   en: View all results
-  fr: Voir tous les résultats 
+  fr: Voir tous les résultats
 search_category:
   en: Categories
   fr: Categories

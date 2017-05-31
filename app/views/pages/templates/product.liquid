@@ -23,9 +23,11 @@ handle: product
   <div class="row">
     <div class="col-xs-12">
       <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Library</a></li>
-        <li class="active">Data</li>
+        <li><a href="{% path_to 'home' %} " class="text-gray-darker">{{ 'home' | translate }}</a></li>
+      {% for category in variant.categories %}
+        <li><a href="{{category.url_key | prepend: url_base}}" class="text-gray-darker">{{category.name}}</a></li>
+      {% endfor %}
+        <li class="active">{{variant.name}}</li>
       </ol>
     </div>
   </div>
