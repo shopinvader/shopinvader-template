@@ -1,17 +1,17 @@
-{% assign product_price = product.price[site.metafields.erp.default_pricelist] %}
+
 <form class="" action="{{product.url_key  | prepend: url_base}}" method="post" data-shopinvader-form>
   <input type="hidden" name="action_proxy" value="cart/item">
   <input type="hidden" name="action_method" value="post">
   <input type="hidden" name="product_id" value="{{product.objectID }}">
     <div class="row">
       <div class="col-xs-12 text-size-4xl text-right">
-        {%if product_price.discount_value != false%}
+        {%if product.price.discount_value != false%}
           <s>
-            {{product_price.discount_old_price | money }}
+            {{product.price.discount_old_price | money }}
           </s>
         {% endif %}
         <span class="text-size-6xl text-heading text-warning">
-          {{ product_price.value | money}}
+          {{ product.price.value | money}}
         </span>
         {% if product.pricelist.tax_included == true %}
           <sub class="text-size-base">{{'product_vat_inc' | translate}}</sub>
@@ -50,7 +50,7 @@
         </span>
       </div>
       <div class="col-xs-6 col-lg-6  text-right ">
-      {%if product_price.discount_value == false%}
+      {%if product.price.discount_value == false%}
         <button type="submit" class="btn btn-success btn-lg">
           {{"product_add_to_cart" | translate }}
         </button>

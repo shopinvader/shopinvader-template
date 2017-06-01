@@ -37,67 +37,71 @@ is_layout: false
         </button>
       </div>
     </div>
-    {% if address_book == null or address_book.size == 0  %}
-    <div class="row">
-      <div class="col-xs-12 col-sm-6">
-        <div class="form-group">
-          <label for="email">{{ "partner_email" | translate }}</label>
-          <input type="email" name="partner_shipping_id[email]" value="{{cart.anonymous_email}}" class="form-control" id="email" placeholder="{{ 'cart_login' | translate }}" required="required" autocomplete="off">
+    <form class="" action="{% path_to cart_checkout %}" method="post">
+      <input type="hidden" name="action_proxy" value="cart">
+      <input type="hidden" name="action_method" value="put">
+
+      {% if address_book == null or address_book.size == 0  %}
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <div class="form-group">
+            <label for="email">{{ "partner_email" | translate }}</label>
+            <input type="email" name="partner_shipping_id[email]" value="{{store.cart.anonymous_email}}" class="form-control" id="email" placeholder="{{ 'cart_login' | translate }}" required="required" autocomplete="off">
+          </div>
         </div>
       </div>
-    </div>
-    {%endif%}
-    <div class="row">
-      <div class="col-xs-12">
-        <h2>{{ 'cart_customer_shipping' | translate }}</h2>
-        {% if address_book == null or address_book.size == 0  %}
-        <div data-autocomplete="address">
-          {%include "address_form"
-          with input_group: 'partner_shipping_id',
-          with_require: true,
-          address: session.partner_shipping_id
-          %}
-        </div>
-        {% else %}
-        <div id="shipping_address_book">
-          {% include "address_book" with
-          input_group: 'shipping',
-          input_name: 'partner_shipping_id',
-          address_list: address_book
-          %}
-        </div>
-        <div id="templates-modal-title" class="hidden">
-          {{'cart_address_update' | translate }}
-        </div>
-        <div id="templates-modal-body" class="hidden">
-          {% include "address_form" with
-          input_group: '',
-          address_book,
-          with_require: false
-          %}
-        </div>
-        <div id="templates-modal-footer" class="hidden">
-          <button type="button" class="btn btn-default" data-dismiss="modal">
-            {{'modal_close' | translate}}
-          </button>
-          <button type="button" id="save-address" class="btn btn-warning">
-            {{'modal_save' | translate}}
-          </button>
-        </div>
-        {% endif %}
-      </div>
-    </div>
-    <div class="row hidden">
-      <div class="col-xs-12">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input name="use_different_invoice_address" class="form-check-input" type="checkbox" autocomplete="off" >
-            {{ 'cart_invoice_address_different' | translate }}
-          </label>
+      {%endif%}
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>{{ 'cart_customer_shipping' | translate }}</h2>
+          {% if address_book == null or address_book.size == 0  %}
+          <div data-autocomplete="address">
+            {%include "address_form"
+            with input_group: 'partner_shipping_id',
+            with_require: true,
+            address: session.partner_shipping_id
+            %}
+          </div>
+          {% else %}
+          <div id="shipping_address_book">
+            {% include "address_book" with
+            input_group: 'shipping',
+            input_name: 'partner_shipping_id',
+            address_list: address_book
+            %}
+          </div>
+          <div id="templates-modal-title" class="hidden">
+            {{'cart_address_update' | translate }}
+          </div>
+          <div id="templates-modal-body" class="hidden">
+            {% include "address_form" with
+            input_group: '',
+            address_book,
+            with_require: false
+            %}
+          </div>
+          <div id="templates-modal-footer" class="hidden">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              {{'modal_close' | translate}}
+            </button>
+            <button type="button" id="save-address" class="btn btn-warning">
+              {{'modal_save' | translate}}
+            </button>
+          </div>
+          {% endif %}
         </div>
       </div>
-    </div>
-    <div class="invoice_address_block hidden">
+      <div class="row hidden">
+        <div class="col-xs-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input name="use_different_invoice_address" class="form-check-input" type="checkbox" autocomplete="off" >
+              {{ 'cart_invoice_address_different' | translate }}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="invoice_address_block hidden">
       <div class="row">
         <div class="col-xs-12">
           <h2>{{ 'cart_customer_invoice' | translate }}</h2>
@@ -127,20 +131,21 @@ is_layout: false
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-6 text-left">
-        <a href="{% path_to cart_index %}">
-          <i class="fa fa-arrow-circle-left"></i>
-          {{'cart_return' | translate}}
-        </a>
+      <div class="row">
+        <div class="col-xs-6 text-left">
+          <a href="{% path_to cart_index %}">
+            <i class="fa fa-arrow-circle-left"></i>
+            {{'cart_return' | translate}}
+          </a>
+        </div>
+        <div class="col-xs-6 text-right address-submit-form ">
+          <button class="btn btn-warning text-lg" type="submit" class="bg-color-success text-1xl color-white">
+            {{'cart_shipping_method' | translate}}
+            <i class="fa fa-arrow-circle-right"></i>
+          </button>
+        </div>
       </div>
-      <div class="col-xs-6 text-right address-submit-form ">
-        <button class="btn btn-warning text-lg" type="submit" class="bg-color-success text-1xl color-white">
-          {{'cart_shipping_method' | translate}}
-          <i class="fa fa-arrow-circle-right"></i>
-        </button>
-      </div>
-    </div>
+    </form>
   </div>
   <div class="col-xs-12 col-md-3">
     {% include 'cart_total' %}

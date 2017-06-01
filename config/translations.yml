@@ -76,6 +76,9 @@ cart_total_vat:
 cart_total_shipping:
   en: "Shipping"
   fr: "Frais de livraison"
+cart_payment_secure:
+  en: Secured Payment
+  fr: Paiement sécurisé
 cart_title:
   en: My cart
   fr: Mon panier
@@ -340,3 +343,6 @@ store_advantage_return:
 recommandation_title:
   en: Our new deals
   fr: Nos bonnes affaires
+search_show_more:
+  en: more
+  fr: afficher plus

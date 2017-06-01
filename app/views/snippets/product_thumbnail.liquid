@@ -1,4 +1,4 @@
-{% assign product_price = product.price.public_tax_inc %}
+
 <div class="well well-full-height well-white">
   <div class="well-content">
     <a href="{{product.url_key | prepend: url_base}}">
@@ -27,10 +27,10 @@
         {% else %}
           <img class="group list-group-image img-responsive" src="{{product.images.first.medium  | default: site.metafields.theme.noimage }}" alt="" />
         {% endif %}
-        {%if product_price.discount_value > 0%}
+        {%if product.price.discount_value > 0%}
           <div class="discount-value">
             {{"product_discount_label" | translate }} <strong class="text-bold">
-              {{product_price.discount_value }} % !
+              {{product.price.discount_value }} % !
             </strong>
           </div>
         {%endif%}
@@ -59,14 +59,14 @@
           <div class="row product-price-line">
             <div class="col-xs-12 text-left">
               {{'product_price_from' | translate}}
-              {%if product_price.discount_value > 0%}
+              {%if product.price.discount_value > 0%}
                 <s>
-                  {{product_price.discount_old_price | money }}
+                  {{product.price.discount_old_price | money }}
                 </s>
               {% endif %}
               <div class="text-heading text-size-4xl">
                 <span class=" {%if product_price.discount_value > 0%} text-warning{% endif %}">
-                  {{product_price.value | money}}
+                  {{product.price.value | money}}
                 </span>
               </div>
             </div>
@@ -86,10 +86,11 @@
         <a class="btn btn-default btn-lg" href="{{product.url_key | prepend: url_base}}">{{'product_display_variant' | translate}}</a>
       {% else %}
         <input type="hidden" name="item_qty" value="1">
+        <input type="hidden" name="action_method" value="post">
         <input type="hidden" name="action_proxy" value="cart/item">
+        <input type="hidden" name="product_id" value="{{product.objectID}}">
 
-
-        {%if product_price.discount_value > 0%}
+        {%if product.price.discount_value > 0%}
           <button type="submit" class="btn btn-danger btn-lg" >{{'product_add_to_cart_discount' | translate}}</button>
         {% else %}
           <button type="submit" class="btn btn-success btn-lg" >{{'product_add_to_cart' | translate}}  <i class="fa fa-shopping-basket"></i></button>

@@ -14,7 +14,7 @@ $(document).ready(function() {
   };
 
   if(typeof(category_id) != 'undefined') {
-    console.log(category_id);
+
 
     instantsearch_params.urlSync = false;
     instantsearch_params.searchParameters = {
@@ -77,17 +77,18 @@ $(document).ready(function() {
         body: $('#stats-template').html(),
       }
     })
-  );*/
+  );
 
   if($('#filters-xs').length > 0) {
     $('[data-filter-attr]').each(
     function(i, element){
+
       var filter = $(element).clone(true);
       filter.attr('id', filter.attr('id')+'-xs');
       filter.data('filter-collapse', 'true');
       filter.appendTo($('#filters-xs .content'));
     });
-  }
+  }*/
   $('[data-filter-attr]').each(
   function(i, element){
 
@@ -108,7 +109,7 @@ $(document).ready(function() {
       },
       tooltips: false,
     };
-
+    console.log(element);
     if($(element).data('filter-hit-limit')) {
       search_widget.limit = $(element).data('filter-hit-limit');
     }

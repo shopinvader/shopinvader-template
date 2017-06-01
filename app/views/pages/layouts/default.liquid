@@ -26,6 +26,7 @@ is_layout: false
     {{ 'bootstrap.min.js' | javascript_tag }}
   </head>
   <body>
+
     {% include 'nav' %}
     <main>
       <div class="container">
@@ -80,6 +81,7 @@ is_layout: false
     {% endblock %}
     <div id="product-modal-add" class="hidden" data-shopinvader-container>.
       {% if params.product_id %}
+        {{store.cart}}
         {% assign product_id = params.product_id | round %}
         <div class="title">
           {{ 'cart_item_added' | translate }}

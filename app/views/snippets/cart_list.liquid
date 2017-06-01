@@ -16,12 +16,12 @@
   </thead>
   <tbody>
   {% for cart_line in store.cart.order_line %}
-    {% if product_id == null or cart_line.product_id.id == product_id %}
+    {% if product_id == null or cart_line.shopinvader_variant_id.record_id.id == product_id %}
     <tr class="cart-line">
       <td class="cart-line-desc">
-        <img src="{{cart_line.product_url | default: site.metafields.theme.noimage}}" alt="" title="{{cart_line.product_id.name}}" height="100" class="thumbnail">
+        <img src="{{cart_line.shopinvader_variant_id.images.first.small | default: site.metafields.theme.noimage}}" alt="" title="{{cart_line.shopinvader_variant_id.name}}" height="100" class="thumbnail">
         <span class="text-size-2xl cart-line-label">
-          {{cart_line.product_id.name}}
+          {{cart_line.shopinvader_variant_id.name}}
         </span>
       </td>
       <td class="cart-line-price">{{cart_line.price_unit | money}}</td>

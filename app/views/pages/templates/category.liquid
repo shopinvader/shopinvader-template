@@ -18,6 +18,24 @@ handle: category
           data-filter-name="categories_ids"
           class="hidden">
         </div>
+        <div
+          id="filter-default_code"
+          data-filter-widget-type="refinementList"
+          data-filter-attr="default_code"
+          data-filter-name="default_code"
+          data-show-more-label="{{'search_show_more' | translate}}"
+          data-filter-hit-limit='10'
+          class="small">
+        </div>
+        <div
+          id="filter-attributes_memory"
+          data-filter-widget-type="refinementList"
+          data-filter-attr="attributes.memory"
+          data-filter-name="Memory"
+          data-show-more-label="{{'search_show_more' | translate}}"
+          data-filter-hit-limit='10'
+          class="small">
+        </div>
       {% for filter in category.filter %}
         <div
           id="filter-{{filter.attribute}}"

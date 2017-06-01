@@ -105,8 +105,7 @@ editable_elements:
                 {% endfor %}
               </ul>
             </div>
-
-            {% for payment_method_id in cart.available_payment_method_ids%}
+            {% for payment_method_id in store.cart.available_payment_method_ids%}
             <div class="panel-heading visible-xs" role="tab" id="head-{{payment_method_id.code}}">
               <h4 class="panel-title">
                 <a role="button" data-toggle="collapse" data-parent="#payment-tabs" href="#collapse-{{payment_method_id.code}}" aria-expanded="true" aria-controls="collapse-{{payment_method_id.code}}">
