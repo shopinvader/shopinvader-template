@@ -1,1 +1,51 @@
---- []
+- Buying guide:
+    _slug:
+      en: buying-guide
+      fr: buying-guide
+    name:
+      en: Buying guide
+      fr: Guide d'achat
+    short_description:
+      en: "<p></p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+        in massa \r\ncursus, tempus dui a, venenatis lacus. Quisque consequat sem
+        id mauris \r\nluctus sodales. Duis consectetur blandit erat, non posuere neque
+        \r\nlobortis ut. Integer efficitur lobortis orci. Vestibulum viverra a augue\r\n
+        sit amet aliquam. In sed leo feugiat, blandit metus gravida, tristique \r\nnulla.
+        Nunc tincidunt sodales libero in suscipit. Cras augue quam, \r\nfaucibus sit
+        amet vestibulum eget, aliquet ac metus. Suspendisse \r\nconsequat mauris mattis
+        libero consequat dignissim. Nunc vitae dolor \r\nnunc.<strong> <br></strong></p><p><strong>Curabitur
+        convallis nibh enim, nec bibendum.</strong></p><br><p></p>"
+      fr: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in massa
+        \r\ncursus, tempus dui a, venenatis lacus. Quisque consequat sem id mauris
+        \r\nluctus sodales. Duis consectetur blandit erat, non posuere neque \r\nlobortis
+        ut. Integer efficitur lobortis orci. Vestibulum viverra a augue\r\n sit amet
+        aliquam. In sed leo feugiat, blandit metus gravida, tristique \r\nnulla. Nunc
+        tincidunt sodales libero in suscipit. Cras augue quam, \r\nfaucibus sit amet
+        vestibulum eget, aliquet ac metus. Suspendisse \r\nconsequat mauris mattis
+        libero consequat dignissim. Nunc vitae dolor \r\nnunc.<strong> <br></strong></p><p><strong>Curabitur
+        convallis nibh enim, nec bibendum.</strong><br></p>"
+    posts:
+    - everything-to-know-before-you-buy-a-tablet
+    - wireless-speakers-tests
+    - make-americano-great-again
+    - how-to-buy-headphones-in-2017
+- Review:
+    _slug:
+      en: review
+      fr: review
+    name:
+      en: Review
+      fr: Review
+    posts:
+    - everything-to-know-before-you-buy-a-tablet
+    - sed-tamen-haec-cum-ita-tutius-observentur
+- How to:
+    _slug:
+      en: how-to
+      fr: how-to
+    name:
+      en: How to
+      fr: How to
+    posts:
+    - how-to-buy-headphones-in-2017
+    - everything-to-know-before-you-buy-a-tablet

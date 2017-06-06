@@ -33,7 +33,7 @@ display_settings:
   # hidden: false           # hidden for authors?
 
 # By default, the back-office displays the _label property (see label_field_name) of the content entry. This can be modified by writing your own Liquid template below:
-entry_template: '<a href="{{ link }}">{{ entry._label }}</a>{% if entry.featured %}&nbsp;&nbsp;<span class="label label-success">FEATURED</span>{% endif %}<div class="small">{{entry.date | format_date}}</div><div class="small">{{entry.group.name}}</div><div class="small">{{entry.short_description}}</div>' # The default template
+entry_template: '<a href="{{ link }}">{{ entry._label }}</a>{% if entry.main_post %}&nbsp;&nbsp;<span class="label label-default">MAIN POST</span>{% endif %}{% if entry._visible %}&nbsp;&nbsp;<span class="label label-success">VISIBLE</span>{% endif %}<div class="small">{{entry.date | format_date}}</div><div class="small">{{entry.group.name}}</div><div class="small">{{entry.short_description}}</div>' # The default template
 
 fields:
 - name:
@@ -50,11 +50,41 @@ fields:
     hint: "Date of the post"
     localized: false
 
+- main_post:
+    label: Main post
+    type: boolean
+    required: true
+    hint: "Most important post"
+    localized: true
+
+- post_author:
+    label: Post Author
+    type: text
+    required: false
+    hint: "Post Credit"
+    localized: true
+    text_formatting: html
+
+- image_author:
+    label: Image Author
+    type: text
+    required: false
+    hint: "Image Credit"
+    localized: true
+    text_formatting: html
+
 - picture:
     label: Picture
     type: file
     required: true
-    hint: Best format is 1920x600 px.
+    hint: Best format is 1370x600 px.
+    localized: false
+
+- thumbnails:
+    label: Thumbnails
+    type: file
+    required: true
+    hint: Best format is 300x300 px.
     localized: false
 
 - short_description:
@@ -86,6 +116,13 @@ fields:
     type: string
     required: false
     localized: true
+
+- relative_posts:
+    label: Relative post
+    type: many_to_many
+    class_name: posts
+    inverse_of: relative_posts
+    ui_enabled: true
 
 - groups:
     label: Group
