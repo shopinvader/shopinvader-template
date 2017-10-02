@@ -11,7 +11,7 @@ $icon-font-path: "../fonts/bootstrap/" !default;
     font-weight: normal;
     font-style: normal;
 }
-@import 'bootstrap/variables';
+@import 'bootstrap4/bootstrap';
 
 @import 'components/algolia';
 @import 'components/cart';

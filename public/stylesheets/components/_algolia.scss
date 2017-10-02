@@ -3,22 +3,22 @@
   text-align: center;
 
   .ais-pagination--link {
-    border: 1px solid $gray-light;
+    border: 1px solid grays("200");
     border-radius: 5px;
-    color: $brand-primary;
+    color: theme-colors("primary");
     padding: 8px 12px;
     text-decoration: none;
   }
 
   .ais-pagination--item__active a {
-    background-color: $brand-primary;
-    border-color: $brand-primary;
+    background-color: theme-colors("primary");
+    border-color: theme-colors("primary");
     color: $white-base;
   }
 }
 
 .ais-root {
-  border-top: 1px solid $gray-light;
+  border-top: 1px solid gray("200");
   padding-bottom: 10px;
 
   .ais-body {
@@ -30,7 +30,7 @@
     .ais-menu--count,
     .ais-star-rating--count,
     .ais-toggle--count {
-      color: $brand-primary;
+      color: theme-colors("primary");
       float: right;
       font-size: $font-size-small;
     }
@@ -70,7 +70,7 @@
         float: right;
       }
       h4 {
-        color: $brand-danger;
+        color: theme-colors("danger");
         font-family: $font-family-sans-serif;
         font-weight: bold;
       }
@@ -91,11 +91,11 @@
     }
 
     .ais-range-slider--connect {
-      background: $brand-primary;
+      background: theme-colors("primary");
     }
 
     .ais-range-slider--handle {
-      border-color: $brand-primary;
+      border-color: theme-colors("primary");
       bottom: 6px;
       height: 15px;
       width: 15px;
@@ -126,9 +126,9 @@
   &.ais-menu {
     .ais-menu--item__active {
       .ais-menu--link {
-        color: $brand-primary;
+        color: theme-colors("primary");
         &:before {
-          color: $brand-primary;
+          color: theme-colors("primary");
         }
       }
     }
@@ -140,7 +140,7 @@
       width: 100%;
 
       &:before {
-        color: $brand-primary;
+        color: theme-colors("primary");
         content: '';
         display: inline-block;
         font-family: FontAwesome;
@@ -156,15 +156,15 @@
   &.ais-refinement-list {
     .ais-refinement-list--item__active {
       .ais-refinement-list--label {
-        color: $brand-primary;
+        color: theme-colors("primary");
         &:hover {
-          color: $brand-primary;
+          color: theme-colors("primary");
           text-decoration: line-through;
         }
 
         &:before {
           font-weight: normal;
-          color: $brand-primary;
+          color: theme-colors("primary");
           content: "";
         }
       }
@@ -181,11 +181,11 @@
       width: 100%;
 
       &:hover {
-        color: $brand-primary;
+        color: theme-colors("primary");
       }
 
       &:before {
-        color: $gray-light;
+        color: gray('200');
         content: '';
         display: inline-block;
         font-family: FontAwesome;
@@ -195,7 +195,7 @@
       }
 
       &:hover:before {
-        color: $brand-primary;
+        color: theme-colors("primary");
       }
 
       .ais-refinement-list--checkbox {
@@ -215,7 +215,7 @@
   padding-top: 10px;
 }
 .filters-xs {
-  background-color: $white-base;
+  background-color: colors("white");
   height: 100%;
   left: 0;
   position: fixed;
@@ -236,11 +236,11 @@
   }
 
   .ais-root__collapsible {
-    background-color: $gray-light;
+    background-color: gray("200");
   }
 
   .ais-root__collapsed {
-    background-color: $white-base;
+    background-color: colors("white");
   }
 
   .ais-root {
@@ -249,7 +249,7 @@
     padding-top: 10px;
 
     .ais-refinement-list--item {
-      border-bottom: 1px solid $white-base;
+      border-bottom: 1px solid colors("white");
 
       vertical-align: middle;
 
