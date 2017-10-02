@@ -27,17 +27,17 @@
         {% else %}
           <img class="group list-group-image img-responsive" src="{{product.images.first.medium  | default: site.metafields.theme.noimage }}" alt="" />
         {% endif %}
-        {%if product.price.discount_value > 0%}
+        {%if product.price.discount > 0%}
           <div class="discount-value">
             {{"product_discount_label" | translate }} <strong class="text-bold">
-              {{product.price.discount_value }} % !
+              {{product.price.discount }} % !
             </strong>
           </div>
         {%endif%}
         </div>
         <div class="col-xs-12 product-desc">
           <div class="text-size-1xl text-bold">
-            {{product.name}}
+            {{product.model_name}}
           </div>
           <div class="">
             <small>{{product.variant_name}}</small>
@@ -45,7 +45,7 @@
           <div class="row">
             <div class="col-xs-6">
               <p class="group inner list-group-item-text">
-                {{product.brand}}
+                {{product.brand.name}}
               </p>
             </div>
             <div class="col-xs-6">
@@ -59,13 +59,13 @@
           <div class="row product-price-line">
             <div class="col-xs-12 text-left">
               {{'product_price_from' | translate}}
-              {%if product.price.discount_value > 0%}
+              {%if product.price.discount > 0%}
                 <s>
-                  {{product.price.discount_old_price | money }}
+                  {{product.price.original_value | money }}
                 </s>
               {% endif %}
               <div class="text-heading text-size-4xl">
-                <span class=" {%if product_price.discount_value > 0%} text-warning{% endif %}">
+                <span class=" {%if product_price.discount > 0%} text-warning{% endif %}">
                   {{product.price.value | money}}
                 </span>
               </div>
@@ -90,7 +90,7 @@
         <input type="hidden" name="action_proxy" value="cart/item">
         <input type="hidden" name="product_id" value="{{product.objectID}}">
 
-        {%if product.price.discount_value > 0%}
+        {%if product.price.discount > 0%}
           <button type="submit" class="btn btn-danger btn-lg" >{{'product_add_to_cart_discount' | translate}}</button>
         {% else %}
           <button type="submit" class="btn btn-success btn-lg" >{{'product_add_to_cart' | translate}}  <i class="fa fa-shopping-basket"></i></button>

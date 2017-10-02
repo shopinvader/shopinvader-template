@@ -27,13 +27,13 @@ handle: product
       {% for category in variant.categories %}
         <li><a href="{{category.url_key | prepend: url_base}}" class="text-gray-darker">{{category.name}}</a></li>
       {% endfor %}
-        <li class="active">{{variant.name}}</li>
+        <li class="active">{{variant.model_name}}</li>
       </ol>
     </div>
   </div>
   <div class="row ">
     <div class="col-lg-12">
-      <h1>{{variant.name}}</h1>
+      <h1>{{variant.model_name}}</h1>
       <div class="text-size-2xl">
         {{variant.variant_name}}
       </div>
@@ -41,7 +41,7 @@ handle: product
   </div>
   <div class="row">
     <div class="col-lg-12">
-      {{variant.brand}}
+      {{variant.brand.name}}
     </div>
   </div>
   <div class="row">

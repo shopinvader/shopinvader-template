@@ -57,15 +57,9 @@
 
       </div>
       <div class="well-footer text-center">
-        {%if product_price.discount_value == false%}
-         <a class="btn btn-success" href="#">
-           {{"product_add_to_cart" | translate }}
-         </a>
-        {%else%}
          <a class="btn btn-warning" href="#">
            {{"product_add_to_cart_discount" | translate }}
          </a>
-        {% endif %}
       </div>
     </div>
   </a>

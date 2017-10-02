@@ -1,13 +1,13 @@
-{% assign product_price = product.pricelist.values.first %}
+
 <div class="product-thumbnail col-xs-12 col-md-6 col-lg-2">
   <div class="thumbnail">
     <div class="product-thumbnail-slide">
       <a href="{{product.url_key | prepend: url_base}}?ref={{product.default_code}}">
       <img class="group list-group-image" src="{{product.images.first.medium  | default: site.metafields.theme.noimage }}" alt="" />
-      {%if product_price.discount_value != false%}
+      {%if product.price.discount > 0%}
       <div class="discount-value">
          <strong class="text-bold">
-          - {{product_price.discount_value }} % !
+          - {{product.price.discount }} % !
         </strong>
       </div>
       {%endif%}
@@ -21,14 +21,14 @@
       <div class="row product-price-line">
         <div class="col-xs-12  text-left">
           {{'product_price_from' | translate}}
-          {%if product_price.discount_value != false%}
+          {%if product_price.discount > 0%}
             <s>
-              {{product_price.discount_old_price | money }}
+              {{product.price.original_value | money }}
             </s>
           {% endif %}
           <div class="text-heading text-size-4xl">
-            <span class=" {%if product_price.discount_value != false%} text-warning{% endif %}">
-              {{product_price.price | money}}
+            <span class=" {%if product_price.discount > 0%} text-warning{% endif %}">
+              {{product.price.value | money}}
             </span>
           </div>
         </div>

@@ -3,13 +3,12 @@ source 'https://rubygems.org'
 gem 'locomotivecms_wagon', git: 'git://github.com/locomotivecms/wagon.git', require: false
 gem 'locomotivecms', git: 'git://github.com/locomotivecms/engine.git', require: false
 gem 'custom_fields', git: 'git://github.com/locomotivecms/custom_fields.git'
-gem 'locomotivecms_steam', git: 'git://github.com/locomotivecms/steam.git', require: false
-
+gem 'locomotivecms_steam', github: 'akretion/steam', branch: 'add_reset_password_notification'
+gem 'byebug'
 group :misc do
   #gem 'shop_invader', path: 'shopinvader'
-  gem 'shop_invader', github: 'akretion/shopinvader', ref: 'a71f6d37700628467b3af7ea009eebb654f243a5', branch: 'add-erp-proxy'
+  gem 'shop_invader', github: 'akretion/shopinvader'
 end
-
 # gem 'locomotivecms_wagon', '~> 2.3.0.rc1'
 
 # gem 'guard-livereload', '~> 2.5.1'
@@ -32,3 +31,4 @@ group :misc do
   # gem 'susy', require: 'susy'
   # gem 'bourbon', require: 'bourbon'
 end
+
