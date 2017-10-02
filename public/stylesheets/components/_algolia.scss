@@ -13,16 +13,16 @@
   .ais-pagination--item__active a {
     background-color: theme-colors("primary");
     border-color: theme-colors("primary");
-    color: $white-base;
+    color: colors("white");
   }
 }
 
 .ais-root {
-  border-top: 1px solid gray("200");
+  border-top: 1px solid grays("200");
   padding-bottom: 10px;
 
   .ais-body {
-    font-size: $font-size-small;
+    font-size: $font-size-sm;
 
     //Result count item
     .ais-refinement-list--count,
@@ -32,7 +32,7 @@
     .ais-toggle--count {
       color: theme-colors("primary");
       float: right;
-      font-size: $font-size-small;
+      font-size: $font-size-sm;
     }
   }
 
@@ -40,7 +40,7 @@
   .ais-show-more {
     cursor: pointer;
     display: block;
-    font-size: $font-size-small;
+    font-size: $font-size-sm;
     font-weight: 700;
     text-align: right;
     transition: .5s;
@@ -104,7 +104,7 @@
 
   // Rating widget
   &.ais-star-rating {
-    font-size: $font-size-small;
+    font-size: $font-size-sm;
     .ais-star-rating--star:before, .ais-star-rating--star__empty:before {
       content: "\f005";
       font-family: FontAwesome;
@@ -173,7 +173,7 @@
     .ais-refinement-list--label {
       cursor: pointer;
       display: block;
-      font-size: $font-size-small;
+      font-size: $font-size-sm;
       font-weight: normal;
       line-height: 16px;
       position: relative;
@@ -185,7 +185,7 @@
       }
 
       &:before {
-        color: gray('200');
+        color: grays('200');
         content: '';
         display: inline-block;
         font-family: FontAwesome;
@@ -236,7 +236,7 @@
   }
 
   .ais-root__collapsible {
-    background-color: gray("200");
+    background-color: grays("200");
   }
 
   .ais-root__collapsed {
@@ -256,7 +256,7 @@
       & > div {
         display: inline;
         .ais-refinement-list--label {
-          font-size: $font-size-large;
+          font-size: $font-size-lg;
           padding-top: 20px;
           padding-bottom: 20px;
 

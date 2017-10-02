@@ -18,7 +18,7 @@
 }
 
 .text-size-sm {
-  font-size: $font-size-small;
+  font-size: $font-size-sm;
 }
 
 .text-size-md {
@@ -26,7 +26,7 @@
 }
 
 .text-size-lg {
-  font-size: $font-size-large;
+  font-size: $font-size-lg;
 }
 
 .text-size-1xl{
@@ -71,23 +71,23 @@
   color: $headings-color;
 }
 .text-white {
-  color: $white-base;
+  color: colors("white-base");
 }
 .text-gray {
-  color: $gray-base;
+  color: grays("700");
 }
 .text-gray-dark {
-  color: $gray-dark;
+  color: grays("800");
 }
 .text-gray-darker {
-  color: $gray-darker;
+  color: grays("900");
 }
 
 .title-decorator:before {
   display: inline-block;
   font-family: FontAwesome;
   font-size: 0.9em;
-  color: $brand-danger;
+  color: theme-colors("danger");
   content:"";
 
   //transform: rotate(-45deg);

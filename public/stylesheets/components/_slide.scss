@@ -15,7 +15,7 @@
 
 .carousel .carousel-control {
   background: none;
-  color: $brand-primary;
+  color: theme-colors("primary");
 
   span {
     font-size: 15px;
@@ -26,7 +26,7 @@
   display: inline-block;
   cursor: pointer;
   &.active {
-    border: 1px solid $gray;
+    border: 1px solid grays("500");
   }
 }
 .carousel-multi-item {

@@ -13,8 +13,8 @@
     width: 25%;
     .breadcrumb-number {
 
-      background-color: $gray-lighter;
-      color: $white-base;
+      background-color: grays("100");
+      color: colors("white");
       display: block;
       line-height: 40px;
       font-size: 28px;
@@ -24,24 +24,24 @@
       margin: auto;
     }
     .breadcrumb-title {
-      color: $gray-lighter;
-      font-size: $font-size-large;
+      color: grays("100");
+      font-size: $font-size-lg;
       line-height: 30px;
     }
     &.active + .active {
       .breadcrumb-number {
-        background-color: $brand-danger;
+        background-color: theme-colors("danger");
       }
       .breadcrumb-title {
-        color: $brand-danger;
+        color: theme-colors("danger");
       }
     }
     &.active {
       .breadcrumb-number {
-        background-color: $brand-primary;
+        background-color: theme-colors("primary");
       }
       .breadcrumb-title {
-        color: $brand-primary;
+        color: theme-colors("primary");
       }
 
     }
@@ -55,7 +55,7 @@
   table-layout: fixed;
   text-align: center;
   width: 100%;
-  @media (max-width: $screen-md-min) {
+  @media (max-width: media-breakpoint-down(xs)) {
     padding: 0px;
     width: 100%;
   }
@@ -67,7 +67,7 @@
 
     .breadcrumb-number {
       .breadcrumb-counter {
-        background: $gray-light none repeat scroll 0 0;
+        background: grays("200") none repeat scroll 0 0;
         border-radius: 50%;
         color: white;
         display: inline-block;
@@ -81,12 +81,12 @@
     }
     .breadcrumb-title {
       display: block;
-      color: $gray-light;
+      color: grays("200");
     }
     &::after, &::before {
       width: calc(50% - 18px);
       height: 1px;
-      background-color: $gray-light;
+      background-color: grays("200");
       content: "";
       position: absolute;
       margin: auto;
@@ -110,27 +110,27 @@
     }
     &.active {
       &::before, &::after {
-        background: $brand-success;
+        background: theme-colors("success");
       }
       &+li {
         &.active::before {
-          background: $brand-success;
+          background: theme-colors("success");
         }
         &::before {
-          background: linear-gradient(to right, $brand-success, $gray-light);
+          background: linear-gradient(to right, theme-colors("success"), grays("200"));
         }
 
       }
 
       .breadcrumb-counter {
-        background-color: $brand-success;
+        background-color: theme-colors("success");
 
       }
       .breadcrumb-title {
-        color: $brand-success;
+        color: theme-colors("success");
       }
     }
-    @media (max-width: $screen-md-min) {
+    @media (max-width: media-breakpoint-down(md)) {
 
       &:first-child {
         text-align: left;
@@ -191,7 +191,7 @@
 
 .cart-compact {
   width: 100%;
-  background-color: red;
+  background-color: theme-colors("danger");
   .checkout {
     padding-top: 30px;
     button {
@@ -218,7 +218,7 @@
     tbody {
       tr {
         background: transparent;
-        border-bottom: 1px solid $gray-light;
+        border-bottom: 1px solid grays('200');
         & > * {
           border-color: transparent;
           display: block;

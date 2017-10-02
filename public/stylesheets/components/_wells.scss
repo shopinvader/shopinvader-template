@@ -20,7 +20,7 @@
   }
 
   &.well-white {
-    background-color: $white-base;
+    background-color: colors("white");
     box-shadow: unset;
   }
 
@@ -46,17 +46,17 @@
     }
 
     &.selected {
-      background-color: $brand-info;
-      border-color: darken($brand-info, 10%);
-      color: $white-base;
+      background-color: theme-colors("info");
+      border-color: darken($cyan, 10%);
+      color: colors("white");
 
       a {
-        color: $white-base;
+        color: colors("white");
         text-decoration: underline;
       }
 
       .fa {
-        color: $white-base !important;
+        color: colors("white") !important;
       }
     }
     &.disabled {
@@ -75,7 +75,7 @@
 }
 
 /*Full width well*/
-@media (max-width: $screen-sm-min) {
+@media (max-width: media-breakpoint-down(sm)) {
   .col-xs-12 {
     & > .well {
       border-left: 0;
@@ -97,7 +97,7 @@
 
     &:nth-child(2n+1) {
       .well {
-        background-color: $white-base;
+        background-color: colors("white");
       }
     }
   }

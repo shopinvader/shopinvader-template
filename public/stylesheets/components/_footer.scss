@@ -1,6 +1,6 @@
 footer {
-  background-color: $brand-primary;
-  color: $white-base;
+  background-color: theme-colors("primary");
+  color: colors("white");
   padding-bottom: 25px;
   padding-top: 25px;
 }

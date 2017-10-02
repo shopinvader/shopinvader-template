@@ -17,11 +17,11 @@
 
 
     .discount-value {
-      background-color: $brand-warning;
+      background-color: theme-colors("warning");
       border-radius: 0;
-      color: $white-base;
+      color: colors("white");
       display: inline-block;
-      font-size: $font-size-large;
+      font-size: $font-size-lg;
       left: 19px;
       padding-bottom: 5px;
       padding-left: 15px;
@@ -52,7 +52,7 @@
     }
     .well {
       border: 0;
-      border-bottom: 1px solid $gray-lighter;
+      border-bottom: 1px solid grays("100");
       box-shadow: none;
       padding: 0;
       padding-left: 10px;
@@ -72,7 +72,7 @@
 //Stock stock
 .product-stock-state {
   .in_stock, .in_limited_stock {
-    color: $brand-success;
+    color: theme-colors("success");
     &:before {
       content: "";
       font-family: "FontAwesome";
@@ -82,24 +82,24 @@
 }
 //Page section menu
 .product-liste-section {
-  border-bottom: 3px solid $brand-primary;
+  border-bottom: 3px solid theme-colors("primary");
   margin-top:20px;
   a {
-    color: $brand-primary;
+    color: theme-colors("primary");
     display: block;
 
-    font-size: $font-size-large;
+    font-size: $font-size-lg;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 8px;
     padding-bottom: 5px;
   }
   .active {
-    background-color: $brand-primary;
+    background-color: theme-colors("primary");
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
     a {
-      color: $white-base;
+      color: colors("white");
       font-weight: bold;
     }
   }
@@ -110,13 +110,13 @@
   .input-group {
 
     .input-group-addon {
-      background-color: $brand-primary;
-      border-color: $brand-primary;
-      color: $white-base;
+      background-color: theme-colors("primary");
+      border-color: theme-colors("primary");
+      color: colors("white");
       cursor: pointer;
     }
     .form-control {
-      border-color: $brand-primary;
+      border-color: theme-colors("primary");
     }
   }
 }
@@ -129,7 +129,7 @@
   .product-average-review {
   }
   .review {
-    border-bottom: 1px solid $gray-lighter;
+    border-bottom: 1px solid grays('100');
     padding-top: 20px;
   }
 }

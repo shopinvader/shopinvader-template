@@ -33,7 +33,7 @@
 .categories-menu {
   padding: 10px;
     li {
-      border-right: 1px solid $gray-lighter ;
+      border-right: 1px solid grays("100");
       text-align: center;
       &:last-child {
         border: 0;
@@ -58,10 +58,10 @@
 }
 
 .header-dropdown-menu {
-  background-color: $white-base;
-  border: 1px solid $gray-lighter;
+  background-color: colors("white");
+  border: 1px solid grays("100");
   box-shadow: 2px 2px 15px 8px rgba(35, 47, 62, 0.3);
-  color: $gray;
+  color: grays("500");
   content: '';
   display: block;
   margin: 0;

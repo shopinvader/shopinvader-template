@@ -36,20 +36,20 @@ footer {
 }
 
 .debug [class*='col-'] {
-  border: 1px dotted $brand-danger !important;
+  border: 1px dotted theme-colors("danger") !important;
   background-clip: content-box !important;
   min-height: 20px !important;
 }
 
 .sidebar {
-  border-right : 1px solid $gray-lighter;
+  border-right : 1px solid grays("100");
   padding-right: 10px;
   height:100%;
 }
 
 .turbolinks-progress-bar {
   height: 5px;
-  background-color: $brand-danger;
+  background-color: theme-colors("danger");
 }
 
 .pagination-block {
@@ -70,14 +70,14 @@ footer {
 
 .nav-stacked {
   li{
-    background-color: $gray-lighter;
+    background-color: grays("100");
     position: relative;
     a {
-      color: $gray-darker;
+      color: grays("900");
       font-size: 14px;
     }
     &.active {
-      background-color: $brand-danger;
+      background-color: theme-colors("danger");
       a {
         background-color : transparent;
         border: 0;
@@ -100,7 +100,7 @@ footer {
   }
 
   &.separator-right > [class*='col-'] {
-    border-right: 1px solid $gray-lighter;
+    border-right: 1px solid grays("100");
 
     &:last-child {
       border-color: transparent;
@@ -108,15 +108,15 @@ footer {
   }
 
   &.separator-bottom > [class*='col-'] {
-    border-bottom: 1px solid $gray-lighter;
+    border-bottom: 1px solid grays("100");
     margin-bottom: 15px;
     padding-bottom: 15px;
   }
 }
 
 .alert-cookie {
-  background-color: $gray-dark;
-  color: $white-base;
+  background-color: grays("900");
+  color: colors("white");
   border: 0;
   bottom: 0;
   margin-bottom: 0;
