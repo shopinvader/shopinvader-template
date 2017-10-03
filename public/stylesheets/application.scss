@@ -22,7 +22,7 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 @import 'components/posts';
 @import 'components/product';
 @import 'components/rating';
-@import 'components/typo';
+//@import 'components/typo';
 @import 'components/slide';
 @import 'components/wait_overlay';
 @import 'components/wells';
@@ -36,7 +36,7 @@ footer {
 }
 
 .debug [class*='col-'] {
-  border: 1px dotted theme-colors("danger") !important;
+  border: 1px dotted red !important;
   background-clip: content-box !important;
   min-height: 20px !important;
 }
@@ -63,7 +63,7 @@ footer {
 
 @media (min-width: 1200px) {
     .container{
-        max-width: 1400px;
+        max-width: 1600px;
         width: 100%;
     }
 }
@@ -82,11 +82,10 @@ footer {
         background-color : transparent;
         border: 0;
       }
-
-
     }
   }
 }
+
 .row,
 .row-fluid {
   &.nopadding {
@@ -100,7 +99,7 @@ footer {
   }
 
   &.separator-right > [class*='col-'] {
-    border-right: 1px solid grays("100");
+    border-right: 1px solid grayscale("100");
 
     &:last-child {
       border-color: transparent;
@@ -108,19 +107,17 @@ footer {
   }
 
   &.separator-bottom > [class*='col-'] {
-    border-bottom: 1px solid grays("100");
+    border-bottom: 1px solid grayscale("100");
     margin-bottom: 15px;
     padding-bottom: 15px;
   }
 }
 
 .alert-cookie {
-  background-color: grays("900");
-  color: colors("white");
-  border: 0;
+
+  text-align: center;
   bottom: 0;
   margin-bottom: 0;
-  padding: 10px;
   position: fixed;
   top: unset;
   width: 100%;

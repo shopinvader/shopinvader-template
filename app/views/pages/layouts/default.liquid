@@ -25,20 +25,19 @@ is_layout: false
     {{ 'bootstrap4.min.js' | javascript_tag }}
   </head>
   <body>
-
     {% include 'nav' %}
     <main>
-      <div class="container">
+      <div class="container-fluid">
       {% block content %}
       {% endblock %}
       </div>
     </main>
-    <div class="alert bg-color-info color-white text-center alert-cookie hidden" role="alert">
+    <div class="alert alert-info alert-cookie" role="alert">
       {% editable_text cookie_notice, fixed: true, rows: 1 %}
         En poursuivant votre navigation sur ce site, vous acceptez l'utilisation
         de cookies pour vous proposer des services et offres adaptés à vos centres d'intérêts.
       {% endeditable_text %}
-      <button type="button" class="btn btn-success" data-dismiss="alert" aria-label="Close">
+      <button type="button" class="btn btn-info" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">OK</span>
       </button>
     </div>
@@ -56,12 +55,12 @@ is_layout: false
     {% block side, short_name: true %}
     <div class="side-cart cart-compact container-fluid"  id="cart-compact">
       <div class="row-fluid">
-        <div class="col-xs-8">
+        <div class="col-8">
           <span class="title-separator text-size-2xl">
             {{ 'cart_title' | translate }}
           </span>
         </div>
-        <div class="col-xs-4 text-right close-side">
+        <div class="col-4 text-right close-side">
           <i class="fa fa-times text-size-1xl display-side-cart"></i>
         </div>
       </div>
@@ -88,14 +87,13 @@ is_layout: false
         <div class="content">
           <div class="">
             <div class="row">
-
               {% include 'cart_list' with cart:store.cart, product_id, readonly: true %}
             </div>
             <div class="row">
-              <div class="col-xs-6">
+              <div class="col-6">
                 <a href="{{product.url_key | prepend: url_base}}" class="btn btn-default btn-lg">{{"cart_continue_shopping" | translate }}</a>
               </div>
-              <div class="col-xs-6 text-right">
+              <div class="col-6 text-right">
                 <a href="{% path_to 'cart_index' %}" class="btn btn-warning btn-lg">{{"cart_checkout" | translate }}</a>
               </div>
             </div>
@@ -109,7 +107,7 @@ is_layout: false
               {% for related_id in product.relateds%}
                 {% with_scope record_id: related_id %}
                   {% for related in store.products %}
-                  <div class="product-thumbnail col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                  <div class="product-thumbnail col-12 col-sm-4 col-md-3 col-lg-2">
                     {% include 'product_thumbnail' with product: related%}
                   </div>
                   {%endfor%}

@@ -1,67 +1,48 @@
-.navbar-brand {
-  padding: 0;
-
-  .navbar-baseline {
-    display : inline-block;
-
-  }
-}
-
-.store-advantage {
-  padding-bottom: 10px;
-  padding-top: 10px;
-}
-
 .navbar-header {
-  background-color: #efefef;
-  padding-top: 10px;
-
-  .header-cart {
-    position: relative;
-
-    .header-cart-itemcount {
-
-      position: absolute;
-      top: 15px;
+  #header-search-hit {
+    display: none;
+    width: 100%;
+  }
+  .algolia-autocomplete {
+    width: 100%;
+    .aa-input {
+      width: 100%;
     }
   }
-
-  .header-login {
-
-  }
 }
+
 .categories-menu {
   padding: 10px;
-    li {
-      border-right: 1px solid grays("100");
-      text-align: center;
-      &:last-child {
-        border: 0;
-        a {
-          padding-right: 0;
-        }
-      }
-
-      &:first-child {
-        a {
-          padding-left: 0;
-        }
-      }
-
+  li {
+    border-right: 1px dotted $gray-200;
+    text-align: center;
+    &:last-child {
+      border-right: 0;
       a {
-        padding-bottom: 5px;
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-top: 5px;
+        padding-right: 0;
       }
     }
+
+    &:first-child {
+      a {
+        padding-left: 0;
+      }
+    }
+
+    a {
+      padding-bottom: 5px;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 5px;
+    }
+  }
 }
 
 .header-dropdown-menu {
-  background-color: colors("white");
-  border: 1px solid grays("100");
+  background-color: color("white");
+  border: 1px solid $gray-200;
   box-shadow: 2px 2px 15px 8px rgba(35, 47, 62, 0.3);
-  color: grays("500");
+  color: $gray-500;
   content: '';
   display: block;
   margin: 0;
@@ -73,4 +54,9 @@
   .product-image {
     max-width: 100px;
   }
+}
+
+.card {
+  margin-bottom: 15px;
+  margin-top: 15px;
 }

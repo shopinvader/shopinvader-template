@@ -1,123 +1,122 @@
 {% block 'header'%}
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12 navbar-header">
-        <div class="container">
-          <div class="row  row-same-height">
-            <div class="col-xs-2">
-              <a class="navbar-brand" href="{% path_to home %}">
-              {% if site.metafields.theme.logo %}
-                <img src="{{ site.metafields.theme.logo }}" alt="{{ site.name }}"  class="img-responsive"/>
-              {% endif %}
-              </a>
-            </div>
-            <div class="col-xs-7">
-              <div class="row">
-                <div class="col-xs-6 text-primary text-bold text-size-1xl" >
-                  {% editable_text "baseline", hint: "Website header baseline" %}
-                  May the discount be with you !
-                  {% endeditable_text %}
-                </div>
-                <div class="col-xs-6 text-right">
-                  {% locale_switcher label: 'locale', sep: ' - ' %}
-                </div>
-                <div class="col-xs-12">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for..." id="header-search-input" autocomplete="off">
-                    <span class="input-group-btn">
-                      <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+<div class="container-fluid navbar-header mt-2">
+  <div class="row mb-2">
+    <div class="col-2">
+      <a class="navbar-brand" href="{% path_to home %}">
+      {% if site.metafields.theme.logo %}
+        <img src="{{ site.metafields.theme.logo }}" alt="{{ site.name }}"  class="img-responsive"/>
+      {% endif %}
+      </a>
+    </div>
+    <div class="col-8  pl-2">
+      <div class="row">
+        <div class="col-6 text-primary lead" >
+          {% editable_text "baseline", hint: "Website header baseline" %}
+          May the discount be with you !
+          {% endeditable_text %}
+        </div>
+        <div class="col-6 text-right">
+          {% locale_switcher label: 'locale', sep: ' - ' %}
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-12">
+          <div class="input-group">
+            <input type="text" class="form-control" id="header-search-input" placeholder="Search for..." aria-label="Search for..." aria-describedby="Product search">
+            <span class="input-group-addon bg-primary text-white" >
+              <i class="fa fa-search"></i>
+            </span>
+            <div id="header-search-hit" >
+              <div id="header-search-product-title">
+                <div class="row">
+                  <div class="col-12 search-title">
+                    <span class="text-size-2xl title-decorator">
+                      {{ 'search_product' | translate }}
                     </span>
-                    <div id="header-search-hit" class="hidden">
-                      <div id="header-search-product-title">
-                        <div class="row">
-                          <div class="col-xs-12 search-title">
-                            <span class="text-size-2xl title-decorator">
-                              {{ 'search_product' | translate }}
-                            </span>
-                            <span class="nb_hits"></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="header-search-product-link">
-                        <div class="row">
-                          <div class="col-xs-12 text-right ">
-                            <a data-href="{% path_to search %}" href="#" class="btn btn-success btn-search-product">
-                              {{ 'search_product_all' | translate }}
-                              <span class="nb_hits"></span>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="header-search-product-empty">
-                        <div class="row">
-                          <div class="col-xs-12 text-center">
-                            {{ 'search_product_empty' | translate }}
-                          </div>
-                        </div>
-                      </div>
-                      <div id="header-search-category-title">
-                        <div class="row">
-                          <div class="col-xs-12">
-                            <div class="text-size-2xl title-decorator">
-                              {{ 'search_category' | translate }}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="header-search-category-empty">
-                        <div class="row">
-                          <div class="col-xs-12 text-center">
-                            {{ 'search_category_empty' | translate }}
-                          </div>
-                        </div>
-                      </div>
-                      <div id="header-search-category-link">
-                        <div class="row">
-                          <div class="col-xs-12 text-right ">
-                            <a href="#" class="btn btn-success">
-                              {{ 'search_category_all' | translate }}
-                              <span class="nb_hits"></span>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="header-search-hit-content">
-                        <div class="row separator-right">
-                          <div class="aa-dataset-product col-xs-12  col-md-7"></div>
-                          <div class="aa-dataset-category col-xs-12 col-md-5"></div>
-                        </div>
-                      </div>
+                    <span class="nb_hits"></span>
+                  </div>
+                </div>
+              </div>
+              <div id="header-search-product-link">
+                <div class="row">
+                  <div class="col-12 text-right ">
+                    <a data-href="{% path_to search %}" href="#" class="btn btn-success btn-search-product">
+                      {{ 'search_product_all' | translate }}
+                      <span class="nb_hits"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div id="header-search-product-empty">
+                <div class="row">
+                  <div class="col-12 text-center">
+                    {{ 'search_product_empty' | translate }}
+                  </div>
+                </div>
+              </div>
+              <div id="header-search-category-title">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="text-size-2xl title-decorator">
+                      {{ 'search_category' | translate }}
                     </div>
                   </div>
                 </div>
               </div>
+              <div id="header-search-category-empty">
+                <div class="row">
+                  <div class="col-12 text-center">
+                    {{ 'search_category_empty' | translate }}
+                  </div>
+                </div>
+              </div>
+              <div id="header-search-category-link">
+                <div class="row">
+                  <div class="col-12 text-right ">
+                    <a href="#" class="btn btn-success">
+                      {{ 'search_category_all' | translate }}
+                      <span class="nb_hits"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div id="header-search-hit-content">
+                <div class="row separator-right">
+                  <div class="aa-dataset-product col-12  col-md-7"></div>
+                  <div class="aa-dataset-category col-12 col-md-5"></div>
+                </div>
+              </div>
             </div>
-            {% include 'header_controls' %}
           </div>
         </div>
       </div>
     </div>
+    <div class="col-2">
+      {% include 'header_controls' %}
+    </div>
   </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12  menu-categories">
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav text-capitalize categories-menu">
-        {% with_scope level: 0%}
+  <div class="row text-white bg-primary">
+    <div class="col-12  menu-categories">
+      <div id="navbar" class="navbar-collapse ">
+        <ul class="nav categories-menu">
+        {% with_scope level: 1%}
           {% for category in store.categories %}
             <li class="{% if page.fullpath == page_in_nav.fullpath %}active{% endif %}">
-              <a href="{{category.url_key  | prepend: url_base }}"> {{ category.name }}</a>
+              <a href="{{category.url_key  | prepend: url_base }}" class="text-white text-uppercase ">
+                {{ category.name }}
+              </a>
             </li>
           {% endfor %}
         {% endwith_scope%}
-          <li>
-            <a href="#" class="text-bold text-warning">FLASH <i class="fa fa-bolt text-danger"></i> SOLD</a>
-          </li>
-          </ul>
-        </div>
+        <li>
+          <a href="#" class="text-bold text-warning">
+            FLASH <i class="fa fa-bolt text-danger"></i> SOLD
+          </a>
+        </li>
+        </ul>
       </div>
     </div>
+  </div>
+</div>
 
-</nav>
 {% endblock %}

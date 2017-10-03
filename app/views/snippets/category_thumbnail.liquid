@@ -1,9 +1,8 @@
-
-<div class="category-thumbnail col-xs-12 col-md-6 col-lg-3">
+<div class="card category-thumbnail">
   <a href="{{category.url_key  | prepend: url_base }}">
-    <img src="{{category.images.first.medium | default: site.metafields.theme.noimage }}" alt="" class="img-responsive">
-    <div class="text-center text-size-base">
+    <img src="{{category.images.first.medium | default: site.metafields.theme.noimage }}" alt="" class="card-img-top">
+    <div class="text-center card-title h5">
       {{category.name}}
     </div>
   </a>
- </div>
+</div>

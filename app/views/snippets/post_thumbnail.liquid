@@ -1,9 +1,9 @@
 <a href="{% path_to post %}">
-  <div class="post-thumbnail thumbnail">
-    <img src="{{post.thumbnails.url | default: site.metafields.theme.noimage }}" alt="{{post.name}}">
-    <div class="caption">
-     <h3 class="text-size-md">{{post.name}}</h3>
-     <p class="visible-lg">{{post.short_description}}</p>
+  <div class="">
+    <img src="{{post.thumbnails.url | default: site.metafields.theme.noimage }}" alt="{{post.name}}" class="img-fluid w-100">
+    <div class="small pt-3">
+     <h3 class="lead">{{post.name}}</h3>
+     <p class="">{{post.short_description}}</p>
     </div>
   </div>
 </a>
