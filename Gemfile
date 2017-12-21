@@ -11,7 +11,7 @@ group :misc do
 end
 # gem 'locomotivecms_wagon', '~> 2.3.0.rc1'
 
-# gem 'guard-livereload', '~> 2.5.1'
+ gem 'guard-livereload', '~> 2.5.1'
 
 group :development do
   # Mac OS X
