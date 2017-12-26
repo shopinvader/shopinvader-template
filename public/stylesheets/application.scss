@@ -1,16 +1,12 @@
 $icon-font-path: "../fonts/bootstrap/" !default;
+/*
 @font-face {
     font-family: 'sf-distant-galaxy';
     src: url('../fonts/sf-distant-galaxy.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-}
-@font-face {
-    font-family: 'Lato';
-    src: url('../fonts/lato-regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
+}*/
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
 @import 'bootstrap4/bootstrap';
 
 @import 'components/algolia';
@@ -53,7 +49,7 @@ footer {
 }
 
 .pagination-block {
-  padding-bottom: 20px;
+
 }
 
 .modal-lg {

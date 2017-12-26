@@ -12,7 +12,7 @@ is_layout: true
         <div class="carousel-inner">
         {% for slide in contents.slides%}
           <div class="{%if forloop.index0 == 0%}active{%endif%} item" data-slide-number="{{forloop.index0}}">
-            <a href="{{slide.link}}"><img src="{{slide.picture.url}}" alt="{{slide.name}}"></a>
+            <a href="{{slide.link}}"><img src="{{slide.picture.url}}" alt="{{slide.name}}" class="w-100"></a>
           </div>
         {% endfor %}
         </div>
@@ -28,9 +28,9 @@ is_layout: true
     </div>
   {% endif %}
   </div>
-  <div class="row store-advantage text-uppercase text text-center text-primary pt-4 pb-4">
+  <div class="row store-advantage text-uppercase text text-center text-primary pt-4 pb-4 mb-4">
     <div class="col-3 text-center ">
-      <span class="fa-stack fa-lg text-danger">
+      <span class="fa-stack fa-lg text-danger fa-2x">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-rocket fa-stack-1x fa-inverse"></i>
       </span>
@@ -39,7 +39,7 @@ is_layout: true
       </div>
     </div>
     <div class="col-3 text-center">
-      <span class="fa-stack fa-lg text-danger">
+      <span class="fa-stack fa-lg text-danger fa-2x">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
       </span>
@@ -48,7 +48,7 @@ is_layout: true
       </div>
     </div>
     <div class="col-3 text-center">
-      <span class="fa-stack fa-lg text-danger">
+      <span class="fa-stack fa-lg text-danger fa-2x">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-tag fa-stack-1x fa-inverse"></i>
       </span>
@@ -57,7 +57,7 @@ is_layout: true
       </div>
     </div>
     <div class="col-3 text-center ">
-      <span class="fa-stack fa-lg text-danger">
+      <span class="fa-stack fa-lg text-danger fa-2x">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-volume-control-phone fa-stack-1x fa-inverse"></i>
       </span>
