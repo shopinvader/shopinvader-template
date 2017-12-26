@@ -1,43 +1,13 @@
 .product-thumbnail {
   cursor: pointer;
-  position: relative;
+  .carousel {
+    .carousel-control-prev,
+    .carousel-control-next {
 
-
-  .thumbnail {
-    display: block;
-    height: calc(100% - 20px);
-    overflow: hidden;
-    padding-bottom: 60px;
-  }
-  .product-thumbnail-slide {
-    opacity: 1;
-
-    width: 80%;
-    margin: auto;
-
-
-    .discount-value {
-      background-color: theme-colors("warning");
-      border-radius: 0;
-      color: colors("white");
-      display: inline-block;
-      font-size: $font-size-lg;
-      left: 19px;
-      padding-bottom: 5px;
-      padding-left: 15px;
-      padding-right: 15px;
-      padding-top: 5px;
-      position: absolute;
-      text-align: center;
-      top: 10px;
-      transform: translateX(-4px) translateY(30%);
     }
   }
-
-  .product-price-line {
-  padding-top: 20px;
-  }
 }
+
 .product-compact {
     padding: 0;
     margin:0;
@@ -82,10 +52,11 @@
 }
 //Page section menu
 .product-liste-section {
-  border-bottom: 3px solid theme-colors("primary");
-  margin-top:20px;
+  border-bottom: 3px solid theme-color("primary");
+  margin-top: 20px;
+  width: 25%;
   a {
-    color: theme-colors("primary");
+    color: theme-color("primary");
     display: block;
 
     font-size: $font-size-lg;
@@ -94,29 +65,31 @@
     padding-top: 8px;
     padding-bottom: 5px;
   }
+
   .active {
-    background-color: theme-colors("primary");
+    background-color: theme-color("primary");
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
     a {
-      color: colors("white");
+      color: $white;
       font-weight: bold;
     }
   }
 }
+
 .product-form-qty {
   padding-bottom: 20px;
   padding-top: 20px;
   .input-group {
 
     .input-group-addon {
-      background-color: theme-colors("primary");
-      border-color: theme-colors("primary");
-      color: colors("white");
+      background-color: theme-color("dark");
+      border-color: theme-color("dark");
+      color: color("white");
       cursor: pointer;
     }
     .form-control {
-      border-color: theme-colors("primary");
+      border-color: theme-color("dark");
     }
   }
 }

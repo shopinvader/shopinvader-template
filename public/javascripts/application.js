@@ -43,6 +43,18 @@ $(document).ready(function () {
       }
     }
   );
+  $('.rating, .rating-tooltip').hover(
+    function (event, element)
+    {
+      $(this).find('.rating-tooltip').css('display', 'block');
+
+    }, function(event, element)
+    {
+      console.log(event);
+      $(this).find('.rating-tooltip').css('display', 'none');
+    }
+  );
+
   $('.side-cart').slideReveal({
     trigger: $(".display-side-cart"),
     position: "right",

@@ -1,22 +1,20 @@
 
 {% if product.images.size > 1 %}
-<div  class="carousel slide" id="slide-{{product.erp_id}}">
+<div class="carousel slide" data-ride="carousel" id="slide-{{product.objectID}}" data->
   <!-- Carousel items -->
-  <div class="carousel-inner" >
-
-    {% assign image_id = 0  %}
+  <div class="carousel-inner" role="listbox">
     {% for image in product.images %}
-    <div class="item {%if forloop.index == 1 %}active{%endif%}"   data-target="#slide-{{product.erp_id}}" data-slide-number="{{forloop.index}}">
-      <img src="{{image.large | default: site.metafields.theme.noimage}}" alt=""/>
+    <div class="carousel-item {%if forloop.index == 1 %}active{%endif%}" data-target="#slide-{{product.objectID}}">
+      <img src="{{image.medium}}" alt="" class="d-block img-fluid w-100"/>
     </div>
     {% endfor %}
+    <a class="carousel-control-prev" href="#slide-{{product.objectID}}" role="button" data-slide="prev">
+      <i class="fa fa-chevron-left text-dark"></i>
+    </a>
+    <a class="carousel-control-next" href="#slide-{{product.objectID}}" role="button" data-slide="next">
+      <i class="fa fa-chevron-right text-dark"></i>
+    </a>
   </div>
-  <a class="left carousel-control" href="#slide-{{product.erp_id}}" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-  </a>
-  <a class="right carousel-control" href="#slide-{{product.erp_id}}" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-  </a>
 </div>
 {% for image in product.images %}
 <div class="{%if forloop.index == 1 %}active{%endif%} carousel-thumbails"   data-target="#slide-{{product.erp_id}}" data-slide-number="{{forloop.index}}">

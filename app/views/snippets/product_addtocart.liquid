@@ -1,65 +1,59 @@
-
-<form class="" action="{{product.url_key  | prepend: url_base}}" method="post" data-shopinvader-form>
+<form class="" action="{{product.url_key  | prepend: url_base}}" method="post" data-shopinvader-forms>
   <input type="hidden" name="action_proxy" value="cart/item">
   <input type="hidden" name="action_method" value="post">
   <input type="hidden" name="product_id" value="{{product.objectID }}">
     <div class="row">
-      <div class="col-xs-12 text-size-4xl text-right">
-        {%if product.price.discount > 0%}
-          <s>
-            {{product.price.original_value | money }}
-          </s>
-        {% endif %}
-        <span class="text-size-6xl text-heading text-warning">
-          {{ product.price.value | money}} 
-        </span>
-        {% if product.pricelist.tax_included == true %}
+      <div class="col-12  ">
+        <b class="text-right">
+          {%if product.price.discount > 0%}
+          <div class="text-dark">
+            <s>{{product.price.original_value | money }}</s>
+          </div>
+          {% endif %}
+          <span class="h2 pull-right font-weight-bold {%if product.price.discount > 0%}text-warning{% else %} text-primary{% endif %}">
+            {{ product.price.value | money}}
+          </span>
+          {% if product.pricelist.tax_included == true %}
           <sub class="text-size-base">{{'product_vat_inc' | translate}}</sub>
-        {% endif %}
-        <div class="text-size-2xl ">
-          {% include 'rating_stars'
-            with
-            rating_value: product.rating_value,
-            rating_nbr: product.rating_nbr
-          %}
-        </div>
+          {% endif %}
+        </b>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-12">
         <div class="">
           {{product.model_name}} {{product.variant_name}}
         </div>
-        {{'product_code' | translate }}
-        <strong>{{product.default_code}}</strong>
-
+        <div class="small text-dark">
+          {{'product_code' | translate }}
+          <strong>{{product.default_code}}</strong>
+        </div>
       </div>
     </div>
     <div class="row form-horizontal product-form-qty">
-      <label for="qty" class="col-sm-5 control-label text-right text-size-lg">
+      <label for="qty" class="col-12 col-sm-5 col-xl-12 control-label text-right text-xl-center text-size-lg">
         {{'product_quantity' | translate}}
       </label>
-      <div class="col-xs-4">
+      <div class="col-7 col-xl-12">
         {% include 'product_qty_input' with qty:1 %}
       </div>
     </div>
-    <div class="row row-same-height ">
-      <div class="col-xs-6 col-lg-6  text-left product-stock-state">
+    <div class="row">
+      <div class="col-12 text-left product-stock-state">
         <span class="{{product.stock_state}} text-size-1xl">
           {{product.stock_state | prepend: 'product_stock_state_' | translate}}
         </span>
       </div>
-      <div class="col-xs-6 col-lg-6  text-right ">
+      <div class="col-12  text-right ">
       {%if product.price.discount > 0%}
-        <button type="submit" class="btn btn-success btn-lg">
-          {{"product_add_to_cart" | translate }}
+        <button type="submit" class="btn btn-warning btn-lg btn-block">
+          {{"product_add_to_cart_discount" | translate }}
         </button>
       {%else%}
-        <button type="submit" class="btn btn-warning btn-lg">
-          {{"product_add_to_cart_discount" | translate }}
+        <button type="submit" class="btn btn-success btn-lg btn-block">
+          {{"product_add_to_cart" | translate }}
         </button>
       {% endif %}
       </div>
     </div>
-
 </form>

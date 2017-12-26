@@ -259,6 +259,12 @@ product_stock_state_resupplying:
 product_stock_state_in_limited_stock:
   en: in stock
   fr: en stock
+product_up_sellings_title:
+  en: More In This Collection
+  fr: More In This Collection
+rating_average_rate:
+  en: "Average rate"
+  fr: "Noté par nos clients"
 rating_count_other:
   en: "{{count | round}} review"
   fr: "{{count | round}} avis"
@@ -280,6 +286,9 @@ rating_comment_count_two:
 rating_comment_count_other:
   en: "{{count | round}} customers comment this product"
   fr: "{{count | round}} clients ont laissé un commentaire sur ce produit "
+rating_last_review:
+  en: Last review
+  fr: Avis le plus récent
 search_filter_title:
   en: Search
   fr: Rechercher

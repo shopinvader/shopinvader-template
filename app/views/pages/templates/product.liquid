@@ -6,6 +6,7 @@ handle: product
 {% extends 'layouts/default' %}
 
 {% block content %}
+
 {% assign variant =null %}
 {% assign variant_list = product.variants %}
 {% if params.ref%}
@@ -21,48 +22,111 @@ handle: product
 
 <div class="">
   <div class="row">
-    <div class="col-xs-12">
-      <ol class="breadcrumb">
-        <li><a href="{% path_to 'home' %} " class="text-gray-darker">{{ 'home' | translate }}</a></li>
+    <div class="col-12">
+      <ol class="breadcrumb pl-0 d-none d-sm-block">
+        <li class="breadcrumb-item ">
+          <a href="{% path_to 'home' %} " class="text-gray-darker">
+          {{ 'home' | translate }}
+          </a>
+        </li>
       {% for category in variant.categories %}
-        <li><a href="{{category.url_key | prepend: url_base}}" class="text-gray-darker">{{category.name}}</a></li>
+        <li class="breadcrumb-item">
+          <a href="{{category.url_key | prepend: url_base}}" class="text-gray-darker">
+            {{category.name}}
+          </a>
+        </li>
       {% endfor %}
-        <li class="active">{{variant.model_name}}</li>
+        <li class="breadcrumb-item active">{{variant.model_name}}</li>
       </ol>
     </div>
   </div>
-  <div class="row ">
-    <div class="col-lg-12">
-      <h1>{{variant.model_name}}</h1>
-      <div class="text-size-2xl">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center text-sm-left h2">{{variant.model_name}}</h1>
+      <div class="lead">
         {{variant.variant_name}}
+      </div>
+      <b>
+
+      </b>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 ">
+      <div class="d-none d-sm-inline-block  pr-4">
+        {{variant.brand.name}}
+      </div>
+      <div class="d-none d-sm-inline-block  pr-4">
+        <a href="{{ variant.categories.last.url_key}}">
+          <u>{{ variant.categories.last.name}}</u>
+        </a>
+      </div>
+
+      <div class="d-inline-block" data-scrollto="#product-section-rating">
+        {% include 'rating_stars' with
+            rating_value: variant.rating.summary.average,
+            rating_nbr: variant.rating.reviews.size,
+            rating: variant.rating %}
+      </div>
+      <div class="d-none d-sm-inline-block pl-4">
+        <span class="fa-stack ">
+          <i class="fa fa-stop fa-stack-2x text-primary"></i>
+          <i class="fa fa-facebook fa-stack-1x text-white"></i>
+        </span>
+        <span class="fa-stack ">
+          <i class="fa fa-stop fa-stack-2x text-primary"></i>
+          <i class="fa fa-twitter fa-stack-1x text-white"></i>
+        </span>
+        <span class="fa-stack">
+          <i class="fa fa-stop fa-stack-2x text-primary"></i>
+          <i class="fa fa-pinterest fa-stack-1x text-white"></i>
+        </span>
+        <span class="fa-stack">
+          <i class="fa fa-stop fa-stack-2x text-primary"></i>
+          <i class="fa fa-envelope fa-stack-1x text-white"></i>
+        </span>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-12">
-      {{variant.brand.name}}
+    <div class="col-12 col-md-7 col-lg-7 col-xl-4 pt-4 order-1">
+      <div class="text-center">
+        {% include 'product_images' with product: variant %}
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-7">
-      {% include 'product_images' with product: variant %}
+    <div class="col-12 col-md-5 col-lg-5 col-xl-3 pt-4 order-2 order-xl-3">
+      <div class="bg-light  pt-3">
+        {%if product.price.discount > 0%}
+        <div class="pb-1">
+          <div class="badge badge-warning p-2">
+            BON PLAN <b>  -{{product.price.discount | round }} %</b>
+          </div>
+        </div>
+        {%endif%}
+        <div class=" pb-3 pr-3 pl-3">
+          {% include 'product_addtocart' with product: variant %}
+        </div>
+      </div>
     </div>
-    <div class="col-lg-5">
-      <div class="well">
-        {% include 'product_addtocart' with product: variant %}
+    <div class=" pt-4 col-12  col-xl-5  order-3 order-xl-2">
+      <div class="editable_content">
+        {{variant.short_description}}
       </div>
     </div>
   </div>
   {% if variant_list.size > 0%}
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
       <h2>{{'product_variant_title' | translate }}</h2>
-      <div class="row row-same-height">
-      {% include 'product_variant_thumbnail' with product %}
-      {% for variant_product in variant_list %}
-        {% include 'product_variant_thumbnail' with product:variant_product %}
-      {% endfor %}
+      <div class="row">
+        <div class="col-2  p-2">
+          {% include 'product_thumbnail' with product %}
+        </div>
+        {% for variant_product in variant_list %}
+          <div class="col-2  p-2">
+            {% include 'product_thumbnail' with product:variant_product %}
+          </div>
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -70,7 +134,7 @@ handle: product
   <div id="product-section-overview">
     {% include 'product_page_section' with step: 'overview' %}
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-12">
         <h2>{{'product_overview_title' | translate }}</h2>
         <div class="editable_content">
           {{variant.description}}
@@ -78,7 +142,8 @@ handle: product
       </div>
     </div>
   </div>
-  {% if product.technical_details %}
+
+  {% if variant.technical_details.size > 0 %}
   <div id="product-section-spec">
     {% include 'product_page_section' with step: 'spec' %}
     <div class="row">
@@ -115,94 +180,134 @@ handle: product
     </div>
   </div>
   {% endif %}
-  {% if product.relateds.size > 0%}
+  {% if variant.up_sellings.size > 0%}
   <div id="product-section-related">
-    {% include 'product_page_section' with step: 'related' %}
+    {% include 'product_page_section' with step: 'up_sellings' %}
     <div class="row">
-      <div class="col-lg-12">
-        <h2>{{'product_related_title' | translate }}</h2>
+      <div class="col-12">
+        <h2>{{'product_up_sellings_title' | translate }}</h2>
         <div class="editable_content">
-          {% for related_id in product.relateds%}
-            {% with_scope erp_id: related_id %}
-              {% for related in store.products %}
-                {% include 'product_thumbnail' with product: related%}
-              {%endfor%}
-            {% endwith_scope%}
-          {%endfor%}
+          <div class="row">
+
+
+            {% for up_seller in variant.up_sellings %}
+              <div class="col-3 col-xl-2">
+              {% with_scope objectID: [up_seller.id]%}
+                {% include 'product_thumbnail' with product: store.products.first%}
+              {% endwith_scope%}
+              </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
   </div>
   {% endif %}
-  {% if variant.comments %}
-  <div id="product-section-advice" class="product-review">
+
+  {% if variant.rating.reviews.size > 0 %}
+  <div id="product-section-rating" class="product-review">
     {% include 'product_page_section' with step: 'reviews' %}
-    <div class="row">
-      <div class="col-lg-12 " id="product-section-reviews">
-        <h2>{{'product_reviews_title' | translate }} ({{variant.comments.size}})</h2>
-        <div class="row well product-average-review">
-          <div class="col-xs-12">
-            <div class="text-size-lg">
-              {{'product_rating_average' | translate}}
+    <div class="row ">
+      <div class="col-12 " id="product-section-reviews">
+        <div class="row justify-content-center">
+          <div class="col-6 col-lg-5 pb-3 ">
+            <h2>{{'product_reviews_title' | translate }} ({{variant.rating.reviews.size}})</h2>
+            <div class="text-warning pb-1">
+              <div class="text-dark text-left font-weight-bold small">{{'rating_average_rate' | translate}}</div>
+              <span class="h1 font-weight-bold">
+                {{variant.rating.summary.average | round: 1}}
+              </span>
+              <span class="h2 text-warning">
+                / 5
+              </span>
             </div>
             <div class="text-size-6xl">
-              {% include 'rating_stars' with rating_value: variant.rating_value %}
-              <span>{{variant.rating_value | round}}/5</span>
+              {% include 'rating_stars' with rating_value: variant.rating.summary.average, rating_nbr: variant.rating.reviews.size %}
             </div>
             <div class="text-size-1xl">
-              {{'rating_comment_count' | translate: count: variant.comments.size}}
+              {{'rating_comment_count' | translate: count: variant.rating.reviews.size}}
             </div>
+          </div>
+          <div class="col-6 col-lg-4">
+
+            {% for rate_count in variant.rating.summary.distribution %}
+            <div class="pt-1">
+              {% assign rate_count_pct = rate_count.last | times: 1.0 | divided_by: 16  | times: 100%}
+              <div class="d-inline-block pr-1 ">
+                {{rate_count.first}} <i class="fa fa-star small text-warning"></i>
+              </div>
+              <div class="d-inline-block w-50">
+                <div class=" progress">
+                   <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: {{rate_count_pct}}%" aria-valuenow="{{rate_count_pct}}" aria-valuemin="0" aria-valuemax="{{rating.summary.count}}"></div>
+                </div>
+              </div>
+              <div class="d-inline-block">
+                <i>{{rate_count.last }}</i>
+              </div>
+            </div>
+            {% endfor %}
           </div>
         </div>
-        {% paginate variant.comments by 5 %}
-          {% for comment in paginate.collection%}
-            <div class="row review">
-              <div class="col-xs-3 text-center text-size-lg">
-                <div class="fa fa-user-circle-o fa-3x text-primary">
+        <div class="row bg-light justify-content-center">
+          <div class="col-12 col-lg-9">
+            {% paginate variant.rating.reviews by 10 %}
 
+              {% for comment in paginate.collection%}
+              <div class="row ">
+                <div class="col-12">
+                  <div class="card mb-0">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-3 text-center">
+                          <div class="fa fa-user-circle-o fa-3x text-secondary">
+
+                          </div>
+                          <div class="">{{comment.nickname}}</div>
+                          <div class="h1 text-primary font-weight-bold">{{comment.rating | round}}<span class="h2 ">/5</span></div>
+                          {% include 'rating_stars' with rating_value: comment.rating %}
+                        </div>
+                        <div class="col-6">
+                          <strong class="text-size-lg">{{comment.name}}</strong>
+                          <p>{{comment.comment}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="">{{comment.nickname}}</div>
-                <div class="text-size-6xl">{{comment.rating | round}}/5</div>
               </div>
-              <div class="col-xs-6">
-                <div class="">
-                  {% include 'rating_stars' with rating_value: comment.rating%}
+              {% endfor %}
+              <div class="row">
+                <div class="col-12 pt-3">
+                  <nav aria-label="Page navigation">
+                    <ul class="pagination pull-right">
+                      {% if paginate.previous %}
+                      <li class="page-item">
+                        <a href="{{paginate.previous.url}}#product-section-advice" aria-label="Previous" class="page-link">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+                      {% endif %}
+                      {% for part in paginate.parts%}
+                      <li class="page-item {%if part.title == paginate.current_page%}active{%endif%}">
+                        <a href="{% if part.is_link == true%}{{part.url}}#product-section-advice{% endif %}" class="page-link">
+                          {{part.title}}
+                        </a>
+                      </li>
+                      {% endfor %}
+                      {% if paginate.next %}
+                      <li class="page-item">
+                        <a href="{{paginate.next.url}}#product-section-advice" aria-label="Next" class="page-link">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                      {% endif %}
+                    </ul>
+                  </nav>
                 </div>
-                <strong class="text-size-lg">{{comment.name}}</strong>
-                <p>{{comment.comment}}</p>
               </div>
-            </div>
-          {% endfor %}
-          <div class="row">
-            <div class="col-xs-12 text-right">
-              <nav aria-label="Page navigation">
-                <ul class="pagination">
-                  {% if paginate.previous %}
-                  <li>
-                    <a href="{{paginate.previous.url}}#product-section-advice" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  {% endif %}
-                  {% for part in paginate.parts%}
-                  <li class="{%if part.title == paginate.current_page%}active{%endif%}">
-                    <a href="{% if part.is_link == true%}{{part.url}}#product-section-advice{% endif %}">
-                      {{part.title}}
-                    </a>
-                  </li>
-                  {% endfor %}
-                  {% if paginate.next %}
-                  <li>
-                    <a href="{{paginate.next.url}}#product-section-advice" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                  {% endif %}
-                </ul>
-              </nav>
-            </div>
+            {% endpaginate %}
           </div>
-        {% endpaginate %}
+        </div>
       </div>
     </div>
   </div>

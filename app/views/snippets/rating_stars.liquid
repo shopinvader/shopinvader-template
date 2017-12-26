@@ -13,4 +13,57 @@
   {% if rating_nbr > 0%}
     <span class="small">{{'rating_count' | translate: count: rating_nbr}}</span>
   {% endif %}
+  {% if rating%}
+  <div class="rating-tooltip">
+    <div class="row p-2">
+      <div class="col-6 text-center">
+        <div class="text-warning">
+          <div class="text-dark text-left pb-3 font-weight-bold small">{{'rating_average_rate' | translate}}</div>
+          <span class="h1 font-weight-bold">
+            {{rating.summary.average | round: 1}}
+          </span>
+          <span class="h2 text-warning">
+            / 5
+          </span>
+          <div class="">
+
+            {{rating.summary.count}}
+          </div>
+        </div>
+        <div class="">
+          {% for rate_count in rating.summary.distribution %}
+          <div class="pt-2">
+            {% assign rate_count_pct = rate_count.last | times: 1.0 | divided_by: 16  | times: 100%}
+            <div class="d-inline-block pr-1 ">
+              {{rate_count.first}} <i class="fa fa-star small"></i>
+            </div>
+            <div class="d-inline-block w-75">
+              <div class=" progress">
+                 <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: {{rate_count_pct}}%" aria-valuenow="{{rate_count_pct}}" aria-valuemin="0" aria-valuemax="{{rating.summary.count}}"></div>
+              </div>
+            </div>
+
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-6 small  border border-bottom-0 border-right-0 border-top-0 border-secondary">
+        {% assign review = rating.reviews.last %}
+        <div class="text-dark text-left pb-3 font-weight-bold">{{'rating_last_review' | translate}}</div>
+        <b class="text-secondary">{{review.nickname}}</b>
+        <div class="pb-1">
+          {% for i in (1..5) %}
+            {% if i > rating.reviews.rate %}
+              <i class="fa fa-star-o" aria-hidden="true"></i>
+            {% else %}
+              <i class="fa fa-star" aria-hidden="true"></i>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <b>{{review.name}}</b>
+        <p>{{review.comment}}</p>
+      </div>
+    </div>
+  </div>
+  {%endif%}
 </div>
