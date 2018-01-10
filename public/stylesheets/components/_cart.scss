@@ -13,8 +13,8 @@
     width: 25%;
     .breadcrumb-number {
 
-      background-color: grays("100");
-      color: colors("white");
+      background-color: $gray-400;
+      color: $white;
       display: block;
       line-height: 40px;
       font-size: 28px;
@@ -24,24 +24,24 @@
       margin: auto;
     }
     .breadcrumb-title {
-      color: grays("100");
-      font-size: $font-size-lg;
+      color: $gray-400;
+      font-size: 1rem;
       line-height: 30px;
     }
     &.active + .active {
       .breadcrumb-number {
-        background-color: theme-colors("danger");
+        background-color: theme-color("warning");
       }
       .breadcrumb-title {
-        color: theme-colors("danger");
+        color: theme-color("warning");
       }
     }
     &.active {
       .breadcrumb-number {
-        background-color: theme-colors("primary");
+        background-color: theme-color("primary");
       }
       .breadcrumb-title {
-        color: theme-colors("primary");
+        color: theme-color("primary");
       }
 
     }
@@ -301,10 +301,11 @@
 
 .side-cart {
   background-color: #fff;
-  width: 360px;
   box-sizing: border-box;
+  display: none;
   overflow: auto;
   padding-top: 10px;
+  width: 360px;
   z-index: 3000;
   &.left-shadow-overlay {
     box-shadow: 2px 2px 15px 0 rgba(0, 0, 0, 0.7);

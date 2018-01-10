@@ -2,3 +2,5 @@
     _slug: john-dot-doe-at-shopinvader-dot-com
     name: John Doe
     email: john.doe@shopinvader.com
+    password: password
+    role: public_tax_inc

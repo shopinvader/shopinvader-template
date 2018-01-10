@@ -199,6 +199,12 @@ product_code:
 product_discount_label:
   en: SAVE
   fr: BON PLAN
+product_display_grid:
+  en: Grid
+  fr: Mosaïque
+product_display_list:
+  en: List
+  fr: Liste
 product_price_from:
   en: Up to
   fr: à partir de
@@ -259,9 +265,18 @@ product_stock_state_resupplying:
 product_stock_state_in_limited_stock:
   en: in stock
   fr: en stock
-product_up_sellings_title:
+product_cross_sellings_tab:
+  en: Customers also shopped for
+  fr: More In This Collection
+product_cross_sellings_title:
   en: More In This Collection
   fr: More In This Collection
+product_up_sellings_tab:
+  en: products related to this item
+  fr: More In This Collection
+product_up_sellings_title:
+  en: Other product
+  fr: Autre produit
 product_variants:
   en: More buying choices
   fr: Plusieurs choix disponibles
@@ -295,6 +310,18 @@ rating_last_review:
 search_filter_title:
   en: Search
   fr: Rechercher
+search_total_count_zero:
+  en: "no result"
+  fr: "aucun résultat"
+search_total_count_one:
+  en: "{{ count }} result"
+  fr: "{{ count }} résultat"
+search_total_count_two:
+  en: "{{ count }} results"
+  fr: "{{ count }} résultats"
+search_total_count_other:
+  en: "{{ count }} results"
+  fr: "{{ count }} résultats"
 signin_email:
   en: Email
   fr: Email

@@ -1,4 +1,4 @@
-<div class="d-flex text-primary text-center ">
+<div class="d-flex text-center " data-shopinvader-container id="header-controls">
   <div class="w-50">
     <i class="fa fa-user fa-2x fa-fw d-inline-block"></i>
     <div class="bold small">
@@ -17,10 +17,11 @@
     {% endif %}
     </div>
   </div>
-  <div class="w-50">
+  <a class="w-50 text-dark" href="{% path_to cart_index%}">
     <i class="fa fa-shopping-basket fa-2x fa-fw d-inline-block ml-3"></i>
     <div class="bold small">
       {{'header_cart' | translate }}
+      <span class="badge badge-primary">{{ store.cart.item_number | round | default: 0 }}</span>
     </div>
-  </div>
+  </a>
 </div>

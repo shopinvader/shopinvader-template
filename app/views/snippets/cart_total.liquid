@@ -1,38 +1,40 @@
-<div class="well well-sm bg-success">
-  <h1 >TOTAL</h1>
-  <table class="table">
-    <tbody>
-      <tr>
-        <td class="text-bold">
-          <div class="text-size-lg">
-            {{'cart_total_subtotal' | translate }}
-        </td>
-        <td class="text-bold text-right">
-          {{store.cart.item_amount_total | money }}
-        </td>
-      </tr>
-      <tr>
-        <td class="text-">{{'cart_total_shipping' | translate }}</td>
-        <td class="text- text-right">{{store.cart.shipping_amount_total | money }}</td>
-      </tr>
-      <tr>
-        <td class="text-bold">
-          <div class="text-size-lg">
-            {{'cart_total_total' | translate }}
-          </div>
-          <div class="">
-            {{'cart_total_vat' | translate }}
-          </div>
-        </td>
-        <td class="text-bold text-right">
-          <div class="text-size-lg">
-            {{store.cart.amount_total | money }}
-          </div>
-          <div class="">
-            {{store.cart.amount_tax | money }}
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="card">
+  <div class="card-body">
+    <h2 class="display-4">TOTAL</h2>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td class="text-bold">
+            <div class="text-size-lg">
+              {{'cart_total_subtotal' | translate }}
+          </td>
+          <td class="text-bold text-right">
+            {{store.cart.item_amount_total | money }}
+          </td>
+        </tr>
+        <tr>
+          <td class="">{{'cart_total_shipping' | translate }}</td>
+          <td class="text-right">{{store.cart.shipping_amount_total | money }}</td>
+        </tr>
+        <tr>
+          <td class="">
+            <div class="h3 font-weight-bold  ">
+              {{'cart_total_total' | translate }}
+            </div>
+            <div class="">
+              {{'cart_total_vat' | translate }}
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="h3 text-primary font-weight-bold ">
+              {{store.cart.amount_total | money }}
+            </div>
+            <div class="">
+              {{store.cart.amount_tax | money }}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
