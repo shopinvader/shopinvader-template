@@ -9,12 +9,11 @@ is_layout: false
 seo_title: thank you for your order | Space Discount
 ---
 {% extends "layouts/default" %}
-{% block 'main' %}
-
+{% block 'content' %}
+  {% assign order = store.last_sale%}
   <div class="container main-content">
-
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-12">
         {% include 'cart_breadcrumbs' with cart_step: 4%}
         <h1 class="text-3xl bold">
         {% editable_text 'title', rows: 1, format:'html' %}
@@ -23,16 +22,16 @@ seo_title: thank you for your order | Space Discount
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-12">
         <p>
         {% editable_text 'message', rows: 1, format:'html' %}
-
+        Thank you for your order
         {% endeditable_text %}
         </p>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-12">
         <p>
           {% editable_text 'signature', rows: 1, format:'raw' %}
             <br>
@@ -41,112 +40,114 @@ seo_title: thank you for your order | Space Discount
       </p>
       </div>
     </div>
-    {% if order.payment_method_id.show_description_after_validation == true%}
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3 alert alert-info">
-          <strong class="text-2xl">{{order.payment_method_id.name}}</strong>
-          <p>
-            {{ 'cart_order_ref' | translate }} <strong>{{order.name}}</strong>
-          </p>
-          <p>
-            {{'cart_amount_payment' | translate }} <strong>{{order.amount_total | money }}</strong>
-          </p>
 
+    {% if order.payment_method.show_description_after_validation == true%}
+    <div class="row justify-content-center">
+      <div class="alert alert-warning col-12 col-lg-8 text-center">
+        <strong class="text-2xl">{{order.payment_method.name}}</strong>
+          {{order.payment_method.description}}
+      </div>
+    </div>
+
+    {% endif %}
+
+    <div class="p-4 mt-4 bg-light ">
+      <div class="row">
+        <div class="col-12 mb-4 pb-2 border border-top-0 border-left-0 border-right-0">
+          <h2 class="display-4 text-primary ">
+            {% editable_text 'product', rows: 1, format:'raw' %}
+            Your order
+            {% endeditable_text %}
+          </h2>
+          <div class="h4 pb-2">
+            {{ 'cart_order_ref' | translate }} <strong>{{order.name}}</strong>
+          </div>
+          <div class="h4">
+            {{'cart_carrier_title' | translate}} <b>{{order.carrier.name}}</b>
+          </div>
         </div>
       </div>
-    {% endif %}
-    <div class="row">
-      <div class="col-xs-12">
-          <h2 class="text-3xl title-separator">
-          {% editable_text 'product', rows: 1, format:'raw' %}
-            Your items
-          {% endeditable_text %}
-          </h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 ">
-        {{ 'cart_order_ref' | translate }} <strong>{{order.name}}</strong>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-6">
-        <h3 class="bold">{{'cart_shipping_address' | translate}}</h3>
-        <address>
-          <div class="bold">
-            {{order.partner_shipping_id.firstname}}
-            {{order.partner_shipping_id.lastname}}
-          </div>
-          <div>{{order.partner_shipping_id.street}}</div>
-          <div>{{order.partner_shipping_id.street2}}</div>
-          <div>
-            <span>{{order.partner_shipping_id.zip}}</span>,
-            <span>{{order.partner_shipping_id.city}}</span>
-          </div>
-          <div>{{order.partner_shipping_id.country_id.name}}</div>
-          <div>{{order.partner_shipping_id.phone}}</div>
-        </address>
-      </div>
-      <div class="col-xs-6 ">
-        <h3 class="bold">{{'cart_invoice_address' | translate}}</h3>
-        <address>
-          <div class="bold">
-            {{order.partner_invoice_id.firstname}}
-            {{order.partner_invoice_id.lastname}}
-          </div>
-          <div>{{order.partner_invoice_id.street}}</div>
-          <div>{{order.partner_invoice_id.street2}}</div>
-          <div>
-            <span>{{order.partner_invoice_id.zip}}</span>,
-            <span>{{order.partner_invoice_id.city}}</span>
-          </div>
-          <div>{{order.partner_invoice_id.country_id.name}}</div>
-          <div>{{order.partner_invoice_id.phone}}</div>
-        </address>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-sm-9">
-        {% include 'cart_list'
-           with cart: order,
-           readonly: true,
-           with_image: false,
-        %}
-      </div>
 
-      <div class="col-xs-12 col-sm-3">
-        {% assign main_title= 'cart_order_ref' | translate | append: order.name%}
-        {% include 'cart_total'
-           with cart: order,
-           main_title:main_title
-        %}
+      <div class="row">
+        <div class="col-6">
+          <h3 class="bold">{{'cart_shipping_address' | translate}}</h3>
+          <address>
+            <div class="bold">
+              {{order.partner_shipping.display_name}}
+            </div>
+            <div>{{order.partner_shipping.street}}</div>
+            <div>{{order.partner_shipping.street2}}</div>
+            <div>
+              <span>{{order.partner_shipping.zip}}</span>,
+              <span>{{order.partner_shipping.city}}</span>
+            </div>
+            <div>{{order.partner_shipping.country_id.name}}</div>
+            <div>{{order.partner_shipping.phone}}</div>
+          </address>
+        </div>
+        <div class="col-6 ">
+          <h3 class="bold">{{'cart_invoice_address' | translate}}</h3>
+          <address>
+            <div class="bold">
+              {{order.partner_invoice.display_name}}
+            </div>
+            <div>{{order.partner_invoice.street}}</div>
+            <div>{{order.partner_invoice.street2}}</div>
+            <div>
+              <span>{{order.partner_invoice.zip}}</span>,
+              <span>{{order.partner_invoice.city}}</span>
+            </div>
+            <div>{{order.partner_invoice.country_id.name}}</div>
+            <div>{{order.partner_invoice.phone}}</div>
+          </address>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-9">
+
+          {% include 'cart_list'
+             with cart: order,
+             readonly: true,
+             with_image: false,
+          %}
+        </div>
+
+        <div class="col-12 col-sm-3">
+          {% assign main_title= 'cart_order_ref' | translate | append: order.name%}
+          {% include 'cart_total'
+             with cart: order,
+             main_title:main_title
+          %}
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-12">
+  {%if store.customer %}
+  <div class="row ">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body text-center">
           <h2 class="text-3xl title-separator">
             {% editable_text 'follow_order_title', rows: 1, format:'raw' %}
               Track your order
             {% endeditable_text %}
           </h2>
+          <p>
+          {% editable_text 'follow_order_message', rows: 10, format:'html' %}
+            You can track your order with your account
+          {% endeditable_text %}
+          </p>
+          <a href="{%path_to account_index %}" class="btn btn-primary text-lg">
+          {% editable_text 'signin', rows: 1, format:'text' %}
+            Sign in <i class="fas fa-chevron-right"></i>
+          {% endeditable_text %}
+          </a>
+        </div>
       </div>
-    </div>
-  {%if store.customer%}
-  <div class="row row-same-height separator-right signin-block">
-    <div class="col-xs-12">
-      <p>
-      {% editable_text 'follow_order_message', rows: 10, format:'html' %}
-        You can track your order with your account
-      {% endeditable_text %}
-      </p>
+
     </div>
     <div  class="col-xs-12 text-center">
       <div>
-        <a href="{%path_to account_index %}" class="btn btn-success text-lg">
-        {% editable_text 'signin', rows: 1, format:'text' %}
-          Sign in
-        {% endeditable_text %}
-        </a>
+
       </div>
     </div>
   </div>

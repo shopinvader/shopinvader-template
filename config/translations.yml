@@ -28,6 +28,36 @@ header_cart:
 header_login:
   en: Sign in or register
   fr: Mon compte
+cart_address_add:
+  en: Add an address
+  fr: Ajouter une adresse
+cart_address_update:
+  en: Update
+  fr: Modifier l'adresse
+cart_checkout:
+  en: "Checkout"
+  fr: "Passer ma commande"
+cart_continue_shopping:
+  en: "Continue shopping"
+  fr: "Poursuivre mes achats"
+cart_customer_shipping:
+  en: My shipping address
+  fr: Mon adresse de livraison
+cart_head_price:
+  en: "Unit Price"
+  fr: "Prix"
+cart_head_qty:
+  en: "Quantity"
+  fr: "Quantité"
+cart_head_total:
+  en: "Item Total"
+  fr: "Total"
+cart_invoice_address:
+  en: Invoice address
+  fr: Adresse de facturation
+cart_item_added:
+  en: "1 Item Added to Cart"
+  fr: "Votre article a été ajouté au panier"
 cart_item_count_zero:
   en: "{{ count }} item"
   fr: "Aucun article"
@@ -43,27 +73,12 @@ cart_item_count_other:
 cart_item_desc:
   en: "Items"
   fr: "Articles"
-cart_item_added:
-  en: "1 Item Added to Cart"
-  fr: "Votre article a été ajouté au panier"
-cart_checkout:
-  en: "Checkout"
-  fr: "Passer ma commande"
-cart_head_price:
-  en: "Unit Price"
-  fr: "Prix"
-cart_head_qty:
-  en: "Quantity"
-  fr: "Quantité"
-cart_head_total:
-  en: "Item Total"
-  fr: "Total"
-cart_continue_shopping:
-  en: "Continue shopping"
-  fr: "Poursuivre mes achats"
-cart_customer_shipping:
-  en: My shipping address
-  fr: Mon adresse de livraison
+cart_order_ref:
+  en: "Order number"
+  fr: Référence
+cart_shipping_address:
+  en: Shipping adress
+  fr: Adresse de livraison
 cart_total_subtotal:
   en: "Subtotal"
   fr: "Sous-total"
@@ -110,7 +125,7 @@ cart_step_step4:
   en: End
   fr: Terminé
 cart_carrier_title:
-  en: Shipping
+  en: Carrier
   fr: Mode de livraison
 cart_carrier_unavailable:
   en: No Shipping mode avaible
@@ -124,18 +139,23 @@ cart_payment_title:
 cart_payment_desc:
   en: Choose your payment mode to checkout
   fr: Sélectionnez votre mode de paiement pour finaliser votre commande.
+
 cart_payment_secure:
-  en:
+  en: Payment Secured
   fr: Vous êtes sur un espace sécurisé.
 cart_invoice_address_different:
   en: Choose invoice address
   fr: je souhaite une adresse de facturation différente
-cart_address_update:
-  en:
-  fr: Modifier l'adresse
+
+cart_invoice_address:
+  en: Invoice address
+  fr: Address de facturaton
 cart_return:
   en: Cancel
   fr: Retour
+cart_submit:
+  en: Submit
+  fr: Valider
 cart_customer_invoice:
   en:
   fr: Je choisis mon adresse de facturation
@@ -145,6 +165,21 @@ cart_free_delivery:
 cart_shipping_method:
   en: Continue
   fr: Continuer
+creditcard_lastname:
+  en: Name (as it appears on your card)
+  fr: Titulaire de la carte
+creditcard_number:
+  en: Card number
+  fr: Numéro de carte
+creditcard_expiry:
+  en: Expiration date
+  fr: Date d'expiration
+creditcard_cvc:
+  en: Security code
+  fr: Cryptogramme visuel
+creditcard_cvc_help:
+  en: 3 last numbers on back
+  fr: 3 derniers chiffres au dos de votre carte, à droite de la signature
 home:
   en: Home
   fr: Accueil

@@ -8,140 +8,148 @@ published: true
 is_layout: false
 ---
 {% extends "layouts/checkout" %}
+{% block content/main2%}
+{{store.cart}}
+{% endblock%}
 {% block content/main %}
-<form method="post" action="{% path_to cart_login %}"  id="cart_update_form">
-  <input type="hidden" name="action_proxy" value="cart">
 
-  {% if page_status == 'add_address'%}
-    <input type="hidden" name="action_method" value="PUT">
-    <input type="hidden" name="current_step" value="{{ page.handle }}">
-    <input type="hidden" name="next_step" value="cart_login">
-    {% include "address_form" with
-      input_group: 'shipping',
-      input_name: 'partner_shipping_id',
-      address_list: address_book
-    %}
-  {%elsif page_status == 'update_address'%}
-
-  {%else%}
-    <input type="hidden" name="action_method" value="PUT">
-    <input type="hidden" name="current_step" value="{{ page.handle }}">
-    <input type="hidden" name="next_step" value="cart_login">
-    {% include "address_book" with
-      input_group: 'shipping',
-      input_name: 'partner_shipping_id',
-      address_list: address_book
-    %}
-  {%endif%}
-  <div class="row" data-shopinvader-container id="cart-address">
-    <div class="col-lg-8 col-xl-9">
-
-    </div>
-    <div class="col-lg-4 col-xl-3 mb-4">
-      {% include 'cart_total' %}
-      <button class="btn btn-primary text-lg btn-lg  btn-block btn-block-xs" type="submit">
-        {% editable_text checkout_button, fixed: true, rows: 1 %}
-          Continuer <i class="fa fa-angle-right"></i>
-        {% endeditable_text %}
-      </button>
-    </div>
-  </div>
-</form>
-<div class="row">
-  <div class="col-xs-12 col-md-9">
-    {% if session.address_validation_error == 'invalid_address'%}
-    {% action 'reset session'%}
-    setSessionProp('address_validation_error', '');
-    {% endaction %}
-    <div class="row">
-      <div class="col-xs-12 text-danger text-center text-1xl">
-        {{'cart_address_error' | translate }}
-      </div>
-    </div>
+<div  data-shopinvader-container id="cart-address">
+  {% if current_customer == null%}
+    {% assign partner_shipping = []%}
+    {% if params.partner_shipping %}
+      {% assign partner_shipping = params.partner_shipping %}
     {% endif %}
-    <div id="template_error" class="d-none">
-      <div class="title">
-        {{'cart_address_error_title' | translate}}
-      </div>
-      <div class="body">
-        <div class="text-center text-2xl">
-          <i class="fa fa-exclamation-triangle fa-w color-warning"></i>
-          {{'cart_address_error_details' | translate}}
+
+    <form method="put" action="{% path_to page %}"  id="cart_address_anonymous">
+      <input type="hidden" name="redirect_success_to" value="{% path_to 'cart_checkout'%}">
+      <input type="hidden" name="action_method" value="PUT">
+      <input type="hidden" name="action_proxy" value="cart">
+      <input type="hidden" name="current_step" value="{{ page.handle }}">
+      <input type="hidden" name="next_step" value="cart_checkout">
+      <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h2>{{ 'cart_shipping_address' | translate }}</h2>
+            {% include "address_form"
+            with input_group: 'partner_shipping',
+            address: partner_shipping
+            with_require: true %}
+            <div class="row">
+              <div class="col-12">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input name="use_different_invoice_address" class="form-check-input"
+                    type="checkbox" autocomplete="off" data-toggle="collapse" data-target="#invoice_address_block"
+                    {% if store.cart.use_different_invoice_address == true %}checked="checked"{% endif%} value="1">
+                    {{ 'cart_invoice_address_different' | translate }}
+                  </label>
+                </div>
+                <div class="collapse  {% if store.cart.use_different_invoice_address == true %}in{% endif%}" id="invoice_address_block">
+                  <h2>{{ 'cart_invoice_address' | translate }}</h2>
+                  {% if store.cart.use_different_invoice_address == true %}
+                    {%assign with_disabled_form = false%}
+                  {%else%}
+                    {%assign with_disabled_form = true%}
+                  {% endif%}
+                  {% include "address_form"
+                    with input_group: 'partner_invoice',
+                    with_require: true,
+                    address: store.cart.partner_invoice,
+                    with_disabled: with_disabled_form
+                  %}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <a href="{% path_to page%}" class="btn btn-default">{{"cart_return" | translate}}</a>
+              </div>
+              <div class="col-6 text-right">
+                <button type="submit" class="btn btn-primary" name="Submit">{{"cart_submit" | translate}}</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">
-          {{'modal_close' | translate}}
-        </button>
+    </form>
+  {% elsif params.page_status == 'add_address'%}
+    <form method="put" action="{% path_to page %}"  id="cart_address_add">
+      <input type="hidden" name="action_method" value="addresses">
+      <input type="hidden" name="action_proxy" value="post">
+      <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            {% include "address_form" with address, with_require: true %}
+            <div class="row">
+              <div class="col-6">
+                <a href="{% path_to page%}" class="btn btn-default">{{"cart_return" | translate}}</a>
+              </div>
+              <div class="col-6 text-right">
+                <button type="submit" class="btn btn-primary" name="Submit">{{"cart_submit" | translate}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <form class="" action="{% path_to cart_checkout %}" method="post">
-      <input type="hidden" name="action_proxy" value="cart">
-
-      <input type="hidden" name="action_method" value="put">
+    </form>
+  {%elsif params.page_status == 'update_address'%}
+    {% with_scope id: params.address_id %}
+      {% assign address = store.addresses.first %}
+    {% endwith_scope%}
+    <form method="post" action="{% path_to page %}"  id="cart_update_form">
       <div class="row">
         <div class="col-12">
-          <h2>{{ 'cart_customer_shipping' | translate }}</h2>
-          <div id="shipping_address_book">
-            {% include "address_book" with
-            input_group: 'shipping',
-            input_name: 'partner_shipping_id',
-            address_list: address_book
-            %}
-          </div>
+          <form method="put" action="{% path_to page %}"  id="cart_address_add">
+            <input type="hidden" name="action_method" value="addresses/{{address.id}}">
+            <input type="hidden" name="action_proxy" value="put">
+            <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  {% include "address_form" with address, with_require: true %}
+                  <div class="row">
+                    <div class="col-6">
+                      <a href="{% path_to page%}" class="btn btn-default">{{"cart_return" | translate}}</a>
+                    </div>
+                    <div class="col-6 text-right">
+                      <button type="submit" class="btn btn-primary" name="Submit">{{"cart_submit" | translate}}</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
-      <div class="row hidden">
-        <div class="col-xs-12">
-          <div class="form-check">
-            <label class="form-check-label">
-              <input name="use_different_invoice_address" class="form-check-input" type="checkbox" autocomplete="off" >
-              {{ 'cart_invoice_address_different' | translate }}
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="invoice_address_block hidden">
+    </form>
+  {%else%}
+    <form method="post" action="{% path_to cart_checkout %}"  id="cart_update_form">
+      <input type="hidden" name="action_method" value="put">
+      <input type="hidden" name="action_proxy" value="cart">
+      <input type="hidden" name="current_step" value="{{ page.handle }}">
+      <input type="hidden" name="next_step" value="cart_checkout">
       <div class="row">
-        <div class="col-xs-12">
-          <h2>{{ 'cart_customer_invoice' | translate }}</h2>
+        <div class="col-lg-8 col-xl-9">
+        {% include "address_book" with
+          input_group: 'shipping',
+          input_name: 'partner_shipping[id]',
+          address_list:  store.addresses,
+          selected_address_id : store.cart.partner_shipping.id
+        %}
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="invoice_address_book row row-same-height address_book"></div>
-          <div id="invoice_address_book">
-            {% include "address_book" with
-            input_group: 'invoice',
-            input_name: 'partner_invoice_id',
-            address_list: address_book,
-            selected_address_id: cart.partner_shipping_id.id
-            %}
-          </div>
-        </div>
-      </div>
-    </div>
-      <div class="row">
-        <div class="col-xs-6 text-left">
-          <a href="{% path_to cart_index %}">
-            <i class="fa fa-arrow-circle-left"></i>
-            {{'cart_return' | translate}}
-          </a>
-        </div>
-        <div class="col-xs-6 text-right address-submit-form ">
-          <button class="btn btn-warning text-lg" type="submit" class="bg-color-success text-1xl color-white">
-            {{'cart_shipping_method' | translate}}
-            <i class="fa fa-arrow-circle-right"></i>
+        <div class="col-lg-4 col-xl-3 mb-4">
+          {% include 'cart_total' with cart: store.cart  %}
+          <button class="btn btn-primary text-lg btn-lg  btn-block btn-block-xs" type="submit">
+            {% editable_text checkout_button, fixed: true, rows: 1 %}
+              Continuer <i class="fa fa-angle-right"></i>
+            {% endeditable_text %}
           </button>
         </div>
       </div>
     </form>
-  </div>
-  <div class="col-xs-12 col-md-3">
-    {% include 'cart_total' %}
-
-  </div>
+  {%endif%}
 </div>
 {% endblock %}
 {% block 'javascripts' %}

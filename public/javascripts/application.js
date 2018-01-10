@@ -80,6 +80,14 @@ $(document).ready(function () {
       $('form#'+$(this).data('form-submit')).submit();
     }
   );
+
+  $('body').on('click',"[data-autosubmit]",
+    function() {
+      console.log($(this).parents('form'));
+      $(this).parents('form').submit();
+    }
+  );
+
   $('body').on('click', '.product-qty .input-group-addon[data-type]',
     function(event) {
       var input_qty = $('#'+$(this).attr('data-field'));

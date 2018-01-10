@@ -9,12 +9,12 @@
               {{'cart_total_subtotal' | translate }}
           </td>
           <td class="text-bold text-right">
-            {{store.cart.item_amount_total | money }}
+            {{cart.item_amount_total | money }}
           </td>
         </tr>
         <tr>
           <td class="">{{'cart_total_shipping' | translate }}</td>
-          <td class="text-right">{{store.cart.shipping_amount_total | money }}</td>
+          <td class="text-right">{{cart.shipping_amount_total | money }}</td>
         </tr>
         <tr>
           <td class="">
@@ -27,10 +27,10 @@
           </td>
           <td class="text-right">
             <div class="h3 text-primary font-weight-bold ">
-              {{store.cart.amount_total | money }}
+              {{cart.amount_total | money }}
             </div>
             <div class="">
-              {{store.cart.amount_tax | money }}
+              {{cart.amount_tax | money }}
             </div>
           </td>
         </tr>

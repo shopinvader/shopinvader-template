@@ -45,3 +45,5 @@ metafields:
     api_key: < Your ERP API KEY >
     api_url: < Your ERP API URL >
     default_pricelist: < Your ERP PRICELIST >
+  payment:
+    stripe_api_key: < Your stripe API KEY >

@@ -38,3 +38,9 @@ google:
     maps_api_key:
       hint: Google MAPS API Authentication for autocomplete address
       type: string
+payment:
+  label: Payment
+  fields:
+    stripe_api_key:
+      hint: "Stripe - Identifiant"
+      type: string

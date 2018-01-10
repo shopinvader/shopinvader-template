@@ -102,10 +102,18 @@
         {% with_scope level: 0%}
           {% for category in store.categories %}
             <li class="{% if page.fullpath == page_in_nav.fullpath %}active{% endif %}">
-              <a href="{{category.url_key  | prepend: url_base }}" class="text-white text-uppercase ">
-                {{ category.name }}
-              </a>
+              <div class="dropdown">
+                <a href="{{category.url_key  | prepend: url_base }}" id="cat-{{category.id}}" class="text-white text-uppercase dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ category.name }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="cat-{{category.id}}" >
+                {% for subcategory in category.childs %}
+                  <a class="dropdown-item p-1" href="{{subcategory.url_key  | prepend: url_base }}">{{subcategory.name}}</a>
+                {% endfor %}
+                </div>
+              </div>
             </li>
+
           {% endfor %}
         {% endwith_scope%}
         <li>

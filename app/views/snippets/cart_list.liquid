@@ -1,6 +1,6 @@
-{% assign item_count = store.cart.item_number | round%}
 
-{% for cart_line in store.cart.order_line %}
+
+{% for cart_line in cart.order_line %}
   {% if product_id == null or cart_line.product.id == product_id %}
     <div class="card">
       <div class="card-body row">
@@ -44,8 +44,10 @@
                     {% endif %}
                   </form>
                 </div>
+
                 <div class="col-4 col-sm-2 col-xl-3 order-2 order-xl-3">
-                  <form class="" action="#" method="post" data-shopinvader-form>
+                  {% if readonly != true%}
+                  <form class="" action="#" method="post">
                     <input type="hidden" name="action_proxy" value="cart/item">
                     <input type="hidden" name="action_method" value="delete">
                     <input type="hidden" name="item_id" value="{{cart_line.id}}">
@@ -53,6 +55,7 @@
                       <i class="fa fa-trash"></i>
                     </button>
                   </form>
+                  {% endif %}
                 </div>
               </div>
             </div>

@@ -9,49 +9,50 @@
   setProp('prefix', prefix);
   setProp('suffix', suffix);
 {% endaction %}
-  <div class="row">
-    {% for address in address_list %}
-    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+  {% if selected_address_id == null%}
+    {% assign selected_address_id = address_list.first.id %}
+  {% endif%}
+
+  <div class="card-deck-wrapper">
+    <div class="card-deck">
+      {% for address in address_list %}
       <div class="card">
         <div class="card-body">
           <div class="radio">
             <label class="text-lg bold">
-              <input type="radio" value="{{address.id | round}}" {%if address.id == selected_address %} checked="checked" {%endif%} name="{{ input_name }}" autocomplete="off"/>
+              <input type="radio" value="{{address.id | round}}" {%if address.id == selected_address_id %} checked="checked" {%endif%} name="{{ input_name }}" id="{{ input_name }}_{{address.id}}" autocomplete="off"/>
               <b>{{address.name}}</b>
             </label>
           </div>
-          <address>
-            <div>{{address.street}}</div>
-            <div>{{address.street2}}</div>
-            <div>
-              <span>{{address.zip}}</span>,
-              <span>{{address.city}}</span>
-            </div>
-            <div>{{address.country_id.name}}</div>
-            <div>{{address.phone}}</div>
-          </address>
-          <div class="bottom-link">
-            <a href="#" class="address-update text-left" data-address-id="{{address.id | round}}">
-              {{'cart_address_update' | translate }}
-            </a>
-          </div>
+          <label for="{{ input_name }}_{{address.id}}">
+            <address>
+              <div>{{address.street}}</div>
+              <div>{{address.street2}}</div>
+              <div>
+                <span>{{address.zip}}</span>,
+                <span>{{address.city}}</span>
+              </div>
+              <div>{{address.country_id.name}}</div>
+              <div>{{address.phone}}</div>
+            </address>
+          </label>
+        </div>
+        <div class="card-footer text-center">
+          <a href="{% path_to page%}?page_status=update_address&address_id={{address.id | round}}" class="btn btn-secondary" data-address-id="{{address.id | round}}">
+            <i class="fas fa-pencil-alt"></i> {{'cart_address_update' | translate }}
+          </a>
         </div>
       </div>
-    </div>
-    {% endfor %}
-    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+      {% endfor %}
       <div class="card">
         <div class="card-body text-center">
           <div class="bottom-link">
-            <form method="post" action="{%path_to page%}">
-              <input type="hidden" name="page_status" value="add_address">
-              <button class="btn btn-link text-primary" href="{% path_to page%}">
-                <div class="text-primary ">
-                  <i class="fa fa-plus-circle fa-5x"></i>
-                </div>
-                {{ 'cart_address_add' | translate }}
-              </button>
-            </form>
+            <a class="btn btn-link text-primary" href="{% path_to page%}?page_status=add_address">
+              <div class="text-primary ">
+                <i class="fa fa-plus-circle fa-5x"></i>
+              </div>
+              {{ 'cart_address_add' | translate }}
+            </a>
           </div>
         </div>
       </div>

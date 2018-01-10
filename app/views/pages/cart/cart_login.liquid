@@ -10,45 +10,20 @@ seo_title: "Sign in or register | Space Discount"
 ---
 {% extends 'layouts/checkout' %}
 
+
 {% block content/main %}
+{% action 'Logged user redirection' %}
+if(getProp("current_customer") != null) {
+  redirectTo('cart_address');
+}
+{% endaction %}
 
 <div class="row row-same-height cart-login pb-4">
 
-  <div class="col-xs-12 col-sm-6">
-    <div class="card h-100">
-      <h3 class="card-header text-center">
-        {% editable_text guest_title, inline: true, rows: 3 %}
-        Guest Checkout
-        {% endeditable_text %}
-      </h3>
-      <div class="card-body">
-        <form method="post" action="{% path_to cart_address %}">
-          <input type="hidden" name="cart_step" value="{{ page.handle }}">
-          <input type="hidden" name="action_method" value="put">
-          <input type="hidden" name="action_proxy" value="cart">
-          <p>
-            {% editable_text guest_details, inline: true, rows: 3 %}
-              You will have the opportunity to create an account and track your order once you complete your checkout.
-            {% endeditable_text %}
-          </p>
-          <div class="form-group">
-            <div class="has-feedback">
-              <label for="email" class="control-label">{{ 'partner_email' | translate }}</label>
-              <input type="email" class="form-control" id="anonymous_email" name="anonymous_email" placeholder="{{ 'partner_email' | translate }}" value="" required= "required">
-            </div>
-          </div>
-          <div class="text-right">
-            <button type="submit" class="btn btn-primary text-size-lg" value="continue_anonymously">
-              {{'cart_without_account_btn' | translate }} <i class="fa fa-angle-right"></i>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+
   <div class="col-xs-12 col-sm-6">
     <div class="card  h-100">
-      <h3 class="card-header text-center">
+      <h3 class="card-header bg-dark text-light text-center">
         {% editable_text account_title, inline: true, rows: 3 %}
         I'm a Returning User
         {% endeditable_text %}
@@ -80,6 +55,38 @@ seo_title: "Sign in or register | Space Discount"
           <div class="text-right">
             <button type="submit" class="btn btn-primary text-size-lg" value="continue_anonymously">
               {{'cart_login_btn' | translate }} <i class="fa fa-angle-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <div class="card h-100">
+      <h3 class="card-header bg-primary text-light text-center">
+        {% editable_text guest_title, inline: true, rows: 3 %}
+        Guest Checkout
+        {% endeditable_text %}
+      </h3>
+      <div class="card-body">
+        <form method="post" action="{% path_to cart_address %}">
+          <input type="hidden" name="cart_step" value="{{ page.handle }}">
+          <input type="hidden" name="action_method" value="put">
+          <input type="hidden" name="action_proxy" value="cart">
+          <p>
+            {% editable_text guest_details, inline: true, rows: 3 %}
+              You will have the opportunity to create an account and track your order once you complete your checkout.
+            {% endeditable_text %}
+          </p>
+          <div class="form-group">
+            <div class="has-feedback">
+              <label for="email" class="control-label">{{ 'partner_email' | translate }}</label>
+              <input type="email" class="form-control" id="anonymous_email" name="anonymous_email" placeholder="{{ 'partner_email' | translate }}" value="" required= "required">
+            </div>
+          </div>
+          <div class="text-right">
+            <button type="submit" class="btn btn-primary text-size-lg" value="continue_anonymously">
+              {{'cart_without_account_btn' | translate }} <i class="fa fa-angle-right"></i>
             </button>
           </div>
         </form>

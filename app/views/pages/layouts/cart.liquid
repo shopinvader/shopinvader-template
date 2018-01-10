@@ -7,11 +7,35 @@ is_layout: true
 {% block content %}
 <div class="row">
   <div class="col-12">
+    {% include 'store_notifications' %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
     <ul class="cart-breadcrumb">
 
     </ul>
   </div>
 </div>
+<span class="badge bagde-info">{{store.cart.item_number}}</span>
+{% if store.cart.item_number > 0%}
   {% block main %}
   {% endblock %}
+{% else %}
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          {% editable_text "cart_empty", hint: "Cart empty" %}
+          Your shopping cart is empty :(
+          {% endeditable_text %}
+          <div class="text-center">
+            <a href="{% path_to home%}" class="btn btn-lg btn-primary">
+              {{'cart_continue_shopping' | translate}}
+              <i class="fa fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
 {% endblock %}
