@@ -21,7 +21,7 @@ $(document).ready(function() {
         name: 'product',
         cssClasses: {
           suggestions:"product-list",
-          suggestion: " col-xs-12 product-compact",
+          suggestion: " col-12 col-lg-4 product-compact",
         },
         templates: {
           header: function(query, result) {
@@ -49,8 +49,8 @@ $(document).ready(function() {
         displayKey: 'name',
         name: 'category',
         cssClasses: {
-          suggestions:" row-fluid",
-          suggestion: " col-xs-12",
+          suggestions:" row",
+          suggestion: " col-4",
         },
         templates: {
           header: function(query, result){

@@ -197,8 +197,8 @@ product_code:
   en: Product code
   fr: Référence
 product_discount_label:
-  en: Save
-  fr: J'économise
+  en: SAVE
+  fr: BON PLAN
 product_price_from:
   en: Up to
   fr: à partir de
@@ -262,6 +262,9 @@ product_stock_state_in_limited_stock:
 product_up_sellings_title:
   en: More In This Collection
   fr: More In This Collection
+product_variants:
+  en: More buying choices
+  fr: Plusieurs choix disponibles
 rating_average_rate:
   en: "Average rate"
   fr: "Noté par nos clients"

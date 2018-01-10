@@ -1,11 +1,32 @@
 .product-thumbnail {
+  border-width:5px;
+  border-color: transparent;
   cursor: pointer;
-  .carousel {
-    .carousel-control-prev,
-    .carousel-control-next {
+  transition: all 200ms ease-in;
+  &:hover {
+    border-color: $gray-200;
+    .product-add-to-cart  {
+      opacity: 1;
+    }
+  }
+  .product-add-to-cart {
+    opacity:0;
+  }
+  .product-thumbnail-img {
+    position: relative;
+    .carousel {
+      .carousel-control-prev,
+      .carousel-control-next {
+
+      }
+    }
+    .badge-discount {
+      bottom: 2rem;
+      position: absolute;
 
     }
   }
+
 }
 
 .product-compact {

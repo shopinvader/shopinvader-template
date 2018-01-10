@@ -99,7 +99,7 @@ handle: product
         {%if product.price.discount > 0%}
         <div class="pb-1">
           <div class="badge badge-warning p-2">
-            BON PLAN <b>  -{{product.price.discount | round }} %</b>
+            {{'product_discount_label'  | translate}} <b>  -{{product.price.discount | round }} %</b>
           </div>
         </div>
         {%endif%}

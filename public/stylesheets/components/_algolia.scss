@@ -3,17 +3,13 @@
   text-align: center;
 
   .ais-pagination--link {
-    border: 1px solid grays("200");
-    border-radius: 5px;
-    color: theme-colors("primary");
-    padding: 8px 12px;
-    text-decoration: none;
+    color: theme-color("primary");
   }
 
   .ais-pagination--item__active a {
-    background-color: theme-colors("primary");
-    border-color: theme-colors("primary");
-    color: colors("white");
+    background-color: theme-color("primary");
+    border-color: theme-color("primary");
+    color: $white;
   }
 }
 

@@ -5,7 +5,7 @@
   <div class="carousel-inner" role="listbox">
     {% for image in product.images %}
     <div class="carousel-item {%if forloop.index == 1 %}active{%endif%}" data-target="#slide-{{product.objectID}}">
-      <img src="{{image.medium}}" alt="" class="d-block img-fluid w-100"/>
+      <img src="{{image.large}}" alt="" class="d-block img-fluid w-100"/>
     </div>
     {% endfor %}
     <a class="carousel-control-prev" href="#slide-{{product.objectID}}" role="button" data-slide="prev">

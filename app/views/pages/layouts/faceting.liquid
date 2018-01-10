@@ -1,0 +1,92 @@
+---
+title: Simple
+is_layout: true
+---
+{% extends 'layouts/default' %}
+
+
+{% block content %}
+  {% if category %}
+    {% assign filters = category.filters %}
+  {% else %}
+    {% assign filters = store.all_filters %}
+  {% endif %}
+  <div class="row">
+    <div class="col-lg-2 p-0 pt-4 border ">
+      <div id="filter" class="sidebar">
+        <h3 class="pl-3">{{'search_filter_title' | translate}}</h3>
+        {% for filter in filters %}
+          <script type="text/html" class="filters-header-template" data-filter-header-id="{{filter.code}}">
+            <div class="row">
+              <div class="col-xs-12 category-filters-head">
+                <div>
+                  <h4 class="title-separator">{{filter.name}}</h4>
+                  {% if filter.help %}
+                    <a  data-toggle="modal" data-target="#help-{{filter.name | dasherize}}" href="#help-{{filter.name | dasherize}}" class=" help small btn btn-success">
+                      {{'search_filter_info' | translate}}
+                    </a>
+                  {%endif%}
+                  </div>
+                </div>
+              </div>
+          </script>
+          <div
+            data-filter-id="filter-{{filter.code}}"
+            data-filter-widget-type="refinementList"
+            data-filter-attr="{{filter.code}}"
+            data-filter-name="{{filter.name}}"
+            data-show-more-label="{{'search_show_more' | translate}}"
+            data-filter-hit-limit='10'
+            class="small border border-left-0 border-right-0 border-top-0 p-3">
+          </div>
+        {% endfor %}
+      </div>
+      {% block side%}
+      {% endblock %}
+    </div>
+    <div class="col-lg-10 p-0 ">
+      <div class="p-3">
+        {% block intro%}
+        {% endblock %}
+      </div>
+      {% block main%}
+        {% paginate store.products by 18 %}
+        <div class="row p-4">
+          <div class="col-4">
+            {% include 'product_display_control'%}
+          </div>
+          <div class="col-4 text-right hidden" id="search-stats">
+            {{'search_total_count' | translate: count: paginate.total_entries}}
+          </div>
+          <div class="col-4 text-right" id="search-pagination">
+            {% include 'paginate' with paginate %}
+          </div>
+        </div>
+        <div id="search-result">
+          {% block 'main'%}
+            <div class="row m-0">
+              {%assign product_display = grid%}
+              {% assign css_col = "col-12  col-sm-4 col-md-3 col-lg-3 col-xl-2"%}
+              {%if session.product_display == 'list'%}
+                {%assign display_horizontal =  true%}
+                {% assign css_col = "col-12"%}
+              {%endif%}
+              {% for product in paginate.collection %}
+              <div class="{{css_col}} product-col p-2 border border-1 border-left-0 border-bottom-0 ">
+                {% include 'product_thumbnail' with product, display_horizontal %}
+              </div>
+              {% endfor %}
+            </div>
+            <div class="row">
+              <div class="col-12 text-right">
+                {% include 'paginate' with paginate %}
+              </div>
+            </div>
+          {% endblock %}
+        </div>
+        {% endpaginate %}
+      {% endblock %}
+    </div>
+  </div>
+
+{% endblock %}
