@@ -39,7 +39,7 @@
 }
 
 .header-dropdown-menu {
-  background-color: color("white");
+  background-color: $white;
   border: 1px solid $gray-200;
   box-shadow: 2px 2px 15px 8px rgba(35, 47, 62, 0.3);
   color: $gray-500;

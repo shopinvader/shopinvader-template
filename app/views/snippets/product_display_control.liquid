@@ -1,0 +1,20 @@
+{%comment%}
+Show list and grid button selector
+{%endcomment%}
+{% if params.product_display%}
+  {% action 'set session params for product layout'%}
+    setSessionProp('product_display', getProp('params.product_display'));
+  {%endaction%}
+{%elsif session.product_display == null%}
+  {% action 'set session params for product layout'%}
+    setSessionProp('product_display', 'grid');
+  {%endaction%}
+{%endif%}
+<div class="lead">
+  <a href="?product_display=grid" class=" mr-3 {%if session.product_display != 'grid'%}text-dark{%endif%}">
+    <i class="fas fa-th-large mr-1"></i>{{'product_display_grid' | translate}}
+  </a>
+  <a href="?product_display=list" class=" mr-3 {%if session.product_display != 'list'%}text-dark{%endif%}">
+    <i class="fas fa-align-justify mr-1"></i>{{'product_display_list' | translate}}
+  </a>
+</div>

@@ -119,12 +119,12 @@ handle: product
     <div class="col-12">
       <h2>{{'product_variant_title' | translate }}</h2>
       <div class="row">
-        <div class="col-2  p-2">
-          {% include 'product_thumbnail' with product %}
+        <div class="col-2 col-lg-2  p-2">
+          {% include 'product_variant_thumbnail' with product%}
         </div>
         {% for variant_product in variant_list %}
           <div class="col-2  p-2">
-            {% include 'product_thumbnail' with product:variant_product %}
+            {% include 'product_variant_thumbnail' with  product:variant_product%}
           </div>
         {% endfor %}
       </div>
@@ -181,18 +181,38 @@ handle: product
   </div>
   {% endif %}
   {% if variant.up_sellings.size > 0%}
-  <div id="product-section-related">
+  <div id="product-section-up-sellings">
     {% include 'product_page_section' with step: 'up_sellings' %}
     <div class="row">
       <div class="col-12">
         <h2>{{'product_up_sellings_title' | translate }}</h2>
         <div class="editable_content">
           <div class="row">
-
-
             {% for up_seller in variant.up_sellings %}
               <div class="col-3 col-xl-2">
               {% with_scope objectID: [up_seller.id]%}
+                {% include 'product_thumbnail' with product: store.products.first%}
+              {% endwith_scope%}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if variant.cross_sellings.size > 0%}
+  <div id="product-section-cross-sellings">
+    {% include 'product_page_section' with step: 'cross_sellings' %}
+    <div class="row">
+      <div class="col-12">
+        <h2>{{'product_cross_sellings_title' | translate }}</h2>
+        <div class="editable_content">
+          <div class="row">
+            {% for cross_seller in variant.cross_sellings %}
+              <div class="col-3 col-xl-2">
+              {% with_scope objectID: [cross_seller.id]%}
                 {% include 'product_thumbnail' with product: store.products.first%}
               {% endwith_scope%}
               </div>
@@ -251,7 +271,6 @@ handle: product
         <div class="row bg-light justify-content-center">
           <div class="col-12 col-lg-9">
             {% paginate variant.rating.reviews by 10 %}
-
               {% for comment in paginate.collection%}
               <div class="row ">
                 <div class="col-12">
@@ -260,7 +279,6 @@ handle: product
                       <div class="row">
                         <div class="col-3 text-center">
                           <div class="fa fa-user-circle-o fa-3x text-secondary">
-
                           </div>
                           <div class="">{{comment.nickname}}</div>
                           <div class="h1 text-primary font-weight-bold">{{comment.rating | round}}<span class="h2 ">/5</span></div>
@@ -313,6 +331,4 @@ handle: product
   </div>
   {% endif %}
 </div>
-
-
 {% endblock %}

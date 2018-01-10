@@ -15,8 +15,15 @@
     {% endif %}
     {% if variant.up_sellings.size > 0%}
     <li class="list-inline-item {% if step == 'up_sellings' %}active{% endif %} text-uppercase">
-      <a href="#product-section-related" data-scrollto="#product-section-related">
-       {{'product_related_tab' | translate }}
+      <a href="#product-section-up-sellings" data-scrollto="#product-section-up-sellings">
+       {{'product_up_sellings_tab' | translate }}
+      </a>
+    </li>
+    {% endif %}
+    {% if variant.cross_sellings.size > 0%}
+    <li class="list-inline-item {% if step == 'cross_sellings' %}active{% endif %} text-uppercase">
+      <a href="#product-section-cross-sellings" data-scrollto="#product-section-cross-sellings">
+       {{'product_cross_sellings_tab' | translate }}
       </a>
     </li>
     {% endif %}

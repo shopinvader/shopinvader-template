@@ -5,6 +5,7 @@ is_layout: false
 {% if locale != default_locale %}
   {% assign url_base ="/" | append: locale %}
 {% endif%}
+
 {% assign url_base =url_base | prepend: base_url | append:"/"%}
 <!DOCTYPE html>
 <html lang="{{locale}}">
@@ -16,9 +17,9 @@ is_layout: false
     <link rel="shortcut icon" href="{{ 'favicon.png' | theme_image_url }}">
     {% block 'css' %}{% endblock %}
     {{ 'application.css' | stylesheet_tag }}
-    {{ 'font-awesome.min.css' | stylesheet_tag }}
+    <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet">
 
-    {{ 'turbolinks.js' | javascript_tag }}
+    {{ 'popper.min.js' | javascript_tag }}
     {{ 'jquery.min.js' | javascript_tag }}
     {{ 'jquery.slidereveal.min.js' | javascript_tag }}
     {{ 'shopinvader.jquery.js' | javascript_tag }}
@@ -85,35 +86,38 @@ is_layout: false
         <div class="title">
           {{ 'cart_item_added' | translate }}
         </div>
+
         <div class="content">
           <div class="">
             <div class="row">
-              {% include 'cart_list' with cart:store.cart, product_id, readonly: true %}
+              <div class="col-12">
+                {% include 'cart_list' with cart:store.cart, product_id, readonly: true %}
+              </div>
             </div>
             <div class="row">
               <div class="col-6">
-                <a href="{{product.url_key | prepend: url_base}}" class="btn btn-default btn-lg">{{"cart_continue_shopping" | translate }}</a>
+                <a href="{{product.url_key | prepend: url_base}}" class="btn btn-light btn-lg">{{"cart_continue_shopping" | translate }}</a>
               </div>
               <div class="col-6 text-right">
-                <a href="{% path_to 'cart_index' %}" class="btn btn-warning btn-lg">{{"cart_checkout" | translate }}</a>
+                <a href="{% path_to 'cart_index' %}" class="btn btn-primary btn-lg">{{"cart_checkout" | translate }} </a>
               </div>
             </div>
-          {% if product and product.relateds.count > 0%}
+            {{product.cross_sellings.count}}
+          {% if product %}
             <div class="row">
               <div class="col-lg-12">
                 <h2>{{'product_related_title' | translate }}</h2>
               </div>
             </div>
             <div class="row">
-              {% for related_id in product.relateds%}
-                {% with_scope record_id: related_id %}
-                  {% for related in store.products %}
-                  <div class="product-thumbnail col-12 col-sm-4 col-md-3 col-lg-2">
-                    {% include 'product_thumbnail' with product: related%}
-                  </div>
-                  {%endfor%}
+
+              {% for cross_seller in product.cross_sellings %}
+                <div class="col-6 col-sm-3 col-xl-2">
+                {% with_scope objectID: [cross_seller.id]%}
+                  {% include 'product_thumbnail' with product: store.products.first%}
                 {% endwith_scope%}
-              {%endfor%}
+                </div>
+              {% endfor %}
             </div>
           {% endif %}
           </div>
@@ -126,7 +130,7 @@ is_layout: false
     {% endblock %}
     {% block 'javascripts_algolia', short_name: true %}
       {% include 'algolia_init' %}
-      {{ 'algolia_app.js' | javascript_tag }}
+
     {% endblock %}
   </body>
 </html>

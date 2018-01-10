@@ -70,9 +70,10 @@ $(document).ready(function () {
   });
 
   /*cart*/
-  $('body').on('change', '.product-qty input',
+  $('body').on('change', '.cart-line-qty .product-qty input',
     function(event) {
-      //$('form#'+$(this).data('form-submit')).submit();
+      console.log($(this));
+      $(this).parents('form').submit();
     });
   $('body').on('click',".cart-items .delete",
     function() {
@@ -102,16 +103,9 @@ $(document).ready(function () {
   /*common event*/
   $('body').on('click', '[data-link]',
       function(){
-        if(typeof(Turbolinks) != 'undefined') {
-          Turbolinks.visit($(this).attr('data-link'));
-        }
-        else {
-          window.location=$(this).attr('data-link');
-        }
-
+        window.location=$(this).attr('data-link');
       }
     );
-
   $('body').on('click', '[data-scrollto]',
     function(){
       console.log($(this).data('scrollto'));

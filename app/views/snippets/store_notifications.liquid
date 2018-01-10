@@ -1,0 +1,8 @@
+{% assign store_notification = store.notifications%}
+{% if store_notification != null %}
+  {% for notification in store_notification%}
+    <div class="alert alert-{{notification.type}} text-center alert-maintenance">
+    {{notification.message}}
+    </div>
+  {% endfor%}
+{% endif%}
