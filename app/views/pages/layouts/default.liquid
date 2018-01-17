@@ -10,23 +10,20 @@ is_layout: false
 <!DOCTYPE html>
 <html lang="{{locale}}">
   <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ site.name }}</title>
     <link rel="shortcut icon" href="{{ 'favicon.png' | theme_image_url }}">
-    {% block 'css' %}{% endblock %}
     {{ 'application.css' | stylesheet_tag }}
-    <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet">
-
-    {{ 'popper.min.js' | javascript_tag }}
-    {{ 'jquery.min.js' | javascript_tag }}
-    {{ 'jquery.slidereveal.min.js' | javascript_tag }}
-    {{ 'shopinvader.jquery.js' | javascript_tag }}
-    {{ 'bootstrap4.min.js' | javascript_tag }}
+    <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet" async>
+    {% block 'css' %}{% endblock %}
   </head>
   <body>
+    <div class="main-loader d-none"><i class="fa fa-spinner fa-spin"></i></div>
     {% include 'nav' %}
+
     <main>
       <div class="container-fluid">
         {% include 'store_notifications' %}
@@ -34,15 +31,7 @@ is_layout: false
       {% endblock %}
       </div>
     </main>
-    <div class="alert alert-info alert-cookie" role="alert">
-      {% editable_text cookie_notice, fixed: true, rows: 1 %}
-        En poursuivant votre navigation sur ce site, vous acceptez l'utilisation
-        de cookies pour vous proposer des services et offres adaptés à vos centres d'intérêts.
-      {% endeditable_text %}
-      <button type="button" class="btn btn-info" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">OK</span>
-      </button>
-    </div>
+
     <div class="modal fade" id="main-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -54,32 +43,7 @@ is_layout: false
         </div>
       </div>
     </div>
-    {% block side, short_name: true %}
-    <div class="side-cart cart-compact container-fluid"  id="cart-compact">
-      <div class="row-fluid">
-        <div class="col-8">
-          <span class="title-separator text-size-2xl">
-            {{ 'cart_title' | translate }}
-          </span>
-        </div>
-        <div class="col-4 text-right close-side">
-          <i class="fa fa-times text-size-1xl display-side-cart"></i>
-        </div>
-      </div>
-      <div data-cart-id="side_cart_items" class="wait-loader" id="side-cart-items" data-shopinvader-container>
-      {% if store.cart %}
-        {% include cart_side %}
-      {% else %}
-        <div class="text-center">
-        {% editable_text "cart_empty", hint: "Side cart empty" %}
-          Your shopping cart is empty :(
-        {% endeditable_text %}
-        </div>
-      {% endif %}
-      </div>
-    </div>
-    {% endblock %}
-    <div id="product-modal-add" class="hidden" data-shopinvader-container>.
+    <div id="product-modal-add" class="d-none" data-shopinvader-container>.
       {% if params.product_id %}
         {{store.cart}}
         {% assign product_id = params.product_id | round %}
@@ -110,7 +74,6 @@ is_layout: false
               </div>
             </div>
             <div class="row">
-
               {% for cross_seller in product.cross_sellings %}
                 <div class="col-6 col-sm-3 col-xl-2">
                 {% with_scope objectID: [cross_seller.id]%}
@@ -125,12 +88,18 @@ is_layout: false
       {% endif %}
     </div>
     {% include 'footer' %}
+
+    {{ 'popper.min.js' | javascript_tag }}
+    {{ 'jquery.min.js' | javascript_tag }}
+    {{ 'jquery.slidereveal.min.js' | javascript_tag }}
+    {{ 'shopinvader.jquery.js' | javascript_tag }}
+    {{ 'bootstrap4.min.js' | javascript_tag }}
     {{ 'application.js' | javascript_tag }}
     {% block 'javascripts', short_name: true %}
     {% endblock %}
     {% block 'javascripts_algolia', short_name: true %}
+      {{ 'search_autocomplete.js' | javascript_tag }}
       {% include 'algolia_init' %}
-
     {% endblock %}
   </body>
 </html>

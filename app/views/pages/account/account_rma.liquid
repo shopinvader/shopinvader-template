@@ -8,34 +8,20 @@ seo_title: Claims | Space Discount
 
 {% block 'content/tabcontent' %}
 
-<div class="row  tab-header">
-  <div class="col-xs-12">
-
-  </div>
-</div>
 {% if params.selected_order_id != null %}
   {% with_scope id: params.selected_order_id %}
-    {% assign selected_order = store.orders.first%}
+    {% assign selected_order = store.sales.first%}
   {% endwith_scope%}
+{% else %}
+  {% assign selected_order = store.sales.first%}
 {%endif%}
 
-<div class="row address-form">
-  <div class="col-md-3 text-center">
-    <p class="text-1xl">
-      {% editable_text 'phone_details', inline: true, rows: 1 %}
-        <div class="bold text-2xl">Besoin d'aide ?</div>
-        Vous pouvez aussi nous contacter par téléphone au
-      {% endeditable_text %}
-    </p>
-    <a href="tel:{{ site.metafields.store.phone_number }}" class="text-2xl bold  color-warning ">
-        {{ site.metafields.store.phone_number }}
-    </a>
-    <p class="small">
-      {{ site.metafields.store.phone_hours }}
-    </p>
-  </div>
-  <div class="well col-xs-12 col-md-7" id="form-rma-container" data-shopinvader-container>
-    <h2>{{'account_rma_title' | translate}}</h2>
+
+<div class="card">
+  <h2 class="card-header bg-primary text-light">
+    <i class="fas fa-backward"></i> {{'account_rma_title' | translate}}
+  </h2>
+  <div class="card-body" id="form-rma-container" data-shopinvader-container>
     <p>
       {% editable_text subtitle, rows: 1, format:'raw', hint: "Subtitle" %}
       Vous pouvez demander le retour de marchandise via le formulaire ci-dessous.
@@ -43,23 +29,23 @@ seo_title: Claims | Space Discount
     </p>
     <form method="post" id="form_rma_order" action="{% path_to page.handle %}" data-shopinvader-form>
       <div class="row">
-        <div class="col-xs-12">
-          <span class="text-2xl form-rma-title">
-            <span class="form-rma-step">1</span>
+        <div class="col-12  pt-2">
+          <span class="h3 text-primary">
+            <i class="font-weight-bold">1.</i>
             {{ 'account_rma_order' | translate }}
           </span>
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12 form-rma-content">
+        <div class="col-12 form-rma-content">
           <p class="help-block">
             {% editable_text help_step1, rows: 1, format:'raw', hint: "Help step 1" %}
             Je sélectionne la commande concernée par le retour de mon article.
             {% endeditable_text %}
           </p>
-          <select class="form-control" name="selected_order_id" id="selected_order_id">
-          {% for order in store.orders %}
-            <option value="{{order.id}}" {% if order.id == selected_order.id %}selected="selected"{% endif%}> {{order.date_order | append:'2017-02-06' | date:"%d/%m/%Y" }} - {{order.name}}</option>
+          <select class="form-control" name="selected_order_id" id="selected_order_id" data-autosubmit>
+          {% for order in store.sales %}
+            <option value="{{order.id}}" {% if order.id == selected_order.id %}selected="selected"{% endif%}> {{order.date_order | date:"%d/%m/%Y" }} - {{order.name}}</option>
           {% endfor %}
           </select>
         </div>
@@ -69,15 +55,15 @@ seo_title: Claims | Space Discount
       <input type="hidden" name="action_proxy" value="rma/{{selected_order.id}}">
       <input type="hidden" name="action_method" value="post">
       <div class="row ">
-        <div class="col-xs-12">
-          <span class="text-2xl form-rma-title">
-            <span class="form-rma-step">2</span>
+        <div class="col-12  pt-4">
+          <span class="h3 text-primary">
+            <i class="font-weight-bold">2.</i>
             {{ 'account_rma_return' | translate }}
           </span>
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12 form-rma-content">
+        <div class="col-12 form-rma-content">
           <p class="help-block">
             {% editable_text help_step2, rows: 1, format:'raw', hint: "Help step 2" %}
             Je sélectionne le ou les articles à retourner.
@@ -94,12 +80,12 @@ seo_title: Claims | Space Discount
               {% for order_line in selected_order.order_line %}
               <tr>
                 <td>
-                  <img src="{{order_line.product_url | resize: '50x50'}}" class="img-responsive img-thumbnail" alt="" />
+                  <img src="{{order_line.product.images.first.small}}" class="img-responsive img-thumbnail" alt="" />
                 </td>
                 <td>
                   {{order_line.product_id.name}}
                   <div class="text-small">
-                    <i>{{order_line.product_id.prefix_code}}</i>
+                    <i>{{order_line.product.name}}</i>
                   </div>
                 </td>
                 <td class="text-center" align="center">
@@ -117,15 +103,15 @@ seo_title: Claims | Space Discount
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12">
-          <span class="text-2xl form-rma-title">
-            <span class="form-rma-step">3</span>
+        <div class="col-12 pt-4">
+          <span class="h3 text-primary">
+            <i class="font-weight-bold">3.</i>
             {{ 'account_rma_message' | translate }}
           </span>
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12 form-rma-content">
+        <div class="col-12 form-rma-content">
           <p class="help-block">
             {% editable_text help_step3, rows: 1, format:'raw', hint: "Help step 3" %}
             J'indique le motif de retour pour chacun de mes articles retournés.
@@ -135,15 +121,15 @@ seo_title: Claims | Space Discount
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-xs-6">
+      <div class="row  pt-4">
+        <div class="col-6">
           <p class="help-block">
           {% editable_text help_message, rows: 1, format:'raw', hint: "Help message" %}
             Une fois validée, votre demande de retour d'article va être analysée au plus vite par nos services.
           {% endeditable_text %}
           </p>
         </div>
-        <div class="col-xs-6">
+        <div class="col-6 text-right">
           <button type="submit" class="btn btn-success btn-lg pull-right" {% if selected_order == null%}disabled="disabled"{% endif %}>
             {{'account_rma_submit' | translate }} <i class="fa fa-angle-right"></i>
           </button>
@@ -154,6 +140,15 @@ seo_title: Claims | Space Discount
 
 
     </form>
+  </div>
+</div>
+<div class="row address-form">
+
+  <div class="bg-light p-4 col-12 col-md-9" >
+
+
+
+
   </div>
 </div>
 {% endblock %}

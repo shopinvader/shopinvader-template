@@ -4,15 +4,92 @@ is_layout: false
 ---
 {% authorize "customers", "account_login" %}
 {% extends 'layouts/default' %}
-
+{% block 'header' %}
+  <div class="container cart-header">
+    <div class="row">
+      <div class="col-12 brand">
+      {% if site.metafields.theme.logo %}
+      <a href="{% path_to home %}">
+        <img src="{{ site.metafields.theme.logo }}" alt="{{ site.name }}"  class="img-responsive"/>
+      </a>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
 {% block 'content' %}
-<div class="container-fluid main-content account-page">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="account-header">
+<div class="row justify-content-center bg-light">
+  <div class="col-12 col-lg-10 col-xl-10">
+    <div class="row">
+      <div class="col-12 col-sm-3 col-xl-2 account-card-menu border-0 bg-secondary mt-3 p-0 pb-4">
+        <div class="p-4">
+          <h1 class="h3 text-primary">{{'account_title' | translate}} <span class="text-warning">{{current_customer.name}}</span></h1>
+          <p>
+          {% editable_text "account_intro", hint: "intro" %}
+            Happy to see you again ;)
+          {% endeditable_text %}
+          </p>
 
+        </div>
+        <ul class="nav flex-column pb-4">
+          <li class="nav-item {%if page.handle == 'account_index'%}active{% endif%}">
+            <a href="{%path_to account_index%}" class="nav-link ">
+              <i class="fas fa-file-alt"></i> {{ "account_order_title" | translate }}
+            </a>
+          </li>
+          <li class="nav-item {%if page.handle == 'account_profil'%}active{% endif%}">
+            <a href="{%path_to account_profil%}" class="nav-link ">
+              <i class="fas fa-user"></i> {{ "account_profil_title" | translate }}
+            </a>
+          </li>
+          <li class="nav-item {%if page.handle == 'account_address'%}active{% endif%}">
+            <a href="{%path_to account_address%}" class="nav-link ">
+              <i class="fas fa-home"></i> {{ "account_address_lists" | translate }}
+            </a>
+          </li>
+          <li class="nav-item {%if page.handle == 'account_password'%}active{% endif%}">
+            <a href="{%path_to account_password%}" class="nav-link ">
+              <i class="fas fa-key"></i> {{ "account_password_title" | translate }}
+            </a>
+          </li>
+          <li class="nav-item {%if page.handle == 'account_rma'%}active{% endif%}">
+            <a href="{%path_to account_rma %}" class="nav-link ">
+              <i class="fas fa-backward"></i> {{ "account_rma_title" | translate }}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-12 col-sm-9">
+        <div class="row">
+          <div class="col-12 text-right pt-3">
+            <form method="post" action="{% path_to account %}">
+              <input type="hidden" name="auth_action" value="sign_out" />
+              <input type="hidden" name="auth_content_type" value="customers" />
+              <button type="submit" class="btn btn-primary" >
+                <i class="fa fa-power-off"></i>
+                {{ 'account_signout' | translate }}
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 pt-2 pb-2">
+            {% block 'tabcontent' %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-10 col-xl-8">
+    <div class="account-page">
+  <div class="row mt-4">
+    <div class="col-12 col-sm-8">
+      <div class="account-header">
         <div class="account-title">
-          <h1>{{'account_title' | translate}} <span class="text-danger">{{current_customer.name}}</span></h1>
+          <h1 class="h1 text-primary">{{'account_title' | translate}} <span class="text-warning">{{current_customer.name}}</span></h1>
           <p>
           {% editable_text "account_intro", hint: "intro" %}
             Happy to see you again ;)
@@ -21,36 +98,51 @@ is_layout: false
         </div>
       </div>
     </div>
+    <div class="col-12 col-sm-4 text-right">
+      <form method="post" action="{% path_to account %}">
+        <input type="hidden" name="auth_action" value="sign_out" />
+        <input type="hidden" name="auth_content_type" value="customers" />
+        <button type="submit" class="btn btn-primary" >
+          <i class="fa fa-power-off"></i>
+          {{ 'account_signout' | translate }}
+        </button>
+      </form>
+    </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 col-sm-3 col-lg-2">
-      <ul class="nav nav-tabs nav-pills nav-stacked nav">
-        <li {%if page.handle == 'account_index'%}class="active"{% endif%}>
-          <a href="{%path_to account_index%}" >{{ "account_order_title" | translate }}</a>
-        </li>
-        <li {%if page.handle == 'account_profil'%}class="active"{% endif%}>
-          <a href="{%path_to account_profil%}" >{{ "account_profil_title" | translate }}</a>
-        </li>
-        <li {%if page.handle == 'account_address'%}class="active"{% endif%}>
-          <a href="{%path_to account_address%}" >{{ "account_address_lists" | translate }}</a>
-        </li>
-        <li {%if page.handle == 'account_password'%}class="active"{% endif%}>
-          <a href="{%path_to account_password%}" >{{ "account_password_title" | translate }}</a>
-        </li>
-        <li {%if page.handle == 'account_rma'%}class="active"{% endif%}>
-          <a href="{%path_to account_rma %}" >{{ "account_rma_title" | translate }}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="tab-content col-xs-12 col-sm-9 col-xs-10">
-      <div class="tab-pane active">
-        {% block 'tabcontent' %}
-        {% endblock %}
-    </div>
+    <div class="col-12">
+      <div class="card text-center">
+        <div class="card-header">
+          <ul class="nav nav-tabs nav-fill card-header-tabs ">
+            <li class="nav-item ">
+              <a href="{%path_to account_index%}" class="nav-link {%if page.handle == 'account_index'%}active{% endif%}">{{ "account_order_title" | translate }}</a>
+            </li>
+            <li class="nav-item ">
+              <a href="{%path_to account_profil%}" class="nav-link {%if page.handle == 'account_profil'%}active{% endif%}">{{ "account_profil_title" | translate }}</a>
+            </li>
+            <li class="nav-item ">
+              <a href="{%path_to account_address%}" class="nav-link {%if page.handle == 'account_address'%}active{% endif%}">{{ "account_address_lists" | translate }}</a>
+            </li>
+            <li class="nav-item ">
+              <a href="{%path_to account_password%}" class="nav-link {%if page.handle == 'account_password'%}active{% endif%}">{{ "account_password_title" | translate }}</a>
+            </li>
+            <li class="nav-item ">
+              <a href="{%path_to account_rma %}" class="nav-link {%if page.handle == 'account_rma'%}active{% endif%}">{{ "account_rma_title" | translate }}</a>
+            </li>
+          </ul>
+
+        </div>
+        <div class="card-body text-left">
+          {% block 'tabcontent' %}
+          {% endblock %}
+        </div>
+      </div>
   </div>
   </div>
 
 
+</div>
+  </div>
 </div>
 {% endblock %}
 

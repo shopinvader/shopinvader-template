@@ -29,16 +29,10 @@
 <div class="address-form">
   <input type="hidden" id="id" name="{{ 'id' | prepend: prefix | append: suffix }}" value="{{address.id | round}}">
   <div class="row">
-    <div class="col-6">
+    <div class="col-12">
       <div class="form-group">
-        <label for="{{ 'firstname' | prepend: prefix_id }}" class="required">{{ "partner_firstname" | translate }}</label>
-        <input type="text" name="{{ 'firstname' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'firstname' | prepend: prefix_id }}" placeholder="{{ 'partner_firstname' | translate }}" {{require}} value="{{address.firstname}}" autocomplete="off">
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="form-group">
-        <label for="{{ 'lastname' | prepend: prefix_id }}" class="required">{{ 'partner_lastname' | translate }}</label>
-        <input type="text" name="{{ 'lastname' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'lastname' | prepend: prefix_id }}" placeholder="{{ 'partner_lastname' | translate }}" {{require}} value="{{address.lastname}}" autocomplete="off">
+        <label for="{{ 'name' | prepend: prefix_id }}" class="required">{{ "partner_name" | translate }}</label>
+        <input type="text" name="{{ 'name' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'name' | prepend: prefix_id }}" placeholder="{{ 'partner_name' | translate }}" {{require}} value="{{address.name}}" autocomplete="off">
       </div>
     </div>
   </div>
@@ -81,18 +75,13 @@
         </select>
       </div>
     </div>
-    <div class="col-6">
+    <div class="col-12 col-sm-6">
       <div class="form-group">
         <label for="{{ 'phone' | prepend: prefix_id }}" class="required">{{ 'partner_phone' | translate }}</label>
         <input type="tel" class="form-control" id="{{ 'phone' | prepend: prefix_id }}" name="{{ 'phone' | prepend: prefix | append: suffix }}" placeholder="{{ 'partner_phone' | translate }}" value="{{address.phone}}" autocomplete="off" {{require}}>
       </div>
     </div>
-    <div class="col-6">
-      <div class="form-group">
-        <label for="{{ 'company' | prepend: prefix_id }}">{{ 'partner_business' | translate }}</label>
-        <input type="text" class="form-control" id="{{ 'company' | prepend: prefix_id }}" name="{{ 'company' | prepend: prefix | append: suffix }}" placeholder="{{ 'partner_business' | translate }}" value="{{address.company}}" autocomplete="off">
-      </div>
-    </div>
+
   </div>
 </div>
 {% endblock %}

@@ -1,21 +1,67 @@
+account_address_submit:
+  en: Submit
+  fr: Valider
+account_address_add:
+  en: Add an address
+  fr: Ajouter une adresse
+account_address_cancel:
+  en: Cancel
+  fr: Annuler
+account_address_update:
+  en: Shipping adresses
+  fr: Mes adresses de livraison
+account_order_address:
+  en: address
+  fr: Adresse
+account_order_empty:
+  en: You don't have orders :(
+  fr: Vous n'avez pas de commande
+account_order_qty:
+  en: Quantity
+  fr: Quantité
 account_order_title:
   en: My sales orders
   fr: Mes commandes
-account_order_empty:
-  en: You don't have orders :(
-  en: Vous n'avez pas de commande
+account_order_payment :
+  en: Payment method
+  fr: Méthode de paiement
+account_order_subtotal:
+  en: Total
+  fr: Total
+
 account_profil_title:
   en: My account profile
   fr: Mes informations
 account_address_lists:
   en: My shipping addresses
   fr: Mes adresses de livraison
+account_password_reset:
+  en: Reset my password
+  fr: Réinitialiser mon mot de passe
 account_password_title:
   en: Reset my password
   fr: Changer de mot de passe
+account_rma_order:
+  en: Order
+  fr: Commande
+account_rma_return:
+  en: Product
+  fr: Produit
+account_rma_message :
+  en: Message
+  fr: Message
+account_rma_item:
+  en: Product
+  fr: Produit
+account_rma_qty:
+  en: Quantity
+  fr: Quantité
 account_rma_title:
   en: Claims
   fr: Retour marchandise
+account_rma_submit:
+  en: Submit
+  fr: Valider
 account_title:
   en: Hello
   fr: Bonjour
@@ -74,8 +120,11 @@ cart_item_desc:
   en: "Items"
   fr: "Articles"
 cart_order_ref:
-  en: "Order number"
+  en: Order number
   fr: Référence
+cart_quantity:
+  en: Quatity
+  fr: Quantité
 cart_shipping_address:
   en: Shipping adress
   fr: Adresse de livraison
@@ -186,6 +235,9 @@ home:
 partner_email:
   en: Email
   fr: Adresse e-mail
+partner_name:
+  en: Name
+  fr: Nom
 partner_firstname:
   en: First name
   fr: Prénom
@@ -420,3 +472,6 @@ recommandation_title:
 search_show_more:
   en: more
   fr: afficher plus
+show_more:
+  en: show more
+  fr: en savoir plus

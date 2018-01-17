@@ -1,0 +1,44 @@
+---
+title: création de compte
+handle: account_register_validation
+slug: register-validation
+display_settings:
+  hidden: false
+editable_elements:
+  main/title: "Account created"
+  main/body: ""
+---
+{% extends 'layouts/lite' %}
+{% block 'content' %}
+<div class="row justify-content-center bg-light">
+  <div class="col-12 col-lg-9 col-xl-7 pt-4 pb-4">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="display-4">
+          {% editable_text "register_validation_title", label: "Register validation : title", format: "raw" %}
+          Thank you !
+          {% endeditable_text %}
+        </h1>
+        {% editable_text "register_validation_text", label: "Register validation : message", format: "html" %}
+          <p>Your customer account as been succefully created</p>
+        {% endeditable_text %}
+        <div class="text-center">
+        {% if params.context == 'cart'%}
+          <a href="{%path_to cart_address %}" class="btn btn-primary text-center">
+            {% editable_text "register_validation_button", label: "Continue cart : button", format: "raw" %}
+              <i class="fa fa-shopping-basket"></i> Checkout
+            {% endeditable_text %}
+          </a>
+        {% else %}
+          <a href="{% path_to account %}" class="btn btn-primary text-center">
+            {% editable_text "register_validation_button", label: "Register validation : button", format: "raw" %}
+              Sign in
+            {% endeditable_text %}
+          </a>
+        {% endif%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

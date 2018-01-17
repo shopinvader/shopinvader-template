@@ -1,0 +1,34 @@
+---
+title: création de compte
+handle: account_register
+slug: register
+display_settings:
+  hidden: false
+editable_elements:
+  main/title: "Create an account"
+  main/body: ""
+---
+{% extends 'layouts/lite' %}
+{% block 'content' %}
+<div class="row justify-content-center bg-light">
+  <div class="col-12 col-lg-9 col-xl-7 pt-4 pb-4">
+    <h1 class="h1">
+    {% editable_text title, inline: true %}
+      Create an account
+    {% endeditable_text %}
+    </h1>
+    {% include 'store_notifications' %}
+    <form action="{% path_to page.handle %}" method="post" data-form-password-validation data-autocomplete="address">
+      <input type="hidden" name="auth_action" value="sign_up" />
+      <input type="hidden" name="auth_disable_email" value="true" />
+      <input type="hidden" name="auth_content_type" value="customers" />
+      <input type="hidden" name="auth_id_field" value="email" />
+      <input type="hidden" name="auth_password_field" value="password" />
+      <input type="hidden" name="auth_email_handle" value="welcome_message" />
+      <input type="hidden" name="auth_callback" value="{% path_to 'account_register_validation' %}?context={{params.context}}" />
+      <input type="hidden" name="auth_entry[role]" value="{{site.metafields.erp.default_pricelist}}">
+      {% include 'signup_form' with email: params.email %}
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,27 +1,54 @@
 <div class="d-flex text-center " data-shopinvader-container id="header-controls">
   <div class="w-50">
-    <i class="fa fa-user fa-2x fa-fw d-inline-block"></i>
+    <i class="fa fa-user fa-2x fa-fw d-inline-block text-primary"></i>
     <div class="bold small">
-    {% if current_customer %}
-      <form method="post" action="{% path_to account %}">
-        <input type="hidden" name="auth_action" value="sign_out" />
-        <input type="hidden" name="auth_content_type" value="customers" />
-        <span class="text-danger">{{current_customer.name}}</span> -
-        <button type="submit" class="btn btn-link " >
-          <i class="fa fa-power-off"></i>
-          {{ 'account_signout' | translate }}
+
+      {% if current_customer %}
+      <div class="btn-group">
+        <button type="button" class="btn btn-link btn-link btn-sm text-dark">{{current_customer.name}}</button>
+        <button type="button" class="btn btn-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="sr-only">Toggle Dropdown</span>
         </button>
-      </form>
-    {% else %}
-      {{'header_login' | translate }}
-    {% endif %}
+        <div class="dropdown-menu pb-0">
+          <a class="dropdown-item small" href="{%path_to account_index%}">
+            <i class="fas fa-file-alt text-primary"></i>  {{ "account_order_title" | translate }}
+          </a>
+          <a class="dropdown-item small" href="{%path_to account_profil%}">
+            <i class="fas fa-user text-primary"></i>  {{ "account_profil_title" | translate }}
+          </a>
+          <a class="dropdown-item small" href="{%path_to account_address%}">
+            <i class="fas fa-home text-primary"></i>  {{ "account_address_lists" | translate }}
+          </a>
+          <a class="dropdown-item small" href="{%path_to account_password%}">
+            <i class="fas fa-key text-primary"></i>  {{ "account_password_title" | translate }}
+          </a>
+          <a class="dropdown-item small" href="{%path_to account_rma%}">
+            <i class="fas fa-backward text-primary"></i>  {{ "account_rma_title" | translate }}
+          </a>
+          <form method="post" action="{% path_to account %}">
+            <input type="hidden" name="auth_action" value="sign_out" />
+            <input type="hidden" name="auth_content_type" value="customers" />
+            <button type="submit" class="btn btn-link dropdown-item  bg-dark text-light pt-2 pb-2" >
+              <i class="fa fa-power-off "></i>
+              {{ 'account_signout' | translate }}
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {% else %}
+        <a href="{% path_to account %}">
+          {{'header_login' | translate }}
+        </a>
+      {% endif %}
+
     </div>
   </div>
   <a class="w-50 text-dark" href="{% path_to cart_index%}">
-    <i class="fa fa-shopping-basket fa-2x fa-fw d-inline-block ml-3"></i>
-    <div class="bold small">
+    <i class="fa fa-shopping-basket text-primary fa-2x fa-fw d-inline-block ml-3"></i>
+    <div class="bold small btn btn-link btn-sm text-dark">
       {{'header_cart' | translate }}
-      <span class="badge badge-primary">{{ store.cart.item_number | round | default: 0 }}</span>
+      <span class="badge badge-warning">{{ store.cart.item_number | round | default: 0 }}</span>
     </div>
   </a>
 </div>
