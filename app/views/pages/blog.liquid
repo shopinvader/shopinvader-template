@@ -1,0 +1,42 @@
+---
+title: Posts
+slug: blog
+position: 99
+listed: true
+published: true
+is_layout: false
+handle: blog
+---
+{% extends 'layouts/default' %}
+{% block "content" %}
+<div class="container pt-4">
+  <div class="row">
+    <div class="col-12">
+      <h1>{% editable_text title %}Blog{% endeditable_text %}</h1>
+    </div>
+  </div>
+  <div class="row">
+    {% for post in contents.posts%}
+    <div class="col-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h4 class="card-title">{{post.name}}</h4>
+          <div class="">
+            <strong>{{post.date | format_date}}</strong>  {{post.post_author}}
+          </div>
+          {% for posts_groups in post.groups%}
+            <span class="label label-primary">{{posts_groups.name}}</span>
+          {% endfor %}
+          <p class="card-text">{{post.short_description}}</p>
+          <div class="text-right">
+            <a href="{%path_to post %}" class="btn btn-primary ">{{'show_more' | translate}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%endfor%}
+  </div>
+</div>
+
+{% endblock%}
