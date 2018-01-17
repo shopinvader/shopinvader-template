@@ -292,23 +292,6 @@
   }
 }
 
-.side-cart {
-  background-color: #fff;
-  box-sizing: border-box;
-  display: none;
-  overflow: auto;
-  padding-top: 10px;
-  width: 360px;
-  z-index: 3000;
-  &.left-shadow-overlay {
-    box-shadow: 2px 2px 15px 0 rgba(0, 0, 0, 0.7);
-  }
-  .cart-empty {
-    padding-top: 100px;
-    vertical-align: middle;
-  }
-}
-
 .cart-header {
 
   height: 120px;

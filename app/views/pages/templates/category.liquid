@@ -26,3 +26,44 @@ handle: category
   <script src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
   <script src="{{ 'search.js' | javascript_url }}?category={{category.name}}"></script>
 {% endblock %}
+{% block 'content/main/result'%}
+  {% with_scope categories: { id: 18 } %}
+    {% paginate store.products by 18 %}
+    <div class="row p-4">
+      <div class="col-8 col-lg-4">
+        {% include 'product_display_control'%}
+      </div>
+      <div class="col-4 col-lg-4 text-right hidden" id="search-stats">
+        {{'search_total_count' | translate: count: paginate.total_entries}}
+      </div>
+      <div class="col-12 col-lg-4 pt-2 pt-lg-2 text-right" id="search-pagination">
+        {% include 'paginate' with paginate %}
+      </div>
+    </div>
+    <div id="search-result" data-category="{{category.objectID}}">
+      {% block 'main'%}
+        <div class="row m-0">
+          {%assign product_display = grid%}
+          {% assign css_col = "col-12  col-sm-4 col-lg-3 col-xl-2"%}
+          {%if session.product_display == 'list'%}
+            {%assign display_horizontal =  true%}
+            {% assign css_col = "col-12"%}
+          {%endif%}
+
+
+          {% for product in paginate.collection %}
+          <div class="{{css_col}} product-col p-2 border border-1 border-left-0 border-bottom-0 ">
+            {% include 'product_thumbnail' with product, display_horizontal %}
+          </div>
+          {% endfor %}
+        </div>
+        <div class="row">
+          <div class="col-12 text-right">
+            {% include 'paginate' with paginate %}
+          </div>
+        </div>
+      {% endblock %}
+    </div>
+    {% endpaginate %}
+  {% endwith_scope %}
+{% endblock %}

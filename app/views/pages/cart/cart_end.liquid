@@ -9,7 +9,31 @@ is_layout: false
 seo_title: thank you for your order | Space Discount
 ---
 {% extends "layouts/default" %}
+{% block 'googletag_data_layer'%}
+window.dataLayer = window.dataLayer || []
+dataLayer.push({
+   'transactionId': {{store.last_sale.name | json}},
+   'transactionAffiliation': {{site.name | json}},
+   'transactionTotal': {{store.last_sale.amount_total | json}},
+   'transactionTax': {{store.last_sale.amount_tax | json}},
+   'transactionShipping': {{store.last_sale.shipping_amount_total | json}},
+   'transactionProducts': [
+   {% for line in store.last_sale.order_line%}
+    {
+       'sku': {{line.product.default_code | json}},
+       'name': {{line.product.name | json}},
+       'category': '',
+       'price': {{line.price_unit | json}},
+       'quantity':  {{line.product_uom_qty | json}}
+     }
+     {% if forloop.last != true%},{%endif%}
+   {% endfor %}
+   ]
+});
+{%endblock%}
+
 {% block 'content' %}
+
   {% assign order = store.last_sale%}
   <div class="container main-content">
     <div class="row">

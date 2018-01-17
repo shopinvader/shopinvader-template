@@ -24,12 +24,12 @@ editable_elements:
       <div class="col-lg-8 col-xl-9">
         <h2> {{ 'cart_carrier_title' | translate }}</h2>
         <div class="card-deck-wrapper">
-          <form method="post" action="{% path_to cart_checkout %}"  id="cart_carrier_form" data-shopinvader-form>
-            <input type="hidden" name="action_method" value="put">
-            <input type="hidden" name="action_proxy" value="cart">
-            <input type="hidden" name="current_step" value="{{ page.handle }}">
-            <input type="hidden" name="next_step" value="cart_checkout">
             {% if store.cart.available_carriers.size >0  %}
+            <form method="post" action="{% path_to cart_checkout %}"  id="cart_carrier_form" data-shopinvader-form>
+              <input type="hidden" name="action_method" value="put">
+              <input type="hidden" name="action_proxy" value="cart">
+              <input type="hidden" name="current_step" value="{{ page.handle }}">
+              <input type="hidden" name="next_step" value="cart_checkout">
               <div class="card-deck">
                 {%for carrier in store.cart.available_carriers%}
                 <div class="card">
@@ -70,62 +70,65 @@ editable_elements:
                 placeholder="{{cart_comment_placeholder | translate}}"
                 autocomplete="off"></textarea>
               </div>
-              <div class="pt-2">
-                <h2>{{ 'cart_payment_title' | translate }}</h2>
-                {{'cart_payment_desc' | translate }}
-                <div class="col-xs-12 col-md-6 text-right cart-security-message">
-                  <i class="fa fa-lock text-success"></i>
-                  {{'cart_payment_secure' | translate }}
+            </form>
+            <div class="pt-2">
+              <h2>{{ 'cart_payment_title' | translate }}</h2>
+              {{'cart_payment_desc' | translate }}
+              <div class="col-xs-12 col-md-6 text-right cart-security-message">
+                <i class="fa fa-lock text-success"></i>
+                {{'cart_payment_secure' | translate }}
+              </div>
+              <div class="card text-center">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                  {% for payment_method in store.cart.available_payment_method_ids%}
+                    <li class="nav-item"  data-toggle="tab" href="#tab-{{payment_method.id}}" role="tab" aria-controls="{{payment_method.id}}" aria-selected="false">
+                      <a class="nav-link  {% if selected_payment.id == payment_method.id %} active{%endif%}" href="#">
+                        <i class="fab fa-{{payment_method.code}}"></i> {{payment_method.name}}
+                      </a>
+                    </li>
+                  {% endfor%}
+                  </ul>
                 </div>
-                <div class="card text-center">
-                  <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs">
-                    {% for payment_method in store.cart.available_payment_method_ids%}
-                      <li class="nav-item"  data-toggle="tab" href="#tab-{{payment_method.id}}" role="tab" aria-controls="{{payment_method.id}}" aria-selected="false">
-                        <a class="nav-link  {% if selected_payment.id == payment_method.id %} active{%endif%}" href="#">
-                          <i class="fab fa-{{payment_method.code}}"></i> {{payment_method.name}}
-                        </a>
-                      </li>
-                    {% endfor%}
-                    </ul>
-                  </div>
-                  <div class="card-body">
-                    <div class="tab-content" id="payment-tabs">
-                    {% for payment_method in store.cart.available_payment_method_ids%}
-                      <div class="tab-pane fade {% if selected_payment.id == payment_method.id %}show active{%endif%}" id="tab-{{payment_method.id}}" role="tabpanel" aria-labelledby="home-tab">
+                <div class="card-body">
+                  <div class="tab-content" id="payment-tabs">
+                  {% for payment_method in store.cart.available_payment_method_ids%}
+                    <div class="tab-pane fade {% if selected_payment.id == payment_method.id %}show active{%endif%}" id="tab-{{payment_method.id}}" role="tabpanel" aria-labelledby="home-tab">
 
-                        <form action="{% path_to page.handle %}" method="post"  id="cart_update_form">
-                          <input type="hidden" name="redirect_success_to" value="{% path_to 'cart_end' %}">
-                          <input type="hidden" name="action_proxy" value="cart">
-                          <input type="hidden" name="action_method" value="put">
-                          <input type='hidden' id="payment_method_id" name="payment_method_id" value="{{payment_method.id}}" autocomplete="off"/>
-                          <input type='hidden' id="payment_method_code" name="payment_method_code" value="{{payment_method.code}}" autocomplete="off"/>
-                          <input type="hidden" name="current_step" value="{{ page.handle }}">
-                          <input type="hidden" name="next_step" value="cart_end">
-                          <div class="p-2">
-                            <b>{{payment_method.code}}</b>{{payment_method.description}}
-                          </div>
-                          {% case payment_method.code %}
-                            {% when 'stripe' %}
-                            <button type="button" data-toggle="modal" data-target="#modal-stripe" name="submit-{{payment_method.id}}" class="btn btn-primary btn-lg">
-                              Pay
-                            </button>
-                            {% when 'paypal' %}
-                              <input type="hidden" data-paypal-params name="payment_params[paypal][action]" value="create" disabled="disabled" autocomplete="off"/>
-                              <input type="hidden" data-paypal-params name="payment_params[paypal][redirect_success_url]" value="{{base_url}}{% path_to cart_end %}" disabled="disabled"  autocomplete="off"/>
-                              <input type="hidden" data-paypal-params name="payment_params[paypal][redirect_cancel_url]" value="{{base_url}}{% path_to cart_checkout %}" disabled="disabled"  autocomplete="off"/>
-                            {% else %}
-                            <button type="submit" name="submit-{{payment_method.id}}" class="btn btn-primary btn-lg">
-                              Pay
-                            </button>
-                          {% endcase %}
-                        </form>
-                      </div>
-                    {% endfor%}
+                      <form action="{% path_to page.handle %}" method="post"  id="{{payment_method.code}}-form">
+                        <input type="hidden" name="redirect_success_to" value="{% path_to 'cart_end' %}">
+                        <input type="hidden" name="action_proxy" value="cart">
+                        <input type="hidden" name="action_method" value="put">
+                        <input type='hidden' id="payment_method_id" name="payment_method_id" value="{{payment_method.id}}" autocomplete="off"/>
+                        <input type='hidden' id="payment_method_code" name="payment_method_code" value="{{payment_method.code}}" autocomplete="off"/>
+                        <input type="hidden" name="current_step" value="{{ page.handle }}">
+                        <input type="hidden" name="next_step" value="cart_end">
+                        <div class="p-2">
+                          <b>{{payment_method.code}}</b>{{payment_method.description}}
+                        </div>
+                        {% case payment_method.code %}
+                          {% when 'stripe' %}
+                          <input type="hidden" name="payment_params[stripe][redirect_success_url]" value="{{base_url}}{% path_to cart_end %}" />
+                          <input type="hidden" name="payment_params[stripe][redirect_cancel_url]" value="{{base_url}}{% path_to page.handle %}" />
+                          <button type="button" data-toggle="modal" data-target="#modal-stripe" name="submit-{{payment_method.id}}" class="btn btn-primary btn-lg">
+                            Pay
+                          </button>
+                          {% when 'paypal' %}
+                            <input type="hidden" data-paypal-params name="payment_params[paypal][action]" value="create" disabled="disabled" autocomplete="off"/>
+                            <input type="hidden" data-paypal-params name="payment_params[paypal][redirect_success_url]" value="{{base_url}}{% path_to cart_end %}" disabled="disabled"  autocomplete="off"/>
+                            <input type="hidden" data-paypal-params name="payment_params[paypal][redirect_cancel_url]" value="{{base_url}}{% path_to cart_checkout %}" disabled="disabled"  autocomplete="off"/>
+                          {% else %}
+                          <button type="submit" name="submit-{{payment_method.id}}" class="btn btn-primary btn-lg">
+                            Pay
+                          </button>
+                        {% endcase %}
+                      </form>
                     </div>
+                  {% endfor%}
                   </div>
                 </div>
               </div>
+            </div>
             {% else %}
               <div class="col-xs-12 text-lg text-center">
                 <div class="alert alert-warning">
@@ -133,7 +136,7 @@ editable_elements:
                 </div>
               </div>
             {% endif %}
-          </form>
+
         </div>
 
 
@@ -219,12 +222,7 @@ editable_elements:
           {% editable_text form_creditcard_details, label: 'Formulaire paiement - détails', rows: 3, format: 'html'%}
           <p>Secured credit card payment with Stripe.</p>
           {% endeditable_text %}
-          <input type="hidden" name="redirect_success_to" value="{% path_to cart_end %}">
-          <input type="hidden" name="action_proxy" value="cart">
-          <input type="hidden" name="action_method" value="put">
-          <input type="hidden" name="next_step" value="cart_end">
-          <input type="hidden" name="payment_params[stripe][redirect_success_url]" value="{{base_url}}{% path_to cart_end %}" />
-          <input type="hidden" name="payment_params[stripe][redirect_cancel_url]" value="{{base_url}}{% path_to page.handle %}" />
+
           <div class="payment-card-row  ">
             <div class="form-group">
               <label for="creditcard-owner">{{'creditcard_lastname' | translate}}</label>
@@ -344,8 +342,8 @@ function init_stripe_form() {
         input_source.attr('type', 'hidden');
         input_source.attr('name', 'payment_params[stripe][source]');
         input_source.attr('value', result.source.id);
-        input_source.appendTo($form);
-        $form.get(0).submit();
+        input_source.appendTo($('#stripe-form'));
+        $('#stripe-form').submit();
       }
     })
   });

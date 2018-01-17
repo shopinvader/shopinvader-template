@@ -1,0 +1,87 @@
+{% if auth_invalid_entry %}
+<div class="alert alert-danger">
+  {% editable_text "register_error", label: "Register error", format: "html" %}
+    <div class="h3">Something went wrong</div>
+    <p>Please check input form and try again</p>
+  {% endeditable_text %}
+</div>
+{% endif %}
+<div class="card">
+  <div class="card-body">
+
+    <div class="form-group row">
+      <label for="auth-email" class="col-12 col-sm-3 col-form-label text-sm-right">
+        {{ 'signin_email' | translate }}
+      </label>
+      <div class="col-12 col-sm-8">
+        <input type="email" class="form-control" name="auth_entry[email]" id="auth-email" value="{{params.auth_entry.email}}" placeholder="{{ 'signin_email' | translate }}" required="required">
+        {% if auth_entry.errors.email.size > 0 %}
+          <small class="form-text text-danger">
+            {{ auth_entry.errors.email.first }}
+          </small>
+        {% endif %}
+      </div>
+    </div>
+    <div class="form-group row" >
+      <label for="auth-password" class="col-12 col-sm-3 col-form-label text-sm-right">
+        {{ 'signin_password' | translate }}
+      </label>
+      <div class="col-12 col-sm-8">
+        <input type="password" name="auth_entry[password]" id="auth-password" class="form-control" placeholder="{{ 'signin_password' | translate }}" required="required" data-form-password-new autocomplete="off" >
+        <small class="form-text text-danger">
+          <div class="">
+            {% if auth_entry.errors.password.size > 0 %}
+              {{ auth_entry.errors.password.first }}
+            {% endif %}
+          </div>
+        </small>
+      </div>
+    </div>
+    <div class="form-group row" >
+      <label for="auth-password-confirm" class="col-12 col-sm-3 col-form-label text-sm-right">
+        {{ 'signin_password_confirm' | translate }}
+      </label>
+      <div class="col-12 col-sm-8">
+        <input type="password" name="auth_entry[password_confirmation]" id="auth-password-confirm" class="form-control" placeholder="{{ 'signin_password_confirm' | translate }}" required="required" data-form-password-confirm autocomplete="off" >
+        <small class="form-text text-danger">
+          <div class="">
+            {% if auth_entry.errors.password_confirmation.size > 0%}
+              {{ auth_entry.errors.password_confirmation.first }}
+            {% endif %}
+          </div>
+        </small>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 text-muted small">
+        {% editable_text "signup_password_help", label: "Signup password help block", format: "html" %}
+          Password must be at least 6 characters
+        {% endeditable_text %}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    {% include 'address_form' with
+      with_require: true,
+      input_group: '',
+      address: params
+    %}
+    <div class="form-group ">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox"  name="opt_in" autocomplete="off">
+          {% editable_text "signup_newsletter_label", label: "Signup newsletter label", format: "html" %}
+            Je m'abonne à la newsletter d'Adaptoo pour obtenir les dernieres offres, les nouveautés et bien plus !
+          {% endeditable_text %}
+        </label>
+      </div>
+    </div>
+    <div class="text-right">
+      <button type="submit" name="button" class="btn btn-primary pull-right">
+        <i class="fa fa-check"></i> {{ 'signin_submit' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

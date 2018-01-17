@@ -1,0 +1,20 @@
+.account-card-menu {
+  .nav {
+    a {
+      color: $gray-800;
+      .fas {
+        color: theme-color('primary');
+      }
+    }
+    .active {
+
+      background: theme-color('primary');
+      & > a {
+        color: $white;
+      }
+      .fas {
+        color: $white;
+      }
+    }
+  }
+}

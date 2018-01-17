@@ -3,6 +3,9 @@
     border: none;
   }
 }
+%product-thumbnail-horizontal {
+
+}
 .product-thumbnail {
   border-width:5px;
   border-color: transparent;
@@ -64,6 +67,9 @@
       height: 100%;
       width: 20%;
       border-left: 1px solid $gray-300;
+      .product-price-value {
+        font-size: 2rem;
+      }
     }
     .product-thumbnail-name {
       order: 2;
@@ -73,6 +79,48 @@
     }
     .product-add-to-cart {
       opacity: 1;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    border: 0;
+    border-bottom: 1px solid $gray-300;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    
+    .d-horizontal-only {
+      display: block;
+    }
+    .d-vertical-only {
+      display: none;
+    }
+    .product-thumbnail-img {
+      order: 1;
+      height: auto;
+      min-width: 80px;
+      width: 33%;
+    }
+    .product-thumbnail-price {
+
+      order: 3;
+      text-align: right;
+      height: auto;
+      width: 60%;
+
+      //border-left: 1px solid $gray-300;
+      .product-price-value {
+        font-size: 1rem;
+      }
+    }
+    .product-thumbnail-name {
+      font-size: 0.9rem;
+      order: 2;
+      text-align: left;
+      height: auto;
+      width: 66%;
+    }
+    .product-add-to-cart {
+      display: none;
     }
   }
 }
@@ -173,5 +221,45 @@
   .review {
     border-bottom: 1px solid grays('100');
     padding-top: 20px;
+  }
+}
+
+.product-search-list {
+
+  .product-thumbnail {
+    border: none;
+    display: flex;
+    flex-flow: row;
+    align-items: flex-start;
+    border-bottom: 1px solid $gray-300;
+    padding-top:1rem;
+    .product-thumbnail-img {
+      order: 1;
+      img {
+        min-width: 50px;
+        max-width: 100px;
+        width: auto;
+
+      }
+    }
+    .product-thumbnail-price {
+      order: 3;
+      text-align: right;
+      height: 100%;
+      width: 30%;
+
+    }
+    .product-thumbnail-name {
+      order: 2;
+      text-align: left;
+      height: 100%;
+      width: auto
+      a {
+        font-size: 1rem;
+      }
+    }
+    .product-add-to-cart {
+      display: none;
+    }
   }
 }

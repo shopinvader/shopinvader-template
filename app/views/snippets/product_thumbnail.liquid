@@ -1,7 +1,7 @@
 <div class="card product-thumbnail bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%endif%}" >
   <div class="product-thumbnail-img">
     {% if product.images.size > 1 %}
-    <div id="slide-{{product.objectID}}" class="carousel slide p-2" data-ride="carousel">
+    <div id="slide-{{product.objectID}}" class="carousel slide p-2" data-ride="carousel" data-interval="false">
       <div class="carousel-inner" role="listbox">
         {% for image in product.images %}
         <div class="carousel-item {%if forloop.index == 1 %}active{%endif%}" data-target="#slide-{{product.objectID}}">
@@ -27,7 +27,7 @@
     </div>
     {%endif%}
   </div>
-  <div class="product-thumbnail-price card-body p-3 p-xl-2" data-link="{{url_base}}{% path_to product %}">
+  <div class="product-thumbnail-price card-body p-0 p-md-3 p-xl-2" data-link="{{product.url_key  | prepend: url_base }}">
     <span class="small">
       <small>{{'product_price_from' | translate}} </small>
     </span>
@@ -44,7 +44,7 @@
       </strong>
     </div>
     <div class="d-horizontal-only">
-      <strong class="h2">
+      <strong class="product-price-value">
         <span class="font-weight-bold {%if product.price.discount > 0%}text-warning {%else%}text-dark{% endif %}">
           {{product.price.value | money}}
         </span>
@@ -54,15 +54,24 @@
           </span>
         {% endif %}
       </strong>
-      <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart "><i class="fa fa-shopping-basket"></i> Add to cart</button>
+      <form class="" action="{%path_to page%}" method="post" data-shopinvader-form>
+        <input type="hidden" name="action_proxy" value="cart/item">
+        <input type="hidden" name="action_method" value="post">
+        <input type="hidden" name="item_qty" value="1">
+        <input type="hidden" name="product_id" value="{{product.objectID }}">
+        <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart ">
+          <i class="fa fa-shopping-basket"></i> Add to cart
+        </button>
+      </form>
     </div>
 
   </div>
-  <div class="product-thumbnail-name card-body p-3 p-xl-2">
+  <div class="product-thumbnail-name card-body p-1 p-sm-3 p-xl-2">
     <div class="font-weight-bold">
-      <a href="{{url_base}}{% path_to product %}" class="card-title">
+      <a href="{{product.url_key  | prepend: url_base }}" class="card-title">
         {{product.model_name}}
         <div class="small">{{product.variant_name}}</div>
+
       </a>
     </div>
     <a href="{{url_base}}{% path_to product %}#product-section-reviews" >
@@ -73,7 +82,7 @@
     {% endif%}
     </a>
     <div class="card-text small">
-      <a href="{{url_base}}{{product.categories.last.url_key}}" class="text-dark"><u>{{product.categories.last.name}}</u></a>
+      <a href="{{product.categories.last.url_key  | prepend: url_base }}" class="text-dark"><u>{{product.categories.last.name}}</u></a>
       {% if product.brand.name%}
         - <a href="#" class="text-underline text-dark"><u>{{product.brand.name}}</u></a>
       {% endif %}

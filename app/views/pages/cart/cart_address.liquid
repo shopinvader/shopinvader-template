@@ -12,7 +12,7 @@ is_layout: false
 {{store.cart}}
 {% endblock%}
 {% block content/main %}
-
+{{store.addresses | json}}
 <div  data-shopinvader-container id="cart-address">
   {% if current_customer == null%}
     {% assign partner_shipping = []%}
@@ -20,7 +20,7 @@ is_layout: false
       {% assign partner_shipping = params.partner_shipping %}
     {% endif %}
 
-    <form method="put" action="{% path_to page %}"  id="cart_address_anonymous">
+    <form method="put" action="{% path_to page %}"  id="cart_address">
       <input type="hidden" name="redirect_success_to" value="{% path_to 'cart_checkout'%}">
       <input type="hidden" name="action_method" value="PUT">
       <input type="hidden" name="action_proxy" value="cart">
@@ -102,8 +102,8 @@ is_layout: false
       <div class="row">
         <div class="col-12">
           <form method="put" action="{% path_to page %}"  id="cart_address_add">
-            <input type="hidden" name="action_method" value="addresses/{{address.id}}">
-            <input type="hidden" name="action_proxy" value="put">
+            <input type="text" name="action_method" value="addresses/{{address.id}}">
+            <input type="text" name="action_proxy" value="put">
             <div class="row justify-content-center">
             <div class="col-12">
               <div class="card">
@@ -136,7 +136,9 @@ is_layout: false
           input_group: 'shipping',
           input_name: 'partner_shipping[id]',
           address_list:  store.addresses,
-          selected_address_id : store.cart.partner_shipping.id
+          selected_address_id : store.cart.partner_shipping.id,
+          display_delector: true,
+          display_add: true
         %}
         </div>
         <div class="col-lg-4 col-xl-3 mb-4">

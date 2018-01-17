@@ -8,7 +8,7 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 }*/
 @import url('https://fonts.googleapis.com/css?family=Roboto:300');
 @import 'bootstrap4/bootstrap';
-
+@import 'components/account';
 @import 'components/algolia';
 @import 'components/cart';
 @import 'components/columns';
@@ -23,9 +23,6 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 @import 'components/wait_overlay';
 @import 'components/wells';
 
-footer {
-  margin-top: 70px;
-}
 
 .navbar-fixed-top + main {
   padding-top: 150px;
@@ -100,17 +97,24 @@ footer {
   }
 }
 
-.alert-cookie {
-
-  text-align: center;
-  bottom: 0;
-  margin-bottom: 0;
+.main-loader {
+  background: transparentize($gray-800, 0.1);
   position: fixed;
-  top: unset;
   width: 100%;
-  z-index: 100;
-  .btn {
-    min-width: 50px;
-    margin-left: 50px;
+  height:100%;
+  z-index: 3000;
+  text-align: center;
+  vertical-align: middle;
+  .fa {
+     font-size: 100px;
+     color: $white;
+     line-height: 100vh;
+     vertical-align: middle;
+  }
+}
+
+.modal-dialog {
+  @include media-breakpoint-down(sm) {
+    margin:0;
   }
 }

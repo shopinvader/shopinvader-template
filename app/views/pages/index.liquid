@@ -7,44 +7,29 @@ handle: home
 {% extends 'layouts/simple' %}
 
 {% block content/main %}
-<div class="row">
-  <div class="col-12 bg-light">
-    <h1 class="text-center ">
-      {% editable_text "main_title", hint: "Bestseller title in homepage" %}
-      Thousands solutions for home
-      {% endeditable_text %}
-    </h1>
-    <div class="row">
-    {% with_scope level: 2%}
-      {% for category in store.categories %}
-        <div class="col-lg-2">
-          {% include 'category_thumbnail' with category %}
-        </div>
-      {% endfor %}
-    {% endwith_scope %}
-    </div>
-  </div>
-</div>
 
-<div class="row mt-4 mb-4 pt-4 pb-4 ">
-  <div class="container">
+
+<div class="row pt-4 justify-content-center ">
+  <div class="container pt-4  pb-4 ">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-12">
         <h2 class="text-primary">
         {% editable_text "bestseller_title", hint: "Bestseller title in homepage" %}
-        Our galactic <span class="text-danger">recommandations</span>
+         <span class="text-warning">Today's</span> Deals
         {% endeditable_text %}
         </h2>
       </div>
     </div>
     <div class="row align-items-stretch justify-content-center align-items-stretch">
-      {% paginate store.products by 12%}
-        {% for product in paginate.collection %}
-          <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-2 p-2  ">
-            {% include 'product_thumbnail' with product %}
-          </div>
-        {% endfor %}
-      {% endpaginate %}
+      {% with_scope main: true %}
+        {% paginate store.products by 12%}
+          {% for product in paginate.collection %}
+            <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-2 p-2  ">
+              {% include 'product_thumbnail' with product %}
+            </div>
+          {% endfor %}
+        {% endpaginate %}
+      {% endwith_scope %}
     </div>
   </div>
 
@@ -73,18 +58,18 @@ handle: home
     </div>
     <div class="row">
       {% with_scope main_post: true %}
-      <div class="col-6 hidden-xs">
+      <div class="col-12 col-md-5 col-lg-5">
         {% include "post_thumbnail" with post: contents.posts.first %}
       </div>
       {%endwith_scope%}
-      <div class="col-6">
+      <div class="col-12 col-md-7 col-lg-7">
         <div class="row align-items-stretch">
-          {% with_scope main_post: null %}
-          {% for post in contents.posts %}
-          <div class="col-6 ">
-            {% include "post_thumbnail" with post %}
-          </div>
-          {% endfor %}
+          {% with_scope main_post: false %}
+            {% for post in contents.posts %}
+            <div class="col-6">
+              {% include "post_thumbnail" with post %}
+            </div>
+            {% endfor %}
           {%endwith_scope%}
         </div>
       </div>
@@ -93,9 +78,9 @@ handle: home
   {% endif %}
   <div class="row bg-primary text-white pt-4 pb-4">
     <div class="col-12">
-      <div class="container">
+      <div class="container pt-4 pb-4">
         <div class="row ">
-          <div class="col-lg-12">
+          <div class="col-12 ">
             <h2>
             {% editable_text "blog_title", hint: "Blog post title in homepage" %}
             Our products reviews for you

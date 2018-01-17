@@ -9,9 +9,9 @@ handle: product
 
 {% assign variant =null %}
 {% assign variant_list = product.variants %}
-{% if params.ref%}
+{% if params.variant%}
   {% for product_variant in variant_list %}
-    {% if product_variant.default_code == params.ref%}
+    {% if product_variant.objectID == params.variant%}
       {% assign variant = product_variant %}
     {% endif %}
   {% endfor %}
@@ -68,24 +68,7 @@ handle: product
             rating_nbr: variant.rating.reviews.size,
             rating: variant.rating %}
       </div>
-      <div class="d-none d-sm-inline-block pl-4">
-        <span class="fa-stack ">
-          <i class="fa fa-stop fa-stack-2x text-primary"></i>
-          <i class="fa fa-facebook fa-stack-1x text-white"></i>
-        </span>
-        <span class="fa-stack ">
-          <i class="fa fa-stop fa-stack-2x text-primary"></i>
-          <i class="fa fa-twitter fa-stack-1x text-white"></i>
-        </span>
-        <span class="fa-stack">
-          <i class="fa fa-stop fa-stack-2x text-primary"></i>
-          <i class="fa fa-pinterest fa-stack-1x text-white"></i>
-        </span>
-        <span class="fa-stack">
-          <i class="fa fa-stop fa-stack-2x text-primary"></i>
-          <i class="fa fa-envelope fa-stack-1x text-white"></i>
-        </span>
-      </div>
+
     </div>
   </div>
   <div class="row">
@@ -119,11 +102,11 @@ handle: product
     <div class="col-12">
       <h2>{{'product_variant_title' | translate }}</h2>
       <div class="row">
-        <div class="col-2 col-lg-2  p-2">
+        <div class="col-12 col-md-3 col-lg-2  p-2">
           {% include 'product_variant_thumbnail' with product%}
         </div>
         {% for variant_product in variant_list %}
-          <div class="col-2  p-2">
+          <div class="col-12 col-md-3 col-lg-2  p-2">
             {% include 'product_variant_thumbnail' with  product:variant_product%}
           </div>
         {% endfor %}

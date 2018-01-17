@@ -10,12 +10,12 @@ slug: cart
 {% block "content/main" %}
 
 
-  <div class="row" data-shopinvader-container id="cart-index">
+  <div class="row"  id="cart-index">
 
     <div class="col-lg-8 col-xl-9">
       {% include 'cart_list' with cart: store.cart %}
     </div>
-    <div class="col-lg-4 col-xl-3 mb-4">
+    <div class="col-lg-4 col-xl-3 mb-4" data-shopinvader-container id="cart-total">
       {% include 'cart_total' with cart: store.cart %}
       <form method="post" action="{% path_to cart_login %}"  id="cart_update_form">
         <input type="hidden" name="action_proxy" value="cart">
@@ -34,9 +34,9 @@ slug: cart
       <strong>Questions? We can help</strong>
       <div class="">
         Online Customer Support: <br>
-        +33 (0)1 00 00 00 07
+        +33 (0)1 00 00 00 00
         <br><br>
-        Email : contact@spacediscount.yeah
+        Email : contact@shopinvader.yeah
       </div>
 
       {% endeditable_text %}

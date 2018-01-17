@@ -38,6 +38,9 @@ google:
     maps_api_key:
       hint: Google MAPS API Authentication for autocomplete address
       type: string
+    tag_manager_id:
+      hint: Google tag manager ID
+      type: string
 payment:
   label: Payment
   fields:
