@@ -19,9 +19,10 @@ $(document).ready(function() {
         source: autocomplete.sources.hits(product_index, { hitsPerPage: 4 }),
         displayKey: 'name',
         name: 'product',
+
         cssClasses: {
-          suggestions:"product-list",
-          suggestion: " col-12 col-lg-4 product-compact",
+          suggestions:"",
+          suggestion: " product-search-list",
         },
         templates: {
           header: function(query, result) {
@@ -38,9 +39,11 @@ $(document).ready(function() {
 
           },
           suggestion: function(suggestion) {
+            suggestion.last_categorie = suggestion.categories[suggestion.categories.length-1];
+            suggestion.price = suggestion.price[default_pricelist];
             var template = Hogan.compile($('#product-hit-template').html());
             suggestion.helpers = hogan_helpers;
-            return template.render(suggestion)
+            return template.render(suggestion);
           }
         }
       },
@@ -50,7 +53,7 @@ $(document).ready(function() {
         name: 'category',
         cssClasses: {
           suggestions:" row",
-          suggestion: " col-4",
+          suggestion: " col-12",
         },
         templates: {
           header: function(query, result){
@@ -69,22 +72,57 @@ $(document).ready(function() {
 });
 
 var hogan_helpers = {
-  "currency": function() {
+  "emphasis": function() {
     return function(text, render) {
-      //var n = new Number(renders(text));
       if(typeof(renders) == 'function') {
-        var value = render(text);
+        var value = parseInt(render(text));
       }
       else {
-        var value = hogan_render(text, this);
+        var value = parseInt(hogan_render(text, this));
       }
-      var n = new Number(value  );
+      return '<em>' + value + '</em>';
+    }
+  },
+  "currency": function() {
+    return function(text, render) {
+      var n = 0;
+      if(typeof(render) != 'undefined') {
+        var value = render(text).trim();
+        n = new Number(value);
+      }
+      else if (typeof(hogan_render) != 'undefined') {
+        n = new Number(hogan_render(text, this));
+      }
+      else {
+        console.log(text);
+        var text = text.trim();
+        if(isNaN(text)) {
+          return text;
+        }
+        else {
+          n = new Number(text);
+        }
+
+      }
+
+
       return n.toLocaleString("fr-FR", {style: "currency", currency: "EUR"})
+    }
+  },
+  "imageDefault": function() {
+    return function(text, render) {
+      var url = render(text).trim();
+      if(url != '') {
+        return render(text);
+      }
+      else {
+        return default_img_url;
+      }
     }
   },
   "ratingsStars": function() {
     return function(text, render) {
-
+      var html = '';
       if(typeof(renders) == 'function') {
         var value = parseInt(render(text));
       }
@@ -94,39 +132,16 @@ var hogan_helpers = {
       if(isNaN(value)) {
         return '&nbsp;';
       }
-      var html = '';
       var n = 1;
       for(n; n <= 5; n++){
         if(n <= value) {
-          html += '<i class="fa fa-star" aria-hidden="true"></i>';
+          html += '<i class="fas fa-star" aria-hidden="true"></i>';
         }
         else {
-          html += '<i class="fa fa-star-o" aria-hidden="true"></i>';
+          html += '<i class="far fa-star" aria-hidden="true"></i>';
         }
       }
-      return html;
-    }
-  },
-  "imageDefault": function() {
-    return function(text, render) {
-
-      console.log(default_img_url);
-      if(typeof(renders) == 'function') {
-        var value = render(text);
-      }
-      else {
-        var value = hogan_render(text, this);
-      }
-
-      var url = value.trim();
-      if(url != '') {
-        return value;
-      }
-      else {
-
-        return
-        default_img_url;
-      }
+      return '<div class="rating">'+html+'</div>';
     }
   }
 }

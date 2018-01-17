@@ -12,24 +12,16 @@ $(document).ready(function() {
        compileOptions: [{delimiters: '<% %>'}]
      }
   };
-  /*
-  instantsearch_params.searchFunction = function(search_helper){
-    console.log('SEARCH');
+  if($('#search-result').attr('data-category') != undefined) {
+    instantsearch_params.urlSync = false;
+    instantsearch_params.searchParameters = {
+      hierarchicalFacetsRefinements: {
+        'categories.id': [$('#search-result').attr('data-category')]
+      }
+    };
 
+  }
 
-    if(jQuery.isEmptyObject(search_helper.state.disjunctiveFacetsRefinements)){
-      $('#search-result').addClass("hidden");
-      $('#all-result').removeClass("hidden");
-      $('#stats').addClass("hidden");
-    }
-    else {
-      $('#search-result').removeClass("hidden");
-      $('#all-result').addClass("hidden");
-      $('#stats').removeClass("hidden");
-    }
-
-    search_helper.search();
-  };*/
   var search = instantsearch(instantsearch_params);
   if(typeof(category_id) == 'undefined') {
     search.addWidget(
@@ -92,14 +84,15 @@ $(document).ready(function() {
   search.addWidget(
     instantsearch.widgets.hits({
       container: '#search-result',
-      hitsPerPage: 5,
+      hitsPerPage: 18,
 
       templates: {
         item: $('#product-hit-template').html()
       },
       cssClasses: {
         root: product_root_css,
-        item: product_item_css
+        item: product_item_css,
+        empty: ' text-center m-4 p-4 lead  d-block'
       },
       transformData: {
         item: function(item) {

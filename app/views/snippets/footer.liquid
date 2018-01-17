@@ -1,9 +1,12 @@
 
-<footer class="footer text-white w-100">
+<footer class="bg-secondary w-100">
   <div class="container">
     <div class="row">
-      <div class="col-12">
+      <div class="col-6">
         <p>&copy; {{site.name}} {{ now | localized_date: '%Y' }} </p>
+      </div>
+      <div class="col-6 text-right">
+        <img src="{{'powered-by-shopinvader-logo.png' | theme_image_url}}" alt="Shopinvader">
       </div>
     </div>
   </div>

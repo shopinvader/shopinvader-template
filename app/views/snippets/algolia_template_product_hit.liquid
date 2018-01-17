@@ -14,7 +14,7 @@
   {% endraw %}
   <div class="card product-thumbnail bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%endif%}" >
     <div class="product-thumbnail-img">
-      <div id="slide-<% objectID %>" class="carousel slide p-2" data-ride="carousel">
+      <div id="slide-<% objectID %>" class="carousel slide p-2" data-ride="carousel" data-interval="false">
         <div class="carousel-inner" role="listbox">
           <div class="carousel-item active" data-target="#slide-<% objectID %>">
             <img src="<% images.0.medium  %>" alt="" class="d-block img-fluid"/>
@@ -64,7 +64,7 @@
         </strong>
       </div>
       <div class="d-horizontal-only">
-        <strong class="h2">
+        <strong class="product-price-value">
           <span class="font-weight-bold <%#price.discount %>text-warning<%/price.discount %>">
             <%#helpers.currency%>
               <% price.value %>
@@ -83,7 +83,7 @@
         <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart "><i class="fa fa-shopping-basket"></i> Add to cart</button>
       </div>
     </div>
-    <div class="product-thumbnail-name card-body p-3 p-xl-2">
+    <div class="product-thumbnail-name card-bodyp-0 p-md-3 p-xl-2">
       <div class="font-weight-bold">
         <a href="{{url_base}}<% url_key %>" class="card-title">
           <% model_name %>

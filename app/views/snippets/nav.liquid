@@ -1,28 +1,25 @@
 {% block 'header'%}
 <div class="container-fluid navbar-header mt-2">
   <div class="row mb-2">
-    <div class="col-2">
+    <div class="col-6 col-md-2 order-1">
       <a class="navbar-brand" href="{% path_to home %}">
       {% if site.metafields.theme.logo %}
         <img src="{{ site.metafields.theme.logo }}" alt="{{ site.name }}"  class="img-responsive"/>
       {% endif %}
       </a>
     </div>
-    <div class="col-8  pl-2">
-      <div class="row">
-        <div class="col-6 text-primary lead" >
+    <div class="col-md-8 pl-2 order-3 order-md-2">
+      <div class="row d-none d-md-block">
+        <div class="col-12 text-primary lead" >
           {% editable_text "baseline", hint: "Website header baseline" %}
           May the discount be with you !
           {% endeditable_text %}
-        </div>
-        <div class="col-6 text-right">
-          {% locale_switcher label: 'locale', sep: ' - ' %}
         </div>
       </div>
       <div class="row ">
         <div class="col-12">
           <div class="input-group">
-            <input type="text" class="form-control" id="header-search-input" placeholder="Search for..." aria-label="Search for..." aria-describedby="Product search">
+            <input type="text" class="form-control" id="header-search-input" placeholder="Search for..." aria-label="Search for..." aria-describedby="Product search" autocomplete="off" value="{{params.q}}">
             <span class="input-group-addon bg-primary text-white" >
               <i class="fa fa-search"></i>
             </span>
@@ -30,7 +27,7 @@
               <div id="header-search-product-title">
                 <div class="row">
                   <div class="col-12 search-title">
-                    <span class="text-size-2xl title-decorator">
+                    <span class="h2">
                       {{ 'search_product' | translate }}
                     </span>
                     <span class="nb_hits"></span>
@@ -39,8 +36,8 @@
               </div>
               <div id="header-search-product-link">
                 <div class="row">
-                  <div class="col-12 text-right ">
-                    <a data-href="{% path_to search %}" href="#" class="btn btn-success btn-search-product">
+                  <div class="col-12 text-right pt-2">
+                    <a data-href="{% path_to search %}" href="#" class="btn btn-primary btn-search-product">
                       {{ 'search_product_all' | translate }}
                       <span class="nb_hits"></span>
                     </a>
@@ -54,10 +51,10 @@
                   </div>
                 </div>
               </div>
-              <div id="header-search-category-title">
+              <div id="header-search-category-title" class=" ">
                 <div class="row">
                   <div class="col-12">
-                    <div class="text-size-2xl title-decorator">
+                    <div class="h2 text-dark">
                       {{ 'search_category' | translate }}
                     </div>
                   </div>
@@ -81,9 +78,9 @@
                 </div>
               </div>
               <div id="header-search-hit-content">
-                <div class="row separator-right">
-                  <div class="aa-dataset-product col-12  col-md-7"></div>
-                  <div class="aa-dataset-category col-12 col-md-5"></div>
+                <div class="row separator-right ">
+                  <div class="aa-dataset-product col-12  col-md-8 pt-2 pb-2"></div>
+                  <div class="aa-dataset-category col-12 col-md-4 pt-2 pb-2 bg-light d-none d-md-block"></div>
                 </div>
               </div>
             </div>
@@ -91,12 +88,12 @@
         </div>
       </div>
     </div>
-    <div class="col-2">
+    <div class="col-6 col-md-2 order-2 order-md-3">
       {% include 'header_controls' %}
     </div>
   </div>
   <div class="row text-white bg-primary">
-    <div class="col-12  menu-categories">
+    <div class="col-12  menu-categories d-none d-md-block">
       <div id="navbar" class="navbar-collapse ">
         <ul class="nav categories-menu">
         {% with_scope level: 0%}
@@ -113,14 +110,11 @@
                 </div>
               </div>
             </li>
-
           {% endfor %}
         {% endwith_scope%}
-        <li>
-          <a href="#" class="text-bold text-warning">
-            FLASH <i class="fa fa-bolt text-danger"></i> SOLD
-          </a>
-        </li>
+          <li>
+            <a href="{% path_to blog%}" class="text-white text-uppercase">Blog</a>
+          </li>
         </ul>
       </div>
     </div>
