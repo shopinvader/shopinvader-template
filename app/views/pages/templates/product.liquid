@@ -5,6 +5,18 @@ handle: product
 ---
 {% extends 'layouts/default' %}
 
+{% block 'header_meta' %}
+<meta name="og:site_name" content="{{site.name}}">
+<meta name="og:title" content="{{product.seo_title}}">
+<meta name="og:url" content="{{base_url}}{% path_to product %}?ref={{variant.product }}">
+<meta name="og:description" content="{{product.meta_description}}">
+<meta name="og:image" content="{{ product.images.first.medium }}">
+<meta name="description" content="{{product.meta_description}}">
+<meta name="keywords" content="{{product.meta_keywords}}">
+<title>{{product.seo_title}}</title>
+<link rel="canonical" href="{{base_url | append: '/' | append: product.url_key}}" />
+{% endblock %}
+
 {% block content %}
 
 {% assign variant =null %}

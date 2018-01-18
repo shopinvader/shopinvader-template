@@ -14,8 +14,11 @@ is_layout: false
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ site.name }}</title>
+    {% block 'header_meta' %}
+      {% seo %}
+    {% endblock %}
     <link rel="shortcut icon" href="{{ 'favicon.png' | theme_image_url }}">
+
     {{ 'application.css' | stylesheet_tag }}
     <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet" async>
     {% block 'css' %}{% endblock %}
