@@ -1,14 +1,14 @@
 {% block 'header'%}
-<div class="container-fluid navbar-header mt-2">
+<div class="container-fluid navbar-header mt-2 border border-top-0 border-left-0 border-right-0 border-primary">
   <div class="row mb-2">
     <div class="col-6 col-md-2 order-1">
       <a class="navbar-brand" href="{% path_to home %}">
       {% if site.metafields.theme.logo %}
-        <img src="{{ site.metafields.theme.logo }}" alt="{{ site.name }}"  class="img-responsive"/>
+        <img src="{{ site.metafields.theme.logo }}" alt="{{ site.name }}"  class="img-fluid"/>
       {% endif %}
       </a>
     </div>
-    <div class="col-md-8 pl-2 order-3 order-md-2">
+    <div class="col-md-7 pl-2 order-3 order-md-2">
       <div class="row d-none d-md-block">
         <div class="col-12 text-primary lead" >
           {% editable_text "baseline", hint: "Website header baseline" %}
@@ -88,8 +88,14 @@
         </div>
       </div>
     </div>
-    <div class="col-6 col-md-2 order-2 order-md-3">
-      {% include 'header_controls' %}
+    <div class="col-6 col-md-3 order-2 order-md-3  text-right mb-2">
+      <div class="d-none d-md-block">
+        {% include 'header_controls' %}
+      </div>
+      <a href="#mobile-menu" class="btn btn-primary d-inline-block d-md-none"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <i class="fas fa-bars"></i>
+      </a>
+
     </div>
   </div>
   <div class="row text-white bg-primary">
@@ -120,5 +126,23 @@
     </div>
   </div>
 </div>
-
+<div class="collapse" id="mobile-menu">
+  <ul class="list-group">
+  {% with_scope level: 0%}
+    {% for category in store.categories %}
+      <li class="list-group-item">
+          <a href="{{category.url_key  | prepend: url_base }}" id="cat-{{category.id}}" class="text-uppercase">
+            {{ category.name }}
+          </a>
+      </li>
+    {% endfor %}
+  {% endwith_scope%}
+    <li class="list-group-item">
+      <a href="{% path_to blog%}" class="text-uppercase">Blog</a>
+    </li>
+    <li class="list-group-item bg-light pb-1 pt-1">
+      {% include 'header_controls' %}
+    </li>
+  </ul>
+</div>
 {% endblock %}

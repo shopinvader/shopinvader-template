@@ -1,7 +1,7 @@
 # The name of this site
 # This text displays in the back-office and
 # can be used in templates through the site.name global variable
-name: "Space Discount (Shopinvader Demo)"
+name: "Shopinvader demo (Shopinvader Demo)"
 
 # An array of domain aliases for the site
 # This option is for sites on multi-site engines
@@ -13,9 +13,9 @@ name: "Space Discount (Shopinvader Demo)"
 # Possible locales include: en, de, fr, pl, pt-BR, it, nl, nb, es, ru, et, ja, zh-CN
 locales: [en, fr]
 
-seo_title: Space Discount | May the discount be with you
-meta_keywords: "Space Discount the Shop Invader demo web store"
-meta_description: "Space Discount the Shop Invader demo web store"
+seo_title: Shopinvader demo | May the discount be with you
+meta_keywords: "the Shopinvader  demo web store"
+meta_description: "the Shopinvader demo web store"
 
 metafields_ui:
   label:

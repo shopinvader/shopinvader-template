@@ -4,7 +4,7 @@
     <div class="bold small">
 
       {% if current_customer %}
-      <div class="btn-group">
+      <div class="btn-group d-block">
         <button type="button" class="btn btn-link btn-link btn-sm text-dark">{{current_customer.name}}</button>
         <button type="button" class="btn btn-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="sr-only">Toggle Dropdown</span>
@@ -46,7 +46,7 @@
   </div>
   <a class="w-50 text-dark" href="{% path_to cart_index%}">
     <i class="fa fa-shopping-basket text-primary fa-2x fa-fw d-inline-block ml-3"></i>
-    <div class="bold small btn btn-link btn-sm text-dark">
+    <div class="bold small btn btn-link btn-sm text-dark d-block">
       {{'header_cart' | translate }}
       <span class="badge badge-warning">{{ store.cart.item_number | round | default: 0 }}</span>
     </div>

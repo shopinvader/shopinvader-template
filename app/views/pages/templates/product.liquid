@@ -36,13 +36,13 @@ handle: product
           </a>
         </li>
       {% endfor %}
-        <li class="breadcrumb-item active">{{variant.model_name}}</li>
+        <li class="breadcrumb-item active d-none d-xl-inline-block">{{variant.model_name}}</li>
       </ol>
     </div>
   </div>
   <div class="row">
     <div class="col-12">
-      <h1 class="text-center text-sm-left h2">{{variant.model_name}}</h1>
+      <h1 class="text-center text-md-left h2">{{variant.model_name}}</h1>
       <div class="lead">
         {{variant.variant_name}}
       </div>
