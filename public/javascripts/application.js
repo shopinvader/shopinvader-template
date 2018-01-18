@@ -54,20 +54,6 @@ $(document).ready(function () {
     }
   );
 
-  $('.side-cart').slideReveal({
-    trigger: $(".display-side-cart"),
-    position: "right",
-    width: "360px",
-    push: false,
-    zIndex: 800,
-    show: function(sidecart){
-      sidecart.addClass("left-shadow-overlay");
-    },
-    hidden: function(sidecart){
-      sidecart.removeClass("left-shadow-overlay");
-    }
-  });
-
 
   $('body').on('click',".cart-items .delete",
     function() {

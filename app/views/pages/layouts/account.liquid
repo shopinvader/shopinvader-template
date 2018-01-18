@@ -82,68 +82,7 @@ is_layout: false
     </div>
   </div>
 </div>
-<div class="row justify-content-center">
-  <div class="col-12 col-lg-10 col-xl-8">
-    <div class="account-page">
-  <div class="row mt-4">
-    <div class="col-12 col-sm-8">
-      <div class="account-header">
-        <div class="account-title">
-          <h1 class="h1 text-primary">{{'account_title' | translate}} <span class="text-warning">{{current_customer.name}}</span></h1>
-          <p>
-          {% editable_text "account_intro", hint: "intro" %}
-            Happy to see you again ;)
-          {% endeditable_text %}
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-sm-4 text-right">
-      <form method="post" action="{% path_to account %}">
-        <input type="hidden" name="auth_action" value="sign_out" />
-        <input type="hidden" name="auth_content_type" value="customers" />
-        <button type="submit" class="btn btn-primary" >
-          <i class="fa fa-power-off"></i>
-          {{ 'account_signout' | translate }}
-        </button>
-      </form>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <div class="card text-center">
-        <div class="card-header">
-          <ul class="nav nav-tabs nav-fill card-header-tabs ">
-            <li class="nav-item ">
-              <a href="{%path_to account_index%}" class="nav-link {%if page.handle == 'account_index'%}active{% endif%}">{{ "account_order_title" | translate }}</a>
-            </li>
-            <li class="nav-item ">
-              <a href="{%path_to account_profil%}" class="nav-link {%if page.handle == 'account_profil'%}active{% endif%}">{{ "account_profil_title" | translate }}</a>
-            </li>
-            <li class="nav-item ">
-              <a href="{%path_to account_address%}" class="nav-link {%if page.handle == 'account_address'%}active{% endif%}">{{ "account_address_lists" | translate }}</a>
-            </li>
-            <li class="nav-item ">
-              <a href="{%path_to account_password%}" class="nav-link {%if page.handle == 'account_password'%}active{% endif%}">{{ "account_password_title" | translate }}</a>
-            </li>
-            <li class="nav-item ">
-              <a href="{%path_to account_rma %}" class="nav-link {%if page.handle == 'account_rma'%}active{% endif%}">{{ "account_rma_title" | translate }}</a>
-            </li>
-          </ul>
 
-        </div>
-        <div class="card-body text-left">
-          {% block 'tabcontent' %}
-          {% endblock %}
-        </div>
-      </div>
-  </div>
-  </div>
-
-
-</div>
-  </div>
-</div>
 {% endblock %}
 
 {% block 'css' %}

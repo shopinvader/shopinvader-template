@@ -8,8 +8,6 @@ seo_title: Shipping addresses | Shopinvader demo
 
 {% block 'content/tabcontent' %}
 <div class="pt-4">
-
-
   {% if params.address_id or params.add  == "true" %}
     <div class="card">
     {% if params.add == "true" %}
@@ -54,7 +52,6 @@ seo_title: Shipping addresses | Shopinvader demo
         </form>
       </div>
     </div>
-
     <div class="row">
       <div class="col-12">
         {% with_scope contact_type: "address"%}
@@ -67,7 +64,6 @@ seo_title: Shipping addresses | Shopinvader demo
           %}
         {% endwith_scope%}
       </div>
-
     </div>
   {% endif%}
 </div>

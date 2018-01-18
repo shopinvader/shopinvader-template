@@ -8,11 +8,8 @@ published: true
 is_layout: false
 ---
 {% extends "layouts/checkout" %}
-{% block content/main2%}
-{{store.cart}}
-{% endblock%}
+
 {% block content/main %}
-{{store.addresses | json}}
 <div  data-shopinvader-container id="cart-address">
   {% if current_customer == null%}
     {% assign partner_shipping = []%}
@@ -102,8 +99,8 @@ is_layout: false
       <div class="row">
         <div class="col-12">
           <form method="put" action="{% path_to page %}"  id="cart_address_add">
-            <input type="text" name="action_method" value="addresses/{{address.id}}">
-            <input type="text" name="action_proxy" value="put">
+            <input type="hidden" name="action_method" value="addresses/{{address.id}}">
+            <input type="hidden" name="action_proxy" value="put">
             <div class="row justify-content-center">
             <div class="col-12">
               <div class="card">
