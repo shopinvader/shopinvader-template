@@ -14,7 +14,11 @@ seo_title: My sales orders | Shopinvader demo
   {% paginate store.sales by 4 %}
     <div class="row">
       <div class="col-12">
-      {%if store.orders == null or store.orders.size == 0 %}
+      {%if store.sales == null or store.sales.size == 0 %}
+        <div class="text-center">
+          {{ 'account_order_empty' | translate }}
+        </div>
+      {% else %}
         <div class="text-right">
           {%include 'paginate' with paginate %}
         </div>
@@ -97,10 +101,7 @@ seo_title: My sales orders | Shopinvader demo
         <div class="text-right">
           {%include 'paginate' with paginate %}
         </div>
-      {% else %}
-        <div class="text-center">
-          {{ 'account_order_empty' | translate }}
-        </div>
+
       {% endif %}
       </div>
     </div>
