@@ -10,6 +10,7 @@ seo_title: My sales orders | Shopinvader demo
 ---
 {% extends 'layouts/account' %}
 {% block 'content/tabcontent' %}
+
   {% paginate store.sales by 4 %}
     <div class="row">
       <div class="col-12">

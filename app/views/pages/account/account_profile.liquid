@@ -7,14 +7,15 @@ seo_title: My account profile | Shopinvader demo
 {% extends 'layouts/account '%}
 
 {% block 'content/tabcontent' %}
-  {% with_scope contact_type: "profile"%}
+{{store_notification| json}}
+  {% with_scope address_type: "profile"%}
     {% assign profile = store.addresses.first %}
     <div class="card">
       <h2 class="card-header bg-primary text-light"><i class="fas fa-user"></i>  {{'account_profil_title' | translate}}</h2>
       <div class="card-body">
         <form class="" action="#" method="post" data-autocomplete="address">
           <input type="hidden" name="action_method" value="put">
-          <input type="hidden" name="action_proxy" value="contacts/{{profile.id | round}}">
+          <input type="hidden" name="action_proxy" value="addresses/{{profile.id | round}}">
           {% include 'address_form' with address: profile %}
           <div class="text-right">
             <input type="submit" name="submit" class="btn btn-primary " value="{{'account_address_submit' | translate}}">

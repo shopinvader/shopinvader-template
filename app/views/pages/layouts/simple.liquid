@@ -7,65 +7,32 @@ is_layout: true
 {% block content %}
   <div class="row">
   {% if contents.slides.size > 0%}
-    <div class="col-12 text-center d-none d-md-block" id="slider">
-      <div class="carousel slide" id="main-carousel">
+    <div class=" text-center d-none d-md-block" id="slider">
+      <div class="carousel slide" id="main-carousel" data-ride="carousel">
         <div class="carousel-inner">
         {% for slide in contents.slides%}
-          <div class="{%if forloop.index0 == 0%}active{%endif%} item" data-slide-number="{{forloop.index0}}">
-            <a href="{{slide.link}}"><img src="{{slide.picture.url}}" alt="{{slide.name}}" class="w-100"></a>
+          <div class="{%if forloop.index0 == 0%}active{%endif%} carousel-item">
+            <a href="{{slide.link}}">
+              <img src="{{slide.picture.url}}" alt="{{slide.name}}" class="w-100">
+            </a>
           </div>
         {% endfor %}
         </div>
       {% if contents.slides.size > 1%}
-        <a class="left carousel-control" href="#main-carousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#main-carousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
+      <a class="carousel-control-prev" href="#main-carousel" role="button" data-slide="prev">
+         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+         <span class="sr-only">Previous</span>
+       </a>
+       <a class="carousel-control-next" href="#main-carousel" role="button" data-slide="next">
+         <span class="carousel-control-next-icon" aria-hidden="true"></span>
+         <span class="sr-only">Next</span>
+       </a>
       {% endif %}
       </div>
     </div>
   {% endif %}
   </div>
-  <div class="row store-advantage text-uppercase text text-center text-dark pt-4 pb-4 mb-4  d-none d-md-flex">
-    <div class="col-3 text-center ">
-      <span class="fa-stack fa-lg text-light fa-2x">
-        <i class="fa fa-circle text-dark fa-stack-2x"></i>
-        <i class="fa fa-rocket fa-stack-1x "></i>
-      </span>
-      <div class="text-dark ">
-        {{'store_advantage_shipping' | translate }}
-      </div>
-    </div>
-    <div class="col-3 text-center">
-      <span class="fa-stack fa-lg text-light fa-2x">
-        <i class="fa fa-circle text-dark fa-stack-2x"></i>
-        <i class="fas fa-undo  fa-stack-1x"></i>
-      </span>
-      <div class="text-dark ">
-        {{'store_advantage_return' | translate }}
-      </div>
-    </div>
-    <div class="col-3 text-center">
-      <span class="fa-stack fa-lg text-light fa-2x">
-        <i class="fa fa-circle text-dark fa-stack-2x"></i>
-        <i class="fa fa-tag fa-stack-1x"></i>
-      </span>
-      <div class="text-dark ">
-        {{'store_advantage_price' | translate }}
-      </div>
-    </div>
-    <div class="col-3 text-center ">
-      <span class="fa-stack fa-lg text-light fa-2x">
-        <i class="fa fa-circle text-dark fa-stack-2x"></i>
-        <i class="fa fa-phone-volume   fa-stack-1x"></i>
-      </span>
-      <div class="text-dark ">
-        {{'store_advantage_hotline' | translate }}
-      </div>
-    </div>
-  </div>
+
   {% block main %}
   {% endblock %}
 {% endblock %}

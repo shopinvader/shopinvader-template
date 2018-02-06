@@ -7,7 +7,34 @@ handle: home
 {% extends 'layouts/simple' %}
 
 {% block content/main %}
-<div class="row pt-4 justify-content-center ">
+
+<div class="row store-advantage text-uppercase text text-center text-dark pt-3 pb-3 d-none d-md-flex">
+  <div class="col-3 text-center ">
+    <i class="fa fa-rocket fa-2x"></i>
+    <div class="text-dark ">
+      {{'store_advantage_shipping' | translate }}
+    </div>
+  </div>
+  <div class="col-3 text-center">
+    <i class="fas fa-undo fa-2x"></i>
+    <div class="text-dark ">
+      {{'store_advantage_return' | translate }}
+    </div>
+  </div>
+  <div class="col-3 text-center">
+    <i class="fa fa-tag text-dark fa-2x"></i>
+    <div class="text-dark ">
+      {{'store_advantage_price' | translate }}
+    </div>
+  </div>
+  <div class="col-3 text-center ">
+    <i class="fa fa-phone-volume fa-2x"></i>
+    <div class="text-dark ">
+      {{'store_advantage_hotline' | translate }}
+    </div>
+  </div>
+</div>
+<div class="row pt-4 justify-content-center showcase">
   <div class="container pt-4  pb-4 ">
     <div class="row">
       <div class="col-12">
@@ -30,7 +57,6 @@ handle: home
       {% endwith_scope %}
     </div>
   </div>
-
 </div>
   {% if contents.posts.size > 0 %}
   <div class="container">
@@ -38,8 +64,7 @@ handle: home
       <div class="col-12 text-center">
         <h2 class="h2">
         {% editable_text post_title %}
-          <span class="text-primary">Space</span> <span class="text-danger">Discount</span>
-          <div class="small text-dark">Mission Report</div>
+          <span class="text-primary">Our</span> <span class="text-danger">reviews</span>
         {% endeditable_text %}
         </h2>
         <p>

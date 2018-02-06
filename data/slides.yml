@@ -1,8 +1,17 @@
-- Bose Mini Bluetooth Speaker:
+- Sales:
     _slug:
-      en: bose-mini-bluetooth-speaker
-      fr: bose-mini-bluetooth-speaker
+      en: Sales
+      fr: Soldes
     name:
-      en: Bose Mini Bluetooth Speaker
-      fr: Bose Mini Bluetooth Speaker
+      en: Sales
+      fr: Soldes
+    picture: "/samples/content_entries/slide-2.png"
+
+- Scandinavian design:
+    _slug:
+      en: Scandinavian design
+      fr: Collection scandinave
+    name:
+      en: Scandinavian design
+      fr: Collection scandinave
     picture: "/samples/content_entries/slide-1.png"

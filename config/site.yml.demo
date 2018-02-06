@@ -47,3 +47,12 @@ metafields:
     default_pricelist: < Your ERP PRICELIST >
   payment:
     stripe_api_key: < Your stripe API KEY >
+  _store:
+    available_countries: >
+      {
+        "fr": [
+          { "name": "France", "id": 74 },
+          { "name": "Belgium", "id": 20 },
+          { "name": "Spain", "id": 67 }
+        ]
+      }

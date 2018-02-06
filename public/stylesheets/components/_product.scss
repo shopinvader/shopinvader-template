@@ -87,7 +87,7 @@
     display: flex;
     flex-flow: row wrap;
     align-items: flex-start;
-    
+
     .d-horizontal-only {
       display: block;
     }
@@ -113,7 +113,7 @@
       }
     }
     .product-thumbnail-name {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       order: 2;
       text-align: left;
       height: auto;
@@ -261,5 +261,12 @@
     .product-add-to-cart {
       display: none;
     }
+  }
+}
+
+.showcase {
+  background-color: #F9F9F9;
+  .product-thumbnail {
+    box-shadow: 0px 0px 6px 0px #e7ebf0;
   }
 }
