@@ -30,6 +30,13 @@ fields:
     hint: Best format is 1370x396px.
     localized: false
 
+- alt:
+    label: alt
+    type: string
+    required: true
+    hint: Name of the slide
+    localized: true
+    
 - link:
     label: "Link"
     type: string

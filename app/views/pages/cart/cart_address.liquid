@@ -128,15 +128,36 @@ is_layout: false
       <input type="hidden" name="current_step" value="{{ page.handle }}">
       <input type="hidden" name="next_step" value="cart_checkout">
       <div class="row">
+
         <div class="col-lg-8 col-xl-9">
-        {% include "address_book" with
-          input_group: 'shipping',
-          input_name: 'partner_shipping[id]',
-          address_list:  store.addresses,
-          selected_address_id : store.cart.partner_shipping.id,
-          display_delector: true,
-          display_add: true
-        %}
+          <h2>{{'cart_shipping_address' | translate}}</h2>
+          {% include "address_book" with
+            input_group: 'shipping',
+            input_name: 'partner_shipping[id]',
+            address_list:  store.addresses,
+            selected_address_id : store.cart.partner_shipping.id,
+            display_delector: true,
+            display_add: true
+          %}
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="use_different_invoice_address" value="1" data-toggle="collapse" data-target="#invoice_address">
+              {% editable_text checkout_button, fixed: true, rows: 1 %}
+                Use different invoice address.
+              {% endeditable_text %}
+            </label>
+          </div>
+          <div class="collapse" id="invoice_address">
+            <h2>{{'cart_invoice_address' | translate}}</h2>
+            {% include "address_book" with
+              input_group: 'shipping',
+              input_name: 'partner_invoice[id]',
+              address_list:  store.addresses,
+              selected_address_id : store.cart.partner_invoice.id,
+              display_delector: true,
+              display_add: true
+            %}
+          </div>
         </div>
         <div class="col-lg-4 col-xl-3 mb-4">
           {% include 'cart_total' with cart: store.cart  %}
@@ -147,6 +168,7 @@ is_layout: false
           </button>
         </div>
       </div>
+
     </form>
   {%endif%}
 </div>
