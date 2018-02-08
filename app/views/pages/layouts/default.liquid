@@ -20,7 +20,7 @@ is_layout: false
     <link rel="shortcut icon" href="{{ 'favicon.png' | theme_image_url }}">
 
     {{ 'application.css' | stylesheet_tag }}
-    <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet" async>
+    <link href="{{'fontawesome/fontawesome.css' | stylesheet_url}}" rel="stylesheet" async>
     {% block 'css' %}{% endblock %}
   </head>
   <body>
