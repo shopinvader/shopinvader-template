@@ -1,6 +1,29 @@
 {% block 'header'%}
 <div class="container-fluid navbar-header mt-2 border border-top-0 border-left-0 border-right-0 border-primary">
-  <div class="row mb-2">
+  <div class="">
+    <div class="row d-none d-sm-block border border-1 border-top-0 border-left-0 border-right-0 text-right">
+      <ul class="list-inline text-primary small col-12 mb-1">
+        <li class="list-inline-item mr-4">
+          {% if site.metafields.phone_number != '' %}
+            <a href="{{site.metafields.store.phone_number_link}}" class="text-primary text-underline">
+              <i class="fa fa-phone text-info mr-1"></i> <b>Need help ?</b>{{site.metafields.store.phone_number}}
+            </a>
+            {{site.metafields.store.phone_number_hours}}
+          {% endif %}
+        </li>
+        <li class="list-inline-item  mr-4">
+          {% editable_text free_charge %}
+            <i class="fa fa-truck text-info mr-1"></i> <b>Free delevery</b> From 50 $
+            {% endeditable_text %}
+        </li>
+        <li class="list-inline-item d-none d-md-inline-block">
+          <i class="fa fa-check text-info mr-1"></i> Ordered before 4PM, <b>delivered by tomorrow</b>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row mb-2 mt-2">
     <div class="col-6 col-md-2 order-1">
       <a class="navbar-brand" href="{% path_to home %}">
       {% if site.metafields.theme.logo %}
