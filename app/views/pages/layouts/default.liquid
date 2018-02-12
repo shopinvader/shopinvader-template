@@ -14,13 +14,36 @@ is_layout: false
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": "{{site.name}}",
+      "url": "{{base_url}}",
+      "logo":  "{{site.metafields.theme.logo}}"
+    }
+    </script>
+    <script type='application/ld+json'>
+      {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "{{base_url}}",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "{{base_url}}/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
     {% block 'header_meta' %}
+      <link rel="canonical" href="{{base_url}}{% path_to page%}" />
       {% seo %}
     {% endblock %}
     <link rel="shortcut icon" href="{{ 'favicon.png' | theme_image_url }}">
 
     {{ 'application.css' | stylesheet_tag }}
     <link href="{{'fontawesome/fontawesome.css' | stylesheet_url}}" rel="stylesheet" async>
+
     {% block 'css' %}{% endblock %}
   </head>
   <body>

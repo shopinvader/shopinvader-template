@@ -53,7 +53,7 @@ handle: category
 
           {% for product in paginate.collection %}
           <div class="{{css_col}} product-col p-2 border border-1 border-left-0 border-bottom-0 ">
-            {% include 'product_thumbnail' with product, display_horizontal %}
+            {% include 'product_thumbnail' with product, display_horizontal, with_richdata: true %}
           </div>
           {% endfor %}
         </div>

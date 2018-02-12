@@ -8,13 +8,57 @@ handle: product
 {% block 'header_meta' %}
 <meta name="og:site_name" content="{{site.name}}">
 <meta name="og:title" content="{{product.seo_title}}">
-<meta name="og:url" content="{{base_url}}{% path_to product %}?ref={{variant.product }}">
+<meta name="og:url" content="{{base_url}}{% path_to product %}?ref={{variant.objectID }}">
 <meta name="og:description" content="{{product.meta_description}}">
 <meta name="og:image" content="{{ product.images.first.medium }}">
 <meta name="description" content="{{product.meta_description}}">
 <meta name="keywords" content="{{product.meta_keywords}}">
 <title>{{product.seo_title}}</title>
 <link rel="canonical" href="{{base_url | append: '/' | append: product.url_key}}" />
+
+{% assign variant_path = '?variant=' | append: product.objectID %}
+{% if product.stock_state == 'in_stock'%}
+  {% assign schema_stock = "http://schema.org/InStock"%}
+{% elsif product.stock_state == 'resupplying'%}
+  {% assign schema_stock = "http://schema.org/OutOfStock"%}
+{% elsif product.stock_state == 'in_limited_stock'%}
+  {% assign schema_stock = "http://schema.org/LimitedAvailability"%}
+{% elsif product.stock_state == 'out_of_stock'%}
+  {% assign schema_stock = "http://schema.org/OutOfStock"%}
+{% endif %}
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org/",
+    "@type": "Product",
+    "name": {{product.model_name | json}},
+    "url": "{% path_to product%}{{variant_path}}",
+    "image": [
+      {% for image in product.images%}
+        "{{image.medium}}"{%if forloop.last == false%},{%endif%}
+      {%endfor%}
+     ],
+    "description": {{product.description | json}},
+    "sku": {{product.default_code | json}},
+    "brand": {
+      "@type": "Thing",
+      "name": {{product.brand.name | json}}
+    },
+
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "EUR",
+      "price": "{{product.price.value}}",
+      "itemCondition": "http://schema.org/UsedCondition",
+
+      "availability": "{{schema_stock}}",
+      "seller": {
+        "@type": "Organization",
+        "name": {{site.name  | json}}
+      }
+    }
+  }
+</script>
+
 {% endblock %}
 
 {% block content %}

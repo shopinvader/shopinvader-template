@@ -1,3 +1,23 @@
+{% assign variant_path = '?variant=' | append: product.objectID %}
+{% if with_richdata == true%}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@type": "Product",
+      "name": {{product.model_name  | json}},
+      "url": "{% path_to product%}",
+      "image": [
+        "{{image.first.medium}}"
+       ],
+      "sku": {{product.default_code | json}},
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "EUR",
+        "price": "{{product.price.value}}"
+      }
+    }
+  </script>
+{% endif%}
 <div class="card product-thumbnail bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%endif%}" >
   <div class="product-thumbnail-img">
     {% if product.images.size > 1 %}

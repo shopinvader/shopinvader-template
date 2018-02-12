@@ -50,7 +50,7 @@ handle: home
         {% paginate store.products by 12%}
           {% for product in paginate.collection %}
             <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-2 p-2  ">
-              {% include 'product_thumbnail' with product %}
+              {% include 'product_thumbnail' with product, with_richdata: true %}
             </div>
           {% endfor %}
         {% endpaginate %}
