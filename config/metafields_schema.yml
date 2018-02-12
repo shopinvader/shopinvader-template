@@ -4,6 +4,10 @@ store:
   fields:
     phone_number:
       type: string
+    phone_number_link:
+      type: string
+    phone_number_hours:
+      type: string
 theme:
   label: Theme
   fields:
