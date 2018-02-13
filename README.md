@@ -8,12 +8,12 @@ e-commerce solution.
 This template  provide a solid and flexible foundation for building new
 Shopinvader webshop. You can extend and adapt this theme to the shop's needs.
 
-See live demo [https://spacediscount.shopinvader.com/](here)
+See live demo [https://spacediscount.shopinvader.com/](https://spacediscount.shopinvader.com/)
 
 ## Requirement
 
 For preview locally this template you need to install
-[https://github.com/locomotivecms/wagon](Wagon) the LocomotiveCMS command line
+[Wagon](https://github.com/locomotivecms/wagon) the LocomotiveCMS command line
 tool for develop your website on your local machine.
 
 Please, visit the documentation website of Locomotive.
