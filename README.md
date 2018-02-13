@@ -3,7 +3,8 @@
 shopinvader-template is an open-source demonstration template for Shopinvader
 e-commerce solution.
 
-
+![shopinvader-template](https://imgur.com/7PiaRFZ)
+![shopinvader-template](https://imgur.com/zPOGE99)
 ## About
 This template  provide a solid and flexible foundation for building new
 Shopinvader webshop. You can extend and adapt this theme to the shop's needs.
