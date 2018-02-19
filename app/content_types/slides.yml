@@ -33,10 +33,10 @@ fields:
 - alt:
     label: alt
     type: string
-    required: true
+    required: false
     hint: Name of the slide
     localized: true
-    
+
 - link:
     label: "Link"
     type: string
