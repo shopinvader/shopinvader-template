@@ -1,8 +1,10 @@
-<div class="rating" >
-  {% if rating_value > 0%}
+<div class="rating " >
+  {% if rating_value > 0 or rating_value == null%}
     {% for i in (1..5) %}
       {% if i > rating_value %}
         <i class="far fa-star" aria-hidden="true"></i>
+      {% elsif rating_value == null %}
+        <i class="fas fa-star text-secondary" aria-hidden="true"></i>
       {% else %}
         <i class="fas fa-star" aria-hidden="true"></i>
       {% endif %}
