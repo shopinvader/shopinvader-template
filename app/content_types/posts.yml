@@ -50,13 +50,6 @@ fields:
     hint: "Date of the post"
     localized: false
 
-- main_post:
-    label: Main post
-    type: boolean
-    required: true
-    hint: "Most important post"
-    localized: true
-
 - post_author:
     label: Post Author
     type: text
