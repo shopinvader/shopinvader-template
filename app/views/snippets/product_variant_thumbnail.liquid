@@ -24,6 +24,10 @@
         <div class="small">{{product.variant_name}}</div>
       </a>
     </div>
-
+    {% for attribute in product.attributes%}
+      <span class="badge badge-info">
+        {{attribute.first}} <strong>{{attribute.last}}</strong>
+      </span>
+    {%endfor%}
   </div>
 </div>

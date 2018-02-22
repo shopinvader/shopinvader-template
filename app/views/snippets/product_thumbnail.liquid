@@ -18,7 +18,7 @@
     }
   </script>
 {% endif%}
-<div class="card product-thumbnail bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%endif%}" >
+<div class="card product-thumbnail bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%elsif display_lite == true%}product-thumbnail-lite{%endif%}" >
   <div class="product-thumbnail-img">
     {% if product.images.size > 1 %}
     <div id="slide-{{product.objectID}}" class="carousel slide p-2" data-ride="carousel" data-interval="false">
@@ -37,7 +37,7 @@
       </a>
     </div>
     {% else %}
-      <img class="group list-group-image card-img-top p-2" src="{{product.images.first.medium  | default: site.metafields.theme.noimage }}" alt="" />
+      <img class="group list-group-image card-img-top pr-2 pr-md-0" src="{{product.images.first.medium  | default: site.metafields.theme.noimage }}" alt="" />
     {% endif %}
     {%if product.price.discount > 0%}
     <div class="pb-1">
@@ -48,10 +48,10 @@
     {%endif%}
   </div>
   <div class="product-thumbnail-price card-body p-0 p-md-3 p-xl-2" data-link="{{product.url_key  | prepend: url_base }}">
-    <span class="small">
-      <small>{{'product_price_from' | translate}} </small>
-    </span>
     <div class="d-vertical-only">
+      <span class="small">
+        <small>{{'product_price_from' | translate}} </small>
+      </span>
       <strong class="h5">
         <span class="font-weight-bold {%if product.price.discount > 0%}text-warning{%else%}text-dark{% endif %}">
           {{product.price.value | money}}
@@ -64,6 +64,9 @@
       </strong>
     </div>
     <div class="d-horizontal-only">
+      <span class="small">
+        <small>{{'product_price_from' | translate}} </small>
+      </span>
       <strong class="product-price-value">
         <span class="font-weight-bold {%if product.price.discount > 0%}text-warning {%else%}text-dark{% endif %}">
           {{product.price.value | money}}
@@ -84,36 +87,36 @@
         </button>
       </form>
     </div>
-
   </div>
   <div class="product-thumbnail-name card-body p-1 p-sm-3 p-xl-2">
     <div class="font-weight-bold">
       <a href="{{product.url_key  | prepend: url_base }}" class="card-title">
         {{product.model_name}}
-        <div class="small">{{product.variant_name}}</div>
+        <div class="">{{product.variant_name}}</div>
 
       </a>
     </div>
-    <a href="{{url_base}}{% path_to product %}#product-section-reviews" >
+    <a href="{{url_base}}{% path_to product %}#product-section-reviews" class="small">
     {%if product.rating.summary.size > 0 %}
       {% include 'rating_stars'
       with rating_value: product.rating.summary.average
       %}
     {% endif%}
     </a>
-    <div class="card-text small">
+    <div class="card-text">
       <a href="{{product.categories.last.url_key  | prepend: url_base }}" class="text-dark"><u>{{product.categories.last.name}}</u></a>
       {% if product.brand.name%}
         - <a href="#" class="text-underline text-dark"><u>{{product.brand.name}}</u></a>
       {% endif %}
     </div>
     {% if product.variant_count > 0%}
-    <div class="small pb-2">
+    <div class="pt-2 pb-2">
       <a href="{{url_base}}{% path_to product %}" class="badge badge-secondary p-1">
         {{'product_variants' | translate}}
       </a>
     </div>
     {% endif%}
+
     <div class="small d-horizontal-only">
       {{product.short_description}}
     </div>

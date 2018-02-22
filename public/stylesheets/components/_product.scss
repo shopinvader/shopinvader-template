@@ -3,9 +3,7 @@
     border: none;
   }
 }
-%product-thumbnail-horizontal {
 
-}
 .product-thumbnail {
   border-width:5px;
   border-color: transparent;
@@ -39,6 +37,7 @@
   }
   .product-thumbnail-name {
     text-align: center;
+    font-size: 0.8rem;
   }
   .d-vertical-only {
     display: block;
@@ -47,41 +46,55 @@
     display: none;
   }
   &.product-thumbnail-horizontal {
-    display: flex;
-    flex-flow: row;
-    align-items: flex-start;
-    .d-horizontal-only {
-      display: block;
-    }
-    .d-vertical-only {
-      display: none;
-    }
-    .product-thumbnail-img {
-      order: 1;
-      height: 100%;
-      width: 20%
-    }
-    .product-thumbnail-price {
-      order: 3;
-      text-align: right;
-      height: 100%;
-      width: 20%;
-      border-left: 1px solid $gray-300;
-      .product-price-value {
-        font-size: 2rem;
+    /*Only for SM MD LG XL screen*/
+    @include media-breakpoint-up(sm) {
+      display: flex;
+      flex-flow: row;
+      align-items: flex-start;
+      .d-horizontal-only {
+        display: block;
+      }
+      .d-vertical-only {
+        display: none;
+      }
+      .product-thumbnail-img {
+        order: 1;
+        height: 100%;
+        width: 20%
+      }
+      .product-thumbnail-price {
+        order: 3;
+        text-align: right;
+        height: 100%;
+        width: 20%;
+        border-left: 1px solid $gray-300;
+        .product-price-value {
+          font-size: 2rem;
+        }
+      }
+      .product-thumbnail-name {
+        order: 2;
+        text-align: left;
+        height: 100%;
+        width: 60%
+      }
+      .product-add-to-cart {
+        opacity: 1;
+      }
+      @include media-breakpoint-down(sm) {
+        .product-thumbnail-name {
+          width: 70%
+        }
+        .product-thumbnail-price {
+          width: 30%;
+          .product-price-value {
+            font-size: 1rem;
+          }
+        }
       }
     }
-    .product-thumbnail-name {
-      order: 2;
-      text-align: left;
-      height: 100%;
-      width: 60%
-    }
-    .product-add-to-cart {
-      opacity: 1;
-    }
   }
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(xs) {
     border: 0;
     border-bottom: 1px solid $gray-300;
     display: flex;
@@ -102,12 +115,13 @@
     }
     .product-thumbnail-price {
 
-      order: 3;
-      text-align: right;
+      //bottom: 0;
       height: auto;
+      order: 3;
+      //position: absolute;
+      //right: 0;
+      text-align: right;
       width: 60%;
-
-      //border-left: 1px solid $gray-300;
       .product-price-value {
         font-size: 1rem;
       }
