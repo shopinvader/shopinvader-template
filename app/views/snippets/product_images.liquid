@@ -1,28 +1,31 @@
 
 {% if product.images.size > 1 %}
-<div class="carousel slide" data-ride="carousel" id="slide-{{product.objectID}}" data->
-  <!-- Carousel items -->
-  <div class="carousel-inner" role="listbox">
+  <div class="carousel slide" data-ride="carousel" id="slide-{{product.objectID}}">
+
+    <!-- Carousel items -->
+    <div class="carousel-inner" role="listbox">
+      {% for image in product.images %}
+      <div class="carousel-item {%if forloop.index == 1 %}active{%endif%}">
+        <img src="{{image.large}}" alt="" class="d-block img-fluid w-100"/>
+      </div>
+      {% endfor %}
+      <a class="carousel-control-prev" href="#slide-{{product.objectID}}" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#slide-{{product.objectID}}" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+  <div class="mt-1 mb-2">
     {% for image in product.images %}
-    <div class="carousel-item {%if forloop.index == 1 %}active{%endif%}" data-target="#slide-{{product.objectID}}">
-      <img src="{{image.large}}" alt="" class="d-block img-fluid w-100"/>
+    <div data-target="#slide-{{product.objectID}}" data-slide-to="{{forloop.index0}}" class="{%if forloop.index == 1 %}active{%endif%} border carousel-thumbails">
+      <img src="{{image.small}}" alt=""/>
     </div>
     {% endfor %}
-    <a class="carousel-control-prev" href="#slide-{{product.objectID}}" role="button" data-slide="prev">
-      <i class="fa fa-chevron-left text-dark"></i>
-    </a>
-    <a class="carousel-control-next" href="#slide-{{product.objectID}}" role="button" data-slide="next">
-      <i class="fa fa-chevron-right text-dark"></i>
-    </a>
   </div>
-</div>
-{% for image in product.images %}
-<div class="{%if forloop.index == 1 %}active{%endif%} carousel-thumbails"   data-target="#slide-{{product.erp_id}}" data-slide-number="{{forloop.index}}">
-  <a class="" href="#slide-{{product.erp_id}}" role="button" data-slide-number="{{forloop.index}}">
-    <img src="{{image.small}}" alt=""/>
-  </a>
-</div>
-{% endfor %}
 {% else %}
-<img class="group list-group-image" src="{{product.images.first.large  | default: site.metafields.theme.noimage }}" alt="" />
+  <img class="group list-group-image" src="{{product.images.first.large  | default: site.metafields.theme.noimage }}" alt="" />
 {% endif %}
