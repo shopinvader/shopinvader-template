@@ -18,9 +18,8 @@ $(document).ready(function () {
     }
   });
   $(document).on('ShopinvaderForm:before-submit',
-    function ()
+    function (element)
     {
-      console.log('DISPLAY OVERLAY');
       $('.main-loader').removeClass('d-none');
     }
   );
@@ -67,19 +66,40 @@ $(document).ready(function () {
     }
   );
 
-
-  /*cart*/
-  $('body').on('change', '.cart-line-qty .product-qty input',
+  $('body').on('change', '.product-qty input',
     function(event) {
-      var form = $(event.currentTarget).parents('form');
-      console.log($(event.currentTarget));
-      $(event.currentTarget).parents('form').submit();
+      var max_value = 100;
+      var min_value = 1;
+      /*Set custom max value*/
+      if($(this).attr('max')) {
+        max_value = $(this).attr('max');
+      }
+      /*Set custom min value*/
+      if($(this).attr('min')) {
+        min_value = $(this).attr('min');
+      }
+      var current_value = parseInt($(this).val())
+
+      if(current_value > max_value) {
+        current_value = max_value;
+      }
+      if(current_value < min_value) {
+        current_value = min_value;
+      }
+      if(isNaN(current_value)) {
+        current_value = min_value;
+      }
+      $(this).val(current_value);
+      if($(this).parents('.cart-line-qty').length > 0) {
+        /*Input in cart lines*/
+        $(this).parents('form').submit();
+      }
     }
   );
-
   $('body').on('click', '.product-qty .input-group-addon[data-type]',
     function(event) {
       var input_qty = $(event.currentTarget).parent('.input-group').find('input.form-control');
+
       if(input_qty.length > 0) {
         var qty = input_qty.val();
         if($(this).attr('data-type') == 'minus') {
@@ -112,8 +132,6 @@ $(document).ready(function () {
     }
   );
 });
-
-
 
 var main_modal = {
   id: 'main-modal',
