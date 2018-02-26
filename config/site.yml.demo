@@ -54,5 +54,17 @@ metafields:
           { "name": "France", "id": 74 },
           { "name": "Belgium", "id": 20 },
           { "name": "Spain", "id": 67 }
+        ],
+        "en": [
+          { "name": "France", "id": 74 },
+          { "name": "Belgium", "id": 20 },
+          { "name": "Spain", "id": 67 }
         ]
       }
+      all_filters: >
+        {
+          "fr": [
+          ],
+          "en": [
+          ]
+        }

@@ -125,8 +125,14 @@ is_layout: false
     {% block 'javascripts', short_name: true %}
     {% endblock %}
     {% block 'javascripts_algolia', short_name: true %}
-      {{ 'search_autocomplete.js' | javascript_tag }}
       {% include 'algolia_init' %}
+      {%comment%}
+      javascript used for search input in header.
+      Disabled for categorie et search page (no autocomplete menu displayed).
+      {%endcomment%}
+      <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+      {{ 'search_autocomplete.js' | javascript_tag }}
     {% endblock %}
   </body>
 </html>

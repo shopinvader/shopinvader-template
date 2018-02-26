@@ -12,29 +12,32 @@ $(document).ready(function() {
        compileOptions: [{delimiters: '<% %>'}]
      }
   };
+
   if($('#search-result').attr('data-category') != undefined) {
     instantsearch_params.urlSync = false;
-    instantsearch_params.searchParameters = {
-      hierarchicalFacetsRefinements: {
-        'categories.id': [$('#search-result').attr('data-category')]
-      }
-    };
-
+    if($('#search-result').attr('data-category')) {
+      instantsearch_params.searchParameters = {
+        hierarchicalFacetsRefinements: {
+          'categories.id': [$('#search-result').attr('data-category')]
+        }
+      };
+    }
   }
 
   var search = instantsearch(instantsearch_params);
   if(typeof(category_id) == 'undefined') {
-    search.addWidget(
-      instantsearch.widgets.searchBox({
-        container: '#header-search-input'
-      })
-    );
   }
+  search.addWidget(
+    instantsearch.widgets.searchBox({
+      container: '#header-search-input'
+    })
+  );
   search.addWidget(
     instantsearch.widgets.stats({
       container: '#search-stats'
     })
   );
+
   $('[data-filter-attr]').each(
   function(i, element){
     var element = $(element);
@@ -56,27 +59,6 @@ $(document).ready(function() {
     };
     search.addWidget(instantsearch.widgets[element.data('filter-widget-type')](search_widget));
   });
-
-
-  /*
-  if(typeof(category_id) != 'undefined') {
-    instantsearch_params.urlSync = false;
-    instantsearch_params.searchParameters = {
-      hierarchicalFacetsRefinements: {
-        categories_ids: [category_id]
-      }
-    };
-
-  }
-  var search = instantsearch(instantsearch_params);
-  if(typeof(category_id) == 'undefined') {
-    search.addWidget(
-      instantsearch.widgets.searchBox({
-        container: '#header-search-input'
-      })
-    );
-  }
-  */
 
   var product_item_css = $('#search-result .product-col').first().attr('class');
   var product_root_css = $('#search-result .row').first().attr('class');
@@ -110,11 +92,6 @@ $(document).ready(function() {
     })
   );
 
-
-
-
-
-
   search.addWidget(
     instantsearch.widgets.pagination({
       container: '#search-pagination',
@@ -124,7 +101,6 @@ $(document).ready(function() {
       }
     })
   );
-
 
   search.templatesConfig.helpers.emphasis = function(text, render) {
     return '<em>' + render(text) + '</em>';
@@ -149,9 +125,7 @@ $(document).ready(function() {
       return default_img_url;
     }
   };
-  search.templatesConfig.helpers.carousel = function(text, render) {
-    console.log(render(text));
-  };
+
   search.templatesConfig.helpers.ratingsStars = function(text, render) {
     var html = '';
     var value = parseInt(render(text));

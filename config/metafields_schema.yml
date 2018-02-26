@@ -63,3 +63,9 @@ payment:
     stripe_api_key:
       hint: "Stripe - Identifiant"
       type: string
+_store:
+  fields:
+    available_countries:
+      type: string
+    all_filters:
+      type: string

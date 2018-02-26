@@ -4,17 +4,25 @@ is_layout: true
 ---
 {% extends 'layouts/default' %}
 
+{% block 'css' %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css">
+{% endblock %}
+
+{% block 'javascripts_algolia'%}
+  {% include 'algolia_init'%}
+  <script src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
+  <script src="{{ 'search.js' | javascript_url }}?category={{category.name}}"></script>
+{% endblock %}
 
 {% block content %}
   {% if category %}
     {% assign filters = category.filters %}
-
   {% else %}
     {% assign filters = store.all_filters %}
   {% endif %}
   <div class="row">
-    <div class="col-12 col-md-3 col-xl-2 p-0 pt-4 border ">
-      <div id="filter" class="sidebar d-none d-md-block">
+    <div class="col-12 col-md-3 col-xl-2 p-0  border ">
+      <div id="filter" class="sidebar d-none d-md-block pt-4">
         <h3 class="pl-3">{{'search_filter_title' | translate}}</h3>
         {% if category == null%}
           <div
@@ -24,7 +32,7 @@ is_layout: true
             data-filter-attr="categories.name"
             data-filter-name="{{'search_category' | translate}}"
             data-filter-hit-limit='10'
-            class="small">
+            class="small border border-left-0 border-right-0 border-top-0 p-3">
           </div>
 
         {% else %}
@@ -67,24 +75,42 @@ is_layout: true
       {% endblock %}
     </div>
     <div class="col-sm-12 col-md-9 col-xl-10 p-0 ">
-      <div class="p-3">
+      <div class="p-1 p-sm-3 text-center text-sm-left">
         {% block intro%}
         {% endblock %}
       </div>
       {% block main%}
         {% block 'result'%}
-          <div class="row p-4">
-            <div class="col-8 col-lg-4">
-              {% include 'product_display_control'%}
+
+            <div class="row p-1 p-md-4">
+              <div class="col-sm-8 col-lg-4 d-none d-sm-flex">
+                {% include 'product_display_control'%}
+              </div>
+              <div class="col-12 col-sm-4 col-lg-4 text-right hidden" id="search-stats">
+
+              </div>
+              <div class="col-12 col-sm-12 col-lg-4 pt-2 pt-lg-2 text-right" id="search-pagination">
+
+              </div>
             </div>
-            <div class="col-4 col-lg-4 text-right hidden" id="search-stats">
-              {{'search_total_count' | translate: count: paginate.total_entries}}
+            <div id="search-result" >
+              <div class="row m-0 border border-1 border-left-0 border-bottom-0 border-right-0 ">
+                {% assign product_display = 'grid'%}
+                {% assign css_col = "col-12  col-sm-4 col-lg-3 col-xl-2"%}
+                {%if session.product_display == 'list'%}
+                  {%assign display_horizontal =  true%}
+                  {% assign css_col = "col-12"%}
+                {%endif%}
+                <div class="{{css_col}} product-col p-2 border border-1 border-left-0 border-top-0 ">
+
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-12 text-right">
+                </div>
+              </div>
             </div>
-            <div class="col-12 col-lg-4 pt-2 pt-lg-2 text-right" id="search-pagination">
-              {% include 'paginate' with paginate %}
-            </div>
-          </div>
-          <div id="search-result" data-category="{{category.objectID}}"></div>
         {% endblock%}
       {% endblock %}
     </div>
