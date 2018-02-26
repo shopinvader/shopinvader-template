@@ -1,4 +1,25 @@
+@include media-breakpoint-down(sm) {
+  main {
+    padding-top: 56px;
+  }
+}
 .navbar-header {
+  @include media-breakpoint-down(sm) {
+    box-shadow: 0px 4px 5px rgba(0,0,0,.26);
+    background: $gray-100;
+    //background-color: #fff;
+    position: fixed;
+
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    height: 56px;
+    z-index: 2000;
+    padding: 7px;
+    .navbar-brand img  {
+      height: 40px;
+    }
+  }
   #header-search-hit {
     display: none;
     width: 100%;
@@ -10,22 +31,157 @@
     }
   }
 }
-
 .categories-menu {
-  padding: 10px;
-  li {
+
+  & > li {
+    padding-bottom: 0.7rem;
+    padding-left: 0.7rem;
+    padding-top: 1rem;
+
+
+    .categories-dropdown {
+      background-position: bottom;
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+      width: 400px;
+      padding-bottom: 2rem;
+      padding-top: 1rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      margin-top: 0.9rem;
+      a {
+        color :$gray-700;
+      }
+
+      .categories-dropdown-label {
+        border-bottom: 1px solid $gray-300;
+        font-weight: bold;
+        font-size: 1.5rem;
+        line-height: 2.5rem;
+        text-transform: uppercase;
+      }
+
+      //position: relative;
+      .categories-dropdown-list {
+        border-right: 2px solid $gray-300;
+        padding: 0;
+        margin-top: 1rem;
+        width: 50%;
+        height: 100%;
+        position: relative;
+        .dropdown-item {
+          padding: 0;
+          & > span > a {
+            text-transform: uppercase;
+            line-height: 2rem;
+            &::after {
+              content: "\f105";
+
+              font-family: FontAwesome;
+              color: theme-color-level('primary', -5);
+              position: absolute;
+              right: 10px;
+            }
+          }
+
+          &:first-child {
+            .dropdown-content {
+              display: block;
+              opacity: 1;
+              z-index: 1000;
+            }
+          }
+          height: 100%;
+          & > span:hover {
+            .dropdown-content {
+              display: block;
+              opacity: 1;
+              z-index: 2000;
+            }
+          }
+          .dropdown-content {
+            transition: all ease-in 0.2s;
+            opacity: 0;
+            background: $white;
+            display: none;
+            position: absolute;
+            top: 0;
+            right: calc(-100% - 1px);
+            width: 100%;
+            height: 100%;
+
+            padding: 1rem;
+            padding-top: 0;
+            ul {
+              list-style: none;
+              padding: 0;
+              margin:0;
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
+
+.categories-menu- {
+
+  & > li {
+    position: relative;
+  }
+  .categories-dropdown {
+    background: #fff;
+
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding-bottom: 6rem;
+    position: absolute;
+    margin:0;
+    width: 100%;
+    z-index: 1050;
+    left: 0;
+    top: 45px;
+    padding: 1rem;
+    ul {
+
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        margin: 0;
+        padding: 0;
+      }
+    }
+    & > ul {
+      display: flex;
+      & > li {
+        border: 1px solid red;
+        padding-bottom: 1rem;
+        padding-left: 1rem;
+
+
+      }
+
+    }
+  }
+  & > li {
+    padding: 10px;
+
     border-right: 1px dotted $gray-200;
-    text-align: center;
+
+  }
+  li {
+
     &:last-child {
       border-right: 0;
       a {
-        padding-right: 0;
+        //padding-right: 0;
       }
     }
 
     &:first-child {
       a {
-        padding-left: 0;
+      //  padding-left: 0;
       }
     }
 
@@ -34,6 +190,76 @@
       padding-left: 20px;
       padding-right: 20px;
       padding-top: 5px;
+
+    }
+    .dropdown-menu {
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      padding-bottom: 6rem;
+      margin:0;
+      width: 100%;
+
+      .dropdown-item{
+        a {
+          display: block;
+          width: 90px;
+          line-height: 1.5rem;
+          font-weight: normal;
+
+          &:hover {
+            background: none;
+            color: theme-color('primary');
+            font-weight: bold;
+          }
+          &::after {
+            content: "\f105";
+
+            font-family: FontAwesome;
+            color: $gray-400;
+            position: absolute;
+            right: 10px;
+          }
+
+        }
+        .dropdown-content {
+          background: $white;
+          border-left: 0;
+          position: absolute;
+          right: -400px;
+          padding-top: 2rem;
+          top: 0rem;
+          min-height: 100%;
+          width: 400px;
+          opacity: none;
+          display: none;
+          .dropdown-image {
+            border: 1px solid green;
+            position: relative;
+            &::after {
+              width: 100%;
+              height: 20px;
+              background: red;
+              position: absolute;
+              top: -20px;
+              left:0;
+              content: " ";
+              display: block;
+              box-shadow: 10px 0 10px $white;
+            }
+            img {
+              width: 100%;
+              display: block;
+            }
+
+          }
+        }
+
+        &:first-child, &:hover {
+          .dropdown-content {
+            display: flex;
+            opacity: 1;
+          }
+        }
+      }
     }
   }
 }
@@ -41,7 +267,7 @@
 .header-dropdown-menu {
   background-color: $white;
   border: 1px solid $gray-200;
-  box-shadow: 2px 2px 15px 8px rgba(35, 47, 62, 0.3);
+  box-shadow: 0px 6px 15px 0px rgba(35, 47, 62, 0.3);
   color: $gray-500;
   content: '';
   display: block;
@@ -49,7 +275,7 @@
   margin-top: 34px;
   min-height: 150px;
   top: 10px;
-  width: calc(100% + 40px);
+  width: 85vw !important;
   .product-image {
     max-width: 100px;
   }
@@ -58,4 +284,10 @@
 .card {
   margin-bottom: 15px;
   margin-top: 15px;
+}
+
+.nav-mobile {
+  position: fixed;
+  left: 0;
+  width: 100%;
 }

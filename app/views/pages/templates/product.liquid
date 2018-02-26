@@ -78,7 +78,7 @@ handle: product
 
 <div class="row">
   <div class="col-12  bg-light">
-    <div class="container mt-4 mb-4 bg-white">
+    <div class="container mt-4 mb-4 bg-white pt-2">
       <div class="row">
         <div class="col-12">
           <ol class="breadcrumb pl-0 d-none d-sm-block">
@@ -234,7 +234,7 @@ handle: product
             <div class="editable_content">
               <div class="row">
                 {% for up_seller in variant.up_sellings %}
-                  <div class="col-3 col-xl-2">
+                  <div class="col-12 col-sm-6 col-md-3 col-xl-2">
                   {% with_scope objectID: [up_seller.id]%}
                     {% include 'product_thumbnail' with product: store.products.first%}
                   {% endwith_scope%}
@@ -252,11 +252,11 @@ handle: product
         {% include 'product_page_section' with step: 'cross_sellings' %}
         <div class="row">
           <div class="col-12">
-            <h2>{{'product_cross_sellings_title' | translate }}</h2>
+            <h2 class="d-none d-md-block">{{'product_cross_sellings_title' | translate }}</h2>
             <div class="editable_content">
               <div class="row">
                 {% for cross_seller in variant.cross_sellings %}
-                  <div class="col-3 col-xl-2">
+                  <div class="col-12 col-sm-6 col-md-3 col-xl-2">
                   {% with_scope objectID: [cross_seller.id]%}
                     {% include 'product_thumbnail' with product: store.products.first%}
                   {% endwith_scope%}

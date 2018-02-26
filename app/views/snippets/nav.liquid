@@ -1,7 +1,7 @@
 {% block 'header'%}
-<div class="container-fluid navbar-header mt-2 border border-top-0 border-left-0 border-right-0 border-primary">
+<div class="container-fluid navbar-header border">
   <div class="">
-    <div class="row d-none d-sm-block border border-1 border-top-0 border-left-0 border-right-0 text-right">
+    <div class="row d-none d-lg-block border border-1 border-top-0 border-left-0 border-right-0 text-right">
       <ul class="list-inline text-primary small col-12 mb-1">
         <li class="list-inline-item mr-4">
           {% if site.metafields.phone_number != '' %}
@@ -23,8 +23,8 @@
     </div>
   </div>
 
-  <div class="row mb-2 mt-2">
-    <div class="col-6 col-md-2 order-1">
+  <div class="row mb-md-2 mt-md-2">
+    <div class="col-6 col-sm-4 col-md-2 order-1">
       <a class="navbar-brand" href="{% path_to home %}">
       {% if site.metafields.theme.logo %}
         <img src="{{ site.metafields.theme.logo }}" alt="{{ site.name }}"  class="img-fluid"/>
@@ -39,13 +39,13 @@
           {% endeditable_text %}
         </div>
       </div>
-      <div class="row ">
+      <div class="row d-none d-md-flex">
         <div class="col-12">
-          <div class="input-group">
-            <input type="text" class="form-control" id="header-search-input" placeholder="Search for..." aria-label="Search for..." aria-describedby="Product search" autocomplete="off" value="{{params.q}}">
-            <span class="input-group-addon bg-primary text-white" >
+          <form method="GET" action="{% path_to search %}" class="input-group" >
+            <input type="text" class="form-control" id="header-search-input" placeholder="Search for..." aria-label="Search for..." aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q" data-autosubmit>
+            <button class="input-group-addon bg-primary text-white" name="submit">
               <i class="fa fa-search"></i>
-            </span>
+            </button>
             <div id="header-search-hit" >
               <div id="header-search-product-title">
                 <div class="row">
@@ -107,11 +107,11 @@
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
-    <div class="col-6 col-md-3 order-2 order-md-3  text-right mb-2">
+    <div class="col-6 col-sm-8 col-md-3 order-2 order-md-3  text-right mb-2">
       <div class="d-none d-md-block">
         {% include 'header_controls' %}
       </div>
@@ -128,15 +128,38 @@
         {% with_scope level: 0%}
           {% for category in store.categories %}
             <li class="{% if page.fullpath == page_in_nav.fullpath %}active{% endif %}">
-              <div class="dropdown">
-                <a href="{{category.url_key  | prepend: url_base }}" id="cat-{{category.id}}" class="text-white text-uppercase dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a href="{{category.url_key  | prepend: url_base }}" id="cat-{{category.id}}" class="text-white text-uppercase dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ category.name }}
+              </a>
+              <div class="dropdown-menu  categories-dropdown">
+                <div class="categories-dropdown-label">
                   {{ category.name }}
-                </a>
-                <div class="dropdown-menu" aria-labelledby="cat-{{category.id}}" >
-                {% for subcategory in category.childs %}
-                  <a class="dropdown-item p-1" href="{{subcategory.url_key  | prepend: url_base }}">{{subcategory.name}}</a>
-                {% endfor %}
                 </div>
+                <ul class="categories-dropdown-list" >
+                  {% for subcategory in category.childs %}
+                  <li class="dropdown-item">
+                    <span>
+                      <a  href="{{subcategory.url_key  | prepend: url_base }}">
+                        {{subcategory.name}}
+                      </a>
+                      <div class="dropdown-content">
+                        <div class="h4 text-primary">
+                          {{subcategory.name}}
+                        </div>
+                        <ul>
+                          {% for sublevel in subcategory.childs%}
+                          <li>
+                            <a  href="{{sublevel.url_key  | prepend: url_base }}" >
+                              {{sublevel.name}}
+                            </a>
+                          </li>
+                          {% endfor%}
+                        </ul>
+                      </div>
+                    </span>
+                  </li>
+                  {% endfor %}
+                </ul>
               </div>
             </li>
           {% endfor %}
@@ -148,24 +171,36 @@
       </div>
     </div>
   </div>
-</div>
-<div class="collapse" id="mobile-menu">
-  <ul class="list-group">
-  {% with_scope level: 0%}
-    {% for category in store.categories %}
-      <li class="list-group-item">
-          <a href="{{category.url_key  | prepend: url_base }}" id="cat-{{category.id}}" class="text-uppercase">
+  <div class="collapse nav-mobile" id="mobile-menu">
+    <ul class="list-group">
+    {% with_scope level: 0%}
+      {% for category in store.categories %}
+        <li class="list-group-item">
+          <a href="#collapse-cat-{{category.id}}" id="cat-{{category.id}}" class="text-uppercase" data-toggle="collapse">
             {{ category.name }}
           </a>
+          <div class="collapse" id="collapse-cat-{{category.id}}">
+            <ul class="list-group "  >
+              {% for subcategory in category.childs %}
+              <li class="list-group-item border-left-0 border-right-0">
+                <a href="{{subcategory.url_key  | prepend: url_base }}" id="cat-{{subcategory.id}}" class="text-uppercase">
+                  {{ subcategory.name }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </li>
+      {% endfor %}
+    {% endwith_scope%}
+      <li class="list-group-item">
+        <a href="{% path_to blog%}" class="text-uppercase">Blog</a>
       </li>
-    {% endfor %}
-  {% endwith_scope%}
-    <li class="list-group-item">
-      <a href="{% path_to blog%}" class="text-uppercase">Blog</a>
-    </li>
-    <li class="list-group-item bg-light pb-1 pt-1">
-      {% include 'header_controls' %}
-    </li>
-  </ul>
+      <li class="list-group-item bg-light pb-1 pt-1">
+        {% include 'header_controls' %}
+      </li>
+    </ul>
+  </div>
 </div>
+
 {% endblock %}

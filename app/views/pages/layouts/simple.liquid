@@ -5,9 +5,10 @@ is_layout: true
 {% extends 'layouts/default' %}
 
 {% block content %}
-  <div class="row">
+  <div class="row  bg-secondary">
+    
   {% if contents.slides.size > 0%}
-    <div class=" text-center d-none d-md-block" id="slider">
+    <div class=" text-center d-none d-sm-block" id="slider">
       <div class="carousel slide" id="main-carousel" data-ride="carousel">
         <div class="carousel-inner">
         {% for slide in contents.slides%}
@@ -30,6 +31,15 @@ is_layout: true
       {% endif %}
       </div>
     </div>
+      <div class="container d-sm-none">
+        <div class="row">
+          {% for slide in contents.slides%}
+          <div class="col-12 p-sm-0 pt-3 pt-sm-3">
+            <img src="{{slide.picture.url}}" alt="{{slide.name}}" class="w-100">
+          </div>
+          {% endfor %}
+        </div>
+      </div>
   {% endif %}
   </div>
 

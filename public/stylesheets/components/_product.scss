@@ -184,23 +184,45 @@
 //Page section menu
 .product-liste-section {
   border-bottom: 3px solid theme-color("primary");
-  margin-top: 20px;
-  width: 25%;
+  margin-left: -15px;
+  margin-right: -15px;
+
+  width: calc(100%  30px) !important;
+  @include media-breakpoint-down(sm) {
+    margin-left: -20px;
+    margin-top: 20px;
+    border-bottom: none;
+  }
+
+  //width: 25%;
   a {
     color: theme-color("primary");
     display: block;
 
-    font-size: $font-size-lg;
+    font-size: 1rem;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 8px;
     padding-bottom: 5px;
   }
+  @include media-breakpoint-down(sm) {
+    li {
+      box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.3);
+      a {
 
+        font-size: 1rem;
+      }
+      &:not(.active) {
+        display: none;
+      }
+    }
+
+  }
   .active {
     background-color: theme-color("primary");
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
+
     a {
       color: $white;
       font-weight: bold;

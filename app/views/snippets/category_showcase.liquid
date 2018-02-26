@@ -1,0 +1,137 @@
+{%if category %}
+{{category.filters}}
+
+  {% with_scope categories: {id: category.objectID}, main: true %}
+    {% if store.products.size > 0%}
+      <div class="row justify-content-end">
+        <div class=" col-12 col-sm-5 col-md-5 col-lg-3 bg-primary text-white text-left p-3 p-lg-4 showcase-desc">
+          <div class="h2 text-uppercase ">
+            {{category.name}}
+          </div>
+          <div class="">
+            {{category.short_description}}
+          </div>
+          <div class="text-center pb-2 pb-lg-4">
+            <a href="{% path_to category %}" class="btn btn-sm btn-light text-primary ">
+              {{'show_more' | translate}}
+            </a>
+          </div>
+        </div>
+        <div class="col-12 col-sm-7 col-md-7 col-lg-5 pt-4 pb-2">
+          <div id="slide-showcase-categories" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+              {% for product in store.products%}
+              <div class="carousel-item {%if forloop.first%}active{%endif%} text-center ">
+                <a href="{% path_to product %}?variant={{product.objectID}}">
+                  <img class="d-inline-block img-fluid" src="{{product.images.first.medium}}" alt="{{product.model_name}}">
+                </a>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="h4">
+                      <a href="{% path_to product %}?variant={{product.objectID}}" class="text-dark">
+                        {{product.model_name}}
+                      </a>
+                    </div>
+                    <div class="small text-secondary">
+                      {{product.variant_name}}
+                    </div>
+                    {% include 'rating_stars' with
+                        rating_value: product.rating.summary.average,
+                        rating_nbr: product.rating.reviews.size %}
+                    <div class="pt-4">
+                      <b>
+                        {%if product.price.discount > 0%}
+                        <div class="text-dark">
+                          <s>{{product.price.original_value | money }}</s>
+                        </div>
+                        {% endif %}
+                        <span class="h3 pull-right font-weight-bold {%if product.price.discount > 0%}text-warning{% else %} text-primary{% endif %}">
+                          {{ product.price.value | money}}
+                        </span>
+                        {% if product.pricelist.tax_included == true %}
+                        <sub class="text-size-base">{{'product_vat_inc' | translate}}</sub>
+                        {% endif %}
+                      </b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {%endfor%}
+              <div class="text-right">
+                <a class="btn btn-secondary" href="#slide-showcase-categories" role="button" data-slide="prev">
+                  <i class="fa fa-angle-left"></i>
+                </a>
+                <a  class="btn btn-secondary"  href="#slide-showcase-categories" role="button" data-slide="next">
+                  <i class="fa fa-angle-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4  pt-4 border border-secondary border-right-0 border-top-0 border-bottom-0">
+          <div class="row">
+            <div class="col-12">
+              <div class="h3">
+                POPULAR PRODUCT
+              </div>
+            </div>
+          </div>
+          <div class="row">
+        {% paginate store.products by 4 %}
+          {% for product in paginate.collection%}
+          <div class="col-3 col-sm-4 col-lg-12 pb-1 pt-1 border  border-left-0 border-bottom-0 ">
+            <div class="row">
+              <div class="col-12 col-md-3 text-center">
+                <a href="{% path_to product %}?variant={{product.objectID}}">
+                  <img class="d-block img-fluid " src="{{product.images.first.medium}}" alt="{{product.model_name}}">
+                </a>
+              </div>
+              <div class="col-12 col-md-9 small d-none d-sm-block">
+                <a href="{% path_to product %}?variant={{product.objectID}}">
+                  {{product.model_name}}
+                </a>
+                <div class="">
+                  {% include 'rating_stars' with
+                  rating_value: product.rating.summary.average,
+                  rating_nbr: product.rating.reviews.size
+                  %}
+                </div>
+
+                <div class="">
+                  {{product.price.value |money}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {% endfor%}
+            </div>
+        {% endpaginate%}
+        </div>
+      </div>
+    {%endif%}
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          {%with_scope parent: {id: category.objectID}%}
+            {% paginate store.categories by 4 %}
+              {%for category in paginate.collection%}
+                {% if category.images.size > 0%}
+                <figure class="figure col-6 col-sm-6 col-md-3 p-0 m-0" data-link="{% path_to category%}">
+
+                  <img src="{{category.images.first.large}}" class="img-fluid" alt="{{category.name}}">
+                  <figcaption class="figure-caption text-center">
+                    <a href="{% path_to category%}" class="text-light">{{category.name}}</a>
+                  </figcaption>
+                </figure>
+                {% endif %}
+              {%endfor%}
+            {% endpaginate  %}
+          {%endwith_scope%}
+        </div>
+      </div>
+    </div>
+  {%endwith_scope%}
+
+
+{%endif%}

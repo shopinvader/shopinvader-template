@@ -22,10 +22,10 @@
   <div class="mt-1 mb-2">
     {% for image in product.images %}
     <div data-target="#slide-{{product.objectID}}" data-slide-to="{{forloop.index0}}" class="{%if forloop.index == 1 %}active{%endif%} border carousel-thumbails">
-      <img src="{{image.small}}" alt=""/>
+      <img src="{{image.small}}" alt="" class="img-fluid"/>
     </div>
     {% endfor %}
   </div>
 {% else %}
-  <img class="group list-group-image" src="{{product.images.first.large  | default: site.metafields.theme.noimage }}" alt="" />
+  <img class="img-fluid" src="{{product.images.first.large  | default: site.metafields.theme.noimage }}" alt="" />
 {% endif %}

@@ -79,13 +79,3 @@
 .text-gray-darker {
   color: grays("900");
 }
-
-.title-decorator:before {
-  display: inline-block;
-  font-family: FontAwesome;
-  font-size: 0.9em;
-  color: theme-colors("danger");
-  content:"";
-
-  //transform: rotate(-45deg);
-}
