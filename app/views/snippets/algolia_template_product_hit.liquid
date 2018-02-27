@@ -85,7 +85,15 @@
             </span>
           <%/price.discount %>
         </strong>
-        <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart "><i class="fa fa-shopping-basket"></i> Add to cart</button>
+        <form class="" action="{%path_to page%}" method="post" data-shopinvader-form>
+          <input type="hidden" name="action_proxy" value="cart/item">
+          <input type="hidden" name="action_method" value="post">
+          <input type="hidden" name="item_qty" value="1">
+          <input type="hidden" name="product_id" value="<% objectID %>">
+          <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart ">
+            <i class="fa fa-shopping-basket"></i> {{'product_add_to_cart' | translate}}
+          </button>
+        </form>
       </div>
     </div>
     <div class="product-thumbnail-name card-bodyp-0 p-md-3 p-xl-2">
