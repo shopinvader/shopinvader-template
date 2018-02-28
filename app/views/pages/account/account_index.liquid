@@ -38,27 +38,27 @@ seo_title: My sales orders | Shopinvader demo
                     <i class="fa fa-map-marker text-primary"></i>
                     {{ "account_order_address" | translate }}
                     <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      {{sale.partner_shipping.display_name}}
+                      {{sale.shipping.address.name}}
                     </button>
                     <div class="dropdown-menu p-2 small" aria-labelledby="dropdownMenuButton">
-                      <strong>{{sale.partner_shipping.display_name}}</strong>
-                      <div>{{sale.partner_shipping.street}}</div>
-                      <div>{{sale.partner_shipping.street2}}</div>
+                      <strong>{{sale.shipping.address.name}}</strong>
+                      <div>{{sale.shipping.address.street}}</div>
+                      <div>{{sale.shipping.address.street2}}</div>
                       <div>
-                        {{sale.partner_shipping.zip}}
-                        {{sale.partner_shipping.city}}
+                        {{sale.shipping.address.zip}}
+                        {{sale.shipping.address.city}}
                       </div>
-                      <div>{{sale.partner_shipping.country_id.name}}</div>
-                      <div>{{sale.partner_shipping.phone}}</div>
+                      <div>{{sale.shipping.address.country_id.name}}</div>
+                      <div>{{sale.shipping.address.phone}}</div>
                     </div>
                   </div>
                 </div>
-                {% if sale.carrier_id %}
+                {% if sale.shipping.carrier %}
                 <div class="col-6 col-sm-4">
                   <i class="fa-li fa fa-truck text-primary"></i>
                   {{ "account_order_shipping" | translate }}
-                  {{sale.carrier_id.name}}
-                  {% for track in sale.tracking %}
+                  {{sale.shipping.carrier.name}}
+                  {% for track in sale.shipping.tracking %}
                     <div>
                       <a href="{{track.url}}">
                         {{"account_order_tracking" | translate }} {{track.value}}
@@ -69,13 +69,13 @@ seo_title: My sales orders | Shopinvader demo
                 {% endif %}
                 <div class="col">
                   <div class="font-weight-bold">
-                    {{sale.amount_total | money }}
+                    {{sale.amount.total | money }}
                   </div>
                 </div>
               </div>
             </div>
             <div class="card-body">
-            {% for line in sale.order_line %}
+            {% for line in sale.lines.items %}
               <div class="row border border-top-0 border-left-0 border-right-0 pb-4">
                 <div class="col-4 col-sm-2">
                   <img src="{{line.product.images.first.small}}" alt="{{line.product.name}}" class="img-fluid"/>
@@ -84,11 +84,11 @@ seo_title: My sales orders | Shopinvader demo
                   <a href="{{line.product.url_key}}" target="_blank">{{line.product.name}}</a>
                   <div class="small">
                     {{ 'account_order_qty' | translate }}
-                    <b>{{line.product_uom_qty | round}}</b>
+                    <b>{{line.qty | round}}</b>
                   </div>
                   <div class="small">
                     {{ 'account_order_subtotal' | translate }}
-                    <b>{{line.price_subtotal_gross | money}}</b>
+                    <b>{{line.amount.total | money}}</b>
                   </div>
                 </div>
 

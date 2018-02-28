@@ -9,13 +9,15 @@
               {{'cart_total_subtotal' | translate }}
           </td>
           <td class="text-bold text-right">
-            {{cart.item_amount_total | money }}
+            {{cart.lines.amount.total | money }}
           </td>
         </tr>
+        {% if cart.shipping.carrier != null%}
         <tr>
           <td class="">{{'cart_total_shipping' | translate }}</td>
-          <td class="text-right">{{cart.shipping_amount_total | money }}</td>
+          <td class="text-right">{{cart.shipping.amount.total | money }}</td>
         </tr>
+        {%endif%}
         <tr>
           <td class="">
             <div class="h3 font-weight-bold  ">
@@ -27,10 +29,10 @@
           </td>
           <td class="text-right">
             <div class="h3 text-primary font-weight-bold ">
-              {{cart.amount_total | money }}
+              {{cart.amount.total | money }}
             </div>
             <div class="">
-              {{cart.amount_tax | money }}
+              {{cart.amout.tax | money }}
             </div>
           </td>
         </tr>

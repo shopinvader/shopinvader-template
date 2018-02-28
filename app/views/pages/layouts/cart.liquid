@@ -17,8 +17,8 @@ is_layout: true
     </ul>
   </div>
 </div>
-<span class="badge bagde-info">{{store.cart.item_number}}</span>
-{% if store.cart.item_number > 0%}
+<span class="badge bagde-info">{{store.cart.lines.count}}</span>
+{% if store.cart.lines.count > 0%}
   {% block main %}
   {% endblock %}
 {% else %}

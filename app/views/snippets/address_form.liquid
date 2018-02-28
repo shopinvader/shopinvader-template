@@ -68,7 +68,7 @@
     <div class="col-12 col-sm-3">
       <div class="form-group">
         <label for="{{ 'country_id' | prepend: prefix_id }}" class="required">{{ 'partner_country' | translate }}</label>
-        <select class="form-control" id="{{ 'country_id' | prepend: prefix_id }}" name="{{ 'country_id' | prepend: prefix | append: suffix }}">
+        <select class="form-control" id="{{ 'country_id' | prepend: prefix_id }}" name="{{ 'country[id]' | prepend: prefix | append: suffix }}">
         {% for country in store.available_countries %}
           <option value="{{country.id}}" {%if country.id == adresse.country_id %}selected="selected"{%endif%}>{{country.name}}</option>
         {% endfor %}

@@ -48,7 +48,7 @@
     <i class="fa fa-shopping-basket text-primary fa-2x fa-fw d-inline-block ml-3"></i>
     <div class="bold small btn btn-link btn-sm text-dark d-block">
       {{'header_cart' | translate }}
-      <span class="badge badge-warning">{{ store.cart.item_number | round | default: 0 }}</span>
+      <span class="badge badge-warning">{{ store.cart.lines.count | round | default: 0 }}</span>
     </div>
   </a>
 </div>

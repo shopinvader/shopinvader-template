@@ -50,15 +50,15 @@
   <div class="product-thumbnail-price card-body p-0 p-md-3 p-xl-2" data-link="{{product.url_key  | prepend: url_base }}">
     <div class="d-vertical-only">
       <span class="small">
-        <small>{{'product_price_from' | translate}} </small>
+        <small>{{ 'product_price_from' | translate }}</small>
       </span>
       <strong class="h5">
         <span class="font-weight-bold {%if product.price.discount > 0%}text-warning{%else%}text-dark{% endif %}">
-          {{product.price.value | money}}
+          {{ product.price.value | money }}
         </span>
-        {%if product.price.discount > 0%}
+        {% if product.price.discount > 0 %}
           <span class="text-dark small">
-            <s>{{product.price.original_value | money }}</s>
+            <s>{{ product.price.original_value | money }}</s>
           </span>
         {% endif %}
       </strong>
@@ -69,21 +69,21 @@
       </span>
       <strong class="product-price-value">
         <span class="font-weight-bold {%if product.price.discount > 0%}text-warning {%else%}text-dark{% endif %}">
-          {{product.price.value | money}}
+          {{ product.price.value | money }}
         </span>
         {%if product.price.discount > 0%}
           <span class="text-dark small">
-            <s>{{product.price.original_value | money }}</s>
+            <s>{{ product.price.original_value | money }}</s>
           </span>
         {% endif %}
       </strong>
-      <form class="" action="{%path_to page%}" method="post" data-shopinvader-form>
-        <input type="hidden" name="action_proxy" value="cart/item">
-        <input type="hidden" name="action_method" value="post">
+      <form method="POST" action="invader/cart/add_item" method="post" data-shopinvader-form>
+        <input type="hidden" name="invader_success_url" value="{%path_to page%}" />
+        <input type="hidden" name="invader_error_url" value="{%path_to page%}" />
         <input type="hidden" name="item_qty" value="1">
         <input type="hidden" name="product_id" value="{{product.objectID }}">
         <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart ">
-          <i class="fa fa-shopping-basket"></i> Add to cart
+          <i class="fa fa-shopping-basket"></i> {{'product_add_to_cart' | translate}}
         </button>
       </form>
     </div>
@@ -92,14 +92,15 @@
     <div class="font-weight-bold">
       <a href="{{product.url_key  | prepend: url_base }}" class="card-title">
         {{product.model_name}}
-        <div class="">{{product.variant_name}}</div>
-
+        <div class="">
+          {{product.variant_name}}
+        </div>
       </a>
     </div>
     <a href="{{url_base}}{% path_to product %}#product-section-reviews" class="small">
     {%if product.rating.summary.size > 0 %}
       {% include 'rating_stars'
-      with rating_value: product.rating.summary.average
+         with rating_value: product.rating.summary.average
       %}
     {% endif%}
     </a>
@@ -116,15 +117,14 @@
       </a>
     </div>
     {% endif%}
-
     <div class="small d-horizontal-only">
       {{product.short_description}}
     </div>
   </div>
   <div class="product-thumbnail-btn d-vertical-only pr-2 pl-2">
-    <form class="" action="{%path_to page%}" method="post" data-shopinvader-form>
-      <input type="hidden" name="action_proxy" value="cart/item">
-      <input type="hidden" name="action_method" value="post">
+    <form method="POST" action="invader/cart/add_item" method="post" data-shopinvader-form>
+      <input type="hidden" name="invader_success_url" value="{%path_to page%}" />
+      <input type="hidden" name="invader_error_url" value="{%path_to page%}" />
       <input type="hidden" name="item_qty" value="1">
       <input type="hidden" name="product_id" value="{{product.objectID }}">
       <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart ">

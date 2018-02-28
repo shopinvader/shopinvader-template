@@ -32,7 +32,7 @@ $(document).ready(function () {
       console.log($(element.target));
       var new_document = $('<div></div>').append($.parseHTML(element.ajaxpage));
 
-      if($(element.target).find('[name=action_method]').val() == 'post' && $(element.target).find('[name=action_proxy]').val() == 'cart/item') {
+      if($(element.target).attr('action') == 'invader/cart/add_item') {
         main_modal.show(
           new_document.find('#product-modal-add .title').html(),
           new_document.find('#product-modal-add .content').html(),

@@ -80,6 +80,9 @@ cart_address_add:
 cart_address_update:
   en: Update
   fr: Modifier l'adresse
+cart_address_delete:
+  en: Delete
+  fr: Supprimer l'adresse
 cart_checkout:
   en: "Checkout"
   fr: "Passer ma commande"

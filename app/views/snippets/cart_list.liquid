@@ -1,6 +1,6 @@
 
 
-{% for cart_line in cart.order_line %}
+{% for cart_line in cart.lines.items %}
   {% if product_id == null or cart_line.product.id == product_id %}
     <div class="card">
       <div class="card-body row">
@@ -8,8 +8,8 @@
           <img src="{{cart_line.product.images.first.medium | default: site.metafields.theme.noimage}}" alt="" title="{{cart_line.product.name}}"  class="img-fluid">
         </div>
         <div class="col-8 col-sm-10 col-md-6 h4 p-0">
-          {{cart_line.product.name}}
-          <div class="small text-dark">SKU {{cart_line.product.default_code}}</div>
+          {{cart_line.product.model.name}}
+          <div class="small text-dark">SKU {{cart_line.product.sku}}</div>
         </div>
         <div class="col-12 col-md-4">
           <div class="row text-right m-0 mt-3 mt-xl-0">
@@ -19,35 +19,34 @@
               </div>
               <div class="h3">
                 {% if business == true%}
-                  {{cart_line.price_subtotal | money }}
+                  {{cart_line.amount.untaxed | money }}
                 {% else %}
-                  {{cart_line.price_subtotal_gross | money }}
+                  {{cart_line.amount.total | money }}
                 {% endif %}
               </div>
             </div>
             <div class="col-8 col-sm-5 col-md-9 order-1 order-xl-2">
-              <form class="cart-line-qty" action="#" method="post" data-shopinvader-form >
-                <input type="hidden" name="action_proxy" value="cart/item">
-                <input type="hidden" name="action_method" value="put">
+              <form class="cart-line-qty" method="POST" action="invader/cart/update_item" data-shopinvader-form>
+                <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+                <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
                 <input type="hidden" name="item_id" value="{{cart_line.id}}">
                 {% if readonly == true%}
                 <center>
                   <div class="small text-dark">
                   {{ 'cart_quantity' | translate }}
                   </div>
-                  {{cart_line.product_uom_qty | round }}
+                  {{cart_line.qty | round }}
                 </center>
                 {% else %}
-                  {% include 'product_qty_input' with qty: cart_line.product_uom_qty%}
+                  {% include 'product_qty_input' with qty: cart_line.qty %}
                 {% endif %}
               </form>
             </div>
-
             <div class="col-4 col-sm-2 col-xl-3 order-2 order-xl-3">
               {% if readonly != true%}
-              <form class="" action="#" method="post">
-                <input type="hidden" name="action_proxy" value="cart/item">
-                <input type="hidden" name="action_method" value="delete">
+              <form class="cart-line-qty" method="POST" action="invader/cart/delete_item" data-shopinvader-form>
+                <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+                <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
                 <input type="hidden" name="item_id" value="{{cart_line.id}}">
                 <button type="submit" class="btn btn-default">
                   <i class="fa fa-trash"></i>

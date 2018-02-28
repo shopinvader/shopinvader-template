@@ -85,9 +85,9 @@
             </span>
           <%/price.discount %>
         </strong>
-        <form class="" action="{%path_to page%}" method="post" data-shopinvader-form>
-          <input type="hidden" name="action_proxy" value="cart/item">
-          <input type="hidden" name="action_method" value="post">
+        <form method="POST" action="invader/cart/add_item"  method="post" data-shopinvader-form>
+          <input type="hidden" name="invader_success_url" value="{%path_to page%}" />
+          <input type="hidden" name="invader_error_url" value="{%path_to page%}" />
           <input type="hidden" name="item_qty" value="1">
           <input type="hidden" name="product_id" value="<% objectID %>">
           <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart ">
@@ -131,9 +131,9 @@
       </div>
     </div>
     <div class="product-thumbnail-btn d-vertical-only pr-2 pl-2">
-      <form class="" action="{%path_to page%}" method="post" data-shopinvader-form>
-        <input type="hidden" name="action_proxy" value="cart/item">
-        <input type="hidden" name="action_method" value="post">
+      <form method="POST" action="invader/cart/add_item" method="post" data-shopinvader-form>
+        <input type="hidden" name="invader_success_url" value="{%path_to page%}" />
+        <input type="hidden" name="invader_error_url" value="{%path_to page%}" />
         <input type="hidden" name="item_qty" value="1">
         <input type="hidden" name="product_id" value="<% objectID %>">
         <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart ">

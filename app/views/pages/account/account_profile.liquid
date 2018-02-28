@@ -12,9 +12,9 @@ seo_title: My account profile | Shopinvader demo
     <div class="card">
       <h2 class="card-header bg-primary text-light"><i class="fas fa-user"></i>  {{'account_profil_title' | translate}}</h2>
       <div class="card-body">
-        <form class="" action="#" method="post" data-autocomplete="address">
-          <input type="hidden" name="action_method" value="put">
-          <input type="hidden" name="action_proxy" value="addresses/{{profile.id | round}}">
+        <form action="invader/address/{{profile.id | round}}/update" method="post" data-autocomplete="address">
+          <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+          <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
           {% include 'address_form' with address: profile %}
           <div class="text-right">
             <input type="submit" name="submit" class="btn btn-primary " value="{{'account_address_submit' | translate}}">

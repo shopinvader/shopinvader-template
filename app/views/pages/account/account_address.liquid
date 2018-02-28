@@ -10,22 +10,23 @@ seo_title: Shipping addresses | Shopinvader demo
 <div class="pt-4">
   {% if params.address_id or params.add  == "true" %}
     <div class="card">
+    {% assign invader_error_url = path_to page %}
     {% if params.add == "true" %}
-      {% assign action_method = 'post'%}
-      {% assign action_proxy = 'contacts'%}
+      {% assign form_action = 'invader/address/add' %}
+      {% assign form_params = '?add=true'%}
     {% else %}
       {% with_scope id: params.address_id %}
-        {% assign address = store.contacts.first %}
+        {% assign address = store.addresses.first %}
+        {% assign form_action = 'invader/address/' | append: address.id | append: "/update" %}
+
       {% endwith_scope%}
-      {% assign action_method = 'put'%}
-      {% assign action_proxy = 'contacts/' | append: address.id | round%}
     {% endif %}
 
       <h2 class="card-header bg-primary text-light"> {{'account_address_update' | translate  }}</h2>
       <div class="card-body">
-        <form class="" action="{% path_to page.handle %}" method="post" data-autocomplete="address">
-          <input type="hidden" name="action_method" value="{{action_method}}">
-          <input type="hidden" name="action_proxy" value="{{action_proxy}}">
+        <form class="" action="{{form_action}}" method="post" data-autocomplete="address">
+          <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+          <input type="hidden" name="invader_error_url" value="{% path_to page %}{{form_params}}" />
           {% include 'address_form' with address, with_require: true %}
           <div class="row">
             <div class="col-6 text-left">
@@ -59,8 +60,9 @@ seo_title: Shipping addresses | Shopinvader demo
             input_group: 'shipping',
             input_name: 'partner_shipping[id]',
             address_list:  store.addresses,
-            display_delector : false,
+            display_selector : false,
             display_add: none,
+            display_delete: true
           %}
         {% endwith_scope%}
       </div>

@@ -13,31 +13,31 @@ editable_elements:
 {% extends 'layouts/checkout' %}
 
 {% block content/main %}
-{% if store.cart.carrier != null%}
-  {% assign selected_carrier = store.cart.carrier  %}
+{% if store.cart.shipping.carrier != null%}
+  {% assign selected_carrier = store.cart.shipping.carrier %}
 {% else %}
-  {% assign selected_carrier = store.cart.available_carriers | first %}
+  {% assign selected_carrier = store.carriers | first %}
 {% endif%}
-{% assign selected_payment = store.cart.available_payment_method_ids | first %}
+{% assign selected_payment = store.payment_methods | first %}
   <div>
     <div class="row">
       <div class="col-lg-8 col-xl-9">
         <h2> {{ 'cart_carrier_title' | translate }}</h2>
         <div class="card-deck-wrapper">
-            {% if store.cart.available_carriers.size >0  %}
-            <form method="post" action="{% path_to cart_checkout %}"  id="cart_carrier_form" data-shopinvader-form>
-              <input type="hidden" name="action_method" value="put">
-              <input type="hidden" name="action_proxy" value="cart">
-              <input type="hidden" name="current_step" value="{{ page.handle }}">
-              <input type="hidden" name="next_step" value="cart_checkout">
+          {% if store.carriers.size >0  %}
+            <form method="post" action="invader/cart/update" id="cart_carrier_form" data-shopinvader-form>
+              <input type="hidden" name="invader_success_url" value="{% path_to cart_checkout %}" />
+              <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+              <input type="hidden" name="step[current]" value="{{ page.handle }}">
+              <input type="hidden" name="step[next]" value="cart_checkout">
               <div class="card-deck">
-                {%for carrier in store.cart.available_carriers%}
+                {%for carrier in store.carriers%}
                 <div class="card">
                   <div class="card-body">
                     <div class="row">
                       <div class="col-xs-8 col-sm-12 radio text-lg">
                         <label>
-                          <input data-autosubmit type="radio" value="{{carrier.id | round}}" {%if carrier.id == selected_carrier.id %} checked="checked" {%endif%} name="carrier_id" autocomplete="off"/>
+                          <input data-autosubmit type="radio" value="{{carrier.id | round}}" {%if carrier.id == selected_carrier.id %} checked="checked" {%endif%} name="shipping[carrier][id]" autocomplete="off"/>
                           <b>{{carrier.name}}</b>
                         </label>
                       </div>
@@ -81,7 +81,7 @@ editable_elements:
               <div class="card text-center">
                 <div class="card-header">
                   <ul class="nav nav-tabs card-header-tabs">
-                  {% for payment_method in store.cart.available_payment_method_ids%}
+                  {% for payment_method in store.payment_methods%}
                     <li class="nav-item"  data-toggle="tab" href="#tab-{{payment_method.id}}" role="tab" aria-controls="{{payment_method.id}}" aria-selected="false">
                       <a class="nav-link  {% if selected_payment.id == payment_method.id %} active{%endif%}" href="#">
                         <i class="fab fa-{{payment_method.code}}"></i> {{payment_method.name}}
@@ -92,31 +92,30 @@ editable_elements:
                 </div>
                 <div class="card-body">
                   <div class="tab-content" id="payment-tabs">
-                  {% for payment_method in store.cart.available_payment_method_ids%}
+                  {% for payment_method in store.payment_methods%}
                     <div class="tab-pane fade {% if selected_payment.id == payment_method.id %}show active{%endif%}" id="tab-{{payment_method.id}}" role="tabpanel" aria-labelledby="home-tab">
+                      <form method="post" action="invader/cart/update" id="{{payment_method.code}}-form">
+                        <input type="hidden" name="invader_success_url" value="{% path_to cart_end %}" />
+                        <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+                        <input type="hidden" name="step[current]" value="{{ page.handle }}">
+                        <input type="hidden" name="step[next]" value="cart_end">
+                        <input type='hidden' id="payment_method_id" name="payment[method][id]" value="{{payment_method.id}}"/>
+                        <input type='hidden' id="payment_method_code" name="payment[method][code]" value="{{payment_method.code}}"/>
 
-                      <form action="{% path_to page.handle %}" method="post"  id="{{payment_method.code}}-form">
-                        <input type="hidden" name="redirect_success_to" value="{% path_to 'cart_end' %}">
-                        <input type="hidden" name="action_proxy" value="cart">
-                        <input type="hidden" name="action_method" value="put">
-                        <input type='hidden' id="payment_method_id" name="payment_method_id" value="{{payment_method.id}}" autocomplete="off"/>
-                        <input type='hidden' id="payment_method_code" name="payment_method_code" value="{{payment_method.code}}" autocomplete="off"/>
-                        <input type="hidden" name="current_step" value="{{ page.handle }}">
-                        <input type="hidden" name="next_step" value="cart_end">
                         <div class="p-2">
                           <b>{{payment_method.code}}</b>{{payment_method.description}}
                         </div>
                         {% case payment_method.code %}
                           {% when 'stripe' %}
-                          <input type="hidden" name="payment_params[stripe][redirect_success_url]" value="{{base_url}}{% path_to cart_end %}" />
-                          <input type="hidden" name="payment_params[stripe][redirect_cancel_url]" value="{{base_url}}{% path_to page.handle %}" />
+                          <input type="hidden" name="payment[params][stripe][redirect_success_url]" value="{{base_url}}{% path_to cart_end %}" />
+                          <input type="hidden" name="payment[params][stripe][redirect_cancel_url]" value="{{base_url}}{% path_to page.handle %}" />
                           <button type="button" data-toggle="modal" data-target="#modal-stripe" name="submit-{{payment_method.id}}" class="btn btn-primary btn-lg">
                             Pay
                           </button>
                           {% when 'paypal' %}
-                            <input type="hidden" data-paypal-params name="payment_params[paypal][action]" value="create" disabled="disabled" autocomplete="off"/>
-                            <input type="hidden" data-paypal-params name="payment_params[paypal][redirect_success_url]" value="{{base_url}}{% path_to cart_end %}" disabled="disabled"  autocomplete="off"/>
-                            <input type="hidden" data-paypal-params name="payment_params[paypal][redirect_cancel_url]" value="{{base_url}}{% path_to cart_checkout %}" disabled="disabled"  autocomplete="off"/>
+                            <input type="hidden" data-paypal-params name="payment[params][paypal][action]" value="create" disabled="disabled" autocomplete="off"/>
+                            <input type="hidden" data-paypal-params name="payment[params][paypal][redirect_success_url]" value="{{base_url}}{% path_to cart_end %}" disabled="disabled"  autocomplete="off"/>
+                            <input type="hidden" data-paypal-params name="payment[params][paypal][redirect_cancel_url]" value="{{base_url}}{% path_to cart_checkout %}" disabled="disabled"  autocomplete="off"/>
                           {% else %}
                           <button type="submit" name="submit-{{payment_method.id}}" class="btn btn-primary btn-lg">
                             Pay
@@ -150,47 +149,42 @@ editable_elements:
             <h3><i class="fas fa-truck small text-primary"></i> {{'cart_shipping_address' | translate}}</h3>
             <address>
               <div class="font-weight-bold">
-                {{store.cart.partner_shipping.display_name}}
+                {{store.cart.shipping.address.name}}
               </div>
-              <div>{{store.cart.partner_shipping.street}}</div>
-              <div>{{store.cart.partner_shipping.street2}}</div>
+              <div>{{store.cart.shipping.address.street}}</div>
+              <div>{{store.cart.shipping.address.street2}}</div>
               <div>
-                <span>{{store.cart.partner_shipping.zip}}</span>,
-                <span>{{store.cart.partner_shipping.city}}</span>
+                <span>{{store.cart.shipping.address.zip}}</span>,
+                <span>{{store.cart.shipping.address.city}}</span>
               </div>
-              <div>{{store.cart.partner_shipping.country_id.name}}</div>
-              <div>{{store.cart.partner_shipping.phone}}</div>
+              <div>{{store.cart.shipping.address.country.name}}</div>
+              <div>{{store.cart.shipping.address.phone}}</div>
             </address>
           </div>
         </div>
         {% endif %}
-        {% if store.cart.partner_invoice.size > 0%}
+        {% if store.cart.invoicing.address != null %}
         <div class="card">
           <div class="card-body">
             <h3><i class="fas fa-file-alt small text-primary"></i> {{'cart_invoice_address' | translate}}</h3>
             <address>
               <div class="font-weight-bold">
-                {{store.cart.partner_invoice.display_name}}
+                {{store.cart.invoicing.address.name}}
               </div>
-              <div>{{store.cart.partner_invoice.street}}</div>
-              <div>{{store.cart.partner_invoice.street2}}</div>
+              <div>{{store.cart.invoicing.address.street}}</div>
+              <div>{{store.cart.invoicing.address.street2}}</div>
               <div>
-                <span>{{store.cart.partner_invoice.zip}}</span>,
-                <span>{{store.cart.partner_invoice.city}}</span>
+                <span>{{store.cart.invoicing.address.zip}}</span>,
+                <span>{{store.cart.invoicing.address.city}}</span>
               </div>
-              <div>{{store.cart.partner_invoice.country_id.name}}</div>
-              <div>{{store.cart.partner_invoice.phone}}</div>
+              <div>{{store.cart.invoicing.address.country_id.name}}</div>
+              <div>{{store.cart.invoicing.address.phone}}</div>
             </address>
           </div>
         </div>
         {% endif %}
       </div>
     </div>
-
-
-
-
-
 {% endblock %}
 {% block javascripts %}
 <div class="modal fade modal-payment" id="modal-stripe" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
@@ -240,10 +234,11 @@ editable_elements:
             </div>
 
             <div class="row form-group">
-              <label for="exampleInputEmail1" class="col-12"><i class="fa fa-lock text-primary"></i>  {{'creditcard_cvc' | translate}}</label>
+              <label for="exampleInputEmail1" class="col-12">
+                <i class="fa fa-lock text-primary"></i>  {{'creditcard_cvc' | translate}}
+              </label>
               <div class="col-6">
                 <div id="card-cvc" class="form-control w-100"></div>
-
               </div>
               <small id="passwordHelpInline" class="text-muted col-6">
                 {{'creditcard_cvc_help' | translate}}
@@ -340,7 +335,7 @@ function init_stripe_form() {
         $('#modal-stripe .modal-loader').show();
         var input_source = $('<input>');
         input_source.attr('type', 'hidden');
-        input_source.attr('name', 'payment_params[stripe][source]');
+        input_source.attr('name', 'payment[method][stripe][source]');
         input_source.attr('value', result.source.id);
         input_source.appendTo($('#stripe-form'));
         $('#stripe-form').submit();

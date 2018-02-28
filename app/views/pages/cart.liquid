@@ -16,11 +16,11 @@ slug: cart
     </div>
     <div class="col-lg-4 col-xl-3 mb-4" data-shopinvader-container id="cart-total">
       {% include 'cart_total' with cart: store.cart %}
-      <form method="post" action="{% path_to cart_login %}"  id="cart_update_form">
-        <input type="hidden" name="action_proxy" value="cart">
-        <input type="hidden" name="action_method" value="PUT">
-        <input type="hidden" name="current_step" value="{{ page.handle }}">
-        <input type="hidden" name="next_step" value="cart_login">
+      <form method="post" action="invader/cart/update"  id="cart_update_form">
+        <input type="hidden" name="invader_success_url" value="{% path_to cart_login %}" />
+        <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+        <input type="hidden" name="step[current]" value="{{ page.handle }}">
+        <input type="hidden" name="step[next]" value="cart_login">
         <button class="btn btn-primary text-lg btn-lg  btn-block btn-block-xs" type="submit">
           {% editable_text checkout_button, fixed: true, rows: 1 %}
             Continuer <i class="fa fa-angle-right"></i>

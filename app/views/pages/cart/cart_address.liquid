@@ -17,12 +17,12 @@ is_layout: false
       {% assign partner_shipping = params.partner_shipping %}
     {% endif %}
 
-    <form method="put" action="{% path_to page %}"  id="cart_address">
-      <input type="hidden" name="redirect_success_to" value="{% path_to 'cart_checkout'%}">
-      <input type="hidden" name="action_method" value="PUT">
-      <input type="hidden" name="action_proxy" value="cart">
-      <input type="hidden" name="current_step" value="{{ page.handle }}">
-      <input type="hidden" name="next_step" value="cart_checkout">
+    <form method="put" action="invader/cart/update" id="cart_address">
+      <input type="hidden" name="invader_success_url" value="{% path_to cart_checkout %}" />
+      <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+      <input type="hidden" name="step[current]" value="{{ page.handle }}">
+      <input type="hidden" name="step[next]" value="cart_checkout">
+
       <div class="row justify-content-center">
       <div class="col-12">
         <div class="card">
@@ -36,23 +36,24 @@ is_layout: false
               <div class="col-12">
                 <div class="form-check">
                   <label class="form-check-label">
-                    <input name="use_different_invoice_address" class="form-check-input"
+                    <input name="invoicing[use_shipping_address]" class="form-check-input"
                     type="checkbox" autocomplete="off" data-toggle="collapse" data-target="#invoice_address_block"
-                    {% if store.cart.use_different_invoice_address == true %}checked="checked"{% endif%} value="1">
+                    {% if store.cart.invoicing.use_shipping_address == false %}checked="checked"{% endif%} value="0">
                     {{ 'cart_invoice_address_different' | translate }}
                   </label>
                 </div>
-                <div class="collapse  {% if store.cart.use_different_invoice_address == true %}in{% endif%}" id="invoice_address_block">
+                <div class="collapse  {% if store.cart.invoicing.use_shipping_address == false %}in{% endif%}" id="invoice_address_block">
                   <h2>{{ 'cart_invoice_address' | translate }}</h2>
-                  {% if store.cart.use_different_invoice_address == true %}
+                  {% if store.cart.invoicing.use_shipping_address == false %}
                     {%assign with_disabled_form = false%}
                   {%else%}
                     {%assign with_disabled_form = true%}
                   {% endif%}
+
                   {% include "address_form"
                     with input_group: 'partner_invoice',
                     with_require: true,
-                    address: store.cart.partner_invoice,
+                    address: store.cart.invoicing.address,
                     with_disabled: with_disabled_form
                   %}
                 </div>
@@ -70,10 +71,10 @@ is_layout: false
         </div>
       </div>
     </form>
-  {% elsif params.page_status == 'add_address'%}
-    <form method="put" action="{% path_to page %}"  id="cart_address_add">
-      <input type="hidden" name="action_method" value="addresses">
-      <input type="hidden" name="action_proxy" value="post">
+  {% elsif params.page_status == 'add_address' %}
+    <form method="post" action="invader/address/create"  id="cart_address_add">
+      <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+      <input type="hidden" name="invader_error_url" value="{% path_to page %}?page_status=add_address" />
       <div class="row justify-content-center">
       <div class="col-12">
         <div class="card">
@@ -91,17 +92,16 @@ is_layout: false
         </div>
       </div>
     </form>
-  {%elsif params.page_status == 'update_address'%}
+  {% elsif params.page_status == 'update_address' %}
     {% with_scope id: params.address_id %}
       {% assign address = store.addresses.first %}
     {% endwith_scope%}
-    <form method="post" action="{% path_to page %}"  id="cart_update_form">
+    <form method="post" action="invader/address/{{address.id}}/update" id="cart_update_form">
+      <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+      <input type="hidden" name="invader_error_url" value="{% path_to page %}?page_status=update_address" />
       <div class="row">
         <div class="col-12">
-          <form method="put" action="{% path_to page %}"  id="cart_address_add">
-            <input type="hidden" name="action_method" value="addresses/{{address.id}}">
-            <input type="hidden" name="action_proxy" value="put">
-            <div class="row justify-content-center">
+          <div class="row justify-content-center">
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
@@ -121,27 +121,26 @@ is_layout: false
         </div>
       </div>
     </form>
-  {%else%}
-    <form method="post" action="{% path_to cart_checkout %}"  id="cart_update_form">
-      <input type="hidden" name="action_method" value="put">
-      <input type="hidden" name="action_proxy" value="cart">
-      <input type="hidden" name="current_step" value="{{ page.handle }}">
-      <input type="hidden" name="next_step" value="cart_checkout">
+  {% else %}
+    <form method="put" action="invader/cart/update" id="cart_address">
+      <input type="hidden" name="invader_success_url" value="{% path_to cart_checkout %}" />
+      <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+      <input type="hidden" name="step[current]" value="{{ page.handle }}">
+      <input type="hidden" name="step[next]" value="cart_checkout">
       <div class="row">
-
         <div class="col-lg-8 col-xl-9">
           <h2>{{'cart_shipping_address' | translate}}</h2>
           {% include "address_book" with
             input_group: 'shipping',
-            input_name: 'partner_shipping[id]',
+            input_name: 'shipping[address][id]',
             address_list:  store.addresses,
-            selected_address_id : store.cart.partner_shipping.id,
+            selected_address_id : store.cart.shipping.address.id,
             display_delector: true,
             display_add: true
           %}
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="use_different_invoice_address" value="1" data-toggle="collapse" data-target="#invoice_address">
+              <input type="checkbox" name="invoicing[use_shipping_address]" value="0" data-toggle="collapse" data-target="#invoice_address">
               {% editable_text checkout_button, fixed: true, rows: 1 %}
                 Use different invoice address.
               {% endeditable_text %}
@@ -150,10 +149,10 @@ is_layout: false
           <div class="collapse" id="invoice_address">
             <h2>{{'cart_invoice_address' | translate}}</h2>
             {% include "address_book" with
-              input_group: 'shipping',
-              input_name: 'partner_invoice[id]',
+              input_group: 'invoicing',
+              input_name: 'invoicing[address][id]',
               address_list:  store.addresses,
-              selected_address_id : store.cart.partner_invoice.id,
+              selected_address_id : store.cart.invoicing.address.id,
               display_delector: true,
               display_add: true
             %}

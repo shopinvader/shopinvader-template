@@ -14,17 +14,17 @@ window.dataLayer = window.dataLayer || []
 dataLayer.push({
    'transactionId': {{store.last_sale.name | json}},
    'transactionAffiliation': {{site.name | json}},
-   'transactionTotal': {{store.last_sale.amount_total | json}},
-   'transactionTax': {{store.last_sale.amount_tax | json}},
-   'transactionShipping': {{store.last_sale.shipping_amount_total | json}},
+   'transactionTotal': {{store.last_sale.amount.total | json}},
+   'transactionTax': {{store.last_sale.amount.tax | json}},
+   'transactionShipping': {{store.last_sale.shipping.amount.total | json}},
    'transactionProducts': [
-   {% for line in store.last_sale.order_line%}
+   {% for line in store.last_sale.lines.items%}
     {
-       'sku': {{line.product.default_code | json}},
+       'sku': {{line.product.sku | json}},
        'name': {{line.product.name | json}},
        'category': '',
-       'price': {{line.price_unit | json}},
-       'quantity':  {{line.product_uom_qty | json}}
+       'price': {{line.amount.price_unit | json}},
+       'quantity':  {{line.qty | json}}
      }
      {% if forloop.last != true%},{%endif%}
    {% endfor %}
@@ -65,11 +65,11 @@ dataLayer.push({
       </div>
     </div>
 
-    {% if order.payment_method.show_description_after_validation == true%}
+    {% if order.payment.method.show_description_after_validation == true%}
     <div class="row justify-content-center">
       <div class="alert alert-warning col-12 col-lg-8 text-center">
-        <strong class="text-2xl">{{order.payment_method.name}}</strong>
-          {{order.payment_method.description}}
+        <strong class="text-2xl">{{order.payment.method.name}}</strong>
+          {{order.payment.method.description}}
       </div>
     </div>
 
@@ -87,7 +87,7 @@ dataLayer.push({
             {{ 'cart_order_ref' | translate }} <strong>{{order.name}}</strong>
           </div>
           <div class="h4">
-            {{'cart_carrier_title' | translate}} <b>{{order.carrier.name}}</b>
+            {{'cart_carrier_title' | translate}} <b>{{order.shipping.carrier.name}}</b>
           </div>
         </div>
       </div>
@@ -97,50 +97,48 @@ dataLayer.push({
           <h3 class="bold">{{'cart_shipping_address' | translate}}</h3>
           <address>
             <div class="bold">
-              {{order.partner_shipping.display_name}}
+              {{order.shipping.address.name}}
             </div>
-            <div>{{order.partner_shipping.street}}</div>
-            <div>{{order.partner_shipping.street2}}</div>
+            <div>{{order.shipping.address.street}}</div>
+            <div>{{order.shipping.address.street2}}</div>
             <div>
-              <span>{{order.partner_shipping.zip}}</span>,
-              <span>{{order.partner_shipping.city}}</span>
+              <span>{{order.shipping.address.zip}}</span>,
+              <span>{{order.shipping.address.city}}</span>
             </div>
-            <div>{{order.partner_shipping.country_id.name}}</div>
-            <div>{{order.partner_shipping.phone}}</div>
+            <div>{{order.shipping.address.country.name}}</div>
+            <div>{{order.shipping.address.phone}}</div>
           </address>
         </div>
         <div class="col-6 ">
           <h3 class="bold">{{'cart_invoice_address' | translate}}</h3>
           <address>
             <div class="bold">
-              {{order.partner_invoice.display_name}}
+              {{order.invoicing.address.name}}
             </div>
-            <div>{{order.partner_invoice.street}}</div>
-            <div>{{order.partner_invoice.street2}}</div>
+            <div>{{order.invoicing.address.street}}</div>
+            <div>{{order.invoicing.address.street2}}</div>
             <div>
-              <span>{{order.partner_invoice.zip}}</span>,
-              <span>{{order.partner_invoice.city}}</span>
+              <span>{{order.invoicing.address.zip}}</span>,
+              <span>{{order.invoicing.address.city}}</span>
             </div>
-            <div>{{order.partner_invoice.country_id.name}}</div>
-            <div>{{order.partner_invoice.phone}}</div>
+            <div>{{order.invoicing.address.country.name}}</div>
+            <div>{{order.invoicing.address.phone}}</div>
           </address>
         </div>
       </div>
       <div class="row">
         <div class="col-12 col-sm-9">
-
           {% include 'cart_list'
              with cart: order,
              readonly: true,
              with_image: false,
           %}
         </div>
-
         <div class="col-12 col-sm-3">
           {% assign main_title= 'cart_order_ref' | translate | append: order.name%}
           {% include 'cart_total'
              with cart: order,
-             main_title:main_title
+             main_title: main_title
           %}
         </div>
       </div>
@@ -166,12 +164,6 @@ dataLayer.push({
           {% endeditable_text %}
           </a>
         </div>
-      </div>
-
-    </div>
-    <div  class="col-xs-12 text-center">
-      <div>
-
       </div>
     </div>
   </div>

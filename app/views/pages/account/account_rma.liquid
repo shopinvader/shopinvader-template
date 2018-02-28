@@ -51,9 +51,9 @@ seo_title: Claims | Shopinvader demo
         </div>
       </div>
     </form>
-    <form class="form-rma {% if selected_order == null%}form-rma-inactive{% endif%}" action="{% path_to page.handle %}" method="post">
-      <input type="hidden" name="action_proxy" value="rma/{{selected_order.id}}">
-      <input type="hidden" name="action_method" value="post">
+    <form class="form-rma {% if selected_order == null%}form-rma-inactive{% endif%}" action="/invader/rma/add" method="post">
+      <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+      <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
       <div class="row ">
         <div class="col-12  pt-4">
           <span class="h3 text-primary">

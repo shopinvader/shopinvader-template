@@ -1,6 +1,6 @@
-<form class="" action="{{product.url_key  | prepend: url_base}}" method="post" data-shopinvader-form>
-  <input type="hidden" name="action_proxy" value="cart/item">
-  <input type="hidden" name="action_method" value="post">
+<form method="POST" action="invader/cart/add_item">
+  <input type="hidden" name="invader_success_url" value="{{product.url_key  | prepend: url_base}}" />
+  <input type="hidden" name="invader_error_url" value="{{product.url_key  | prepend: url_base}}" />
   <input type="hidden" name="product_id" value="{{product.objectID }}">
     <div class="row">
       <div class="col-12  ">
