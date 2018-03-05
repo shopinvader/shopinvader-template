@@ -1,0 +1,39 @@
+---
+title: Account addresses
+handle: account_address_form
+slug: addresses-form
+seo_title: Shipping addresses | Shopinvader demo
+---
+{% extends 'layouts/account '%}
+
+{% block 'content/tabcontent' %}
+{% assign form_action = '/invader/addresses/create' %}
+{% if params.item_id %}
+  {% with_scope id: params.item_id %}
+    {% assign address = store.addresses.first %}
+
+    {% assign form_action = '/invader/addresses/' | append: address.id | append: "/update" %}
+  {% endwith_scope%}
+{% endif %}
+
+<div class="pt-4">
+  <div class="card">
+    <h2 class="card-header bg-primary text-light"> {{'account_address_update' | translate  }}</h2>
+    <div class="card-body">
+      <form class="" action="{{form_action}}" method="post" data-autocomplete="address">
+        <input type="hidden" name="invader_success_url" value="{% path_to account_address %}" />
+        <input type="hidden" name="invader_error_url" value="{% path_to page %}{{form_params}}" />
+        {% include 'address_form' with address, with_require: true %}
+        <div class="row">
+          <div class="col-6 text-left">
+            <a href="{% path_to account_address %}" class="btn btn-default " >{{'account_address_cancel' | translate}}</a>
+          </div>
+          <div class="col-6 text-right">
+            <input type="submit" name="submit" class="btn btn-primary " value="{{'account_address_submit' | translate}}">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

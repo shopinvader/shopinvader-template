@@ -16,7 +16,7 @@
   <div class="card-deck-wrapper">
     <div class="card-deck">
       {% for address in address_list %}
-        {% if address.id == null %}
+        {% if address.id != null %}
           <div class="card">
             <div class="card-body">
               {% if display_delector == true%}
@@ -43,7 +43,7 @@
             <div class="card-footer text-center">
               <div class="row">
                 <div class="col-6 text-right">
-                  <a href="{% path_to page%}?page_status=update_address&address_id={{address.id | round}}" class="btn btn-secondary " data-address-id="{{address.id | round}}">
+                  <a href="{% path_to page%}?page_status=update_address&address_id={{address.id | round}}" class="btn btn-link" data-address-id="{{address.id | round}}">
                     <i class="fas fa-pencil-alt"></i> {{'cart_address_update' | translate }}
                   </a>
                 </div>
@@ -52,15 +52,13 @@
                   <form method="POST" action="invader/address/{{address.id | round}}/remove">
                     <input type="hidden" name="invader_success_url" value="{% path_to page%}" />
                     <input type="hidden" name="invader_error_url" value="{% path_to page%}" />
-                    <button type="submit" name="button" class="btn btn-secondary  d-inline">
-                        <i class="fas fa-trash"></i> {{'cart_address_delete' | translate }}
+                    <button type="submit" name="button" class="btn btn-link  d-inline">
+                      <i class="fas fa-trash"></i> {{'cart_address_delete' | translate }}
                     </button>
                   </form>
                   {% endif %}
                 </div>
               </div>
-
-
             </div>
           </div>
         {% endif %}
@@ -69,7 +67,7 @@
       <div class="card">
         <div class="card-body text-center">
           <div class="bottom-link">
-            {% if display_add == true
+            {% if display_add == true %}
               <a class="btn btn-link text-primary" href="{% path_to page%}?page_status=add_address">
                 <div class="text-primary ">
                   <i class="fa fa-plus-circle fa-5x"></i>

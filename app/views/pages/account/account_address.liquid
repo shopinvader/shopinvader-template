@@ -8,65 +8,66 @@ seo_title: Shipping addresses | Shopinvader demo
 
 {% block 'content/tabcontent' %}
 <div class="pt-4">
-  {% if params.address_id or params.add  == "true" %}
-    <div class="card">
-    {% assign invader_error_url = path_to page %}
-    {% if params.add == "true" %}
-      {% assign form_action = 'invader/address/add' %}
-      {% assign form_params = '?add=true'%}
-    {% else %}
-      {% with_scope id: params.address_id %}
-        {% assign address = store.addresses.first %}
-        {% assign form_action = 'invader/address/' | append: address.id | append: "/update" %}
-
-      {% endwith_scope%}
-    {% endif %}
-
-      <h2 class="card-header bg-primary text-light"> {{'account_address_update' | translate  }}</h2>
-      <div class="card-body">
-        <form class="" action="{{form_action}}" method="post" data-autocomplete="address">
-          <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
-          <input type="hidden" name="invader_error_url" value="{% path_to page %}{{form_params}}" />
-          {% include 'address_form' with address, with_require: true %}
-          <div class="row">
-            <div class="col-6 text-left">
-              <a href="{% path_to account_address %}" class="btn btn-default " >{{'account_address_cancel' | translate}}</a>
+    <div class="row">
+    <div class="col-6">
+      <h2>{{'account_address_lists' | translate  }}</h2>
+    </div>
+    <div class="col-6 text-right">
+      <form action="{% path_to account_address_form %}" method="post">
+        <button type="submit" name="button" class="btn btn-warning">
+          <i class="fa fa-plus"></i> {{'account_address_add' | translate}}
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      {% with_scope address_type: "address"%}
+      <div class="row">
+        {% for address in store.addresses%}
+        <div class="col-12 col-sm-6 col-xl-4">
+          <div class="card">
+            <div class="card-header h4 text-white bg-primary">
+              <strong>{{address.name}}</strong> {{address.address_type}}
             </div>
-            <div class="col-6 text-right">
-              <input type="submit" name="submit" class="btn btn-primary " value="{{'account_address_submit' | translate}}">
+            <div class="card-body">
+              <address>
+                <div class="">
+                  {{address.street}}
+                </div>
+                <div class="">
+                  {{address.street2}}
+                </div>
+                <div class="">
+                  {{address.zip}} - {{address.city}}
+                </div>
+                <div class="">
+                  {{address.country.name}}
+                </div>
+              </address>
+              <div class="row small">
+                <form action="{% path_to account_address_form %}" method="post" class="col-6">
+                  <input type="hidden" name="item_id" value="{{address.id}}">
+                  <button type="submit" name="update_{{address.id}}" class="btn btn-link">
+                    <i class="fas fa-pencil-alt"></i> {{'cart_address_update' | translate }}
+                  </button>
+                </form>
+                <form method="POST" action="/invader/addresses/{{address.id | round}}/delete" class="col-6">
+                  <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+                  <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+                  <button type="submit" name="button" class="btn btn-link">
+                      <i class="fas fa-trash"></i> {{'cart_address_delete' | translate }}
+                  </button>
+                </form>
+              </div>
             </div>
+
           </div>
-        </form>
+        </div>
+        {% endfor%}
       </div>
+      {% endwith_scope%}
     </div>
-  {% else %}
-    <div class="row">
-      <div class="col-6">
-        <h2> <i class="fas fa-home"> </i>{{'account_address_lists' | translate  }}</h2>
-      </div>
-      <div class="col-6 text-right">
-        <form action="{% path_to page.handle %}" method="post">
-          <input type="hidden" name="add" value="true">
-          <button type="submit" name="button" class="btn btn-warning">
-            <i class="fa fa-plus"></i> {{'account_address_add' | translate}}
-          </button>
-        </form>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        {% with_scope contact_type: "address"%}
-          {% include "address_book" with
-            input_group: 'shipping',
-            input_name: 'partner_shipping[id]',
-            address_list:  store.addresses,
-            display_selector : false,
-            display_add: none,
-            display_delete: true
-          %}
-        {% endwith_scope%}
-      </div>
-    </div>
-  {% endif%}
+  </div>
 </div>
 {% endblock %}
