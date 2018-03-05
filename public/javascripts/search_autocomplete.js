@@ -40,7 +40,7 @@ $(document).ready(function() {
           },
           suggestion: function(suggestion) {
             suggestion.last_categorie = suggestion.categories[suggestion.categories.length-1];
-            suggestion.price = suggestion.price[default_pricelist];
+            suggestion.price = suggestion.price[default_role];
             var template = Hogan.compile($('#product-hit-template').html());
             suggestion.helpers = hogan_helpers;
             return template.render(suggestion);

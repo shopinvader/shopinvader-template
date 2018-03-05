@@ -51,7 +51,7 @@ erp:
       type: string
     api_url:
       type: string
-    default_pricelist:
+    default_role:
       type: string
 google:
   label: Google API Integration

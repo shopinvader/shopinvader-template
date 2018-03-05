@@ -2,7 +2,7 @@
 {% if current_customer %}
   {% assign pricelist = current_customer.role %}
 {% else %}
-  {% assign pricelist = site.metafields.erp.default_pricelist %}
+  {% assign pricelist = site.metafields.erp.default_role %}
 {% endif %}
 {%assign product_display = grid%}
 {%if session.product_display == 'list'%}

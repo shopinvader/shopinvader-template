@@ -79,7 +79,7 @@ $(document).ready(function() {
       transformData: {
         item: function(item) {
           item.last_categorie = item.categories[item.categories.length-1];
-          item.price = item.price[default_pricelist];
+          item.price = item.price[default_role];
           if(item.variant_count > 0) {
             item.varianted = true;
           }
