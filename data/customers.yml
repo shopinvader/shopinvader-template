@@ -3,4 +3,10 @@
     name: John Doe
     email: john.doe@shopinvader.com
     password: password
-    role: public_tax_inc
+    role: default
+- osiris@shopinvader.com:
+    _slug: osiris-at-shopinvader-dot-com
+    name: Osiris
+    email: osiris@shopinvader.com
+    password: password
+    role: default
