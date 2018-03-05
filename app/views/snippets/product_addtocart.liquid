@@ -22,7 +22,7 @@
     <div class="row">
       <div class="col-12">
         <div class="">
-          {{product.model_name}} {{product.variant_name}}
+          {{product.model.name}} {{product.name}}
         </div>
         <div class="small text-dark">
           {{'product_code' | translate }}
@@ -39,11 +39,13 @@
       </div>
     </div>
     <div class="row">
+    {% if product.stock_state != null and  product.stock_state != ''%}
       <div class="col-12 text-left product-stock-state">
         <span class="{{product.stock_state}} text-size-1xl">
           {{product.stock_state | prepend: 'product_stock_state_' | translate}}
         </span>
       </div>
+    {% endif %}
       <div class="col-12  text-right ">
       {%if product.price.discount > 0%}
         <button type="submit" class="btn btn-warning btn-lg btn-block">

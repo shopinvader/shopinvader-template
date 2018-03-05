@@ -80,7 +80,7 @@ seo_title: Claims | Shopinvader demo
               {% for order_line in selected_order.order_line %}
               <tr>
                 <td>
-                  <img src="{{order_line.product.images.first.small}}" class="img-responsive img-thumbnail" alt="" />
+                  <img src="{{order_line.product.images.first.small.src}}" class="img-responsive img-thumbnail" alt="{{order_line.product.images.first.small.alt}}" />
                 </td>
                 <td>
                   {{order_line.product_id.name}}

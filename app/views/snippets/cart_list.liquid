@@ -5,7 +5,7 @@
     <div class="card">
       <div class="card-body row">
         <div class="col-4 col-sm-2 col-md-2 ">
-          <img src="{{cart_line.product.images.first.medium | default: site.metafields.theme.noimage}}" alt="" title="{{cart_line.product.name}}"  class="img-fluid">
+          <img src="{{cart_line.product.images.first.medium.src | default: site.metafields.theme.noimage}}" alt="{{cart_line.product.images.first.medium.alt}}" title="{{cart_line.product.name}}"  class="img-fluid">
         </div>
         <div class="col-8 col-sm-10 col-md-6 h4 p-0">
           {{cart_line.product.model.name}}

@@ -4,12 +4,12 @@
     {
       "@context": "http://schema.org/",
       "@type": "Product",
-      "name": {{product.model_name  | json}},
+      "name": {{product.model.name  | json}},
       "url": "{% path_to product%}",
       "image": [
-        "{{image.first.medium}}"
+        "{{image.first.medium.src}}"
        ],
-      "sku": {{product.default_code | json}},
+      "sku": {{product.sku | json}},
       "offers": {
         "@type": "Offer",
         "priceCurrency": "EUR",
@@ -20,24 +20,35 @@
 {% endif%}
 <div class="card product-thumbnail bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%elsif display_lite == true%}product-thumbnail-lite{%endif%}" >
   <div class="product-thumbnail-img">
+    {% assign images_count = 0%}
     {% if product.images.size > 1 %}
     <div id="slide-{{product.objectID}}" class="carousel slide p-2" data-ride="carousel" data-interval="false">
       <div class="carousel-inner" role="listbox">
         {% for image in product.images %}
-        <div class="carousel-item {%if forloop.index == 1 %}active{%endif%}" data-target="#slide-{{product.objectID}}">
-          <img src="{{image.medium}}" alt="" class="d-block img-fluid"/>
-        </div>
+          {% if image.medium.src != '' and image.medium.src != null %}
+            {{image.medium.src | json}}
+            {% assign images_count = images_count | plus: 1%}
+            <div class="carousel-item {%if forloop.index == 1 %}active{%endif%}" data-target="#slide-{{product.objectID}}">
+              <img src="{{image.medium.src}}" alt="{{image.medium.alt}}" class="d-block img-fluid"/>
+            </div>
+          {% endif %}
         {% endfor %}
       </div>
-      <a class="carousel-control-prev" href="#slide-{{product.objectID}}" role="button" data-slide="prev">
-        <i class="fa fa-chevron-left text-dark"></i>
-      </a>
-      <a class="carousel-control-next" href="#slide-{{product.objectID}}" role="button" data-slide="next">
-        <i class="fa fa-chevron-right text-dark"></i>
-      </a>
+      {% if images_count > 0%}
+        <a class="carousel-control-prev" href="#slide-{{product.objectID}}" role="button" data-slide="prev">
+          <i class="fa fa-chevron-left text-dark"></i>
+        </a>
+        <a class="carousel-control-next" href="#slide-{{product.objectID}}" role="button" data-slide="next">
+          <i class="fa fa-chevron-right text-dark"></i>
+        </a>
+      {% else %}
+        <div class="carousel-item active" data-target="#slide-{{product.objectID}}">
+          <img src="{{site.metafields.theme.noimage}}" alt="" class="d-block img-fluid"/>
+        </div>
+      {% endif %}
     </div>
     {% else %}
-      <img class="group list-group-image card-img-top pr-2 pr-md-0" src="{{product.images.first.medium  | default: site.metafields.theme.noimage }}" alt="" />
+      <img class="group list-group-image card-img-top pr-2 pr-md-0" src="{{product.images.first.medium.src  | default: site.metafields.theme.noimage }}" alt="{{product.images.first.medium.alt}}" />
     {% endif %}
     {%if product.price.discount > 0%}
     <div class="pb-1">
@@ -91,9 +102,9 @@
   <div class="product-thumbnail-name card-body p-1 p-sm-3 p-xl-2">
     <div class="font-weight-bold">
       <a href="{{product.url_key  | prepend: url_base }}" class="card-title">
-        {{product.model_name}}
-        <div class="">
-          {{product.variant_name}}
+        {{product.model.name}}
+        <div class="small">
+          {{product.name}}
         </div>
       </a>
     </div>

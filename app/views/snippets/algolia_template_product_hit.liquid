@@ -18,11 +18,11 @@
       <div id="slide-<% objectID %>" class="carousel slide p-2" data-ride="carousel" data-interval="false">
         <div class="carousel-inner" role="listbox">
           <div class="carousel-item active" data-target="#slide-<% objectID %>">
-            <img src="<% images.0.medium  %>" alt="" class="d-block img-fluid"/>
+            <img src="<% images.0.medium.src %>" alt="<% images.0.medium.alt %>" class="d-block img-fluid"/>
           </div>
           <%#images%>
             <div class="carousel-item " data-target="#slide-<% objectID %>">
-              <img src="<% medium  %>" alt="" class="d-block img-fluid"/>
+              <img src="<% medium.src %>" alt="<% medium.alt %>" class="d-block img-fluid"/>
             </div>
           <%/images%>
         </div>
@@ -99,11 +99,11 @@
     <div class="product-thumbnail-name card-bodyp-0 p-md-3 p-xl-2">
       <div class="font-weight-bold">
         <a href="{{url_base}}<% url_key %>" class="card-title">
-          <% model_name %>
+          <% model.name %>
           <div class="small">
-            <%#variant_name%>
-              <% variant_name %>
-            <%/variant_name%>
+            <%#name%>
+              <% name %>
+            <%/name%>
           </div>
         </a>
       </div>
@@ -114,7 +114,6 @@
       </a>
       <div class="card-text small">
         <a href="{{url_base}}<% last_categorie.url_key %>" class="text-underline text-dark"><u><% last_categorie.name %></u></a>
-
         <%#brand%>
           - <a href="#" class="text-underline text-dark"><u><% brand.name %></u></a>
         <%/brand%>

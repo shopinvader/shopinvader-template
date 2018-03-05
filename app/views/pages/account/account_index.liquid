@@ -78,7 +78,7 @@ seo_title: My sales orders | Shopinvader demo
             {% for line in sale.lines.items %}
               <div class="row border border-top-0 border-left-0 border-right-0 pb-4">
                 <div class="col-4 col-sm-2">
-                  <img src="{{line.product.images.first.small}}" alt="{{line.product.name}}" class="img-fluid"/>
+                  <img src="{{line.product.images.first.small.src}}" alt="{{order_line.product.images.first.small.alt }}" class="img-fluid"/>
                 </div>
                 <div class="col-8 col-sm-10">
                   <a href="{{line.product.url_key}}" target="_blank">{{line.product.name}}</a>

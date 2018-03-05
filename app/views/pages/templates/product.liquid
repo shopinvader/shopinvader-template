@@ -10,21 +10,23 @@ handle: product
 <meta name="og:title" content="{{product.seo_title}}">
 <meta name="og:url" content="{{base_url}}{% path_to product %}?ref={{variant.objectID }}">
 <meta name="og:description" content="{{product.meta_description}}">
-<meta name="og:image" content="{{ product.images.first.medium }}">
+<meta name="og:image" content="{{ product.images.first.medium.src }}">
 <meta name="description" content="{{product.meta_description}}">
 <meta name="keywords" content="{{product.meta_keywords}}">
 <title>{{product.seo_title}}</title>
 <link rel="canonical" href="{{base_url | append: '/' | append: product.url_key}}" />
 
 {% assign variant_path = '?variant=' | append: product.objectID %}
-{% if product.stock_state == 'in_stock'%}
-  {% assign schema_stock = "http://schema.org/InStock"%}
-{% elsif product.stock_state == 'resupplying'%}
-  {% assign schema_stock = "http://schema.org/OutOfStock"%}
-{% elsif product.stock_state == 'in_limited_stock'%}
-  {% assign schema_stock = "http://schema.org/LimitedAvailability"%}
-{% elsif product.stock_state == 'out_of_stock'%}
-  {% assign schema_stock = "http://schema.org/OutOfStock"%}
+{%  if product.stock_state != null and  product.stock_state != ''%}
+  {% if product.stock_state == 'in_stock'%}
+    {% assign schema_stock = "http://schema.org/InStock"%}
+  {% elsif product.stock_state == 'resupplying'%}
+    {% assign schema_stock = "http://schema.org/OutOfStock"%}
+  {% elsif product.stock_state == 'in_limited_stock'%}
+    {% assign schema_stock = "http://schema.org/LimitedAvailability"%}
+  {% elsif product.stock_state == 'out_of_stock'%}
+    {% assign schema_stock = "http://schema.org/OutOfStock"%}
+  {% endif %}
 {% endif %}
 <script type="application/ld+json">
   {
@@ -34,26 +36,24 @@ handle: product
     "url": "{% path_to product%}{{variant_path}}",
     "image": [
       {% for image in product.images%}
-        "{{image.medium}}"{%if forloop.last == false%},{%endif%}
-      {%endfor%}
+        "{{image.medium.src}}"{%if forloop.last == false%},{%endif%}
+      {% endfor %}
      ],
-    "description": {{product.model.description | json}},
+    "description": {{product.description | json}},
     "sku": {{product.sku | json}},
     "brand": {
       "@type": "Thing",
-      "name": {{product.model.brand.name | json}}
+      "name": {{product.brand.name | json}}
     },
-
     "offers": {
       "@type": "Offer",
       "priceCurrency": "EUR",
       "price": "{{product.price.value}}",
       "itemCondition": "http://schema.org/UsedCondition",
-
       "availability": "{{schema_stock}}",
       "seller": {
         "@type": "Organization",
-        "name": {{site.name  | json}}
+        "name": {{site.name | json}}
       }
     }
   }
@@ -104,19 +104,16 @@ handle: product
           <div class="lead">
             {{variant.variant.name}}
           </div>
-          <b>
-
-          </b>
         </div>
       </div>
       <div class="row">
         <div class="col-12 ">
           <div class="d-none d-sm-inline-block  pr-4">
-            {{variant.model.brand.name}}
+            {{variant.brand.name }}
           </div>
           <div class="d-none d-sm-inline-block  pr-4">
             <a href="{{ variant.categories.last.url_key}}">
-              <u>{{ variant.model.categories.last.name}}</u>
+              <u>{{ variant.categories.last.name}}</u>
             </a>
           </div>
 

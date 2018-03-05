@@ -38,7 +38,12 @@ algolia:
     api_key:
       hint: "Algolia API Key"
       type: string
-
+    indices:
+      hint: "Algolia indices"
+      type: string
+    routes:
+      hint: "Algolia routes"
+      type: string
 erp:
   label: Odoo ERP Integration
   fields:

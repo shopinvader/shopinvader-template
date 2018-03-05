@@ -1,13 +1,11 @@
-
 {% if product.images.size > 1 %}
   <div class="carousel slide" data-ride="carousel" id="slide-{{product.objectID}}">
-
-    <!-- Carousel items -->
     <div class="carousel-inner" role="listbox">
       {% for image in product.images %}
-      <div class="carousel-item {%if forloop.index == 1 %}active{%endif%}">
-        <img src="{{image.large}}" alt="" class="d-block img-fluid w-100"/>
-      </div>
+        <div class="carousel-item {%if forloop.index == 1 %}active{%endif%}">
+          {{image.large.src | json}}
+          <img src="{{image.large.src}}" alt="{{image.large.alt}}" class="d-block img-fluid w-100"/>
+        </div>
       {% endfor %}
       <a class="carousel-control-prev" href="#slide-{{product.objectID}}" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -22,10 +20,10 @@
   <div class="mt-1 mb-2">
     {% for image in product.images %}
     <div data-target="#slide-{{product.objectID}}" data-slide-to="{{forloop.index0}}" class="{%if forloop.index == 1 %}active{%endif%} border carousel-thumbails">
-      <img src="{{image.small}}" alt="" class="img-fluid"/>
+      <img src="{{image.small.src}}" alt="{{image.small.alt}}" class="img-fluid"/>
     </div>
     {% endfor %}
   </div>
 {% else %}
-  <img class="img-fluid" src="{{product.images.first.large  | default: site.metafields.theme.noimage }}" alt="" />
+  <img class="img-fluid" src="{{product.images.first.large.src | default: site.metafields.theme.noimage }}" alt="" />
 {% endif %}

@@ -1,6 +1,6 @@
 <div class="card category-thumbnail">
   <a href="{{category.url_key  | prepend: url_base }}">
-    <img src="{{category.images.first.medium | default: site.metafields.theme.noimage }}" alt="" class="card-img-top">
+    <img src="{{category.images.first.medium.src | default: site.metafields.theme.noimage }}" alt="{{category.images.first.medium.alt}}" class="card-img-top">
     <div class="text-center card-title h5">
       {{category.name}}
     </div>

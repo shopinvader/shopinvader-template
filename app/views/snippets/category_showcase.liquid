@@ -1,6 +1,4 @@
 {%if category %}
-{{category.filters}}
-
   {% with_scope categories: {id: category.objectID}, main: true %}
     {% if store.products.size > 0%}
       <div class="row justify-content-end">
@@ -23,17 +21,17 @@
               {% for product in store.products%}
               <div class="carousel-item {%if forloop.first%}active{%endif%} text-center ">
                 <a href="{% path_to product %}?variant={{product.objectID}}">
-                  <img class="d-inline-block img-fluid" src="{{product.images.first.medium}}" alt="{{product.model_name}}">
+                  <img class="d-inline-block img-fluid" src="{{product.images.first.medium.src}}" alt="{{product.images.first.medium.alt}}">
                 </a>
                 <div class="row">
                   <div class="col-12">
                     <div class="h4">
                       <a href="{% path_to product %}?variant={{product.objectID}}" class="text-dark">
-                        {{product.model_name}}
+                        {{product.model.name}}
                       </a>
                     </div>
                     <div class="small text-secondary">
-                      {{product.variant_name}}
+                      {{product.name}}
                     </div>
                     {% include 'rating_stars' with
                         rating_value: product.rating.summary.average,
@@ -83,12 +81,13 @@
             <div class="row">
               <div class="col-12 col-md-3 text-center">
                 <a href="{% path_to product %}?variant={{product.objectID}}">
-                  <img class="d-block img-fluid " src="{{product.images.first.medium}}" alt="{{product.model_name}}">
+                  <img class="d-block img-fluid " src="{{product.images.first.medium.src}}" alt="{{product.images.first.medium.alt}}">
                 </a>
               </div>
               <div class="col-12 col-md-9 small d-none d-sm-block">
                 <a href="{% path_to product %}?variant={{product.objectID}}">
-                  {{product.model_name}}
+                  {{product.model.name}}
+                  <span class="small">{{product.name}}</span>
                 </a>
                 <div class="">
                   {% include 'rating_stars' with
@@ -96,14 +95,12 @@
                   rating_nbr: product.rating.reviews.size
                   %}
                 </div>
-
                 <div class="">
-                  {{product.price.value |money}}
+                  {{product.price.value | money}}
                 </div>
               </div>
             </div>
           </div>
-
           {% endfor%}
             </div>
         {% endpaginate%}
@@ -118,8 +115,7 @@
               {%for category in paginate.collection%}
                 {% if category.images.size > 0%}
                 <figure class="figure col-6 col-sm-6 col-md-3 p-0 m-0" data-link="{% path_to category%}">
-
-                  <img src="{{category.images.first.large}}" class="img-fluid" alt="{{category.name}}">
+                  <img src="{{category.images.first.large.src}}" class="img-fluid" alt="{{category.images.first.large.alt}}">
                   <figcaption class="figure-caption text-center">
                     <a href="{% path_to category%}" class="text-light">{{category.name}}</a>
                   </figcaption>
@@ -132,6 +128,4 @@
       </div>
     </div>
   {%endwith_scope%}
-
-
 {%endif%}
