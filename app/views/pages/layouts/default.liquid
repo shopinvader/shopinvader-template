@@ -71,17 +71,16 @@ is_layout: false
       </div>
     </div>
     <div id="product-modal-add" class="d-none" data-shopinvader-container>.
-      {% if params.product_id %}
-        {% assign product_id = params.product_id | round %}
+      {% if params.addtocart_product_id %}
+        {% assign product_id = params.addtocart_product_id | round %}
         <div class="title">
           {{ 'cart_item_added' | translate }}
         </div>
-
         <div class="content">
           <div class="">
             <div class="row">
               <div class="col-12">
-                {% include 'cart_list' with cart:store.cart, product_id, readonly: true %}
+                {% include 'cart_list' with cart: store.cart, product_id, readonly: true %}
               </div>
             </div>
             <div class="row">
@@ -92,15 +91,14 @@ is_layout: false
                 <a href="{% path_to 'cart_index' %}" class="btn btn-primary btn-lg">{{"cart_checkout" | translate }} </a>
               </div>
             </div>
-            {{product.cross_sellings.count}}
-          {% if product %}
+          {% if product and product.relateds.cross_sell != null%}
             <div class="row">
               <div class="col-lg-12">
                 <h2>{{'product_related_title' | translate }}</h2>
               </div>
             </div>
             <div class="row">
-              {% for cross_seller in product.cross_sellings %}
+              {% for cross_seller in product.relateds.cross_sell %}
                 <div class="col-6 col-sm-3 col-xl-2">
                 {% with_scope objectID: [cross_seller.id]%}
                   {% include 'product_thumbnail' with product: store.products.first%}

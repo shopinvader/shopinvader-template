@@ -26,7 +26,7 @@ editable_elements:
       <input type="hidden" name="auth_password_field" value="password" />
       <input type="hidden" name="auth_email_handle" value="welcome_message" />
       <input type="hidden" name="auth_callback" value="{% path_to 'account_register_validation' %}?context={{params.context}}" />
-      <input type="hidden" name="auth_entry[role]" value="{{site.metafields.erp.default_pricelist}}">
+      <input type="hidden" name="auth_entry[role]" value="{{site.metafields.erp.default_role}}">
       {% include 'signup_form' with email: params.email %}
     </form>
   </div>

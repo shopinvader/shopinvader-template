@@ -27,12 +27,10 @@ $(document).ready(function () {
   $(document).on('ShopinvaderForm:after-submit',
     function (event, element)
     {
-      console.log('HIDE OVERLAY');
       $('.main-loader').addClass('d-none');
-      console.log($(element.target));
       var new_document = $('<div></div>').append($.parseHTML(element.ajaxpage));
-
-      if($(element.target).attr('action') == 'invader/cart/add_item') {
+      console.log($(element.target).attr('action'));
+      if($(element.target).attr('action') == '/invader/cart/add_item') {
         main_modal.show(
           new_document.find('#product-modal-add .title').html(),
           new_document.find('#product-modal-add .content').html(),

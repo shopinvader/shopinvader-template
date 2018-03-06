@@ -85,7 +85,7 @@
             </span>
           <%/price.discount %>
         </strong>
-        <form method="POST" action="invader/cart/add_item"  method="post" data-shopinvader-form>
+        <form method="POST" action="/invader/cart/add_item"  method="post" data-shopinvader-form>
           <input type="hidden" name="invader_success_url" value="{%path_to page%}" />
           <input type="hidden" name="invader_error_url" value="{%path_to page%}" />
           <input type="hidden" name="item_qty" value="1">
@@ -98,7 +98,7 @@
     </div>
     <div class="product-thumbnail-name card-bodyp-0 p-md-3 p-xl-2">
       <div class="font-weight-bold">
-        <a href="{{url_base}}<% url_key %>" class="card-title">
+        <a href="{{url_base}}<% url_key %>?ref=<% sku %>" class="card-title">
           <% model.name %>
           <div class="small">
             <%#name%>
@@ -107,20 +107,20 @@
           </div>
         </a>
       </div>
-      <a href="{{ url_base }}<% url_key %>?ref=<% default_code %>#product-section-reviews" >
+      <a href="{{ url_base }}<% url_key %>?ref=<% sku %>#product-section-reviews" >
         <%#helpers.ratingsStars%>
           <% rating.summary.average  %>
         <%/helpers.ratingsStars%>
       </a>
       <div class="card-text small">
-        <a href="{{url_base}}<% last_categorie.url_key %>" class="text-underline text-dark"><u><% last_categorie.name %></u></a>
+        <a href="{{url_base}}<% last_categorie.url_key %>?ref=<% sku %>" class="text-underline text-dark"><u><% last_categorie.name %></u></a>
         <%#brand%>
           - <a href="#" class="text-underline text-dark"><u><% brand.name %></u></a>
         <%/brand%>
       </div>
       <%#varianted%>
       <div class="small pb-2">
-        <a href="{{url_base}}<% url_key %>" class="badge badge-secondary p-1">
+        <a href="{{url_base}}<% url_key %>?ref=<% sku %>" class="badge badge-secondary p-1">
           {{'product_variants' | translate}}
         </a>
       </div>

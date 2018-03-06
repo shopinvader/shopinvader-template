@@ -13,11 +13,11 @@
     {% assign selected_address_id = address_list.first.id %}
   {% endif%}
 
-  <div class="card-deck-wrapper">
-    <div class="card-deck">
-      {% for address in address_list %}
-        {% if address.id != null %}
-          <div class="card">
+  <div class="row">
+    {% for address in address_list %}
+      {% if address.id != null %}
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 align-items-stretch d-flex">
+          <div class="card w-100">
             <div class="card-body">
               {% if display_delector == true%}
               <div class="radio">
@@ -36,14 +36,14 @@
                     <span>{{address.city}}</span>
                   </div>
                   <div>{{address.country.name}}</div>
-                  <div>{{address.phone}}</div>
+                  <div><i class="fa fa-phone small"></i>  {{address.phone}}</div>
                 </address>
               </label>
             </div>
             <div class="card-footer text-center">
               <div class="row">
-                <div class="col-6 text-right">
-                  <a href="{% path_to page%}?page_status=update_address&address_id={{address.id | round}}" class="btn btn-link" data-address-id="{{address.id | round}}">
+                <div class="col-6">
+                  <a href="{% path_to cart_address_form %}?item_id={{address.id}}" name="update_{{address.id}}" class="btn btn-link">
                     <i class="fas fa-pencil-alt"></i> {{'cart_address_update' | translate }}
                   </a>
                 </div>
@@ -61,23 +61,26 @@
               </div>
             </div>
           </div>
-        {% endif %}
-      {% endfor %}
-      {% if display_add == true %}
-      <div class="card">
-        <div class="card-body text-center">
-          <div class="bottom-link">
-            {% if display_add == true %}
-              <a class="btn btn-link text-primary" href="{% path_to page%}?page_status=add_address">
-                <div class="text-primary ">
-                  <i class="fa fa-plus-circle fa-5x"></i>
-                </div>
-                {{ 'cart_address_add' | translate }}
-              </a>
-            {%endif%}
+        </div>
+      {% endif %}
+    {% endfor %}
+    {% if display_add == true %}
+      <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+        <div class="card">
+          <div class="card-body text-center">
+            <div class="bottom-link">
+              {% if display_add == true %}
+                <a class="btn btn-link text-primary" href="{% path_to cart_address_form%}">
+                  <div class="text-primary ">
+                    <i class="fa fa-plus-circle fa-5x"></i>
+                  </div>
+                  {{ 'cart_address_add' | translate }}
+                </a>
+              {%endif%}
+            </div>
           </div>
         </div>
       </div>
-      {%endif%}
-    </div>
+    {%endif%}
+
   </div>

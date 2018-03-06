@@ -1,5 +1,4 @@
 
-
 {% for cart_line in cart.lines.items %}
   {% if product_id == null or cart_line.product.id == product_id %}
     <div class="card">
@@ -26,7 +25,7 @@
               </div>
             </div>
             <div class="col-8 col-sm-5 col-md-9 order-1 order-xl-2">
-              <form class="cart-line-qty" method="POST" action="invader/cart/update_item" data-shopinvader-form>
+              <form class="cart-line-qty" method="POST" action="/invader/cart/update_item" data-shopinvader-form>
                 <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
                 <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
                 <input type="hidden" name="item_id" value="{{cart_line.id}}">
@@ -44,7 +43,7 @@
             </div>
             <div class="col-4 col-sm-2 col-xl-3 order-2 order-xl-3">
               {% if readonly != true%}
-              <form class="cart-line-qty" method="POST" action="invader/cart/delete_item" data-shopinvader-form>
+              <form class="cart-line-qty" method="POST" action="/invader/cart/delete_item" data-shopinvader-form>
                 <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
                 <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
                 <input type="hidden" name="item_id" value="{{cart_line.id}}">

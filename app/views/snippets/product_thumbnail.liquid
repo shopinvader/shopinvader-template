@@ -1,4 +1,4 @@
-{% assign variant_path = '?variant=' | append: product.objectID %}
+{% assign variant_path = '?ref=' | append: product.sku %}
 {% if with_richdata == true%}
   <script type="application/ld+json">
     {
@@ -89,8 +89,8 @@
         {% endif %}
       </strong>
       <form method="POST" action="invader/cart/add_item" method="post" data-shopinvader-form>
-        <input type="hidden" name="invader_success_url" value="{%path_to page%}" />
-        <input type="hidden" name="invader_error_url" value="{%path_to page%}" />
+        <input type="hidden" name="invader_success_url" value="{%path_to page%}?ref={{product.sku}}" />
+        <input type="hidden" name="invader_error_url" value="{%path_to page%}?ref={{product.sku}}" />
         <input type="hidden" name="item_qty" value="1">
         <input type="hidden" name="product_id" value="{{product.objectID }}">
         <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart ">
@@ -101,14 +101,14 @@
   </div>
   <div class="product-thumbnail-name card-body p-1 p-sm-3 p-xl-2">
     <div class="font-weight-bold">
-      <a href="{{product.url_key  | prepend: url_base }}" class="card-title">
+      <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="card-title">
         {{product.model.name}}
         <div class="small">
           {{product.name}}
         </div>
       </a>
     </div>
-    <a href="{{url_base}}{% path_to product %}#product-section-reviews" class="small">
+    <a href="{{url_base}}{% path_to product %}?ref={{product.sku}}#product-section-reviews" class="small">
     {%if product.rating.summary.size > 0 %}
       {% include 'rating_stars'
          with rating_value: product.rating.summary.average
@@ -123,7 +123,7 @@
     </div>
     {% if product.variant_count > 0%}
     <div class="pt-2 pb-2">
-      <a href="{{url_base}}{% path_to product %}" class="badge badge-secondary p-1">
+      <a href="{{url_base}}{% path_to product %}?ref={{product.sku}}" class="badge badge-secondary p-1">
         {{'product_variants' | translate}}
       </a>
     </div>
@@ -134,8 +134,8 @@
   </div>
   <div class="product-thumbnail-btn d-vertical-only pr-2 pl-2">
     <form method="POST" action="invader/cart/add_item" method="post" data-shopinvader-form>
-      <input type="hidden" name="invader_success_url" value="{%path_to page%}" />
-      <input type="hidden" name="invader_error_url" value="{%path_to page%}" />
+      <input type="hidden" name="invader_success_url" value="{%path_to page%}?ref={{product.sku}}" />
+      <input type="hidden" name="invader_error_url" value="{%path_to page%}?ref={{product.sku}}" />
       <input type="hidden" name="item_qty" value="1">
       <input type="hidden" name="product_id" value="{{product.objectID }}">
       <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart ">

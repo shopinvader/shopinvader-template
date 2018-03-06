@@ -1,5 +1,5 @@
-<form method="POST" action="invader/cart/add_item">
-  <input type="hidden" name="invader_success_url" value="{{product.url_key  | prepend: url_base}}" />
+<form method="POST" action="/invader/cart/add_item" data-shopinvader-form>
+  <input type="hidden" name="invader_success_url" value="{{product.url_key  | prepend: url_base}}?addtocart_product_id={{product.objectID}}" />
   <input type="hidden" name="invader_error_url" value="{{product.url_key  | prepend: url_base}}" />
   <input type="hidden" name="product_id" value="{{product.objectID }}">
     <div class="row">
@@ -26,7 +26,7 @@
         </div>
         <div class="small text-dark">
           {{'product_code' | translate }}
-          <strong>{{product.default_code}}</strong>
+          <strong>{{product.sku}}</strong>
         </div>
       </div>
     </div>

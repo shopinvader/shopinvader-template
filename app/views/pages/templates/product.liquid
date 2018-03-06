@@ -75,7 +75,6 @@ handle: product
 {%if variant == null%}
   {% assign variant = product %}
 {% endif %}
-
 <div class="row">
   <div class="col-12  bg-light">
     <div class="container mt-4 mb-4 bg-white pt-2">
@@ -116,14 +115,12 @@ handle: product
               <u>{{ variant.categories.last.name}}</u>
             </a>
           </div>
-
           <div class="d-inline-block" data-scrollto="#product-section-rating">
             {% include 'rating_stars' with
                 rating_value: variant.rating.summary.average,
                 rating_nbr: variant.rating.reviews.size,
                 rating: variant.rating %}
           </div>
-
         </div>
       </div>
       <div class="row">
@@ -184,7 +181,6 @@ handle: product
           </div>
         </div>
       </div>
-
       {% if variant.technical_details.size > 0 %}
       <div id="product-section-spec">
         {% include 'product_page_section' with step: 'spec' %}
