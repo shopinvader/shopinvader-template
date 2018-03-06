@@ -111,7 +111,14 @@ var hogan_helpers = {
   },
   "imageDefault": function() {
     return function(text, render) {
-      var url = render(text).trim();
+      console.log(render);
+      if(typeof(render) == 'function') {
+        var url = render(text).trim();
+      }
+      else {
+        var url = hogan_render(text, this).trim();
+      }
+
       if(url != '') {
         return render(text);
       }
@@ -123,7 +130,7 @@ var hogan_helpers = {
   "ratingsStars": function() {
     return function(text, render) {
       var html = '';
-      if(typeof(renders) == 'function') {
+      if(typeof(render) == 'function') {
         var value = parseInt(render(text));
       }
       else {

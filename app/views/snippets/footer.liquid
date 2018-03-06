@@ -16,7 +16,7 @@
             <ul class="">
               {% for category_lv2 in category_lv1.childs%}
               <li class="">
-                <a href="{{base_url}}{{category_lv2.url}}" class="">
+                <a href="{{category_lv2.url_key | prepend: url_base}}" class="">
                   {{category_lv2.name}}
                 </a>
               </li>

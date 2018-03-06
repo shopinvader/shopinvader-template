@@ -3,7 +3,7 @@
     <div class="carousel-inner" role="listbox">
       {% for image in product.images %}
         <div class="carousel-item {%if forloop.index == 1 %}active{%endif%}">
-          {{image.large.src | json}}
+
           <img src="{{image.large.src}}" alt="{{image.large.alt}}" class="d-block img-fluid w-100"/>
         </div>
       {% endfor %}
@@ -19,6 +19,7 @@
   </div>
   <div class="mt-1 mb-2">
     {% for image in product.images %}
+
     <div data-target="#slide-{{product.objectID}}" data-slide-to="{{forloop.index0}}" class="{%if forloop.index == 1 %}active{%endif%} border carousel-thumbails">
       <img src="{{image.small.src}}" alt="{{image.small.alt}}" class="img-fluid"/>
     </div>

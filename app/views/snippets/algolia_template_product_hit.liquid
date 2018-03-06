@@ -15,25 +15,11 @@
   {% endraw %}
   <div class="card product-thumbnail bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%endif%}" >
     <div class="product-thumbnail-img">
-      <div id="slide-<% objectID %>" class="carousel slide p-2" data-ride="carousel" data-interval="false">
-        <div class="carousel-inner" role="listbox">
-          <div class="carousel-item active" data-target="#slide-<% objectID %>">
-            <img src="<% images.0.medium.src %>" alt="<% images.0.medium.alt %>" class="d-block img-fluid"/>
-          </div>
-          <%#images%>
-            <div class="carousel-item " data-target="#slide-<% objectID %>">
-              <img src="<% medium.src %>" alt="<% medium.alt %>" class="d-block img-fluid"/>
-            </div>
-          <%/images%>
-        </div>
-        <a class="carousel-control-prev" href="#slide-<% objectID %>" role="button" data-slide="prev">
-          <i class="fa fa-chevron-left text-dark"></i>
-        </a>
-        <a class="carousel-control-next" href="#slide-<% objectID %>" role="button" data-slide="next">
-          <i class="fa fa-chevron-right text-dark"></i>
-        </a>
-      </div>
-
+      <a href="/<% url_key %>?ref=<% default_code %>">
+        <img class="group list-group-image card-img-top pr-2 pr-md-0" src="<%#helpers.imageDefault%>
+        <% images.0.medium.src  %>
+        <%/helpers.imageDefault%>" class="img-responsive" alt="<% images.0.medium.alt  %>">
+      </a>
       <%#price.discount %>
       <div class="pb-1">
         <div class="badge badge-warning p-2 badge-discount">
@@ -101,9 +87,9 @@
         <a href="{{url_base}}<% url_key %>?ref=<% sku %>" class="card-title">
           <% model.name %>
           <div class="small">
-            <%#name%>
-              <% name %>
-            <%/name%>
+            <%#short_name%>
+              <% short_name %>
+            <%/short_name%>
           </div>
         </a>
       </div>
@@ -112,14 +98,14 @@
           <% rating.summary.average  %>
         <%/helpers.ratingsStars%>
       </a>
-      <div class="card-text small">
-        <a href="{{url_base}}<% last_categorie.url_key %>?ref=<% sku %>" class="text-underline text-dark"><u><% last_categorie.name %></u></a>
+      <div class="card-text ">
+        <a href="{{url_base}}<% last_categorie.url_key %>" class="text-underline text-dark"><u><% last_categorie.name %></u></a>
         <%#brand%>
           - <a href="#" class="text-underline text-dark"><u><% brand.name %></u></a>
         <%/brand%>
       </div>
       <%#varianted%>
-      <div class="small pb-2">
+      <div class=" pb-2">
         <a href="{{url_base}}<% url_key %>?ref=<% sku %>" class="badge badge-secondary p-1">
           {{'product_variants' | translate}}
         </a>

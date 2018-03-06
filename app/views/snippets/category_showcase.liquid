@@ -21,7 +21,7 @@
               {% for product in store.products%}
               <div class="carousel-item {%if forloop.first%}active{%endif%} text-center ">
                 <a href="{% path_to product %}?ref={{product.sku}}">
-                  <img class="d-inline-block img-fluid" src="{{product.images.first.medium.src}}" alt="{{product.images.first.medium.alt}}">
+                  <img class="d-inline-block img-fluid" src="{{product.images.first.medium.src | default: site.metafields.theme.noimage}}" alt="{{product.images.first.medium.alt}}">
                 </a>
                 <div class="row">
                   <div class="col-12">
@@ -30,8 +30,8 @@
                         {{product.model.name}}
                       </a>
                     </div>
-                    <div class="small text-secondary">
-                      {{product.name}}
+                    <div class="small text-primary">
+                      {{product.short_name}}
                     </div>
                     {% include 'rating_stars' with
                         rating_value: product.rating.summary.average,
@@ -81,13 +81,13 @@
             <div class="row">
               <div class="col-12 col-md-3 text-center">
                 <a href="{% path_to product %}?ref={{product.sku}}">
-                  <img class="d-block img-fluid " src="{{product.images.first.medium.src}}" alt="{{product.images.first.medium.alt}}">
+                  <img class="d-block img-fluid " src="{{product.images.first.medium.src | default: site.metafields.theme.noimage}}" alt="{{product.images.first.medium.alt}}">
                 </a>
               </div>
               <div class="col-12 col-md-9 small d-none d-sm-block">
                 <a href="{% path_to product %}?ref={{product.sku}}">
                   {{product.model.name}}
-                  <span class="small">{{product.name}}</span>
+                  <div class="small">{{product.short_name}}</div>
                 </a>
                 <div class="">
                   {% include 'rating_stars' with

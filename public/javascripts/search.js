@@ -122,6 +122,7 @@ $(document).ready(function() {
       return render(text);
     }
     else {
+
       return default_img_url;
     }
   };
