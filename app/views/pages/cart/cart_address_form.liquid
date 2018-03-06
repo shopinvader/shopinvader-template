@@ -12,7 +12,7 @@ is_layout: false
 {% block content/main %}
 <div  data-shopinvader-container id="cart-address">
   {% assign form_action = '/invader/addresses/create' %}
-  {% if params.item_id %}
+  {% if params.item_id and params.item_id != ''%}
     {% with_scope id: params.item_id %}
       {% assign address = store.addresses.first %}
 
@@ -21,7 +21,7 @@ is_layout: false
   {% endif %}
   <form method="post" action="{{form_action}}" id="cart_update_form">
     <input type="hidden" name="invader_success_url" value="{% path_to cart_address %}" />
-    <input type="hidden" name="invader_error_url" value="{% path_to page %}?address_id={{address.id}}" />
+    <input type="hidden" name="invader_error_url" value="{% path_to page %}?item_id={{address.id}}" />
     <div class="row">
       <div class="col-12">
         <div class="row justify-content-center">

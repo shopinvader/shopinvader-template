@@ -22,7 +22,7 @@
               {% if display_delector == true%}
               <div class="radio">
                 <label class="text-lg bold">
-                  <input type="radio" value="{{address.id | round}}" {%if address.id == selected_address_id %} checked="checked" {%endif%} name="{{ input_name }}" id="{{ input_name }}_{{address.id}}" autocomplete="off"/>
+                  <input class="input-{{ input_group }}-address" type="radio" value="{{address.id | round}}" {%if address.id == selected_address_id %} checked="checked" {%endif%} name="{{ input_name }}" id="{{ input_name }}_{{address.id}}" autocomplete="off"/>
                   <b>{{address.name}}</b>
                 </label>
               </div>

@@ -24,6 +24,7 @@ editable_elements:
       <div class="col-lg-8 col-xl-9">
         <h2> {{ 'cart_carrier_title' | translate }}</h2>
         <div class="card-deck-wrapper">
+          {% comment %}
           {% if store.carriers.size >0  %}
             <form method="post" action="invader/cart/update" id="cart_carrier_form" data-shopinvader-form>
               <input type="hidden" name="invader_success_url" value="{% path_to cart_checkout %}" />
@@ -135,14 +136,14 @@ editable_elements:
                 </div>
               </div>
             {% endif %}
-
+          {% endcomment %}
         </div>
 
 
       </div>
       <div class="col-lg-4 col-xl-3 mb-4" data-shopinvader-container id="cart-total">
         {% include 'cart_total' with cart: store.cart  %}
-        {% if store.cart.partner_shipping.size > 0%}
+        {% if store.cart.shipping.size > 0%}
         <div class="card">
           <div class="card-body">
 

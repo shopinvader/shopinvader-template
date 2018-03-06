@@ -10,6 +10,14 @@ is_layout: false
 {% extends "layouts/checkout" %}
 
 {% block content/main %}
+{% assign input_specific_address = "" %}
+{% assign collapse_specific_address = "" %}
+
+{% if store.cart.shipping.address.id != store.cart.invoicing.address.id %}
+  {% assign input_specific_address = "checked='checked'"%}
+  {% assign collapse_specific_address = 'show' %}
+{% endif %}
+
 <div  data-shopinvader-container id="cart-address">
   <form method="post" action="/invader/cart/update" id="cart_address">
     <input type="hidden" name="invader_success_url" value="{% path_to cart_checkout %}" />
@@ -30,15 +38,14 @@ is_layout: false
           display_delete: false
         %}
         <div class="checkbox">
-          {{store.cart.invoicing.use_shipping_address}}
           <label>
-            <input type="checkbox" name="invoicing[use_shipping_address]" value="0" data-toggle="collapse" data-target="#invoice_address" autocomplete="off">
+            <input type="checkbox" id="use_specific_address" {{input_specific_address}} value="1" data-toggle="collapse" data-target="#invoice_address" autocomplete="off">
             {% editable_text checkout_button, fixed: true, rows: 1 %}
               Use different invoice address.
             {% endeditable_text %}
           </label>
         </div>
-        <div class="collapse" id="invoice_address">
+        <div class="collapse {{collapse_specific_address}}" id="invoice_address">
           <h2>{{'cart_invoice_address' | translate}}</h2>
           {% include "address_book" with
             input_group: 'invoicing',

@@ -63,6 +63,16 @@ $(document).ready(function () {
       $(this).parents('form').submit();
     }
   );
+  $('[data-toggle=display-hover]').hover(
+    function() {
+      console.log($($(this).attr('data-target')));
+      $($(this).attr('data-target')).css('display', 'block');
+    },
+    function() {
+      console.log($(this).attr('data-target'));
+      $($(this).attr('data-target')).css('display', 'none');
+    }
+  );
 
   $('body').on('change', '.product-qty input',
     function(event) {
@@ -114,7 +124,14 @@ $(document).ready(function () {
       }
     }
   );
-
+  $('body').on('submit', '#cart_address', function(event) {
+    event.preventDefault();
+    if($(this).find('#use_specific_address:checked').length == 0) {
+      var shipping_addresss_id = $('input.input-shipping-address:checked').val();
+      $('input.input-invoicing-address[value='+shipping_addresss_id+']').prop('checked', true);
+    }
+    $(this).get(0).submit();
+  });
   /*common event*/
   $('body').on('click', '[data-link]',
       function(){
@@ -129,6 +146,7 @@ $(document).ready(function () {
       }, 1500);
     }
   );
+
 });
 
 var main_modal = {
