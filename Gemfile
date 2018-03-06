@@ -2,14 +2,12 @@ source 'https://rubygems.org'
 
 gem 'locomotivecms_wagon', github: 'locomotivecms/wagon', require: false
 gem 'locomotivecms_steam', github: 'locomotivecms/steam', require: false, ref: 'e23477ecbd0b752498bb2258ff14d41511016251'
-gem 'byebug'
-group :misc do
-  gem 'shop_invader', path: 'shopinvader'
-  #gem 'shop_invader', github: 'akretion/shopinvader', branch: 'refactor-odoo-10', require: false
-end
-# gem 'locomotivecms_wagon', '~> 2.3.0.rc1'
 
- gem 'guard-livereload', '~> 2.5.1'
+group :misc do
+  gem 'shop_invader', github: 'akretion/shopinvader', branch: 'refactor-odoo-10'
+end
+
+gem 'guard-livereload', '~> 2.5.1'
 
 group :development do
   # Mac OS X
