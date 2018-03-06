@@ -16,8 +16,9 @@ editable_elements:
       <div class="card-body">
         <h1 class="display-4">
           {% editable_text "register_validation_title", label: "Register validation : title", format: "raw" %}
-          Thank you !
+          Thank you
           {% endeditable_text %}
+          {{current_customer.name}} !
         </h1>
         {% editable_text "register_validation_text", label: "Register validation : message", format: "html" %}
           <p>Your customer account as been succefully created</p>
