@@ -475,6 +475,9 @@ recommandation_title:
 search_show_more:
   en: more
   fr: afficher plus
+show_category:
+  en: Show all product in category
+  fr: Voir la catégories
 show_more:
   en: show more
   fr: en savoir plus

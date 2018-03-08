@@ -1,5 +1,8 @@
 $(document).ready(function () {
-
+  $( ".product-thumbnail-img.loader img" ).load(function() {
+    // Handler for .load() called.
+    $(this).css('border', '1px solid red');
+  });
   $('.carousel-multi-item .item').each(function(){
     var itemToClone = $(this);
 

@@ -10,7 +10,7 @@
         {%with_scope level: 0%}
           {% for category_lv1 in store.categories%}
           <li class="col-12 col-sm-6 col-md-4 pt-2 pb-4 pb-md-2list-inline-item m-0">
-            <a href="{% path_to category_lv1%}" class="h4 text-white font-weight-bold text-uppercase">
+            <a href="{{category_lv1.url_key | prepend: url_base}}" class="h4 text-white font-weight-bold text-uppercase">
               {{category_lv1.name}}
             </a>
             <ul class="">

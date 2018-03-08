@@ -5,7 +5,7 @@
       "@context": "http://schema.org/",
       "@type": "Product",
       "name": {{product.model.name  | json}},
-      "url": "{% path_to product%}",
+      "url": "{{product.url_key  | prepend: url_base }}?ref={{product.sku}}",
       "image": [
         "{{image.first.medium.src}}"
        ],
@@ -18,8 +18,12 @@
     }
   </script>
 {% endif%}
-<div class="card product-thumbnail bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%elsif display_lite == true%}product-thumbnail-lite{%endif%}" >
+<div class="card product-thumbnail  bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%elsif display_lite == true%}product-thumbnail-lite{%endif%}" >
+  <div class="product-thumbnail-img-load">
+    <div class="cssload-speeding-wheel"></div>
+  </div>
   <div class="product-thumbnail-img">
+
     {% assign images_count = 0%}
     {% if product.images.size > 1 %}
     <div id="slide-{{product.objectID}}" class="carousel slide p-2" data-ride="carousel" data-interval="false">
@@ -88,8 +92,8 @@
           </span>
         {% endif %}
       </strong>
-      <form method="POST" action="invader/cart/add_item" method="post" data-shopinvader-form>
-        <input type="hidden" name="invader_success_url" value="{%path_to page%}?ref={{product.sku}}" />
+      <form method="POST" action="/invader/cart/add_item" method="post" data-shopinvader-form>
+        <input type="hidden" name="invader_success_url" value="{%path_to page%}?ref={{product.sku}}&addtocart_product_id={{product.objectID}}" />
         <input type="hidden" name="invader_error_url" value="{%path_to page%}?ref={{product.sku}}" />
         <input type="hidden" name="item_qty" value="1">
         <input type="hidden" name="product_id" value="{{product.objectID }}">
@@ -108,7 +112,7 @@
         </div>
       </a>
     </div>
-    <a href="{{url_base}}{% path_to product %}?ref={{product.sku}}#product-section-reviews" class="small">
+    <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}#product-section-reviews" class="small">
     {%if product.rating.summary.size > 0 %}
       {% include 'rating_stars'
          with rating_value: product.rating.summary.average
@@ -123,7 +127,7 @@
     </div>
     {% if product.variant_count > 0%}
     <div class="pt-2 pb-2">
-      <a href="{{url_base}}{% path_to product %}?ref={{product.sku}}" class="badge badge-secondary p-1">
+      <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="badge badge-secondary p-1">
         {{'product_variants' | translate}}
       </a>
     </div>
@@ -133,8 +137,8 @@
     </div>
   </div>
   <div class="product-thumbnail-btn d-vertical-only pr-2 pl-2">
-    <form method="POST" action="invader/cart/add_item" method="post" data-shopinvader-form>
-      <input type="hidden" name="invader_success_url" value="{%path_to page%}?ref={{product.sku}}" />
+    <form method="POST" action="/invader/cart/add_item" method="post" data-shopinvader-form>
+      <input type="hidden" name="invader_success_url" value="{%path_to page%}?ref={{product.sku}}&addtocart_product_id={{product.objectID}}" />
       <input type="hidden" name="invader_error_url" value="{%path_to page%}?ref={{product.sku}}" />
       <input type="hidden" name="item_qty" value="1">
       <input type="hidden" name="product_id" value="{{product.objectID }}">

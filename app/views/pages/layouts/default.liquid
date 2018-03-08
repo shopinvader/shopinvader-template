@@ -39,7 +39,11 @@ is_layout: false
     {% block 'header_meta' %}
       <link rel="canonical" href="{{base_url}}{% path_to page%}" />
       {% seo %}
+      {% for locale_code in locales %}
+      <link rel="alternate" href="{% path_to page, locale: locale_code %}" hreflang="{{locale_code}}"/>
+      {% endfor %}
     {% endblock %}
+
     <link rel="shortcut icon" href="{{ 'favicon.png' | theme_image_url }}">
 
     {{ 'application.css' | stylesheet_tag }}

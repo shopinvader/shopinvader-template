@@ -1,15 +1,8 @@
 ---
 title: Page non trouvée
 slug: '404'
+editable_elements:
+  content/jumbotron: >
+    <h1 class="text-danger font-weight-bold">404 - Page non trouvée</h1>
+    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
 ---
-{% extends 'layouts/default' %}
-{% block content %}
-<div class="container">
-  <div class="jumbotron">
-    {% editable_text jumbotron, rows: 5, priority: 1 %}
-      <h1 class="text-danger">Arrggggh, page not found</h1>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-    {% endeditable_text %}
-  </div>
-</div>
-{% endblock %}

@@ -12,6 +12,7 @@ $(document).ready(function() {
        compileOptions: [{delimiters: '<% %>'}]
      }
   };
+  console.log(instantsearch_params);
 
   if($('#search-result').attr('data-category') != undefined) {
     instantsearch_params.urlSync = false;

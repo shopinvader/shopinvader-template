@@ -4,6 +4,17 @@
     <div class="row d-none d-lg-block border border-1 border-top-0 border-left-0 border-right-0 text-right">
       <ul class="list-inline text-primary small col-12 mb-1">
         <li class="list-inline-item mr-4">
+          {% for locale_code in locales %}
+            {% assign url_home = "/" %}
+            {% if locale_code != default_locale %}
+              {% assign url_home = url_home | append: locale_code %}
+            {% endif%}
+            <a href="{{url_home}}" class="p-1 text-uppercase {% if locale != locale_code%} text-dark {%endif%}">
+              {{locale_code}}
+            </a>
+          {% endfor%}
+        </li>
+        <li class="list-inline-item mr-4">
           {% if site.metafields.phone_number != '' %}
             <a href="{{site.metafields.store.phone_number_link}}" class="text-primary text-underline">
               <i class="fa fa-phone text-info mr-1"></i> <b>Need help ?</b>{{site.metafields.store.phone_number}}
@@ -173,13 +184,13 @@
           <ul class="row" >
             {% for category_l1 in category_l0.childs %}
             <li class="col-3">
-              <a  href="{{category_lvl1.url_key  | prepend: url_base }}" class="text-uppercase text-dark font-weight-bold">
+              <a  href="{{category_l1.url_key  | prepend: url_base }}" class="text-uppercase text-dark font-weight-bold">
                 {{category_l1.name}}
               </a>
               <ul>
                 {% for category_l2 in category_l1.childs %}
                 <li>
-                  <a href="{% path_to category_l2 %}" class="text-dark">
+                  <a href="{{category_l2.url_key | prepend: url_base}}" class="text-dark">
                     {{category_l2.name}}
                   </a>
                 </li>
@@ -209,6 +220,11 @@
                 </a>
               </li>
               {% endfor %}
+              <li class="list-group-item border-left-0 border-right-0">
+                <a href="{{category.url_key  | prepend: url_base }}" id="cat-{{category.id}}" class="text-uppercase">
+                  {{'show_category' | translate}}
+                </a>
+              </li>
             </ul>
           </div>
         </li>

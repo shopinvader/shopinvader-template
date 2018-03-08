@@ -8,7 +8,7 @@ handle: product
 {% block 'header_meta' %}
 <meta name="og:site_name" content="{{site.name}}">
 <meta name="og:title" content="{{product.seo_title}}">
-<meta name="og:url" content="{{base_url}}{% path_to product %}?ref={{variant.objectID }}">
+<meta name="og:url" content="{{ product.url_key | prepend: url_base }}?ref={{product.objectID }}">
 <meta name="og:description" content="{{product.meta_description}}">
 <meta name="og:image" content="{{ product.images.first.medium.src }}">
 <meta name="description" content="{{product.meta_description}}">
@@ -16,7 +16,6 @@ handle: product
 <title>{{product.seo_title}}</title>
 <link rel="canonical" href="{{base_url | append: '/' | append: product.url_key}}" />
 
-{% assign variant_path = '?variant=' | append: product.objectID %}
 {%  if product.stock_state != null and  product.stock_state != ''%}
   {% if product.stock_state == 'in_stock'%}
     {% assign schema_stock = "http://schema.org/InStock"%}
@@ -33,7 +32,7 @@ handle: product
     "@context": "http://schema.org/",
     "@type": "Product",
     "name": {{product.model.name | json}},
-    "url": "{% path_to product%}{{variant_path}}",
+    "url": "{{product.url_key  | prepend: url_base }}?ref={{product.sku}}",
     "image": [
       {% for image in product.images%}
         "{{image.medium.src}}"{%if forloop.last == false%},{%endif%}
@@ -111,7 +110,7 @@ handle: product
             {{variant.brand.name }}
           </div>
           <div class="d-none d-sm-inline-block  pr-4">
-            <a href="{{ variant.categories.last.url_key}}">
+            <a href="{{ variant.categories.last.url_key | prepend: url_base }}}}">
               <u>{{ variant.categories.last.name}}</u>
             </a>
           </div>
