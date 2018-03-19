@@ -13,6 +13,7 @@
   }
 }
 .ais-search-box {
+  max-width: none !important;
   width: 100% !important;
   .ais-search-box--input {
     width: 100%;
@@ -31,7 +32,7 @@
     .ais-menu--count,
     .ais-star-rating--count,
     .ais-toggle--count {
-      color: theme-colors("primary");
+      color: theme-color("info");
       float: right;
       font-size: $font-size-sm;
     }
@@ -71,7 +72,7 @@
         float: right;
       }
       h4 {
-        color: theme-colors("danger");
+        color: $gray-700;
         font-family: $font-family-sans-serif;
         font-weight: bold;
       }
@@ -83,23 +84,114 @@
     }
   }
 
+  &.ais-price-ranges {
+    .ais-price-ranges--input {
+      display: inline;
+      width: 85%;
+      padding: 0.2rem;
+      font-size: 0.8rem;
+      -moz-appearance: textfield;
+    }
+    .ais-price-ranges--link {
+      font-size: 0.8rem;
+      color: theme-color("dark");
+    }
+    .ais-price-ranges--currency {
+      font-size: 1rem;
+      text-align: left;
+      padding-right: 0.2rem;
+      float: right;
+    }
+    .ais-price-ranges--separator {
+      padding-left: 0.2rem;
+      padding-right: 0.2rem;
+      font-size: 1rem;
+      color: theme-color("primary");
+    }
+    .ais-price-ranges--button {
+      padding: 0rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      font-size: 0.7rem;
+      height: 25px;
+    }
+  }
+  &.ais-current-refined-values {
+    .ais-current-refined-values--list {
+      display: inline-block;
+      .ais-current-refined-values--item {
+        border: 1px solid $gray-500;
+
+        display: inline-block;
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding: 0.3rem;
+        a {
+          color: $gray-600;
+          display: inline-block;
+          text-transform: uppercase;
+        }
+        &::after {
+          color: $gray-700;
+          content:"X";
+          display: inline-block;
+          padding-left: 0.4rem;
+        }
+      }
+      .ais-current-refined-values--clear-all {
+        display: inline-block;
+      }
+    }
+  }
   // Price slider widget
   &.ais-range-slider {
-    margin: auto;
-    //width: calc(100% - 30px);
-    .ais-range-slider--tooltip {
-      background-color: transparent;
+
+    .ais-range-slider--base {
+      border-color: theme-color("secondary");
     }
 
     .ais-range-slider--connect {
-      background: theme-colors("primary");
+      background: theme-color("primary");
     }
 
     .ais-range-slider--handle {
-      border-color: theme-colors("primary");
-      bottom: 6px;
-      height: 15px;
-      width: 15px;
+      border-color: theme-color("primary");
+      //background: theme-color("info");
+      bottom: 5px;
+      height: 12px;
+      width: 12px;
+    }
+
+    .ais-range-slider--marker {
+      background: none;
+      &.ais-range-slider--marker-large {
+        background: theme-color("secondary");
+      }
+    }
+    .rheostat {
+      margin-left: auto;
+      margin-right: auto;
+      width: calc(100% - 40px);
+
+      .rheostat-progress {
+        background: theme-color-level("primary", -3);
+        top: -2px;
+      }
+      .rheostat-background {
+        top: -3px;
+      }
+      .rheostat-handle {
+        .ais-range-slider--tooltip {
+          background-color: theme-color("secondary");
+          border-radius: 3px;
+          font-size: 0.6rem;
+          padding-left: 4px;
+          padding-right: 4px;
+          width: auto;
+        }
+
+      }
     }
   }
 
@@ -127,9 +219,9 @@
   &.ais-menu {
     .ais-menu--item__active {
       .ais-menu--link {
-        color: theme-colors("primary");
+        color: theme-color("primary");
         &:before {
-          color: theme-colors("primary");
+          color: theme-color("primary");
         }
       }
     }
@@ -141,7 +233,7 @@
       width: 100%;
 
       &:before {
-        color: theme-colors("primary");
+        color: theme-color("primary");
         content: '';
         display: inline-block;
         font-family: FontAwesome;
@@ -157,15 +249,14 @@
   &.ais-refinement-list {
     .ais-refinement-list--item__active {
       .ais-refinement-list--label {
-        color: theme-colors("primary");
         &:hover {
-          color: theme-colors("primary");
+          color: theme-color("primary");
           text-decoration: line-through;
         }
 
         &:before {
           font-weight: normal;
-          color: theme-colors("primary");
+          color: theme-color("primary");
           content: "";
         }
       }
@@ -182,7 +273,7 @@
       width: 100%;
 
       &:hover {
-        color: theme-colors("primary");
+        color: theme-color("primary");
       }
 
       &:before {
@@ -196,7 +287,7 @@
       }
 
       &:hover:before {
-        color: theme-colors("primary");
+        color: theme-color("primary");
       }
 
       .ais-refinement-list--checkbox {
@@ -216,7 +307,7 @@
   padding-top: 10px;
 }
 .filters-xs {
-  background-color: colors("white");
+  background-color: $white;
   height: 100%;
   left: 0;
   position: fixed;
@@ -241,7 +332,7 @@
   }
 
   .ais-root__collapsed {
-    background-color: colors("white");
+    background-color: $white;
   }
 
   .ais-root {
@@ -250,7 +341,7 @@
     padding-top: 10px;
 
     .ais-refinement-list--item {
-      border-bottom: 1px solid colors("white");
+      border-bottom: 1px solid $white;
 
       vertical-align: middle;
 

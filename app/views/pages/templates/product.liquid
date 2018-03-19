@@ -64,9 +64,9 @@ handle: product
 
 {% assign variant = null %}
 {% assign variant_list = product.variants %}
-{% if params.variant%}
+{% if params.ref%}
   {% for product_variant in variant_list %}
-    {% if product_variant.objectID == params.variant%}
+    {% if product_variant.sku == params.ref%}
       {% assign variant = product_variant %}
     {% endif %}
   {% endfor %}
@@ -110,7 +110,7 @@ handle: product
             {{variant.brand.name }}
           </div>
           <div class="d-none d-sm-inline-block  pr-4">
-            <a href="{{ variant.categories.last.url_key | prepend: url_base }}}}">
+            <a href="{{ variant.categories.last.url_key | prepend: url_base }}">
               <u>{{ variant.categories.last.name}}</u>
             </a>
           </div>

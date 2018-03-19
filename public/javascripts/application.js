@@ -1,24 +1,28 @@
 $(document).ready(function () {
   $( ".product-thumbnail-img.loader img" ).load(function() {
     // Handler for .load() called.
-    $(this).css('border', '1px solid red');
+    $(this).css('opacity', 1);
+    $(this).parent('.loader').find('.loader-icon').delay('1s').remove();
   });
-  $('.carousel-multi-item .item').each(function(){
-    var itemToClone = $(this);
+  $('.carousel-multi-item').on('slide.bs.carousel', function (e) {
 
-    for (var i=1;i<4;i++) {
-      itemToClone = itemToClone.next();
+      var $e = $(e.relatedTarget);
+      var idx = $e.index();
+      var itemsPerSlide = 4;
+      var totalItems = $('.carousel-item').length;
 
-      // wrap around if at end of item collection
-      if (!itemToClone.length) {
-        itemToClone = $(this).siblings(':first');
+      if (idx >= totalItems-(itemsPerSlide-1)) {
+          var it = itemsPerSlide - (totalItems - idx);
+          for (var i=0; i<it; i++) {
+              // append slides to end
+              if (e.direction=="left") {
+                  $('.carousel-item').eq(i).appendTo('.carousel-inner');
+              }
+              else {
+                  $('.carousel-item').eq(0).appendTo('.carousel-inner');
+              }
+          }
       }
-
-      // grab item, clone, add marker class, add to collection
-      itemToClone.children(':first-child').clone()
-        .addClass("cloneditem-"+(i))
-        .appendTo($(this));
-    }
   });
   $(document).on('ShopinvaderForm:before-submit',
     function (element)

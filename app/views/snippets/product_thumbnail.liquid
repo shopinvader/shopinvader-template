@@ -19,11 +19,9 @@
   </script>
 {% endif%}
 <div class="card product-thumbnail  bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%elsif display_lite == true%}product-thumbnail-lite{%endif%}" >
-  <div class="product-thumbnail-img-load">
-    <div class="cssload-speeding-wheel"></div>
-  </div>
-  <div class="product-thumbnail-img">
 
+  <div class="product-thumbnail-img loader">
+    <div class="loader-icon"></div>
     {% assign images_count = 0%}
     {% if product.images.size > 1 %}
     <div id="slide-{{product.objectID}}" class="carousel slide p-2" data-ride="carousel" data-interval="false">

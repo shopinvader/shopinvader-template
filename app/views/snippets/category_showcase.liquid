@@ -19,8 +19,8 @@
           <div id="slide-showcase-categories" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
               {% for product in store.products%}
-              <div class="carousel-item {%if forloop.first%}active{%endif%} text-center ">
-                <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}">
+              <div class="carousel-item showcase-carousel-item {%if forloop.first%}active{%endif%} text-center ">
+                <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="showcase-carousel-link">
                   <img class="d-inline-block img-fluid" src="{{product.images.first.medium.src | default: site.metafields.theme.noimage}}" alt="{{product.images.first.medium.alt}}">
                 </a>
                 <div class="row">

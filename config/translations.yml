@@ -271,6 +271,9 @@ partner_business:
 partner_business_info:
   en:
   fr: "(livraison sur un lieu de travail)"
+per_page:
+  en: per page
+  fr: par page
 product_add_to_cart:
   en: Add to cart
   fr: Ajouter au panier

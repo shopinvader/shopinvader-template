@@ -111,7 +111,7 @@ var hogan_helpers = {
   },
   "imageDefault": function() {
     return function(text, render) {
-      console.log(render);
+
       if(typeof(render) == 'function') {
         var url = render(text).trim();
       }
@@ -120,7 +120,7 @@ var hogan_helpers = {
       }
 
       if(url != '') {
-        return render(text);
+        return url;
       }
       else {
         return default_img_url;

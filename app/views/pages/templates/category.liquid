@@ -6,22 +6,36 @@ handle: category
 {% extends 'layouts/faceting' %}
 {% block content/intro %}
   <h1 class="title-decorator">{{category.name}}</h1>
-  <p>{{category.subtitle}}</p>
+  <p>{{category.short_description}}</p>
 {% endblock %}
-
+{% block content/footer %}
+  <p>{{category.description}}</p>
+{% endblock %}
 {% block 'content/main/result'%}
+
   {% with_scope categories: {id: category.objectID}%}
     {% paginate store.products by 18 %}
-    <div class="row p-1 p-md-4">
-      <div class="col-sm-8 col-lg-4 d-none d-sm-flex">
-        {% include 'product_display_control'%}
+    <div class="p-1 p-md-4 ">
+      <div class="row">
+        <div class="order-1 order-lg-1 col-12 col-sm-3 col-md-4 col-lg-3 col-xl-2 d-none d-sm-flex">
+          {% include 'product_display_control'%}
+        </div>
+        <div class="order-3 order-lg-2 col-12 col-sm-12 col-lg-9 col-xl-10 text-right " >
+          <div class="text-right d-inline-block" id="search-pagination">
+            {% include 'paginate' with paginate %}
+          </div>
+          <div class="d-inline-block" id="hits-per-page-selector" data-label="{{'per_page' | translate}}">
+
+          </div>
+          <div class="d-inline-block  text-right pl-4 " id="search-stats">
+            {{'search_total_count' | translate: count: paginate.total_entries}}
+          </div>
+        </div>
+        <div class="order-2 order-lg-3 col-12 col-sm-9 col-md-8 col-lg-12 col-xl-12 pt-1 text-center text-sm-left " id="current-refined-values">
+
+        </div>
       </div>
-      <div class="col-12 col-sm-4 col-lg-4 text-right hidden" id="search-stats">
-        {{'search_total_count' | translate: count: paginate.total_entries}}
-      </div>
-      <div class="col-12 col-sm-12 col-lg-4 pt-2 pt-lg-2 text-right" id="search-pagination">
-        {% include 'paginate' with paginate %}
-      </div>
+
     </div>
     <div id="search-result" data-category="{{category.objectID}}">
         <div class="row m-0 border border-1 border-left-0 border-bottom-0 border-right-0 ">

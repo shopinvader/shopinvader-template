@@ -16,33 +16,44 @@ handle: home
       {%assign category = store.categories.last%}
     {%endwith_scope%}
     {%include category_showcase with category%}
-
   </div>
 </div>
-<div class="row pt-md-4 justify-content-center">
-  <div class="container pt-md-4  pb-md-4 ">
-    <div class="row">
-      <div class="col-12">
-        <h2 class="text-primary text-center">
-          {% editable_text "bestseller_title", hint: "Bestseller title in homepage" %}
-          <span class="text-warning">Today's</span> Deals
-          {% endeditable_text %}
-        </h2>
+{% with_scope main: true %}
+  {% if store.products.count > 0 %}
+    <div class="row pt-md-4 justify-content-center">
+      <div class="container pt-md-4  pb-md-4 ">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="text-primary text-center">
+              {% editable_text "bestseller_title", hint: "Bestseller title in homepage" %}
+              <span class="text-warning">Today's</span> Deals
+              {% endeditable_text %}
+            </h2>
+            <div id="carouselExample" class="carousel slide carousel-multi-item" data-ride="carousel" data-interval="9000">
+              <div class="carousel-inner row w-100 mx-auto" role="listbox">
+              {% paginate store.products by 8%}
+                {% for product in paginate.collection %}
+                <div class="carousel-item col-md-3 {% if forloop.index0 == 0%}active{% endif %}">
+                  {% include 'product_thumbnail' with product, with_richdata: true %}
+                </div>
+                {% endfor %}
+              {% endpaginate %}
+              </div>
+              <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                <i class="fa fa-chevron-left fa-lg text-muted"></i>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
+                <i class="fa fa-chevron-right fa-lg text-muted"></i>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row align-items-stretch justify-content-center align-items-stretch">
-      {% with_scope main: true %}
-        {% paginate store.products by 8%}
-          {% for product in paginate.collection %}
-          <div class="col-12 col-sm-6 col-md-4 col-lg-3 p-2  ">
-            {% include 'product_thumbnail' with product, with_richdata: true %}
-          </div>
-          {% endfor %}
-        {% endpaginate %}
-      {% endwith_scope %}
-    </div>
-  </div>
-</div>
+  {%endif%}
+{% endwith_scope %}
 <div class="row justify-content-center banner-cover banner-quote" style="background-image:url({% editable_file 'banner-quote', resize: '2500x>' %}/images/banner-info.jpg{% endeditable_file %})">
   <div class="card col-11 col-sm-10 col-md-8 col-lg-6">
     <div class="card-body">

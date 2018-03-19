@@ -25,11 +25,11 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 
 html {
   font-size: 16px;
+  
   @include media-breakpoint-down(sm) {
     font-size: 14px;
   }
 }
-
 
 
 .debug [class*='col-'] {
@@ -37,9 +37,6 @@ html {
   background-clip: content-box !important;
   min-height: 20px !important;
 }
-
-
-
 
 .pagination-block {
 }
@@ -187,6 +184,77 @@ html {
         }
       }
     }
+  }
+  .showcase-carousel-item {
+    .showcase-carousel-link {
+      display: block;
+      position: relative;
+      text-align: center;
+      width: 100%;
+      &:before{
+        content: "";
+        display: block;
+        padding-top: 80%; 	/* initial ratio of 1:1*/
+      }
+      img {
+        position: absolute;
+        top: 0;
+        left:0;
+        right:0;
+        margin-left:auto;
+        margin-right:auto;
+        display: inline-block;
+      }
+    }
+  }
+}
+.loader {
+  .loader-icon {
+    position: absolute;
+    top: 35%;
+    left: 35%;
+
+    width: 30%;
+    height: 30%;
+    margin: 0 auto;
+    border: 1px solid rgba(23,163,184,0.98);
+    border-radius: 50%;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    animation: cssload-spin 575ms infinite linear;
+  }
+  @keyframes cssload-spin {
+    100%{ transform: rotate(360deg); transform: rotate(360deg); }
+  }
+
+  @-o-keyframes cssload-spin {
+    100%{ -o-transform: rotate(360deg); transform: rotate(360deg); }
+  }
+
+  @-ms-keyframes cssload-spin {
+    100%{ -ms-transform: rotate(360deg); transform: rotate(360deg); }
+  }
+
+  @-webkit-keyframes cssload-spin {
+    100%{ -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+  }
+
+  @-moz-keyframes cssload-spin {
+    100%{ -moz-transform: rotate(360deg); transform: rotate(360deg); }
+  }
+  &:before{
+    content: "";
+    display: block;
+    padding-top: 100%; 	/* initial ratio of 1:1*/
+  }
+  overflow: hidden;
+  img {
+    opacity:1;
+    position: absolute;
+    top:0;
+    bottom:0;
+    transition: opacity 500ms ease-in;
+
   }
 }
 .post-mozaic {

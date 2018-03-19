@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/akretion/shopinvader.git
-  revision: de8dcbd11f467692da0e848460937adc9b2db87c
+  revision: ea4066d8f8d7d4208bb16e8bc4fcede65b6d164e
   branch: refactor-odoo-10
   specs:
     shop_invader (0.1.0)

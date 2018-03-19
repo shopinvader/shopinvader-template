@@ -5,12 +5,12 @@ is_layout: true
 {% extends 'layouts/default' %}
 
 {% block 'css' %}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.css">
 {% endblock %}
 
 {% block 'javascripts_algolia'%}
   {% include 'algolia_init'%}
-  <script src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0"></script>
   <script src="{{ 'search.js' | javascript_url }}?category={{category.name}}"></script>
 {% endblock %}
 
@@ -24,18 +24,12 @@ is_layout: true
     <div class="col-12 col-md-3 col-xl-2 p-0  border ">
       <div id="filter" class="sidebar d-none d-md-block pt-4">
         <h3 class="pl-3">{{'search_filter_title' | translate}}</h3>
-        {% if category == null%}
-          <div
-            id="filter-category"
-            data-filter-id="filter-categories_ids"
-            data-filter-widget-type="menu"
-            data-filter-attr="categories.name"
-            data-filter-name="{{'search_category' | translate}}"
-            data-filter-hit-limit='10'
-            class="small border border-left-0 border-right-0 border-top-0 p-3">
-          </div>
+        <div
+          id="hierarchical-categories"
+          class=" border border-left-0 border-right-0 border-top-0 p-3">
+        </div>
 
-        {% else %}
+        {% if category != null%}
           <div
             id="filter-categories_ids"
             data-filter-id="filter-categories_ids"
@@ -45,6 +39,7 @@ is_layout: true
             class="d-none">
           </div>
         {% endif %}
+
         {% for filter in filters %}
           <script type="text/html" class="filters-header-template" data-filter-header-id="{{filter.code}}">
             <div class="row">
@@ -70,6 +65,12 @@ is_layout: true
             class="small border border-left-0 border-right-0 border-top-0 p-3">
           </div>
         {% endfor %}
+        <div class="border border-left-0 border-right-0 border-top-0 p-3">
+          <div id="filter-sliderprice" data-filter-name="Price">
+          </div>
+          <div id="filter-rangeprice">
+          </div>
+        </div>
       </div>
       {% block side%}
       {% endblock %}
@@ -83,13 +84,21 @@ is_layout: true
         {% block 'result'%}
 
             <div class="row p-1 p-md-4">
-              <div class="col-sm-8 col-lg-4 d-none d-sm-flex">
+              <div class="order-1 order-lg-1 col-sm-3 col-md-4 col-lg-3 col-xl-2 d-none d-sm-flex">
                 {% include 'product_display_control'%}
               </div>
-              <div class="col-12 col-sm-4 col-lg-4 text-right hidden" id="search-stats">
+              <div class="order-3 order-lg-2 col-sm-12 col-lg-9 col-xl-10 text-right " >
+                <div class="text-right d-inline-block" id="search-pagination">
+                  {% include 'paginate' with paginate %}
+                </div>
+                <div class="d-inline-block" id="hits-per-page-selector" data-label="{{'per_page' | translate}}">
 
+                </div>
+                <div class="d-inline-block  text-right pl-4 " id="search-stats">
+                  {{'search_total_count' | translate: count: paginate.total_entries}}
+                </div>
               </div>
-              <div class="col-12 col-sm-12 col-lg-4 pt-2 pt-lg-2 text-right" id="search-pagination">
+              <div class="order-2 order-lg-3 col-sm-9 col-md-8 col-lg-12 col-xl-12 pt-1 text-center text-sm-left " id="current-refined-values">
 
               </div>
             </div>
@@ -113,6 +122,10 @@ is_layout: true
             </div>
         {% endblock%}
       {% endblock %}
+      <div class="p-1 p-sm-3 text-center text-sm-left">
+        {% block footer%}
+        {% endblock %}
+      </div>
     </div>
   </div>
 

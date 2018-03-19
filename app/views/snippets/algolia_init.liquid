@@ -8,6 +8,8 @@
   <script type="text/javascript">
     var algolia_api_key = {{site.metafields.algolia.api_key | json}};
     var algolia_app_id = {{site.metafields.algolia.application_id | json}};
+    var algolia_currency = 'EUR';
+    var algolia_locale = 'fr-FR';
     {% action 'get algolia parameters' %}
       setProp('algolia_indexes', JSON.parse(site.metafields.algolia.indices));
     {% endaction %}

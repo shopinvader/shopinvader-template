@@ -29,101 +29,71 @@
     border: 1px solid grays("500");
   }
 }
+
 .carousel-multi-item {
-  .carousel-inner {
-    .carousel-control {
-      background-image: none;
-      width: 4%;
-    }
-    .carousel-control.left {
-      margin-left: 15px;
-    }
-    .carousel-control.right {
-      margin-right: 15px;
-    }
-    .cloneditem-1,
-    .cloneditem-2,
-    .cloneditem-3 {
-      display: none;
-    }
-
-
-    @media all and (min-width: 768px) {
-      & > .active.left,
-      & > .prev {
-        left: -50%;
-      }
-      & > .active.right,
-      & > .next {
-        left: 50%;
-      }
-      & > .left,
-      & > .prev.right,
-      & > .active {
-        left: 0;
-      }
-      .cloneditem-1 {
+  @media (min-width: 768px) {
+    /* show 3 items */
+    .carousel-inner .active,
+    .carousel-inner .active + .carousel-item,
+    .carousel-inner .active + .carousel-item + .carousel-item,
+    .carousel-inner .active + .carousel-item + .carousel-item + .carousel-item  {
         display: block;
-      }
     }
 
-
-    @media all and (min-width: 768px) and (transform-3d), all and (min-width: 768px) and (-webkit-transform-3d) {
-      & > .item.active.right,
-      & > .item.next {
-        left: 0;
-        transform: translate3d(50%, 0, 0);
-      }
-      & > .item.active.left,
-      & > .item.prev {
-        left: 0;
-        transform: translate3d(-50%, 0, 0);
-      }
-      & > .item.left,
-      & > .item.prev.right,
-      & > .item.active {
-        left: 0;
-        transform: translate3d(0, 0, 0);
-      }
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item,
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item,
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item + .carousel-item {
+        transition: none;
     }
 
-    @media all and (min-width: 992px) {
-      & > .active.left,
-      & > .prev {
-        left: -25%;
-      }
-      & > .active.right,
-      & > .next {
-        left: 25%;
-      }
-      & > .left,
-      & > .prev.right,
-      & > .active {
-        left: 0;
-      }
-      .cloneditem-2,
-      .cloneditem-3 {
+    .carousel-inner .carousel-item-next,
+    .carousel-inner .carousel-item-prev {
+      position: relative;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: absolute;
+        top: 0;
+        right: -25%;
+        z-index: -1;
         display: block;
-      }
+        visibility: visible;
     }
 
-    @media all and (min-width: 992px) and (transform-3d), all and (min-width: 992px) and (-webkit-transform-3d) {
-      & > .item.active.right,
-      & > .item.next {
+    /* left or forward direction */
+    .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+    .carousel-item-next.carousel-item-left + .carousel-item,
+    .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
+    .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item,
+    .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+
+    /* farthest right hidden item must be abso position for animations */
+    .carousel-inner .carousel-item-prev.carousel-item-right {
+        position: absolute;
+        top: 0;
         left: 0;
-        transform: translate3d(25%, 0, 0);
-      }
-      & > .item.active.left,
-      & > .item.prev {
-        left: 0;
-        transform: translate3d(-25%, 0, 0);
-      }
-      & > .item.left,
-      & > .item.prev.right,
-      & > .item.active {
-        left: 0;
-        transform: translate3d(0, 0, 0);
-      }
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+
+    /* right or prev direction */
+    .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+    .carousel-item-prev.carousel-item-right + .carousel-item,
+    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
+    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item,
+    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
     }
   }
 }
