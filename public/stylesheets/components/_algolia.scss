@@ -1,15 +1,39 @@
 .ais-pagination {
   padding: 0;
+
   text-align: center;
-
-  .ais-pagination--link {
-    color: theme-color("primary");
-  }
-
   .ais-pagination--item__active a {
     background-color: theme-color("primary");
     border-color: theme-color("primary");
     color: $white;
+  }
+  .ais-pagination--item__disabled {
+    display: none;
+  }
+  @include media-breakpoint-up(sm) {
+    .ais-pagination--link {
+      color: theme-color("primary");
+    }
+
+
+  }
+  @include media-breakpoint-down(sm) {
+    margin:0;
+    .ais-pagination--item__first,
+    .ais-pagination--item__last,
+    .ais-pagination--item__page {
+      display: none;
+    }
+    .ais-pagination--item__active {
+      display: inline-block;
+
+    }
+    .ais-pagination--item__next,
+    .ais-pagination--item__previous {
+      a {
+        font-weight: bold;
+      }
+    }
   }
 }
 .ais-search-box {
@@ -50,7 +74,7 @@
     &:before {
       content: '';
       display: inline-block;
-      font-family: FontAwesome;
+      font-family: 'Font Awesome 5 Free';
       font-size: 13px;
       margin-right: 5px;
       text-decoration: none;
@@ -65,11 +89,22 @@
 
   &.ais-root__collapsible {
     .ais-header{
+      position: relative;
       &:before {
+        border: 1px solid $gray-600;
+        border-top: 0;
+        border-right: 0;
+
+        content: " ";
         display: inline-block;
-        font: normal normal normal 16px/1 FontAwesome;
-        content: "\f106";
-        float: right;
+        position: absolute;
+        height: 10px;
+        transform: rotate(135deg);
+        top: 5px;
+        right: 0px;
+        width: 10px;
+        transition: all ease-in 200ms;
+
       }
       h4 {
         color: $gray-700;
@@ -79,7 +114,7 @@
     }
     &.ais-root__collapsed {
       .ais-header:before {
-        content: "\f107";
+        transform: rotate(-45deg);
       }
     }
   }
@@ -115,7 +150,11 @@
       font-size: 0.7rem;
       height: 25px;
     }
+    .ais-price-ranges--form {
+      padding-top: 0.5rem;
+    }
   }
+
   &.ais-current-refined-values {
     .ais-current-refined-values--list {
       display: inline-block;
@@ -127,16 +166,25 @@
         margin-right: 0.5rem;
         margin-bottom: 0.5rem;
         padding: 0.3rem;
+        position: relative;
         a {
           color: $gray-600;
           display: inline-block;
           text-transform: uppercase;
         }
-        &::after {
-          color: $gray-700;
-          content:"X";
-          display: inline-block;
-          padding-left: 0.4rem;
+        .fa {
+
+
+          transition: 200ms all ease-in;
+        }
+        &:hover {
+          border-color: theme-color("warning");
+          a {
+            color: $gray-800;
+          }
+          .fa {
+            color: theme-color("warning");
+          }
         }
       }
       .ais-current-refined-values--clear-all {
@@ -144,6 +192,7 @@
       }
     }
   }
+
   // Price slider widget
   &.ais-range-slider {
 
@@ -200,7 +249,7 @@
     font-size: $font-size-sm;
     .ais-star-rating--star:before, .ais-star-rating--star__empty:before {
       content: "\f005";
-      font-family: FontAwesome;
+      font-family: 'Font Awesome 5 Free';
       font-size: 14px;
     }
     .ais-star-rating--star__empty:before {
@@ -236,7 +285,7 @@
         color: theme-color("primary");
         content: '';
         display: inline-block;
-        font-family: FontAwesome;
+        font-family: 'Font Awesome 5 Free';
         font-size: 14px;
         margin-right: 5px;
       }
@@ -252,12 +301,20 @@
         &:hover {
           color: theme-color("primary");
           text-decoration: line-through;
+          &:after,  {
+            background-color: theme-color-level("primary", -0.1);
+          }
         }
 
-        &:before {
-          font-weight: normal;
-          color: theme-color("primary");
-          content: "";
+        &:after,  {
+          background-color: theme-color("primary");
+          content: " ";
+          display: inline-block;
+          height: 10px;
+          left: 2px;
+          position: absolute;
+          top: 2px;
+          width: 10px;
         }
       }
     }
@@ -277,21 +334,22 @@
       }
 
       &:before {
-        color: grays('200');
-        content: '';
+        border: 1px solid $gray-600;
+        content: " ";
+        height: 14px;
+        width: 14px;
+        background-color: transparent;
         display: inline-block;
-        font-family: FontAwesome;
-        font-size: 14px;
-        margin-right: 5px;
-        transition: .5s;
+        font-size: 22px;
       }
 
       &:hover:before {
-        color: theme-color("primary");
+        background-color: $gray-600;
       }
 
       .ais-refinement-list--checkbox {
         display: none;
+
       }
     }
 

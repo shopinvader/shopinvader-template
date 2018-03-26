@@ -1,9 +1,11 @@
 $(document).ready(function () {
   $( ".product-thumbnail-img.loader img" ).load(function() {
     // Handler for .load() called.
+    console.log($(this));
     $(this).css('opacity', 1);
-    $(this).parent('.loader').find('.loader-icon').delay('1s').remove();
+    $(this).parents('.loader').find('.loader-icon').delay('1s').remove();
   });
+
   $('.carousel-multi-item').on('slide.bs.carousel', function (e) {
 
       var $e = $(e.relatedTarget);
@@ -24,6 +26,7 @@ $(document).ready(function () {
           }
       }
   });
+
   $(document).on('ShopinvaderForm:before-submit',
     function (element)
     {
@@ -36,7 +39,6 @@ $(document).ready(function () {
     {
       $('.main-loader').addClass('d-none');
       var new_document = $('<div></div>').append($.parseHTML(element.ajaxpage));
-      console.log($(element.target).attr('action'));
       if($(element.target).attr('action') == '/invader/cart/add_item') {
         main_modal.show(
           new_document.find('#product-modal-add .title').html(),
@@ -53,7 +55,6 @@ $(document).ready(function () {
 
     }, function(event, element)
     {
-      console.log(event);
       $(this).find('.rating-tooltip').css('display', 'none');
     }
   );
@@ -72,11 +73,9 @@ $(document).ready(function () {
   );
   $('[data-toggle=display-hover]').hover(
     function() {
-      console.log($($(this).attr('data-target')));
       $($(this).attr('data-target')).css('display', 'block');
     },
     function() {
-      console.log($(this).attr('data-target'));
       $($(this).attr('data-target')).css('display', 'none');
     }
   );
@@ -131,6 +130,7 @@ $(document).ready(function () {
       }
     }
   );
+
   $('body').on('submit', '#cart_address', function(event) {
     event.preventDefault();
     if($(this).find('#use_specific_address:checked').length == 0) {
@@ -139,15 +139,16 @@ $(document).ready(function () {
     }
     $(this).get(0).submit();
   });
+
   /*common event*/
   $('body').on('click', '[data-link]',
-      function(){
-        window.location=$(this).attr('data-link');
-      }
-    );
+    function(){
+      window.location=$(this).attr('data-link');
+    }
+  );
+
   $('body').on('click', '[data-scrollto]',
     function(){
-      console.log($(this).data('scrollto'));
       $('html, body').animate({
           scrollTop: $($(this).data('scrollto')).offset().top - $('.navbar-fixed-top').height()
       }, 1500);

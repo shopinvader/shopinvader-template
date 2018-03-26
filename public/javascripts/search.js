@@ -2,39 +2,32 @@
 $(document).ready(function() {
 
   var instantsearch_params = {
-    // Replace with your own values
-    appId: algolia_app_id,
-    apiKey:  algolia_api_key, // search only API key, no ADMIN key
-    indexName: algolia_products_index,
-    numberLocale: 'fr-FR',
+    appId: algolia_params.app_id,
+    apiKey:  algolia_params.api_key, // search only API key, no ADMIN key
+    indexName: algolia_params.products_index,
     urlSync: true,
     templatesConfig: {
-       compileOptions: [{delimiters: '<% %>'}]
-     }
+      compileOptions: [{delimiters: '<% %>'}]
+    }
   };
-  console.log(instantsearch_params);
 
   if($('#search-result').attr('data-category') != undefined) {
-    instantsearch_params.urlSync = false;
     if($('#search-result').attr('data-category')) {
-      instantsearch_params.searchParameters = {
-        hierarchicalFacetsRefinements: {
+      instantsearch_params.searchParameters= {
+        facetsRefinements: {
           'categories.id': [$('#search-result').attr('data-category')]
-        }
+        },
+        facets: ['categories.id']
       };
     }
   }
-  var search = instantsearch({
-     appId: instantsearch_params.appId,
-     apiKey: instantsearch_params.apiKey,
-     indexName: instantsearch_params.indexName,
-     urlSync: true,
-     templatesConfig: {
-        compileOptions: [{delimiters: '<% %>'}]
-      }
-   });
+
+  var search = instantsearch(instantsearch_params );
+
   //var search = instantsearch(instantsearch_params);
-  if(typeof(category_id) == 'undefined') {
+  if($('#search-result').attr('data-category') != undefined) {
+
+
   }
   search.addWidget(
     instantsearch.widgets.searchBox({
@@ -58,7 +51,7 @@ $(document).ready(function() {
     );
     default_item = false;
   }
-  console.log(page_hits_count);
+
   search.addWidget(
     instantsearch.widgets.hitsPerPageSelector({
       container: '#hits-per-page-selector',
@@ -70,22 +63,21 @@ $(document).ready(function() {
     })
   );
 
-
-
   search.addWidget(
     instantsearch.widgets.hierarchicalMenu({
       container: '#hierarchical-categories',
       attributes: ['hierarchicalCategories.lvl0', 'hierarchicalCategories.lvl1', 'hierarchicalCategories.lvl2'],
       autoHideContainer: false,
+      showParentLevel: true,
       templates: {
-        header: "<h4>Category</h4>",
+        header: "<h4 class='text-uppercase'>Category</h4>",
       },
     })
   );
 
   var filters = [];
 
-  filters.push({name:'hierarchicalCategories.lvl0', label: 'Categories'});
+  filters.push({name:'hierarchicalCategories.lvl0', label: 'Category'});
   search.addWidget(
     instantsearch.widgets.rangeSlider({
       container: '#filter-sliderprice',
@@ -101,10 +93,10 @@ $(document).ready(function() {
         format(rawValue) {
           var number = new Number(rawValue);
           return number.toLocaleString(
-            algolia_locale,
+            algolia_params.locale_code,
             {
               style: "currency",
-              currency: algolia_currency
+              currency: algolia_params.currency_code,
             }
           );
         }
@@ -118,13 +110,13 @@ $(document).ready(function() {
       container: '#filter-rangeprice',
       attributeName: 'price.default.value',
       labels: {
-        currency: '€ ',
+        currency: algolia_params.currency_symbol+' ',
         separator: '-',
 
       },
       autoHideContainer: false,
       cssClasses: {
-        button: ' btn btn-sm btn-primary',
+        button: 'pr-1 btn btn-sm btn-outline-primary',
         input: ' form-control',
         form: ' input-group',
         label: ' text-dark small',
@@ -144,7 +136,7 @@ $(document).ready(function() {
       sortBy: ['isRefined', 'name:asc'],
       operator: 'or',
       templates: {
-        header: '<h4>'+$element.data('filter-name')+'</h4>'
+        header: '<h4 class="text-uppercase">'+$element.data('filter-name')+'</h4>'
       },
       showMore: {
         limit: 100
@@ -159,21 +151,30 @@ $(document).ready(function() {
     filters.push({name: $element.data('filter-attr'), label: $element.data('filter-name')});
   });
 
-  search.addWidget(
-    instantsearch.widgets.currentRefinedValues({
-      container: '#current-refined-values',
-      clearAll: 'after',
-      clearsQuery: true,
-      attributes: filters,
-      cssClasses: {
+  $('[data-current-filter]').each(
+  function(i, element){
 
-        count: ' d-none',
-        clearAll: ' btn btn-primary btn-sm  d-inline-block',
-      },
-      autoHideContainer: false,
-    })
-  );
-
+    search.addWidget(
+      instantsearch.widgets.currentRefinedValues({
+        container: '#'+$(element).attr('id'),
+        clearAll: 'after',
+        clearsQuery: true,
+        attributes: filters,
+        cssClasses: {
+          count: ' d-none',
+          clearAll: ' btn btn-outline-dark btn-sm  btn-sm  d-inline-block',
+        },
+        transformData : {
+          item: function(element) {
+            element.name = "<b>"+element.name+"</b> <i class='fa fa-times pl-1'></i>"
+            return element;
+          }
+        },
+        autoHideContainer: false,
+        onlyListedAttributes: true,
+      })
+    );
+  });
   var product_item_css = $('#search-result .product-col').first().attr('class');
   var product_root_css = $('#search-result .row').first().attr('class');
 
@@ -227,7 +228,12 @@ $(document).ready(function() {
     else {
       n = new Number(text);
     }
-    return n.toLocaleString(algolia_locale, {style: "currency", currency: algolia_currency})
+    return n.toLocaleString(algolia_params.locale_code,
+      {
+        style: "currency",
+        currency: algolia_params.currency_code
+      }
+    );
   };
 
   search.templatesConfig.helpers.imageDefault = function(text, render) {
@@ -260,4 +266,5 @@ $(document).ready(function() {
   };
 
   search.start();
+
 });

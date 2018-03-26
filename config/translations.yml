@@ -232,6 +232,12 @@ creditcard_cvc:
 creditcard_cvc_help:
   en: 3 last numbers on back
   fr: 3 derniers chiffres au dos de votre carte, à droite de la signature
+close :
+  en: Close
+  fr: Fermer
+filters:
+  en: Filters
+  fr: Filtrer
 home:
   en: Home
   fr: Accueil

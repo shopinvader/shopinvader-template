@@ -10,11 +10,11 @@ Show list and grid button selector
     setSessionProp('product_display', 'grid');
   {%endaction%}
 {%endif%}
-<div class="lead">
-  <a href="?product_display=grid" class=" mr-3 {%if session.product_display != 'grid'%}text-dark{%endif%}">
+<div class="">
+  <a href="?product_display=grid" class="btn btn-outline-primary {%if session.product_display != 'grid'%}btn-outline-dark{%endif%}">
     <i class="fas fa-th-large mr-1"></i>{{'product_display_grid' | translate}}
   </a>
-  <a href="?product_display=list" class=" mr-3 {%if session.product_display != 'list'%}text-dark{%endif%}">
+  <a href="?product_display=list" class="btn btn-outline-primary  {%if session.product_display != 'list'%}btn-outline-dark{%endif%}">
     <i class="fas fa-align-justify mr-1"></i>{{'product_display_list' | translate}}
   </a>
 </div>

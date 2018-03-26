@@ -13,10 +13,8 @@
 
             $this.target = $(event.target);
             $this.originalEvent = event;
-            console.log("target", $this.target.serializeArray());
             $this.trigger_before_submit_ajaxpage();
             var form = new FormData(event.target);
-            console.log(form);
             $.ajax({
               "method": $this.target.attr('method'),
               "url": $this.target.attr('action'),
@@ -40,7 +38,6 @@
 
           },
           trigger_before_submit_ajaxpage : function () {
-            console.log($this.target)
             $(document).trigger('ShopinvaderForm:before-submit', {target: $this.target, originalEvent: $this.originalEvent, ajaxpage: $this.ajaxpage} );
           },
           trigger_after_submit_ajaxpage : function () {

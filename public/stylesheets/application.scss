@@ -17,6 +17,7 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 @import 'components/nav';
 @import 'components/posts';
 @import 'components/product';
+@import 'components/preloader';
 @import 'components/rating';
 //@import 'components/typo';
 @import 'components/slide';
@@ -25,9 +26,9 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 
 html {
   font-size: 16px;
-  
+
   @include media-breakpoint-down(sm) {
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 
@@ -104,21 +105,7 @@ html {
   }
 }
 
-.main-loader {
-  background: transparentize($gray-800, 0.1);
-  position: fixed;
-  width: 100%;
-  height:100%;
-  z-index: 3000;
-  text-align: center;
-  vertical-align: middle;
-  .fa {
-     font-size: 100px;
-     color: $white;
-     line-height: 100vh;
-     vertical-align: middle;
-  }
-}
+
 
 .modal-dialog {
   @include media-breakpoint-down(sm) {
@@ -327,7 +314,7 @@ html {
       color: $white;
       &::before {
         content: "\f10d";
-        font-family: 'FontAwesome';
+        font-family: 'Font Awesome 5 Free';
         font-size: 1.6rem;
         color: theme-color-level('dark', -5);
         position: absolute;
@@ -335,5 +322,79 @@ html {
         top:.8rem;
       }
     }
+  }
+}
+.sidebar-filters {
+  @include media-breakpoint-up(md) {
+    &.collapse {
+      display: block;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    &.collapsings {
+      .sidebar-filters-backdrop {
+        opacity: 1;
+      }
+    }
+    &.show {
+      .sidebar-filters-content {
+        left:0;
+      }
+      .sidebar-filters-backdrop {
+        opacity: 1;
+      }
+    }
+    .sidebar-filters-backdrop {
+      position: fixed;
+      background-color: transparentize($gray-900, 0.5);
+      height: 100vh;
+      width: 100vw;
+      top: 0px;
+      left: 0px;
+      z-index: 2990;
+      opacity: 0;
+      transition: all ease-in 300ms;
+    }
+    //display: none;
+    .sidebar-filters-content {
+      background: $white;
+      border: 1px solid $gray-300;
+      box-shadow: 0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2);
+      position: fixed;
+      top: 0px;
+      left: -300px;
+      z-index: 3000;
+      height: 100vh;
+      min-width: 270px;
+      max-width: 300px;
+      display: flex;
+      flex-direction: column;
+      transition: all ease-in 200ms;
+      .sidebar-filters-list {
+        overflow: auto;
+      }
+    }
+  }
+  .filter-block {
+    border-bottom: 1px solid  $gray-300;
+    padding: 0.8rem;
+    h4 {
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+}
+.filter-bar {
+  display: flex;
+  align-items: stretch;
+  flex-flow: nowrap;
+  align-self: stretch;
+  justify-content: stretch;
+  .filter-bar-col {
+    border: 1px solid $gray-300;
+    flex-grow: 1;
+    line-height: 100%;
   }
 }

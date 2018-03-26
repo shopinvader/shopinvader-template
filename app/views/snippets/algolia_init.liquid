@@ -6,17 +6,40 @@
     {% assign algolia_locale = "_en_US"%}
   {%endif%}
   <script type="text/javascript">
-    var algolia_api_key = {{site.metafields.algolia.api_key | json}};
-    var algolia_app_id = {{site.metafields.algolia.application_id | json}};
-    var algolia_currency = 'EUR';
-    var algolia_locale = 'fr-FR';
     {% action 'get algolia parameters' %}
+
+      var js_locales = {
+        'fr': {
+          'code': 'fr-FR',
+          'currency_code': 'EUR',
+          'currency_symbol': '€'
+        },
+        'en': {
+          'code': 'en-US',
+          'currency_code': 'USD',
+          'currency_symbol': '$'
+        }
+      };
+      var locale = {{locale | json}};
+      if(js_locales[locale]) {
+        setProp('algolia_locale', js_locales[locale]);
+      }
+      else {
+        setProp('algolia_locale', js_locales.first());
+      }
       setProp('algolia_indexes', JSON.parse(site.metafields.algolia.indices));
     {% endaction %}
-
+    var algolia_params = {
+      api_key: {{site.metafields.algolia.api_key | json}},
+      app_id: {{site.metafields.algolia.application_id | json}},
+      locale_code: {{algolia_locale.code  | json}},
+      currency_symbol: {{algolia_locale.currency_symbol | json}},
+      currency_code: {{algolia_locale.currency_code | json}},
     {% for role in algolia_indexes %}
-      var algolia_{{role.name}}_index = {{role.index | append: algolia_locale | json}}
+      {{role.name}}_index : {{role.index | append:"_" | append: algolia_locale.code | replace: "-", "_" | json}},
     {% endfor %}
+    };
+
     var default_img_url = "{{site.metafields.theme.noimage }}";
     var default_role = "{{site.metafields.erp.default_role }}";
     {% if category %}

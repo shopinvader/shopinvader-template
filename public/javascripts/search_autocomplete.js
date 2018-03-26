@@ -1,8 +1,8 @@
 $(document).ready(function() {
 
-  var client = algoliasearch(algolia_app_id, algolia_api_key);
-  var product_index = client.initIndex(algolia_products_index);
-  var category_index = client.initIndex(algolia_categories_index);
+  var client = algoliasearch(algolia_params.app_id, algolia_params.api_key);
+  var product_index = client.initIndex(algolia_params.products_index);
+  var category_index = client.initIndex(algolia_params.categories_index);
   autocomplete('#header-search-input',
     {
       debug: true,
@@ -94,7 +94,6 @@ var hogan_helpers = {
         n = new Number(hogan_render(text, this));
       }
       else {
-        console.log(text);
         var text = text.trim();
         if(isNaN(text)) {
           return text;
@@ -102,9 +101,7 @@ var hogan_helpers = {
         else {
           n = new Number(text);
         }
-
       }
-
 
       return n.toLocaleString("fr-FR", {style: "currency", currency: "EUR"})
     }
@@ -157,7 +154,6 @@ var hogan_helpers = {
 function search_template_link(template, query, result) {
   if(result.nbHits > 1) {
     var search_path = template.find('.btn-search-product').data('href');
-    console.log( template.find('.btn-search-product'));
     template.find('.btn-search-product').attr('href', search_path+'?q='+query.query)
     template.find('.nb_hits').html(' ('+result.nbHits+')');
     return template.html();
