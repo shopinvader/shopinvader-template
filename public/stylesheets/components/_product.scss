@@ -46,6 +46,7 @@
     display: none;
   }
   &.product-thumbnail-horizontal {
+
     /*Only for SM MD LG XL screen*/
     @include media-breakpoint-up(sm) {
       display: flex;
@@ -81,7 +82,9 @@
       .product-add-to-cart {
         opacity: 1;
       }
+
       @include media-breakpoint-down(sm) {
+
         .product-thumbnail-name {
           width: 70%
         }
@@ -136,6 +139,9 @@
     .product-add-to-cart {
       display: none;
     }
+    .product-short-description {
+      display: none;
+    }
   }
 }
 
@@ -176,7 +182,7 @@
     color: theme-colors("success");
     &:before {
       content: "";
-      font-family: "FontAwesome";
+      font-family: 'Font Awesome 5 Free';
     }
   }
 

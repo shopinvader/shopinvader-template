@@ -30,7 +30,6 @@
       <%/price.discount %>
     </div>
     <div class="product-thumbnail-price card-body p-0 p-md-3 p-xl-2">
-
       <div class="d-vertical-only">
         <span class="small">
           <small>{{'product_price_from' | translate}} </small>
@@ -113,7 +112,9 @@
       </div>
       <%/varianted%>
       <div class="small d-horizontal-only">
-        <%& short_description %>
+        <div class="product-short-description">
+          <%& short_description %>
+        </div>
       </div>
     </div>
     <div class="product-thumbnail-btn d-vertical-only pr-2 pl-2">
