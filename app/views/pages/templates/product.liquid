@@ -79,21 +79,23 @@ handle: product
     <div class="container mt-4 mb-4 bg-white pt-2">
       <div class="row">
         <div class="col-12">
-          <ol class="breadcrumb pl-0 d-none d-sm-block">
-            <li class="breadcrumb-item ">
-              <a href="{% path_to 'home' %} " class="text-gray-darker">
-              {{ 'home' | translate }}
-              </a>
-            </li>
-          {% for category in variant.categories %}
-            <li class="breadcrumb-item">
-              <a href="{{category.url_key | prepend: url_base}}" class="text-gray-darker">
-                {{category.name}}
-              </a>
-            </li>
-          {% endfor %}
-            <li class="breadcrumb-item active d-none d-xl-inline-block">{{variant.model.name}}</li>
-          </ol>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb pl-0 d-none d-sm-inline-block">
+              <li class="breadcrumb-item d-inline-block ">
+                <a href="{% path_to 'home' %} " class="text-gray-darker">
+                {{ 'home' | translate }}
+                </a>
+              </li>
+            {% for category in variant.categories %}
+              <li class="breadcrumb-item d-inline-block" >
+                <a href="{{category.url_key | prepend: url_base}}" class="text-gray-darker">
+                  {{category.name}}
+                </a>
+              </li>
+            {% endfor %}
+              <li class="breadcrumb-item active d-none d-xl-inline-block">{{variant.model.name}}</li>
+            </ol>
+          </nav>
         </div>
       </div>
       <div class="row">

@@ -1,11 +1,13 @@
-
-
   <div class="input-group product-qty">
-    <div class="input-group-addon" data-field="qty" data-type="minus">
-      <i href="#" class="fa fa-minus text-white"></i>
+    <div class="input-group-prepend" data-field="qty" data-type="minus">
+      <div class="btn btn-dark">
+        <i href="#" class="fa fa-minus text-white"></i>
+      </div>
     </div>
     <input type="text" class="form-control text-center" name="item_qty" id="qty" value="{{qty | round}}" autocomplete="off" max="100" step="1" min="1">
-    <div class="input-group-addon" data-field="qty" data-type="plus">
-      <i href="#" class="fa fa-plus text-white"></i>
+    <div class="input-group-append" data-field="qty" data-type="plus">
+      <div class="btn btn-dark">
+        <i href="#" class="fa fa-plus text-white"></i>
+      </div>
     </div>
   </div>

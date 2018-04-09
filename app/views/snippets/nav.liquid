@@ -53,10 +53,13 @@
       <div class="row d-none d-md-flex">
         <div class="col-12">
           <form method="GET" action="{% path_to search %}" class="input-group" >
+
             <input type="text" class="form-control" id="header-search-input" placeholder="Search for..." aria-label="Search for..." aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q" data-autosubmit>
-            <button class="input-group-addon bg-primary text-white" name="submit">
-              <i class="fa fa-search"></i>
-            </button>
+            <div class="input-group-append" >
+              <button class="btn btn-primary" name="submit" type="submit">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
             <div id="header-search-hit" >
               <div id="header-search-product-title">
                 <div class="row">

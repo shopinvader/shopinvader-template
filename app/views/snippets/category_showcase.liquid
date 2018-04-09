@@ -2,7 +2,7 @@
   {% with_scope categories: {id: category.objectID}, main: true %}
     {% if store.products.size > 0%}
       <div class="row justify-content-end">
-        <div class=" col-12 col-sm-5 col-md-5 col-lg-3 bg-primary text-white text-left p-3 p-lg-4 showcase-desc">
+        <div class=" col-12 col-sm-5 col-md-5 col-lg-3 text-left p-3 p-lg-4 showcase-desc">
           <div class="h2 text-uppercase ">
             {{category.name}}
           </div>
@@ -56,10 +56,10 @@
               </div>
               {%endfor%}
               <div class="text-right">
-                <a class="btn btn-secondary" href="#slide-showcase-categories" role="button" data-slide="prev">
+                <a class="btn btn-sm btn-outline-info " href="#slide-showcase-categories" role="button" data-slide="prev">
                   <i class="fa fa-angle-left"></i>
                 </a>
-                <a  class="btn btn-secondary"  href="#slide-showcase-categories" role="button" data-slide="next">
+                <a  class="btn btn-sm btn-outline-info "  href="#slide-showcase-categories" role="button" data-slide="next">
                   <i class="fa fa-angle-right"></i>
                 </a>
               </div>

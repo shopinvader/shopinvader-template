@@ -1,12 +1,7 @@
 $icon-font-path: "../fonts/bootstrap/" !default;
-/*
-@font-face {
-    font-family: 'sf-distant-galaxy';
-    src: url('../fonts/sf-distant-galaxy.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}*/
-@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+@import 'components/custom';
+@import url('https://fonts.googleapis.com/css?family=Lato:300');
+
 @import 'bootstrap4/bootstrap';
 @import 'components/account';
 @import 'components/algolia';
@@ -21,17 +16,32 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 @import 'components/rating';
 //@import 'components/typo';
 @import 'components/slide';
+@import 'components/showcase';
 @import 'components/wait_overlay';
 @import 'components/wells';
 
 html {
-  font-size: 16px;
-
+  font-size: 15px;
   @include media-breakpoint-down(sm) {
     font-size: 15px;
   }
 }
+@if $page-max-width > 0 {
+  body {
 
+    background-color: $main-bg;
+    .navbar-header {
+        max-width: $page-max-width;
+    }
+    .page {
+      background-color: $body-bg;
+      max-width: $page-max-width;
+      margin: auto;
+      box-shadow: $page-shadow;
+    }
+  }
+
+}
 
 .debug [class*='col-'] {
   border: 1px dotted red !important;
@@ -55,7 +65,7 @@ html {
 
 @media (min-width: 1200px) {
     .container{
-        max-width: 1200px;
+        max-width: $max-content-width;
         width: 100%;
     }
 }
@@ -91,7 +101,7 @@ html {
   }
 
   &.separator-right > [class*='col-'] {
-    border-right: 1px solid grayscale("100");
+    border-right: 1px solid $gray-100;
 
     &:last-child {
       border-color: transparent;
@@ -99,7 +109,7 @@ html {
   }
 
   &.separator-bottom > [class*='col-'] {
-    border-bottom: 1px solid grayscale("100");
+    border-bottom: 1px solid $gray-100;
     margin-bottom: 15px;
     padding-bottom: 15px;
   }
@@ -112,89 +122,7 @@ html {
     margin:0;
   }
 }
-.main-showcase{
-  position: relative;
-  &::before {
-    background-color: #EEEEEE;
-    position: absolute;
-    height: 80%;
-    top: 0;
-    left: 0;
-    width: 100%;
-    content: " ";
-  }
-  .container {
-    background: $white;
-    box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.3);
-    margin: 1rem;
-    @include media-breakpoint-up(md) {
-      margin: 0;
-      margin-top: -3rem;
-    }
-    position: relative;
 
-    .showcase-desc {
-      @include media-breakpoint-up(md) {
-        box-shadow: -3px 2px 19px 0px #4950575e;
-        position: absolute;
-        top: 2rem;
-        left: -2rem;
-      }
-    }
-
-    figure {
-      position: relative;
-      img {
-        filter: contrast(60%);
-      }
-      figcaption {
-        position: absolute;
-        top: 20%;
-        left: 0;
-        color: #fff;
-        text-align: center;
-        width: 100%;
-        font-size: 2rem;
-        //font-weight: bold;
-        text-transform: uppercase;
-
-      }
-      @include media-breakpoint-down(md) {
-        img {
-          filter: contrast(100%);
-        }
-        figcaption {
-          font-size: 0.8rem;
-          background: transparentize(theme-color('primary'), 0.2);
-          top: auto;
-          bottom: 0;
-        }
-      }
-    }
-  }
-  .showcase-carousel-item {
-    .showcase-carousel-link {
-      display: block;
-      position: relative;
-      text-align: center;
-      width: 100%;
-      &:before{
-        content: "";
-        display: block;
-        padding-top: 80%; 	/* initial ratio of 1:1*/
-      }
-      img {
-        position: absolute;
-        top: 0;
-        left:0;
-        right:0;
-        margin-left:auto;
-        margin-right:auto;
-        display: inline-block;
-      }
-    }
-  }
-}
 .loader {
   .loader-icon {
     position: absolute;
@@ -232,7 +160,7 @@ html {
   &:before{
     content: "";
     display: block;
-    padding-top: 100%; 	/* initial ratio of 1:1*/
+    padding-top: 100%;
   }
   overflow: hidden;
   img {
@@ -316,6 +244,7 @@ html {
         content: "\f10d";
         font-family: 'Font Awesome 5 Free';
         font-size: 1.6rem;
+        font-weight: bold;
         color: theme-color-level('dark', -5);
         position: absolute;
         left: 0rem;

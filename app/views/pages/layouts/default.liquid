@@ -57,14 +57,19 @@ is_layout: false
         <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
       </svg>
     </div>
-    {% include 'nav' %}
-    <main>
-      <div class="container-fluid">
-        {% include 'store_notifications' %}
-      {% block content %}
-      {% endblock %}
-      </div>
-    </main>
+    <div class="page">
+      <header>
+        {% include 'nav' %}
+      </header>
+      <main>
+        <div class="container-fluid">
+          {% include 'store_notifications' %}
+          {% block content %}
+          {% endblock %}
+        </div>
+      </main>
+      {% include 'footer' %}
+    </div>
 
     <div class="modal fade" id="main-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg" role="document">
@@ -87,7 +92,7 @@ is_layout: false
           <div class="">
             <div class="row">
               <div class="col-12">
-                {% include 'cart_list' with cart: store.cart, product_id, readonly: true %}
+                {% include 'cart_list' with cart: store.cart, readonly: true %}
               </div>
             </div>
             <div class="row">
@@ -118,7 +123,7 @@ is_layout: false
         </div>
       {% endif %}
     </div>
-    {% include 'footer' %}
+
 
     {{ 'popper.min.js' | javascript_tag }}
     {{ 'jquery.min.js' | javascript_tag }}

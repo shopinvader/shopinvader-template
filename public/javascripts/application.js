@@ -7,7 +7,6 @@ $(document).ready(function () {
   });
 
   $('.carousel-multi-item').on('slide.bs.carousel', function (e) {
-
       var $e = $(e.relatedTarget);
       var idx = $e.index();
       var itemsPerSlide = 4;
@@ -110,7 +109,7 @@ $(document).ready(function () {
       }
     }
   );
-  $('body').on('click', '.product-qty .input-group-addon[data-type]',
+  $('body').on('click', '.product-qty [data-type]',
     function(event) {
       var input_qty = $(event.currentTarget).parent('.input-group').find('input.form-control');
 
