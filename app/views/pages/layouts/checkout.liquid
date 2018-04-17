@@ -39,7 +39,7 @@ is_layout: true
           My shopping cart
           {% endeditable_text %}
         </h1>
-        {% if store.cart.lines.count != null%}
+        {% if store.cart.lines.count != null and store.cart.lines.count != 0 %}
           {% block main %}
           {% endblock %}
         {% else %}

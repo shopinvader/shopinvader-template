@@ -38,9 +38,12 @@
 }
 .ais-search-box {
   max-width: none !important;
-  width: 100% !important;
+  width: calc(100% - 41px) !important;
   .ais-search-box--input {
     width: 100%;
+  }
+  .ais-search-box--magnifier {
+    display: none;
   }
 }
 .ais-root {

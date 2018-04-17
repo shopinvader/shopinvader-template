@@ -59,7 +59,9 @@ $theme-colors: (
   warning: $yellow,
   danger: $red,
   light: $gray-100,
+  gray: #6a7a88,
   dark: $gray-800
+
 );
 $enable-rounded: false;
 
@@ -87,6 +89,9 @@ $h5-font-size: 1.2rem;
 $h6-font-size: 1rem;
 $headings-line-height:   1.1;
 
+// Header
+$header-bg: $white;
+$header-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.3);
 // Buttons
 
 $input-btn-padding-y:       .5rem;
@@ -106,8 +111,8 @@ $nav-tabs-border-color:                       #ddd;
 $nav-tabs-link-active-border-color:           #ddd;
 
 //Theme
-$max-content-width: 1200px;
-$page-max-width: 100%;
+$max-content-width: 1200px; // container max size
+$page-max-width: 2000px;
 $page-shadow: none;
 $main-bg:  transparent;
 

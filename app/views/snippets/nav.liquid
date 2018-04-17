@@ -1,155 +1,150 @@
 {% block 'header'%}
-<div class="container-fluid navbar-header border">
-  <div class="">
-    <div class="row d-none d-lg-block border border-1 border-top-0 border-left-0 border-right-0 text-right">
-      <ul class="list-inline text-primary small col-12 mb-1">
-        <li class="list-inline-item mr-4">
-          {% for locale_code in locales %}
-            {% assign url_home = "/" %}
-            {% if locale_code != default_locale %}
-              {% assign url_home = url_home | append: locale_code %}
-            {% endif%}
-            <a href="{{url_home}}" class="p-1 text-uppercase {% if locale != locale_code%} text-dark {%endif%}">
-              {{locale_code}}
-            </a>
-          {% endfor%}
-        </li>
-        <li class="list-inline-item mr-4">
-          {% if site.metafields.phone_number != '' %}
-            <a href="{{site.metafields.store.phone_number_link}}" class="text-primary text-underline">
-              <i class="fa fa-phone text-info mr-1"></i> <b>Need help ?</b>{{site.metafields.store.phone_number}}
-            </a>
-            {{site.metafields.store.phone_number_hours}}
-          {% endif %}
-        </li>
-        <li class="list-inline-item  mr-4">
-          {% editable_text free_charge %}
-            <i class="fa fa-truck text-info mr-1"></i> <b>Free delevery</b> From 50 $
-            {% endeditable_text %}
-        </li>
-        <li class="list-inline-item d-none d-md-inline-block">
-          <i class="fa fa-check text-info mr-1"></i> Ordered before 4PM, <b>delivered by tomorrow</b>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="row mb-md-2 mt-md-2">
-    <div class="col-6 col-sm-4 col-md-2 order-1">
-      <a class="navbar-brand" href="{% path_to home %}">
-      {% if site.metafields.theme.logo %}
-        <img src="{{ site.metafields.theme.logo }}" alt="{{ site.name }}"  class="img-fluid"/>
-      {% endif %}
-      </a>
-    </div>
-    <div class="col-md-7 pl-2 order-3 order-md-2">
-      <div class="row d-none d-md-block">
-        <div class="col-12 text-primary lead" >
-          {% editable_text "baseline", hint: "Website header baseline" %}
-          May the discount be with you !
+<div class="container-fluid navbar-header">
+  <div class="row d-none d-lg-block bg-light pt-1 pb-1 text-right">
+    <ul class="nav-container list-inline  small col-12 mb-1">
+      <li class="list-inline-item mr-4">
+        {% for locale_code in locales %}
+          {% assign url_home = "/" %}
+          {% if locale_code != default_locale %}
+            {% assign url_home = url_home | append: locale_code %}
+          {% endif%}
+          <a href="{{url_home}}" class="p-1 text-uppercase text-gray {% if locale == locale_code%} font-weight-bold text-underline  {%endif%}">
+            {{locale_code}}
+          </a>
+        {% endfor%}
+      </li>
+      <li class="list-inline-item mr-4 text-gray font-weight-bold">
+        {% if site.metafields.phone_number != '' %}
+          <a href="{{site.metafields.store.phone_number_link}}" class="text-gray font-weight-bold text-underline">
+            <i class="fa fa-phone mr-1"></i> <b>Need help ?</b>{{site.metafields.store.phone_number}}
+          </a>
+          {{site.metafields.store.phone_number_hours}}
+        {% endif %}
+      </li>
+      <li class="list-inline-item text-gray font-weight-bold mr-4">
+        {% editable_text free_charge %}
+          <i class="fa fa-truck mr-1"></i> <b>Free delevery</b> From 50 $
           {% endeditable_text %}
-        </div>
+      </li>
+      <li class="list-inline-item d-none d-md-inline-block text-gray font-weight-bold">
+        <i class="fa fa-check mr-1"></i> Ordered before 4PM, <b>delivered by tomorrow</b>
+      </li>
+    </ul>
+  </div>
+  <div class="nav-container">
+    <div class="row mb-md-2 mt-md-2">
+      <div class="col-6 col-sm-4 col-md-3 order-1">
+        <a class="navbar-brand" href="{% path_to home %}" class="p-4">
+          {% if site.metafields.theme.logo %}
+          <img src="{{ site.metafields.theme.logo }}" alt="{{ site.name }}"  class="img-fluid "/>
+          {% endif %}
+        </a>
       </div>
-      <div class="row d-none d-md-flex">
-        <div class="col-12">
-          <form method="GET" action="{% path_to search %}" class="input-group" >
+      <div class="col-md-5 col-lg-6 pl-2 order-3 order-md-2">
+        <div class="row d-none d-md-flex">
+          <div class="col-12">
+            <form method="GET" action="{% path_to search %}" class="input-group" >
 
-            <input type="text" class="form-control" id="header-search-input" placeholder="Search for..." aria-label="Search for..." aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q" data-autosubmit>
-            <div class="input-group-append" >
-              <button class="btn btn-primary" name="submit" type="submit">
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
-            <div id="header-search-hit" >
-              <div id="header-search-product-title">
-                <div class="row">
-                  <div class="col-12 search-title">
-                    <span class="h2">
-                      {{ 'search_product' | translate }}
-                    </span>
-                    <span class="nb_hits"></span>
-                  </div>
-                </div>
+              <input type="text" class="form-control search-input" id="header-search-input" placeholder="Search for..." aria-label="Search for..." aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q" data-autosubmit>
+              <div class="input-group-prepend" >
+                <button class="btn btn-link btn-lg p-0" name="submit" type="submit">
+                  <i class="fa fa-search"></i>
+                </button>
               </div>
-              <div id="header-search-product-link">
-                <div class="row">
-                  <div class="col-12 text-right pt-2">
-                    <a data-href="{% path_to search %}" href="#" class="btn btn-primary btn-search-product">
-                      {{ 'search_product_all' | translate }}
+              <div class="small font-weight-light text-center pt-2">
+                {% editable_text "baseline", hint: "Website header baseline" %}
+                May the discount be with you !
+                {% endeditable_text %}
+              </div>
+              <div id="header-search-hit" >
+                <div id="header-search-product-title">
+                  <div class="row">
+                    <div class="col-12 search-title">
+                      <span class="h2">
+                        {{ 'search_product' | translate }}
+                      </span>
                       <span class="nb_hits"></span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div id="header-search-product-empty">
-                <div class="row">
-                  <div class="col-12 text-center">
-                    {{ 'search_product_empty' | translate }}
-                  </div>
-                </div>
-              </div>
-              <div id="header-search-category-title" class=" ">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="h2 text-dark">
-                      {{ 'search_category' | translate }}
                     </div>
                   </div>
                 </div>
-              </div>
-              <div id="header-search-category-empty">
-                <div class="row">
-                  <div class="col-12 text-center">
-                    {{ 'search_category_empty' | translate }}
+                <div id="header-search-product-link">
+                  <div class="row">
+                    <div class="col-12 text-right pt-2">
+                      <a data-href="{% path_to search %}" href="#" class="btn btn-primary btn-search-product">
+                        {{ 'search_product_all' | translate }}
+                        <span class="nb_hits"></span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div id="header-search-product-empty">
+                  <div class="row">
+                    <div class="col-12 text-center">
+                      {{ 'search_product_empty' | translate }}
+                    </div>
+                  </div>
+                </div>
+                <div id="header-search-category-title" class=" ">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="h2 text-dark">
+                        {{ 'search_category' | translate }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="header-search-category-empty">
+                  <div class="row">
+                    <div class="col-12 text-center">
+                      {{ 'search_category_empty' | translate }}
+                    </div>
+                  </div>
+                </div>
+                <div id="header-search-category-link">
+                  <div class="row">
+                    <div class="col-12 text-right ">
+                      <a href="#" class="btn btn-success">
+                        {{ 'search_category_all' | translate }}
+                        <span class="nb_hits"></span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div id="header-search-hit-content">
+                  <div class="row separator-right ">
+                    <div class="aa-dataset-product col-12  col-md-8 pt-2 pb-2"></div>
+                    <div class="aa-dataset-category col-12 col-md-4 pt-2 pb-2 bg-light d-none d-md-block"></div>
                   </div>
                 </div>
               </div>
-              <div id="header-search-category-link">
-                <div class="row">
-                  <div class="col-12 text-right ">
-                    <a href="#" class="btn btn-success">
-                      {{ 'search_category_all' | translate }}
-                      <span class="nb_hits"></span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div id="header-search-hit-content">
-                <div class="row separator-right ">
-                  <div class="aa-dataset-product col-12  col-md-8 pt-2 pb-2"></div>
-                  <div class="aa-dataset-category col-12 col-md-4 pt-2 pb-2 bg-light d-none d-md-block"></div>
-                </div>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-6 col-sm-8 col-md-3 order-2 order-md-3  text-right mb-2">
-      <div class="d-none d-md-block">
-        {% include 'header_controls' %}
+      <div class="col-6 col-sm-8 col-md-4 col-lg-3 order-2 order-md-3  text-right mb-2">
+        <div class="d-none d-md-block">
+          {% include 'header_controls' %}
+        </div>
+        <a href="#mobile-menu" class="btn btn-primary d-inline-block d-md-none"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+          <i class="fas fa-bars"></i>
+        </a>
       </div>
-      <a href="#mobile-menu" class="btn btn-primary d-inline-block d-md-none"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
-        <i class="fas fa-bars"></i>
-      </a>
-
     </div>
-  </div>
-  <div class="row text-white bg-primary">
-    <div class="col-12  menu-categories d-none d-md-block">
-      <div id="navbar" class="navbar-collapse ">
-        <ul class="nav categories-menu">
-        {% with_scope level: 0%}
-          {% for category in store.categories %}
+    <div class="row ">
+      <div class="col-12  menu-categories d-none d-md-block">
+        <div id="navbar" class="navbar-collapse ">
+          <ul class="nav justify-content-start categories-menu">
+          {% with_scope level: 0%}
+            {% for category in store.categories %}
             <li class="{% if page.fullpath == page_in_nav.fullpath %}active{% endif %}"  data-toggle="display-hover" data-target="#menu-{{category.id}}">
-              <a href="{{category.url_key  | prepend: url_base }}" id="cat-{{category.id}}" class="text-white text-uppercase " aria-haspopup="true" aria-expanded="false">
+              <a href="{{category.url_key  | prepend: url_base }}" id="cat-{{category.id}}"  aria-haspopup="true" aria-expanded="false">
                 {{ category.name }}
               </a>
               <div class="dropdown-category" id="menu-{{category.id}}">
                 <ul class="row" >
                   {% for category_l1 in category.childs %}
                   <li class="col-3">
-                    <a  href="{{category_l1.url_key  | prepend: url_base }}" class="text-uppercase text-dark font-weight-bold">
+                    <a  href="{{category_l1.url_key  | prepend: url_base }}" class="text-uppercase text-primary">
                       {{category_l1.name}}
                     </a>
                     <ul>
@@ -166,50 +161,50 @@
                 </ul>
               </div>
             </li>
-          {% endfor %}
-        {% endwith_scope%}
-          <li>
-            <a href="{% path_to blog%}" class="text-white text-uppercase">Blog</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  {% with_scope level: 0%}
-    {% for category_l0 in store.categories %}
-      <div class="row">
-        <div class="col-12 bg-white border dropdown-category" id="menu-{{category_l0.id}}">
-          <div class="row">
-            <div class="col-12">
-              <div class="h4">{{category_l0.name}}</div>
-            </div>
-          </div>
-          <ul class="row" >
-            {% for category_l1 in category_l0.childs %}
-            <li class="col-3">
-              <a  href="{{category_l1.url_key  | prepend: url_base }}" class="text-uppercase text-dark font-weight-bold">
-                {{category_l1.name}}
-              </a>
-              <ul>
-                {% for category_l2 in category_l1.childs %}
-                <li>
-                  <a href="{{category_l2.url_key | prepend: url_base}}" class="text-dark">
-                    {{category_l2.name}}
-                  </a>
-                </li>
-                {% endfor %}
-              </ul>
-            </li>
             {% endfor %}
+          {% endwith_scope%}
+            <li class=" align-items-end">
+              <a href="{% path_to blog%}" class="align-self-end">Blog</a>
+            </li>
           </ul>
         </div>
       </div>
-    {% endfor %}
-  {% endwith_scope %}
-  <div class="collapse nav-mobile" id="mobile-menu">
-    <ul class="list-group">
+    </div>
     {% with_scope level: 0%}
-      {% for category in store.categories %}
+    {% for category_l0 in store.categories %}
+    <div class="row">
+      <div class="col-12 bg-white border dropdown-category" id="menu-{{category_l0.id}}">
+        <div class="row">
+          <div class="col-12">
+            <div class="h4">{{category_l0.name}}</div>
+          </div>
+        </div>
+        <ul class="row" >
+          {% for category_l1 in category_l0.childs %}
+          <li class="col-3">
+            <a  href="{{category_l1.url_key  | prepend: url_base }}" class="text-uppercase text-dark font-weight-bold">
+              {{category_l1.name}}
+            </a>
+            <ul>
+              {% for category_l2 in category_l1.childs %}
+              <li>
+                <a href="{{category_l2.url_key | prepend: url_base}}" class="text-dark">
+                  {{category_l2.name}}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endfor %}
+    {% endwith_scope %}
+    <div class="collapse nav-mobile" id="mobile-menu">
+      <ul class="list-group">
+        {% with_scope level: 0%}
+        {% for category in store.categories %}
         <li class="list-group-item">
           <a href="#collapse-cat-{{category.id}}" id="cat-{{category.id}}" class="text-uppercase" data-toggle="collapse">
             {{ category.name }}
@@ -231,16 +226,16 @@
             </ul>
           </div>
         </li>
-      {% endfor %}
-    {% endwith_scope%}
-      <li class="list-group-item">
-        <a href="{% path_to blog%}" class="text-uppercase">Blog</a>
-      </li>
-      <li class="list-group-item bg-light pb-1 pt-1">
-        {% include 'header_controls' %}
-      </li>
-    </ul>
+        {% endfor %}
+        {% endwith_scope%}
+        <li class="list-group-item">
+          <a href="{% path_to blog%}" class="text-uppercase">Blog</a>
+        </li>
+        <li class="list-group-item bg-light pb-1 pt-1">
+          {% include 'header_controls' %}
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
-
 {% endblock %}
