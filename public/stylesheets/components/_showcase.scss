@@ -65,25 +65,37 @@
       }
     }
   }
-  .showcase-carousel-item {
-    .showcase-carousel-link {
-      display: block;
-      position: relative;
-      text-align: center;
-      width: 100%;
-      &:before{
-        content: "";
+  .showcase-carousel {
+    height: 480px;
+    @include media-breakpoint-up(sm) {
+      height: 430px;
+    }
+    @include media-breakpoint-up(md) {
+      height: 470px;
+    }
+    @include media-breakpoint-up(lg) {
+      height: 550px;
+    }
+    .showcase-carousel-item {
+      .showcase-carousel-link {
         display: block;
-        padding-top: 80%;
-      }
-      img {
-        position: absolute;
-        top: 0;
-        left:0;
-        right:0;
-        margin-left:auto;
-        margin-right:auto;
-        display: inline-block;
+        position: relative;
+        text-align: center;
+        width: 100%;
+        &:before{
+          content: "";
+          display: block;
+          padding-top: 80%;
+        }
+        img {
+          position: absolute;
+          top: 0;
+          left:0;
+          right:0;
+          margin-left:auto;
+          margin-right:auto;
+          display: inline-block;
+        }
       }
     }
   }

@@ -68,7 +68,85 @@ is_layout: false
           {% endblock %}
         </div>
       </main>
-      {% include 'footer' %}
+      {% block 'footer' %}
+      {% capture 'background_category_footer' %}
+        {% editable_file 'banner-category-footer', fixed:'true' %}/images/banner-categories.jpg{% endeditable_file %}
+      {% endcapture %}
+      <footer class="bg-secondary w-100">
+        <div class="container-fluid">
+          <div class="row categories-list"  style="background-image:url({{background_category_footer}})">
+            <div class="col-12">
+              <div class="container">
+                <ul class="row  pt-2 pb-2 list-inline">
+                {%with_scope level: 0%}
+                  {% for category_lv1 in store.categories%}
+                  <li class="col-12 col-sm-6 col-md-4 pt-2 pb-4 pb-md-2list-inline-item m-0">
+                    <a href="{{category_lv1.url_key | prepend: url_base}}" class="h4 text-white font-weight-bold text-uppercase">
+                      {{category_lv1.name}}
+                    </a>
+                    <ul class="">
+                      {% for category_lv2 in category_lv1.childs%}
+                      <li class="">
+                        <a href="{{category_lv2.url_key | prepend: url_base}}" class="">
+                          {{category_lv2.name}}
+                        </a>
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                  {% endfor %}
+                {% endwith_scope %}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class=" row store-advantage bg-dark text-uppercase text text-center text-light  pt-5 pb-5 d-none d-md-flex">
+            <div class="col-12">
+              <div class="container">
+                <div class="row">
+                  <div class="col-3 text-center ">
+                    <i class="fa fa-rocket fa-2x"></i>
+                    <div class="text-light ">
+                      {{'store_advantage_shipping' | translate }}
+                    </div>
+                  </div>
+                  <div class="col-3 text-center">
+                    <i class="fas fa-undo fa-2x"></i>
+                    <div class="text-light ">
+                      {{'store_advantage_return' | translate }}
+                    </div>
+                  </div>
+                  <div class="col-3 text-center">
+                    <i class="fa fa-tag text-light fa-2x"></i>
+                    <div class="text-light ">
+                      {{'store_advantage_price' | translate }}
+                    </div>
+                  </div>
+                  <div class="col-3 text-center ">
+                    <i class="fa fa-phone-volume fa-2x"></i>
+                    <div class="text-light ">
+                      {{'store_advantage_hotline' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-6 pt-5">
+              <p class="text-info">&copy; {{site.name}} {{ now | localized_date: '%Y' }} </p>
+            </div>
+            <div class="col-6 text-right pt-4">
+              <img src="{{'powered-by-shopinvader-logo.png' | theme_image_url}}" alt="Shopinvader" class="img-fluid">
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {% endblock %}
     </div>
 
     <div class="modal fade" id="main-modal" tabindex="-1" role="dialog">
