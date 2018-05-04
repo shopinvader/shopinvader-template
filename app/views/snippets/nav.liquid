@@ -44,7 +44,6 @@
         <div class="row d-none d-md-flex">
           <div class="col-12">
             <form method="GET" action="{% path_to search %}" class="input-group" >
-
               <input type="text" class="form-control search-input" id="header-search-input" placeholder="Search for..." aria-label="Search for..." aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q" data-autosubmit>
               <div class="input-group-prepend" >
                 <button class="btn btn-link btn-lg p-0" name="submit" type="submit">
@@ -163,9 +162,13 @@
             </li>
             {% endfor %}
           {% endwith_scope%}
-            <li class=" align-items-end">
-              <a href="{% path_to blog%}" class="align-self-end">Blog</a>
-            </li>
+            {% for nav_page in site.pages%}
+              {% if nav_page.listed? == true and nav_page.depth <= 1 %}
+                <li class=" align-items-end">
+                  <a href="{% path_to nav_page%}" class="align-self-end text-dark">{{nav_page.title}}</a>
+                </li>
+              {% endif %}
+            {% endfor%}
           </ul>
         </div>
       </div>
@@ -228,9 +231,13 @@
         </li>
         {% endfor %}
         {% endwith_scope%}
-        <li class="list-group-item">
-          <a href="{% path_to blog%}" class="text-uppercase">Blog</a>
-        </li>
+        {% for nav_page in site.pages%}
+          {% if nav_page.listed? == true and nav_page.depth <= 1 %}
+            <li class=" list-group-item">
+              <a href="{% path_to nav_page%}" class="text-dark text-uppercase">{{nav_page.title}}</a>
+            </li>
+          {% endif %}
+        {% endfor%}
         <li class="list-group-item bg-light pb-1 pt-1">
           {% include 'header_controls' %}
         </li>

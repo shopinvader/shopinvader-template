@@ -29,6 +29,10 @@ theme:
     noimage:
       hint: Default placeholder image (categories, products...)
       type: image
+    user_icon:
+      type: image
+    cart_icon:
+      type: image
 algolia:
   label: Algolia
   fields:

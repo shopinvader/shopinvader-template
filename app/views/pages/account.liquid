@@ -30,7 +30,7 @@ is_layout: false
             To continue with your order, simply sign in below.
             {% endeditable_text %}
           </p>
-            <form action="{% path_to 'account_login' %}" method="post">
+          <form action="{% path_to 'account_login' %}" method="post">
             <input type="hidden" name="auth_action" value="sign_in" />
             <input type="hidden" name="auth_content_type" value="customers" />
             <input type="hidden" name="auth_id_field" value="email" />
