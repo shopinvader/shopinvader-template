@@ -22,36 +22,11 @@
 
   <div class="product-thumbnail-img loader">
     <div class="loader-icon"></div>
-    {% assign images_count = 0%}
-    {% if product.images.size > 1 %}
-    <div id="slide-{{product.objectID}}" class="carousel slide p-2" data-ride="carousel" data-interval="false">
-      <div class="carousel-inner" role="listbox">
-        {% for image in product.images %}
-          {% if image.medium.src != '' and image.medium.src != null %}
-            {{image.medium.src | json}}
-            {% assign images_count = images_count | plus: 1%}
-            <div class="carousel-item {%if forloop.index == 1 %}active{%endif%}" data-target="#slide-{{product.objectID}}">
-              <img src="{{image.medium.src}}" alt="{{image.medium.alt}}" class="d-block img-fluid"/>
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-      {% if images_count > 0%}
-        <a class="carousel-control-prev" href="#slide-{{product.objectID}}" role="button" data-slide="prev">
-          <i class="fa fa-chevron-left text-dark"></i>
-        </a>
-        <a class="carousel-control-next" href="#slide-{{product.objectID}}" role="button" data-slide="next">
-          <i class="fa fa-chevron-right text-dark"></i>
-        </a>
-      {% else %}
-        <div class="carousel-item active" data-target="#slide-{{product.objectID}}">
-          <img src="{{site.metafields.theme.noimage}}" alt="" class="d-block img-fluid"/>
-        </div>
-      {% endif %}
-    </div>
-    {% else %}
-      <img class="group list-group-image card-img-top pr-2 pr-md-0" src="{{product.images.first.medium.src  | default: site.metafields.theme.noimage }}" alt="{{product.images.first.medium.alt}}" />
-    {% endif %}
+
+    <img class="group list-group-image card-img-top pr-2 pr-md-0"
+    src="{{product.images.first.medium.src  | default: site.metafields.theme.noimage }}"
+    alt="{{product.images.first.medium.alt}}"
+    data-link="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}"/>
     {%if product.price.discount > 0%}
     <div class="pb-1">
       <div class="badge badge-warning p-2 badge-discount">
@@ -60,7 +35,7 @@
     </div>
     {%endif%}
   </div>
-  <div class="product-thumbnail-price card-body p-0 p-md-3 p-xl-2" data-link="{{product.url_key  | prepend: url_base }}">
+  <div class="product-thumbnail-price card-body p-0 p-md-3 p-xl-2" data-link="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}">
     <div class="d-vertical-only">
       <span class="small">
         <small>{{ 'product_price_from' | translate }}</small>
