@@ -1,15 +1,17 @@
-# Shopinvader Demonstration template
+# ShopInvader Demonstration template
 
-shopinvader-template is an open-source demonstration template for Shopinvader
-e-commerce solution.
+shopinvader-template is an open-source template for ShopInvader the
+e-commerce solution with Odoo.
+See [shopinvader.com](https://shopinvader.com)
 
-![shopinvader-template](https://imgur.com/7PiaRFZ)
-![shopinvader-template](https://imgur.com/zPOGE99)
+![ShopInvader template](https://imgur.com/7PiaRFZ)
+![ShopInvader template screenshot](https://imgur.com/7PiaRFZ "shopinvader template screenshot")
+
 ## About
 This template  provide a solid and flexible foundation for building new
-Shopinvader webshop. You can extend and adapt this theme to the shop's needs.
+ShopInvader webshop. You can extend and adapt this theme to the shop's needs.
 
-See live demo [https://spacediscount.shopinvader.com/](https://spacediscount.shopinvader.com/)
+See live demo [https://shopinvader.com/template](https://shopinvader.com/template/)
 
 ## Requirement
 
@@ -18,8 +20,11 @@ For preview locally this template you need to install
 tool for develop your website on your local machine.
 
 Please, visit the documentation website of Locomotive.
-[http://locomotive-v3.locomotivecms.com](http://locomotive-v3.readme.io)
+[http://locomotive-v3.readme.io](http://locomotive-v3.readme.io)
 
+## Documentation
+
+See [https://akretion.github.io/shopinvader-documentation/](https://akretion.github.io/shopinvader-documentation/).
 
 ## Installation
 
