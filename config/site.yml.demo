@@ -33,8 +33,8 @@ metafields:
     api_key: "75575d3910b3ac55428bcdfa1b0e6784"
     indices: >
       [
-        { "name": "categories", "index": "category" },
-        { "name": "products", "index": "product" }
+        { "name": "categories", "index": "demo_site_10_category" },
+        { "name": "products", "index": "demo_site_10_product" }
       ]
     routes: >
       [
@@ -51,20 +51,20 @@ metafields:
     available_countries: >
       {
         "fr": [
-          { "name": "France", "id": 74 },
-          { "name": "Belgium", "id": 20 },
-          { "name": "Spain", "id": 67 }
+          { "name": "France", "id": 76 },
+          { "name": "Belgium", "id": 21 },
+          { "name": "Spain", "id": 69 }
         ],
         "en": [
-          { "name": "France", "id": 74 },
-          { "name": "Belgium", "id": 20 },
-          { "name": "Spain", "id": 67 }
+          { "name": "France", "id": 76 },
+          { "name": "Belgium", "id": 21 },
+          { "name": "Spain", "id": 69 }
         ]
       }
-      all_filters: >
-        {
-          "fr": [
-          ],
-          "en": [
-          ]
-        }
+    all_filters: >
+      {
+        "fr": [
+        ],
+        "en": [
+        ]
+      }
