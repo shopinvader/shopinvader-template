@@ -52,11 +52,11 @@
                 <input type="hidden" name="auth_callback" value="{% path_to account_index %}" />
                 <div class="form-group">
                   <label for="auth-email">{{ 'signin_email' | translate }}</label>
-                  <input type="email" class="form-control" id="auth-email" placeholder="{{ 'signin_email' | translate }}" name="auth_id" value="{{ params.auth_id }}" required="required">
+                  <input type="email" class="form-control"  placeholder="{{ 'signin_email' | translate }}" name="auth_id" value="{{ params.auth_id }}" required="required">
                 </div>
                 <div class="form-group">
                   <label for="auth-password">{{ 'signin_password' | translate }}</label>
-                  <input type="password" class="form-control" id="auth-password" placeholder="{{ 'signin_password' | translate }}" name="auth_password" value="" required="required">
+                  <input type="password" class="form-control" placeholder="{{ 'signin_password' | translate }}" name="auth_password" value="" required="required">
                   <a href="{% path_to forgot_password %}" class="color-white">
                     {{ 'signin_forgotpassword' | translate }}
                   </a>
