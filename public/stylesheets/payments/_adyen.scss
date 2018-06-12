@@ -1,0 +1,48 @@
+
+.modal-payment.adyen-popup {
+
+  .modal-header {
+    background-color: theme-color("primary");
+    color: $white;
+  }
+  .modal-body {
+    background: $gray-200;
+    position: relative;
+    .modal-loader {
+      position: absolute;
+      margin: auto;
+      width: 100%;
+      top: 30%;
+      display: none;
+
+    }
+  }
+  .payment-card-row {
+    max-width: 650px;
+    border: 1px solid $gray-400;
+    box-shadow: 0 1px 3px 0 $gray-400;
+    border-radius: 10px;
+    padding: 20px;
+    background: $white;
+    margin: auto;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    input[data-encrypted-name]{
+      border-radius: 4px;
+      box-shadow: 0 1px 3px 0 #ced4da;
+      &:focus {
+        box-shadow: none;
+
+      }
+      &:not(:focus) {
+        &.valid:not(:empty) {
+          border-bottom-color:  theme-color("success");
+        }
+        &.invalid {
+          border-bottom-color:  theme-color("danger");
+
+        }
+      }
+    }
+  }
+}

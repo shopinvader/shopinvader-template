@@ -1,7 +1,6 @@
 $icon-font-path: "../fonts/bootstrap/" !default;
 @import 'components/custom';
 @import url('https://fonts.googleapis.com/css?family=Lato:300');
-
 @import 'bootstrap4/bootstrap';
 @import 'components/account';
 @import 'components/algolia';
@@ -9,6 +8,7 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 @import 'components/columns';
 @import 'components/editable';
 @import 'components/footer';
+@import 'components/loader';
 @import 'components/nav';
 @import 'components/posts';
 @import 'components/product';
@@ -17,8 +17,10 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 //@import 'components/typo';
 @import 'components/slide';
 @import 'components/showcase';
-@import 'components/wait_overlay';
 @import 'components/wells';
+
+@import 'payments/adyen';
+@import 'payments/stripe';
 
 html {
   font-size: 15px;
@@ -123,55 +125,7 @@ html {
   }
 }
 
-.loader {
-  .loader-icon {
-    position: absolute;
-    top: 35%;
-    left: 35%;
 
-    width: 30%;
-    height: 30%;
-    margin: 0 auto;
-    border: 1px solid rgba(23,163,184,0.98);
-    border-radius: 50%;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    animation: cssload-spin 575ms infinite linear;
-  }
-  @keyframes cssload-spin {
-    100%{ transform: rotate(360deg); transform: rotate(360deg); }
-  }
-
-  @-o-keyframes cssload-spin {
-    100%{ -o-transform: rotate(360deg); transform: rotate(360deg); }
-  }
-
-  @-ms-keyframes cssload-spin {
-    100%{ -ms-transform: rotate(360deg); transform: rotate(360deg); }
-  }
-
-  @-webkit-keyframes cssload-spin {
-    100%{ -webkit-transform: rotate(360deg); transform: rotate(360deg); }
-  }
-
-  @-moz-keyframes cssload-spin {
-    100%{ -moz-transform: rotate(360deg); transform: rotate(360deg); }
-  }
-  &:before{
-    content: "";
-    display: block;
-    padding-top: 100%;
-  }
-  overflow: hidden;
-  img {
-    opacity:1;
-    position: absolute;
-    top:0;
-    bottom:0;
-    transition: opacity 500ms ease-in;
-
-  }
-}
 .post-mozaic {
   .post-mozaic-item {
     display: flex;

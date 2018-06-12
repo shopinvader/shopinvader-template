@@ -10,19 +10,20 @@
   setProp('suffix', suffix);
 {% endaction %}
   {% if selected_address_id == null%}
-    {% assign selected_address_id = address_list.first.id %}
+    {% assign address_id = address_list.first.id %}
+  {% else %}
+    {% assign address_id = selected_address_id %}
   {% endif%}
-
   <div class="row">
     {% for address in address_list %}
       {% if address.id != null %}
-        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 align-items-stretch d-flex">
+        <div class="col-12 col-sm-6 col-lg-4  align-items-stretch d-flex">
           <div class="card w-100">
             <div class="card-body">
               {% if display_delector == true%}
               <div class="radio">
                 <label class="text-lg bold">
-                  <input class="input-{{ input_group }}-address" type="radio" value="{{address.id | round}}" {%if address.id == selected_address_id %} checked="checked" {%endif%} name="{{ input_name }}" id="{{ input_name }}_{{address.id}}" autocomplete="off"/>
+                  <input class="input-{{ input_group }}-address" type="radio" value="{{address.id | round}}" {%if address.id == address_id %} checked="checked" {%endif%} name="{{ input_name }}" id="{{ input_name }}_{{address.id}}" autocomplete="off"/>
                   <b>{{address.name}}</b>
                 </label>
               </div>
@@ -36,7 +37,9 @@
                     <span>{{address.city}}</span>
                   </div>
                   <div>{{address.country.name}}</div>
-                  <div><i class="fa fa-phone small"></i>  {{address.phone}}</div>
+                  {% if address.phone%}
+                    <div><i class="fa fa-phone small"></i>  {{address.phone}}</div>
+                  {% endif %}
                 </address>
               </label>
             </div>
@@ -65,16 +68,18 @@
       {% endif %}
     {% endfor %}
     {% if display_add == true %}
-      <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+      <div class="col-12 col-sm-6 col-lg-4">
         <div class="card">
           <div class="card-body text-center">
             <div class="bottom-link">
               {% if display_add == true %}
                 <a class="btn btn-link text-primary" href="{% path_to cart_address_form%}">
                   <div class="text-primary ">
-                    <i class="fa fa-plus-circle fa-5x"></i>
+                    <i class="fa fa-plus-circle fa-5x pb-3"></i>
                   </div>
-                  {{ 'cart_address_add' | translate }}
+                  <div class="h4">
+                    {{ 'cart_address_add' | translate }}
+                  </div>
                 </a>
               {%endif%}
             </div>

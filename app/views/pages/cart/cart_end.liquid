@@ -127,14 +127,14 @@ dataLayer.push({
         </div>
       </div>
       <div class="row">
-        <div class="col-12 col-sm-9">
+        <div class="col-12 col-lg-8 col-xl-9">
           {% include 'cart_list'
              with cart: order,
              readonly: true,
              with_image: false,
           %}
         </div>
-        <div class="col-12 col-sm-3">
+        <div class="col-12  col-lg-4 col-xl-3">
           {% assign main_title= 'cart_order_ref' | translate | append: order.name%}
           {% include 'cart_total'
              with cart: order,

@@ -70,7 +70,10 @@ payment:
   label: Payment
   fields:
     stripe_api_key:
-      hint: "Stripe - Identifiant"
+      hint: "Stripe - API Key"
+      type: string
+    adyen_url:
+      hint: "Adyen - Hosted JS Library URL"
       type: string
 _store:
   fields:

@@ -1,22 +1,31 @@
+
 <div class="card">
   <div class="card-body">
-    <h2 class="display-4">TOTAL</h2>
+    <h2 class="display-4 text-uppercase">{{'cart_total_total' | translate}}</h2>
     <table class="table">
       <tbody>
         <tr>
           <td class="text-bold">
             <div class="text-size-lg">
               {{'cart_total_subtotal' | translate }}
+            </div>
           </td>
           <td class="text-bold text-right">
             {{cart.lines.amount.total | money }}
+
           </td>
         </tr>
-        {% if cart.shipping.carrier != null%}
+        {% if cart.shipping.selected_carrier != null%}
         <tr>
-          <td class="">{{'cart_total_shipping' | translate }}</td>
+          <td class="">
+            {{'cart_total_shipping' | translate }}
+            <div class="small">
+              {{ cart.shipping.selected_carrier.name }}
+            </div>
+          </td>
           <td class="text-right">{{cart.shipping.amount.total | money }}</td>
         </tr>
+
         {%endif%}
         <tr>
           <td class="">
@@ -33,7 +42,7 @@
             </div>
             <div class="">
               {{cart.amount.tax | money }}
-              
+
             </div>
           </td>
         </tr>

@@ -280,6 +280,9 @@ partner_business_info:
 per_page:
   en: per page
   fr: par page
+popular_product:
+  en: Popular product
+  fr: Les plus vues
 product_add_to_cart:
   en: Add to cart
   fr: Ajouter au panier
@@ -379,6 +382,9 @@ product_up_sellings_title:
 product_variants:
   en: More buying choices
   fr: Plusieurs choix disponibles
+product_zoom:
+  en: Zoom
+  fr: Zoom
 rating_average_rate:
   en: "Average rate"
   fr: "Noté par nos clients"

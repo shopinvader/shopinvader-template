@@ -13,336 +13,153 @@ editable_elements:
 {% extends 'layouts/checkout' %}
 
 {% block content/main %}
-{% if store.cart.shipping.carrier != null%}
-  {% assign selected_carrier = store.cart.shipping.carrier %}
-{% else %}
-  {% assign selected_carrier = store.carriers | first %}
-{% endif%}
-{% assign selected_payment = store.payment_methods | first %}
-  <div>
-    <div class="row">
-      <div class="col-lg-8 col-xl-9">
-        <h2> {{ 'cart_carrier_title' | translate }}</h2>
-        <div class="card-deck-wrapper">
-          {% comment %}
-          {% if store.carriers.size >0  %}
-            <form method="post" action="invader/cart/update" id="cart_carrier_form" data-shopinvader-form>
-              <input type="hidden" name="invader_success_url" value="{% path_to cart_checkout %}" />
-              <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
-              <input type="hidden" name="step[current]" value="{{ page.handle }}">
-              <input type="hidden" name="step[next]" value="cart_checkout">
-              <div class="card-deck">
-                {%for carrier in store.carriers%}
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-xs-8 col-sm-12 radio text-lg">
-                        <label>
-                          <input data-autosubmit type="radio" value="{{carrier.id | round}}" {%if carrier.id == selected_carrier.id %} checked="checked" {%endif%} name="shipping[carrier][id]" autocomplete="off"/>
-                          <b>{{carrier.name}}</b>
-                        </label>
+
+  {% assign selected_payment = store.cart.payment.available_methods.items | first %}
+    <div>
+      <div class="row">
+        <div class="col-lg-8 col-xl-9">
+          <h2> {{ 'cart_carrier_title' | translate }}</h2>
+          <div class="card-deck-wrapper">
+            {% if store.cart.shipping.available_carriers.count > 0 %}
+              {% assign selected_carrier = store.cart.shipping.selected_carrier %}
+
+              <form method="post" action="/invader/cart/add_carrier" id="cart_carrier_form" data-shopinvader-form>
+                <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+                <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+                <div class="card-deck">
+                  {%for carrier in store.cart.shipping.available_carriers.items %}
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-xs-8 col-sm-12 radio text-lg">
+                          <label>
+                            <input data-autosubmit type="radio" value="{{carrier.id | round}}" {%if carrier.id == selected_carrier.id %} checked="checked" {%endif%} name="carrier[id]" autocomplete="off"/>
+                            <b>{{carrier.name}}</b>
+                          </label>
+                        </div>
+                        <div class="col-xs-4  col-sm-12 text-center text-size-2xl">
+                          {% if carrier.price > 0 %}
+                            {{carrier.price | money}}
+                          {% else %}
+                            {{ 'cart_free_delivery' | translate }}
+                          {% endif %}
+                        </div>
                       </div>
-                      <div class="col-xs-4  col-sm-12 text-center text-size-2xl">
-                        {% if carrier.price > 0 %}
-                          {{carrier.price | money}}
-                        {% else %}
-                          {{ 'cart_free_delivery' | translate }}
+                      <div class="row">
+                        <div class="col-xs-4 col-sm-12 text-center">
+                        {% if carrier.logo_url  %}
+                          <img src="{{carrier.logo_url | theme_image_url }}" />
                         {% endif %}
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xs-4 col-sm-12 text-center">
-                      {% if carrier.logo_url  %}
-                        <img src="{{carrier.logo_url | theme_image_url }}" />
-                      {% endif %}
-                      </div>
-                      <div class="col-xs-8 col-sm-12">
-                        {{carrier.description}}
+                        </div>
+                        <div class="col-xs-8 col-sm-12">
+                          {{carrier.description}}
+                        </div>
                       </div>
                     </div>
                   </div>
+                  {%endfor%}
                 </div>
-                {%endfor%}
+                <div class="pt-4">
+                  <h2>{{ 'cart_comment_title' | translate }}</h2>
+                  <textarea
+                  name="message" rows="4" cols="80" class="form-control"
+                  placeholder="{{cart_comment_placeholder | translate}}"
+                  autocomplete="off"></textarea>
+                </div>
+              </form>
+              <div class="pt-4">
+                <h2>{{ 'cart_payment_title' | translate }}</h2>
+                {{'cart_payment_desc' | translate }}
+                <div class="card text-center">
+                  <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs nav-justified">
+                    {% for payment_method in store.cart.payment.available_methods.items%}
+                      <li class="nav-item "  data-toggle="tab" href="#tab-{{payment_method.id}}" role="tab" aria-controls="{{payment_method.id}}" aria-selected="false">
+                        <a class="nav-link {% if selected_payment.id == payment_method.id %} active{%endif%}" href="#">
+                          {{payment_method.name}}
+                        </a>
+                      </li>
+                    {% endfor%}
+                    </ul>
+                  </div>
+                  <div class="card-body">
+                    <div class="tab-content" id="payment-tabs">
+                    {% for payment_method in  store.cart.payment.available_methods.items%}
+                      <div class="tab-pane fade {% if selected_payment.id == payment_method.id %}show active{%endif%}" id="tab-{{payment_method.id}}" role="tabpanel" aria-labelledby="home-tab">
+                        {% case payment_method.code %}
+
+                        {% when 'stripe' %}
+                          {% include 'payment_stripe' with payment_method %}
+                        {% when 'adyen' %}
+                          {% include 'payment_adyen' with payment_method %}
+                        {% when 'bank_transfert' %}
+                          {% include 'payment_bank_transfert' with payment_method %}
+                        {% else %}
+                          {% include 'payment_check' with payment_method %}
+                        {% endcase %}
+
+                      </div>
+                    {% endfor%}
+
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="">
-                <h2>{{ 'cart_comment_title' | translate }}</h2>
-                <textarea
-                name="message" rows="4" cols="80" class="form-control"
-                placeholder="{{cart_comment_placeholder | translate}}"
-                autocomplete="off"></textarea>
-              </div>
-            </form>
-            <div class="pt-2">
-              <h2>{{ 'cart_payment_title' | translate }}</h2>
-              {{'cart_payment_desc' | translate }}
-              <div class="col-xs-12 col-md-6 text-right cart-security-message">
+              <div class="text-center pt-2 pb-2">
                 <i class="fa fa-lock text-success"></i>
                 {{'cart_payment_secure' | translate }}
               </div>
-              <div class="card text-center">
-                <div class="card-header">
-                  <ul class="nav nav-tabs card-header-tabs">
-                  {% for payment_method in store.payment_methods%}
-                    <li class="nav-item"  data-toggle="tab" href="#tab-{{payment_method.id}}" role="tab" aria-controls="{{payment_method.id}}" aria-selected="false">
-                      <a class="nav-link  {% if selected_payment.id == payment_method.id %} active{%endif%}" href="#">
-                        <i class="fab fa-{{payment_method.code}}"></i> {{payment_method.name}}
-                      </a>
-                    </li>
-                  {% endfor%}
-                  </ul>
-                </div>
-                <div class="card-body">
-                  <div class="tab-content" id="payment-tabs">
-                  {% for payment_method in store.payment_methods%}
-                    <div class="tab-pane fade {% if selected_payment.id == payment_method.id %}show active{%endif%}" id="tab-{{payment_method.id}}" role="tabpanel" aria-labelledby="home-tab">
-                      <form method="post" action="invader/cart/update" id="{{payment_method.code}}-form">
-                        <input type="hidden" name="invader_success_url" value="{% path_to cart_end %}" />
-                        <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
-                        <input type="hidden" name="step[current]" value="{{ page.handle }}">
-                        <input type="hidden" name="step[next]" value="cart_end">
-                        <input type='hidden' id="payment_method_id" name="payment[method][id]" value="{{payment_method.id}}"/>
-                        <input type='hidden' id="payment_method_code" name="payment[method][code]" value="{{payment_method.code}}"/>
-
-                        <div class="p-2">
-                          <b>{{payment_method.code}}</b>{{payment_method.description}}
-                        </div>
-                        {% case payment_method.code %}
-                          {% when 'stripe' %}
-                          <input type="hidden" name="payment[params][stripe][redirect_success_url]" value="{{base_url}}{% path_to cart_end %}" />
-                          <input type="hidden" name="payment[params][stripe][redirect_cancel_url]" value="{{base_url}}{% path_to page.handle %}" />
-                          <button type="button" data-toggle="modal" data-target="#modal-stripe" name="submit-{{payment_method.id}}" class="btn btn-primary btn-lg">
-                            Pay
-                          </button>
-                          {% when 'paypal' %}
-                            <input type="hidden" data-paypal-params name="payment[params][paypal][action]" value="create" disabled="disabled" autocomplete="off"/>
-                            <input type="hidden" data-paypal-params name="payment[params][paypal][redirect_success_url]" value="{{base_url}}{% path_to cart_end %}" disabled="disabled"  autocomplete="off"/>
-                            <input type="hidden" data-paypal-params name="payment[params][paypal][redirect_cancel_url]" value="{{base_url}}{% path_to cart_checkout %}" disabled="disabled"  autocomplete="off"/>
-                          {% else %}
-                          <button type="submit" name="submit-{{payment_method.id}}" class="btn btn-primary btn-lg">
-                            Pay
-                          </button>
-                        {% endcase %}
-                      </form>
-                    </div>
-                  {% endfor%}
+              {% else %}
+                <div class="col-xs-12 text-lg text-center">
+                  <div class="alert alert-warning">
+                    {{ 'cart_carrier_unavailable' | translate }}
                   </div>
                 </div>
-              </div>
-            </div>
-            {% else %}
-              <div class="col-xs-12 text-lg text-center">
-                <div class="alert alert-warning">
-                  {{ 'cart_carrier_unavailable' | translate }}
+              {% endif %}
+          </div>
+        </div>
+        <div class="col-lg-4 col-xl-3 mb-4" data-shopinvader-container id="cart-total">
+          {% include 'cart_total' with cart: store.cart  %}
+          {% if store.cart.shipping.size > 0%}
+          <div class="card">
+            <div class="card-body">
+              <h3><i class="fas fa-truck small text-primary"></i> {{'cart_shipping_address' | translate}}</h3>
+              <address>
+                <div class="font-weight-bold">
+                  {{store.cart.shipping.address.name}}
                 </div>
-              </div>
-            {% endif %}
-          {% endcomment %}
+                <div>{{store.cart.shipping.address.street}}</div>
+                <div>{{store.cart.shipping.address.street2}}</div>
+                <div>
+                  <span>{{store.cart.shipping.address.zip}}</span>,
+                  <span>{{store.cart.shipping.address.city}}</span>
+                </div>
+                <div>{{store.cart.shipping.address.country.name}}</div>
+                <div>{{store.cart.shipping.address.phone}}</div>
+              </address>
+            </div>
+          </div>
+          {% endif %}
+          {% if store.cart.invoicing.address != null %}
+          <div class="card">
+            <div class="card-body">
+              <h3><i class="fas fa-file-alt small text-primary"></i> {{'cart_invoice_address' | translate}}</h3>
+              <address>
+                <div class="font-weight-bold">
+                  {{store.cart.invoicing.address.name}}
+                </div>
+                <div>{{store.cart.invoicing.address.street}}</div>
+                <div>{{store.cart.invoicing.address.street2}}</div>
+                <div>
+                  <span>{{store.cart.invoicing.address.zip}}</span>,
+                  <span>{{store.cart.invoicing.address.city}}</span>
+                </div>
+                <div>{{store.cart.invoicing.address.country_id.name}}</div>
+                <div>{{store.cart.invoicing.address.phone}}</div>
+              </address>
+            </div>
+          </div>
+          {% endif %}
         </div>
-
-
       </div>
-      <div class="col-lg-4 col-xl-3 mb-4" data-shopinvader-container id="cart-total">
-        {% include 'cart_total' with cart: store.cart  %}
-        {% if store.cart.shipping.size > 0%}
-        <div class="card">
-          <div class="card-body">
-
-            <h3><i class="fas fa-truck small text-primary"></i> {{'cart_shipping_address' | translate}}</h3>
-            <address>
-              <div class="font-weight-bold">
-                {{store.cart.shipping.address.name}}
-              </div>
-              <div>{{store.cart.shipping.address.street}}</div>
-              <div>{{store.cart.shipping.address.street2}}</div>
-              <div>
-                <span>{{store.cart.shipping.address.zip}}</span>,
-                <span>{{store.cart.shipping.address.city}}</span>
-              </div>
-              <div>{{store.cart.shipping.address.country.name}}</div>
-              <div>{{store.cart.shipping.address.phone}}</div>
-            </address>
-          </div>
-        </div>
-        {% endif %}
-        {% if store.cart.invoicing.address != null %}
-        <div class="card">
-          <div class="card-body">
-            <h3><i class="fas fa-file-alt small text-primary"></i> {{'cart_invoice_address' | translate}}</h3>
-            <address>
-              <div class="font-weight-bold">
-                {{store.cart.invoicing.address.name}}
-              </div>
-              <div>{{store.cart.invoicing.address.street}}</div>
-              <div>{{store.cart.invoicing.address.street2}}</div>
-              <div>
-                <span>{{store.cart.invoicing.address.zip}}</span>,
-                <span>{{store.cart.invoicing.address.city}}</span>
-              </div>
-              <div>{{store.cart.invoicing.address.country_id.name}}</div>
-              <div>{{store.cart.invoicing.address.phone}}</div>
-            </address>
-          </div>
-        </div>
-        {% endif %}
-      </div>
-    </div>
-{% endblock %}
-{% block javascripts %}
-<div class="modal fade modal-payment" id="modal-stripe" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="">
-          <i class="fa fa-credit-card-alt"></i>
-          {% editable_text form_creditcard_title, label: 'Formulaire paiement - titre', rows: 1 %}
-            Pay my order
-          {% endeditable_text %}
-        </h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      </div>
-      <div class="modal-body">
-
-        <div class="text-center modal-loader">
-          <span class="fa-5x text-info ">
-            <i class="fas fa-spinner fa-pulse"></i>
-          </span>
-        </div>
-        <form action="" method="post" id="payment-form" >
-          <h3>
-          {% editable_text form_creditcard_subtitle, label: 'Formulaire paiement - sous-titre', rows: 1 %}
-          Secured credit card payment
-          {% endeditable_text %}
-          </h3>
-
-          {% editable_text form_creditcard_details, label: 'Formulaire paiement - détails', rows: 3, format: 'html'%}
-          <p>Secured credit card payment with Stripe.</p>
-          {% endeditable_text %}
-
-          <div class="payment-card-row  ">
-            <div class="form-group">
-              <label for="creditcard-owner">{{'creditcard_lastname' | translate}}</label>
-              <input type="text" class="form-control" id="creditcard-owner" placeholder="{{'creditcard_lastname' | translate}}">
-            </div>
-            <div class="row form-group">
-              <div class="col-12 col-sm-7 col-lg-8">
-                <label ><i class="fa fa-credit-card text-primary"></i> {{'creditcard_number' | translate}}</label>
-                <div id="card-number" class="form-control"></div>
-              </div>
-              <div class="col-12 col-sm-5 col-lg-4">
-                <label ><i class="fa fa-calendar-o text-primary"></i>  {{'creditcard_expiry' | translate}}</label>
-                <div id="card-expiry" class="form-control"></div>
-              </div>
-            </div>
-
-            <div class="row form-group">
-              <label for="exampleInputEmail1" class="col-12">
-                <i class="fa fa-lock text-primary"></i>  {{'creditcard_cvc' | translate}}
-              </label>
-              <div class="col-6">
-                <div id="card-cvc" class="form-control w-100"></div>
-              </div>
-              <small id="passwordHelpInline" class="text-muted col-6">
-                {{'creditcard_cvc_help' | translate}}
-              </small>
-            </div>
-            <div class="form-group text-center">
-              <button type="submit" class="btn btn-success w-75" id="" placeholder="">
-                Payer <span id="payement_total_label" data-shopinvader-container>
-                  {{ store.cart.amount_total | money }}
-                </span>
-              </button>
-              <div id="card-errors" class="text-danger pt-2" role="alert"></div>
-            </div>
-            <div class="text-center text-large text-secondary">
-              <i class="fab fa-cc-visa"></i>
-              <i class="fab fa-cc-mastercard"></i>
-              <i class="fab fa-cc-amex"></i>
-              <i class="fab fa-credit-card-alt"></i>
-            </div>
-          </div>
-
-        </div>
-        <div class="modal-header bg-light text-dark">
-          <div class="text-left w-50">
-            <i class="fa fa-lock text-success"></i>
-            {% editable_text form_creditcard_security, label: 'Formulaire paiement - mention page sécurisée', rows: 1 %}
-            Page sécurisée
-            {% endeditable_text %}
-          </div>
-          <div class="w-50 text-right">
-            <i class="fab fa-cc-stripe fa-2x"></i>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<script src="https://js.stripe.com/v3/"></script>
-
-<script>
-$('#modal-stripe').on('shown.bs.modal', function (e) {
-   init_stripe_form();
-});
-function init_stripe_form() {
-  var stripe = Stripe('{{site.metafields.payment.stripe_api_key}}');
-  var elements = stripe.elements();
-  var style = {
-    base: {
-      color: '#32325d',
-      lineHeight: '24px',
-      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-      fontSmoothing: 'antialiased',
-      fontSize: '16px',
-      '::placeholder': {
-        color: '#aab7c4'
-      }
-    },
-    invalid: {
-      color: '#EE392D',
-      iconColor: '#EE392D'
-    }
-  };
-  var card = elements.create('cardNumber', {style: style});
-  card.mount('#card-number');
-  var card_expiry = elements.create('cardExpiry', {style: style});
-  card_expiry.mount('#card-expiry');
-  var card_cvc = elements.create('cardCvc', {style: style});
-  card_cvc.mount('#card-cvc');
-  card.on('ready', function() {
-    $('#modal-stripe .modal-loader').hide();
-    $('#modal-stripe #payment-form').css('opacity', 1);
-  });
-  card.addEventListener('change', function(event) {
-    var displayError = document.getElementById('card-errors');
-    if (event.error) {
-      displayError.textContent = event.error.message;
-    } else {
-      displayError.textContent = '';
-    }
-  });
-  var form = document.getElementById('payment-form');
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    $form = $(this);
-    var extraDetails = {
-      name: $('input#creditcard-owner').value,
-    };
-    stripe.createSource(card, extraDetails).then(function(result){
-      if(result.error) {
-        $('#card-errors').html(result.error.message);
-      }
-      else {
-        $('#modal-stripe #payment-form').css('opacity', 0);
-        $('#modal-stripe .modal-loader').show();
-        var input_source = $('<input>');
-        input_source.attr('type', 'hidden');
-        input_source.attr('name', 'payment[method][stripe][source]');
-        input_source.attr('value', result.source.id);
-        input_source.appendTo($('#stripe-form'));
-        $('#stripe-form').submit();
-      }
-    })
-  });
-}
-</script>
 {% endblock %}
