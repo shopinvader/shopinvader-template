@@ -14,12 +14,12 @@
         {% endfor%}
       </li>
       <li class="list-inline-item mr-4 text-gray font-weight-bold">
-        {% if site.metafields.phone_number != '' %}
-          <a href="{{site.metafields.store.phone_number_link}}" class="text-gray font-weight-bold text-underline">
-            <i class="fa fa-phone mr-1"></i> <b>Need help ?</b>{{site.metafields.store.phone_number}}
+        {% editable_text phone_contact %}
+          <a href="tel:+33999 888 76541" class="text-gray font-weight-bold text-underline">
+            <i class="fa fa-phone mr-1"></i> <b>Need help ?</b>(+33) 999 888 76541
           </a>
-          {{site.metafields.store.phone_number_hours}}
-        {% endif %}
+           (mon-sat) 9AM 8PM
+        {% endeditable_text %}
       </li>
       <li class="list-inline-item text-gray font-weight-bold mr-4">
         {% editable_text free_charge %}
@@ -27,7 +27,9 @@
           {% endeditable_text %}
       </li>
       <li class="list-inline-item d-none d-md-inline-block text-gray font-weight-bold">
+        {% editable_text delivery_tomorrow %}
         <i class="fa fa-check mr-1"></i> Ordered before 4PM, <b>delivered by tomorrow</b>
+        {% endeditable_text %}
       </li>
     </ul>
   </div>
