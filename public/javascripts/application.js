@@ -1,7 +1,6 @@
 $(document).ready(function () {
   $( ".product-thumbnail-img.loader img" ).load(function() {
     // Handler for .load() called.
-    console.log($(this));
     $(this).css('opacity', 1);
     $(this).parents('.loader').find('.loader-icon').delay('1s').remove();
   });
@@ -25,6 +24,14 @@ $(document).ready(function () {
           }
       }
   });
+
+  $(document).on('ShopinvaderForm:after-error',
+    function (element)
+    {
+      $('.main-loader').addClass('d-none');
+      $('#generic-error-message').modal('show');
+    }
+  );
 
   $(document).on('ShopinvaderForm:before-submit',
     function (element)

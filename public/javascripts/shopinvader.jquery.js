@@ -23,6 +23,9 @@
               "success": function(ajaxpage) {
                 $this.render_ajaxpage(ajaxpage);
                 $this.trigger_after_submit_ajaxpage();
+              },
+              "error": function(ajaxpage) {
+                $this.trigger_after_error();
               }
             });
 
@@ -36,6 +39,9 @@
               }
             });
 
+          },
+          trigger_after_error: function() {
+              $(document).trigger('ShopinvaderForm:after-error', {target: $this.target, originalEvent: $this.originalEvent, ajaxpage: $this.ajaxpage} );
           },
           trigger_before_submit_ajaxpage : function () {
             $(document).trigger('ShopinvaderForm:before-submit', {target: $this.target, originalEvent: $this.originalEvent, ajaxpage: $this.ajaxpage} );

@@ -50,8 +50,11 @@ is_layout: false
     <link href="{{'fontawesome/fontawesome.css' | stylesheet_url}}" rel="stylesheet" async>
 
     {% block 'css' %}{% endblock %}
+    {% block 'javascripts_header' %}{% endblock %}
   </head>
   <body>
+
+
     <div class="main-loader d-none">
       <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
         <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
@@ -106,25 +109,25 @@ is_layout: false
                 <div class="row">
                   <div class="col-3 text-center ">
                     <i class="fa fa-rocket fa-2x"></i>
-                    <div class="text-light ">
+                    <div class="text-light pt-2 font-weight-bold">
                       {{'store_advantage_shipping' | translate }}
                     </div>
                   </div>
                   <div class="col-3 text-center">
                     <i class="fas fa-undo fa-2x"></i>
-                    <div class="text-light ">
+                    <div class="text-light pt-2 font-weight-bold">
                       {{'store_advantage_return' | translate }}
                     </div>
                   </div>
                   <div class="col-3 text-center">
                     <i class="fa fa-tag text-light fa-2x"></i>
-                    <div class="text-light ">
+                    <div class="text-light pt-2 font-weight-bold">
                       {{'store_advantage_price' | translate }}
                     </div>
                   </div>
                   <div class="col-3 text-center ">
                     <i class="fa fa-phone-volume fa-2x"></i>
-                    <div class="text-light ">
+                    <div class="text-light pt-2 font-weight-bold">
                       {{'store_advantage_hotline' | translate }}
                     </div>
                   </div>
@@ -137,10 +140,13 @@ is_layout: false
         <div class="container">
           <div class="row">
             <div class="col-6 pt-5">
-              <p class="text-info">&copy; {{site.name}} {{ now | localized_date: '%Y' }} </p>
+              <p class="text-dark">&copy; {{site.name}} {{ now | localized_date: '%Y' }} </p>
+              {% editable_text "footer_content", label: "Footer content", fixed: 'true', rows: 6, format:"html" %}
+
+              {% endeditable_text %}
             </div>
             <div class="col-6 text-right pt-4">
-              <img src="{{'powered-by-shopinvader-logo.png' | theme_image_url}}" alt="Shopinvader" class="img-fluid">
+              <img src="{% editable_file 'shopinvader_powered_by', fixed: 'true'%}images/powered-by-shopinvader-logo.png{% endeditable_file %}" alt="ShopInvader" class="img-fluid">
             </div>
           </div>
         </div>
@@ -202,7 +208,32 @@ is_layout: false
       {% endif %}
     </div>
 
-
+    <div class="modal fade" id="generic-error-message" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-warning">
+            <div class="h5">
+              {% editable_text "generic_error_message_title", label: "Generic Error Message : title", fixed: 'true', rows: 1, format:"raw" %}
+              <i class="fa fa-exclamation-triangle"></i>  Oops! Something went wrong!
+              {% endeditable_text %}
+            </div>
+          </div>
+          <div class="modal-body">
+            {% editable_text "generic_error_message_content", label: "Generic Error Message : content", fixed: 'true', rows: 10, format:"html" %}
+            <b>The application has encountered an unknown error.</b>
+            <p>
+            It doesn't appear to have affected your data, but our technical staff
+            have been automatically notified and will be looking into this with
+            the utmost urgency.
+            </p>
+            {% endeditable_text %}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'close' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
     {{ 'popper.min.js' | javascript_tag }}
     {{ 'jquery.min.js' | javascript_tag }}
     {{ 'jquery.slidereveal.min.js' | javascript_tag }}
