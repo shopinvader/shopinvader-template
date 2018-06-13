@@ -35,36 +35,30 @@ dataLayer.push({
 {% block 'content' %}
 
   {% assign order = store.last_sale%}
+
   <div class="container main-content">
     <div class="row">
       <div class="col-12">
+        <div class="p-4">
         {% include 'cart_breadcrumbs' with cart_step: 4%}
         <h1 class="text-3xl bold">
         {% editable_text 'title', rows: 1, format:'html' %}
           Thank you !
         {% endeditable_text %}</h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
         <p>
         {% editable_text 'message', rows: 1, format:'html' %}
         Thank you for your order
         {% endeditable_text %}
         </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
         <p>
           {% editable_text 'signature', rows: 1, format:'raw' %}
             <br>
             <b>The Shopinvader demo team</b>
           {% endeditable_text %}
-      </p>
+        </p>
+        </div>
       </div>
     </div>
-
     {% if order.payment.method.show_description_after_validation == true%}
     <div class="row justify-content-center">
       <div class="alert alert-warning col-12 col-lg-8 text-center">
