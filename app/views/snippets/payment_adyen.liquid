@@ -34,13 +34,24 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body" id="adyen-popup-body" data-shopinvader-container>
-        <div class="alert alert-primary">
-          {{store.cart.payment.adyen_params}}
-        </div>
+
         <div class="text-center modal-loader">
+          <div class="spinner"></div>
         </div>
+        <form action="" method="post" id="adyen-3ds-form" class="d-none">
+          <input type="hidden" name="PaReq" value="" />
+          <input type="hidden" name="MD" value="" />
+          <input type="hidden" name="TermUrl" value="" />
+          <div class="pt-4 pb-4 text-center">
+            {% editable_text adyen_form_3DS_msg, label: 'Adyen Form - 3DS message', rows: 3, format: 'html' %}
+              <div class="h5">Processing your 3D Secure Transaction</div>
+              <p>Please click continue to continue the processing of your 3D Secure transaction.</p>
+            {% endeditable_text %}
+            <input type="submit" class="btn btn-lg btn-success" value="continue"/>
+          </div>
+        </form>
         <form action="" method="post" id="adyen-encrypted-form" >
-          <input type="text" value="" data-encrypted-name="generationtime" />
+          <input type="hidden" value="" data-encrypted-name="generationtime" />
           <h3>
             {% editable_text adyen_form_subtitle, label: 'Adyen Form - sub-title', rows: 1 %}
             Secured credit card payment
@@ -124,20 +135,10 @@
     </div>
   </div>
 </div>
-
-<form method="POST" action="/invader/cart/add_payment" id="adyen-checkout-form" data-shopinvader-form>
-  <input type="hidden" name="invader_success_url" value="{% path_to 'cart_end' %}" />
-  <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
-  <input type="hidden" name="payment_mode[id]" value="{{payment_method.id }}">
-  <input type="hidden" id="adyen_encrypted_card" name="adyen[encrypted_card]" value="" autocomplete="off">
-  <input type="hidden" name="adyen[return_success_url]" value="{% path_to page %}">
-  <input type="hidden" name="adyen[return_success_error]" value="{% path_to page %}?adyen_error=true">
-</form>
-
 <script type="text/javascript" src="{{site.metafields.payment.adyen_url}}"></script>
 <script type="text/javascript">
   window.addEventListener("load", function() {
-    $('#modal-stripe').on('shown.bs.modal', function (e) {
+    $('#modal-adyen').on('shown.bs.modal', function (e) {
      init_adyen_form();
     });
   },false);
@@ -149,42 +150,60 @@
     var options = {};
 
     options.name = encrypted_field;
-    options.submit(function(event) {
+    options.onsubmit = function(e) {
         var encryptedData = $adyen_form.find('#'+encrypted_field).val();
-        console.log('encrypted', encryptedData);
         $('#modal-adyen #adyen-encrypted-form').css('opacity', 0);
-        $('form#adyen-form').append();
         $('#modal-adyen .modal-loader').show();
-
-        //$adyen_checkout_form = $('#adyen-checkout-form');
-        //$adyen_checkout_form.find('#adyen_encrypted_card').val(encryptedData);
-        //$adyen_checkout_form.submit();
-
         $.ajax({
           url: "/invader/cart/add_payment",
           method: 'POST',
           dataType: 'json',
           contentType: 'application/json',
-          accepts:"application/json",
-          data: {
-            'invader_success_url': "{% path_to 'cart_end' %}",
-            'invader_error_url': "{% path_to page %}",
+
+          data: JSON.stringify({
             'payment_mode': {
-              'id': "{{payment_method.id }}"
+              'id': "{{payment_method.id}}"
             },
             'adyen': {
               "encrypted_card" : encryptedData,
               "return_success_url" : "{% path_to page %}",
               "return_success_error" : "{% path_to page %}"
             }
+          }),
+          success: function(cart) {
+            var error = true;
+            if(cart != null) {
+              if(cart.payment.hasOwnProperty('adyen_params')) {
+                var adyen_params = cart.payment.adyen_params;
+                $3ds_form = $('#adyen-3ds-form');
+                error = false;
+                if($3ds_form) {
+                  $3ds_form.attr('action', adyen_params.IssuerUrl);
+                  $3ds_form.find('[name=PaReq]').val(adyen_params.PaReq);
+                  $3ds_form.find('[name=MD]').val(adyen_params.MD);
+                  $3ds_form.find('[name=TermUrl]').val(adyen_params.TermUrl);
+                  $3ds_form.removeClass('d-none');
+                  $('#modal-adyen #adyen-encrypted-form').hide();
+                  $('#modal-adyen .modal-loader').hide();
+                }
+                else {
+                  window.location = "{% path_to cart_end %}";
+                }
+              }
+            }
+            if(error == true) {
+              $('#modal-adyen').modal('hide');
+              $('#generic-error-message').modal('show');
+            }
           },
-          success: function(ajaxpage) {
-            console.log(ajaxpage);
-            //if($(ajaxpage).find('#modal-adyen '))
+          error: function() {
+            $('#modal-adyen').modal('hide');
+            $('#generic-error-message').modal('show');
           }
         });
         e.preventDefault();
-    });
+    };
+
     // Bind encryption options to the form.
     var cseForm = adyen.createEncryptedForm($adyen_form[0], options);
   }
