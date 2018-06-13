@@ -1,8 +1,8 @@
 <div class="d-flex text-center nav-header-controls" data-shopinvader-container id="header-controls">
   <div class="w-50 pt-2 nav-header-controls-user">
-    <div class="text-center">
+    <a href="{% path_to account  %}" class="d-block text-center">
       <img src="{{ site.metafields.theme.user_icon }}"  class="d-inline-block">
-    </div>
+    </a>
     <div class=" font-weight-bold small">
       {% if current_customer %}
       <a href="{% path_to account %}" class="btn btn-link btn-sm text-dark font-weight-bold ">
@@ -81,10 +81,10 @@
     </div>
   </div>
   <div class="w-50 pt-2 text-dark nav-header-controls-cart" href="{% path_to cart_index%}">
-    <div class="text-center">
+    <a class="d-block text-center" href="{% path_to cart_index %}">
       <img src="{{ site.metafields.theme.cart_icon }}" class="d-inline-block">
       <div class=" cart-item-number">{{ store.cart.lines.count | round | default: 0 }}</div>
-    </div>
+    </a>
     <div class="font-weight-bold">
       <a href="{% path_to cart_index %}" class="btn btn-link btn-sm font-weight-bold text-dark">
         {{'header_cart' | translate }}
