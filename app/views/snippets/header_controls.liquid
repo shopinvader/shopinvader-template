@@ -1,5 +1,5 @@
 <div class="d-flex text-center nav-header-controls" data-shopinvader-container id="header-controls">
-  <div class="w-50 pt-2 nav-header-controls-user">
+  <div class="w-50 pt-2 nav-header-controls-item">
     <a href="{% path_to account  %}" class="d-block text-center">
       <img src="{{ site.metafields.theme.user_icon }}"  class="d-inline-block">
     </a>
@@ -80,7 +80,7 @@
       {% endif %}
     </div>
   </div>
-  <div class="w-50 pt-2 text-dark nav-header-controls-cart" href="{% path_to cart_index%}">
+  <div class="w-50 pt-2 text-dark nav-header-controls-item" href="{% path_to cart_index%}">
     <a class="d-block text-center" href="{% path_to cart_index %}">
       <img src="{{ site.metafields.theme.cart_icon }}" class="d-inline-block">
       <div class=" cart-item-number">{{ store.cart.lines.count | round | default: 0 }}</div>
