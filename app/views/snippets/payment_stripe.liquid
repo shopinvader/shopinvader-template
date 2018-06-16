@@ -1,79 +1,77 @@
-
-<div>
-  <p>
-    {{payment_method.description}}
-  </p>
-  <button type="button" class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#modal-stripe">
-    {% editable_text  stripe_showmodal_label, label: 'Stripe  - Show modal button', rows: 1 %}
-       <i class="fas fa-credit-card"></i>  Pay by credit card
-    {% endeditable_text %}
-  </button>
-  <div class="pt-3">
-    {% editable_text stripe_description, label: 'Stripe - description', rows: 1 %}
-      Secured checkout with Stripe
-    {% endeditable_text %}
-    <div class=" text-secondary fa-2x">
-      <i class="fab fa-cc-visa"></i>
-      <i class="fab fa-cc-mastercard"></i>
-      <i class="fab fa-cc-amex"></i>
-      <i class="fas fa-credit-card"></i>
+{% if site.metafields.payment.stripe_api_key %}
+  <div>
+    <p>
+      {{payment_method.description}}
+    </p>
+    <button type="button" class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#modal-stripe">
+      {% editable_text  stripe_showmodal_label, label: 'Stripe  - Show modal button', rows: 1 %}
+         <i class="fas fa-credit-card"></i>  Pay by credit card
+      {% endeditable_text %}
+    </button>
+    <div class="pt-3">
+      {% editable_text stripe_description, label: 'Stripe - description', rows: 1 %}
+        Secured checkout with Stripe
+      {% endeditable_text %}
+      <div class=" text-secondary fa-2x">
+        <i class="fab fa-cc-visa"></i>
+        <i class="fab fa-cc-mastercard"></i>
+        <i class="fab fa-cc-amex"></i>
+        <i class="fas fa-credit-card"></i>
+      </div>
     </div>
   </div>
-</div>
-<div class="modal fade modal-payment stripe-popup" id="modal-stripe" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content text-left">
-      <div class="modal-header">
-        <h4 class="modal-title" id="">
-          <i class="fa fa-credit-card-alt"></i>
-          {% editable_text stripe_form_title, label: 'Stripe Form - title', rows: 1 %}
-            Pay my order
-          {% endeditable_text %}
-        </h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      </div>
-      <div class="modal-body">
-
-        <div class="text-center modal-loader">
-          <div class="spinner"></div>
-        </div>
-        <form action="" method="post" id="payment-form" >
-          <h3>
-            {% editable_text stripe_form_subtitle, label: 'Stripe Form - sub-title', rows: 1 %}
-            Secured credit card payment
+  <div class="modal fade modal-payment stripe-popup" id="modal-stripe" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content text-left">
+        <div class="modal-header">
+          <h4 class="modal-title" id="">
+            <i class="fa fa-credit-card-alt"></i>
+            {% editable_text stripe_form_title, label: 'Stripe Form - title', rows: 1 %}
+              Pay my order
             {% endeditable_text %}
-          </h3>
+          </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center modal-loader">
+            <div class="spinner"></div>
+          </div>
+          <form action="" method="post" id="payment-form" >
+            <h3>
+              {% editable_text stripe_form_subtitle, label: 'Stripe Form - sub-title', rows: 1 %}
+              Secured credit card payment
+              {% endeditable_text %}
+            </h3>
 
-          {% editable_text stripe_form_details, label: 'Stripe Form - details', rows: 3, format: 'html'%}
-          <p>Secured credit card payment with Stripe.</p>
-          {% endeditable_text %}
-
-          <div class="payment-card-row  ">
-            <div class="form-group">
-              <label for="creditcard-owner">{{'creditcard_lastname' | translate}}</label>
-              <input type="text" class="form-control" id="creditcard-owner" placeholder="{{'creditcard_lastname' | translate}}" autocomplete="off">
-            </div>
-            <div class="row form-group">
-              <div class="col-12 col-sm-7 col-lg-8">
-                <label ><i class="fa fa-credit-card text-primary"></i> {{'creditcard_number' | translate}}</label>
-                <div id="stripe-card-number" class="form-control"></div>
+            {% editable_text stripe_form_details, label: 'Stripe Form - details', rows: 3, format: 'html'%}
+            <p>Secured credit card payment with Stripe.</p>
+            {% endeditable_text %}
+            <div class="payment-card-row">
+              <div class="form-group">
+                <label for="creditcard-owner">{{'creditcard_lastname' | translate}}</label>
+                <input type="text" class="form-control" id="creditcard-owner" placeholder="{{'creditcard_lastname' | translate}}" autocomplete="off">
               </div>
-              <div class="col-12 col-sm-5 col-lg-4">
-                <label ><i class="fa fa-calendar-o text-primary"></i>  {{'creditcard_expiry' | translate}}</label>
-                <div id="stripe-card-expiry" class="form-control"></div>
+              <div class="row form-group">
+                <div class="col-12 col-sm-7 col-lg-8">
+                  <label ><i class="fa fa-credit-card text-primary"></i> {{'creditcard_number' | translate}}</label>
+                  <div id="stripe-card-number" class="form-control"></div>
+                </div>
+                <div class="col-12 col-sm-5 col-lg-4">
+                  <label ><i class="fa fa-calendar-o text-primary"></i>  {{'creditcard_expiry' | translate}}</label>
+                  <div id="stripe-card-expiry" class="form-control"></div>
+                </div>
               </div>
-            </div>
-
-            <div class="row form-group">
-              <label for="exampleInputEmail1" class="col-12">
-                <i class="fa fa-lock text-primary"></i>  {{'creditcard_cvc' | translate}}
-              </label>
-              <div class="col-6">
-                <div id="stripe-card-cvc" class="form-control w-100"></div>
+              <div class="row form-group">
+                <label for="exampleInputEmail1" class="col-12">
+                  <i class="fa fa-lock text-primary"></i>  {{'creditcard_cvc' | translate}}
+                </label>
+                <div class="col-6">
+                  <div id="stripe-card-cvc" class="form-control w-100"></div>
+                </div>
+                <small id="passwordHelpInline" class="text-muted col-6">
+                  {{'creditcard_cvc_help' | translate}}
+                </small>
               </div>
-              <small id="passwordHelpInline" class="text-muted col-6">
-                {{'creditcard_cvc_help' | translate}}
-              </small>
             </div>
             <div class="form-group text-center">
               <button type="submit" class="btn btn-success w-75" id="" placeholder="">
@@ -92,8 +90,7 @@
               <i class="fab fa-credit-card-alt"></i>
             </div>
           </div>
-
-        </div>
+        </form>
         <div class="modal-footer bg-light text-dark">
           <div class="text-left w-50">
             <i class="fa fa-lock text-success"></i>
@@ -105,90 +102,95 @@
             <i class="fab fa-cc-stripe fa-2x"></i>
           </div>
         </div>
-      </form>
+      </div>
+
     </div>
   </div>
-</div>
-<form method="POST" action="/invader/cart/add_payment" id="stripe-checkout-form">
-  <input type="hidden" name="invader_success_url" value="{% path_to 'cart_end' %}" />
-  <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
-  <input type="hidden" name="payment_mode[id]" value="{{payment_method.id }}">
-  <input type="hidden" id="stripe_source" name="stripe[source]" value="" autocomplete="off">
-  <input type="hidden" name="stripe[return_success_url]" value="{% path_to page %}">
-  <input type="hidden" name="stripe[return_success_error]" value="{% path_to page %}">
-</form>
-<script src="https://js.stripe.com/v3/"></script>
+  <form method="POST" action="/invader/cart/add_payment" id="stripe-checkout-form">
+    <input type="hidden" name="invader_success_url" value="{% path_to 'cart_end' %}" />
+    <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+    <input type="hidden" name="payment_mode[id]" value="{{payment_method.id }}">
+    <input type="hidden" id="stripe_source" name="stripe[source]" value="" autocomplete="off">
+    <input type="hidden" name="stripe[return_success_url]" value="{% path_to page %}">
+    <input type="hidden" name="stripe[return_success_error]" value="{% path_to page %}">
+  </form>
+  <script src="https://js.stripe.com/v3/"></script>
 
-<script defer="true">
-window.addEventListener("load", function() {
-  $('#modal-stripe').on('shown.bs.modal', function (e) {
-   init_stripe_form();
-  });
-},false);
+  <script defer="true">
+  window.addEventListener("load", function() {
+    $('#modal-stripe').on('shown.bs.modal', function (e) {
+     init_stripe_form();
+    });
+  },false);
 
-function init_stripe_form() {
-  var stripe = Stripe('{{site.metafields.payment.stripe_api_key}}');
-  if(stripe) {
-    var elements = stripe.elements();
-    var style = {
-      base: {
-        color: '#32325d',
-        lineHeight: '24px',
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSmoothing: 'antialiased',
-        fontSize: '16px',
-        '::placeholder': {
-          color: '#aab7c4'
+  function init_stripe_form() {
+    var stripe = Stripe('{{site.metafields.payment.stripe_api_key}}');
+    if(stripe) {
+      var elements = stripe.elements();
+      var style = {
+        base: {
+          color: '#32325d',
+          lineHeight: '24px',
+          fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+          fontSmoothing: 'antialiased',
+          fontSize: '16px',
+          '::placeholder': {
+            color: '#aab7c4'
+          }
+        },
+        invalid: {
+          color: '#EE392D',
+          iconColor: '#EE392D'
         }
-      },
-      invalid: {
-        color: '#EE392D',
-        iconColor: '#EE392D'
-      }
-    };
-    var card = elements.create('cardNumber', {style: style});
-    card.mount('#stripe-card-number');
-    var card_expiry = elements.create('cardExpiry', {style: style});
-    card_expiry.mount('#stripe-card-expiry');
-    var card_cvc = elements.create('cardCvc', {style: style});
-    card_cvc.mount('#stripe-card-cvc');
-
-    card.on('ready', function() {
-      $('#modal-stripe .modal-loader').hide();
-      $('#modal-stripe #payment-form').css('opacity', 1);
-    });
-
-    card.addEventListener('change', function(event) {
-      var $displayError =$('#stripe-card-errors');
-      if (event.error) {
-        $displayError.html(event.error.message);
-      } else {
-        $displayError.html();
-      }
-    });
-
-    var $form = $('#modal-stripe #payment-form');
-    $form.on('submit', function(event) {
-      event.preventDefault();
-      $form = $(this);
-      var extraDetails = {
-        name: $('input#creditcard-owner').value,
       };
-      stripe.createSource(card, extraDetails).then(function(result){
-        if(result.error) {
-          $('#stripe-card-errors').html(result.error.message);
-        }
-        else {
-          $('#modal-stripe #payment-form').css('opacity', 0);
-          $('#modal-stripe .modal-loader').show();
-          $form = $('#stripe-checkout-form');
-          $form.find('#stripe_source').val(result.source.id);
-          $form.submit();
+      var card = elements.create('cardNumber', {style: style});
+      card.mount('#stripe-card-number');
+      var card_expiry = elements.create('cardExpiry', {style: style});
+      card_expiry.mount('#stripe-card-expiry');
+      var card_cvc = elements.create('cardCvc', {style: style});
+      card_cvc.mount('#stripe-card-cvc');
 
+      card.on('ready', function() {
+        $('#modal-stripe .modal-loader').hide();
+        $('#modal-stripe #payment-form').css('opacity', 1);
+      });
+
+      card.addEventListener('change', function(event) {
+        var $displayError =$('#stripe-card-errors');
+        if (event.error) {
+          $displayError.html(event.error.message);
+        } else {
+          $displayError.html();
         }
-      })
-    });
+      });
+
+      var $form = $('#modal-stripe #payment-form');
+      $form.on('submit', function(event) {
+        event.preventDefault();
+        $form = $(this);
+        var extraDetails = {
+          name: $('input#creditcard-owner').value,
+        };
+        stripe.createSource(card, extraDetails).then(function(result){
+          if(result.error) {
+            $('#stripe-card-errors').html(result.error.message);
+          }
+          else {
+            $('#modal-stripe #payment-form').css('opacity', 0);
+            $('#modal-stripe .modal-loader').show();
+            $form = $('#stripe-checkout-form');
+            $form.find('#stripe_source').val(result.source.id);
+            $form.submit();
+
+          }
+        })
+      });
+    }
   }
-}
 
-</script>
+  </script>
+{%else%}
+  <div class="alert alert-warning">
+    Payment with Stripe not available.
+  </div>
+{%endif%}
