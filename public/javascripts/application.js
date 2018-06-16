@@ -24,6 +24,17 @@ $(document).ready(function () {
           }
       }
   });
+  $(".carousel").swipe({
+
+    swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+
+      if (direction == 'left') $(this).carousel('next');
+      if (direction == 'right') $(this).carousel('prev');
+
+    },
+    allowPageScroll:"vertical"
+
+  });
 
   $(document).on('ShopinvaderForm:after-error',
     function (element)
@@ -85,7 +96,15 @@ $(document).ready(function () {
       $($(this).attr('data-target')).css('display', 'none');
     }
   );
-
+  $('.nav-header-controls-item').hover(
+    function() {
+      $('.nav-header-controls .header-controls-dropdown-content').hide();
+      $(this).find('.header-controls-dropdown-content').slideDown(200);
+    },
+    function() {
+      $(this).find('.header-controls-dropdown-content').delay('1500').slideUp(100);
+    }
+  );
   $('body').on('change', '.product-qty input',
     function(event) {
       var max_value = 100;

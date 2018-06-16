@@ -7,9 +7,6 @@ handle: home
 {% extends 'layouts/simple' %}
 
 {% block content/main %}
-{% comment%}
-
-{%endcomment%}
 <div class="row justify-content-center  main-showcase">
   <div class="container">
     {% with_scope level: 0%}
@@ -82,23 +79,23 @@ handle: home
   </div>
 </div>
 
-{% if contents.posts.size > 0 %}
-<div class="row pt-4 pb-4">
-  <div class="col-12 pt-4">
-    <div class="container pb-4">
-      <div class="row">
-        <div class="col-12 text-center pb-4">
-          <h2 class="h1">
-          {% editable_text post_title %}
-            <span class="text-primary">Our</span> <span class="text-warning">reviews</span>
-          {% endeditable_text %}
-          </h2>
+  {% if contents.posts.size > 0 %}
+  <div class="row pt-4 pb-4">
+    <div class="col-12 pt-4">
+      <div class="container pb-4">
+        <div class="row">
+          <div class="col-12 text-center pb-4">
+            <h2 class="h1">
+            {% editable_text post_title %}
+              <span class="text-primary">Our</span> <span class="text-warning">reviews</span>
+            {% endeditable_text %}
+            </h2>
+          </div>
         </div>
-      </div>
-      <div class="row post-mozaic">
-      {% paginate contents.posts by 4%}
-        {% for post in paginate.collection %}
-        <div class="col-12 col-sm-6 post-mozaic-item">
+        <div class="row post-mozaic">
+        {% paginate contents.posts by 4%}
+          {% for post in paginate.collection %}
+          <div class="col-12 col-sm-6 post-mozaic-item">
             <div class="post-mozaic-img" style="background-image:url({{post.thumbnails.url | default: site.metafields.theme.noimage }})">
             </div>
             <div class="post-mozaic-content ">
@@ -107,17 +104,15 @@ handle: home
               <a href="{% path_to post %}" class="text-uppercase">
                 {{'show_more' | translate}} <i class="fa fa-angle-right"></i>
               </a>
+            </div>
           </div>
+          {% endfor %}
+        {% endpaginate %}
         </div>
-        {% endfor %}
-      {% endpaginate %}
       </div>
     </div>
-    
   </div>
-</div>
   {% endif %}
-
   <div class="row bg-primary text-white pt-4 pb-4">
     <div class="col-12">
       <div class="container pt-4 pb-4">

@@ -76,6 +76,16 @@ handle: product
 {% endif %}
 <div class="row">
   <div class="col-12  bg-light">
+    <div class="container pt-4">
+      <div class="d-block d-sm-none">
+
+        {% for category in variant.categories %}
+        <a href="{{category.url_key | prepend: url_base}}" class="btn btn-outline-dark btn-sm">
+          {{category.name}}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
     <div class="container mt-4 mb-4 bg-white pt-2">
       <div class="row">
         <div class="col-12">
@@ -95,6 +105,7 @@ handle: product
             {% endfor %}
               <li class="breadcrumb-item active d-none d-xl-inline-block">{{variant.model.name}}</li>
             </ol>
+
           </nav>
         </div>
       </div>

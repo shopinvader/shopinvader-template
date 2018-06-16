@@ -20,38 +20,41 @@
             <div class="carousel-inner showcase-carousel" role="listbox">
               {% for product in store.products%}
               <div class="carousel-item showcase-carousel-item {%if forloop.first%}active{%endif%} text-center ">
-                <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="showcase-carousel-link">
-                  <img class="d-inline-block img-fluid" src="{{product.images.first.medium.src | default: site.metafields.theme.noimage}}" alt="{{product.images.first.medium.alt}}">
-                </a>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="h4">
-                      <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="text-dark">
-                        {{product.model.name}}
-                      </a>
-                    </div>
-                    <div class="small text-primary">
-                      {{product.short_name}}
-                    </div>
-                    {% include 'rating_stars' with
-                        rating_value: product.rating.summary.average,
-                        rating_nbr: product.rating.reviews.size %}
-                    <div class="pt-4">
-                      <b>
-                        {%if product.price.discount > 0%}
-                        <div class="text-dark">
-                          <s>{{product.price.original_value | money }}</s>
-                        </div>
-                        {% endif %}
-                        <span class="h3 pull-right font-weight-bold {%if product.price.discount > 0%}text-warning{% else %} text-primary{% endif %}">
-                          {{ product.price.value | money}}
-                        </span>
-                        {% if product.pricelist.tax_included == true %}
-                        <sub class="text-size-base">{{'product_vat_inc' | translate}}</sub>
-                        {% endif %}
-                      </b>
+                <div class="showcase-carousel-item-content">
+                  <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="showcase-carousel-link">
+                    <img class="d-inline-block img-fluid" src="{{product.images.first.medium.src | default: site.metafields.theme.noimage}}" alt="{{product.images.first.medium.alt}}">
+                  </a>
+                  <div class="row showcase-carousel-item-desc">
+                    <div class="col-12">
+                      <div class="h4">
+                        <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="text-dark">
+                          {{product.model.name}}
+                        </a>
+                      </div>
+                      <div class="small text-primary">
+                        {{product.short_name}}
+                      </div>
+                      {% include 'rating_stars' with
+                      rating_value: product.rating.summary.average,
+                      rating_nbr: product.rating.reviews.size %}
+                      <div class="pt-4">
+                        <b>
+                          {%if product.price.discount > 0%}
+                          <div class="text-dark">
+                            <s>{{product.price.original_value | money }}</s>
+                          </div>
+                          {% endif %}
+                          <span class="h3 pull-right font-weight-bold {%if product.price.discount > 0%}text-warning{% else %} text-primary{% endif %}">
+                            {{ product.price.value | money}}
+                          </span>
+                          {% if product.pricelist.tax_included == true %}
+                          <sub class="text-size-base">{{'product_vat_inc' | translate}}</sub>
+                          {% endif %}
+                        </b>
+                      </div>
                     </div>
                   </div>
+
                 </div>
               </div>
               {%endfor%}

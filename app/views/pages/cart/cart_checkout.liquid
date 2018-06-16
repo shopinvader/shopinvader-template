@@ -13,7 +13,6 @@ editable_elements:
 {% extends 'layouts/checkout' %}
 
 {% block content/main %}
-
   {% assign selected_payment = store.cart.payment.available_methods.items | first %}
     <div>
       <div class="row">
@@ -70,12 +69,13 @@ editable_elements:
               <div class="pt-4">
                 <h2>{{ 'cart_payment_title' | translate }}</h2>
                 {{'cart_payment_desc' | translate }}
-                <div class="card text-center">
-                  <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs nav-justified">
+
+                <div class="card card-payment text-center">
+                  <div class="card-header ">
+                    <ul class="nav nav-tabs card-header-tabs nav-justified" role="tablist">
                     {% for payment_method in store.cart.payment.available_methods.items%}
-                      <li class="nav-item "  data-toggle="tab" href="#tab-{{payment_method.id}}" role="tab" aria-controls="{{payment_method.id}}" aria-selected="false">
-                        <a class="nav-link {% if selected_payment.id == payment_method.id %} active{%endif%}" href="#">
+                      <li class="nav-item "  >
+                        <a class="nav-link {% if selected_payment.id == payment_method.id %} active{%endif%}"  data-toggle="tab" href="#tab-{{payment_method.id}}"  role="tab" aria-controls="{{payment_method.id}}" aria-selected="{% if selected_payment.id == payment_method.id %}true{%else%}false{%endif%}">
                           {{payment_method.name}}
                         </a>
                       </li>

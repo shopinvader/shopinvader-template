@@ -123,7 +123,7 @@
         color: theme-colors("success");
       }
     }
-    @media (max-width: media-breakpoint-down(md)) {
+    @include media-breakpoint-down(md) {
 
       &:first-child {
         text-align: left;
@@ -300,5 +300,49 @@
 
   .brand {
 
+  }
+}
+
+.card-payment {
+  .card-header {
+    @include media-breakpoint-down(sm) {
+      background-color: transparent;
+      padding: 0;
+      .card-header-tabs {
+        padding: 0;
+
+        flex-direction: column;
+        margin: 0;
+        .nav-item {
+          .nav-link {
+            font-size:1.2rem;
+            color: $gray-800;
+            &.active {
+              background-color: lighten(theme-color('primary'), 6%);
+              border-left: 0;
+              border-right: 0;
+              border-top: 0;
+              color: $white;
+            }
+            border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+
+
+          }
+        }
+      }
+    }
+    @include media-breakpoint-up(md) {
+      .card-header-tabs {
+        margin-bottom: -0.82rem;
+        .nav-item {
+          .nav-link {
+            &.active {
+              border-bottom: 0;
+              border-top: 2px solid theme-color('primary');
+            }
+          }
+        }
+      }
+    }
   }
 }
