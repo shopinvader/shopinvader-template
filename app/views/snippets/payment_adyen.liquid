@@ -1,210 +1,211 @@
-
-<div>
-  <p>
-    {{payment_method.description}}
-  </p>
-  <button type="button" class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#modal-adyen">
-    {% editable_text  adyen_showmodal_label, label: 'Adyen  - Show modal button', rows: 1 %}
-       <i class="fas fa-credit-card"></i>  Pay by credit card
-    {% endeditable_text %}
-  </button>
-  <div class="pt-3">
-    {% editable_text adyen_description, label: 'Adyen - description', rows: 1 %}
-      Secured checkout with Adyen
-    {% endeditable_text %}
-    <div class=" text-secondary fa-2x">
-      <i class="fab fa-cc-visa"></i>
-      <i class="fab fa-cc-mastercard"></i>
-      <i class="fab fa-cc-amex"></i>
-      <i class="fas fa-credit-card"></i>
+{% if site.metafields.payment.adyen_url %}
+  <div>
+    <p>
+      {{payment_method.description}}
+    </p>
+    <button type="button" class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#modal-adyen">
+      {% editable_text  adyen_showmodal_label, label: 'Adyen  - Show modal button', rows: 1 %}
+         <i class="fas fa-credit-card"></i>  Pay by credit card
+      {% endeditable_text %}
+    </button>
+    <div class="pt-3">
+      {% editable_text adyen_description, label: 'Adyen - description', rows: 1 %}
+        Secured checkout with Adyen
+      {% endeditable_text %}
+      <div class=" text-secondary fa-2x">
+        <i class="fab fa-cc-visa"></i>
+        <i class="fab fa-cc-mastercard"></i>
+        <i class="fab fa-cc-amex"></i>
+        <i class="fas fa-credit-card"></i>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="modal fade modal-payment adyen-popup" id="modal-adyen" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content text-left">
-      <div class="modal-header">
-        <h4 class="modal-title">
-          <i class="fa fa-credit-card-alt"></i>
-          {% editable_text adyen_form_title, label: 'Adyen Form - title', rows: 1 %}
-            Pay my order
-          {% endeditable_text %}
-        </h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      </div>
-      <div class="modal-body" id="adyen-popup-body" data-shopinvader-container>
-
-        <div class="text-center modal-loader">
-          <div class="spinner"></div>
+  <div class="modal fade modal-payment adyen-popup" id="modal-adyen" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content text-left">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <i class="fa fa-credit-card-alt"></i>
+            {% editable_text adyen_form_title, label: 'Adyen Form - title', rows: 1, format: 'raw' %}
+              Pay my order
+            {% endeditable_text %}
+          </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
-        <form action="" method="post" id="adyen-3ds-form" class="d-none">
-          <input type="hidden" name="PaReq" value="" />
-          <input type="hidden" name="MD" value="" />
-          <input type="hidden" name="TermUrl" value="" />
-          <div class="pt-4 pb-4 text-center">
-            {% editable_text adyen_form_3DS_msg, label: 'Adyen Form - 3DS message', rows: 3, format: 'html' %}
-              <div class="h5">Processing your 3D Secure Transaction</div>
-              <p>Please click continue to continue the processing of your 3D Secure transaction.</p>
-            {% endeditable_text %}
-            <input type="submit" class="btn btn-lg btn-success" value="continue"/>
+        <div class="modal-body" id="adyen-popup-body" data-shopinvader-container>
+          <div class="text-center modal-loader">
+            <div class="spinner"></div>
           </div>
-        </form>
-        <form action="" method="post" id="adyen-encrypted-form" >
-          <input type="hidden" value="" data-encrypted-name="generationtime" />
-          <h3>
-            {% editable_text adyen_form_subtitle, label: 'Adyen Form - sub-title', rows: 1 %}
-            Secured credit card payment
-            {% endeditable_text %}
-          </h3>
+          <form action="" method="post" id="adyen-3ds-form" class="d-none">
+            <input type="hidden" name="PaReq" value="" />
+            <input type="hidden" name="MD" value="" />
+            <input type="hidden" name="TermUrl" value="" />
 
-          {% editable_text adyen_form_details, label: 'Adyen Form - details', rows: 3, format: 'html'%}
-            <p>Secured credit card payment with Adyen.</p>
-          {% endeditable_text %}
-          <div class="payment-card-row">
-            <div class="form-group">
-              <label for="creditcard-owner">{{'creditcard_lastname' | translate}}</label>
-              <input type="text" class="form-control" id="creditcard-owner" placeholder="{{'creditcard_lastname' | translate}}" data-encrypted-name="holderName">
-            </div>
-            <div class="row form-group">
-              <div class="col-12 col-sm-7 col-lg-7">
-                <label ><i class="fa fa-credit-card text-primary" id="card-icon" ></i> {{'creditcard_number' | translate}}</label>
-                <input type="text" size="20" autocomplete="off" data-encrypted-name="number" id="card-number" class="form-control" placeholder="{{'creditcard_number' | translate}}" />
+          </form>
+          <form action="" method="post" id="adyen-encrypted-form" >
+            <input type="hidden" value="" data-encrypted-name="generationtime" />
+            <h3>
+              {% editable_text adyen_form_subtitle, label: 'Adyen Form - sub-title', rows: 1 %}
+              Secured credit card payment
+              {% endeditable_text %}
+            </h3>
+
+            {% editable_text adyen_form_details, label: 'Adyen Form - details', rows: 3, format: 'html'%}
+              <p>Secured credit card payment with Adyen.</p>
+            {% endeditable_text %}
+            <div class="payment-card-row">
+              <div class="form-group">
+                <label for="creditcard-owner">{{'creditcard_lastname' | translate}}</label>
+                <input type="text" class="form-control" id="creditcard-owner" placeholder="{{'creditcard_lastname' | translate}}" data-encrypted-name="holderName">
               </div>
-              <div class="col-12 col-sm-5 col-lg-5">
-                <label ><i class="fa fa-calendar-o text-primary"></i>  {{'creditcard_expiry' | translate}}</label>
-                <div class="d-flex">
-                  <div class="w-50 pr-2">
-                    <select class="form-control" autocomplete="off" data-encrypted-name="expiryMonth" id="card-expiry-month" class="form-control">
-                      {% for month in (1..12) %}
-                      <option value="{{month}}">{{month}}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                  <div class="w-50">
-                    {% assign current_year =  now | date: "%Y" %}
-                    {% assign last_year =  current_year | plus: 10 %}
-                    <select class="form-control" autocomplete="off" data-encrypted-name="expiryYear" id="card-expiry-year" class="form-control">
-                      {% for month in (current_year..last_year) %}
-                      <option value="{{month}}">{{month}}</option>
-                      {% endfor %}
-                    </select>
+              <div class="row form-group">
+                <div class="col-12 col-sm-7 col-lg-7">
+                  <label ><i class="fa fa-credit-card text-primary" id="card-icon" ></i> {{'creditcard_number' | translate}}</label>
+                  <input type="text" size="20" autocomplete="off" data-encrypted-name="number" id="card-number" class="form-control" placeholder="{{'creditcard_number' | translate}}" />
+                </div>
+                <div class="col-12 col-sm-5 col-lg-5">
+                  <label ><i class="fa fa-calendar-o text-primary"></i>  {{'creditcard_expiry' | translate}}</label>
+                  <div class="d-flex">
+                    <div class="w-50 pr-2">
+                      <select class="form-control" autocomplete="off" data-encrypted-name="expiryMonth" id="card-expiry-month" class="form-control">
+                        {% for month in (1..12) %}
+                        <option value="{{month}}">{{month}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="w-50">
+                      {% assign current_year =  now | date: "%Y" %}
+                      {% assign last_year =  current_year | plus: 10 %}
+                      <select class="form-control" autocomplete="off" data-encrypted-name="expiryYear" id="card-expiry-year" class="form-control">
+                        {% for month in (current_year..last_year) %}
+                        <option value="{{month}}">{{month}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row form-group">
-              <label for="exampleInputEmail1" class="col-12">
-                <i class="fa fa-lock text-primary"></i>  {{'creditcard_cvc' | translate}}
-              </label>
-              <div class="col-6">
-                <input type="text" id="card-cvc" class="form-control w-100" size="4" maxlength="4" autocomplete="off" data-encrypted-name="cvc" />
+              <div class="row form-group">
+                <label for="exampleInputEmail1" class="col-12">
+                  <i class="fa fa-lock text-primary"></i>  {{'creditcard_cvc' | translate}}
+                </label>
+                <div class="col-6">
+                  <input type="text" id="card-cvc" class="form-control w-100" size="4" maxlength="4" autocomplete="off" data-encrypted-name="cvc" />
+                </div>
+                <small id="passwordHelpInline" class="text-muted col-6">
+                  {{'creditcard_cvc_help' | translate}}
+                </small>
               </div>
-              <small id="passwordHelpInline" class="text-muted col-6">
-                {{'creditcard_cvc_help' | translate}}
-              </small>
+              <div class="form-group text-center">
+                <button type="submit" class="btn btn-success w-75" id="" placeholder="" disabled="disabled">
+                  {% editable_text adyen_ckeckout_button, label: 'Adyen Form - checkout label', rows: 3, format: 'html'%}
+                    PAY
+                  {% endeditable_text %} <span id="payement_total_label" data-shopinvader-container>
+                    {{ store.cart.amount.total | money}}
+                  </span>
+                </button>
+                <div id="card-errors" class="text-danger pt-2" role="alert"></div>
+              </div>
+              <div class="text-center text-large text-secondary">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-amex"></i>
+                <i class="fab fa-credit-card-alt"></i>
+              </div>
             </div>
-            <div class="form-group text-center">
-              <button type="submit" class="btn btn-success w-75" id="" placeholder="" disabled="disabled">
-                {% editable_text adyen_ckeckout_button, label: 'Adyen Form - checkout label', rows: 3, format: 'html'%}
-                  PAY
-                {% endeditable_text %} <span id="payement_total_label" data-shopinvader-container>
-                  {{ store.cart.amount.total | money}}
-                </span>
-              </button>
-              <div id="card-errors" class="text-danger pt-2" role="alert"></div>
-            </div>
-            <div class="text-center text-large text-secondary">
-              <i class="fab fa-cc-visa"></i>
-              <i class="fab fa-cc-mastercard"></i>
-              <i class="fab fa-cc-amex"></i>
-              <i class="fab fa-credit-card-alt"></i>
-            </div>
-          </div>
-
+          </form>
         </div>
-        <div class="modal-header bg-light text-dark">
+        <div class="modal-footer bg-light text-dark">
           <div class="text-left w-50">
             <i class="fa fa-lock text-success"></i>
-            {% editable_text adyen_security_details, label: 'Adyen Form - security details', rows: 1 %}
+            {% editable_text adyen_security_details, label: 'Adyen Form - security details', rows: 1, format: 'html' %}
             Secured Area
             {% endeditable_text %}
           </div>
+          <div class="w-50 text-right">
+            <i class="logo-adyen"></i>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
-</div>
-<script type="text/javascript" src="{{site.metafields.payment.adyen_url}}"></script>
-<script type="text/javascript">
-  window.addEventListener("load", function() {
-    $('#modal-adyen').on('shown.bs.modal', function (e) {
-     init_adyen_form();
-    });
-  },false);
-  function init_adyen_form() {
-    var $adyen_form = $('#adyen-encrypted-form');
-    var encrypted_field = "encrypted_field";
-    var current_date = new Date();
-    $adyen_form.find('[data-encrypted-name="generationtime"]').val(current_date.toISOString());
-    var options = {};
+  <script type="text/javascript" src="{{site.metafields.payment.adyen_url}}"></script>
+  <script type="text/javascript">
+    window.addEventListener("load", function() {
+      $('#modal-adyen').on('shown.bs.modal', function (e) {
+       init_adyen_form();
+      });
+    },false);
+    function init_adyen_form() {
+      var $adyen_form = $('#adyen-encrypted-form');
+      var encrypted_field = "encrypted_field";
+      var current_date = new Date();
+      $adyen_form.find('[data-encrypted-name="generationtime"]').val(current_date.toISOString());
+      var options = {};
 
-    options.name = encrypted_field;
-    options.onsubmit = function(e) {
-        var encryptedData = $adyen_form.find('#'+encrypted_field).val();
-        $('#modal-adyen #adyen-encrypted-form').css('opacity', 0);
-        $('#modal-adyen .modal-loader').show();
-        $.ajax({
-          url: "/invader/cart/add_payment",
-          method: 'POST',
-          dataType: 'json',
-          contentType: 'application/json',
+      options.name = encrypted_field;
+      options.onsubmit = function(e) {
+          $('#modal-adyen #adyen-encrypted-form').css('opacity', 0);
+          $('#modal-adyen .modal-loader').show();
+          $.ajax({
+            url: "/invader/cart/add_payment",
+            method: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
 
-          data: JSON.stringify({
-            'payment_mode': {
-              'id': "{{payment_method.id}}"
-            },
-            'adyen': {
-              "encrypted_card" : encryptedData,
-              "return_success_url" : "{% path_to page %}",
-              "return_success_error" : "{% path_to page %}"
-            }
-          }),
-          success: function(cart) {
-            var error = true;
-            if(cart != null) {
-              if(cart.payment.hasOwnProperty('adyen_params')) {
-                var adyen_params = cart.payment.adyen_params;
-                $3ds_form = $('#adyen-3ds-form');
-                error = false;
-                if($3ds_form) {
-                  $3ds_form.attr('action', adyen_params.IssuerUrl);
-                  $3ds_form.find('[name=PaReq]').val(adyen_params.PaReq);
-                  $3ds_form.find('[name=MD]').val(adyen_params.MD);
-                  $3ds_form.find('[name=TermUrl]').val(adyen_params.TermUrl);
-                  $3ds_form.removeClass('d-none');
-                  $('#modal-adyen #adyen-encrypted-form').hide();
-                  $('#modal-adyen .modal-loader').hide();
-                }
-                else {
-                  window.location = "{% path_to cart_end %}";
+            data: JSON.stringify({
+              'payment_mode': {
+                'id': "{{payment_method.id}}"
+              },
+              'adyen': {
+                "encrypted_card" : $adyen_form.find('#'+encrypted_field).val(),
+                "return_success_url" : "{% path_to page %}",
+                "return_success_error" : "{% path_to page %}"
+              }
+            }),
+            success: function(cart) {
+              var error = true;
+
+              if(cart != null) {
+                if(cart.payment.hasOwnProperty('adyen_params')) {
+                  var adyen_params = cart.payment.adyen_params;
+                  $3ds_form = $('#adyen-3ds-form');
+                  error = false;
+
+                  if($3ds_form) {
+                    //With 3D Secure Payment
+                    $3ds_form.attr('action', adyen_params.IssuerUrl);
+                    $3ds_form.find('[name=PaReq]').val(adyen_params.PaReq);
+                    $3ds_form.find('[name=MD]').val(adyen_params.MD);
+                    $3ds_form.find('[name=TermUrl]').val(adyen_params.TermUrl);
+                    $3ds_form.submit();
+                  }
+                  else {
+                    //Without 3D Secure
+                    window.location = "{% path_to cart_end %}";
+                  }
                 }
               }
-            }
-            if(error == true) {
+              if(error == true) {
+                $('#modal-adyen').modal('hide');
+                $('#generic-error-message').modal('show');
+              }
+            },
+            error: function() {
               $('#modal-adyen').modal('hide');
               $('#generic-error-message').modal('show');
             }
-          },
-          error: function() {
-            $('#modal-adyen').modal('hide');
-            $('#generic-error-message').modal('show');
-          }
-        });
-        e.preventDefault();
-    };
+          });
+          e.preventDefault();
+      };
 
-    // Bind encryption options to the form.
-    var cseForm = adyen.createEncryptedForm($adyen_form[0], options);
-  }
-</script>
+      // Bind encryption options to the form.
+      adyen.createEncryptedForm($adyen_form[0], options);
+    }
+  </script>
+{%else%}
+  <div class="alert alert-warning">
+    Payment with Adyen not available.
+  </div>
+{%endif%}
