@@ -66,6 +66,7 @@ google:
     tag_manager_id:
       hint: Google tag manager ID
       type: string
+
 payment:
   label: Payment
   fields:
