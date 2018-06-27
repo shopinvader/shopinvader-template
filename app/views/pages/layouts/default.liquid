@@ -15,6 +15,7 @@ is_layout: false
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#17a2b8">
+    <meta name="generator" content="ShopInvader" />
     <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -149,6 +150,15 @@ is_layout: false
               <img src="{% editable_file 'shopinvader_powered_by', fixed: 'true'%}images/powered-by-shopinvader-logo.png{% endeditable_file %}" alt="ShopInvader" class="img-fluid">
             </div>
           </div>
+          <div class="row">
+            <div class="col-12">
+              <a data-toggle="modal" href="#cookie-manage-modal">
+                {% editable_text "cookies_message_manage", label: "Cookies - message : manage", fixed: true, rows: 1, format:"raw" %}
+                Manage cookies
+                {% endeditable_text %}
+              </a>
+            </div>
+          </div>
         </div>
       </footer>
 
@@ -180,10 +190,10 @@ is_layout: false
               </div>
             </div>
             <div class="row">
-              <div class="col-6">
+              <div class="col-12 col-sm-6 text-center text-sm-left">
                 <a href="{{product.url_key | prepend: url_base}}" class="btn btn-light btn-lg">{{"cart_continue_shopping" | translate }}</a>
               </div>
-              <div class="col-6 text-right">
+              <div class="col-12 col-sm-6 text-center text-sm-right pt-2 pt-sm-0">
                 <a href="{% path_to 'cart_index' %}" class="btn btn-primary btn-lg">{{"cart_checkout" | translate }} </a>
               </div>
             </div>
@@ -253,5 +263,6 @@ is_layout: false
       <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
       {{ 'search_autocomplete.js' | javascript_tag }}
     {% endblock %}
+    {% include 'cookies_manager' %}
   </body>
 </html>

@@ -25,6 +25,8 @@ metafields_ui:
 metafields:
   store:
     phone_number: < Your Store Hotline number >
+  google:
+    analytics_id:
   theme:
     logo: "/samples/assets/shop-logo.png"
     noimage: "/samples/assets/no-image.jpg"
