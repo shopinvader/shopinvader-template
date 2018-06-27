@@ -383,4 +383,15 @@ handle: product
     </div>
   </div>
 </div>
+<div class="bottom-nav text-center d-md-none">
+  <form method="POST" action="/invader/cart/add_item" data-shopinvader-form>
+    <input type="hidden" name="invader_success_url" value="{{product.url_key  | prepend: url_base}}?addtocart_product_id={{product.objectID}}" />
+    <input type="hidden" name="invader_error_url" value="{{product.url_key  | prepend: url_base}}" />
+    <input type="hidden" name="product_id" value="{{product.objectID }}">
+    <input type="hidden" name="item_qty" value="1">
+    <button type="submit" name="submit" class="btn btn-success">
+      {{"product_add_to_cart" | translate }}
+    </button>
+  </form>
+</div>
 {% endblock %}

@@ -21,7 +21,7 @@ slug: cart
         <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
         <input type="hidden" name="step[current]" value="{{ page.handle }}">
         <input type="hidden" name="step[next]" value="cart_login">
-        <button class="btn btn-primary text-lg btn-lg  btn-block btn-block-xs" type="submit">
+        <button class="btn btn-primary btn-lg  btn-block btn-block-xs" type="submit">
           {% editable_text checkout_button, fixed: true, rows: 1 %}
             Continuer <i class="fa fa-angle-right"></i>
           {% endeditable_text %}
@@ -37,9 +37,25 @@ slug: cart
         <br><br>
         Email : contact@shopinvader.yeah
       </div>
-
       {% endeditable_text %}
     </div>
   </div>
-
+  <div class="bottom-nav text-center d-md-none">
+    <form method="post" action="invader/cart/update"  id="cart_update_form">
+      <input type="hidden" name="invader_success_url" value="{% path_to cart_login %}" />
+      <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+      <input type="hidden" name="step[current]" value="{{ page.handle }}">
+      <input type="hidden" name="step[next]" value="cart_login">
+      <div class="row">
+        <div class="col-6 pt-2">
+          {{'cart_total_total' | translate }} <b>{{store.cart.amount.total | money}}</b>
+        </div>
+        <div class="col-6 text-right">
+          <button class="btn btn-success " type="submit">
+            {{page.editable_elements.content.main.checkout_button}}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 {% endblock %}
