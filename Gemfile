@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'locomotivecms_wagon', github: 'locomotivecms/wagon', require: false
-gem 'locomotivecms_steam', github: 'akretion/steam', require: false, branch: 'fix-json-params'
+gem 'locomotivecms_steam', github: 'akretion/steam', branch: 'v3.4-pending-pr'
+
 
 group :misc do
-  gem 'shop_invader', github: 'akretion/shopinvader', branch: 'refactor-odoo-10'
+  gem 'shop_invader', github: 'akretion/locomotive_shopinvader', branch: 'refactor-odoo-10'
   #gem 'shop_invader', path: 'locomotive_shopinvader'
 end
 
