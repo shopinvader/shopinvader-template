@@ -16,7 +16,7 @@
   <div class="card product-thumbnail bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%endif%}" >
     <div class="product-thumbnail-img ">
       <div class="loader-icon"></div>
-      <a href="/<% url_key %>?ref=<% default_code %>">
+      <a href="{{url_base}}<% url_key %>?ref=<% default_code %>">
         <img class="group list-group-image card-img-top pr-2 pr-md-0" src="<%#helpers.imageDefault%>
         <% images.0.medium.src  %>
         <%/helpers.imageDefault%>" class="img-responsive" alt="<% images.0.medium.alt  %>">
