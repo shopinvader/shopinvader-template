@@ -1,0 +1,17 @@
+  <div>
+    <p>
+        {{payment_method.description}}
+    </p>
+    <form method="POST" action="/invader/cart/add_payment" id="paypal-checkout-form">
+
+      <input type="submit" class="btn btn-primary btn-lg" value="Pay with Paypal">
+      </input>
+      <input type="hidden" name="invader_success_url" value="{% path_to 'cart_end' %}" />
+      <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+      <input type="hidden" name="payment_mode[id]" value="{{payment_method.id }}">
+      <input type="hidden" name="paypal[return_url]" value="{% path_to page %}">
+      <input type="hidden" name="paypal[cancel_url]" value="{% path_to page %}">
+    </form>
+  </div>
+
+
