@@ -1,498 +1,661 @@
 account_address_submit:
   en: Submit
   fr: Valider
+  pt_BR: Validar
 account_address_add:
   en: Add an address
   fr: Ajouter une adresse
+  pt_BR: Adicionar um endereço
 account_address_cancel:
   en: Cancel
   fr: Annuler
+  pt_BR: Cancelar
 account_address_update:
   en: Shipping adresses
   fr: Mes adresses de livraison
+  pt_BR: Endereços de entrega
 account_order_address:
-  en: address
+  en: Address
   fr: Adresse
+  pt_BR: Endereço
 account_order_empty:
   en: You don't have orders :(
   fr: Vous n'avez pas de commande
+  pt_BR: Você não tem pedidos
 account_order_qty:
   en: Quantity
   fr: Quantité
+  pt_BR: Quantidade
 account_order_title:
   en: My sales orders
   fr: Mes commandes
+  pt_BR: Meus pedidos
+
 account_order_payment :
   en: Payment method
   fr: Méthode de paiement
+  pt_BR: Método de pagamento
 account_order_subtotal:
   en: Total
   fr: Total
-
+  pt_BR: Total
 account_profil_title:
   en: My account profile
   fr: Mes informations
+  pt_BR: Meu perfil
 account_address_lists:
   en: My shipping addresses
   fr: Mes adresses de livraison
+  pt_BR: Meus endereços de entrega
 account_password_reset:
   en: Reset my password
   fr: Réinitialiser mon mot de passe
+  pt_BR: Redefinir minha senha
 account_password_title:
   en: Reset my password
-  fr: Changer de mot de passe
+  fr: Changer mon mot de passe
+  pt_BR: Mudar minha senha
 account_rma_order:
   en: Order
   fr: Commande
+  pt_BR: Pedido
 account_rma_return:
   en: Product
   fr: Produit
+  pt_BR: Produto
 account_rma_message :
   en: Message
   fr: Message
+  pt_BR: Mensagem
 account_rma_item:
   en: Product
   fr: Produit
+  pt_BR: Produto
 account_rma_qty:
   en: Quantity
   fr: Quantité
+  pt_BR: Quantidade
 account_rma_title:
   en: Claims
   fr: Retour marchandise
+  pt_BR: Devolução de mercadoria
 account_rma_submit:
   en: Submit
   fr: Valider
+  pt_BR: Validar
 account_title:
   en: Hello
   fr: Bonjour
+  pt_BR: Bem-vindo
 account_signout:
   en: Sign out
   fr: Déconnexion
+  pt_BR: Sair
 header_cart:
   en: My basket
   fr: Mon panier
+  pt_BR: Meu carrinho
 header_login:
   en: Sign in or register
   fr: Mon compte
+  pt_BR: Minha conta
 cart_address_add:
   en: Add an address
   fr: Ajouter une adresse
+  pt_BR: Adicionar um endereço
 cart_address_update:
   en: Update
   fr: Modifier l'adresse
+  pt_BR: Alterar endereço
 cart_address_delete:
   en: Delete
   fr: Supprimer l'adresse
+  pt_BR: Excluir endereço
 cart_checkout:
   en: "Checkout"
   fr: "Passer ma commande"
+  pt_BR: "Fechar pedido"
 cart_continue_shopping:
   en: "Continue shopping"
   fr: "Poursuivre mes achats"
+  pt_BR: "Escolher mais produtos"
 cart_customer_shipping:
   en: My shipping address
   fr: Mon adresse de livraison
+  pt_BR: Meu endereço de entrega
 cart_head_price:
   en: "Unit Price"
   fr: "Prix"
+  pt_BR: "Preço"
 cart_head_qty:
   en: "Quantity"
   fr: "Quantité"
+  pt_BR: "Quantidade"
 cart_head_total:
   en: "Item Total"
   fr: "Total"
+  pt_BR: "Total"
 cart_invoice_address:
   en: Invoice address
   fr: Adresse de facturation
+  pt_BR: Endereço para faturamento
 cart_item_added:
   en: "1 Item Added to Cart"
   fr: "Votre article a été ajouté au panier"
+  pt_BR: "O seu item foi adicionado ao carrinho"
 cart_item_count_zero:
   en: "{{ count }} item"
   fr: "Aucun article"
+  pt_BR: "{{ count }} item"
 cart_item_count_one:
   en: "{{ count }} item"
   fr: "{{ count }} article"
+  pt_BR: "{{ count }} item"
 cart_item_count_two:
   en: "{{ count }} items"
   fr: "{{ count }} articles"
+  pt_BR: "{{ count }} itens"
 cart_item_count_other:
   en: "{{ count }} items"
   fr: "{{ count }} articles"
+  pt_BR: "{{ count }} itens"
 cart_item_desc:
   en: "Items"
   fr: "Articles"
+  pt_BR: "Items"
 cart_order_ref:
   en: Order number
   fr: Référence
+  pt_BR: Número do pedido
 cart_quantity:
   en: Quatity
   fr: Quantité
+  pt_BR: Quantidade
 cart_shipping_address:
   en: Shipping adress
   fr: Adresse de livraison
+  pt_BR: Endereço de entrega
 cart_total_subtotal:
   en: "Subtotal"
   fr: "Sous-total"
+  pt_BR: "Subtotal"
 cart_total_total:
   en: "Total"
   fr: "Total"
+  pt_BR: "Total"
 cart_total_vat:
   en: "Sales Tax"
   fr: "dont T.V.A."
+  pt_BR: "Impostos inclusos"
 cart_total_shipping:
   en: "Shipping"
   fr: "Frais de livraison"
+  pt_BR: "Frete"
 cart_payment_secure:
-  en: Secured Payment
+  en: Secured payment
   fr: Paiement sécurisé
+  pt_BR: Compra segura
 cart_title:
   en: My cart
   fr: Mon panier
+  pt_BR: Meu carrinho
 cart_password:
   en: Password
   fr: Mot de passe
+  pt_BR: Senha
 cart_reset_password:
   en: Reset Password
   fr: Mot de passe oublié ?
+  pt_BR: Esqueceu a senha ?
 cart_login:
   en: Email
   fr: Email
+  pt_BR: E-mail
 cart_login_btn:
   en: Login
   fr: Connexion
+  pt_BR: Cadastrar
 cart_without_account_btn:
   en: Continue
   fr: Continuer
+  pt_BR: Continuar
 cart_step_step1:
   en: Shopping cart
   fr: Panier
+  pt_BR: Carrinho
 cart_step_step2:
   en: Shipping address
   fr: Coordonnées
+  pt_BR: Endereço de entrega
 cart_step_step3:
   en: Checkout
   fr: Paiement
+  pt_BR: Pagamento
 cart_step_step4:
   en: End
   fr: Terminé
+  pt_BR: Concluído
 cart_carrier_title:
   en: Carrier
   fr: Mode de livraison
+  pt_BR: Forma de entrega
 cart_carrier_unavailable:
   en: No Shipping mode avaible
-  fr: Aucun mode de livraison n'est disponible.
+  fr: Aucun mode de livraison n'est disponible
+  pt_BR: Entrega indisponível
 cart_comment_title:
   en: Comment
   fr: Commentaire
+  pt_BR: Comentário
 cart_payment_title:
   en: Payment
   fr: Mode de paiement
+  pt_BR: Forma de pagamento
 cart_payment_desc:
-  en: Choose your payment mode to checkout
+  en: Choose your payment mode to checkout.
   fr: Sélectionnez votre mode de paiement pour finaliser votre commande.
-
+  pt_BR: Selecione a sua forma de pagamento para concluir a sua compra.
 cart_payment_secure:
   en: Payment Secured
-  fr: Vous êtes sur un espace sécurisé.
+  fr: Vous êtes sur un espace sécurisé
+  pt_BR: Ambiente Seguro
 cart_invoice_address_different:
   en: Choose invoice address
-  fr: je souhaite une adresse de facturation différente
-
+  fr: Je souhaite une adresse de facturation différente
+  pt_BR: Alterar endereço de faturação
 cart_invoice_address:
   en: Invoice address
   fr: Address de facturaton
+  pt_BR: Endereço de faturação
 cart_return:
   en: Cancel
   fr: Retour
+  pt_BR: Cancelar
 cart_submit:
   en: Submit
   fr: Valider
+  pt_BR: Confirmar
 cart_customer_invoice:
-  en:
+  en: Choose invoice address
   fr: Je choisis mon adresse de facturation
+  pt_BR: Alterar endereço de faturação
 cart_free_delivery:
   en: Free
   fr: Offert
+  pt_BR: Grátis
 cart_shipping_method:
   en: Continue
   fr: Continuer
+  pt_BR: Continuar
 creditcard_lastname:
   en: Name (as it appears on your card)
   fr: Titulaire de la carte
+  pt_BR: Nome impresso no cartão
 creditcard_number:
   en: Card number
   fr: Numéro de carte
+  pt_BR: Número do cartão
 creditcard_expiry:
   en: Expiration date
   fr: Date d'expiration
+  pt_BR: Validade
 creditcard_cvc:
   en: Security code
   fr: Cryptogramme visuel
+  pt_BR: Código de segurança
 creditcard_cvc_help:
   en: 3 last numbers on back
   fr: 3 derniers chiffres au dos de votre carte, à droite de la signature
+  pt_BR: 3 últimos números atrás do seu cartão
 close :
   en: Close
   fr: Fermer
+  pt_BR: Fechar
 filters:
   en: Filters
   fr: Filtrer
+  pt_BR: Filtrar
 home:
   en: Home
   fr: Accueil
+  pt_BR: Início
 partner_email:
   en: Email
   fr: Adresse e-mail
+  pt_BR: E-mail
 partner_name:
   en: Name
   fr: Nom
+  pt_BR: Nome
 partner_firstname:
   en: First name
   fr: Prénom
+  pt_BR: Primeiro nome
 partner_lastname:
   en: Last name
   fr: Nom
+  pt_BR: Último nome
 partner_address1:
   en: Adresse line 1
   fr: Adresse
+  pt_BR: Endereço
 partner_address2:
   en: Address line 2
   fr: Complément
+  pt_BR: Complemento e referência
 partner_zipcode:
   en: Zip Code
   fr: Code postal
+  pt_BR: CEP
 partner_city:
   en: City
   fr: Ville
+  pt_BR: Cidade
 partner_country:
   en: Country
   fr: Pays
+  pt_BR: País
 partner_phone:
   en: Phone
   fr: Téléphone
+  pt_BR: Telefone
 partner_business:
   en: Company name
   fr: Société
+  pt_BR: Razão Social
 partner_business_info:
-  en:
+  en: "(delivery at workplace)"
   fr: "(livraison sur un lieu de travail)"
+  pt_BR: "(entrega no local de trabalho)"
 per_page:
   en: per page
   fr: par page
+  pt_BR: por página
 popular_product:
   en: Popular product
   fr: Les plus vues
+  pt_BR: Os mais desejados
 product_add_to_cart:
   en: Add to cart
   fr: Ajouter au panier
+  pt_BR: Adicionar ao carrinho
 product_display_variant:
   en: View all versions
   fr: Voir toutes les versions
+  pt_BR: Ver todas as versões
 product_add_to_cart_discount:
   en: Shop now !
   fr: J'en profite !
+  pt_BR: Aproveito !
 product_advice_title:
   en: Help & Advice
-  fr: Aide & conseils
+  fr: Aide & Conseils
+  pt_BR: Ajuda & Dicas
 product_code:
   en: Product code
   fr: Référence
+  pt_BR: Referência
 product_discount_label:
   en: SAVE
   fr: BON PLAN
+  pt_BR: OFERTAS EXCLUSIVAS
 product_display_grid:
   en: Grid
   fr: Mosaïque
+  pt_BR: Grade
 product_display_list:
   en: List
   fr: Liste
+  pt_BR: Lista
 product_price_from:
   en: Up to
-  fr: à partir de
+  fr: À partir de
+  pt_BR: A partir de
 product_quantity:
   en: Quantity
   fr: Quantité
+  pt_BR: Quantidade
 product_advice_tab:
   en: Advices
   fr: Conseils
+  pt_BR: Dicas
 product_advice_title:
   en: Our advices
   fr: Nos conseils
+  pt_BR: As nossas dicas
 product_reviews_tab:
   en: Reviews
   fr: Avis client
+  pt_BR: Avaliações
 product_reviews_title:
   en: All Reviews
   fr: Tous les avis client
+  pt_BR: Todas as avaliações
 product_overview_tab:
   en: Overview
   fr: Détails
+  pt_BR: Detalhes
 product_overview_title:
   en: Overview
   fr: Les plus du produit
+  pt_BR: Descrição do produto
 product_spec_tab:
   en: Details & Specs
   fr: Spécification
+  pt_BR: Especificações Técnicas
 product_spec_title:
   en: Details & Specs
   fr: Spécification
+  pt_BR: Especificações Técnicas
 product_variant_title:
   en: Product models
-  fr: Toutes les modèles
+  fr: Tous les modèles
+  pt_BR: Todos os modelos
 product_stock_state_in_stock:
   en: In-stock
   fr: En stock
+  pt_BR: Disponível
 product_vat_inc:
   en: V.A.T. Inc.
   fr: T.T.C.
+  pt_BR: Taxas inclusas
 product_rating_average:
   en: "Rating"
   fr: "Note moyenne :"
+  pt_BR: "Avaliação"
 product_related_tab:
   en: "Related Products"
   fr: "Produits complémentaire"
+  pt_BR: "Produtos complementares"
 product_related_title:
   en: "Customers who viewed this item bought …"
   fr: "Les clients ayant vu ce produit ont également acheté"
+  pt_BR: "O que os clientes mais compram após ver este item"
 product_stock_state_in_stock:
   en: In stock
   fr: En stock
+  pt_BR: Disponível
 product_stock_state_out_of_stock:
   en: Out of stock
   fr: Epuisé
+  pr_BR: Indisponível
 product_stock_state_resupplying:
   en: Resupplying
   fr: En cours de réapprovisionnement
+  pt_BR: Reaprovisionamento
 product_stock_state_in_limited_stock:
   en: in stock
   fr: en stock
+  pt_BR: disponível
 product_cross_sellings_tab:
   en: Customers also shopped for
-  fr: More In This Collection
+  fr: Des clients ont aussi acheté
+  pt_BR: Clientes compraram também
 product_cross_sellings_title:
   en: More In This Collection
-  fr: More In This Collection
+  fr: En voir plus dans cette collection
+  pt_BR: Mais produtos desse tipo
 product_up_sellings_tab:
-  en: products related to this item
-  fr: More In This Collection
+  en: Products related to this item
+  fr: Produits liés à cet article
+  pt_BR: Produtos relacionaos a este item
 product_up_sellings_title:
   en: Other product
   fr: Autre produit
+  pt_BR: Outros produtos
 product_variants:
   en: More buying choices
   fr: Plusieurs choix disponibles
+  pt_BR: Outras opções de compra
 product_zoom:
   en: Zoom
   fr: Zoom
+  pt_BR: Zoom
 rating_average_rate:
   en: "Average rate"
   fr: "Noté par nos clients"
+  pt_BR: "Nota média"
 rating_count_other:
   en: "{{count | round}} review"
   fr: "{{count | round}} avis"
+  pt_BR: "{{count | round}} avaliação"
 rating_count_one:
   en: "{{count | round}} review"
   fr: "{{count | round}} avis"
+  pt_BR: "{{count | round}} avaliação"
 rating_count_two:
   en: "{{count | round}} reviews"
   fr: "{{count | round}} avis"
+  pt_BR: "{{count | round}} avaliações"
 rating_count_other:
   en: "{{count | round}} reviews"
   fr: "{{count | round}} avis"
+  pt_BR: "{{count | round}} avaliações"
 rating_comment_count_one:
   en: "{{count | round}} customer comment this product"
-  fr: "{{count | round}} client a laissé un commentaire sur ce produit "
+  fr: "{{count | round}} client a laissé un commentaire sur ce produit"
+  pt_BR: "{{count | round}} cliente avaliaram esse produto"
 rating_comment_count_two:
   en: "{{count | round}} customers comment this product"
-  fr: "{{count | round}} clients ont laissé un commentaire sur ce produit "
+  fr: "{{count | round}} clients ont laissé un commentaire sur ce produit"
+  pt_BR: "{{count | round}} clientes avaliaram esse produto"
 rating_comment_count_other:
   en: "{{count | round}} customers comment this product"
-  fr: "{{count | round}} clients ont laissé un commentaire sur ce produit "
+  fr: "{{count | round}} clients ont laissé un commentaire sur ce produit"
+  pt_BR: "{{count | round}} clientes avaliaram esse produto"
 rating_last_review:
   en: Last review
   fr: Avis le plus récent
+  pt_BR: Avaliação a mais recente
 search_filter_title:
   en: Search
   fr: Rechercher
+  pt_BR: Buscar
 search_total_count_zero:
   en: "no result"
   fr: "aucun résultat"
+  pt_BR: "nenhum resultado"
 search_total_count_one:
   en: "{{ count }} result"
   fr: "{{ count }} résultat"
+  pt_BR: "{{ count }} resultado"
 search_total_count_two:
   en: "{{ count }} results"
   fr: "{{ count }} résultats"
+  pt_BR: "{{ count }} resultados"
 search_total_count_other:
   en: "{{ count }} results"
   fr: "{{ count }} résultats"
+  pt_BR: "{{ count }} resultados"
 signin_email:
   en: Email
   fr: Email
+  pt_BR: E-mail
 signin_password:
   en: Password
   fr: Mot de passe
+  pt_BR: Senha
 signin_password_confirm:
-    en: Confirm password
-    fr: Confirmer mon mot de passe
+  en: Confirm password
+  fr: Confirmer mon mot de passe
+  pt_BR: Confirme a sua senha
 signin_submit:
   en: Register my account
   fr: Créer mon compte
+  pt_BR: Cadastre-se
 signin_cancel:
   en: Cancel
   fr: Annuler
+  pt_BR: Cancelar
 signin_signin:
   en: Sign in
   fr: Connexion
+  pt_BR: Entrar
 signin_reset:
   en: Reset password
   fr: Continuer
+  pt_BR: Continuar
 signin_wrong:
   en: Wrong credentials!
   fr: Email ou mot de passe incorrect.
+  pt_BR: E-mail ou senha incorretos.
 signin_forgotpassword:
   en: Reset password
   fr: Mot de passe oublié ?
+  pt_BR: Esqueci minha senha
 signin_create_account:
   en: Register my account
-  fr: Créer un compte
+  fr: Créer mon compte
+  pt_BR: Cadastre-se
 search_product:
   en: Products
   fr: Produits
+  pt_BR: Produtos
 search_product_empty:
   en: No product found.
   fr: Aucun produit trouvé.
+  pt_BR: Não encontramos nenhum resultado.
 search_product_all:
   en: View all results
   fr: Voir tous les résultats
+  pt_BR: Ver todos os resultados
 search_category:
   en: Categories
   fr: Categories
+  pt_BR: Categorias
 search_category_empty:
   en: No category found.
   fr: Aucune catégorie trouvée.
+  pt_BR: Nenhuma categoria encontrada.
 store_advantage_shipping:
   en: free shipping
   fr: livraison gratuite
+  pt_BR: frete grátis
 store_advantage_hotline:
-  en: free Hotline
+  en: Free Hotline
   fr: Assistance gratuite
+  pt_BR: Atendimento
 store_advantage_price:
-  en: lowest price guarantee
-  fr: Les prix le plus bas !
+  en: Lowest price guarantee
+  fr: Le prix le plus bas !
+  pt_BR: O preço o mais barato
 store_advantage_return:
   en: easy return
   fr: retour gratuit
+  pt_BR: devolução grátis
 recommandation_title:
   en: Our new deals
   fr: Nos bonnes affaires
+  pt_BR: Ofertas Exclusivas
 search_show_more:
   en: more
   fr: afficher plus
+  pt_BR: ver mais
 show_category:
   en: Show all product in category
-  fr: Voir la catégories
+  fr: Voir la catégorie
+  pt_BR: Ver todos os produtos da categoria
 show_more:
   en: show more
   fr: en savoir plus
+  pt_BR: ver mais
