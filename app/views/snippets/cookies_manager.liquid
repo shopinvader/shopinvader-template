@@ -7,21 +7,39 @@
     {% endaction %}
   {% endif %}
   {% if session.cookies_accepted != true%}
-    <div class="fixed-bottom bg-dark p-2 text-light text-center small collapse show" id="cookies-manager-msg">
-      {% editable_text "cookies_message", label: "Cookies - message", fixed: true, rows: 1, format:"raw" %}
-      By allowing these third party services, you accept their cookies and the use of tracking technologies necessary for their proper functioning.
-      {% endeditable_text %}
-
-      <button type="button" class="btn btn-primary btn-sm ml-2"  data-toggle="collapse" data-target="#cookies-manager-msg">
-        {% editable_text "cookies_message_accept", label: "Cookies - message : accept", fixed: true, rows: 1, format:"raw" %}
-        Accept
-        {% endeditable_text %}
-      </button>
-      <button type="button" class="btn btn-light btn-sm ml-2" data-toggle="modal" data-target="#cookie-manage-modal">
-        {% editable_text "cookies_message_manage", label: "Cookies - message : manage", fixed: true, rows: 1, format:"raw" %}
-        Manage cookies
-        {% endeditable_text %}
-      </button>
+    <div class="fixed-bottom bg-dark p-2 pt-4 pb-4 text-light collapse show" id="cookies-manager-msg">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-8 col-xl-9 order-1">
+            <div class="h1">
+              {% editable_text "cookies_title", label: "Cookies - title", fixed: true, rows: 1, format:"raw" %}
+              Your privacy
+              {% endeditable_text %}
+            </div>
+          </div>
+          <div class="col-12  col-md-4 col-xl-3 order-3 order-md-2 pt-4 pt-md-0">
+            <button type="button" class="btn btn-primary btn-block btn-lg"  data-toggle="collapse" data-target="#cookies-manager-msg">
+              {% editable_text "cookies_message_accept", label: "Cookies - message : accept", fixed: true, rows: 1, format:"raw" %}
+              Accept
+              {% endeditable_text %}
+            </button>
+          </div>
+          <div class="col-12 order-2 order-md-3 ">
+            <p>
+            {% editable_text "cookies_message", label: "Cookies - message", fixed: true, rows: 1, format:"raw" %}
+            By allowing these third party services, you accept their cookies and the use of tracking technologies necessary for their proper functioning.
+            {% endeditable_text %}
+            </p>
+            <u>
+              <a type="button" class="text-light pt-1" data-toggle="modal" href="#cookie-manage-modal">
+                {% editable_text "cookies_message_manage", label: "Cookies - message : manage", fixed: true, rows: 1, format:"raw" %}
+                See all options
+                {% endeditable_text %}
+              </a>
+            </u>
+          </div>
+        </div>
+      </div>
 
     </div>
   {% endif%}
@@ -85,7 +103,7 @@
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="cookies_manager[gtag]" id="cookies_gtag_disable" value="disable" {% if gtag == 'disable'%}checked="checked"{%endif%}>
                         <label class="form-check-label" for="cookies_gtag_disable">
-                          {% editable_text "cookies_gtag_enable", label: "Cookies - Google Tag : enable", fixed: true, rows: 1, format:"raw" %}
+                          {% editable_text "cookies_gtag_disable", label: "Cookies - Google Tag : enable", fixed: true, rows: 1, format:"raw" %}
                           Disable
                           {% endeditable_text %}
                         </label>
@@ -111,29 +129,37 @@
         </div>
       </div>
     </div>
-    {% if site.metafields.google.analytics_id%}
-      {% if session.cookies_manager.gtag != 'disable'%}
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{site.metafields.google.analytics_id}}"></script>
+    {% if session.cookies_manager %}
         <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'UA-72717357-7');
+        function delCookie(name)   {
+          var path = ";path=" + "/";
+          var domain = ";domain=" + "."+document.location.hostname;
+          var expiration = "Thu, 01-Jan-1970 00:00:01 GMT";
+          document.cookie = name + "=" + path + domain + ";expires=" + expiration;
+        }
+        var excluded_cookies = [];
+        {% if session.cookies_manager.gtag == 'disable'%}
+          excluded_cookies.push("__utma","__utmb","__utmc","__utmz","_ga", "_gid");
+        {% endif %}
+        var cleared_cookies = '';
+        for(i in excluded_cookies) {
+          delCookie(excluded_cookies[i]);
+        }
         </script>
-      {% else %}
-        <script>
-        $.removeCookie('__utma', { path: '/' });
-        $.removeCookie('__gads', { path: '/' });
-        $.removeCookie('_ga', { path: '/' });
-        $.removeCookie('_gat_gtag_{{site.metafields.google.analytics_id}}', { path: '/' });
-        $.removeCookie('_gid', { path: '/' });
-        </script>
-      {% endif %}
     {% endif %}
     {% action 'set cookies accepted' %}
       setSessionProp("cookies_accepted", true);
     {% endaction %}
+    {% if site.metafields.google.analytics_id and session.cookies_manager.gtag != 'disable'%}
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-25624330-28"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
+        gtag('config', {{site.metafields.google.analytics_id | json}});
+      </script>
+
+    {% endif %}
 {% endblock%}
