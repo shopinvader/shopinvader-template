@@ -57,7 +57,7 @@
                 <div class="form-group">
                   <label for="auth-password">{{ 'signin_password' | translate }}</label>
                   <input type="password" class="form-control" placeholder="{{ 'signin_password' | translate }}" name="auth_password" value="" required="required">
-                  <a href="{% path_to forgot_password %}" class="color-white">
+                  <a href="{% path_to reset_password_request %}" class="color-white">
                     {{ 'signin_forgotpassword' | translate }}
                   </a>
                 </div>
@@ -106,7 +106,8 @@
                       {{cart_line.product.name}}
                     </a>
                     <div class="small font-weight-bold pt-2 text-info">
-                      {{cart_line.amount.total | money}} x {{cart_line.qty}}
+                      {% include 'currency' | value: cart_line.amount.total %} x
+                      {{cart_line.qty}}
                     </div>
                   </div>
                 </div>

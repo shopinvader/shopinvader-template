@@ -76,6 +76,23 @@ payment:
     adyen_url:
       hint: "Adyen - Hosted JS Library URL"
       type: string
+smtp:
+  label: SMTP Parameters
+  fields:
+    sender:
+      type: string
+    address:
+      type: string
+    port:
+      type: integer
+    user_name:
+      type: string
+    password:
+      type: string
+    authentication:
+      type: string
+    enable_starttls_auto:
+      type: boolean
 _store:
   fields:
     available_countries:

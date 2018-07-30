@@ -49,6 +49,14 @@ metafields:
     default_role: default
   payment:
     stripe_api_key: < Your stripe API KEY >
+  smtp:
+    sender: < Your sender email address >
+    address: < Your SMTP Server address >
+    port: < Your SMTP Server port >
+    user_name: < Your SMTP user ID >
+    password: < Your SMTP User password >
+    authentication: plain
+    enable_starttls_auto: true
   _store:
     available_countries: >
       {

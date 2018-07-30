@@ -22,9 +22,9 @@ is_layout: false
       </h1>
       </div>
     </div>
-    <div class="row row-same-height cart-login pb-4">
+    <div class="row row-same-height cart-login pb-4 mb-4">
       <div class="col-12 col-md-6 pb-0 mb-0">
-        <div class="card  h-100">
+        <div class="card shadow h-100">
           <h2 class="h3 card-header bg-dark text-light text-center">
             {% editable_text "sigin_account_title", label: "Sign in title", rows: 1 %}
             Sign In
@@ -49,7 +49,7 @@ is_layout: false
               <div class="form-group">
                 <label for="auth-password">{{ 'signin_password' | translate }}</label>
                 <input type="password" class="form-control" id="auth-password" placeholder="{{ 'signin_password' | translate }}" name="auth_password" value="" required="required">
-                <a href="{% path_to forgot_password %}" class="color-white">
+                <a href="{% path_to reset_password_request %}" class="color-white">
                   {{ 'signin_forgotpassword' | translate }}
                 </a>
               </div>
@@ -62,7 +62,7 @@ is_layout: false
         </div>
       </div>
       <div class="col-12 col-md-6">
-        <div class="card  h-100">
+        <div class="card shadow h-100">
           <h2 class="h3 card-header bg-primary text-light text-center">
             {% editable_text "sigin_new_title", label: "Create account title", rows: 1 %}
               Account Registration
