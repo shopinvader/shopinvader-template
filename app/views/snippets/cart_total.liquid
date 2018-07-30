@@ -1,5 +1,5 @@
 
-<div class="card">
+<div class="card  shadow-sm">
   <div class="card-body">
     <h2 class="display-4 text-uppercase">{{'cart_total_total' | translate}}</h2>
     <table class="table">
@@ -11,7 +11,7 @@
             </div>
           </td>
           <td class="text-bold text-right">
-            {{cart.lines.amount.total | money }}
+            {% include 'currency' | value: cart.lines.amount.total %}
 
           </td>
         </tr>
@@ -23,7 +23,9 @@
               {{ cart.shipping.selected_carrier.name }}
             </div>
           </td>
-          <td class="text-right">{{cart.shipping.amount.total | money }}</td>
+          <td class="text-right">
+            {% include 'currency' | value: cart.shipping.amount.total %}
+          </td>
         </tr>
 
         {%endif%}
@@ -38,11 +40,10 @@
           </td>
           <td class="text-right">
             <div class="h3 text-primary font-weight-bold ">
-              {{cart.amount.total | money }}
+              {% include 'currency' | value: cart.amount.total %}
             </div>
             <div class="">
-              {{cart.amount.tax | money }}
-
+              {% include 'currency' | value: cart.amount.tax %}
             </div>
           </td>
         </tr>

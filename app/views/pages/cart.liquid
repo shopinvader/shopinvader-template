@@ -48,7 +48,8 @@ slug: cart
       <input type="hidden" name="step[next]" value="cart_login">
       <div class="row">
         <div class="col-6 pt-2">
-          {{'cart_total_total' | translate }} <b>{{store.cart.amount.total | money}}</b>
+          {{'cart_total_total' | translate }} <b>
+          {% include 'currency' | value: store.cart.amount.total %}</b>
         </div>
         <div class="col-6 text-right">
           <button class="btn btn-success " type="submit">

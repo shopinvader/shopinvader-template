@@ -78,7 +78,7 @@
                 {% editable_text stripe_ckeckout_button, label: 'Stripe Form - checkout label', rows: 3, format: 'html'%}
                   PAY
                 {% endeditable_text %} <span id="payement_total_label" data-shopinvader-container>
-                  {{ store.cart.amount.total | money}}
+                  {% include 'currency' | value: amount %}
                 </span>
               </button>
               <div id="stripe-card-errors" class="text-danger pt-2" role="alert"></div>
@@ -106,7 +106,7 @@
 
     </div>
   </div>
-  <form method="POST" action="/invader/cart/add_payment" id="stripe-checkout-form">
+  <form method="POST" action="{{action}}" id="stripe-checkout-form">
     <input type="hidden" name="invader_success_url" value="{% path_to 'cart_end' %}" />
     <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
     <input type="hidden" name="payment_mode[id]" value="{{payment_method.id }}">

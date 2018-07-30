@@ -19,7 +19,6 @@
   </script>
 {% endif%}
 <div class="card product-thumbnail  bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%elsif display_lite == true%}product-thumbnail-lite{%endif%}" >
-
   <div class="product-thumbnail-img loader">
     <div class="loader-icon"></div>
     <img class="group list-group-image card-img-top pr-2 pr-md-0"
@@ -41,11 +40,11 @@
       </span>
       <strong class="h5">
         <span class="font-weight-bold {%if product.price.discount > 0%}text-warning{%else%}text-dark{% endif %}">
-          {{ product.price.value | money }}
+          {% include 'currency' | value: product.price.value %}
         </span>
         {% if product.price.discount > 0 %}
           <span class="text-dark small">
-            <s>{{ product.price.original_value | money }}</s>
+            <s>{% include 'currency' | value: product.price.original_value %}</s>
           </span>
         {% endif %}
       </strong>
@@ -56,11 +55,11 @@
       </span>
       <strong class="product-price-value">
         <span class="font-weight-bold {%if product.price.discount > 0%}text-warning {%else%}text-dark{% endif %}">
-          {{ product.price.value | money }}
+          {% include 'currency' | value: product.price.value %}
         </span>
         {%if product.price.discount > 0%}
           <span class="text-dark small">
-            <s>{{ product.price.original_value | money }}</s>
+            <s>{% include 'currency' | value: product.price.original_value %}</s>
           </span>
         {% endif %}
       </strong>

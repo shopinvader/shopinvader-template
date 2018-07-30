@@ -44,24 +44,21 @@ is_layout: false
       <link rel="alternate" href="{% path_to page, locale: locale_code %}" hreflang="{{locale_code}}"/>
       {% endfor %}
     {% endblock %}
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <link rel="shortcut icon" href="{{ 'favicon.png' | theme_image_url }}">
 
     {{ 'application.css' | stylesheet_tag }}
-    <link href="{{'fontawesome/fontawesome.css' | stylesheet_url}}" rel="stylesheet" async>
 
     {% block 'css' %}{% endblock %}
     {% block 'javascripts_header' %}{% endblock %}
   </head>
   <body>
-
-
     <div class="main-loader d-none">
       <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
         <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
       </svg>
     </div>
-    <div class="page">
+    <div class="page shadow">
       <header>
         {% include 'nav' %}
       </header>
@@ -76,7 +73,7 @@ is_layout: false
       {% capture 'background_category_footer' %}
         {% editable_file 'banner-category-footer', fixed:'true' %}/images/banner-categories.jpg{% endeditable_file %}
       {% endcapture %}
-      <footer class="bg-secondary w-100">
+      <footer class="bg-light w-100">
         <div class="container-fluid">
           <div class="row categories-list"  style="background-image:url({{background_category_footer}})">
             <div class="col-12">
@@ -259,7 +256,7 @@ is_layout: false
       javascript used for search input in header.
       Disabled for categorie et search page (no autocomplete menu displayed).
       {%endcomment%}
-      <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
       <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
       {{ 'search_autocomplete.js' | javascript_tag }}
     {% endblock %}

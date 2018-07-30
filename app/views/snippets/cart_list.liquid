@@ -1,6 +1,7 @@
 
 {% for cart_line in cart.lines.items %}
   {% if product_id == null or cart_line.product.id == product_id %}
+
     <div class="card">
       <div class="card-body row">
         <div class="col-4 col-sm-2 col-md-2 ">
@@ -19,9 +20,9 @@
               </div>
               <div class="h3">
                 {% if business == true%}
-                  {{cart_line.amount.untaxed | money }}
+                  {% include 'currency' | value: cart_line.amount.untaxed %}
                 {% else %}
-                  {{cart_line.amount.total | money }}
+                  {% include 'currency' | value: cart_line.amount.total %}
                 {% endif %}
               </div>
             </div>

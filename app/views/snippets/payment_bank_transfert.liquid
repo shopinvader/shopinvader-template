@@ -1,6 +1,6 @@
 <p>{{payment_method.description}}</p>
 <div class="">
-  <form method="POST" action="/invader/cart/add_payment">
+  <form method="POST" action="{{action}}">
     <input type="hidden" name="invader_success_url" value="{% path_to 'cart_end' %}" />
     <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
     <input type="hidden" name="payment_mode[id]" value="{{payment_method.id }}">

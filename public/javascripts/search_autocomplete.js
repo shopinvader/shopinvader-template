@@ -102,8 +102,14 @@ var hogan_helpers = {
           n = new Number(text);
         }
       }
-
-      return n.toLocaleString("fr-FR", {style: "currency", currency: "EUR"})
+      n*= algolia_params.currency_rate;
+      return n.toLocaleString(
+        algolia_params.locale_code,
+        {
+          style: "currency",
+          currency: algolia_params.currency_code,
+        }
+      )
     }
   },
   "imageDefault": function() {

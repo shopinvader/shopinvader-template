@@ -1,42 +1,38 @@
 
 {% if site.metafields.algolia %}
   {% if locale == 'fr'%}
-    {% assign algolia_locale = "_fr_FR"%}
+    {% assign algolia_locale = "fr_FR"%}
   {%else%}
-    {% assign algolia_locale = "_en_US"%}
+    {% assign algolia_locale = "en_US"%}
   {%endif%}
+  {% if session.currency_code and session.currency_code != ''%}
+    {% assign currency_code = session.currency_code %}
+  {% else %}
+    {% assign currency_code = store.currencies.first.first %}
+  {% endif %}
+  {% if store.currencies_format[currency_code]%}
+    {% assign currency_data = store.currencies_format[currency_code] %}
+    {% assign rate = 1%}
+    {% if store.currencies_rate[currency_code]%}
+      {% assign rate = store.currencies_rate[currency_code]%}
+    {%endif%}
+  {%endif%}
+
   <script type="text/javascript">
     {% action 'get algolia parameters' %}
 
-      var js_locales = {
-        'fr': {
-          'code': 'fr-FR',
-          'currency_code': 'EUR',
-          'currency_symbol': '€'
-        },
-        'en': {
-          'code': 'en-US',
-          'currency_code': 'USD',
-          'currency_symbol': '$'
-        }
-      };
-      var locale = {{locale | json}};
-      if(js_locales[locale]) {
-        setProp('algolia_locale', js_locales[locale]);
-      }
-      else {
-        setProp('algolia_locale', js_locales.first());
-      }
       setProp('algolia_indexes', JSON.parse(site.metafields.algolia.indices));
     {% endaction %}
+
     var algolia_params = {
       api_key: {{site.metafields.algolia.api_key | json}},
       app_id: {{site.metafields.algolia.application_id | json}},
-      locale_code: {{algolia_locale.code  | json}},
-      currency_symbol: {{algolia_locale.currency_symbol | json}},
-      currency_code: {{algolia_locale.currency_code | json}},
+      locale_code: {{currency_data.default_locale   | replace: "_", "-"   | json}},
+      currency_symbol: {{currency_data.unit | json}},
+      currency_code: {{currency_code | json}},
+      currency_rate: {{rate | json}},
     {% for role in algolia_indexes %}
-      {{role.name}}_index : {{role.index | append:"_" | append: algolia_locale.code | replace: "-", "_" | json}},
+      {{role.name}}_index : {{role.index | append:"_" | append: algolia_locale  | json}},
     {% endfor %}
     };
 

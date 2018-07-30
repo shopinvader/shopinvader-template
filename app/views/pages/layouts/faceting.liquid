@@ -5,12 +5,15 @@ is_layout: false
 {% extends 'layouts/default' %}
 
 {% block 'css' %}
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.9.0/dist/instantsearch.min.css">
 {% endblock %}
 
 {% block 'javascripts_algolia'%}
   {% include 'algolia_init'%}
-  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0"></script>
+  <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.9.0"></script>
+  <script src="{{ 'search_currency.js' | javascript_url }}"></script>
   <script src="{{ 'search.js' | javascript_url }}?category={{category.name}}"></script>
 {% endblock %}
 
@@ -20,6 +23,7 @@ is_layout: false
   {% else %}
     {% assign filters = store.all_filters %}
   {% endif %}
+  {{_store.all_filters}}
   <div class="row">
     <div class="col-12 col-md-3 col-xl-2 p-0  border ">
       <div id="filters" class="sidebar sidebar-filters collapse">
@@ -62,6 +66,8 @@ is_layout: false
               <div id="filter-sliderprice" data-filter-name="Price">
               </div>
               <div id="filter-rangeprice">
+              </div>
+              <div id="filter-price">
               </div>
             </div>
             <div class="filter-block text-center bg-light" data-current-filter id="current-refined-values-sidebar">

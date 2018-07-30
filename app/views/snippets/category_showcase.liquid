@@ -41,11 +41,11 @@
                         <b>
                           {%if product.price.discount > 0%}
                           <div class="text-dark">
-                            <s>{{product.price.original_value | money }}</s>
+                            <s>{% include 'currency' | value: product.price.original_value %}</s>
                           </div>
                           {% endif %}
                           <span class="h3 pull-right font-weight-bold {%if product.price.discount > 0%}text-warning{% else %} text-primary{% endif %}">
-                            {{ product.price.value | money}}
+                            {% include 'currency' | value: product.price.value %}
                           </span>
                           {% if product.pricelist.tax_included == true %}
                           <sub class="text-size-base">{{'product_vat_inc' | translate}}</sub>
@@ -100,7 +100,7 @@
                   %}
                 </div>
                 <div class="">
-                  {{product.price.value | money}}
+                  {% include 'currency' | value: product.price.value %}
                 </div>
               </div>
             </div>

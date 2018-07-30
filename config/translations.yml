@@ -28,7 +28,43 @@ account_order_payment :
 account_order_subtotal:
   en: Total
   fr: Total
+account_quotation_invoicing_address:
+  en: Invoicing address
+  fr: Adresse de facturation
+account_quotation_shipping_address:
+  en: Shipping address
+  fr: Adresse de livraison
 
+account_quotation_total_title:
+  en: Total
+  fr: Total
+account_quotation_total_subtotal:
+  en: Total without tax
+  fr: Montant HT
+account_quotation_total_taxes:
+  en: Taxes
+  fr: Taxes
+account_quotation_total_amount:
+  en: Total VAT Inc
+  fr: Total T.T.C
+account_quotation_empty:
+  en: You don't have quotation :(
+  fr: Vous n'avez pas de devis
+account_quotation_title:
+  en: My quotations
+  fr: Mes devis
+account_quotation_lines:
+  en: More details
+  fr: Voir le devis
+account_quotation_name:
+  en: Quotation
+  fr: Devis
+account_quotation_payment:
+  en: Pay this quotation
+  fr: Payer ce devis
+account_quotation_cancel:
+  en: Return
+  fr: Retour
 account_profil_title:
   en: My account profile
   fr: Mes informations
@@ -74,6 +110,21 @@ header_cart:
 header_login:
   en: Sign in or register
   fr: Mon compte
+currency_eur:
+  en: Euro
+  fr: Euro
+currency_chf:
+  en: Swiss franc
+  fr: Franc Suisse
+currency_gbp:
+  en: Pound sterling
+  fr: Livre sterling
+currency_usd:
+  en: US Dollars
+  fr: Dollars (USA)
+currency_cad:
+  en: Canadian Dollars
+  fr: Dollars (Canada)
 cart_address_add:
   en: Add an address
   fr: Ajouter une adresse
@@ -235,6 +286,9 @@ creditcard_cvc_help:
 close :
   en: Close
   fr: Fermer
+email_resetpassword_subject:
+  en: Reset your password - ShopInvader
+  fr: Réinitilisation de votre mot de passe - ShopInvader
 filters:
   en: Filters
   fr: Filtrer
@@ -436,6 +490,9 @@ signin_password:
 signin_password_confirm:
     en: Confirm password
     fr: Confirmer mon mot de passe
+signin_password_new:
+    en: New password
+    fr: Nouveau mot de passe
 signin_submit:
   en: Register my account
   fr: Créer mon compte
@@ -484,6 +541,21 @@ store_advantage_price:
 store_advantage_return:
   en: easy return
   fr: retour gratuit
+payment_method_stripe:
+  en: Credit card with Stripe
+  fr: Carte Bancaire
+payment_method_adyen:
+  en: Credit card with Adyen
+  fr: Carte Bancaire
+payment_method_bank_transfert:
+  en: Bank transfert
+  fr: Virement bancaire
+payment_method_check:
+  en: Check
+  fr: Chèque
+payment_method_stripe:
+  en: Credit card with Stripe
+  fr: Carte Bancaire
 recommandation_title:
   en: Our new deals
   fr: Nos bonnes affaires

@@ -27,7 +27,7 @@ editable_elements:
                 <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
                 <div class="card-deck">
                   {%for carrier in store.cart.shipping.available_carriers.items %}
-                  <div class="card">
+                  <div class="card shadow-sm">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-xs-8 col-sm-12 radio text-lg">
@@ -38,7 +38,7 @@ editable_elements:
                         </div>
                         <div class="col-xs-4  col-sm-12 text-center text-size-2xl">
                           {% if carrier.price > 0 %}
-                            {{carrier.price | money}}
+                            {% include 'currency' | value: carrier.price %}
                           {% else %}
                             {{ 'cart_free_delivery' | translate }}
                           {% endif %}
@@ -66,17 +66,19 @@ editable_elements:
                   autocomplete="off"></textarea>
                 </div>
               </form>
+
+              {% include 'cart_quotation' %}
               <div class="pt-4">
                 <h2>{{ 'cart_payment_title' | translate }}</h2>
                 {{'cart_payment_desc' | translate }}
 
-                <div class="card card-payment text-center">
+                <div class="card  shadow-sm card-payment text-center">
                   <div class="card-header ">
                     <ul class="nav nav-tabs card-header-tabs nav-justified" role="tablist">
                     {% for payment_method in store.cart.payment.available_methods.items%}
                       <li class="nav-item "  >
                         <a class="nav-link {% if selected_payment.id == payment_method.id %} active{%endif%}"  data-toggle="tab" href="#tab-{{payment_method.id}}"  role="tab" aria-controls="{{payment_method.id}}" aria-selected="{% if selected_payment.id == payment_method.id %}true{%else%}false{%endif%}">
-                          {{payment_method.name}}
+                          {{'payment_method_' | append: payment_method.name | downcase | underscore | translate}}
                         </a>
                       </li>
                     {% endfor%}
@@ -87,17 +89,23 @@ editable_elements:
                     {% for payment_method in  store.cart.payment.available_methods.items%}
                       <div class="tab-pane fade {% if selected_payment.id == payment_method.id %}show active{%endif%}" id="tab-{{payment_method.id}}" role="tabpanel" aria-labelledby="home-tab">
                         {% case payment_method.code %}
-
                         {% when 'stripe' %}
-                          {% include 'payment_stripe' with payment_method %}
+                          {% include 'payment_stripe' with payment_method,
+                            amount: store.cart.amount.total,
+                            action: '/invader/cart/add_payment' %}
                         {% when 'adyen' %}
-                          {% include 'payment_adyen' with payment_method %}
+                          {% include 'payment_adyen' with payment_method,
+                            amount: store.cart.amount.total,
+                            action: '/invader/cart/add_payment' %}
                         {% when 'bank_transfert' %}
-                          {% include 'payment_bank_transfert' with payment_method %}
+                          {% include 'payment_bank_transfert' with payment_method,
+                            amount: store.cart.amount.total,
+                            action: '/invader/cart/add_payment' %}
                         {% else %}
-                          {% include 'payment_check' with payment_method %}
+                          {% include 'payment_check' with payment_method,
+                            amount: store.cart.amount.total,
+                            action: '/invader/cart/add_payment' %}
                         {% endcase %}
-
                       </div>
                     {% endfor%}
 
@@ -121,9 +129,12 @@ editable_elements:
         <div class="col-lg-4 col-xl-3 mb-4" data-shopinvader-container id="cart-total">
           {% include 'cart_total' with cart: store.cart  %}
           {% if store.cart.shipping.size > 0%}
-          <div class="card">
+          <div class="card ">
             <div class="card-body">
-              <h3><i class="fas fa-truck small text-primary"></i> {{'cart_shipping_address' | translate}}</h3>
+              <h3>
+                <span class="text-primary small"><i class="fas fa-truck"></i></span>
+                {{'cart_shipping_address' | translate}}
+              </h3>
               <address>
                 <div class="font-weight-bold">
                   {{store.cart.shipping.address.name}}

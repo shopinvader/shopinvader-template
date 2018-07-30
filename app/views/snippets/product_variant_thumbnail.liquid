@@ -9,11 +9,11 @@
     </span>
     <strong class="h5">
       <span class="font-weight-bold {%if product.price.discount > 0%}text-warning{%else%}text-dark{% endif %}">
-        {{product.price.value | money}}
+        {% include 'currency' | value: product.price.value %}
       </span>
       {%if product.price.discount > 0%}
         <span class="text-dark small">
-          <s>{{product.price.original_value | money }}</s>
+          <s>{% include 'currency' | value: product.price.original_value %}</s>
         </span>
       {% endif %}
     </strong>
@@ -25,6 +25,6 @@
         <div class="small">{{product.name}}</div>
       </a>
     </div>
-    
+
   </div>
 </div>

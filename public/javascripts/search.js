@@ -1,16 +1,22 @@
 
-$(document).ready(function() {
 
+
+$(document).ready(function() {
   var instantsearch_params = {
-    appId: algolia_params.app_id,
-    apiKey:  algolia_params.api_key, // search only API key, no ADMIN key
     indexName: algolia_params.products_index,
     urlSync: true,
     templatesConfig: {
       compileOptions: [{delimiters: '<% %>'}]
     }
   };
-
+  if(algolia_params.currency_rate != 1 && typeof(customSearchClient) != 'undefined') {
+    //Add customSearchClient necessary for currency conversion
+    instantsearch_params.searchClient = customSearchClient;
+  }
+  else {
+    instantsearch_params.appId = algolia_params.app_id;
+    instantsearch_params.apiKey = algolia_params.api_key;
+  }
   if($('#search-result').attr('data-category') != undefined) {
     if($('#search-result').attr('data-category')) {
       instantsearch_params.searchParameters= {
@@ -23,7 +29,6 @@ $(document).ready(function() {
   }
 
   var search = instantsearch(instantsearch_params );
-
   //var search = instantsearch(instantsearch_params);
   if($('#search-result').attr('data-category') != undefined) {
 
@@ -62,7 +67,6 @@ $(document).ready(function() {
       }
     })
   );
-
   search.addWidget(
     instantsearch.widgets.hierarchicalMenu({
       container: '#hierarchical-categories',
@@ -81,14 +85,16 @@ $(document).ready(function() {
   search.addWidget(
     instantsearch.widgets.rangeSlider({
       container: '#filter-sliderprice',
-      attributeName: 'price.default.value',
+      attributeName: 'price.'+default_role+'.value',
       autoHideContainer: false,
+      searchForFacetValues: true,
       templates: {
         header: "<h4>Price</h4>",
       },
       collapsible: {
         collapsed: false,
       },
+
       tooltips: {
         format(rawValue) {
           var number = new Number(rawValue);
@@ -120,8 +126,6 @@ $(document).ready(function() {
         input: ' form-control',
         form: ' input-group',
         label: ' text-dark small',
-
-
       }
     })
   );
@@ -175,6 +179,7 @@ $(document).ready(function() {
       })
     );
   });
+
   var product_item_css = $('#search-result .product-col').first().attr('class');
   var product_root_css = $('#search-result .row').first().attr('class');
 
@@ -221,13 +226,18 @@ $(document).ready(function() {
     return '<em>' + render(text) + '</em>';
   };
   search.templatesConfig.helpers.currency = function(text, render) {
-    var n = 0;
+    var value = 0;
     if(typeof(render) != 'undefined') {
-      n = new Number(render(text));
+
+      value = parseFloat(render(text));
     }
     else {
-      n = new Number(text);
+      value = parseFloat(text);
     }
+
+    n = new Number(value);
+
+
     return n.toLocaleString(algolia_params.locale_code,
       {
         style: "currency",

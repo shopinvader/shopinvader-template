@@ -78,3 +78,36 @@ metafields:
         "en": [
         ]
       }
+    currencies_rate: >
+      {
+        "EUR" : 1,
+        "USD" : 1.17,
+        "CAD" : 1.54,
+      }
+    currencies_format: >
+      {
+        "EUR" : {
+          "format": "%n %u",
+          "unit": "€",
+          "separator": ",",
+          "delimiter": " ",
+          "code": "EUR",
+          "default_locale": "fr-FR"
+        },
+        "USD" : {
+          "format": "%u %n",
+          "unit": "$",
+          "separator": ".",
+          "delimiter": " ",
+          "code": "USD",
+          "default_locale": "en-US"
+        },
+        "CAD" : {
+          "format": "%u %n",
+          "unit": "$",
+          "separator": ".",
+          "delimiter": " ",
+          "code": "CAD",
+          "default_locale": "en-EN"
+        }
+      }

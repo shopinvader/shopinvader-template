@@ -2,12 +2,49 @@
 <div class="container-fluid navbar-header">
   <div class="row d-none d-lg-block bg-light pt-1 pb-1 text-right">
     <ul class="nav-container list-inline  small col-12 mb-1">
+
+      {% if store.currencies != null %}
+        {% if params.new_currency or session.currency_code == null%}
+          {% action "set current currency"%}
+            var currency = getProp('params.new_currency');
+            var currencies = getProp('store.currencies_format');
+            if(!currencies.hasOwnProperty(currency) ) {
+              currency = Object.keys(currencies)[0];
+            }
+            setSessionProp('currency_code', currency);
+            setProp('currency_code', currency);
+          {% endaction %}
+        {% endif %}
+
+        <li class="list-inline-item mr-4 dropdown">
+
+          {% assign currency = store.currencies_format[session.currency_code]%}
+          {% if currency %}
+            <a class=" btn btn-link btn-sm dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="badge badge-info rounded w-25 shadow-sm ">{{currency.unit}}</span> - <u>{{'currency_' | append: session.currency_code | downcase | translate}}</u>
+            </a>
+          {% endif %}
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <form action="#" method="POST">
+              <div class="input-group">
+                {% for currency in store.currencies_format %}
+                <div class="dropdown-item">
+                    <input type="radio" name="new_currency" id="new_currency_{{currency.first}}" value="{{currency.first}}" class="d-none" data-autosubmit>
+                    <label for="new_currency_{{currency.first}}" >
+
+                    <span class="badge badge-secondary rounded w-25 shadow-sm">{{currency[1].unit}}</span> - {{'currency_' | append: currency.first | downcase | translate}}
+                  </label>
+                </div>
+
+                {% endfor%}
+              </div>
+            </form>
+          </div>
+        </li>
+      {% endif %}
       <li class="list-inline-item mr-4">
         {% for locale_code in locales %}
-          {% assign url_home = "/" %}
-          {% if locale_code != default_locale %}
-            {% assign url_home = url_home | append: locale_code %}
-          {% endif%}
+          {% assign url_home = "/"  | append: locale_code %}
           <a href="{{url_home}}" class="p-1 text-uppercase text-gray {% if locale == locale_code%} font-weight-bold text-underline  {%endif%}">
             {{locale_code}}
           </a>
