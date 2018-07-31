@@ -51,6 +51,7 @@ is_layout: false
 
     {% block 'css' %}{% endblock %}
     {% block 'javascripts_header' %}{% endblock %}
+
   </head>
   <body>
     <div class="main-loader d-none">
@@ -261,5 +262,6 @@ is_layout: false
       {{ 'search_autocomplete.js' | javascript_tag }}
     {% endblock %}
     {% include 'cookies_manager' %}
+
   </body>
 </html>

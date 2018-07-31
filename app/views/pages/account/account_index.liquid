@@ -32,6 +32,7 @@ seo_title: My sales orders | Shopinvader demo
                 </div>
                 <div class="col-6 col-sm-4">
                   {{sale.date   | date:"%d/%m/%Y" }}
+
                 </div>
                 <div class="col-6 col-sm-4">
                   <div >
@@ -70,6 +71,10 @@ seo_title: My sales orders | Shopinvader demo
                 <div class="col">
                   <div class="font-weight-bold">
                     {% include 'currency' | value: sale.amount.total %}
+                    <div class="small">
+                      {{ 'account_order_shipping' | translate }}
+                      {% include 'currency' | value: sale.shipping.amount.total %}
+                    </div>
                   </div>
                 </div>
               </div>

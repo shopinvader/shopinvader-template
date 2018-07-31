@@ -60,6 +60,11 @@ seo_title : My account | Shopinvader demo
                 <i class="fas fa-file-alt"></i> {{ "account_order_title" | translate }}
               </a>
             </li>
+            <li class="nav-item {%if page.handle == 'account_quotations'%}active{% endif%}">
+              <a href="{%path_to account_quotations%}" class="nav-link ">
+                <i class="fas fa-file-invoice"></i> {{ "account_quotation_title" | translate }}
+              </a>
+            </li>
             <li class="nav-item {%if page.handle == 'account_profil'%}active{% endif%}">
               <a href="{%path_to account_profil%}" class="nav-link ">
                 <i class="fas fa-user"></i> {{ "account_profil_title" | translate }}

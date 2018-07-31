@@ -1,0 +1,235 @@
+---
+title: Order page
+slug: quotation-details
+handle: account_quotation_details
+position: 99
+listed: false
+published: true
+is_layout: false
+seo_title: My quotation | Shopinvader demo
+---
+{% extends 'layouts/account' %}
+{% block 'content/tabcontent' %}
+{% if params.quotation_id%}
+  {% with_scope id: params.quotation_id %}
+    {% assign quotation = store.quotations.first%}
+  {% endwith_scope%}
+  {% if quotation %}
+    <div class="col-12">
+      <div class="row bg-dark text-light pt-2 pb-2 navbar-quotation">
+        <div class="col-12 col-sm-8 col-lg-9">
+          <a class=" text-light btn btn-link btn-lg" href="#">
+            <i class="fa fa-file-invoice"></i>
+            {{quotation.name}}
+            <span class="badge badge-primary small">
+              {{'account_quotation_status_' | append: quotation.state | translate}}
+            </span>
+
+
+          </a>
+        </div>
+        <div class="col-6 col-sm-4 col-lg-3 ">
+          {% if quotation.state == 'estimated'%}
+          <button class="btn btn-primary btn-block collapsed" data-toggle="collapse" data-target=".collapse-toggle">
+            <div class="quotation-details">
+              <i class="fas fa-credit-card"></i>
+              {{'account_quotation_payment' | translate}}
+            </div>
+            <div class="quotation-pay">
+              <i class="fas fa-angle-left"></i>
+              {{'account_quotation_cancel' | translate}}
+            </div>
+          </button>
+          {% endif%}
+        </div>
+
+      </div>
+    </div>
+    <div class="collapse show collapse-toggle" id="card-quotation">
+      <div class="card  shadow bg-white p-3 p-lg-4">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-12 pb-4">
+              <img src="{{ site.metafields.theme.logo }}" alt="{{ site.name }}"  class="img-responsive"/>
+            </div>
+          </div>
+          <div class="row pt-2 pb-4">
+            <div class="col-12 col-sm-6 col-lg-7 col-xl-8">
+              <div class=" pb-1">
+                <span class="fa-stack mb-2">
+                  <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                  <i class="fas fa-file-invoice fa-stack-1x fa-inverse"></i>
+                </span>
+                <span class="h3 font-weight-bold">
+                  {{'account_quotation_invoicing_address' | translate}}
+                </span>
+              </div>
+              <div>{{quotation.invoicing.address.name}}</div>
+              <div>{{quotation.invoicing.address.street}}</div>
+              <div>{{quotation.invoicing.address.street2}}</div>
+              <div>
+                {{quotation.invoicing.address.zip}}
+                {{quotation.invoicing.address.city}}
+              </div>
+              <div>{{quotation.invoicing.address.country_id.name}}</div>
+              <div>{{quotation.invoicing.address.phone}}</div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-5 col-xl-4">
+              <div class=" pb-1">
+                <span class="fa-stack mb-2">
+                  <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                  <i class="fas fa-map-marker-alt fa-stack-1x fa-inverse"></i>
+                </span>
+                <span class="h3 font-weight-bold">
+                  {{'account_quotation_shipping_address' | translate}}
+                </span>
+              </div>
+
+              <div>{{quotation.shipping.address.name}}</div>
+              <div>{{quotation.shipping.address.street}}</div>
+              <div>{{quotation.shipping.address.street2}}</div>
+              <div>
+                {{quotation.shipping.address.zip}}
+                {{quotation.shipping.address.city}}
+              </div>
+              <div>{{quotation.shipping.address.country_id.name}}</div>
+              <div>{{quotation.shipping.address.phone}}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 pt-4">
+              <div class=" h2">
+                {{'account_quotation_name' | translate}} {{quotation.name}}
+                {{quotation.date_order  | date:"%d/%m/%Y" }}
+
+              </div>
+            </div>
+          </div>
+          <div class="row   m-0 mt-4 border-bottom border-dark d-none d-sm-flex d-md-none d-lg-flex">
+            <div class="col-8 text-light pt-3 pb-3">
+
+            </div>
+            <div class="col-2 text-dark text-center pt-3 pb-3 font-weight-bold">
+              {{ 'account_order_qty' | translate }}
+            </div>
+            <div class="col-2   text-dark text-center pt-3 pb-3 font-weight-bold">
+              {{ 'account_order_subtotal' | translate }}
+            </div>
+          </div>
+          {% for line in quotation.lines.items %}
+          <div class="row m-0 border-bottom  pb-4 pt-4">
+            <div class="col-3 col-sm-2 col-md-2 col-lg-2 col-xl-1">
+              <img src="{{line.product.images.first.small.src}}" alt="{{order_line.product.images.first.small.alt }}" class="img-fluid"/>
+            </div>
+            <div class="col-9 col-sm-6 col-md-10 col-lg-6 col-xl-7">
+              <span class="font-weight-bold">{{line.product.name}}</span>
+            </div>
+            <div class="col-6 col-sm-2 col-md-6 col-lg-2 text-center pt-4 pt-sm-0  pt-sm-3 pt-lg-0">
+              <div class="">
+                {{ 'account_order_qty' | translate }}
+              </div>
+              {{line.qty | round}}
+            </div>
+            <div class="col-6 col-sm-2 col-md-6 col-lg-2 text-center pt-4 pt-sm-0  pt-sm-3 pt-lg-0">
+              <div class="">
+                {{ 'account_order_subtotal' | translate }}
+              </div>
+              {% include 'currency' | value: line.amount.total %}
+            </div>
+          </div>
+          {% endfor%}
+          <div class="row mt-4 pt-4 justify-content-end">
+            <div class="col-12 col-sm-7 col-md-8 col-lg-7 col-xl-5 ">
+              <div class="row">
+                <div class="col-12 border-bottom">
+                  <h2>{{'account_quotation_total_title' | translate}}</h2>
+                </div>
+              </div>
+              <div class="row pt-2">
+                <div class="col-6">
+                  {{'account_quotation_total_subtotal' | translate}}
+                </div>
+                <div class="col-6 text-right font-weight-bold">
+                  {% include 'currency' | value: quotation.amount.untaxed %}
+                </div>
+              </div>
+              <div class="row pt-2">
+                <div class="col-6">
+                  {{'account_quotation_shipping' | translate}}
+                </div>
+                <div class="col-6 text-right font-weight-bold">
+                  {% include 'currency' | value: quotation.shipping.amount.total %}
+                </div>
+              </div>
+              <div class="row pt-2">
+                <div class="col-6">
+                  {{'account_quotation_total_taxes' | translate}}
+                </div>
+                <div class="col-6 text-right font-weight-bold">
+                  {% include 'currency' | value: quotation.amount.tax %}
+                </div>
+              </div>
+              <div class="row pt-3 h4">
+                <div class="col-6">
+                  {{'account_quotation_total_amount' | translate}}
+                </div>
+                <div class="col-6 text-right font-weight-bold">
+                  {% include 'currency' | value: quotation.amount.total %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if quotation.state == 'estimated'%}
+      <div class="collapse collapse-toggle">
+
+      <div class="card  shadow-sm card-payment text-center">
+        <div class="card-header ">
+          <ul class="nav nav-tabs card-header-tabs nav-justified" role="tablist">
+
+          {% for payment_method in quotation.payment.available_methods.items%}
+            <li class="nav-item "  >
+              <a class="nav-link {% if forloop.index0 == 0 %} active{%endif%}"  data-toggle="tab" href="#tab-{{payment_method.id}}"  role="tab" aria-controls="{{payment_method.id}}" aria-selected="{% if selected_payment.id == payment_method.id %}true{%else%}false{%endif%}">
+                {{'payment_method_' | append: payment_method.name | downcase | underscore | translate}}
+              </a>
+            </li>
+          {% endfor%}
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="tab-content" id="payment-tabs">
+          {% for payment_method in quotation.payment.available_methods.items%}
+            <div class="tab-pane fade {% if forloop.index0 == 0 %}show active{%endif%}" id="tab-{{payment_method.id}}" role="tabpanel" aria-labelledby="home-tab">
+              {% assign action = '/invader/quotations/' | append: quotation.id | append: '/add_payment'%}
+
+              {% case payment_method.code %}
+              {% when 'stripe' %}
+                {% include 'payment_stripe' with payment_method,
+                  amount: quotation.amount.total,
+                  action %}
+              {% when 'adyen' %}
+                {% include 'payment_adyen' with payment_method,
+                  amount: quotation.amount.total,
+                  action %}
+              {% when 'bank_transfert' %}
+                {% include 'payment_bank_transfert' with payment_method,
+                  amount: quotation.amount.total,
+                  action %}
+              {% else %}
+                {% include 'payment_check' with payment_method,
+                  amount: quotation.amount.total,
+                  action %}
+              {% endcase %}
+            </div>
+          {% endfor%}
+
+          </div>
+        </div>
+      </div>
+    </div>
+    {%endif%}
+  {% endif %}
+{% endif %}
+{% endblock %}

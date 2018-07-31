@@ -63,7 +63,7 @@ $theme-colors: (
   dark: $gray-800
 
 );
-$enable-rounded: false;
+$enable-rounded: true;
 $enable-shadows: true;
 //Breadcrumb
 $breadcrumb-padding-y:          .75rem;
@@ -121,3 +121,5 @@ $main-showcase-float: true;
 $main-showcase-width: auto;
 $main-showcase-bg: $cyan;
 $main-showcase-color: $white;
+
+$card-border-radius: 0;

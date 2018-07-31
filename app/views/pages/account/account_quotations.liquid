@@ -1,0 +1,86 @@
+---
+title: Order page
+slug: quotations
+handle: account_quotations
+position: 99
+listed: false
+published: true
+is_layout: false
+seo_title: My quotations | Shopinvader demo
+---
+{% extends 'layouts/account' %}
+{% block 'content/tabcontent' %}
+  {% paginate store.quotations by 6 %}
+    <div class="row">
+      <div class="col-12">
+      {%if store.quotations == null or store.quotations.size == 0 %}
+        <div class="text-center">
+          {{ 'account_quotation_empty' | translate }}
+        </div>
+      {% else %}
+        <div class="text-right">
+          {%include 'paginate' with paginate %}
+        </div>
+        <div class="row">
+        {% for quotation in paginate.collection %}
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="card  shadow-sm">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-7">
+                    <i class="fa fa-file-invoice text-primary"></i>
+                    <a href="{% path_to account_quotation_details %}?quotation_id={{quotation.id}}" class="font-weight-bold">
+                      {{quotation.name}}
+                    </a>
+                  </div>
+                  <div class="col-5 text-right">
+                  {% case quotation.state%}
+                    {% when 'estimating' %}
+                    <div class="badge badge-info">
+                      <i class="fa fa-cogs"></i> {{'account_quotation_status_' | append: quotation.state | translate}}
+                    </div>
+                    {% when 'estimated' %}
+                    <div class="badge badge-primary">
+                      <i class="far fa-file"></i> {{'account_quotation_status_' | append: quotation.state | translate}}
+                    </div>
+                    {% else %}
+                    <div class="badge badge-dark">
+                      {{quotation.state }}
+                    </div>
+                  {% endcase %}
+
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class=" pt-2">
+                      {{quotation.date  | date:"%d/%m/%Y" }}
+                    </div>
+                    <div class="text-right pt-2">
+                      {% include 'currency' | value: quotation.amount.total %}
+                      <div class="small">
+                        {{ 'account_quotation_shipping' | translate }}
+                        {% include 'currency' | value: quotation.shipping.amount.total %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer text-center">
+                <a href="{% path_to account_quotation_details %}?quotation_id={{quotation.id}}" class="font-weight-bold">
+                  <i class="fa fa-search"></i> {{'account_quotation_lines' | translate}}
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+        <div class="text-right">
+          {%include 'paginate' with paginate %}
+        </div>
+
+      {% endif %}
+      </div>
+    </div>
+  {% endpaginate %}
+{% endblock %}

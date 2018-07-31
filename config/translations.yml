@@ -28,6 +28,9 @@ account_order_payment :
 account_order_subtotal:
   en: Total
   fr: Total
+account_order_shipping:
+  en: Shipping cost
+  fr: Frais de port
 account_quotation_invoicing_address:
   en: Invoicing address
   fr: Adresse de facturation
@@ -65,6 +68,15 @@ account_quotation_payment:
 account_quotation_cancel:
   en: Return
   fr: Retour
+account_quotation_status_estimating:
+  en: Estimation in progress
+  fr: En cours de chiffrage
+account_quotation_status_estimated:
+  en: Pending payment
+  fr: En attente de paiement
+account_quotation_shipping:
+  en: Shipping cost
+  fr: Frais de port
 account_profil_title:
   en: My account profile
   fr: Mes informations
