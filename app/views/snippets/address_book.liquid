@@ -18,7 +18,7 @@
     {% for address in address_list %}
       {% if address.id != null %}
         <div class="col-12 col-sm-6 col-lg-4  align-items-stretch d-flex">
-          <div class="card w-100">
+          <div class="card shadow-sm w-100">
             <div class="card-body">
               {% if display_delector == true%}
               <div class="radio">
@@ -38,7 +38,9 @@
                   </div>
                   <div>{{address.country.name}}</div>
                   {% if address.phone%}
-                    <div><i class="fa fa-phone small"></i>  {{address.phone}}</div>
+                    <span class="small">
+                      <i class="fa fa-phone"></i>
+                    </span>  {{address.phone}}
                   {% endif %}
                 </address>
               </label>

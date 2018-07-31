@@ -18,3 +18,16 @@
     }
   }
 }
+.navbar-quotation {
+  .quotation-pay {
+    display: none;
+  }
+  .btn:not(.collapsed) {
+    .quotation-details {
+      display: none;
+    }
+    .quotation-pay {
+      display: block;
+    }
+  }
+}

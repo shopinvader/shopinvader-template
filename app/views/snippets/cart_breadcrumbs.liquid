@@ -14,7 +14,7 @@
 <ul class="cart-breadcrumb">
   <li class="active">
     <a href="{% path_to cart_index %}" >
-      <span class="breadcrumb-number">
+      <span class="breadcrumb-number shadow">
         <span class="breadcrumb-counter">1</span>
       </span>
       <span class="breadcrumb-title">
@@ -24,7 +24,7 @@
   </li>
   <li class="{%if cart_step >= 2 %}active{% endif %}">
     <a href="{% path_to cart_address %}" >
-      <span class="breadcrumb-number">
+      <span class="breadcrumb-number shadow">
         <span class="breadcrumb-counter">2</span>
       </span>
       <span class="breadcrumb-title">
@@ -34,7 +34,7 @@
   </li>
   <li class="{%if cart_step >= 3 %}active{% endif %}">
     <a href="{% path_to cart_checkout %}" >
-      <span class="breadcrumb-number">
+      <span class="breadcrumb-number shadow">
         <span class="breadcrumb-counter">3</span>
       </span>
       <span class="breadcrumb-title">
@@ -43,7 +43,7 @@
     </a>
   </li>
   <li class="{%if cart_step >= 4 %}active{% endif %}">
-    <span class="breadcrumb-number">
+    <span class="breadcrumb-number shadow">
       <span class="breadcrumb-counter">4</span>
     </span>
     <span class="breadcrumb-title">
