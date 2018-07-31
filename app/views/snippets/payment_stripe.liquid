@@ -110,7 +110,7 @@
     <input type="hidden" name="invader_success_url" value="{% path_to 'cart_end' %}" />
     <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
     <input type="hidden" name="payment_mode[id]" value="{{payment_method.id }}">
-    <input type="hidden" id="stripe_source" name="stripe[source]" value="" autocomplete="off">
+    <input type="hidden" id="stripe_token" name="stripe[token]" value="" autocomplete="off">
     <input type="hidden" name="stripe[return_success_url]" value="{% path_to page %}">
     <input type="hidden" name="stripe[return_success_error]" value="{% path_to page %}">
   </form>
@@ -179,7 +179,7 @@
             $('#modal-stripe #payment-form').css('opacity', 0);
             $('#modal-stripe .modal-loader').show();
             $form = $('#stripe-checkout-form');
-            $form.find('#stripe_source').val(result.source.id);
+            $form.find('#stripe_token').val(result.source.id);
             $form.submit();
 
           }

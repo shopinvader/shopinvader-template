@@ -161,13 +161,13 @@
               },
               'adyen': {
                 "token" : $adyen_form.find('#'+encrypted_field).val(),
-                "redirect_success_url" : "{% path_to page %}",
+                "redirect_success_url" : "{% path_to cart_end %}",
                 "redirect_cancel_url" : "{% path_to page %}"
               }
             }),
             success: function(cart) {
               var error = true;
-
+              console.log('cart', cart);
               if(cart != null) {
                 if(cart.payment.hasOwnProperty('adyen_params')) {
                   var adyen_params = cart.payment.adyen_params;
@@ -182,10 +182,12 @@
                     $3ds_form.find('[name=TermUrl]').val(adyen_params.TermUrl);
                     $3ds_form.submit();
                   }
-                  else {
-                    //Without 3D Secure
-                    window.location = "{% path_to cart_end %}";
-                  }
+
+                }
+                else {
+                  error = false;
+                  //Without 3D Secure
+                  window.location = "{% path_to cart_end %}";
                 }
               }
               if(error == true) {
@@ -194,6 +196,7 @@
               }
             },
             error: function(reponse) {
+              console.log('recieved error response', response);
               if(reponse.hasOwnProperty('responseJSON')) {
                 $('#card-errors').html(reponse.responseJSON.description);
                 $('#modal-adyen #adyen-encrypted-form').css('opacity', 1);
