@@ -96,6 +96,14 @@ $(document).ready(function () {
       $($(this).attr('data-target')).css('display', 'none');
     }
   );
+  $('[data-toggle=display-hover]').hover(
+    function() {
+      $($(this).attr('data-target')).css('display', 'block');
+    },
+    function() {
+      $($(this).attr('data-target')).css('display', 'none');
+    }
+  );
   $('.nav-header-controls-item').hover(
     function() {
       $('.nav-header-controls .header-controls-dropdown-content').hide();

@@ -47,6 +47,7 @@
   .algolia-autocomplete {
     width: calc(100% - 41px);
     .aa-input {
+      box-shadow: none;
       width: 100%;
     }
   }
