@@ -82,7 +82,7 @@ metafields:
       {
         "EUR" : 1,
         "USD" : 1.17,
-        "CAD" : 1.54,
+        "CAD" : 1.54
       }
     currencies_format: >
       {
