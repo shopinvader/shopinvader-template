@@ -9,13 +9,13 @@
           </span>
 
           <span class="h1 pt-4 pb-4 text-info ">
-            {% editable_text form_creditcard_title, label: 'Cart Quotation - title', rows: 1 %}
+            {% editable_text quotation_title, label: 'Cart Quotation - title', rows: 1 %}
               Request a quotation
             {% endeditable_text %}
           </span>
         </div>
         <div class="col-12 col-md-8 text-info ">
-          {% editable_text form_creditcard_title, label: 'Cart Quotation - desc', rows: 1 %}
+          {% editable_text quotation_title, label: 'Cart Quotation - desc', rows: 1 %}
             If you want a quotation you can request our teams to
             study an offer customized to your needs and your situation.
             <br>
@@ -29,7 +29,7 @@
             <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
             <button type="submit" name="button" class="btn btn-outline-info btn-lg mt-3">
               <b>
-              {% editable_text form_creditcard_title, label: 'Formulaire paiement - titre', rows: 1 %}
+              {% editable_text quotation_title, label: 'Formulaire paiement - titre', rows: 1 %}
                 Request quotation
               {% endeditable_text %}
               </b>
