@@ -97,14 +97,20 @@ editable_elements:
                           {% include 'payment_adyen' with payment_method,
                             amount: store.cart.amount.total,
                             action: '/invader/cart/add_payment' %}
+                        {% when 'paypal' %}
+                          {% include 'payment_paypal' with payment_method,
+                            amount: store.cart.amount.total,
+                            action: '/invader/cart/add_payment' %}
                         {% when 'bank_transfert' %}
                           {% include 'payment_bank_transfert' with payment_method,
                             amount: store.cart.amount.total,
                             action: '/invader/cart/add_payment' %}
-                        {% else %}
+                        {% when 'check' %}
                           {% include 'payment_check' with payment_method,
                             amount: store.cart.amount.total,
                             action: '/invader/cart/add_payment' %}
+                        {% else %}
+                          Indisponible
                         {% endcase %}
                       </div>
                     {% endfor%}
