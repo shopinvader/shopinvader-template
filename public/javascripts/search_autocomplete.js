@@ -3,6 +3,7 @@ $(document).ready(function() {
   var client = algoliasearch(algolia_params.app_id, algolia_params.api_key);
   var product_index = client.initIndex(algolia_params.products_index);
   var category_index = client.initIndex(algolia_params.categories_index);
+  var hitsSource = autocomplete.sources.hits(category_index, { hitsPerPage: 5 });
   autocomplete('#header-search-input',
     {
       debug: true,
@@ -48,7 +49,20 @@ $(document).ready(function() {
         }
       },
       {
-        source: autocomplete.sources.hits(category_index, {hitsPerPage: 4}),
+        source: function(query, callback) {
+          hitsSource(query, function(suggestions) {
+            var categories = [];
+            suggestions = suggestions.map(function(suggestion) {
+              if(categories.includes(suggestion.name) == false) {
+                return suggestion;
+              }
+              categories.push(suggestion.name);
+              return false;
+            });
+
+            callback(suggestions);
+          });
+        },
         displayKey: 'name',
         name: 'category',
         cssClasses: {
@@ -170,13 +184,14 @@ function search_template_link(template, query, result) {
 }
 
 function search_template_title(template, result) {
-  if(result.nbHits > 0) {
-    template.find('.nb_hits').html(' ('+result.nbHits+')');
+  if(typeof(result) != 'undefined') {
+    if(result.nbHits > 0) {
+      template.find('.nb_hits').html(' ('+result.nbHits+')');
+    }
+    else {
+      template.find('.nb_hits').html('');
+    }
   }
-  else {
-    template.find('.nb_hits').html('');
-  }
-
   return template.html();
 }
 
