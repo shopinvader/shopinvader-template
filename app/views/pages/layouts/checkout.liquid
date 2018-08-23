@@ -44,7 +44,7 @@ is_layout: false
           {% block main %}
           {% endblock %}
         {% else %}
-          <div class="container">
+          <div class="container" data-shopinvader-container id="cart-content">
             <div class="row">
               <div class="col-12">
                 {% editable_text "cart_empty", hint: "Cart empty" %}

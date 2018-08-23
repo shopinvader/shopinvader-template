@@ -8,13 +8,12 @@ slug: cart
 {% extends 'layouts/checkout' %}
 
 {% block "content/main" %}
-
+<div data-shopinvader-container id="cart-content">
   <div class="row"  id="cart-index">
-
-    <div class="col-lg-8 col-xl-9" data-shopinvader-container id="cart-line">
+    <div class="col-lg-8 col-xl-9" >
       {% include 'cart_list' with cart: store.cart %}
     </div>
-    <div class="col-lg-4 col-xl-3 mb-4" data-shopinvader-container id="cart-total">
+    <div class="col-lg-4 col-xl-3 mb-4">
       {% include 'cart_total' with cart: store.cart %}
       <form method="post" action="invader/cart/update"  id="cart_update_form">
         <input type="hidden" name="invader_success_url" value="{% path_to cart_login %}" />
@@ -59,4 +58,6 @@ slug: cart
       </div>
     </form>
   </div>
+</div>
+
 {% endblock %}
