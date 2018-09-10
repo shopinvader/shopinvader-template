@@ -50,6 +50,7 @@ fields:
     required: true
     hint: Explanatory text displayed in the back office
     localized: false
+    unique: true
 
 - password: # The lowercase, underscored name of the field
     label: Password # Human readable name of the field
