@@ -86,7 +86,7 @@ seo_title: My sales orders | Shopinvader demo
                   <img src="{{line.product.images.first.small.src}}" alt="{{order_line.product.images.first.small.alt }}" class="img-fluid"/>
                 </div>
                 <div class="col-8 col-sm-10">
-                  <a href="{{line.product.url_key}}" target="_blank">{{line.product.name}}</a>
+                  <a href="{{line.product.url_key | prepend: url_base }}" target="_blank">{{line.product.name}}</a>
                   <div class="small">
                     {{ 'account_order_qty' | translate }}
                     <b>{{line.qty | round}}</b>
