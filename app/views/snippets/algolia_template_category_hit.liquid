@@ -2,14 +2,19 @@
   {% raw %}
   {{=<% %>=}}
   {% endraw %}
-  <div class="">
+  <%#name%>
+  <div style="font-size:1.4rem;" class="">
     <a href="{{url_base}}/<% url_key %>" class="bold" >
       <%#name%>
         <% name %>
       <%/name%>
     </a>
     <div class="small">
-    <%& short_description %>
+      <%# short_description %>
+      <%& short_description %>
+      <%/ short_description %>
+      &nbsp <BR>
     </div>
   </div>
+  <%/name%>
 </script>

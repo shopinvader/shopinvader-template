@@ -254,6 +254,7 @@ is_layout: false
       {% include 'algolia_init' %}
       <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
       <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
       {{ 'search_autocomplete.js' | javascript_tag }}
     {% endblock %}
     {% block 'javascripts', short_name: true %}

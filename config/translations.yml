@@ -304,6 +304,12 @@ email_resetpassword_subject:
 filters:
   en: Filters
   fr: Filtrer
+filter_clear:
+  en: Clear All
+  fr: Effacer la recherche
+filter_price:
+  en: Price
+  fr: Prix
 home:
   en: Home
   fr: Accueil
