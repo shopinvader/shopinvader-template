@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function() {
   var instantsearch_params = {
     indexName: algolia_params.products_index,
@@ -90,7 +87,7 @@ $(document).ready(function() {
       },
 
       tooltips: {
-        format(rawValue) {
+        format: function(rawValue) {
           var number = new Number(rawValue);
           return number.toLocaleString(
             algolia_params.locale_code,
@@ -210,14 +207,22 @@ $(document).ready(function() {
 
   search.addWidget(
     instantsearch.widgets.pagination({
-      container: '#search-pagination',
+      container: '#search-pagination-top',
       cssClasses: {
         root: 'pagination-block',
         link: 'btn btn-default '
       }
     })
   );
-
+  search.addWidget(
+    instantsearch.widgets.pagination({
+      container: '#search-pagination-bottom',
+      cssClasses: {
+        root: 'pagination-block',
+        link: 'btn btn-default '
+      }
+    })
+  );
   search.templatesConfig.helpers.emphasis = function(text, render) {
     return '<em>' + render(text) + '</em>';
   };

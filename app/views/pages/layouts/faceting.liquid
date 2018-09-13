@@ -102,7 +102,7 @@ is_layout: false
               </div>
             </div>
             <div class="col-4 col-sm-3 col-md-8 col-lg-5 col-xl-5 text-left p-0">
-              <div class=" d-inline-block text-left" id="search-pagination">
+              <div class=" d-inline-block text-left" id="search-pagination-top">
                 {% include 'paginate' with paginate %}
               </div>
             </div>
@@ -133,6 +133,13 @@ is_layout: false
             </div>
             <div class="row">
               <div class="col-12 text-right">
+              </div>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-12 align-content-center text-center">
+              <div class=" d-inline-block text-left align-content-center" id="search-pagination-bottom">
+                {% include 'paginate' with paginate %}
               </div>
             </div>
           </div>
