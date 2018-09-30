@@ -2,6 +2,7 @@
 
 shopinvader-template is an open-source template for ShopInvader the
 e-commerce solution with Odoo.
+
 See [shopinvader.com](https://shopinvader.com)
 
 ![ShopInvader template](https://imgur.com/7PiaRFZ)
@@ -35,3 +36,38 @@ $ git clone https://github.com/akretion/shopinvader-template.git YOUR_SITE_NAME
 bundle exec wagon serve
 
 ```
+
+### Launch with docker-compose
+
+Run the container with bash
+
+```bash
+cd YOUR_SITE_NAME
+docker-compose run wagon gosu ubuntu bash
+```
+
+Now you are inside the container you can use wagon !
+
+```bash
+wagon serve
+```
+
+### Launch with docky
+
+Run the container with bash
+
+```bash
+cd YOUR_SITE_NAME
+docky run
+```
+
+Now you are inside the container you can use wagon !
+
+```bash
+wagon serve
+```
+
+### Wagon documentation
+
+https://locomotive-v3.readme.io/docs
+
