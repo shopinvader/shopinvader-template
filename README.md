@@ -43,7 +43,7 @@ Run the container with bash
 
 ```bash
 cd YOUR_SITE_NAME
-docker-compose run wagon gosu ubuntu bash
+docker-compose run --service-ports wagon gosu ubuntu bash
 ```
 
 Now you are inside the container you can use wagon !
