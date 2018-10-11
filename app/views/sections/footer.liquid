@@ -1,0 +1,173 @@
+---
+{
+  "name": "Footer",
+  "class": "",
+  "icon": "footer",
+  "keep_name": true,
+  "keep_icon": true,
+  "id": "footer",
+  "settings": [
+    {
+      "label": "Theme color",
+      "id": "theme_color",
+      "type": "select",
+      "keep_name": true,
+      "options": [
+        {"label": "Light","value": "light"},
+        {"label": "Dark","value": "dark"},
+        {"label": "Transparent","value": "transparent"}
+      ]
+    },
+    {
+      "label": "Display categories",
+      "id": "categories_display",
+      "type": "checkbox"
+    },
+    {
+      "label": "Categories Background",
+      "id": "categories_background",
+      "type": "image_picker"
+    },
+    {
+      "label": "Footer text",
+      "id": "footer_content",
+      "type": "text",
+      "html": true
+    },
+    {
+      "label": "Cookies manager link label",
+      "id": "cookies_link_label",
+      "type": "text"
+    },
+    {
+      "label": "Logo Footer",
+      "id": "footer_logo",
+      "type": "image_picker"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Reinsurance undertaking ",
+      "type": "reinsurance",
+      "settings": [
+        {
+          "label": "Label",
+          "id": "label",
+          "type": "text"
+        },
+        {
+          "label": "Picture",
+          "id": "icon",
+          "type": "image_picker"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "settings": {
+      "categories_display" : true,
+      "categories_background" : "images/banner-categories.jpg",
+      "cookies_link_label": "Manage cookies",
+      "footer_logo": "images/powered-by-shopinvader-logo.png"
+    },
+    "blocks": [
+      {
+        "type": "reinsurance",
+        "settings": {
+          "label": "free shipping",
+          "icon": "images/free-delivery.png"
+        }
+      },
+      {
+        "type": "reinsurance",
+        "settings": {
+          "label": "Easy return ",
+          "icon": "images/free-return.png"
+        }
+      },
+      {
+        "type": "reinsurance",
+        "settings": {
+          "label":  "lowest price guarantee",
+          "icon": "images/lowest-price.png"
+        }
+      },
+      {
+        "type": "reinsurance",
+        "settings": {
+          "label":  "Free Holine",
+          "icon": "images/free-hotline.png"
+        }
+      }
+    ]
+  }
+}
+---
+
+<footer class="bg-light w-100">
+  <div class="container-fluid">
+  {% if section.settings.categories_display %}
+    <div class="row categories-list"  style="background-image:url({{section.settings.categories_background}})">
+      <div class="col-12">
+        <div class="container">
+          <ul class="row  pt-2 pb-2 list-inline">
+          {%with_scope level: 0%}
+            {% for category_lv1 in store.categories%}
+            <li class="col-12 col-sm-6 col-md-4 pt-2 pb-4 pb-md-2list-inline-item m-0">
+              <a href="{{category_lv1.url_key | prepend: url_base}}" class="h4 text-white font-weight-bold text-uppercase">
+                {{category_lv1.name}}
+              </a>
+              <ul class="">
+                {% for category_lv2 in category_lv1.childs%}
+                <li class="">
+                  <a href="{{category_lv2.url_key | prepend: url_base}}" class="">
+                    {{category_lv2.name}}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
+            {% endfor %}
+          {% endwith_scope %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+    <div class=" row store-advantage bg-dark text text-center text-light  pt-5 pb-5 d-none d-md-flex">
+      <div class="col-12">
+        <div class="container">
+          <div class="row">
+            {% for block in section.blocks %}
+            <div class="col-3 text-center ">
+              <img src="{{ block.settings.icon }}" alt="{{block.settings.label}}" class="img-fluid">
+              <div class="text-light lead ">
+                {{block.settings.label}}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-6 pt-5">
+        <p class="text-dark">&copy; {{site.name}} {{ now | localized_date: '%Y' }} </p>
+        {{section.settings.footer_content}}
+      </div>
+      <div class="col-6 text-right pt-4">
+        <img src="{{section.settings.footer_logo}}" alt="ShopInvader" class="img-fluid">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <a data-toggle="modal" href="#cookie-manage-modal">
+          {{section.settings.cookies_link_label}}
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
