@@ -11,6 +11,15 @@
     padding-top: 10px;
     //max-width: 350px;
   }
+  .carousel-caption {
+    bottom: 0;
+    top: 0;
+    .carousel-caption-content {
+      background-color: transparentize(theme-color('dark'), 0.3);
+      color: $white;
+
+    }
+  }
 }
 
 .carousel .carousel-control {

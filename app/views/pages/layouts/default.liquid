@@ -66,11 +66,12 @@ is_layout: false
       <main>
         <div class="container-fluid">
           {% include 'store_notifications' %}
-          {% block content %}
-          {% endblock %}
+
         </div>
+        {% block content %}
+        {% endblock %}
       </main>
-      {% global_section 'footer', id:'page_footer'%}
+      {% global_section 'footer',  placement: 'bottom', id:'page_footer'%}
     </div>
 
     <div class="modal fade" id="main-modal" tabindex="-1" role="dialog">
