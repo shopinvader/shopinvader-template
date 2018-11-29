@@ -1,0 +1,19 @@
+---
+title: Registration succeeded
+slug: login_succeed
+handle: cart_login_succeed
+position: 4
+listed: false
+published: true
+is_layout: false
+seo_title: "Registration succeeded | Shopinvader demo"
+---
+{% extends 'layouts/checkout' %}
+
+
+{% block content/main %}
+{% action 'Registration succeeded redirection' %}
+  var path = 'cart_address?guest_email=' + getProp('params.email');
+  redirectTo(path);
+{% endaction %}
+{% endblock %}

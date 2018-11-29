@@ -73,9 +73,15 @@ if(getProp("current_customer") != null) {
           {% endeditable_text %}
         </p>
         <div class="text-center">
-          <a class="btn btn-primary text-size-lg" href="{% path_to account_register%}?context=cart">
-            {{'cart_without_account_btn' | translate }} <i class="fa fa-angle-right"></i>
-          </a>
+          {% if store.is_guest_mode_allowed %}
+            <a class="btn btn-primary text-size-lg" href="{% path_to guest_create%}?context=cart">
+              {{'cart_without_account_btn' | translate }} <i class="fa fa-angle-right"></i>
+            </a>
+          {% else %}
+            <a class="btn btn-primary text-size-lg" href="{% path_to account_register%}?context=cart">
+                {{'cart_without_account_btn' | translate }} <i class="fa fa-angle-right"></i>
+            </a>
+          {% endif %}
         </div>
       </div>
     </div>

@@ -1,0 +1,31 @@
+---
+title: Guest Account creation - Form
+handle: guest_create
+slug: guest_create
+seo_title: Guest Account creation | Shopinvader demo
+display_settings:
+  hidden: false
+editable_elements:
+  main/title: "Create a guest account"
+  main/body: ""
+---
+{% extends 'layouts/lite' %}
+{% block 'content' %}
+<div class="row justify-content-center bg-light">
+  <div class="col-12 col-lg-9 col-xl-7 pt-4 pb-4">
+    <h1 class="h1">
+    {% editable_text title, inline: true %}
+     Guest information
+    {% endeditable_text %}
+    </h1>
+    {% include 'store_notifications' %}
+    <form method="post" action="/invader/guest/create" id="cart_guest_form" data-autocomplete="address">
+      <input type="hidden" name="invader_success_url" value="{% path_to cart_address %}" />
+      <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+      <input type="hidden" name="step[current]" value="cart_login">
+      <input type="hidden" name="step[next]" value="cart_address">
+      {% include 'guest_form' %}
+    </form>
+  </div>
+</div>
+{% endblock %}

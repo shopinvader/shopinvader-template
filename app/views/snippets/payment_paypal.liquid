@@ -20,7 +20,7 @@
 
   </div>
   <div class="col-12 col-sm-6 text-center text-sm-left">
-    <form method="POST" action="{{action}}">
+    <form method="POST" action="{{action}}" id="paypal-checkout-form"su>
       <input type="hidden" name="invader_success_url" value="{% path_to 'cart_end' %}" />
       <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
       <input type="hidden" name="payment_mode[id]" value="{{payment_method.id }}">
