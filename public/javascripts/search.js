@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function() {
   var instantsearch_params = {
     indexName: algolia_params.products_index,
@@ -29,19 +26,13 @@ $(document).ready(function() {
   }
 
   var search = instantsearch(instantsearch_params );
-  //var search = instantsearch(instantsearch_params);
-  if($('#search-result').attr('data-category') != undefined) {
 
-
-  }
-  search.addWidget(
-    instantsearch.widgets.searchBox({
-      container: '#header-search-input'
-    })
-  );
   search.addWidget(
     instantsearch.widgets.stats({
-      container: '#search-stats'
+      container: '#search-stats',
+      templates: {
+        body: $('#stats-template').html()
+      }
     })
   );
   var page_hits_count = [];
@@ -50,7 +41,7 @@ $(document).ready(function() {
     page_hits_count.push(
       {
         value:i,
-        label: i+' '+$('#hits-per-page-selector').data('label'),
+        label: i+' '+ algolia_params.translations.per_page,
         default: default_item,
       }
     );
@@ -89,14 +80,14 @@ $(document).ready(function() {
       autoHideContainer: false,
       searchForFacetValues: true,
       templates: {
-        header: "<h4>Price</h4>",
+        header: "<h4>"+algolia_params.translations.price+"</h4>",
       },
       collapsible: {
         collapsed: false,
       },
 
       tooltips: {
-        format(rawValue) {
+        format: function(rawValue) {
           var number = new Number(rawValue);
           return number.toLocaleString(
             algolia_params.locale_code,
@@ -109,7 +100,7 @@ $(document).ready(function() {
       }
     })
   );
-  filters.push({name:'price.default.value', label: 'Price'});
+  filters.push({name:'price.'+default_role+'.value', label: algolia_params.translations.price});
 
   search.addWidget(
     instantsearch.widgets.priceRanges({
@@ -148,25 +139,26 @@ $(document).ready(function() {
       collapsible: {
         collapsed: false,
       },
-
-      autoHideContainer: false,
+      autoHideContainer: false
     };
     search.addWidget(instantsearch.widgets[$element.data('filter-widget-type')](search_widget));
     filters.push({name: $element.data('filter-attr'), label: $element.data('filter-name')});
   });
 
   $('[data-current-filter]').each(
-  function(i, element){
-
+  function(i, element) {
     search.addWidget(
       instantsearch.widgets.currentRefinedValues({
-        container: '#'+$(element).attr('id'),
+        container: ('#'+$(element).attr('id')),
         clearAll: 'after',
         clearsQuery: true,
         attributes: filters,
         cssClasses: {
           count: ' d-none',
-          clearAll: ' btn btn-outline-dark btn-sm  btn-sm  d-inline-block',
+          clearAll: ' btn btn-outline-dark btn-sm  btn-sm  d-inline-block'
+        },
+        templates: {
+          clearAll: algolia_params.translations.clear_all
         },
         transformData : {
           item: function(element) {
@@ -175,7 +167,7 @@ $(document).ready(function() {
           }
         },
         autoHideContainer: false,
-        onlyListedAttributes: true,
+        onlyListedAttributes: true
       })
     );
   });
@@ -189,7 +181,8 @@ $(document).ready(function() {
       hitsPerPage: 18,
 
       templates: {
-        item: $('#product-hit-template').html()
+        item: $('#product-hit-template').html(),
+        empty: algolia_params.translations.result_empty
       },
       cssClasses: {
         root: product_root_css,
@@ -214,14 +207,22 @@ $(document).ready(function() {
 
   search.addWidget(
     instantsearch.widgets.pagination({
-      container: '#search-pagination',
+      container: '#search-pagination-top',
       cssClasses: {
         root: 'pagination-block',
         link: 'btn btn-default '
       }
     })
   );
-
+  search.addWidget(
+    instantsearch.widgets.pagination({
+      container: '#search-pagination-bottom',
+      cssClasses: {
+        root: 'pagination-block',
+        link: 'btn btn-default '
+      }
+    })
+  );
   search.templatesConfig.helpers.emphasis = function(text, render) {
     return '<em>' + render(text) + '</em>';
   };

@@ -4,7 +4,7 @@ $(document).ready(function() {
   var product_index = client.initIndex(algolia_params.products_index);
   var category_index = client.initIndex(algolia_params.categories_index);
   var hitsSource = autocomplete.sources.hits(category_index, { hitsPerPage: 5 });
-  autocomplete('#header-search-input',
+  $('#header-search-input').autocomplete(
     {
       debug: true,
       dropdownMenuContainer: '#header-search-hit-dropdown',
@@ -54,9 +54,9 @@ $(document).ready(function() {
             var categories = [];
             suggestions = suggestions.map(function(suggestion) {
               if(categories.includes(suggestion.name) == false) {
+                categories.push(suggestion.name);
                 return suggestion;
               }
-              categories.push(suggestion.name);
               return false;
             });
 
@@ -83,6 +83,12 @@ $(document).ready(function() {
       }
     ]
   );
+  $('body').click(function(element){
+    console.log(element);
+    if($(element.target).parents('.algolia-autocomplete').length == 0) {
+      $('#header-search-input').autocomplete('close');
+    }
+  });
 });
 
 var hogan_helpers = {

@@ -11,7 +11,6 @@ is_layout: true
     </div>
   </div>
   <div class="row">
-    {% for post in contents.posts%}
     <div class="col-12 pt-2 pb-2">
       {% editable_text 'content', format: 'html', rows: 10 %}
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -23,8 +22,6 @@ is_layout: true
       id est laborum.
       {% endeditable_text %}
     </div>
-
-    {%endfor%}
   </div>
 </div>
 

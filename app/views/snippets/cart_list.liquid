@@ -25,6 +25,13 @@
                   {% include 'currency' | value: cart_line.amount.total %}
                 {% endif %}
               </div>
+              {%if cart_line.discount.rate > 0%}
+              <div class="">
+                <div class="badge badge-warning p-2 badge-discount small">
+                  {{'product_discount_label' | translate}} <b>  -{{cart_line.discount.rate | round }} %</b>
+                </div>
+              </div>
+              {% endif %}
             </div>
             <div class="col-8 col-sm-5 col-md-9 order-1 order-xl-2">
               <form class="cart-line-qty" method="POST" action="/invader/cart/update_item" data-shopinvader-form>

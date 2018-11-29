@@ -3,12 +3,12 @@
   {{=<% %>=}}
   {% endraw %}
   <div class="row" >
-    <div class="col-xs-12 text-right" id="stats-template">
+    <div class="col-12 text-right">
         <%#hasManyResults %>
-          <strong><% nbHits %> {{"search_results" | translate }}</strong>
+          <strong><% nbHits %> {{'search_total_count_two' | translate }}</strong>
         <%/hasManyResults %>
         <%#hasOneResult %>
-          <strong><% nbHits %> {{"search_result" | translate }}</strong>
+          <strong><% nbHits %> {{'search_total_count_one' | translate }}</strong>
         <%/hasOneResult %>
     </div>
   </div>

@@ -4,6 +4,7 @@ dev.docker-compose.yml
 config/deploy.yml
 config/site.yml
 shopinvader
+dragonfly.log
 app/views/pages/account/account_address_form.fr.liquid
 app/views/pages/account/account_address.fr.liquid
 app/views/pages/account/account_index.fr.liquid

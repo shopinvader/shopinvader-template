@@ -8,7 +8,7 @@
   {% if session.currency_code and session.currency_code != ''%}
     {% assign currency_code = session.currency_code %}
   {% else %}
-    {% assign currency_code = store.currencies.first.first %}
+    {% assign currency_code = store.currencies_rate.first.first %}
   {% endif %}
   {% if store.currencies_format[currency_code]%}
     {% assign currency_data = store.currencies_format[currency_code] %}
@@ -25,15 +25,23 @@
     {% endaction %}
 
     var algolia_params = {
+      {% for role in algolia_indexes %}
+        {{role.name}}_index : {{role.index | append:"_" | append: algolia_locale  | json}},
+      {% endfor %}
       api_key: {{site.metafields.algolia.api_key | json}},
       app_id: {{site.metafields.algolia.application_id | json}},
       locale_code: {{currency_data.default_locale   | replace: "_", "-"   | json}},
       currency_symbol: {{currency_data.unit | json}},
       currency_code: {{currency_code | json}},
       currency_rate: {{rate | json}},
-    {% for role in algolia_indexes %}
-      {{role.name}}_index : {{role.index | append:"_" | append: algolia_locale  | json}},
-    {% endfor %}
+      translations: {
+        'clear_all' : {{ 'filter_clear' | translate | json }},
+        'result_number': 'Resultat(s)',
+        'per_page' : {{'per_page' | translate | json }},
+        'price':  {{'filter_price' | translate | json }},
+        'result_empty': {{'search_total_count_zero' | translate | json }}
+      },
+
     };
 
     var default_img_url = "{{site.metafields.theme.noimage }}";

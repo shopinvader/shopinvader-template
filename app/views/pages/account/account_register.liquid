@@ -27,7 +27,6 @@ editable_elements:
         <input type="hidden" name="auth_content_type" value="customers" />
         <input type="hidden" name="auth_id_field" value="email" />
         <input type="hidden" name="auth_password_field" value="password" />
-        <input type="hidden" name="auth_email_handle" value="welcome_message" />
         <input type="hidden" name="auth_guest_signup" value=""/>
         <input type="hidden" name="auth_callback" value="{% path_to 'account_register_validation' %}?context={{params.context}}" />
         <input type="hidden" name="auth_entry[role]" value="{{site.metafields.erp.default_role}}">
@@ -40,7 +39,6 @@ editable_elements:
         <input type="hidden" name="auth_content_type" value="customers" />
         <input type="hidden" name="auth_id_field" value="email" />
         <input type="hidden" name="auth_password_field" value="password" />
-        <input type="hidden" name="auth_email_handle" value="welcome_message" />
         <input type="hidden" name="auth_callback" value="{% path_to 'account_register_validation' %}?context={{params.context}}" />
         <input type="hidden" name="auth_entry[role]" value="{{site.metafields.erp.default_role}}">
         {% include 'signup_form' with email: params.email %}

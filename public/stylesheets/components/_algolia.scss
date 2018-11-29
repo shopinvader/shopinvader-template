@@ -1,14 +1,23 @@
 .ais-pagination {
   padding: 0;
-
-  text-align: center;
-  .ais-pagination--item__active a {
-    background-color: theme-color("primary");
-    border-color: theme-color("primary");
-    color: $white;
-  }
-  .ais-pagination--item__disabled {
-    display: none;
+  .ais-pagination--item {
+    text-align: center;
+    a {
+      background-color: $gray-100;
+      border-color: $gray-300;
+      color: theme-color('dark');
+      font-size: 0.8rem;
+      padding: 0.5rem 0.65rem 0.5rem 0.65rem;
+    }
+    &.ais-pagination--item__active a {
+      background-color: theme-color("primary");
+      border-color: theme-color("primary");
+      color: $white;
+      font-weight: bold;
+    }
+    &.ais-pagination--item__disabled {
+      display: none;
+    }
   }
   @include media-breakpoint-up(sm) {
     .ais-pagination--link {

@@ -110,6 +110,9 @@ $input-btn-line-height-lg:  1.5;
 $nav-tabs-border-color:                       #ddd;
 $nav-tabs-link-active-border-color:           #ddd;
 
+//card
+$card-border-radius: 0;
+
 //Theme
 $max-content-width: 1200px; // container max size
 $page-max-width: 2000px;
@@ -118,8 +121,6 @@ $main-bg:  transparent;
 
 $main-showcase-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.3);
 $main-showcase-float: true;
-$main-showcase-width: auto;
+$main-showcase-width: 100%;
 $main-showcase-bg: $cyan;
 $main-showcase-color: $white;
-
-$card-border-radius: 0;
