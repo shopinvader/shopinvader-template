@@ -44,17 +44,17 @@ metafields:
           ["*", { "name": "product", "template_handle": "product", "index": "products" } ]
       ]
   erp:
-    api_key: < Your ERP API KEY >
-    api_url: < Your ERP API URL >
+    api_key: demo1234
+    api_url: http://odoo:8069
     default_role: default
   payment:
-    stripe_api_key: < Your stripe API KEY >
+    stripe_api_key: pk_test_FcNCqsbwmVR5YZ0ak2bpe1xd
   smtp:
-    sender: < Your sender email address >
-    address: < Your SMTP Server address >
-    port: < Your SMTP Server port >
-    user_name: < Your SMTP user ID >
-    password: < Your SMTP User password >
+    sender: Shopinvader is comming
+    address: revolution@shopinvader.com
+    port: 1022
+    user_name: revolution
+    password: shopinvader
     authentication: plain
     enable_starttls_auto: true
   _store:
