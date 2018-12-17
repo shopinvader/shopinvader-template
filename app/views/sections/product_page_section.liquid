@@ -1,0 +1,536 @@
+---
+{
+  "name": "Product page section",
+  "class": "",
+  "icon": "image_text",
+  "keep_icon": true,
+  "settings": [
+    {
+      "label": "Section Name",
+      "id": "section_name",
+      "type": "text"
+    },
+    {
+      "label": "Container color",
+      "id": "theme_color",
+      "type": "select",
+      "options": [
+        {"label": "None","value": "none"},
+        {"label": "Light","value": "light"}
+      ]
+    },
+    {
+      "label": "Card color",
+      "id": "card_color",
+      "type": "select",
+      "options": [
+        {"label": "None","value": "none"},
+        {"label": "Light","value": "light"},
+        {"label": "White","value": "white"},
+        {"label": "Dark","value": "dark"}
+      ]
+    },
+    {
+      "label": "Card Border",
+      "id": "border",
+      "type": "checkbox"
+
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Product description",
+      "type": "description",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"}
+          ]
+        },
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true
+
+        }
+      ]
+    },
+    {
+      "name": "Cross Selling",
+      "type": "cross_sellings",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"}
+          ]
+        },
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true
+
+        }
+      ]
+    },
+    {
+      "name": "Technical Media",
+      "type": "technical_details",
+      "settings": [
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true
+
+        }
+      ]
+    },
+    {
+      "name": "Up Selling",
+      "type": "up_sellings",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"}
+          ]
+        },
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true
+
+        }
+      ]
+    },
+    {
+      "name": "Review",
+      "type": "review",
+      "settings": [
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true
+
+        }
+      ]
+    },
+    {
+      "name": "Attribute table",
+      "type": "attribute_table",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"}
+          ]
+        },
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true
+
+        },
+        {
+          "label": "Attribute Groupe",
+          "id": "group_name",
+          "type": "text"
+        },
+        {
+          "label": "Display label",
+          "id": "display_legend",
+          "type": "checkbox"
+        }
+      ]
+    },
+    {
+      "name": "Attribute Text",
+      "type": "attribute_text",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"}
+          ]
+        },
+        {
+          "label": "Theme color",
+          "id": "theme_color",
+          "type": "select",
+          "options": [
+            {"label": "Light","value": "light"},
+            {"label": "Dark","value": "dark"},
+            {"label": "Primary", "value": "primary"},
+            {"label": "Secondary", "value": "secondary"},
+            {"label": "Info", "value": "info"},
+            {"label": "Danger", "value": "danger"},
+            {"label": "Warning", "value": "warning"}
+          ]
+        },
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true
+
+        },
+        {
+          "label": "Attribute Name",
+          "id": "attribute_name",
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "settings": {
+      "section_name": "Product data",
+      "sku" : "",
+      "border" : true,
+      "theme_color": "none",
+      "add_to_cart": true
+    },
+    "blocks": [
+      {
+        "type": "description",
+        "settings": {
+          "title": "Overview",
+          "cell_size": "xl"
+        }
+      },
+      {
+        "type": "cross_sellings",
+        "settings": {
+          "title": "More In This Collection",
+          "cell_size": "xl"
+        }
+      },
+      {
+        "type": "up_sellings",
+        "settings": {
+          "title": "More choices",
+          "cell_size": "xl"
+        }
+      }
+    ]
+  }
+}
+---
+{% if live_editing %}
+  {% assign product = store.products.first %}
+{% else %}
+  {% assign variant = product%}
+{% endif %}
+
+
+{% case section.settings.theme_color %}
+  {% when "none" %}
+    {% assign css_banner = "" %}
+  {% when "light" %}
+    {% assign css_banner = "bg-light" %}
+  {% when "dark" %}
+    {% assign css_banner = "bg-dark"%}
+{% endcase %}
+
+{% case section.settings.card_color %}
+  {% when "none" %}
+    {% assign css_card = "" %}
+  {% when "light" %}
+    {% assign css_card = "bg-light" %}
+  {% when "dark" %}
+    {% assign css_card = "bg-dark"%}
+  {% when "white" %}
+    {% assign css_card = "bg-white"%}
+{% endcase %}
+
+<div class="container-fluid {{css_banner}} pt-2 pb-2">
+  <div class="container mt-3 mb-3 pt-2 pb-2 {{css_card}} {% if section.settings.border %}shadow-sm{% endif %}">
+    <div class="row">
+      {% for block in section.blocks%}
+        {% case block.settings.cell_size %}
+          {% when 'xs' %}
+            {% assign css_cell = "col-12 col-sm-6 col-lg-2 "%}
+          {% when 'sm' %}
+            {% assign css_cell = "col-12 col-sm-6 col-lg-4 "%}
+          {% when 'md' %}
+            {% assign css_cell = "col-12 col-sm-6 col-lg-6 "%}
+          {% when 'lg' %}
+            {% assign css_cell = "col-12 col-sm-6 col-lg-8 "%}
+          {% when 'xl' %}
+            {% assign css_cell = "col-12"%}
+        {% endcase %}
+
+        {% case block.settings.theme_color %}
+        {% when "light" %}
+          {% assign css_cell = css_cell | append: " bg-light text-dark" %}
+        {% when "dark" %}
+          {% assign css_cell = css_cell | append: " text-light bg-dark"%}
+        {% when "primary" %}
+          {% assign css_cell = css_cell | append: " text-light bg-primary"%}
+        {% when "warning" %}
+          {% assign css_cell = css_cell | append: " text-dark bg-warning"%}
+        {% when "danger" %}
+          {% assign css_cell = css_cell | append: " text-light bg-danger"%}
+        {% when "info" %}
+          {% assign css_cell = css_cell | append: " text-light bg-info"%}
+        {% endcase %}
+
+        {% case block.type %}
+        {% when 'description'%}
+          <div class="{{css_cell}} pt-4 pb-4">
+            <div class="">
+              {{ block.settings.title }}
+            </div>
+            <p>
+              {{ variant.description }}
+            </p>
+          </div>
+        {% when 'technical_details'%}
+          <div class="col-12 pt-4 pb-4">
+            <div class="">
+              {{ block.settings.title }}
+            </div>
+            <div class="row">
+              <div class="col-lg-7">
+                <h2>{{'product_spec_title' | translate }}</h2>
+                <table class="table table-striped">
+                  <tbody>
+                  {% for details in  variant.technical_details %}
+                    <tr>
+                      <td>{{details.name}}</td>
+                      <td>{{details.value}}</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-lg-7">
+              {% if variant.technical_media.size > 0 %}
+                <h2 class="text-2xl title-separator">
+                  {{ 'item_documentation' | translate }}
+                </h2>
+                <ul>
+                {% for media_file in variant.technical_media %}
+                  <li>
+                    <i class="fa fa-fw fa-lg color-info ico-document-{{ media_file.type }}"></i>&nbsp;
+                    <a href="{{media_file.url}}" class="text-lg" target="_blank">
+                      {{ media_file.type | prepend: 'product_document_' | translate }}
+                    </a>
+                  </li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+              </div>
+            </div>
+          </div>
+        {% when 'cross_sellings'%}
+          <div class="col-12 pt-4 pb-4">
+            {{ block.settings.title }}
+            <div class="editable_content">
+              <div class="row">
+                {% for cross_seller in variant.cross_sellings %}
+                  <div class="col-12 col-sm-6 col-md-3 col-xl-2">
+                  {% with_scope objectID: [cross_seller.id]%}
+                    {% include 'product_thumbnail' with product: store.products.first%}
+                  {% endwith_scope%}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% when 'up_sellings'%}
+          <div class="{{css_cell}} pt-4 pb-4">
+            {{ block.settings.title }}
+            <div class="editable_content">
+              <div class="row">
+                {% for up_seller in variant.up_sellings %}
+                  <div class="col-12 col-sm-6 col-md-3 col-xl-2">
+                  {% with_scope objectID: [up_seller.id]%}
+                    {% include 'product_thumbnail' with product: store.products.first%}
+                  {% endwith_scope%}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% when 'reviews' %}
+          <div class="row ">
+            <div class="col-12 " id="product-section-reviews">
+              <div class="row justify-content-center">
+                <div class="col-12 col-sm-6 col-lg-5 pb-3 ">
+                  <h2>{{'product_reviews_title' | translate }} ({{variant.rating.reviews.size}})</h2>
+                  <div class="text-warning pb-1">
+                    <div class="text-dark text-left font-weight-bold small">{{'rating_average_rate' | translate}}</div>
+                    <span class="h1 font-weight-bold">
+                      {{variant.rating.summary.average | round: 1}}
+                    </span>
+                    <span class="h2 text-warning">
+                      / 5
+                    </span>
+                  </div>
+                  <div class="text-size-6xl">
+                    {% include 'rating_stars' with rating_value: variant.rating.summary.average, rating_nbr: variant.rating.reviews.size %}
+                  </div>
+                  <div class="text-size-1xl">
+                    {{'rating_comment_count' | translate: count: variant.rating.reviews.size}}
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+
+                  {% for rate_count in variant.rating.summary.distribution %}
+                  <div class="pt-1">
+                    {% assign rate_count_pct = rate_count.last | times: 1.0 | divided_by: 16  | times: 100%}
+                    <div class="d-inline-block pr-1 ">
+                      {{rate_count.first}} <i class="fa fa-star small text-warning"></i>
+                    </div>
+                    <div class="d-inline-block w-50">
+                      <div class=" progress">
+                         <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: {{rate_count_pct}}%" aria-valuenow="{{rate_count_pct}}" aria-valuemin="0" aria-valuemax="{{rating.summary.count}}"></div>
+                      </div>
+                    </div>
+                    <div class="d-inline-block">
+                      <i>{{rate_count.last }}</i>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-12 col-lg-9">
+                  {% paginate variant.rating.reviews by 10 %}
+                    {% for comment in paginate.collection%}
+                    <div class="row ">
+                      <div class="col-12">
+                        <div class="card mb-0">
+                          <div class="card-body p-2 p-sm-4">
+                            <div class="row">
+                              <div class="col-12 col-sm-4 col-md-3 text-center">
+                                <div class="fa fa-user-circle-o fa-3x text-secondary">
+                                </div>
+                                <div class="">{{comment.nickname}}</div>
+                                <div class="h1 text-primary font-weight-bold">{{comment.rating | round}}<span class="h2 ">/5</span></div>
+                                {% include 'rating_stars' with rating_value: comment.rating %}
+                              </div>
+                              <div class="col-12 col-sm-8 col-md-9">
+                                <strong class="text-size-lg">{{comment.name}}</strong>
+                                <p>{{comment.comment}}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    <div class="row">
+                      <div class="col-12 pt-3">
+                        <nav aria-label="Page navigation">
+                          <ul class="pagination pull-right">
+                            {% if paginate.previous %}
+                            <li class="page-item">
+                              <a href="{{paginate.previous.url}}#product-section-advice" aria-label="Previous" class="page-link">
+                                <span aria-hidden="true">&laquo;</span>
+                              </a>
+                            </li>
+                            {% endif %}
+                            {% for part in paginate.parts%}
+                            <li class="page-item {%if part.title == paginate.current_page%}active{%endif%}">
+                              <a href="{% if part.is_link == true%}{{part.url}}#product-section-advice{% endif %}" class="page-link">
+                                {{part.title}}
+                              </a>
+                            </li>
+                            {% endfor %}
+                            {% if paginate.next %}
+                            <li class="page-item">
+                              <a href="{{paginate.next.url}}#product-section-advice" aria-label="Next" class="page-link">
+                                <span aria-hidden="true">&raquo;</span>
+                              </a>
+                            </li>
+                            {% endif %}
+                          </ul>
+                        </nav>
+                      </div>
+                    </div>
+                  {% endpaginate %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% when 'attribute_table' %}
+          <div class="{{css_cell}}">
+            {% for structured_attribute in variant.structured_attributes %}
+              {% if structured_attribute.group_name == block.settings.group_name %}
+                <div class=" pt-4">
+                  {{ block.settings.title }}
+                </div>
+                {% for attribute in structured_attribute.fields %}
+                  <div class="row pt-2 pb-2  pb-4">
+                  {% if block.settings.display_legend%}
+                    <div class="col-6">
+                      <b>{{ attribute.name }}</b>
+                    </div>
+                    <div class="col-6">
+                      {{ attribute.value }}
+                    </div>
+                  {% else %}
+                    <div class="col-12">
+                      {{ attribute.value }}
+                    </div>
+                  {% endif %}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% when 'attribute_text' %}
+          {% if variant.attributes[block.settings.attribute_name] %}
+            <div class="{{css_cell}} pt-4 pb-4">
+              <div class="">
+                {{ block.settings.title }}
+              </div>
+              <div>
+                {{ variant.attributes[block.settings.attribute_name] }}
+              </div>
+            </div>
+          {% endif %}
+        {% endcase%}
+      {% endfor %}
+    </div>
+  </div>
+</div>

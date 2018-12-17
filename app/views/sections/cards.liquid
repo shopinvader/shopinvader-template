@@ -1,0 +1,188 @@
+---
+{
+  "name": "Cards",
+  "class": "",
+  "icon": "list",
+  "settings": [
+    {
+      "label": "Section Name",
+      "id": "section_name",
+      "type": "text"
+    },
+    {
+      "label": "Background Image",
+      "id": "bg_image",
+      "type": "image_picker"
+    },
+    {
+      "label": "Theme color",
+      "id": "theme_color",
+      "type": "select",
+      "options": [
+        {"label": "Light","value": "light"},
+        {"label": "Dark","value": "dark"},
+        {"label": "Primary", "value": "primary"}
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Text Header",
+      "type": "header_text",
+      "settings": [
+        {
+          "label": "Content",
+          "id": "content",
+          "type": "text",
+          "html": true,
+          "nb_rows": 5
+        }
+      ]
+    },
+    {
+      "name": "Text Footer",
+      "type": "footer_text",
+      "settings": [
+        {
+          "label": "Content",
+          "id": "content",
+          "type": "text",
+          "html": true,
+          "nb_rows": 5
+        }
+      ]
+    },
+    {
+      "name": "Card",
+      "type": "card",
+      "settings": [
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text"
+        },
+        {
+          "label": "Picture",
+          "id": "picture",
+          "type": "image_picker"
+        },
+        {
+          "label": "Text",
+          "id": "content",
+          "type": "text",
+          "html": true,
+          "nb_rows": 10
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Cards",
+    "category": "Content",
+    "settings": {
+      "section_name": "Cards",
+      "theme_color": "light"
+    },
+    "blocks": [
+      {
+        "type": "header_text",
+        "settings": {
+          "content": "<h1>All my features</h1><div> My features introduction here !</div>"
+        }
+      },
+      {
+        "type": "footer_text",
+        "settings": {
+          "content": "<div>This is my cads conclusions.</div>"
+        }
+      },
+      {
+        "type": "card",
+        "settings": {
+          "title": "Feature #1",
+          "picture": "",
+          "content": "This is a small text about the feature #1"
+        }
+      },
+      {
+        "type": "card",
+        "settings": {
+          "title": "Feature #2",
+          "picture": "",
+          "content": "This is a small text about the feature #2"
+        }
+      },
+      {
+        "type": "card",
+        "settings": {
+          "title": "Feature #3",
+          "picture": "",
+          "content": "This is a small text about the feature #3"
+        }
+      },
+      {
+        "type": "card",
+        "settings": {
+          "title": "Feature #4",
+          "picture": "",
+          "content": "This is a small text about the feature #4"
+        }
+      }
+    ]
+  }]
+}
+---
+{% case section.settings.theme_color %}
+{% when 'dark' %}
+  {% assign theme_row = "bg-gray text-light" %}
+  {% assign theme_card = "bg-dark text-light" %}
+{% when 'light' %}
+  {% assign theme_row = "text-dark"%}
+  {% assign theme_card = " text-dark" %}
+{% when 'primary' %}
+  {% assign theme_row = "bg-primary text-light " %}
+  {% assign theme_card = "bg-light text-dark" %}
+{% endcase %}
+{% if section.settings.bg_image %}
+  {% assign theme_image = "background-image:url(" | append : section.settings.bg_image | append : ");"%}
+{% endif %}
+
+<div class="container-fluid">
+  <div class="row pt-4 pb-4 {{theme_row}} justify-content-center banner-cover" style="{{ theme_image }}">
+    <div class="col-12 pt-4 pb-4 ">
+      <div class="container pt-4 pb-4 ">
+        <div class="row">
+          {% for item in section.blocks %}
+            {% if item.type == "header_text" %}
+              <div class="col-12 pb-3">
+                {{ item.settings.content }}
+              </div>
+            {% endif %}
+          {%endfor%}
+          <div class="col-12">
+            <div class="card-deck">
+              {% for item in section.blocks %}
+                {% if item.type == "card" %}
+                  <div class="card text-left {{theme_card}} shadow">
+                    <div class="card-body">
+                      <h3>{{item.settings.title}}</h3>
+                      {{item.settings.content}}
+                    </div>
+                  </div>
+                {% endif %}
+              {%endfor%}
+            </div>
+          </div>
+          {% for item in section.blocks %}
+            {% if item.type == "footer_text" %}
+              <div class="col-12 pb-3">
+                {{ item.settings.content }}
+              </div>
+            {% endif %}
+          {%endfor%}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

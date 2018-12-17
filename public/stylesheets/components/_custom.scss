@@ -52,7 +52,7 @@ $colors: (
 );
 
 $theme-colors: (
-  primary: $cyan,
+  primary: #17a2b8,
   secondary: #EEEEEE,
   success: $green,
   info: #1B626D,
@@ -76,7 +76,7 @@ $breadcrumb-active-color:       inherit;
 $breadcrumb-divider:            " > ";
 
 //fonts
-$font-family-sans-serif: Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-sans-serif: Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 $font-family-base:       $font-family-sans-serif;
 

@@ -8,7 +8,7 @@
   {% if session.currency_code and session.currency_code != ''%}
     {% assign currency_code = session.currency_code %}
   {% else %}
-    {% assign currency_code = store.currencies.first.first %}
+    {% assign currency_code = store.currencies_format.first.first %}
   {% endif %}
   {% if store.currencies_format[currency_code]%}
     {% assign currency_data = store.currencies_format[currency_code] %}
@@ -17,7 +17,6 @@
       {% assign rate = store.currencies_rate[currency_code]%}
     {%endif%}
   {%endif%}
-
   <script type="text/javascript">
     {% action 'get algolia parameters' %}
 

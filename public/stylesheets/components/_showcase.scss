@@ -1,36 +1,44 @@
 .main-showcase{
   position: relative;
-
-  //margin: auto;
-  &::before {
-    background-color: #EEEEEE;
-    position: absolute;
-    height: 80%;
-    top: 0;
-    left: 0;
-    width: 100%;
-    content: " ";
+  &.main-showcase-float {
+    //margin: auto;
+    &::before {
+      background-color: #EEEEEE;
+      position: absolute;
+      height: 80%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      content: " ";
+    }
+    .container {
+      background: $white;
+      width: $main-showcase-width;
+      box-shadow: $main-showcase-shadow;
+      @include media-breakpoint-up(md) {
+        margin: 0;
+        margin-top: -3rem;
+      }
+    }
+    .border {
+      border: 0;
+    }
   }
   .container {
-    width: $main-showcase-width;
-    background: $white;
-    box-shadow: $main-showcase-shadow;
     margin: 1rem;
     position: relative;
-    @include media-breakpoint-up(md) {
-      margin: 0;
-      margin-top: -3rem;
-    }
 
     .showcase-desc {
       background-color: $main-showcase-bg;
       color: $main-showcase-color;
-      @if $main-showcase-float{
-        @include media-breakpoint-up(md) {
-          box-shadow: -3px 2px 19px 0px #4950575e;
-          position: absolute;
-          top: 2rem;
-          left: -2rem;
+      &.showcase-desc-float {
+        @if $main-showcase-float{
+          @include media-breakpoint-up(md) {
+            box-shadow: -3px 2px 19px 0px #4950575e;
+            position: absolute;
+            top: 2rem;
+            left: -2rem;
+          }
         }
       }
     }

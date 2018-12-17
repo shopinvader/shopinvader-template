@@ -1,0 +1,876 @@
+---
+{
+  "name": "Header",
+  "class": "",
+  "icon": "header",
+  "keep_name": true,
+  "keep_icon": true,
+  "id": "header",
+  "settings": [
+    {
+      "label": "Theme color",
+      "id": "theme_color",
+      "type": "select",
+      "keep_name": true,
+      "options": [
+        {"label": "Light","value": "light"},
+        {"label": "Dark","value": "dark"},
+        {"label": "Transparent","value": "transparent"}
+      ]
+    },
+    {
+      "label": "Fixed header",
+      "id": "fixed_position",
+      "type": "checkbox"
+    },
+    {
+      "label": "Wide",
+      "id": "large_size",
+      "type": "checkbox"
+    },
+    {
+      "label": "Message",
+      "id": "text",
+      "type": "text"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Brand Logo",
+      "type": "logo",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "keep_name": true,
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Auto", "value": "auto"}
+          ]
+        },
+        {
+          "label": "Brand logo",
+          "id": "picture",
+          "type": "image_picker"
+        }
+      ]
+    },
+    {
+      "name": "Text",
+      "type": "text",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "keep_name": true,
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Auto", "value": "auto"}
+          ]
+        },
+        {
+          "label": "Content",
+          "id": "content",
+          "type": "text",
+          "html": true,
+          "nb_rows": 10
+        }
+      ]
+    },
+    {
+      "name": "Cart icon",
+      "type": "cart_icon",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "keep_name": true,
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Auto", "value": "auto"}
+          ]
+        },
+        {
+          "label": "side icon",
+          "id": "inline_display",
+          "type": "checkbox"
+        },
+        {
+          "label": "icon",
+          "id": "icon",
+          "type": "image_picker"
+        },
+        {
+          "label": "label",
+          "id": "label",
+          "type": "text"
+        },
+        {
+          "label": "Display icon in mobile navbar",
+          "id": "display_sm_icon",
+          "type": "checkbox"
+        }
+      ]
+    },
+    {
+      "name": "Account icon",
+      "type": "user_icon",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "keep_name": true,
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Auto", "value": "auto"}
+          ]
+        },
+        {
+          "label": "side icon",
+          "id": "inline_display",
+          "type": "checkbox"
+        },
+        {
+          "label": "icon",
+          "id": "icon",
+          "type": "image_picker"
+        },
+        {
+          "label": "label",
+          "id": "label",
+          "type": "text"
+        },
+        {
+          "label": "Display icon in mobile navbar",
+          "id": "display_sm_icon",
+          "type": "checkbox"
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "force_name": true,
+      "type": "search",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "keep_name": true,
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Auto", "value": "auto"}
+          ]
+        },
+        {
+          "label": "Placeholder",
+          "id": "placeholder",
+          "type": "text"
+        },
+        {
+          "label": "Baseline",
+          "id": "baseline",
+          "type": "text",
+          "html": true,
+          "nb_rows": 2
+        },
+        {
+          "label": "icon",
+          "id": "icon",
+          "type": "image_picker"
+        },
+        {
+          "label": "Display icon in mobile navbar",
+          "id": "display_sm_icon",
+          "type": "checkbox"
+        }
+      ]
+    },
+    {
+      "name": "Categories navigation",
+      "force_name": true,
+      "type": "navigation",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Auto", "value": "auto"}
+          ]
+        },
+        {
+          "label": "Item Align",
+          "id": "item_align",
+          "type": "select",
+          "options": [
+            {"label": "Start","value": "start"},
+            {"label": "Center","value": "center"},
+            {"label": "End", "value": "end"}
+          ]
+        },
+        {
+          "label": "Theme color",
+          "id": "theme_color",
+          "type": "select",
+          "options": [
+            {"label": "Light","value": "light"},
+            {"label": "Dark","value": "dark"},
+            {"label": "Primary", "value": "primary"},
+            {"label": "Secondary", "value": "secondary"},
+            {"label": "Info", "value": "info"},
+            {"label": "Danger", "value": "danger"},
+            {"label": "Warning", "value": "warning"},
+            {"label": "None", "value": "warning"}
+          ]
+        }
+      ]
+    }
+  ],
+  "default": {
+    "settings": {
+      "theme_color": "transparent",
+      "fixed_position": false,
+      "large_size": false,
+      "message": "<center><i class='fa fa-gift'></i> Save 10% with voucher code <b>SAVE10</b></center>"
+    },
+    "blocks": [
+    {
+      "type": "logo",
+      "settings": {
+        "picture": "/images/shop-logo.png",
+        "cell_size": "auto"
+      }
+    },
+    {
+      "type": "search",
+      "settings": {
+        "label": "Search product...",
+        "cell_size": "auto",
+        "display_sm_icon": true,
+        "icon": "/images/search-icon.png"
+      }
+    },
+    {
+      "type": "user_icon",
+      "settings": {
+        "icon": "/images/user-icon.png",
+        "cell_size": "xs",
+        "inline_display":  true,
+        "label": "Sign-in",
+        "display_sm_icon": true
+      }
+    },
+    {
+      "type": "cart_icon",
+      "settings": {
+        "icon": "/images/cart-icon.png",
+        "cell_size": "xs",
+        "inline_display":  true,
+        "label": "My cart",
+        "display_sm_icon": true
+      }
+    },
+    {
+      "type": "navigation",
+      "settings": {
+        "cell_size": "xl",
+        "item_align": "center",
+        "theme_color": "light"
+      }
+    }]
+  }
+}
+---
+{% assign category_html = ""%}
+<div class="header {% if section.settings.fixed_position %}fixed{%endif%}  header-theme-{{section.settings.theme_color}}">
+  {% if section.settings.message != ''%}
+  <div class="header-message  pt-2 pb-2">
+    {{section.settings.message}}
+  </div>
+  {% endif%}
+  <div class="container{% if section.settings.large_size %}-fluid{%endif%}">
+    <div class="row  align-items-center">
+      <div class="col-auto header-block header-block-menu d-lg-none">
+        <a href="#" class="text-primary text-left d-md-none">
+          <i class="fas fa-bars"></i>
+        </a>
+      </div>
+      {% for block in section.blocks %}
+        {% case block.settings.cell_size %}
+          {% when 'xs' %}
+            {% assign css_cell = "col-auto col-lg-2 col-xl-2 "%}
+          {% when 'sm' %}
+            {% assign css_cell = "col-auto col-lg-3 col-xl-4 "%}
+          {% when 'md' %}
+            {% assign css_cell = "col-auto col-lg-4 col-xl-6 "%}
+          {% when 'lg' %}
+            {% assign css_cell = "col-auto col-lg-8 col-xl-8 "%}
+          {% when 'xl' %}
+            {% assign css_cell = "col-auto"%}
+          {% when 'auto' %}
+            {% assign css_cell = "col-auto"%}
+        {% endcase %}
+
+        {% assign display_sm_icon_css = "" %}
+        {% if block.settings.display_sm_icon == false %}
+          {% assign display_sm_icon_css = "d-none d-md-flex" %}
+        {% endif %}
+
+        {% case block.type %}
+          {% when "text" %}
+            <div class="{{css_cell}} header-block header-block-{{ block.type }}">
+              {{ block.settings.content }}
+            </div>
+          {% when "logo" %}
+            <div class="{{css_cell}} header-block header-block-{{ block.type }}" style="flex-grow:1;">
+              <a class="" href="{% path_to 'home' %}">
+                <img src="{{ block.settings.picture }}" alt="{{ site.name }}" class="navbar-brand"/>
+              </a>
+            </div>
+          {% when "cart_icon" %}
+            <div class="col-auto header-block header-block-{{ block.type }} {{display_sm_icon_css}}">
+              {% assign css_icon = "" %}
+              {% if block.settings.inline_display %}
+                {% assign css_icon = "icon-inline" %}
+              {% endif %}
+              <div class="icon {{ css_icon }}">
+                <a class="icon-link" href="{% path_to 'cart_index'%}">
+                  <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
+                  <span class="icon-label d-none d-md-flex">{{ block.settings.label }}</span>
+                </a>
+              </div>
+            </div>
+          {% when "user_icon" %}
+            {% assign css_icon = "" %}
+            {% if block.settings.inline_display %}
+              {% assign css_icon = "icon-inline" %}
+            {% endif %}
+            <div class="col-auto header-block header-block-{{ block.type }} {{display_sm_icon_css}}">
+              <div class="icon {{ css_icon }} ">
+                <a class="icon-link" href="{% path_to 'account_index'%}">
+                  <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
+                  <span class="icon-label d-none d-md-block">
+                    {% if current_customer %}
+                      {{ current_customer.name }}
+                    {% else %}
+                      {{ block.settings.label }}
+                    {% endif %}
+                  </span>
+                </a>
+                {% include 'header_icon_account' %}
+              </div>
+            </div>
+          {% when "navigation" %}
+            {% capture category_html %}
+              <div class="w-100 header-block-navigation">
+                {% case block.settings.theme_color %}
+                {% when "light" %}
+                  {% assign css_banner = "text-dark" %}
+                {% when "dark" %}
+                  {% assign css_banner = "text-light bg-dark"%}
+                {% when "primary" %}
+                  {% assign css_banner = "text-light bg-primary"%}
+                {% when "warning" %}
+                  {% assign css_banner = "text-dark bg-warning"%}
+                {% when "danger" %}
+                  {% assign css_banner = "text-light bg-danger"%}
+                {% when "info" %}
+                  {% assign css_banner = "text-light bg-info"%}
+                {% endcase %}
+                <ul class="list-inline m-0 d-flex justify-content-{{block.settings.item_align}} {{css_banner}} row">
+                  {% for category_level1 in store.categories %}
+                    {% if category_level1.level == 0 %}
+                      <li class="list-inline-item pr-3 pl-3 pt-3 pb-3 col-12 col-md-auto">
+                        <a href="{{category.url_key  | prepend: url_base }}" class="{{css_banner}} font-weight-bold ">
+                          {{ category_level1.name}}
+                        </a>
+                        <div class="container p-3 p-md-5 list-inline-dropdown">
+                          <div class="row">
+                            <div class="col-12 col-md-8">
+                              <div class="h3 text-uppercase pb-3 d-none d-md-block">{{ category_level1.name}}</div>
+                              <ul class="row p-0">
+                                {% for category_level2 in category_level1.childs %}
+                                  <li class="col-12 col-md-4 pb-2 pt-2">
+                                    <div class="h4">{{ category_level2.name}}</div>
+                                    <ul class="p-0 m-0">
+                                    {% for category_level3 in category_level2.childs %}
+                                      <li class="pb-2 pt-2">
+                                        <a href="#">{{ category_level3.name }}</a>
+                                      </li>
+                                    {% endfor %}
+                                    </ul>
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                            </div>
+                            <div class="col-12 col-md-4">
+                              {{ category_nav.images}}
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    {% endif %}
+                  {% endfor%}
+                </ul>
+              </div>
+
+            {% endcapture %}
+          {% when "search" %}
+            <div class="{{ css_cell }} header-block header-block-{{ block.type }} {{display_sm_icon_css}}">
+            <div class="icon d-md-none">
+              <a class="icon-link" href="{% path_to 'cart_index'%}">
+                <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
+                <span class="icon-label d-none d-md-flex">{{ block.settings.label }}</span>
+              </a>
+            </div>
+
+            <div class="d-none d-md-block w-100">
+              <form method="GET" action="{% path_to search %}" class="search-form d-flex flex-row pt-md-2 pt-md-3 " >
+                <input type="text" class="form-control search-input" id="header-search-input" placeholder="{{ block.settings.placeholder }}" aria-label="{{ block.settings.placeholder }}" aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q" data-autosubmit>
+                <button class="btn btn-link btn-lg p-0 search-icon" name="submit" type="submit">
+                  <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"/>
+                </button>
+              </form>
+              <div class="small text-left pt-2 w-100">
+              <div class="font-weight-bold">
+                {{ section.settings.baseline }}
+              </div>
+            </div>
+            </div>
+            <div id="header-search-hit" class="d-none search-result">
+              <div id="header-search-product-title">
+                <div class="font-weight-bold">
+                  {{ 'search_product' | translate }}
+                  <span class="nb_hits"></span>
+                </div>
+              </div>
+              <div id="header-search-product-link">
+                <div class="row">
+                  <div class="col-12 text-right pt-2 ">
+                    <a data-href="{% path_to search %}" href="#" class="btn btn-primary btn-search-product">
+                      {{ 'search_product_all' | translate }}
+                      <span class="nb_hits"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div id="header-search-product-empty">
+                <div class="pt-3 pb-3">
+                  {{ 'search_product_empty' | translate }}
+                </div>
+              </div>
+              <div id="header-search-category-title" class=" ">
+                <div class="font-weight-bold">
+                  {{ 'search_category' | translate }}
+                </div>
+              </div>
+              <div id="header-search-category-empty">
+                <div class="pt-3 pb-3">
+                  {{ 'search_category_empty' | translate }}
+                </div>
+              </div>
+              <div id="header-search-category-link">
+                <div class="row">
+                  <div class="col-12 text-right ">
+                    <a href="#" class="btn btn-success">
+                      {{ 'search_category_all' | translate }}
+                      <span class="nb_hits"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div id="header-search-hit-content">
+                <div class="row">
+                  <div class="aa-dataset-product col-12  col-md-8"></div>
+                  <div class="aa-dataset-category col-12 col-md-4 d-none d-md-block"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+  <div class="d-none d-md-block">
+    {{category_html}}
+  </div>
+  <div class="header-category-sm container-fluid">
+    <div class="row bg-dark pt-3 pb-3 color-light">
+      <div class="col-2 text-left">
+        <i class="fa fa-chevron-left fa-2x"></i>
+      </div>
+      <div class="col-8 lead text-center">
+        MENU
+      </div>
+      <div class="col-2 text-right">
+        <i class="fa fa-times fa-2x"></i>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        {% with_scope level: 0 %}
+          {% include section_header_nav_sm
+            with categories: store.categories,
+            level: 1
+            %}
+        {% endwith_scope%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{%comment%}
+{% include section_header_nav_sm
+   with categories: category_sublevel.childs,
+   level: 2
+%}
+
+{% for category_level1 in store.categories %}
+  {% if category_level1.level == 0 %}
+    <li class="list-inline-item3 level-1 col-12">
+      <a href="{{category_level1.url_key  | prepend: url_base }}" class="">
+        {{ category_level1.name}}
+      </a>
+      <ul class="list-inline">
+      {% for category_level2 in category_level1.childs %}
+          <li class="list-inline-item level-2 ">
+            <a href="{{category_level2.url_key  | prepend: url_base }}" class="">
+              {{ category_level2.name}}
+            </a>
+            <ul class="list-inline">
+            {% for category_level3 in category_level2.childs %}
+                <li class="list-inline-item level-3">
+                  <a href="{{category_level3.url_key  | prepend: url_base }}" class="">
+                    {{ category_level3.name}}
+                  </a>
+                </li>
+            {% endfor %}
+            </ul>
+          </li>
+      {% endfor %}
+      </ul>
+    </li>
+  {% endif %}
+{% endfor %}
+
+<div class="navbar-header-section">
+  <nav class="navbar navbar-expand-lg navbar-theme-{{section.settings.theme_color}} {% if section.settings.fixed_position%}fixed-top{% endif %}">
+    <div class="{% if section.settings.large_size %} container-fluid {%else%} container {%endif%}">
+      <div class="row w-100">
+        {% for block in section.blocks %}
+          {% case block.settings.cell_size %}
+            {% when 'xs' %}
+              {% assign css_cell = "col-12 col-sm-6 col-lg-2 "%}
+            {% when 'sm' %}
+              {% assign css_cell = "col-12 col-sm-6 col-lg-3 "%}
+            {% when 'md' %}
+              {% assign css_cell = "col-12 col-sm-6 col-lg-6 "%}
+            {% when 'lg' %}
+              {% assign css_cell = "col-12 col-sm-6 col-lg-8 "%}
+            {% when 'xl' %}
+              {% assign css_cell = "col-12"%}
+            {% when 'auto' %}
+              {% assign css_cell = "col-auto"%}
+          {% endcase %}
+          <div class="{{css_cell}}">
+          {% case block.type %}
+            {% when "text" %}
+              {{ block.settings.content }}
+            {% when "brand_logo" %}
+              <a class="navbar-brand" href="{% path_to 'index' %}">
+                <img src="{{ block.settings.picture }}" alt="{{ site.name }}"  class="img-fluid "/>
+              </a>
+            {% when "cart_icon" %}
+              <div class="d-flex text-center nav-header-controls" data-shopinvader-container id="header-controls">
+                <div class="pt-2 text-dark nav-header-controls-item  {% if block.settings.inline_display %}nav-header-controls-item-inline{%endif%}" href="{% path_to cart_index%}">
+                  <a class="d-block text-center nav-header-controls-img" href="{% path_to cart_index %}">
+                    {% if block.settings.icon %}
+                      <img src="{{ block.settings.icon }}" alt="{{ site.name }}"  class="d-inline-block"/>
+                    {% endif %}
+                    <div class=" cart-item-number">{{ store.cart.lines.count | round | default: 0 }}</div>
+                  </a>
+                  <div class="font-weight-bold">
+                    <a href="{% path_to cart_index %}" class="btn btn-link btn-sm font-weight-bold">
+                      {{'header_cart' | translate }}
+                    </a>
+                    <div class="header-controls-dropdown">
+                      <div class="header-controls-dropdown-content" id="cart-dropdown">
+                        {% if store.cart.lines.count != null and store.cart.lines.count != 0 %}
+                          {% for cart_line in store.cart.lines.items %}
+                            <div class="header-controls-dropdown-item">
+                              <div class="row">
+                                <div class="col-4">
+                                  <img src="{{cart_line.product.images.first.medium.src | default: site.metafields.theme.noimage}}"
+                                  alt="{{cart_line.product.images.first.medium.alt}}"
+                                  title="{{cart_line.product.name}}"
+                                  class="img-fluid">
+                                </div>
+                                <div class="col-8 text-left">
+                                  <a href="{{cart_line.product.url_key | prepend: url_base }}" class="text-dark">
+                                    {{cart_line.product.name}}
+                                  </a>
+                                  <div class="small font-weight-bold pt-2 text-info">
+                                    {% include 'currency' | value: cart_line.amount.total %} x
+                                    {{cart_line.qty}}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          {% endfor %}
+                        {% else %}
+                          <div class="text-center lead pt-4 pb-2">
+                            {% editable_text "cart_dropdown_empty", hint: "Cart empty", fixed: true %}
+                            Your shopping cart is empty :(
+                            {% endeditable_text %}
+                          </div>
+                        {% endif%}
+                        <div class="header-controls-dropdown-item text-center">
+                          <a href="{% path_to cart_index %}" class="btn btn-outline-primary">
+                            {{'header_cart' | translate}}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% when "user_icon" %}
+              <div class="d-flex text-center nav-header-controls" data-shopinvader-container id="header-controls">
+                <div class="pt-2 nav-header-controls-item {% if block.settings.inline_display %}nav-header-controls-item-inline{%endif%}">
+                  <a href="{% path_to account  %}" class="d-block text-center nav-header-controls-img">
+                  {% if block.settings.icon %}
+                    <img src="{{ block.settings.icon }}" alt="{{ site.name }}"  class="d-inline-block"/>
+                  {% endif %}
+                  </a>
+                  <div class=" font-weight-bold small">
+                    {% if current_customer %}
+                    <a href="{% path_to account %}" class="btn btn-link btn-sm font-weight-bold ">
+                      {{current_customer.name}}
+                    </a>
+                    <div class="header-controls-dropdown">
+                      <div class="header-controls-dropdown-content" id="cart-dropdown">
+                        <div class="header-controls-dropdown-item text-left">
+                          <a class="d-block pt-2 pb-2" href="{%path_to account_index%}">
+                            <i class="fas fa-file-alt text-primary"></i>  {{ "account_order_title" | translate }}
+                          </a>
+                          <a class="d-block pt-2 pb-2" href="{%path_to account_quotations%}">
+                            <i class="fas fa-file-invoice  text-primary"></i>  {{ "account_quotation_title" | translate }}
+                          </a>
+                          <a class="d-block  pt-2 pb-2" href="{%path_to account_profil%}">
+                            <i class="fas fa-user text-primary"></i>  {{ "account_profil_title" | translate }}
+                          </a>
+                          <a class="d-block  pt-2 pb-2" href="{%path_to account_address%}">
+                            <i class="fas fa-home text-primary"></i>  {{ "account_address_lists" | translate }}
+                          </a>
+                          <a class="d-block pt-2 pb-2" href="{%path_to account_password%}">
+                            <i class="fas fa-key text-primary"></i>  {{ "account_password_title" | translate }}
+                          </a>
+                          <a class="d-block pt-2 pb-2" href="{%path_to account_rma%}">
+                            <i class="fas fa-backward text-primary"></i>  {{ "account_rma_title" | translate }}
+                          </a>
+                          <form method="post" action="{% path_to account %}">
+                            <input type="hidden" name="auth_action" value="sign_out" />
+                            <input type="hidden" name="auth_content_type" value="customers" />
+                            <button type="submit" class="btn btn-link dropdown-item  bg-dark text-light pt-2 pb-2" >
+                              <i class="fa fa-power-off "></i>
+                              {{ 'account_signout' | translate }}
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    {% else %}
+                      <a href="{% path_to account %}" class="btn btn-link btn-sm font-weight-bold ">
+                        {{'header_login' | translate }}
+                      </a>
+                      <div class="header-controls-dropdown">
+                        <div class="header-controls-dropdown-content" id="cart-dropdown">
+                          <div class="header-controls-dropdown-item text-left">
+                            <form action="{% path_to 'account_login' %}" method="post">
+                              <input type="hidden" name="auth_action" value="sign_in" />
+                              <input type="hidden" name="auth_content_type" value="customers" />
+                              <input type="hidden" name="auth_id_field" value="email" />
+                              <input type="hidden" name="auth_password_field" value="password" />
+                              <input type="hidden" name="auth_callback" value="{% path_to account_index %}" />
+                              <div class="form-group">
+                                <label for="auth-email">{{ 'signin_email' | translate }}</label>
+                                <input type="email" class="form-control"  placeholder="{{ 'signin_email' | translate }}" name="auth_id" value="{{ params.auth_id }}" required="required">
+                              </div>
+                              <div class="form-group">
+                                <label for="auth-password">{{ 'signin_password' | translate }}</label>
+                                <input type="password" class="form-control" placeholder="{{ 'signin_password' | translate }}" name="auth_password" value="" required="required">
+                                <a href="{% path_to reset_password_request %}" class="color-white">
+                                  {{ 'signin_forgotpassword' | translate }}
+                                </a>
+                              </div>
+                              <div class="text-center">{% if auth_wrong_credentials %}{{ 'signin_wrong' | translate }}{% endif %}</div>
+                              <div class="text-right">
+                                <button type="submit" class="btn btn-dark btn-lg pull-right"><i class="fa fa-lock"></i> {{ 'signin_signin' | translate }}</button>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="header-controls-dropdown-item">
+                            <div class="text-center">
+                              <a href="{% path_to account_register%}" class="btn btn-primary  btn-sm">
+                                {{ 'signin_create_account' | translate }} <i class="fa fa-angle-right"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% when "search" %}
+              <form method="GET" action="{% path_to search %}" class="input-group navbar-search" >
+                <input type="text" class="form-control search-input" id="header-search-input" placeholder="{{ block.settings.placeholder }}" aria-label="{{ block.settings.placeholder }}" aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q" data-autosubmit>
+                <div class="input-group-prepend" >
+                  <button class="btn btn-link btn-lg p-0" name="submit" type="submit">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+                <div class="small text-left pt-2 w-100">
+                  <div class="font-weight-bold">
+                    {{ section.settings.baseline }}
+                  </div>
+                </div>
+                <div id="header-search-hit" class="d-none">
+                  <div id="header-search-product-title">
+                    <div class="row">
+                      <div class="col-12 search-title">
+                        <span class="h2">
+                          {{ 'search_product' | translate }}
+                        </span>
+                        <span class="nb_hits"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="header-search-product-link">
+                    <div class="row">
+                      <div class="col-12 text-right pt-2">
+                        <a data-href="{% path_to search %}" href="#" class="btn btn-primary btn-search-product">
+                          {{ 'search_product_all' | translate }}
+                          <span class="nb_hits"></span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="header-search-product-empty">
+                    <div class="row">
+                      <div class="col-12 text-center">
+                        {{ 'search_product_empty' | translate }}
+                      </div>
+                    </div>
+                  </div>
+                  <div id="header-search-category-title" class=" ">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="h2 text-dark">
+                          {{ 'search_category' | translate }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="header-search-category-empty">
+                    <div class="row">
+                      <div class="col-12 text-center">
+                        {{ 'search_category_empty' | translate }}
+                      </div>
+                    </div>
+                  </div>
+                  <div id="header-search-category-link">
+                    <div class="row">
+                      <div class="col-12 text-right ">
+                        <a href="#" class="btn btn-success">
+                          {{ 'search_category_all' | translate }}
+                          <span class="nb_hits"></span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="header-search-hit-content">
+                    <div class="row separator-right ">
+                      <div class="aa-dataset-product col-12  col-md-8 pt-2 pb-2"></div>
+                      <div class="aa-dataset-category col-12 col-md-4 pt-2 pb-2 bg-light d-none d-md-block"></div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            {% when "store_categories_menu" %}
+            <div class="menu-categories d-none d-md-block">
+              <div id="navbar" class="navbar-collapse ">
+                <ul class="nav justify-content-start categories-menu">
+                  {% with_scope level: 0%}
+                  {% for category in store.categories %}
+                  <li class="{% if page.fullpath == page_in_nav.fullpath %}active{% endif %}"  data-toggle="display-hover" data-target="#menu-{{category.id}}">
+                    <a href="{{category.url_key  | prepend: url_base }}" id="cat-{{category.id}}"  aria-haspopup="true" aria-expanded="false">
+                      {{ category.name }}
+                    </a>
+                    <div class="dropdown-category" id="menu-{{category.id}}">
+                      <ul class="row" >
+                        {% for category_l1 in category.childs %}
+                        <li class="col-3">
+                          <a  href="{{category_l1.url_key  | prepend: url_base }}" class="text-uppercase text-primary">
+                            {{category_l1.name}}
+                          </a>
+                          <ul>
+                            {% for category_l2 in category_l1.childs %}
+                            <li>
+                              <a href="{{category_l2.url_key | prepend: url_base}}" class="text-dark">
+                                {{category_l2.name}}
+                              </a>
+                            </li>
+                            {% endfor %}
+                          </ul>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </li>
+                  {% endfor %}
+                  {% endwith_scope%}
+                  {% for nav_page in site.pages%}
+                  {% if nav_page.listed? == true and nav_page.depth <= 1 %}
+                  <li class=" align-items-end">
+                    <a href="{% path_to nav_page%}" class="align-self-end text-dark">{{nav_page.title}}</a>
+                  </li>
+                  {% endif %}
+                  {% endfor%}
+                </ul>
+              </div>
+
+            </div>
+
+          {% endcase %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </nav>
+</div>
+{% endcomment%}

@@ -1,0 +1,18 @@
+
+{% if categories %}
+  <ul class="list-inline">
+  {% for category_sublevel in categories %}
+    <li class="list-inline-item level-{{level}}">
+      <a href="#nav-sm-{{category_sublevel.id}}" data-toggle="collapse">
+        {{ category_sublevel.name}}
+      </a>
+      {% if category_sublevel.childs.size > 0 and level == 1 %}
+        {% include section_header_nav_sm
+           with categories: category_sublevel.childs,
+           level: 2
+        %}
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+{% endif %}

@@ -3,12 +3,29 @@
   "name": "Carousel",
   "class": "",
   "icon": "slide",
+  "keep_icon": true,
   "settings": [
+    {
+      "label": "Section Name",
+      "id": "section_name",
+      "type": "text"
+    },
     {
       "label": "Identifier",
       "id": "identifier",
       "type": "text"
-    }, {
+    },
+    {
+      "label": "Full width",
+      "id": "full_width",
+      "type": "checkbox"
+    },
+    {
+      "label": "Display on mobile",
+      "id": "display_sm",
+      "type": "checkbox"
+    },
+    {
       "label": "Display Controls",
       "id": "display_control",
       "type": "radio",
@@ -24,6 +41,7 @@
       "type": "list_item",
       "settings": [
         {
+          "section_name": "Carousel",
           "label": "Slide title",
           "id": "title",
           "type": "text"
@@ -41,6 +59,11 @@
           "type": "text"
         },
         {
+          "label": "Transparent background",
+          "id": "bg_transparent",
+          "type": "checkbox"
+        },
+        {
           "label": "Caption",
           "id": "caption",
           "type": "text",
@@ -56,23 +79,35 @@
             {"label": "Center","value": "center"},
             {"label": "Right", "value": "end"}
           ]
+        },
+        {
+          "label": "Caption Size",
+          "id": "caption_size",
+          "type": "select",
+          "options": [
+            {"label": "Left","value": "start"},
+            {"label": "Medium","value": "col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 "},
+            {"label": "Large", "value": "col-12 col-sm-11 col-md-9 col-lg-8 col-xl-7 "}
+          ]
         }
+
       ]
     }
   ],
-  "presets": [{
-    "name": "Simple carousel",
-    "category": "Slider",
+  "default": {
     "settings": {
-      "display_controls": "true",
-      "identifier": "simple"
+      "section_name": "Main carousel",
+      "identifier": "main",
+      "display_control": "true",
+      "full_width": "true",
+      "display_sm": "true"
     },
     "blocks": [
       {
         "type": "list_item",
         "settings": {
           "title": "Slide #1",
-          "picture": "samples/content_entries/slide-1.jpg",
+          "picture": "/images/slide-1.jpg",
           "link": "",
           "align_caption": "center"
         }
@@ -81,7 +116,39 @@
         "type": "list_item",
         "settings": {
           "title": "Slide #2",
-          "picture": "samples/content_entries/slide-2.jpg",
+          "picture": "/images/slide-2.jpg",
+          "link": "",
+          "caption": "<h5>Slide #2</h5><p>Maecenas varius nibh a maximus vehicula</p>",
+          "align_caption": "end"
+        }
+      }
+    ]
+  },
+  "presets": [{
+    "name": "Carousel",
+    "category": "Slider",
+    "settings": {
+      "section_name": "Main carousel",
+      "identifier": "main",
+      "display_control": "true",
+      "full_width": "true",
+      "display_sm": "true"
+    },
+    "blocks": [
+      {
+        "type": "list_item",
+        "settings": {
+          "title": "Slide #1",
+          "picture": "/images/slide-1.png",
+          "link": "",
+          "align_caption": "center"
+        }
+      },
+      {
+        "type": "list_item",
+        "settings": {
+          "title": "Slide #2",
+          "picture": "/images/slide-2.png",
           "link": "",
           "caption": "<h5>Slide #2</h5><p>Maecenas varius nibh a maximus vehicula</p>",
           "align_caption": "end"
@@ -92,27 +159,28 @@
 }
 ---
 
-<div class="container-fluid">
-  <div class="row text-center d-none d-sm-block" id="slider">
+<div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+  <div class="row text-center {% if section.settings.display_sm != true %}d-none d-sm-block{% endif %}" id="slider">
     <div class="carousel slide" id="carousel-{{section.settings.identifier}}" data-ride="carousel">
       <div class="carousel-inner">
         {% for slide in section.blocks %}
-        <div class="{%if forloop.index0 == 0%}active{%endif%} carousel-item">
-          <a href="{{slide.link}}">
-            <img src="{{ slide.settings.picture }}" alt="{{slide.settings.title}}" class="w-100">
-          </a>
-          {% if slide.settings.caption %}
-            <div class="carousel-caption d-none d-md-flex">
-              <div class="row align-self-center justify-content-center justify-content-md-{{slide.settings.align_caption}}">
-                <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 carousel-caption-content mt-2 mb-2">
-                  <div class="p-3 p-lg-4">
-                    {{ slide.settings.caption }}
+          <div class="{%if forloop.index0 == 0%}active{%endif%} carousel-item">
+            <a href="{{slide.link}}">
+              <img src="{{ slide.settings.picture }}" alt="{{slide.settings.title}}" class="w-100">
+            </a>
+            {% if slide.settings.caption %}
+              <div class="carousel-caption d-none d-md-flex">
+                <div class="row align-self-center justify-content-center justify-content-md-{{slide.settings.align_caption}}">
+                  <div class="{{caption_size}} carousel-caption-content mt-2 mb-2 {% if !block.settings.bg_transparent %}bg-dark{% endif %}">
+                    <div class="p-3 p-lg-4">
+                      {{ slide.settings.caption }}
+
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          {% endif %}
-        </div>
+            {% endif %}
+          </div>
         {% endfor %}
       </div>
       {% if section.settings.display_control == "true"%}

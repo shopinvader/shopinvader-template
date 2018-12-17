@@ -1,0 +1,52 @@
+---
+{
+  "name": "Global Theme Settings",
+  "class": "",
+  "icon": "text",
+  "keep_name": true,
+  "keep_icon": true,
+  "settings": [
+    {
+      "label": "Max width page",
+      "id": "page_max_width",
+      "type": "select",
+      "options": [
+        {"label": "Small","value": "1020px"},
+        {"label": "Medium","value": "1200px"},
+        {"label": "Large", "value": "1600px"},
+        {"label": "Full", "value": "100%"}
+      ]
+    },
+    {
+      "label": "Page with border",
+      "id": "page_border",
+      "type": "checkbox"
+    },
+    {
+      "label": "Background body",
+      "id": "body_bg_color",
+      "type": "text"
+    }
+  ],
+  "default": {
+    "settings": {
+      "page_max_width": "1600px",
+      "body_bg_color": "",
+      "page_border": false
+    }
+  }
+}
+---
+
+<style media="screen">
+  body {
+    background-color: {{section.settings.body_bg_color}};
+  }
+  body .page {
+    max-width: {{section.settings.page_max_width}};
+    {% if section.settings.page_border == false %}
+      box-shadow: unset !important;
+      border: none;
+    {% endif %}
+  }
+</style>

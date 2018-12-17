@@ -1,0 +1,61 @@
+{% if current_customer %}
+  <div class="header-controls-dropdown">
+  <div class="header-controls-dropdown-content" id="cart-dropdown">
+    <div class="header-controls-dropdown-item text-left">
+      <a class="d-block pt-2 pb-2" href="{%path_to account_index%}">
+        <i class="fas fa-file-alt text-primary"></i>  {{ "account_order_title" | translate }}
+      </a>
+      <a class="d-block pt-2 pb-2" href="{%path_to account_quotations%}">
+        <i class="fas fa-file-invoice  text-primary"></i>  {{ "account_quotation_title" | translate }}
+      </a>
+      <a class="d-block  pt-2 pb-2" href="{%path_to account_profil%}">
+        <i class="fas fa-user text-primary"></i>  {{ "account_profil_title" | translate }}
+      </a>
+      <a class="d-block  pt-2 pb-2" href="{%path_to account_address%}">
+        <i class="fas fa-home text-primary"></i>  {{ "account_address_lists" | translate }}
+      </a>
+      <a class="d-block pt-2 pb-2" href="{%path_to account_password%}">
+        <i class="fas fa-key text-primary"></i>  {{ "account_password_title" | translate }}
+      </a>
+      <a class="d-block pt-2 pb-2" href="{%path_to account_rma%}">
+        <i class="fas fa-backward text-primary"></i>  {{ "account_rma_title" | translate }}
+      </a>
+      <form method="post" action="{% path_to account %}">
+        <input type="hidden" name="auth_action" value="sign_out" />
+        <input type="hidden" name="auth_content_type" value="customers" />
+        <button type="submit" class="btn btn-link dropdown-item  bg-dark text-light pt-2 pb-2" >
+          <i class="fa fa-power-off "></i>
+          {{ 'account_signout' | translate }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% else %}
+  <div class="header-dropdown">
+    <div class="p-3">
+      <form action="{% path_to 'account_login' %}" method="post">
+        <input type="hidden" name="auth_action" value="sign_in" />
+        <input type="hidden" name="auth_content_type" value="customers" />
+        <input type="hidden" name="auth_id_field" value="email" />
+        <input type="hidden" name="auth_password_field" value="password" />
+        <input type="hidden" name="auth_callback" value="{% path_to account_index %}" />
+        <div class="form-group">
+          <label for="auth-email" class="text-dark">{{ 'signin_email' | translate }}</label>
+          <input type="email" class="form-control"  placeholder="{{ 'signin_email' | translate }}" name="auth_id" value="{{ params.auth_id }}" required="required">
+        </div>
+        <div class="form-group">
+          <label for="auth-password" class="text-dark">{{ 'signin_password' | translate }}</label>
+          <input type="password" class="form-control" placeholder="{{ 'signin_password' | translate }}" name="auth_password" value="" required="required">
+          <a href="{% path_to reset_password_request %}" class="color-white">
+            {{ 'signin_forgotpassword' | translate }}
+          </a>
+        </div>
+        <div class="text-center">{% if auth_wrong_credentials %}{{ 'signin_wrong' | translate }}{% endif %}</div>
+        <div class="text-right">
+          <button type="submit" class="btn btn-dark pull-right"><i class="fa fa-lock"></i> {{ 'signin_signin' | translate }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endif %}

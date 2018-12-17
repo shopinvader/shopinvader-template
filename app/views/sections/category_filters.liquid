@@ -1,0 +1,149 @@
+---
+{
+  "name": "Category filters",
+  "class": "",
+  "icon": "list",
+  "keep_name": true,
+  "keep_icon": true,
+  "settings": [
+    {
+      "label": "Theme color",
+      "id": "theme_color",
+      "type": "select",
+      "options": [
+        {"label": "Light","value": "light"},
+        {"label": "Dark","value": "dark"},
+        {"label": "Primary", "value": "primary"},
+        {"label": "Secondary", "value": "secondary"},
+        {"label": "Info", "value": "info"},
+        {"label": "Danger", "value": "danger"},
+        {"label": "Warning", "value": "warning"},
+        {"label": "None", "value": "none"}
+      ]
+    },
+    {
+      "label": "Text position",
+      "id": "text_position",
+      "type": "select",
+      "options": [
+        {"label": "start","value": "start"},
+        {"label": "end","value": "end"}
+      ]
+    },
+    {
+      "label": "Category ID",
+      "id": "category_id",
+      "type": "text"
+    },
+    {
+      "label": "Content",
+      "id": "content",
+      "type": "text",
+      "html": "true"
+    },
+    {
+      "label": "Picture",
+      "id": "picture",
+      "type": "image_picker"
+    }
+  ],
+  "presets": [{
+    "name": "Category products list",
+    "category": "Category",
+    "settings": {
+      "content" : "<h2><b>Hello</b> World</h2>",
+      "category_id": "182",
+      "theme_color": "light",
+      "text_position": "start"
+    }
+  }],
+  "default": {
+    "settings": {
+      "content" : "<h2><b>Hello</b> World</h2>",
+      "category_id": "182",
+      "theme_color": "light",
+      "text_position": "start"
+    }
+  }
+}
+---
+{% case section.settings.theme_color %}
+  {% when "light" %}
+    {% assign css_banner = "bg-light" %}
+  {% when "dark" %}
+    {% assign css_banner = "text-light bg-dark"%}
+  {% when "primary" %}
+    {% assign css_banner = "text-light bg-primary"%}
+  {% when "warning" %}
+    {% assign css_banner = "text-dark bg-warning"%}
+  {% when "danger" %}
+    {% assign css_banner = "text-light bg-danger"%}
+  {% when "info" %}
+    {% assign css_banner = "text-light bg-info"%}
+  {% when "none" %}
+    {% assign css_banner = ""%}
+{% endcase %}
+{% with_scope id: section.settings.category_id %}
+  {% assign category = store.categories.first %}
+{% endwith_scope %}
+
+<div class="container-fluid">
+  <div class="row {{css_banner}}">
+    <div class="col-12">
+      <div class="container mt-4 mb-4">
+        <div class="row">
+          <div class="col-6 col-sm-3 col-xl-3 pt-4 {% if section.settings.text_position == 'end'%}order-5{%endif%}">
+            {{ section.settings.content }}
+            <img src="{{section.settings.picture}}" alt="" class="img-fluid">
+          </div>
+          <div class="col-xl-9">
+            {% assign slide_count = 1 %}
+            {% assign carousel_html_id = "carousel-category-" | append : section.settings.category_id%}
+            {% with_scope categories: {id: section.settings.category_id} %}
+              <div id="{{carousel_html_id}}" class="carousel slide" data-ride="carousel">
+
+                <div class="carousel-inner">
+                  <div class="carousel-item active p-1">
+                    <div class="row">
+                    {% assign thumb_order = 0 %}
+                    {% for product in store.products %}
+                      {% assign thumb_order = thumb_order | plus: 1 %}
+                      <div class="col-6 col-sm-3 col-xl-3 p-1">
+                        <div class=" h-100">
+                          {% include 'product_thumbnail' with
+                             product
+                          %}
+                        </div>
+                      </div>
+                      {% if thumb_order == 4 %}
+                        {% assign slide_count = slide_count | plus: 1 %}
+                        {% assign thumb_order = 0 %}
+                        </div>
+                      </div>
+                      <div class="carousel-item p-1">
+                        <div class="row">
+                      {%endif%}
+                    {% endfor %}
+                    </div>
+                  </div>
+
+                </div>
+                {% if slide_count > 1%}
+                  <div class="pt-2 pb-2 text-right">
+                    <a class="btn btn-outline-gray btn-sm pb-0" href="#{{carousel_html_id}}" role="button" data-slide="prev">
+                      <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="btn btn-outline-gray btn-sm pb-0" href="#{{carousel_html_id}}" role="button" data-slide="next">
+                      <i class="fa fa-angle-right"></i>
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            {% endwith_scope%}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

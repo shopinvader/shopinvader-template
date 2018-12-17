@@ -52,8 +52,13 @@ is_layout: false
     {% block 'css' %}{% endblock %}
     {% block 'javascripts_header' %}{% endblock %}
 
+    {{ 'section-debug.js' | javascript_tag }}
+    {% if live_editing %}
+    {% endif %}
   </head>
   <body>
+    {% global_section 'global_theme_settings',  placement: 'top', id:'global_theme_settings'%}
+
     <div class="main-loader d-none">
       <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
         <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
@@ -61,17 +66,16 @@ is_layout: false
     </div>
     <div class="page shadow">
       <header>
-        {% include 'nav' %}
+        {% global_section 'header', id:'page_header'%}
       </header>
       <main>
         <div class="container-fluid">
           {% include 'store_notifications' %}
-
         </div>
         {% block content %}
         {% endblock %}
       </main>
-      {% global_section 'footer',  placement: 'bottom', id:'page_footer'%}
+      {% global_section 'footer',   id:'page_footer',  placement: 'bottom'%}
     </div>
 
     <div class="modal fade" id="main-modal" tabindex="-1" role="dialog">
@@ -127,32 +131,7 @@ is_layout: false
       {% endif %}
     </div>
 
-    <div class="modal fade" id="generic-error-message" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header bg-warning">
-            <div class="h5">
-              {% editable_text "generic_error_message_title", label: "Generic Error Message : title", fixed: 'true', rows: 1, format:"raw" %}
-              <i class="fa fa-exclamation-triangle"></i>  Oops! Something went wrong!
-              {% endeditable_text %}
-            </div>
-          </div>
-          <div class="modal-body">
-            {% editable_text "generic_error_message_content", label: "Generic Error Message : content", fixed: 'true', rows: 10, format:"html" %}
-            <b>The application has encountered an unknown error.</b>
-            <p>
-            It doesn't appear to have affected your data, but our technical staff
-            have been automatically notified and will be looking into this with
-            the utmost urgency.
-            </p>
-            {% endeditable_text %}
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'close' | translate}}</button>
-          </div>
-        </div>
-      </div>
-    </div>
+
     {{ 'popper.min.js' | javascript_tag }}
     {{ 'jquery.min.js' | javascript_tag }}
     {{ 'jquery.slidereveal.min.js' | javascript_tag }}
@@ -170,7 +149,6 @@ is_layout: false
     {% endblock %}
     {% block 'javascripts', short_name: true %}
     {% endblock %}
-    {% include 'cookies_manager' %}
-
+    {% global_section 'cookies_manager',  placement: 'bottom'  %}
   </body>
 </html>

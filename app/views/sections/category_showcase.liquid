@@ -1,0 +1,200 @@
+---
+{
+  "name": "Category showcase",
+  "class": "",
+  "keep_name": true,
+  "keep_icon": true,
+  "settings": [
+    {
+      "label": "floating showcase",
+      "id": "main_float",
+      "type": "checkbox"
+    },
+    {
+      "label": "Category ID",
+      "id": "category",
+      "type": "text"
+    },
+    {
+      "label": "Block title",
+      "id": "block_title",
+      "type": "text"
+    },
+    {
+      "label": "floating block",
+      "id": "block_float",
+      "type": "checkbox"
+    },
+    {
+      "label": "Block description",
+      "id": "block_description",
+      "type": "text",
+      "html": true,
+      "nb_rows": 10
+    }
+  ],
+  "default": {
+    "settings": {
+      "main_float": "true",
+      "block_title": "Hello World",
+      "block_float": "true",
+      "block_description": "this is an example."
+    }
+  },
+  "presets": [{
+    "name": "Category showcase",
+    "category": "Category",
+    "settings": {
+      "main_float": "true",
+      "block_title": "Hello World",
+      "block_float": "true",
+      "block_description": "this is an example."
+    }
+  }]
+}
+---
+
+{% with_scope level: 0%}
+  {%assign category = store.categories.last%}
+{%endwith_scope%}
+{%if category %}
+  {% with_scope categories: {id: category.objectID}, main: true %}
+<div class="container-fluid">
+  <div class="row justify-content-center  main-showcase {% if section.settings.main_float %}main-showcase-float{% endif%}">
+    <div class="container">
+    {% if store.products.size > 0%}
+      <div class="row justify-content-end">
+        <div class=" col-12 col-sm-5 col-md-5 col-lg-3 text-left p-3 p-lg-4 showcase-desc {% if section.settings.block_float %}showcase-desc-float{% endif%}">
+          <div class="h2 text-uppercase ">
+            {{ section.settings.block_title }}
+          </div>
+          <div class="">
+            {{ section.settings.block_description }}
+          </div>
+          <div class="text-center pb-2 pb-lg-4">
+            <a href="{{category.url_key  | prepend: url_base }}" class="btn btn-sm btn-light text-primary ">
+              {{'show_more' | translate}}
+            </a>
+          </div>
+        </div>
+        <div class="col-12 col-sm-7 col-md-7 col-lg-5 pt-4 pb-2">
+          <div id="slide-showcase-categories" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner showcase-carousel" role="listbox">
+              {% for product in store.products%}
+              <div class="carousel-item showcase-carousel-item {%if forloop.first%}active{%endif%} text-center ">
+                <div class="showcase-carousel-item-content">
+                  <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="showcase-carousel-link">
+                    <img class="d-inline-block img-fluid" src="{{product.images.first.medium.src | default: site.metafields.theme.noimage}}" alt="{{product.images.first.medium.alt}}">
+                  </a>
+                  <div class="row showcase-carousel-item-desc">
+                    <div class="col-12">
+                      <div class="h4">
+                        <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="text-dark">
+                          {{product.model.name}}
+                        </a>
+                      </div>
+                      <div class="small text-primary">
+                        {{product.short_name}}
+                      </div>
+                      {% include 'rating_stars' with
+                      rating_value: product.rating.summary.average,
+                      rating_nbr: product.rating.reviews.size %}
+                      <div class="pt-4">
+                        <b>
+                          {%if product.price.discount > 0%}
+                          <div class="text-dark">
+                            <s>{% include 'currency' | value: product.price.original_value %}</s>
+                          </div>
+                          {% endif %}
+                          <span class="h3 pull-right font-weight-bold {%if product.price.discount > 0%}text-warning{% else %} text-primary{% endif %}">
+                            {% include 'currency' | value: product.price.value %}
+                          </span>
+                          {% if product.pricelist.tax_included == true %}
+                          <sub class="text-size-base">{{'product_vat_inc' | translate}}</sub>
+                          {% endif %}
+                        </b>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              {%endfor%}
+
+            </div>
+            <div class="text-right">
+              <a class="btn btn-sm btn-outline-info " href="#slide-showcase-categories" role="button" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+              </a>
+              <a  class="btn btn-sm btn-outline-info "  href="#slide-showcase-categories" role="button" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4  pt-4 border border-secondary border-right-0 border-top-0 border-bottom-0">
+          <div class="row">
+            <div class="col-12">
+              <div class="h3">
+                {{'popular_product' | translate}}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+        {% paginate store.products by 4 %}
+          {% for product in paginate.collection%}
+          <div class="col-3 col-sm-4 col-lg-12 pb-1 pt-1 border  border-left-0 border-bottom-0 ">
+            <div class="row">
+              <div class="col-12 col-md-3 text-center">
+                <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}">
+                  <img class="d-block img-fluid " src="{{product.images.first.medium.src | default: site.metafields.theme.noimage}}" alt="{{product.images.first.medium.alt}}">
+                </a>
+              </div>
+              <div class="col-12 col-md-9 small d-none d-sm-block">
+                <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}">
+                  {{product.model.name}}
+                  <div class="small">{{product.short_name}}</div>
+                </a>
+                <div class="">
+                  {% include 'rating_stars' with
+                  rating_value: product.rating.summary.average,
+                  rating_nbr: product.rating.reviews.size
+                  %}
+                </div>
+                <div class="">
+                  {% include 'currency' | value: product.price.value %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor%}
+            </div>
+        {% endpaginate%}
+        </div>
+      </div>
+    {%endif%}
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          {%with_scope parent: {id: category.objectID}%}
+            {% paginate store.categories by 4 %}
+              {%for category in paginate.collection%}
+                {% if category.images  and category.images.size > 0%}
+                <figure class="figure col-6 col-sm-6 col-md-3 p-0 m-0" data-link="{{category.url_key  | prepend: url_base }}">
+                  <img src="{{category.images.first.large.src | default: site.metafields.theme.noimage}}" class="img-fluid" alt="{{category.images.first.large.alt}}">
+                  <figcaption class="figure-caption text-center">
+                    <a href="{{category.url_key  | prepend: url_base }}" class="text-light">{{category.name}}</a>
+                  </figcaption>
+                </figure>
+                {% endif %}
+              {%endfor%}
+            {% endpaginate  %}
+          {%endwith_scope%}
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+  {%endwith_scope%}
+{%endif%}

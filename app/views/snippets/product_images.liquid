@@ -1,32 +1,49 @@
+
+{% case thumb_position %}
+  {% when 'left' %}
+    {% assign css_slide = 'flex-row'%}
+    {% assign css_image = 'order-2'%}
+    {% assign css_thumb= 'order-1 d-flex flex-column mt-2 mb-2'%}
+  {% when 'right' %}
+    {% assign css_slide = 'flex-row'%}
+    {% assign css_image = 'order-1'%}
+    {% assign css_thumb= 'order-2 d-flex flex-column mt-2 mb-2'%}
+  {% when 'top' %}
+    {% assign css_slide = 'flex-column'%}
+    {% assign css_image = 'order-2'%}
+    {% assign css_thumb= 'order-1 mt-2 mb-2 d-flex flex-row justify-content-center'%}
+  {% else %}
+    {% assign css_slide = 'flex-column'%}
+    {% assign css_image = 'order-1'%}
+    {% assign css_thumb= 'order-2 mt-2 mb-2 d-flex flex-row justify-content-center'%}
+{% endcase %}
 {% if product.images.size > 1 %}
-  <div class="carousel slide" data-ride="carousel" id="slide-{{product.objectID}}">
-    <div class="carousel-inner" role="listbox">
+  <div class="d-flex {{css_slide}}">
+    <div class="carousel slide {{css_image}}" data-ride="carousel" id="slide-{{product.objectID}}">
+      <div class="carousel-inner" role="listbox">
+        {% for image in product.images %}
+          <div class="carousel-item {%if forloop.index == 1 %}active{%endif%}">
+            <img src="{{image.large.src}}" alt="{{image.large.alt}}" class="d-block img-fluid w-100"/>
+          </div>
+        {% endfor %}
+        <a class="carousel-control-prev" href="#slide-{{product.objectID}}" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#slide-{{product.objectID}}" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    <div class=" {{css_thumb}}">
       {% for image in product.images %}
-        <div class="carousel-item {%if forloop.index == 1 %}active{%endif%}">
-
-          <img src="{{image.large.src}}" alt="{{image.large.alt}}" class="d-block img-fluid w-100"/>
-        </div>
+      <div data-target="#slide-{{product.objectID}}" data-slide-to="{{forloop.index0}}" class="{%if forloop.index == 1 %}active{%endif%} border carousel-thumbails d-flex mb-2 mr-2">
+        <img src="{{image.small.src}}" alt="{{image.small.alt}}" class="img-fluid"/>
+      </div>
       {% endfor %}
-      <a class="carousel-control-prev" href="#slide-{{product.objectID}}" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#slide-{{product.objectID}}" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
     </div>
   </div>
-  <div class="mt-1 mb-2">
-    {% for image in product.images %}
-    <div data-target="#slide-{{product.objectID}}" data-slide-to="{{forloop.index0}}" class="{%if forloop.index == 1 %}active{%endif%} border carousel-thumbails">
-      <img src="{{image.small.src}}" alt="{{image.small.alt}}" class="img-fluid"/>
-    </div>
-    {% endfor %}
-
-
-  </div>
-
 {% else %}
   <img class="img-fluid" src="{{product.images.first.large.src | default: site.metafields.theme.noimage }}" alt="" />
 {% endif %}

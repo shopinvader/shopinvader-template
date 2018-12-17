@@ -1,9 +1,102 @@
 $(document).ready(function() {
+
+
   var instantsearch_params = {
     indexName: algolia_params.products_index,
-    urlSync: true,
     templatesConfig: {
       compileOptions: [{delimiters: '<% %>'}]
+    },
+    routing: {
+      router: instantsearch.routers.history({
+
+        windowTitle(routeState) {
+          return `Website / Find ${routeState.q} in ${routeState["brand.name"]} brands`;
+        },
+        createURL({ routeState, location }) {
+          let baseUrl = location.href.split('/search/')[0];
+
+          if (!routeState.q && routeState["brand.name"] === 'all' && routeState.p === 1) return baseUrl;
+          if (baseUrl[baseUrl.length - 1] !== '/') baseUrl += '/';
+          var routeStateArray = [];
+          if(routeState.q != null && routeState.q != "") {
+            routeStateArray.push('q', encodeURIComponent(routeState.q));
+          }
+          for (i in filters) {
+            var filter = filters[i];
+            if(routeState.hasOwnProperty(filter.name)) {
+              routeStateArray.push(filter.url_key, encodeURIComponent(routeState[filter.name]));
+            }
+          }
+          routeStateArray.push('p', routeState.p);
+          return `${baseUrl}search/${routeStateArray.join('/')}`;
+        },
+        parseURL({ location }) {
+          let routeStateString = location.href.split('/search/')[1];
+          if (routeStateString === undefined) return {};
+          var regex_url = /^q\/(.*?)\/(.*?)\/p\/(.*?)$/;
+          const routeStateValues = routeStateString.split('/');
+          console.log(routeStateValues);
+          var url_param = {
+            "q": routeStateValues[routeStateValues.indexOf('q')+1],
+            "p": routeStateValues[routeStateValues.indexOf('p')+1]
+          };
+          console.log(routeStateValues);
+
+          for (i in filters) {
+            var filter = filters[i];
+            url_param[encodeURIComponent(filter.name)] = decodeURIComponent(
+              routeStateValues[routeStateValues.indexOf(encodeURIComponent(filter.url_key))+1]
+            );
+          }
+          return url_param;
+        },
+      }),
+      stateMapping: {
+        stateToRoute(uiState) {
+          console.log('uiState', uiState);
+          var route_params = {
+            q: uiState.query || '',
+            p: uiState.page || 1
+          };
+          for (i in filters) {
+            var filter = filters[i];
+            if(uiState.hasOwnProperty('refinementList') && uiState.refinementList.hasOwnProperty(filter.name)) {
+              var active_filters = (uiState.refinementList &&
+                uiState.refinementList[filter.name] &&
+                uiState.refinementList[filter.name].join('~'));
+            }
+            else if(uiState.hasOwnProperty('priceRanges') &&  uiState.priceRanges.hasOwnProperty(filter.name)) {
+              console.log(filter.name+ ' is priceRanges');
+              var active_filters = (uiState.priceRanges &&
+                uiState.priceRanges[filter.name] &&
+                uiState.priceRanges[filter.name].join('-'));
+            }
+            if(active_filters != null) {
+              route_params[filter.name] = active_filters;
+            }
+          }
+          return route_params;
+        },
+        routeToState(routeState) {
+          console.log('routeState',  routeState);
+          //if (routeState["brand.name"] === 'all') routeState["brand.name"] = undefined;
+          var route_params = {
+            query: routeState.q,
+            refinementList: {},
+            page: routeState.p
+          };
+          for (i in filters) {
+            var filter = filters[i];
+            if(typeof(routeState[filter.name]) != 'undefined') {
+              route_params.refinementList[filter.name] = (
+                routeState[filter.name] && routeState[filter.name].split('~')
+              );
+            }
+          }
+          console.log('routeToState',  route_params);
+          return route_params;
+        }
+      }
     }
   };
   if(algolia_params.currency_rate != 1 && typeof(customSearchClient) != 'undefined') {
@@ -72,7 +165,7 @@ $(document).ready(function() {
 
   var filters = [];
 
-  filters.push({name:'hierarchicalCategories.lvl0', label: 'Category'});
+  filters.push({name:'hierarchicalCategories.lvl0', label: 'Category', url_key: 'categories'});
   search.addWidget(
     instantsearch.widgets.rangeSlider({
       container: '#filter-sliderprice',
@@ -100,7 +193,7 @@ $(document).ready(function() {
       }
     })
   );
-  filters.push({name:'price.'+default_role+'.value', label: algolia_params.translations.price});
+  filters.push({name:'price.'+default_role+'.value', label: algolia_params.translations.price, 'url_key': 'price'});
 
   search.addWidget(
     instantsearch.widgets.priceRanges({
@@ -142,11 +235,18 @@ $(document).ready(function() {
       autoHideContainer: false
     };
     search.addWidget(instantsearch.widgets[$element.data('filter-widget-type')](search_widget));
-    filters.push({name: $element.data('filter-attr'), label: $element.data('filter-name')});
+    filters.push(
+      {
+        name: $element.data('filter-attr'),
+        label: $element.data('filter-name'),
+        url_key: encodeURIComponent($element.data('filter-name').toLowerCase())
+      }
+    );
   });
 
   $('[data-current-filter]').each(
   function(i, element) {
+    console.log(i, element);
     search.addWidget(
       instantsearch.widgets.currentRefinedValues({
         container: ('#'+$(element).attr('id')),

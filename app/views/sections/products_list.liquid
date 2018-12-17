@@ -1,0 +1,106 @@
+---
+{
+  "name": "Products list",
+  "class": "",
+  "icon": "list",
+  "keep_name": true,
+  "keep_icon": true,
+  "settings": [
+    {
+      "label": "Thumbnails Alignment",
+      "id": "cells_align",
+      "type": "select",
+      "options": [
+        {"label": "Left","value": "start"},
+        {"label": "Center","value": "center"},
+        {"label": "Right", "value": "end"}
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Product thumbnail",
+      "type": "product_thumb",
+      "settings": [
+        {
+          "label": "Thumbnail Size",
+          "id": "thumb_size",
+          "type": "select",
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"}
+          ]
+        },
+        {
+          "label": "Product inline",
+          "id": "display_horizontal",
+          "type": "checkbox"
+        },
+        {
+          "label": "Product SKU",
+          "id": "sku",
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Products list",
+    "category": "Product",
+    "settings": {
+      "cells_align": "start"
+    }
+  }],
+  "default": {
+    "settings": {
+      "cells_align" : "start"
+    },
+    "blocks": [
+      {
+        "type": "product_thumb",
+        "settings": {
+          "sku": "TABLEMID-001",
+          "thumb_size": "images/free-delivery.png",
+          "display_horizontal": "false"
+        }
+      }
+    ]
+  }
+}
+---
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="container mt-4 mb-4">
+        <div class="row justify-content-md-{{section.settings.cells_align}}">
+          {% for product_block in section.blocks %}
+            {% case product_block.settings.thumb_size %}
+              {% when 'xs' %}
+                {% assign css_cell = "col-6 col-sm-3 col-xl-2 "%}
+              {% when 'sm' %}
+                {% assign css_cell = "col-6 col-sm-3 col-xl-2"%}
+              {% when 'md' %}
+                {% assign css_cell = "col-12 col-sm-6 col-lg-6 "%}
+              {% when 'lg' %}
+                {% assign css_cell = "col-12 col-sm-6 col-lg-8 "%}
+              {% when 'xl' %}
+                {% assign css_cell = "col-12"%}
+            {% endcase %}
+            <div class="{{css_cell}}">
+            {% with_scope sku: [product_block.settings.sku]%}
+              {% include 'product_thumbnail' with
+                 product: store.products.first,
+                 display_horizontal: product_block.settings.display_horizontal
+              %}
+            {% endwith_scope%}
+            </div>
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

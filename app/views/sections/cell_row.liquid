@@ -1,0 +1,261 @@
+---
+{
+  "name": "Cells and rows",
+  "class": "",
+  "icon": "image_text",
+  "keep_icon": true,
+  "settings": [
+    {
+      "label": "Section Name",
+      "id": "section_name",
+      "type": "text"
+    },
+    {
+      "label": "Theme color",
+      "id": "theme_color",
+      "type": "select",
+      "options": [
+        {"label": "Light","value": "light"},
+        {"label": "Dark","value": "dark"},
+        {"label": "Primary", "value": "primary"},
+        {"label": "Secondary", "value": "secondary"},
+        {"label": "Info", "value": "info"},
+        {"label": "Danger", "value": "danger"},
+        {"label": "Warning", "value": "warning"},
+        {"label": "None", "value": "warning"}
+      ]
+    },
+    {
+      "label": "Cells Alignment",
+      "id": "cells_align",
+      "type": "select",
+      "options": [
+        {"label": "Left","value": "start"},
+        {"label": "Center","value": "center"},
+        {"label": "Right", "value": "end"}
+      ]
+    },
+    {
+      "label": "Row Margin",
+      "id": "margin",
+      "type": "select",
+      "options": [
+        {"label": "None","value": ""},
+        {"label": "Small","value": "sm"},
+        {"label": "Medium", "value": "md"},
+        {"label": "Large", "value": "lg"},
+        {"label": "Extra-large", "value": "xl"}
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Text",
+      "type": "cell_text",
+      "keep_icon": true,
+      "keep_name": true,
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Auto", "value": "auto"},
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"}
+          ]
+        },
+        {
+          "label": "Margin",
+          "id": "margin",
+          "type": "select",
+          "options": [
+            {"label": "None","value": ""},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"}
+          ]
+        },
+        {
+          "label": "Content",
+          "id": "content",
+          "type": "text",
+          "html": true,
+          "nb_rows": 10
+        }
+      ]
+    },
+    {
+      "name": "Picture",
+      "type": "cell_image",
+      "keep_icon": true,
+      "keep_name": true,
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Auto", "value": "auto"},
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"}
+          ]
+        },
+        {
+          "label": "Margin",
+          "id": "margin",
+          "type": "select",
+          "options": [
+            {"label": "None","value": ""},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"}
+          ]
+        },
+        {
+          "label": "Picture",
+          "id": "picture",
+          "type": "image_picker"
+        },
+        {
+          "label": "Picture Title",
+          "id": "picture_alt",
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Cells and rows",
+    "category": "Content",
+    "settings": {
+      "section_name": "Cells",
+      "theme_color": "light",
+      "cells_align": "left",
+      "margin": "xl"
+    },
+    "blocks": [
+      {
+        "type": "cell_text",
+        "settings" : {
+          "cell_size": "md",
+          "content":  "<h3>Lorem ipsum dolor sit amet</h3> <br>Vivamus nunc nisi, ultricies sed mollis fringilla, volutpat ac neque. Praesent eget felis tincidunt, efficitur elit eu, varius odio. Aliquam in tortor lacinia, mollis ex eu, venenatis erat",
+          "margin": "sm"
+        }
+      },
+      {
+        "type": "cell_text",
+        "settings" : {
+          "cell_size": "md",
+          "content":  "<h3>Lorem ipsum dolor sit amet</h3> <br>Vivamus nunc nisi, ultricies sed mollis fringilla, volutpat ac neque. Praesent eget felis tincidunt, efficitur elit eu, varius odio. Aliquam in tortor lacinia, mollis ex eu, venenatis erat",
+          "margin": "sm"
+        }
+      }
+    ]
+  }],
+  "default": {
+    "settings" : {
+      "section_name": "Cells",
+      "theme_color": "light",
+      "cells_align": "left",
+      "margin": "xl"
+    },
+    "blocks": [
+      {
+        "type": "cell_text",
+        "settings" : {
+          "cell_size": "md",
+          "content":  "<h3>Lorem ipsum dolor sit amet</h3> <br>Vivamus nunc nisi, ultricies sed mollis fringilla, volutpat ac neque. Praesent eget felis tincidunt, efficitur elit eu, varius odio. Aliquam in tortor lacinia, mollis ex eu, venenatis erat",
+          "margin": "sm"
+        }
+      },
+      {
+        "type": "cell_text",
+        "settings" : {
+          "cell_size": "md",
+          "content":  "<h3>Lorem ipsum dolor sit amet</h3> <br>Vivamus nunc nisi, ultricies sed mollis fringilla, volutpat ac neque. Praesent eget felis tincidunt, efficitur elit eu, varius odio. Aliquam in tortor lacinia, mollis ex eu, venenatis erat",
+          "margin": "sm"
+        }
+      }
+    ]
+  }
+}
+---
+{% case section.settings.theme_color %}
+{% when "light" %}
+  {% assign css_banner = "text-dark" %}
+{% when "dark" %}
+  {% assign css_banner = "text-light bg-dark"%}
+{% when "primary" %}
+  {% assign css_banner = "text-light bg-primary"%}
+{% when "warning" %}
+  {% assign css_banner = "text-dark bg-warning"%}
+{% when "danger" %}
+  {% assign css_banner = "text-light bg-danger"%}
+{% when "info" %}
+  {% assign css_banner = "text-light bg-info"%}
+{% endcase %}
+
+{% case section.settings.margin %}
+  {% when "sm" %}
+    {% assign css_margin_row = "mt-1 mb-1" %}
+  {% when "md" %}
+    {% assign css_margin_row = "mt-2 mb-2  pt-2 pb-2"%}
+  {% when "lg" %}
+    {% assign css_margin_row = "mt-3 mb-3  pt-3 pb-3"%}
+  {% when "xl" %}
+    {% assign css_margin_row = "mt-4 mb-4 pt-4 pb-4"%}
+{% endcase %}
+
+<div class="container-fluid">
+  <div class="row {{css_banner}}">
+
+    <div class="col-12">
+      <div class="container {{css_margin_row}}">
+        <div class="row justify-content-md-{{section.settings.cells_align}}">
+          {% for cell in section.blocks %}
+          {% case cell.settings.cell_size %}
+            {% when 'xs' %}
+              {% assign css_cell = "col-12 col-sm-6 col-lg-2 "%}
+            {% when 'sm' %}
+              {% assign css_cell = "col-12 col-sm-6 col-lg-4 "%}
+            {% when 'md' %}
+              {% assign css_cell = "col-12 col-sm-6 col-lg-6 "%}
+            {% when 'lg' %}
+              {% assign css_cell = "col-12 col-sm-6 col-lg-8 "%}
+            {% when 'xl' %}
+              {% assign css_cell = "col-12"%}
+            {% else %}
+              {% assign css_cell = "col-auto"%}
+          {% endcase %}
+          {% case cell.settings.margin %}
+            {% when "sm" %}
+              {% assign css_margin_cell = "mt-1 mb-1" %}
+            {% when "md" %}
+              {% assign css_margin_cell = "mt-2 mb-2  pt-2 pb-2"%}
+            {% when "lg" %}
+              {% assign css_margin_cell = "mt-3 mb-3  pt-3 pb-3"%}
+            {% when "xl" %}
+              {% assign css_margin_cell = "mt-4 mb-4 pt-4 pb-4"%}
+          {% endcase %}
+          {% assign css_cell = css_cell | append : css_margin_cell %}
+          <div class="{{css_cell}}">
+            {% if cell.type == "cell_image" %}
+            <img src="{{cell.settings.picture}}" alt="{{cell.settings.picture_alt}}" class="img-fluid">
+            {% else %}
+            {{ cell.settings.content }}
+            {% endif %}
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

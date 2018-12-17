@@ -1,6 +1,6 @@
 $icon-font-path: "../fonts/bootstrap/" !default;
 @import 'components/custom';
-@import url('https://fonts.googleapis.com/css?family=Lato:300');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300');
 @import 'bootstrap4/bootstrap';
 @import 'components/account';
 @import 'components/algolia';
@@ -9,7 +9,7 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 @import 'components/editable';
 @import 'components/footer';
 @import 'components/loader';
-@import 'components/nav';
+//@import 'components/nav';
 @import 'components/posts';
 @import 'components/product';
 @import 'components/preloader';
@@ -21,15 +21,19 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 
 @import 'payments/adyen';
 @import 'payments/stripe';
+/*Section*/
+@import 'sections/cookies_manager';
+@import 'sections/header';
+@import 'sections/section_debug';
 /* Need to fix CDN issue
 @import 'fontawesome/fontawesome';
 @import 'fontawesome/solid';
 @import 'fontawesome/regular';
 @import 'fontawesome/brands';*/
 html {
-  font-size: 15px;
+  font-size: 14px;
   @include media-breakpoint-down(sm) {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
@@ -42,7 +46,7 @@ html {
     }
     .page {
       background-color: $body-bg;
-      max-width: $page-max-width;
+      //max-width: $page-max-width;
       margin: auto;
       box-shadow: $page-shadow;
     }

@@ -1,0 +1,39 @@
+---
+{
+  "name": "Error Message",
+  "class": "",
+  "icon": "text",
+  "settings": [
+    {
+      "label": "Title",
+      "id": "title",
+      "type": "text"
+    },
+    {
+      "label": "Message",
+      "id": "message",
+      "type": "text",
+      "html": true,
+      "nb_rows": 15
+    }
+  ]
+
+}
+---
+<div class="modal fade" id="generic-error-message" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <div class="h5">
+          {{ section.settings.title }}
+        </div>
+      </div>
+      <div class="modal-body">
+        {{ section.settings.message }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'close' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

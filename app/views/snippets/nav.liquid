@@ -21,22 +21,22 @@
           {% assign currency = store.currencies_format[session.currency_code]%}
           {% if currency %}
             <a class=" btn btn-link btn-sm dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="badge badge-info rounded w-25 shadow-sm ">{{currency.unit}}</span> - <u>{{'currency_' | append: session.currency_code | downcase | translate}}</u>
+              <span class="badge badge-info rounded w-25 shadow-sm ">{{currency.unit}}</span> - <u>{{'currency_' | append: session.currency_code | downcase | translate}}</u>
             </a>
           {% endif %}
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <form action="#" method="POST">
               <div class="input-group">
-                {% for currency in store.currencies_format %}
+              {% for currency in store.currencies_format %}
                 <div class="dropdown-item">
-                    <input type="radio" name="new_currency" id="new_currency_{{currency.first}}" value="{{currency.first}}" class="d-none" data-autosubmit>
-                    <label for="new_currency_{{currency.first}}" >
-
-                    <span class="badge badge-secondary rounded w-25 shadow-sm">{{currency[1].unit}}</span> - {{'currency_' | append: currency.first | downcase | translate}}
+                  <input type="radio" name="new_currency" id="new_currency_{{currency.first}}" value="{{currency.first}}" class="d-none" data-autosubmit>
+                  <label for="new_currency_{{currency.first}}" >
+                    <span class="badge badge-secondary rounded w-25 shadow-sm">
+                      {{currency[1].unit}}
+                    </span> - {{'currency_' | append: currency.first | downcase | translate}}
                   </label>
                 </div>
-
-                {% endfor%}
+              {% endfor%}
               </div>
             </form>
           </div>

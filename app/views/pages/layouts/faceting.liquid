@@ -16,12 +16,16 @@ is_layout: false
 {% endblock %}
 
 {% block content %}
-  {% if category %}
+  {% if category and category.filters != []%}
     {% assign filters = category.filters %}
   {% else %}
     {% assign filters = store.all_filters %}
   {% endif %}
+{% assign filters = store.all_filters %}
+<div class="alert alert-info">
 
+</div>
+<div class="container-fluid">
   <div class="row">
     <div class="col-12 col-md-3 col-xl-2 p-0  border ">
       <div id="filters" class="sidebar sidebar-filters collapse">
@@ -151,5 +155,5 @@ is_layout: false
       </div>
     </div>
   </div>
-
+</div>
 {% endblock %}
