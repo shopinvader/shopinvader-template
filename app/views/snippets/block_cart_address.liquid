@@ -1,29 +1,28 @@
 {% assign address = store.cart[address_type].address%}
-<div class="row pt-4 pb-5">
-	<div class="col-12 pt-2 pb-2">{{title}}</div>
-	<div class="col-12 pb-2">
-		<b>{{ address.name }}</b>
-	</div>
-	<div class="col-12 ">
-		<div class="d-flex">
-			<i class="ti-location-pin pr-2 pt-1"></i> 
-			<div>
-				{{ address.street }}<br>
-				{% if address.street2 != "" %}
-          {{ address.street2 }}<br>
-      	{% endif %}
-      	{{ address.zip }} - {{ address.city }}, {{ address.country.name }}
+{% if address != null %}
+	<div class="row pt-4 pb-5">
+		<div class="col-12 pt-2 pb-2">{{title}}</div>
+		<div class="col-12 pb-2">
+			<b>{{ address.name }}</b>
+		</div>
+		<div class="col-12 ">
+			<div class="d-flex">
+				<i class="ti-location-pin pr-2 pt-1"></i> 
+				<div>
+					{{ address.street }}<br>
+					{% if address.street2 != "" %}
+	          {{ address.street2 }}<br>
+	      	{% endif %}
+	      	{{ address.zip }} - {{ address.city }}, {{ address.country.name }}
+				</div>
+			</div>
+			<div class="d-flex pt-2">
+
+				{% if address.phone != "" %}
+					<i class="fas fa-phone pr-2"></i>
+					<div>{{ address.phone }}</div>
+				{% endif %}
 			</div>
 		</div>
-		<div class="d-flex pt-2">
-
-			{% if address.phone != "" %}
-				<i class="fas fa-phone pr-2"></i>
-				<div>{{ address.phone }}</div>
-			{% endif %}
-		</div>
-   
 	</div>
-
-	
-</div>
+{% endif %}

@@ -4,9 +4,40 @@ handle: account
 slug: account
 seo_title: My account | Shopinvader demo
 is_layout: false
+sections_content: >
+  {
+    "account_login": {
+      "settings": {
+        "cells_align": "center",
+        "cells_direction": "flex-row"
+      },
+      "blocks": [
+        {
+          "type": "card_login",
+          "settings": {
+            "cell_size": "lg",
+            "display_border": false,
+            "title": "<h3>Sign In</h3>",
+            "btn_label": "Sign In",
+            "theme": "light"
+          }
+        },
+        {
+          "type": "card_register",
+          "settings": {
+            "cell_size": "lg",
+            "display_border": true,
+            "title": "<h3>Account Registration</h3>",
+            "btn_label": "Register",
+            "theme": "none"
+          }
+        }
+      ]
+    }
+  }
 ---
 {% extends 'layouts/default' %}
-{% block "content" %}
+{% block "body/content" %}
   {% action 'Redirection when customer is already logged' %}
   if (getProp('current_customer')) {
     redirectTo('account_index');
@@ -22,6 +53,7 @@ is_layout: false
       </h1>
       </div>
     </div>
+    {% section 'account_login' %}
     <div class="row row-same-height cart-login pb-4 mb-4">
       <div class="col-12 col-md-6 pb-0 mb-0">
         <div class="card shadow h-100">

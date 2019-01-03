@@ -26,7 +26,7 @@ sections_content: >
           }
         },
         {
-          "type": "cart_address",
+          "type": "cart_address_list",
           "settings": {
             "cell_size": "lg"
           }
@@ -39,6 +39,24 @@ sections_content: >
             "display_submit": true,
             "title": "Your order",
             "display_lines": true
+          }
+        },
+        {
+          "type": "cart_address",
+          "settings": {
+            "cell_size": "full",
+            "title": "<h3>Shipping address</h3>",
+            "address_type": "shipping",
+            "is_child": true
+          }
+        },
+        {
+          "type": "cart_address",
+          "settings": {
+            "cell_size": "full",
+            "title": "<h3>Ivoice address</h3>",
+            "address_type": "invoicing",
+            "is_child": true
           }
         }
         

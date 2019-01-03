@@ -7,7 +7,7 @@
   "keep_icon": true,
   "settings": [
     {
-      "label": "Thumbnails Alignment",
+      "label": "Card alignment",
       "id": "cells_align",
       "type": "select",
       "options": [
@@ -15,12 +15,21 @@
         {"label": "Center","value": "center"},
         {"label": "Right", "value": "end"}
       ]
+    },
+    {
+      "label": "Card direction",
+      "id": "cells_direction",
+      "type": "select",
+      "options": [
+        {"label": "Row","value": "flex-row"},
+        {"label": "Column","value": "flex-column"}
+      ]
     }
   ],
   "blocks": [
     {
-      "name": "Product thumbnail",
-      "type": "product_thumb",
+      "name": "Register card",
+      "type": "card_register",
       "settings": [
         {
           "label": "Thumbnail Size",
@@ -33,74 +42,248 @@
             {"label": "Large", "value": "lg"},
             {"label": "Extra-large", "value": "xl"}
           ]
+
         },
         {
-          "label": "Product inline",
-          "id": "display_horizontal",
-          "type": "checkbox"
+          "label": "Theme",
+          "id": "theme",
+          "type": "select",
+          "options": [
+            {"label": "Transparent", "value": "none"},
+            {"label": "Dark","value": "dark"},
+            {"label": "Light","value": "light"}
+          ]
         },
         {
-          "label": "Product SKU",
-          "id": "sku",
+          "label": "Show border",
+          "id": "display_border",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true,
+          "nb_rows": 2
+        },
+        {
+          "label": "Content",
+          "id": "content",
+          "type": "text",
+          "html": true,
+          "nb_rows": 10
+        },
+        {
+          "label": "Button label",
+          "id": "btn_label",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "Login card",
+      "type": "card_login",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Auto", "value": "auto"},
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
+          ]
+        },
+        {
+          "label": "Theme",
+          "id": "theme",
+          "type": "select",
+          "options": [
+            {"label": "Transparent", "value": "none"},
+            {"label": "Dark","value": "dark"},
+            {"label": "Light","value": "light"}
+          ]
+        },
+        {
+          "label": "Show border",
+          "id": "display_border",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true,
+          "nb_rows": 2
+        },
+        {
+          "label": "Content",
+          "id": "content",
+          "type": "text",
+          "html": true,
+          "nb_rows": 10
+        },
+        {
+          "label": "Button label",
+          "id": "btn_label",
           "type": "text"
         }
       ]
     }
   ],
-  "presets": [{
-    "name": "Products list",
-    "category": "Product",
-    "settings": {
-      "cells_align": "start"
-    }
-  }],
   "default": {
-    "settings": {
-      "cells_align" : "start"
-    },
     "blocks": [
       {
-        "type": "product_thumb",
+        "type": "card_login",
         "settings": {
-          "sku": "TABLEMID-001",
-          "thumb_size": "images/free-delivery.png",
-          "display_horizontal": "false"
+          "cell_size": "md",
+          "btn_label": "Sign In"
+        }
+      },
+      {
+        "type": "card_register",
+        "settings": {
+          "cell_size": "md",
+          "btn_label": "Register"
         }
       }
     ]
   }
 }
 ---
+<div class="container">
+  <div class="row pt-4 pb-4 justify-content-{{section.settings.cells_align}} {{section.settings.cells_direction}}">
+    {% for block in section.blocks %}
+      {% assign theme = '' %}
+      {% assign next_block = section.blocks[forloop.index] %}
+      {% case block.settings.cell_size %}
+        {% when 'xs' %}
+          {% assign css_cell = "col-12 col-md-4 col-lg-2 col-xl-2 "%}
+        {% when 'sm' %}
+          {% assign css_cell = "col-12 col-md-6 col-lg-4"%}
+        {% when 'md' %}
+          {% assign css_cell = "col-12 col-lg-12 col-xl-6 "%}
+        {% when 'lg' %}
+          {% assign css_cell = "col-12 col-md-12 col-lg-8 "%}
+        {% when 'xl' %}
+          {% assign css_cell = "col-12 col-lg-10 col-xl-10 "%}
+        {% when 'full' %}
+          {% assign css_cell = "col-12 "%}
+        {% when 'auto' %}
+          {% assign css_cell = "col-auto"%}
+      {% endcase %}
+      
+      {% case block.settings.theme %}
+        {% when 'dark' %}
+          {% assign theme = " bg-dark  text-light"%}
+        {% when 'light' %}
+          {% assign theme = "text-dark bg-light"%}
+      {% endcase %}
+      {% if block.settings.display_border != true %}
+        {% assign theme = theme | append :' border-0' %}
+      {% endif %}
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <div class="container mt-4 mb-4">
-        <div class="row justify-content-md-{{section.settings.cells_align}}">
-          {% for product_block in section.blocks %}
-            {% case product_block.settings.thumb_size %}
-              {% when 'xs' %}
-                {% assign css_cell = "col-6 col-sm-3 col-xl-2 "%}
-              {% when 'sm' %}
-                {% assign css_cell = "col-6 col-sm-3 col-xl-2"%}
-              {% when 'md' %}
-                {% assign css_cell = "col-12 col-sm-6 col-lg-6 "%}
-              {% when 'lg' %}
-                {% assign css_cell = "col-12 col-sm-6 col-lg-8 "%}
-              {% when 'xl' %}
-                {% assign css_cell = "col-12"%}
+      <div class="{{css_cell}} block block_{{block.type}}">
+        <div class="card {{theme}} h-100">
+          <div class="card-body">
+            <div>{{ block.settings.title }}</div>
+            <div>
+              {% case block.type %}
+              {% when 'card_login' %}
+                <form action="{% path_to 'account_login' %}" method="post">
+                  <input type="hidden" name="auth_action" value="sign_in" />
+                  <input type="hidden" name="auth_content_type" value="customers" />
+                  <input type="hidden" name="auth_id_field" value="email" />
+                  <input type="hidden" name="auth_password_field" value="password" />
+                  <input type="hidden" name="auth_callback" value="{% path_to account_index %}" />
+                  <div class="form-group">
+                    <label for="auth-email">{{ 'signin_email' | translate }}</label>
+                    <input type="email" class="form-control" id="auth-email" placeholder="{{ 'signin_email' | translate }}" name="auth_id" value="{{ params.auth_id }}" required="required">
+                  </div>
+                  <div class="form-group">
+                    <label for="auth-password">{{ 'signin_password' | translate }}</label>
+                    <input type="password" class="form-control" id="auth-password" placeholder="{{ 'signin_password' | translate }}" name="auth_password" value="" required="required">
+                    <a href="{% path_to reset_password_request %}" class="color-white">
+                      {{ 'signin_forgotpassword' | translate }}
+                    </a>
+                  </div>
+                  <script src="https://www.google.com/recaptcha/api.js?render=6LduOIAUAAAAAIfEIpRUGSyJJZjewBVfFGoJExeN"></script>
+                  <script>
+                  grecaptcha.ready(function() {
+                      grecaptcha.execute('reCAPTCHA_site_key', {action: 'homepage'}).then(function(token) {
+                         
+                      });
+                  });
+                  </script>
+                  <div class="text-center">{% if auth_wrong_credentials %}{{ 'signin_wrong' | translate }}{% endif %}</div>
+                  <div class="text-right">
+                    <button type="submit" class="btn btn-dark btn-lg pull-right"><i class="fa fa-lock"></i> {{ block.settings.btn_label  }}</button>
+                  </div>
+
+                </form>
+              {% when 'card_register' %}
+                {{ block.settings.content }}
+                <div class="text-center pt-3">
+                  <a href="{% path_to cart_next_step %}" class="btn btn-primary">
+                    {{ block.settings.btn_label  }}
+                  </a>
+                </div>
+              </div>
             {% endcase %}
-            <div class="{{css_cell}}">
-            {% with_scope sku: [product_block.settings.sku]%}
-              {% include 'product_thumbnail' with
-                 product: store.products.first,
-                 display_horizontal: product_block.settings.display_horizontal
-              %}
-            {% endwith_scope%}
             </div>
-          {%endfor%}
+          </div>
         </div>
+        
+        
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% comment %}
+<div class="d-none">
+  <div class="col-12 col-sm-6 {% if inverse_card == true%}order-md-1{%endif%}">
+    <div class="p-4">
+      <div>{{login_title}} {{cart_next_step}}</div>
+      <form action="{% path_to page %}" method="post">
+        <input type="hidden" name="auth_action" value="sign_in" />
+        <input type="hidden" name="auth_content_type" value="customers" />
+        <input type="hidden" name="auth_id_field" value="email" />
+        <input type="hidden" name="auth_password_field" value="password" />
+        <input type="hidden" name="auth_callback" value="{% path_to cart_next_step %}" />
+        <div class="form-group">
+          <label for="auth-email">{{ 'signin_email' | translate }}</label>
+          <input type="email" class="form-control" id="auth-email" placeholder="{{ 'signin_email' | translate }}" name="auth_id" value="{{ params.auth_id }}john.doe@shopinvader.com" required="required">
+        </div>
+        <div class="form-group">
+          <label for="auth-password">{{ 'signin_password' | translate }}</label>
+          <input type="password" class="form-control" id="auth-password" placeholder="{{ 'signin_password' | translate }}" name="auth_password" value="password" required="required">
+          <a href="{% path_to reset_password_request %}" class="color-white">
+            {{ 'signin_forgotpassword' | translate }}
+          </a>
+        </div>
+        <div class="text-center">{% if auth_wrong_credentials %}{{ 'signin_wrong' | translate }}{% endif %}</div>
+        <div class="text-right">
+          <button type="submit" class="btn btn-dark btn-lg pull-right"><i class="fa fa-lock"></i> {{ 'signin_signin' | translate }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 bg-light {% if inverse_card == true%}order-md-0{%endif%}">
+    <div class="p-4">
+      <div>{{guest_title}}</div>
+      {{ guest_content}}
+      <div class="text-center">
+        <a href="{% path_to cart_next_step %}" class="btn btn-primary">
+          {{ guest_button }}
+        </a>
       </div>
     </div>
   </div>
 </div>
+{% endcomment %}

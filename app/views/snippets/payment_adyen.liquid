@@ -3,15 +3,11 @@
     <p>
       {{payment_method.description}}
     </p>
-    <button type="button" class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#modal-adyen">
-      {% editable_text  adyen_showmodal_label, label: 'Adyen  - Show modal button', rows: 1 %}
-         <i class="fas fa-credit-card"></i>  Pay by credit card
-      {% endeditable_text %}
+    <button type="button" class="btn btn-dark btn-lg font-weight-bold text-uppercase"  data-toggle="modal" data-target="#modal-adyen">
+      {{ 'payment_adyen_button' | translate }}
     </button>
     <div class="pt-3">
-      {% editable_text adyen_description, label: 'Adyen - description', rows: 1 %}
-        Secured checkout with Adyen
-      {% endeditable_text %}
+      {{ 'payment_adyen_description' | translate }}
       <div class=" text-secondary fa-2x">
         <i class="fab fa-cc-visa"></i>
         <i class="fab fa-cc-mastercard"></i>
@@ -27,9 +23,7 @@
         <div class="modal-header">
           <h4 class="modal-title">
             <i class="fa fa-credit-card-alt"></i>
-            {% editable_text adyen_form_title, label: 'Adyen Form - title', rows: 1, format: 'raw' %}
-              Pay my order
-            {% endeditable_text %}
+            {{ 'payment_adyen_form_title' | translate }}
           </h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
@@ -46,14 +40,11 @@
           <form action="" method="post" id="adyen-encrypted-form" >
             <input type="hidden" value="" data-encrypted-name="generationtime" />
             <h3 class="d-none d-md-block">
-              {% editable_text adyen_form_subtitle, label: 'Adyen Form - sub-title', rows: 1 %}
-              Secured credit card payment
-              {% endeditable_text %}
+              {{ 'payment_adyen_form_subtitle' | translate }}
             </h3>
-
-            {% editable_text adyen_form_details, label: 'Adyen Form - details', rows: 3, format: 'html'%}
-              <p>Secured credit card payment with Adyen.</p>
-            {% endeditable_text %}
+            <p>
+              {{ 'payment_adyen_description' | translate }}
+            </p>
             <div class="payment-card-row">
               <div class="form-group">
                 <label for="creditcard-owner">{{'creditcard_lastname' | translate}}</label>
@@ -99,9 +90,8 @@
               </div>
               <div class="form-group text-center">
                 <button type="submit" class="btn btn-success w-75" id="" placeholder="" disabled="disabled">
-                  {% editable_text adyen_ckeckout_button, label: 'Adyen Form - checkout label', rows: 3, format: 'html'%}
-                    PAY
-                  {% endeditable_text %} <span id="payement_total_label" data-shopinvader-container>
+                  {{'payment_adyen_ckeckout_button' | translate}} 
+                  <span id="payement_total_label" data-shopinvader-container>
                     {% include 'currency' | value: amount %}
                   </span>
                 </button>
@@ -119,9 +109,8 @@
         <div class="modal-footer bg-light text-dark">
           <div class="text-left w-50">
             <i class="fa fa-lock text-success"></i>
-            {% editable_text adyen_security_details, label: 'Adyen Form - security details', rows: 1, format: 'html' %}
-            Secured Area
-            {% endeditable_text %}
+            {{'creditcard_cvc_help' | translate}}
+            <p>{{'payment_adyen_security_details'}}</p>
           </div>
           <div class="w-50 text-right">
             <i class="logo-adyen"></i>

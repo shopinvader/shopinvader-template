@@ -8,30 +8,119 @@ listed: false
 published: true
 is_layout: false
 seo_title: thank you for your order | Shopinvader demo
+sections_content: >
+  {
+    "cart": {
+      "settings": {
+        "large_size": false,
+        "submit_label": "Continue",
+        "cart_current_step": "cart_index",
+        "cart_next_step": "cart_login",
+        "cart_next_page": "cart/login",
+        "origin_data": "last_sale"
+      },
+      "blocks": [
+        {
+          "type": "cell_text",
+          "settings": {
+            "cell_size": "full",
+            "content": "<h1>Thank you !</h1><p>Thank you for your order.</p>"
+          }
+        },
+        {
+          "type": "cart_lines",
+          "settings": {
+            "cell_size": "lg",
+            "theme": "none",
+            "display_border": true,
+            "table_layout": "card"
+          }
+        },
+        {
+          "type": "cart_address",
+          "settings": {
+            "cell_size": "md",
+            "address_type": "shipping",
+            "title": "<h3>Shipping address</h3>",
+            "is_child": true
+          }
+        },
+        {
+          "type": "cart_address",
+          "settings": {
+            "cell_size": "md",
+            "address_type": "invoicing",
+            "title": "<h3>Invoice address</h3>",
+            "is_child": true
+          }
+        },
+        {
+          "type": "cart_summary",
+          "settings": {
+            "cell_size": "sm",
+            "title": "My order",
+            "display_lines": false,
+            "theme": "none",
+            "display_border": false,
+            "display_submit": true
+
+          }
+        },
+        {
+          "type": "cell_text",
+          "settings": {
+            "cell_size": "full",
+            "content": "<p>Thank you for your order.</p>"
+          }
+        }      
+      ]
+    }
+  }
 ---
-{% extends "layouts/default" %}
+{% extends 'layouts/default' %}
 {% block 'googletag_data_layer'%}
-window.dataLayer = window.dataLayer || []
-dataLayer.push({
-   'transactionId': {{store.last_sale.name | json}},
-   'transactionAffiliation': {{site.name | json}},
-   'transactionTotal': {{store.last_sale.amount.total | json}},
-   'transactionTax': {{store.last_sale.amount.tax | json}},
-   'transactionShipping': {{store.last_sale.shipping.amount.total | json}},
-   'transactionProducts': [
-   {% for line in store.last_sale.lines.items%}
-    {
-       'sku': {{line.product.sku | json}},
-       'name': {{line.product.name | json}},
-       'category': '',
-       'price': {{line.amount.price_unit | json}},
-       'quantity':  {{line.qty | json}}
-     }
-     {% if forloop.last != true%},{%endif%}
-   {% endfor %}
-   ]
-});
+  window.dataLayer = window.dataLayer || []
+  dataLayer.push({
+     'transactionId': {{store.last_sale.name | json}},
+     'transactionAffiliation': {{site.name | json}},
+     'transactionTotal': {{store.last_sale.amount.total | json}},
+     'transactionTax': {{store.last_sale.amount.tax | json}},
+     'transactionShipping': {{store.last_sale.shipping.amount.total | json}},
+     'transactionProducts': [
+     {% for line in store.last_sale.lines.items%}
+      {
+         'sku': {{line.product.sku | json}},
+         'name': {{line.product.name | json}},
+         'category': '',
+         'price': {{line.amount.price_unit | json}},
+         'quantity':  {{line.qty | json}}
+       }
+       {% if forloop.last != true%},{%endif%}
+     {% endfor %}
+     ]
+  });
 {%endblock%}
+
+{% block 'body/content' %}
+  {% assign order = store.last_sale%}
+  {% if order != null %}
+    <div class="pt-5">
+      {% section 'cart' %}
+    </div>
+  {% else %}
+    <div class="container pt-3 pb-5 " id="cart" data-shopinvader-container >
+      <div class="alert alert-info mb-5 mt-5 lead text-center">
+        {{"cart_empty" | translate}}
+      </div>
+      <a class="btn btn-outline-dark  font-weight-bold text-uppercase btn-lg" href="{% path_to home %}">
+        {{"cart_continue_shopping" | translate}} <i class="fa fa-chevron-right"></i>
+      </a>
+    </div>
+    
+  {% endif %}
+  {% sections_dropzone %}
+{% endblock %}
+
 
 {% block 'content' %}
 

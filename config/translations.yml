@@ -1,3 +1,22 @@
+payment_adyen_button:
+  en: <i class="fas fa-credit-card"></i>  Pay by credit card
+  fr: <i class="fas fa-credit-card"></i>  Payer par carte de crédit
+payment_adyen_description:
+  en: Secured checkout with Adyen
+  fr: Paiement sécurisé avec Adyen
+payment_adyen_form_title:
+  en: Pay my order
+  fr: Payer ma commande
+payment_adyen_form_subtitle:
+  en: Secured credit card payment
+  fr: Paiement sécurisé par carte bancaire
+payment_adyen_ckeckout_button:
+  en: PAY
+  fr: PAYER
+payment_adyen_security_details:
+  en: Secured Area
+  fr: Espace sécurisé
+
 account_address_submit:
   en: Submit
   fr: Valider
@@ -285,7 +304,7 @@ cart_shipping_method:
   fr: Continuer
 cart_empty:
   en: You have no items in your shopping basket.
-  fr: Votre panier est vide
+  fr: Votre panier est viewed
 creditcard_lastname:
   en: Name (as it appears on your card)
   fr: Titulaire de la carte

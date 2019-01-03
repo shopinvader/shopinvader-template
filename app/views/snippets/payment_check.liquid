@@ -4,7 +4,7 @@
     <input type="hidden" name="invader_success_url" value="{% path_to 'cart_end' %}" />
     <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
     <input type="hidden" name="payment_mode[id]" value="{{payment_method.id }}">
-    <button type="submit" name="button" class="btn btn-primary btn-lg">
+    <button type="submit" name="button" class="btn btn-dark btn-lg font-weight-bold text-uppercase">
       {% editable_text form_creditcard_title, label: 'Formulaire paiement - titre', rows: 1 %}
         <i class="fas fa-money-check"></i> Pay by check
       {% endeditable_text %}

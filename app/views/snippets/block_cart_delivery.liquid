@@ -1,4 +1,5 @@
-{% if store.cart.shipping.available_carriers.items | count > 0 %}
+
+{% if store.cart.shipping.available_carriers.items != null %}
   {% assign selected_payment = store.cart.payment.available_methods.items | first %}
   {% if store.cart.shipping.available_carriers.count > 0 %}
     {% assign selected_carrier = store.cart.shipping.selected_carrier %}

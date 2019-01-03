@@ -11,7 +11,7 @@ handle: category
 {% block content/footer %}
   <p>{{category.description}}</p>
 {% endblock %}
-{% block 'content/main/result'%}
+{% block 'body/content/main/result'%}
 
   {% with_scope categories: {id: category.objectID}%}
     {% paginate store.products by 18 %}

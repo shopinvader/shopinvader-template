@@ -37,6 +37,15 @@
         {"label": "Between", "value": "between"},
         {"label": "Around", "value": "around"}
       ]
+    },
+    {
+      "label": "Origin data",
+      "id": "origin_data",
+      "type": "select",
+      "options": [
+        {"label": "cart","value": "cart"},
+        {"label": "last_sale","value": "Last sale"}
+      ]
     }
   ],
   "blocks": [
@@ -54,8 +63,14 @@
 	          {"label": "Small","value": "sm"},
 	          {"label": "Medium", "value": "md"},
 	          {"label": "Large", "value": "lg"},
-	          {"label": "Extra-large", "value": "xl"}
+	          {"label": "Extra-large", "value": "xl"},
+	          {"label": "Full", "value": "full"}
 	        ]
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
 	      },
 	      {
 	        "label": "Theme",
@@ -89,11 +104,6 @@
 	        "label": "Show cart items",
 	        "id": "display_lines",
 	        "type": "checkbox"
-	      },
-	      {
-	        "label": "Child of previous block",
-	        "id": "is_child",
-	        "type": "checkbox"
 	      }
 	    ]
   	},
@@ -111,8 +121,14 @@
 	          {"label": "Small","value": "sm"},
 	          {"label": "Medium", "value": "md"},
 	          {"label": "Large", "value": "lg"},
-	          {"label": "Extra-large", "value": "xl"}
+	          {"label": "Extra-large", "value": "xl"},
+	          {"label": "Full", "value": "full"}
 	        ]
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
 	      },
 	      {
 	      	"label": "Title",
@@ -120,11 +136,6 @@
 	      	"type": "text",
 	      	"html": true,
 	        "nb_rows": 2
-	      },
-	      {
-	        "label": "Child of previous block",
-	        "id": "is_child",
-	        "type": "checkbox"
 	      }
 	    ]
   	},
@@ -142,8 +153,14 @@
 	          {"label": "Small","value": "sm"},
 	          {"label": "Medium", "value": "md"},
 	          {"label": "Large", "value": "lg"},
-	          {"label": "Extra-large", "value": "xl"}
+	          {"label": "Extra-large", "value": "xl"},
+	          {"label": "Full", "value": "full"}
 	        ]
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
 	      },
 	      {
 	      	"label": "Title",
@@ -177,8 +194,14 @@
 	          {"label": "Small","value": "sm"},
 	          {"label": "Medium", "value": "md"},
 	          {"label": "Large", "value": "lg"},
-	          {"label": "Extra-large", "value": "xl"}
+	          {"label": "Extra-large", "value": "xl"},
+	          {"label": "Full", "value": "full"}
 	        ]
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
 	      },
 	      {
 	        "label": "Text",
@@ -186,11 +209,6 @@
 	        "type": "text",
 	        "html": true,
 	        "nb_rows": 10
-	      },
-	      {
-	        "label": "Child of previous block",
-	        "id": "is_child",
-	        "type": "checkbox"
 	      }
 	    ]
   	},
@@ -208,7 +226,8 @@
 	          {"label": "Small","value": "sm"},
 	          {"label": "Medium", "value": "md"},
 	          {"label": "Large", "value": "lg"},
-	          {"label": "Extra-large", "value": "xl"}
+	          {"label": "Extra-large", "value": "xl"},
+	          {"label": "Full", "value": "full"}
 	        ]
 	      },
 	      {
@@ -232,8 +251,14 @@
 	          {"label": "Small","value": "sm"},
 	          {"label": "Medium", "value": "md"},
 	          {"label": "Large", "value": "lg"},
-	          {"label": "Extra-large", "value": "xl"}
+	          {"label": "Extra-large", "value": "xl"},
+	          {"label": "Full", "value": "full"}
 	        ]
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
 	      },
 	      {
 	        "label": "Login card : title",
@@ -267,11 +292,6 @@
 	        "label": "Inverse card",
 	        "id": "inverse_card",
 	        "type": "checkbox"
-	      },
-	      {
-	        "label": "Child of previous block",
-	        "id": "is_child",
-	        "type": "checkbox"
 	      }
 	    ]
   	},
@@ -287,10 +307,15 @@
 	          {"label": "Auto", "value": "auto"},
 	          {"label": "Small", "value": "md"},
 	          {"label": "Medium", "value": "lg"},
-	          {"label": "Large", "value": "xl"}
+	          {"label": "Large", "value": "xl"},
+	          {"label": "Full", "value": "full"}
 	        ]
 	      },
-
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
+	      },
 	      {
 	        "label": "Layout",
 	        "id": "table_layout",
@@ -306,10 +331,11 @@
 	        "type": "checkbox"
 	      },
 	      {
-	        "label": "Child of previous block",
-	        "id": "is_child",
+	        "label": "Readonly",
+	        "id": "readonly",
 	        "type": "checkbox"
 	      }
+	      
 	    ]
   	},
   	{
@@ -326,8 +352,46 @@
 	          {"label": "Small","value": "sm"},
 	          {"label": "Medium", "value": "md"},
 	          {"label": "Large", "value": "lg"},
-	          {"label": "Extra-large", "value": "xl"}
+	          {"label": "Extra-large", "value": "xl"},
+	          {"label": "Full", "value": "full"}
 	        ]
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
+	      },
+	      {
+	      	"label": "Title",
+	      	"id": "title",
+	      	"type": "text",
+	      	"html": true,
+	        "nb_rows": 2
+	      }
+	    ]
+  	},
+  	{
+	    "name": "Quotation",
+	    "type": "cart_quotation",
+	    "settings": [
+	      {
+	        "label": "Cell Size",
+	        "id": "cell_size",
+	        "type": "select",
+	        "options": [
+	          {"label": "Auto", "value": "auto"},
+	          {"label": "Extra-small","value": "xs"},
+	          {"label": "Small","value": "sm"},
+	          {"label": "Medium", "value": "md"},
+	          {"label": "Large", "value": "lg"},
+	          {"label": "Extra-large", "value": "xl"},
+	          {"label": "Full", "value": "full"}
+	        ]
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
 	      },
 	      {
 	      	"label": "Title",
@@ -337,9 +401,16 @@
 	        "nb_rows": 2
 	      },
 	      {
-	        "label": "Child of previous block",
-	        "id": "is_child",
-	        "type": "checkbox"
+	      	"label": "Content",
+	      	"id": "title",
+	      	"type": "text",
+	      	"html": true,
+	        "nb_rows": 10
+	      },
+	      {
+	      	"label": "Button",
+	      	"id": "title",
+	      	"type": "text"
 	      }
 	    ]
   	},
@@ -357,7 +428,8 @@
 	          {"label": "Small","value": "sm"},
 	          {"label": "Medium", "value": "md"},
 	          {"label": "Large", "value": "lg"},
-	          {"label": "Extra-large", "value": "xl"}
+	          {"label": "Extra-large", "value": "xl"},
+	          {"label": "Full", "value": "full"}
 	        ]
 	      },
 	      {
@@ -371,7 +443,8 @@
   "default": {
     "settings" : {
       "large_size": false,
-      "submit_label": "Continue"
+      "submit_label": "Continue",
+      "origin_data": "cart"
     },
     "blocks": [
       {
@@ -387,9 +460,16 @@
   }
 }
 ---
-
+{% assign checkout_button = false %}
+{% assign origin_data = section.settings.origin_data %}
 {% assign cart = store.cart %}
+
+{% if origin_data == 'last_sale' %}
+	{% assign cart = store.last_sale %}
+{% endif %}
+
 <div class="container{% if section.settings.large_size %}-fluid{%endif%}" id="cart" data-shopinvader-container>
+
 	<div class="row justify-content-center justify-content-md-{{cells_align}}">
 		{% assign has_child = false %}
 		{% for block in section.blocks %}
@@ -420,6 +500,7 @@
           {% assign theme = "bg-light text-dark"%}
       {% endcase %}
 			<div class="{{css_cell}} block block_{{block.type}}">
+
 				{% case block.type %}
 					{% when 'cell_text' %}
 						<div class="pt-2 pb-2">
@@ -438,11 +519,21 @@
 							cart_next_page: section.settings.cart_next_page,
 							theme
 						%}
+						{% if block.settings.display_submit == true %}
+							{% assign checkout_button = true %}
+						{% endif %}
 					{% when 'cart_lines' %}
+						{% assign readonly = block.settings.readonly %}
+						
+						{% if origin_data != 'cart' %}
+							{% assign readonly = true %}
+						{% endif %}
+
 						{% include block_cart_lines with
 							theme,
 							table_layout : block.settings.table_layout,
-							cell_size : block.settings.cell_size
+							cell_size : block.settings.cell_size,
+							readonly
 						%}
 					{% when 'cart_delivery' %}
 						{% include block_cart_delivery with
@@ -470,9 +561,16 @@
 							cart_current_step: section.settings.cart_current_step,
 							cart_next_page: section.settings.cart_next_page,
 						%}
+						{% assign checkout_button = true %}
 					{% when 'cart_payment' %}
 						{% include block_cart_payment with
 							title: block.settings.title
+						%}
+					{% when 'cart_quotation' %}
+						{% include block_cart_quotation with
+							title: block.settings.title,
+							content: block.settings.content,
+							btn_label: block.settings.btn_label
 						%}
 				{% endcase %}
 			
@@ -495,6 +593,27 @@
 		{% endfor %}
 	</div>
 </div>
+{% if section.settings.origin_data == 'cart' and store.cart.lines.count > 0 %}
+<div class="bottom-nav text-center d-md-none">
+  <form method="POST" action="/invader/cart/update">
+    <input type="hidden" name="invader_success_url" value="{% path_to section.settings.cart_next_step %}" />
+    <input type="hidden" name="invader_error_url" value="{% path_to page%}" />
+    <input type="hidden" name="step[current]" value="{{ section.settings.cart_current_step }}">
+    <input type="hidden" name="step[next]" value="{{section.settings.cart_next_step}}">
+    <div class="row">
+    	<div class="col-6 text-left">
+    		{{'cart_total_total' | translate }}<br>
+    		<b>{% include 'currency' | value: cart.amount.total %}</b>
+    	</div>
+    	<div class="col-6 text-right">
+    		<button type="submit" name="submit" class="btn btn-outline-primary">
+		      {{"cart_checkout" | translate }} <i class="ti-angle-right"></i>
+		    </button>
+    	</div>
+    </div>
+  </form>
+</div>
+{% endif %}
 <script type="text/javascript">
 	
 	document.addEventListener('locomotive::section::load', event => {

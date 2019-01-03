@@ -3,7 +3,7 @@
     <p>
       {{payment_method.description}}
     </p>
-    <button type="button" class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#modal-stripe">
+    <button type="button" class="btn btn-dark btn-lg font-weight-bold text-uppercase"  data-toggle="modal" data-target="#modal-stripe">
       {% editable_text  stripe_showmodal_label, label: 'Stripe  - Show modal button', rows: 1 %}
          <i class="fas fa-credit-card"></i>  Pay by credit card
       {% endeditable_text %}
@@ -12,7 +12,7 @@
       {% editable_text stripe_description, label: 'Stripe - description', rows: 1 %}
         Secured checkout with Stripe
       {% endeditable_text %}
-      <div class=" text-secondary fa-2x">
+      <div class=" fa-2x">
         <i class="fab fa-cc-visa"></i>
         <i class="fab fa-cc-mastercard"></i>
         <i class="fab fa-cc-amex"></i>

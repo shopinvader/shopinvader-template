@@ -1,3 +1,9 @@
+{% if current_customer %}
+  {% action 'redirection to next step'%}
+    var cart_next_step = getProp('cart_next_step')
+    redirectTo(cart_next_step);
+  {% endaction %}
+{% endif %}
 <div class="row">
   <div class="col-12 col-sm-6 {% if inverse_card == true%}order-md-1{%endif%}">
     <div class="p-4">
