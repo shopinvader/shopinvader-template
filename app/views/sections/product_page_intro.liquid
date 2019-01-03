@@ -188,7 +188,7 @@
   "default": {
     "settings": {
       "sku" : "",
-      "border" : true,
+      "border" : false,
       "theme_color": "none",
       "add_to_cart": true,
       "display_variant": true
@@ -227,7 +227,7 @@
       {
         "type": "product_short_description",
         "settings": {
-          "cell_size": "sm"
+          "cell_size": "xl"
         }
       }
 
@@ -401,7 +401,7 @@
                       </div>
                     </div>
                   </div>
-                  {% if section.settings.display_add_to_cart %}
+                  {% if block.settings.display_add_to_cart %}
                     <form method="POST" action="/invader/cart/add_item" data-shopinvader-form>
                       <input type="hidden" name="invader_success_url" value="{{variant.url_key  | prepend: url_base}}?addtocart_product_id={{variant.objectID}}" />
                       <input type="hidden" name="invader_error_url" value="{{variant.url_key  | prepend: url_base}}" />

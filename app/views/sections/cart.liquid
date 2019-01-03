@@ -1,0 +1,507 @@
+---
+{
+  "name": "Cart",
+  "class": "",
+  "icon": "text",
+  "keep_icon": true,
+  "keep_name": true,
+  "settings": [
+  	{
+      "label": "Cart current step",
+      "id": "cart_current_step",
+      "type": "text"
+    },
+    {
+      "label": "Cart next step",
+      "id": "cart_next_step",
+      "type": "text"
+    },
+    {
+      "label": "Wide",
+      "id": "large_size",
+      "type": "checkbox"
+    },
+    {
+      "label": "Submit button label",
+      "id": "submit_label",
+      "type": "text"
+    },
+    {
+      "label": "Cells Alignment",
+      "id": "cells_align",
+      "type": "select",
+      "options": [
+        {"label": "Left","value": "start"},
+        {"label": "Center","value": "center"},
+        {"label": "Right", "value": "end"},
+        {"label": "Between", "value": "between"},
+        {"label": "Around", "value": "around"}
+      ]
+    }
+  ],
+  "blocks": [
+    {
+	    "name": "Cart Summary",
+	    "type": "cart_summary",
+	    "settings": [
+	      {
+	        "label": "Cell Size",
+	        "id": "cell_size",
+	        "type": "select",
+	        "options": [
+	          {"label": "Auto", "value": "auto"},
+	          {"label": "Extra-small","value": "xs"},
+	          {"label": "Small","value": "sm"},
+	          {"label": "Medium", "value": "md"},
+	          {"label": "Large", "value": "lg"},
+	          {"label": "Extra-large", "value": "xl"}
+	        ]
+	      },
+	      {
+	        "label": "Theme",
+	        "id": "theme",
+	        "type": "select",
+	        "options": [
+	          {"label": "Transparent", "value": "none"},
+	          {"label": "Dark","value": "dark"},
+	          {"label": "Light","value": "light"}
+	        ]
+	      },
+	      {
+	        "label": "Show border",
+	        "id": "display_border",
+	        "type": "checkbox",
+	        "default": true
+	      },
+	      {
+	      	"label": "Display submit button",
+	      	"id": "display_submit",
+	      	"type": "checkbox"
+	      },
+	      {
+	        "label": "Title",
+	        "id": "title",
+	        "type": "text",
+	        "html": false,
+	        "nb_rows": 1
+	      },
+	      {
+	        "label": "Show cart items",
+	        "id": "display_lines",
+	        "type": "checkbox"
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
+	      }
+	    ]
+  	},
+  	{
+	    "name": "Delivery Selector",
+	    "type": "cart_delivery",
+	    "settings": [
+	      {
+	        "label": "Cell Size",
+	        "id": "cell_size",
+	        "type": "select",
+	        "options": [
+	          {"label": "Auto", "value": "auto"},
+	          {"label": "Extra-small","value": "xs"},
+	          {"label": "Small","value": "sm"},
+	          {"label": "Medium", "value": "md"},
+	          {"label": "Large", "value": "lg"},
+	          {"label": "Extra-large", "value": "xl"}
+	        ]
+	      },
+	      {
+	      	"label": "Title",
+	      	"id": "title",
+	      	"type": "text",
+	      	"html": true,
+	        "nb_rows": 2
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
+	      }
+	    ]
+  	},
+  	{
+	    "name": "Address",
+	    "type": "cart_address",
+	    "settings": [
+	      {
+	        "label": "Cell Size",
+	        "id": "cell_size",
+	        "type": "select",
+	        "options": [
+	          {"label": "Auto", "value": "auto"},
+	          {"label": "Extra-small","value": "xs"},
+	          {"label": "Small","value": "sm"},
+	          {"label": "Medium", "value": "md"},
+	          {"label": "Large", "value": "lg"},
+	          {"label": "Extra-large", "value": "xl"}
+	        ]
+	      },
+	      {
+	      	"label": "Title",
+	      	"id": "title",
+	      	"type": "text",
+	      	"html": true,
+	        "nb_rows": 2
+	      },
+	      {
+	        "label": "Address type",
+	        "id": "address_type",
+	        "type": "select",
+	        "options": [
+	          {"label": "Invoice", "value": "invoice"},
+	          {"label": "Shipping","value": "shipping"}
+	        ]
+	      }
+	    ]
+  	},
+  	{
+	    "name": "text",
+	    "type": "cell_text",
+	    "settings": [
+	      {
+	        "label": "Cell Size",
+	        "id": "cell_size",
+	        "type": "select",
+	        "options": [
+	          {"label": "Auto", "value": "auto"},
+	          {"label": "Extra-small","value": "xs"},
+	          {"label": "Small","value": "sm"},
+	          {"label": "Medium", "value": "md"},
+	          {"label": "Large", "value": "lg"},
+	          {"label": "Extra-large", "value": "xl"}
+	        ]
+	      },
+	      {
+	        "label": "Text",
+	        "id": "content",
+	        "type": "text",
+	        "html": true,
+	        "nb_rows": 10
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
+	      }
+	    ]
+  	},
+  	{
+	    "name": "Address selector",
+	    "type": "cart_address_list",
+	    "settings": [
+	      {
+	        "label": "Cell Size",
+	        "id": "cell_size",
+	        "type": "select",
+	        "options": [
+	          {"label": "Auto", "value": "auto"},
+	          {"label": "Extra-small","value": "xs"},
+	          {"label": "Small","value": "sm"},
+	          {"label": "Medium", "value": "md"},
+	          {"label": "Large", "value": "lg"},
+	          {"label": "Extra-large", "value": "xl"}
+	        ]
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
+	      }
+	    ]
+  	},
+  	{
+	    "name": "Login / Register",
+	    "type": "cart_login",
+	    "settings": [
+	      {
+	        "label": "Cell Size",
+	        "id": "cell_size",
+	        "type": "select",
+	        "options": [
+	          {"label": "Auto", "value": "auto"},
+	          {"label": "Extra-small","value": "xs"},
+	          {"label": "Small","value": "sm"},
+	          {"label": "Medium", "value": "md"},
+	          {"label": "Large", "value": "lg"},
+	          {"label": "Extra-large", "value": "xl"}
+	        ]
+	      },
+	      {
+	        "label": "Login card : title",
+	        "id": "login_title",
+	        "type": "text",
+	        "html": true,
+	        "nb_rows": 2
+	      },
+
+	      {
+	        "label": "Guest card : title",
+	        "id": "guest_title",
+	        "type": "text",
+	        "html": true,
+	        "nb_rows": 2
+	      },
+	      {
+	        "label": "Guest card : content",
+	        "id": "guest_content",
+	        "type": "text",
+	        "html": true,
+	        "nb_rows": 10
+	      },
+	      {
+	        "label": "Guest card : button label",
+	        "id": "guest_button",
+	        "type": "text",
+	        "html": false
+	      },
+	      {
+	        "label": "Inverse card",
+	        "id": "inverse_card",
+	        "type": "checkbox"
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
+	      }
+	    ]
+  	},
+  	{
+	    "name": "Cart lines",
+	    "type": "cart_lines",
+	    "settings": [
+	      {
+	        "label": "Cell Size",
+	        "id": "cell_size",
+	        "type": "select",
+	        "options": [
+	          {"label": "Auto", "value": "auto"},
+	          {"label": "Small", "value": "md"},
+	          {"label": "Medium", "value": "lg"},
+	          {"label": "Large", "value": "xl"}
+	        ]
+	      },
+
+	      {
+	        "label": "Layout",
+	        "id": "table_layout",
+	        "type": "radio",
+	        "options": [
+	          {"label": "table", "value": "table"},
+	          {"label": "card","value": "card"}
+	        ]
+	      },
+	      {
+	        "label": "Show border",
+	        "id": "display_border",
+	        "type": "checkbox"
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
+	      }
+	    ]
+  	},
+  	{
+	    "name": "Payment mode",
+	    "type": "cart_payment",
+	    "settings": [
+	      {
+	        "label": "Cell Size",
+	        "id": "cell_size",
+	        "type": "select",
+	        "options": [
+	          {"label": "Auto", "value": "auto"},
+	          {"label": "Extra-small","value": "xs"},
+	          {"label": "Small","value": "sm"},
+	          {"label": "Medium", "value": "md"},
+	          {"label": "Large", "value": "lg"},
+	          {"label": "Extra-large", "value": "xl"}
+	        ]
+	      },
+	      {
+	      	"label": "Title",
+	      	"id": "title",
+	      	"type": "text",
+	      	"html": true,
+	        "nb_rows": 2
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
+	      }
+	    ]
+  	},
+  	{
+	    "name": "Submit Form",
+	    "type": "cart_submit",
+	    "settings": [
+	      {
+	        "label": "Cell Size",
+	        "id": "cell_size",
+	        "type": "select",
+	        "options": [
+	          {"label": "Auto", "value": "auto"},
+	          {"label": "Extra-small","value": "xs"},
+	          {"label": "Small","value": "sm"},
+	          {"label": "Medium", "value": "md"},
+	          {"label": "Large", "value": "lg"},
+	          {"label": "Extra-large", "value": "xl"}
+	        ]
+	      },
+	      {
+	        "label": "Child of previous block",
+	        "id": "is_child",
+	        "type": "checkbox"
+	      }
+	    ]
+  	}
+  ],
+  "default": {
+    "settings" : {
+      "large_size": false,
+      "submit_label": "Continue"
+    },
+    "blocks": [
+      {
+      	"type": "cart_summary",
+      	"settings": {
+      		"cell_size": "sm",
+      		"title": "Total",
+      		"theme": "none",
+      		"display_border": true
+      	}
+      }
+    ]
+  }
+}
+---
+
+{% assign cart = store.cart %}
+<div class="container{% if section.settings.large_size %}-fluid{%endif%}" id="cart" data-shopinvader-container>
+	<div class="row justify-content-center justify-content-md-{{cells_align}}">
+		{% assign has_child = false %}
+		{% for block in section.blocks %}
+			{% assign theme = '' %}
+			{% assign next_block = section.blocks[forloop.index] %}
+			{% case block.settings.cell_size %}
+        {% when 'xs' %}
+          {% assign css_cell = "col-12 col-md-4 col-lg-2 col-xl-2 "%}
+        {% when 'sm' %}
+          {% assign css_cell = "col-12 col-md-6 col-lg-4"%}
+        {% when 'md' %}
+          {% assign css_cell = "col-12 col-lg-12 col-xl-6 "%}
+        {% when 'lg' %}
+          {% assign css_cell = "col-12 col-md-12 col-lg-8 "%}
+        {% when 'xl' %}
+          {% assign css_cell = "col-12 col-lg-10 col-xl-10 "%}
+        {% when 'full' %}
+          {% assign css_cell = "col-12 "%}
+        {% when 'auto' %}
+          {% assign css_cell = "col-auto"%}
+      {% endcase %}
+
+
+      {% case block.settings.theme %}
+        {% when 'dark' %}
+          {% assign theme = "bg-dark text-light"%}
+        {% when 'light' %}
+          {% assign theme = "bg-light text-dark"%}
+      {% endcase %}
+			<div class="{{css_cell}} block block_{{block.type}}">
+				{% case block.type %}
+					{% when 'cell_text' %}
+						<div class="pt-2 pb-2">
+							{{ block.settings.content }}
+						</div>
+					{% when 'cart_summary' %}
+						{% include block_cart_summary with
+							title: block.settings.title,
+							display_lines: block.settings.display_lines,
+							display_submit: block.settings.display_submit,
+							display_border: block.settings.display_border,
+							items: cart.lines.items,
+							submit_label: section.settings.submit_label,
+							cart_next_step: section.settings.cart_next_step,
+							cart_current_step: section.settings.cart_current_step,
+							cart_next_page: section.settings.cart_next_page,
+							theme
+						%}
+					{% when 'cart_lines' %}
+						{% include block_cart_lines with
+							theme,
+							table_layout : block.settings.table_layout,
+							cell_size : block.settings.cell_size
+						%}
+					{% when 'cart_delivery' %}
+						{% include block_cart_delivery with
+							title: block.settings.title
+						%}
+					{% when 'cart_address_list' %}
+						{% include block_cart_address_list %}
+					{% when 'cart_address' %}
+						{% include block_cart_address with
+							 title: block.settings.title,
+							 address_type: block.settings.address_type
+						%}
+					{% when 'cart_login' %}
+						{% include block_cart_login with
+							cart_next_step : section.settings.cart_next_step,
+							login_title: block.settings.login_title,
+							guest_title: block.settings.guest_title,
+							guest_content: block.settings.guest_content,
+							guest_button: block.settings.guest_button,
+							inverse_card: block.settings.inverse_card,
+						%}
+					{% when 'cart_submit' %}
+						{% include block_cart_submit with
+							cart_next_step: section.settings.cart_next_step,
+							cart_current_step: section.settings.cart_current_step,
+							cart_next_page: section.settings.cart_next_page,
+						%}
+					{% when 'cart_payment' %}
+						{% include block_cart_payment with
+							title: block.settings.title
+						%}
+				{% endcase %}
+			
+				{% if next_block.settings.is_child == true %}
+					{% if has_child ==  false%}
+						{% assign has_child = true %}
+						<div class="row subchild">
+					{% else %}
+						</div>
+					{% endif %}
+					
+				{% else %}
+					{% if has_child ==  true%}
+						{% assign has_child = false %}
+							</div>
+						</div>
+					{% endif %}
+					</div>
+				{% endif %}
+		{% endfor %}
+	</div>
+</div>
+<script type="text/javascript">
+	
+	document.addEventListener('locomotive::section::load', event => {
+	  const { sectionId } = event.detail;
+	  const $section  = $(`#locomotive-section-${sectionId}`);
+
+	  console.log('the user is viewing: ', $section);
+
+	});
+</script>

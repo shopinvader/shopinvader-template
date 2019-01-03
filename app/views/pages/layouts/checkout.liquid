@@ -2,46 +2,68 @@
 title: Cart
 checkout: checkout
 is_layout: false
+
 ---
 
-{% extends 'layouts/default' %}
-{% block 'header' %}
-  <div class="container cart-header">
-    <div class="row">
-      <div class="col-12 brand">
-      {% if site.metafields.theme.logo %}
-      <a href="{% path_to home %}">
-        <img src="{{ site.metafields.theme.logo }}" alt="{{ site.name }}"  class="img-responsive"/>
-      </a>
-      {% endif %}
+{% extends 'layouts/base' %}
+{% block 'body' %}
+  <div class="page shadow">
+    <header>
+      {% block header %}
+        {% global_section 'header-lite', id:'cart_header'%}
+      {% endblock %}
+    </header>
+    <main>
+      <div class="container-fluid">
+        {% include 'store_notifications' %}
       </div>
-    </div>
+      {% case page.handle %}
+        {% when 'cart_login' %}
+          {% assign cart_step = 2 %}
+        {% when 'cart_address' %}
+          {% assign cart_step = 2 %}
+        {% when 'cart_checkout' %}
+          {% assign cart_step = 3 %}
+        {% when 'cart_end' %}
+          {% assign cart_step = 4 %}
+        {% else %}
+          {% assign cart_step = 1 %}
+      {% endcase %}
+      {% if store.cart == false or store.cart.lines.count == 0 %}
+        {% action 'redirect to cart index' %}
+          redirectTo('cart_index');
+        {% endaction %}
+      {% endif %}
+      {% block 'main' %}
+        <div class="row ">
+          <div class="col-12">
+            {% global_section 'cart_breadcrumb' %}
+            <div class="pt-4 pb-4">
+              {% section 'cart' %}
+            </div>
+            {% sections_dropzone %}
+          </div>
+        </div>
+      {% endblock %}
+    </main>
   </div>
 {% endblock %}
-{% block 'content' %}
 
-{% case page.handle %}
-  {% when 'cart_login' %}
-    {% assign cart_step = 2 %}
-  {% when 'cart_address' %}
-    {% assign cart_step = 2 %}
-  {% when 'cart_checkout' %}
-    {% assign cart_step = 3 %}
-  {% when 'cart_end' %}
-    {% assign cart_step = 4 %}
-  {% else %}
-    {% assign cart_step = 1 %}
-{% endcase %}
-    <div class="row justify-content-center bg-light pt-4 pb-4">
+
+
+{% comment %}
+    <div class="row justify-content-center  pt-4 pb-4">
       <div class="col-12 col-xl-10">
+
         {% include 'cart_breadcrumbs' with cart_step%}
-        <h1 class="title-decorator text-primary">
+        <h1 class="h3 text-dark font-weight-bold">
           {% editable_text "cart_title", hint: "Cart title in homepage" %}
           My shopping cart
           {% endeditable_text %}
         </h1>
+
         {% if store.cart.lines.count != null and store.cart.lines.count != 0 %}
-          {% block main %}
+          {% block main_old %}
           {% endblock %}
         {% else %}
           <div class="container" data-shopinvader-container id="cart-content">
@@ -64,6 +86,7 @@ is_layout: false
     </div>
   </div>
 </div>
-{% endblock %}
+
+{% endcomment %}
 {% block 'footer' %}
 {% endblock %}

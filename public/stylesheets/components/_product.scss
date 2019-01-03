@@ -267,6 +267,11 @@
   }
 }
 .product-qty {
+  border: 1px solid $input-border-color;
+  input {
+    border: 0;
+    box-shadow: none;
+  }
   .input-group-addon {
     cursor: pointer;
   }

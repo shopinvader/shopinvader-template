@@ -15,6 +15,11 @@
       "type": "image_picker"
     },
     {
+      "label": "Card shadow",
+      "id": "shadow",
+      "type": "checkbox"
+    },
+    {
       "label": "Theme color",
       "id": "theme_color",
       "type": "select",
@@ -163,7 +168,7 @@
             <div class="card-deck">
               {% for item in section.blocks %}
                 {% if item.type == "card" %}
-                  <div class="card text-left {{theme_card}} shadow">
+                  <div class="card text-left {{theme_card}} {% if section.settings.shadow == true %}shadow{%endif%}">
                     <div class="card-body">
                       <h3>{{item.settings.title}}</h3>
                       {{item.settings.content}}

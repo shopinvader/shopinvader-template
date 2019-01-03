@@ -1,100 +1,86 @@
 ---
-title: Cart - Signin or Register
-slug: login
-handle: cart_login
-position: 4
-listed: false
+title: Cart Step 2
+position: 101
 published: true
-is_layout: false
-seo_title: "Sign in or register | Shopinvader demo"
+listed: false
+handle: cart_login
+slug: login
+seo_title: Sign in or register | Shopinvader demo
+sections_content: >
+  {
+    "cart": {
+      "settings": {
+        "large_size": false,
+        "submit_label": "Continue",
+        "cart_current_step": "cart_index",
+        "cart_next_step": "cart_address"
+      },
+      "blocks": [
+
+        {
+          "type": "cart_login",
+          "settings": {
+            "cell_size": "full",
+            "login_title": "<h3>Have an account already ?</h3>",
+            "guest_title": "<h3>New on the shop ?</h3>",
+            "guest_content": "<p>Register just after your checkout</p>",
+            "guest_button": "Register",
+            "inverse_card": true
+          }
+        }
+        
+      ]
+    }
+  }
+sections_dropzone_content: >
+  [
+
+    {
+      "type": "cards",
+      "settings": {
+        "margin": "md"
+      },
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "title": "<h4><i class='fas fa-question'></i>  <b>Help</b></h4>",
+            "content": "<p>Call us on 00112233445566<br> Monday - Friday: 8am - 8pm<br> Saturday - Sunday: 9am - 7pm</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "<h4><i class='fas fa-truck'></i>  <b>Deliver</b></h4>",
+            "content": "<p>Track the progress of your order in real time.</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "<h4><i class='fas fa-undo '></i>  <b>Returns</b></h4>",
+            "content": "<p>1 month money-back returns if you change your mind.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "type": "cell_row",
+      "settings": {
+        "margin": "md"
+      },
+      "blocks": [
+        {
+          "type": "cell_text",
+          "settings": {
+            "cell_size": "xl",
+            "margin": "md",
+            "content": "<p class='lead'>Shopinvader demo &copy;</p>"
+          }
+        }
+      ] 
+    }
+  ]
 ---
+
 {% extends 'layouts/checkout' %}
-
-
-{% block content/main %}
-{% action 'Logged user redirection' %}
-if(getProp("current_customer") != null) {
-  redirectTo('cart_address');
-}
-{% endaction %}
-
-<div class="row row-same-height cart-login pb-4 mb-4">
-  <div class="col-xs-12 col-sm-6">
-    <div class="card  shadow-sm h-100">
-      <h3 class="card-header bg-dark text-light text-center">
-        {% editable_text account_title, inline: true, rows: 3 %}
-        I'm a Returning User
-        {% endeditable_text %}
-      </h3>
-      <div class="card-body">
-        <form method="post" action="{% path_to cart_update %}"  id="cart_update_form">
-          <input type="hidden" name="auth_action" value="sign_in" />
-          <input type="hidden" name="auth_content_type" value="customers" />
-          <input type="hidden" name="auth_id_field" value="email" />
-          <input type="hidden" name="auth_password_field" value="password" />
-          <input type="hidden" name="auth_callback" value="{% path_to cart_address %}" />
-          <input type="hidden" name="cart_step" value="{{ page.handle }}">
-          <div class="form-group">
-            <label for="login">{{ 'partner_email' | translate }}</label>
-            <input type="email" class="form-control" id="login" name="auth_id" placeholder="{{ 'partner_email' | translate }}" required="required">
-          </div>
-          <div class="form-group">
-            <label for="password">{{ 'cart_password' | translate }}</label>
-            <input type="password" class="form-control" id="password" name="auth_password" placeholder="{{ 'cart_password' | translate }}" required="required">
-          </div>
-          <div class="text-center text-warning">
-            {% if auth_wrong_credentials  %}
-              {{ 'signin_wrong' | translate }}
-            {% endif %}
-          </div>
-          <div class="text-left">
-            <a href="{% path_to reset_password_request %}?origin=cart" class="small">{{'cart_reset_password' | translate }}</a>
-          </div>
-          <div class="text-right">
-            <button type="submit" class="btn btn-primary text-size-lg">
-              {{'cart_login_btn' | translate }} <i class="fa fa-angle-right"></i>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <div class="col-xs-12 col-sm-6">
-    <div class="card  shadow-sm h-100">
-      <h3 class="card-header bg-primary text-light text-center">
-        {% editable_text guest_title, inline: true, rows: 3 %}
-        Guest Checkout
-        {% endeditable_text %}
-      </h3>
-      <div class="card-body">
-        <p>
-          {% editable_text guest_details, inline: true, rows: 3 %}
-            You will have the opportunity to create an account and track your order once you complete your checkout.
-          {% endeditable_text %}
-        </p>
-        <div class="text-center">
-          <a class="btn btn-primary text-size-lg" href="{% path_to account_register%}?context=cart">
-            {{'cart_without_account_btn' | translate }} <i class="fa fa-angle-right"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{% endblock %}
-{% block 'main/bottom' %}
-<div class="row separator-right">
-  <div class="col-sm-3">
-    {% include widget_payment %}
-  </div>
-  <div class="col-sm-3">
-    {% include widget_phone %}
-  </div>
-  <div class="col-sm-3">
-    {% include widget_delivery %}
-  </div>
-  <div class="col-sm-3">
-    {% include widget_rating %}
-  </div>
-</div>
-{% endblock %}

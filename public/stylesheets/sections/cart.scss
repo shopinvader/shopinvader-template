@@ -1,0 +1,54 @@
+.locomotive-section[data-locomotive-section-type="cart"] {
+	.block {
+		
+	}
+	.block_cart_address {
+		
+	}
+	.cart-item-list {
+			@include media-breakpoint-down(md) {
+				display: inline-block;
+				width: 48%;
+			}
+			@include media-breakpoint-down(sm) {
+				display: inline-block;
+				width: 100%;
+			}
+			input[type="radio"].form-radio {
+				display: none;
+				
+				& + label {
+					padding-left: 45px;
+					position: relative;
+					&:before {
+						cursor: pointer;
+						border: 1px solid $gray-900;
+						border-radius: 50%;
+						display: block;
+						content: "";
+						height: 20px;
+						width: 20px;
+						top: 16px;
+						left: 16px;
+						position: absolute;
+					}
+
+				}
+				&:checked + label {
+					&:after {
+						content: "";
+						background-color: $gray-900;
+						border-radius: 50%;
+						height: 14px;
+						width: 14px;
+						top: 19px;
+						left: 19px;
+						position: absolute;
+					}
+				}
+			}
+			input[type="radio"]:checked + label {
+				background-color: $gray-100;
+			}
+		}
+}

@@ -1,0 +1,104 @@
+{% if display_border == false %}
+	{% assign theme = theme | append: " border-0" %}
+	{% assign css_body = "p-0"%}
+{% else %}
+	{% assign css_body = "p-4"%}
+{% endif %}
+
+<div class="card {{theme}}">
+	<div class="card-body {{css_body}}">
+		<div class="row">
+			<div class="col-12 text-center pb-2 pt-2">
+				<div class="h5 font-weight-bold">{{title}}</div>
+			</div>
+		</div>
+		{% if display_lines %}
+			{% for cart_line in items %}
+				<div class="row pt-3 pb-3 border-bottom">
+	        <div class="col-2 p-0">
+	          <img src="{{cart_line.product.images.first.medium.src | default: site.metafields.theme.noimage}}" alt="{{cart_line.product.images.first.medium.alt}}" title="{{cart_line.product.name}}"  class="img-fluid">
+	        </div>
+	        <div class="col-7">
+	          <div class="font-weight-bold">{{cart_line.product.model.name}}</div>
+
+	          <div>
+	          	{{ 'cart_quantity' | translate }} : 
+	          	{{cart_line.qty | round }}
+	          </div>
+	        </div>
+	        <div class="col-3 p-0 text-right">
+	        	<div class="">
+	            {% if business == true%}
+	              {% include 'currency' | value: cart_line.amount.untaxed %}
+	            {% else %}
+	              {% include 'currency' | value: cart_line.amount.total %}
+	            {% endif %}
+	          </div>
+	          {%if cart_line.discount.rate > 0%}
+	          <div class="">
+	            <div class="badge badge-warning p-2 badge-discount small">
+	              {{'product_discount_label' | translate}} <b>  -{{cart_line.discount.rate | round }} %</b>
+	            </div>
+	          </div>
+	          {% endif %}
+	        </div>
+				</div>
+			{% endfor %}
+		{% endif %}
+		<div class="row pt-2 font-weight-bold">
+			<div class="col-6 ">
+				{{'cart_total_subtotal' | translate }}
+			</div>
+			<div class="col-6 text-right">
+				{% include 'currency' | value: cart.lines.amount.total %}
+			</div>
+		</div>
+		<div class="row pt-2 pt-2 pb-2">
+			<div class="col-6 ">
+				{{'cart_total_shipping' | translate }}
+
+			</div>
+			<div class="col-6 text-right">
+				{% include 'currency' | value: cart.shipping.amount.total %}
+			</div>
+			<div class="col-12 small">
+        {{ cart.shipping.selected_carrier.name }}
+      </div>
+		</div>
+		<div class="row pt-2 ">
+			<div class="col-6 ">
+				<div class="h5 font-weight-bold  ">
+				  {{'cart_total_total' | translate }}
+				</div>
+				<div class="">
+				  {{'cart_total_vat' | translate }}
+				</div>
+			</div>
+			<div class="col-6 text-right">
+				<div class="h5 text-primary font-weight-bold ">
+          {% include 'currency' | value: cart.amount.total %}
+        </div>
+        <div class="">
+          {% include 'currency' | value: cart.amount.tax %}
+        </div>
+			</div>
+		</div>
+		{% if display_submit %}
+			<div class="row pt-4">
+				<div class="col-12">
+					<form method="post" action="/invader/cart/update"  id="cart_update_form">
+        		<input type="hidden" name="invader_success_url" value="{% path_to cart_next_step %}" />
+        		<input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+        		<input type="hidden" name="step[current]" value="{{ cart_current_step }}">
+        		<input type="hidden" name="step[next]" value="{{ cart_next_step }}">
+		        <button class="btn btn-primary btn-lg btn-block btn-block-xs" type="submit">
+		          {{submit_label}}
+		        </button>
+      		</form>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+</div>
+
+

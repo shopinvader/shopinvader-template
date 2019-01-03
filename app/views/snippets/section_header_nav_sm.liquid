@@ -1,18 +1,85 @@
 
 {% if categories %}
-  <ul class="list-inline">
-  {% for category_sublevel in categories %}
+  
+    <li class="list-inline-item">
+      <div class="d-flex">
+        <div class="col-2 text-left">
+
+        </div>
+        <div class="col-8 lead text-center font-weight-bold">
+          MENU
+        </div>
+        <div class="col-2 text-right" data-target="#nav-sm" data-toggle="nav-sm-display">
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+    </li>
+  {% for category_level1 in categories %}
     <li class="list-inline-item level-{{level}}">
-      <a href="#nav-sm-{{category_sublevel.id}}" data-toggle="collapse">
-        {{ category_sublevel.name}}
-      </a>
-      {% if category_sublevel.childs.size > 0 and level == 1 %}
-        {% include section_header_nav_sm
-           with categories: category_sublevel.childs,
-           level: 2
-        %}
+      {% if category_level1.childs.size > 0 %}
+        <div data-target="#nav-sm-1-{{forloop.index0}}" data-toggle="nav-sm-display" class="d-flex justify-content-between">
+          <div class="">
+            {{ category_level1.name}}
+          </div>
+          <div class="small">
+            <i class="fa fa-chevron-right"></i>
+          </div>
+        </div>
+        <ul class="list-inline " id="nav-sm-1-{{forloop.index0}}">
+          <li class="list-inline-item">
+            <div class="d-flex color-light">
+              <div class="col-2 text-left" data-toggle="nav-sm-display" data-target="#nav-sm-1-{{forloop.index0}}">
+                <i class="fa fa-chevron-left"></i>
+              </div>
+              <div class="col-10 text-center font-weight-bold">
+                {{ category_level1.name}}
+              </div>
+            </div>
+          </li>
+          {% for category_level2 in category_level1.childs %}
+            <li class="list-inline-item level-2">
+              {% if category_level2.childs.size > 0 %}
+                <div data-target="#nav-sm-2-{{forloop.index0}}" data-toggle="nav-sm-display" class="d-flex justify-content-between">
+                  <div class="">
+                    {{ category_level2.name}}
+                  </div>
+                  <div class="small">
+                    <i class="fa fa-chevron-right"></i>
+                  </div>
+                </div>
+                <ul class="list-inline" id="nav-sm-2-{{forloop.index0}}">
+                  <li class="list-inline-item">
+                    <div class="d-flex">
+                      <div class="col-2 text-left" data-toggle="nav-sm-display" data-target="#nav-sm-2-{{forloop.index0}}">
+                        <i class="fa fa-chevron-left"></i>
+                      </div>
+                      <div class="col-10 text-center font-weight-bold">
+                        {{ category_level2.name}}
+                      </div>
+                    </div>
+                  </li>
+                  {% for category_level3 in category_level2.childs %}
+                    <li class="list-inline-item level-2">
+                      <a href="{{ category_level3.url_key | prepend: url_base}}">
+                        {{category_level3.name}}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% else %}
+                <a href="{{ category_level2.url_key | prepend: url_base}}">
+                  {{category_level2.name}}
+                </a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <a href="{{ category_level2.url_key | prepend: url_base}}">
+          {{category_level2.name}}
+        </a>
       {% endif %}
     </li>
   {% endfor %}
-  </ul>
+
 {% endif %}

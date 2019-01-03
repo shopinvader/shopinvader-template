@@ -1,0 +1,139 @@
+<div id="cart_address_container" data-shopinvader-container>
+	{% if current_customer %}
+		{% if params.item_id %}
+
+			{% assign form_action = '/invader/addresses/create' %}
+		  {% if params.item_id and params.item_id != ''%}
+		    {% with_scope id: params.item_id %}
+		      {% assign address = store.addresses.first %}
+
+		      {% assign form_action = '/invader/addresses/' | append: address.id | append: "/update" %}
+		    {% endwith_scope%}
+		  {% endif %}
+			<form method="post" action="{{form_action}}" id="cart_update_form">
+    		<input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+    		<input type="hidden" name="invader_error_url" value="{% path_to page %}?item_id={{address.id}}" />
+    		<div class="row">
+    			<div class="col-12 text-left pb-3 pt-3">
+    				<a href="{% path_to page %}" class="text-dark text-uppercase font-weight-bold">
+    					<i class="fas fa-chevron-left"></i> {{'cart_return' | translate }}
+    				</a>
+    			</div>
+    		</div>
+    		<div class="row">
+    			<div class="col-12">
+    				{% include "address_form" with address, with_require: true %}
+    			</div>
+    		</div>
+    		<div class="row">
+          <div class="col-6">
+            <a href="{% path_to page %}" class="text-dark text-uppercase font-weight-bold">
+    					<i class="fas fa-chevron-left"></i> {{'cart_return' | translate }}
+    				</a>
+          </div>
+          <div class="col-6 text-right">
+            <button type="submit" class="btn btn-outline-dark" name="Submit">{{"cart_submit" | translate}}</button>
+          </div>
+        </div>
+    	</form>
+		{% else %}
+			{% assign modes = 'shipping,invoice' | split: ','%}
+			{% for mode in modes %}
+				{% assign selected_address = store.cart.shipping.address %}
+				{% if selected_address == null %}
+					{% assign selected_address = store.addresses | first %}
+				{% endif %}
+				{% capture 'address_list' %}
+					<div  id="address_list_{{mode}}">
+						<form method="post" action="/invader/cart/update" id="cart_carrier_form" data-shopinvader-form>
+					    <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+					    <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+					    <input type="hidden" name="step[current]" value="cart_address">
+					    <input type="hidden" name="step[next]" value="cart_checkout">
+					    {%for address in store.addresses %}
+					      <div class="cart-item-list">
+					      	<input data-autosubmit 
+					        	type="radio" 
+					        	value="{{address.id | round}}" 
+					        	name="{{ mode }}[address][id]" 
+					        	id="{{ mode }}{{address.id | round}}"
+					        	autocomplete="off"
+					        	class="form-radio" 
+					        	{%if address.id == selected_address.id %} checked="checked" {%endif%} />
+					      	<label class="container pt-3 pb-3" for="{{ mode }}{{address.id | round}}">
+					      		<div class="row">
+					        		<div class="col-6 pb-2">
+					        			<b>{{ address.name }}</b>
+					        		</div>
+					        		<div class="col-6 text-right">
+					        			<a href="{% path_to page %}?item_id={{address.id}}" class="font-style-underline">
+					        				{{ 'cart_address_update' | translate }}
+					        			</a>
+					        		</div>
+					        		<div class="col-12 ">
+					        			<div class="d-flex">
+					        				<i class="ti-location-pin pr-2 pt-1"></i> 
+					        				<div>
+					        					{{ address.street }}<br>
+					        					{% if address.street2 != "" %}
+							                {{ address.street2 }}<br>
+						              	{% endif %}
+						              	{{ address.zip }} - {{ address.city }}, {{ address.country.name }}
+					        				</div>
+					        			</div>
+					        			<div class="d-flex pt-2">
+
+					        				{% if address.phone != "" %}
+						        				<i class="fas fa-phone pr-2"></i>
+						        				<div>{{ address.phone }}</div>
+						        			{% endif %}
+					        			</div>
+						           
+					        		</div>
+		
+					        		
+					        	</div>
+						      </label>
+					      </div>
+					    {% endfor %}
+					  </form>
+					  
+					</div>
+				{% endcapture %}
+				{% if mode == "shipping" %}
+					<h4 class="font-weight-bold">
+						{{'cart_shipping_address' | translate }}
+					</h4>
+
+					{{address_list}}
+			  	<div>
+			  		<a class="btn btn-link text-dark" data-toggle="modal" href="#modal-address-invoice" role="button">
+			  		 	{{"cart_customer_invoice" | translate}}
+			  		</a>
+			  	</div>
+				{% else %}
+					<div class="modal fade" id="modal-address-invoice" tabindex="-1" role="dialog" aria-labelledby="modal-address-invoice-label" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="modal-address-invoice-label">{{'cart_invoice_address' | translate }}</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        {{address_list}}
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-primary">{{'cart_checkout' | translate }}</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+				{% endif %}
+				
+			{% endfor %}
+			
+		{% endif %}
+	{% endif %}
+</div>

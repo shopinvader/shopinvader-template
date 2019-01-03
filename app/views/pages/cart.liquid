@@ -1,16 +1,125 @@
 ---
-title: My shopping cart | Shopinvader demo
+title: Cart Step 1
 published: true
 listed: false
 handle: cart_index
 slug: cart
----
-{% extends 'layouts/checkout' %}
+seo_title: My shopping cart | Shopinvader demo
+position: 100
+sections_content: >
+  {
+    "cart": {
+      "settings": {
+        "large_size": false,
+        "submit_label": "Continue",
+        "cart_current_step": "cart_index",
+        "cart_next_step": "cart_login",
+        "cart_next_page": "cart/login"
+      },
+      "blocks": [
+        {
+          "type": "cell_text",
+          "settings": {
+            "cell_size": "full",
+            "content": "<h3>My Shopping cart</h3>"
+          }
+        },
+        {
+          "type": "cart_lines",
+          "settings": {
+            "cell_size": "lg",
+            "theme": "none",
+            "display_border": true,
+            "table_layout": "card"
+          }
+        },
+        {
+          "type": "cart_summary",
+          "settings": {
+            "cell_size": "sm",
+            "title": "My order",
+            "display_lines": false,
+            "theme": "none",
+            "display_border": false,
+            "display_submit": true
 
-{% block "content/main" %}
+          }
+        }       
+      ]
+    }
+  }
+sections_dropzone_content: >
+  [
+    {
+      "type": "cards",
+      "settings": {
+        "margin": "none"
+      },
+      "blocks": [ {
+          "type": "card",
+          "settings": {
+            "title": "<h4><i class='ti-help-alt pr-1'></i>  <b>Help</b></h4>",
+            "content": "<p>Call us on 00112233445566<br> Monday - Friday: 8am - 8pm<br> Saturday - Sunday: 9am - 7pm</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "<h4><i class='ti-truck pr-1'></i>  <b>Deliver</b></h4>",
+            "content": "<p>Track the progress of your order in real time.</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "<h4><i class='ti-back-left pr-1'></i>  <b>Returns</b></h4>",
+            "content": "<p>1 month money-back returns if you change your mind.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "type": "category_products_list",
+      "settings": {
+        "category_id": "202",
+        "text_position": "top",
+        "content": "<h4><b>You might also like</b></h4>",
+        "slider": false,
+        "item_limit": 5
+      },
+      "blocks": []
+    }
+  ]
+
+---
+{% extends 'layouts/default' %}
+{% block 'body/content' %}
+  {% if store.cart.lines.count > 0 %}
+    <div class="pt-5">
+      {% section 'cart' %}
+    </div>
+  {% else %}
+    <div class="container pt-3 pb-5 " id="cart" data-shopinvader-container >
+      <div class="alert alert-info mb-5 mt-5 lead text-center">
+        {{"cart_empty" | translate}}
+      </div>
+      <a class="btn btn-outline-dark  font-weight-bold text-uppercase btn-lg" href="{% path_to home %}">
+        {{"cart_continue_shopping" | translate}} <i class="fa fa-chevron-right"></i>
+      </a>
+    </div>
+    
+  {% endif %}
+  {% sections_dropzone %}
+{% endblock %}
+{% comment %}
+
+
+
 <div data-shopinvader-container id="cart-content">
   <div class="row"  id="cart-index">
+    
     <div class="col-lg-8 col-xl-9" >
+
       {% include 'cart_list' with cart: store.cart %}
     </div>
     <div class="col-lg-4 col-xl-3 mb-4">
@@ -60,4 +169,4 @@ slug: cart
   </div>
 </div>
 
-{% endblock %}
+{% endcomment%}

@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-12 col-sm-6 {% if inverse_card == true%}order-md-1{%endif%}">
+    <div class="p-4">
+      <div>{{login_title}} {{cart_next_step}}</div>
+      <form action="{% path_to page %}" method="post">
+        <input type="hidden" name="auth_action" value="sign_in" />
+        <input type="hidden" name="auth_content_type" value="customers" />
+        <input type="hidden" name="auth_id_field" value="email" />
+        <input type="hidden" name="auth_password_field" value="password" />
+        <input type="hidden" name="auth_callback" value="{% path_to cart_next_step %}" />
+        <div class="form-group">
+          <label for="auth-email">{{ 'signin_email' | translate }}</label>
+          <input type="email" class="form-control" id="auth-email" placeholder="{{ 'signin_email' | translate }}" name="auth_id" value="{{ params.auth_id }}john.doe@shopinvader.com" required="required">
+        </div>
+        <div class="form-group">
+          <label for="auth-password">{{ 'signin_password' | translate }}</label>
+          <input type="password" class="form-control" id="auth-password" placeholder="{{ 'signin_password' | translate }}" name="auth_password" value="password" required="required">
+          <a href="{% path_to reset_password_request %}" class="color-white">
+            {{ 'signin_forgotpassword' | translate }}
+          </a>
+        </div>
+        <div class="text-center">{% if auth_wrong_credentials %}{{ 'signin_wrong' | translate }}{% endif %}</div>
+        <div class="text-right">
+          <button type="submit" class="btn btn-dark btn-lg pull-right"><i class="fa fa-lock"></i> {{ 'signin_signin' | translate }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 bg-light {% if inverse_card == true%}order-md-0{%endif%}">
+    <div class="p-4">
+      <div>{{guest_title}}</div>
+      {{ guest_content}}
+      <div class="text-center">
+        <a href="{% path_to cart_next_step %}" class="btn btn-primary">
+          {{ guest_button }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,19 +1,37 @@
-.header-category-sm {
-  border:  1px solid $border-color;
-  box-shadow: $box-shadow;
-  background-color: $white;
-  color: black;
-  height: 100vh;
+body.nav-sm-display {
   position: fixed;
-  width: 100%;
-  max-width: 500px;
-  z-index: 3000;
-  top: 0;
-  left: 0;
-  overflow: auto;
+  &:before {
+    content: " ";
+    position: absolute;
+    width: 100%;
+    background-color: transparentize($gray-900, 0.7);
+  }
+}
+.header-category-sm {
   ul {
-    display: block;
+    border:  1px solid $border-color;
+    box-shadow: $box-shadow;
+    background-color: $white;
+    color: black;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    //max-width: 500px;
+    margin-left:-100%;
+    z-index: 3000;
+    top: 0;
+    left: -100%;
+    overflow: auto;
+    //display: none;
+    transition: left 500ms ease-in;
+    &.open-nav {
+      left:100%;
+
+    }
     li {
+      &.list-inline-item:not(:last-child) {
+        margin: 0;
+      }
 
       font-weight: normal;
       padding-bottom: 1rem;
@@ -21,16 +39,24 @@
       padding-left: 0;
       padding-right: 0;
       text-transform: uppercase;
-      display: none;
-      &.level-1 {
-        border-bottom:  1px solid $border-color;
-        display: block;
-        padding-left: 1rem;
-        padding-right: 1rem;
+      display: block;
+      border-bottom:  1px solid $border-color;
+      display: block;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      &.bg-dark {
+        border-bottom:  none;
+
+      }
+      .collapse {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
       }
       a {
         color: $gray-900;
-        font-size: 1.05rem;
+        font-size: 1.0rem;
         display: block;
         width: 100%;
         height: 100%;
@@ -55,6 +81,7 @@
   .header  {
     //border: 1px solid red;
     & .header-block {
+      //border: 1px solid red;
       &.col-auto {
         padding-left: 10px;
         padding-right: 10px;
@@ -142,6 +169,7 @@
           box-shadow: none;
         }
       }
+
       .header-dropdown-menu {
         background-color: $white;
         color: $gray-900;
@@ -157,6 +185,7 @@
         max-height: 80vh;
 
         transition: 300ms ease-in opacity;
+
         .aa-dataset-product {
           overflow: auto;
           height: 100%;
@@ -183,6 +212,7 @@
     }
     .header-block-cart_icon,
     .header-block-user_icon,
+    .header-block-link_icon,
     .header-block-search {
       //border: 1px solid red;
       display: flex;
@@ -284,6 +314,7 @@
         }
       }
       .header-controls-dropdown {
+        display: none;
         @include media-breakpoint-down(md) {
           display: none
         }
@@ -333,17 +364,20 @@
       .list-inline {
         .list-inline-item {
           margin: 0;
+          position:  initial;
           a {
             display: inline-block;
             width: 100%;
             height: 100%;
           }
           .list-inline-dropdown {
+            color: $gray-900;
             background-color:  $gray-100;
             display: none;
             left: 0;
             position: absolute;
             min-width: 100%;
+            width: 100%;
             z-index: 2000;
             margin-top: 10px;
             ul {
@@ -367,5 +401,14 @@
         }
       }
     }
+  }
+}
+
+.header-test {
+  border: 1px solid blue;
+  & > .row > div {
+    border: 1px solid red;
+    padding: 1rem;
+
   }
 }

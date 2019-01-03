@@ -1,18 +1,15 @@
 
-<div class="card  shadow-sm">
-  <div class="card-body">
-    <h2 class="display-4 text-uppercase">{{'cart_total_total' | translate}}</h2>
+<div class="">
+  <div class="">
+    <h2 class="display-4 text-uppercase d-none d-md-block">{{'cart_total_total' | translate}}</h2>
     <table class="table">
       <tbody>
         <tr>
-          <td class="text-bold">
-            <div class="text-size-lg">
-              {{'cart_total_subtotal' | translate }}
-            </div>
+          <td class="font-weight-bold border-0">
+            {{'cart_total_subtotal' | translate }}
           </td>
-          <td class="text-bold text-right">
+          <td class="font-weight-bold text-right border-0">
             {% include 'currency' | value: cart.lines.amount.total %}
-
           </td>
         </tr>
         {% if cart.shipping.selected_carrier.id != null%}

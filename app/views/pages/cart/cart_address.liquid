@@ -1,5 +1,6 @@
 ---
-title: Cart - shipping address
+title: Cart Step 3
+position: 103
 slug: shipping
 handle: cart_address
 position: 4
@@ -7,84 +8,42 @@ listed: false
 published: true
 is_layout: false
 seo_title: Shipping address | Shopinvader demo
+sections_content: >
+  {
+    "cart": {
+      "settings": {
+        "large_size": false,
+        "submit_label": "Continue ",
+        "cart_current_step": "cart_address",
+        "cart_next_step": "cart_checkout"
+      },
+      "blocks": [
+        {
+          "type": "cell_text",
+          "settings": {
+            "cell_size": "full",
+            "content": "<h3>My shipping address</h3>"
+          }
+        },
+        {
+          "type": "cart_address",
+          "settings": {
+            "cell_size": "lg"
+          }
+        },
+        {
+          "type": "cart_summary",
+          "settings": {
+            "cell_size": "sm",
+            "display_border": true,
+            "display_submit": true,
+            "title": "Your order",
+            "display_lines": true
+          }
+        }
+        
+      ]
+    }
+  }
 ---
-{% extends "layouts/checkout" %}
-
-{% block content/main %}
-{% assign input_specific_address = "" %}
-{% assign collapse_specific_address = "" %}
-
-{% if store.cart.shipping.address.id != store.cart.invoicing.address.id %}
-  {% assign input_specific_address = "checked='checked'"%}
-  {% assign collapse_specific_address = 'show' %}
-{% endif %}
-
-<div  data-shopinvader-container id="cart-address">
-  <form method="post" action="/invader/cart/update" id="cart_address">
-    <input type="hidden" name="invader_success_url" value="{% path_to cart_checkout %}" />
-    <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
-    <input type="hidden" name="step[current]" value="{{ page.handle }}">
-    <input type="hidden" name="step[next]" value="cart_checkout">
-    <div class="row">
-      <div class="col-lg-8 col-xl-9">
-
-        <h2>{{'cart_shipping_address' | translate}}</h2>
-        {% include "address_book" with
-          input_group: 'shipping',
-          input_name: 'shipping[address][id]',
-          address_list:  store.addresses,
-          selected_address_id : store.cart.shipping.address.id,
-          display_delector: true,
-          display_add: true,
-          display_delete: false
-        %}
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" id="use_specific_address" {{input_specific_address}} value="1" data-toggle="collapse" data-target="#invoice_address" autocomplete="off">
-            {% editable_text different_invoice_address, fixed: true, rows: 1 %}
-              Use different invoice address.
-            {% endeditable_text %}
-          </label>
-        </div>
-        <div class="collapse {{collapse_specific_address}}" id="invoice_address">
-          <h2>{{'cart_invoice_address' | translate}}</h2>
-          {% include "address_book" with
-            input_group: 'invoicing',
-            input_name: 'invoicing[address][id]',
-            address_list:  store.addresses,
-            selected_address_id : store.cart.invoicing.address.id,
-            display_delector: true,
-            display_add: true,
-            display_delete: false
-          %}
-        </div>
-      </div>
-      <div class="col-lg-4 col-xl-3 mb-4">
-        {% include 'cart_total' with cart: store.cart  %}
-        <button class="btn btn-primary text-lg btn-lg  btn-block btn-block-xs" type="submit">
-          {% editable_text checkout_button, fixed: true, rows: 1 %}
-            Continue <i class="fa fa-angle-right"></i>
-          {% endeditable_text %}
-        </button>
-      </div>
-    </div>
-    <div class="bottom-nav text-center d-md-none">
-      <div class="row">
-        <div class="col-6 pt-2">
-          {{'cart_total_total' | translate }} <b>
-          {% include 'currency' | value: store.cart.amount.total %}</b>
-        </div>
-        <div class="col-6 text-right">
-          <button class="btn btn-success " type="submit">
-            {{page.editable_elements.content.main.checkout_button}}
-          </button>
-        </div>
-      </div>
-    </div>
-  </form>
-</div>
-{% endblock %}
-{% block 'javascripts' %}
-  {{ 'address_autocomplete.js' | javascript_tag }}
-  <script src="https://maps.googleapis.com/maps/api/js?key={{site.metafields.google.maps_api_key}}&libraries=places&callback=initAutocomplete" async defer></script>
-{% endblock %}
+{% extends 'layouts/checkout' %}

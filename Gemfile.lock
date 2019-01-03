@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/akretion/locomotive_shopinvader.git
-  revision: ad9f4ac66b0ef0c8730abb6104b8ec9ca7410354
-  branch: section
+  revision: 8a1bb2730e8b73aee4685dce8f24262b8d197797
+  branch: v4.0.x
   specs:
     shop_invader (0.1.0)
       algoliasearch (~> 1.13.0)
@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: git://github.com/locomotivecms/common.git
-  revision: 4d1bd565246262ab4b1b824e21c7847846f4cc5c
+  revision: c2a1c48c326e947bca2c6f56dacda8a7c8f3930a
   specs:
     locomotivecms_common (0.3.1)
       activesupport (>= 5.1.5, < 6.0)
@@ -30,9 +30,9 @@ GIT
 
 GIT
   remote: git://github.com/locomotivecms/steam.git
-  revision: 8b6c41fe4662836436e5fbcd15e236216cc01476
+  revision: 42cc8bd3fa30bef94a3f6ad5aa9b804b71391381
   specs:
-    locomotivecms_steam (1.5.0.beta1)
+    locomotivecms_steam (1.5.0.beta2)
       RedCloth (~> 4.3.2)
       autoprefixer-rails (~> 8.0.0)
       bcrypt (~> 3.1.11)
@@ -49,6 +49,7 @@ GIT
       mimetype-fu (~> 0.1.2)
       moneta (~> 1.0.0)
       morphine (~> 0.1.1)
+      multi_json (~> 1.13.1)
       nokogiri (~> 1.8.2)
       pony (~> 1.12)
       rack-cache (~> 1.7.0)
@@ -61,7 +62,7 @@ GIT
 
 GIT
   remote: git://github.com/locomotivecms/wagon.git
-  revision: bf0f96179b15c3bc7829a2eb9fb101febbaad2cf
+  revision: 0377a88eb217436abd2f47394278bea7dc9be983
   specs:
     locomotivecms_wagon (3.0.0.beta1)
       faker (~> 1.6)
@@ -70,7 +71,9 @@ GIT
       locomotivecms_coal (~> 1.6.0.beta1)
       locomotivecms_common (~> 0.3.1)
       locomotivecms_steam (~> 1.5.0.beta1)
+      neatjson (~> 0.8.4)
       netrc (~> 0.11.0)
+      oj (~> 3.7.4)
       rack-livereload (~> 0.3.16)
       rubyzip (~> 1.2.1)
       thin (~> 1.7.2)
@@ -80,7 +83,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     RedCloth (4.3.2)
-    activesupport (5.2.1)
+    activesupport (5.2.2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -95,7 +98,7 @@ GEM
       execjs
     bcrypt (3.1.12)
     chronic (0.10.2)
-    chunky_png (1.3.10)
+    chunky_png (1.3.11)
     coderay (1.1.2)
     coffee-script (2.4.1)
       coffee-script-source
@@ -114,9 +117,9 @@ GEM
       sass (>= 3.3.0, < 3.5)
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
-    concurrent-ruby (1.0.5)
+    concurrent-ruby (1.1.4)
     crass (1.0.4)
-    daemons (1.2.6)
+    daemons (1.3.1)
     dragonfly (1.1.5)
       addressable (~> 2.3)
       multi_json (~> 1.0)
@@ -135,7 +138,7 @@ GEM
       faraday (>= 0.7.4, < 1.0)
     ffi (1.9.25)
     formatador (0.2.5)
-    guard (2.14.2)
+    guard (2.15.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
       lumberjack (>= 1.0.12, < 2.0)
@@ -153,10 +156,11 @@ GEM
     haml (4.0.7)
       tilt
     http_parser.rb (0.6.0)
-    httparty (0.16.2)
+    httparty (0.16.3)
+      mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
     httpclient (2.8.3)
-    i18n (1.1.0)
+    i18n (1.2.0)
       concurrent-ruby (~> 1.0)
     json (2.1.0)
     kramdown (1.16.2)
@@ -169,9 +173,9 @@ GEM
     locomotivecms-solid (4.0.1)
       locomotivecms-liquid (~> 4.0.0)
     lumberjack (1.0.13)
-    mail (2.7.0)
+    mail (2.7.1)
       mini_mime (>= 0.1.1)
-    method_source (0.9.0)
+    method_source (0.9.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2018.0812)
@@ -184,6 +188,7 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    neatjson (0.8.4)
     nenv (0.3.0)
     netrc (0.11.0)
     nokogiri (1.8.5)
@@ -193,13 +198,14 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    oj (3.7.4)
     pony (1.12)
       mail (>= 2.0)
-    pry (0.11.3)
+    pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (3.0.3)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-cache (1.7.2)
       rack (>= 0.4)
     rack-livereload (0.3.17)
@@ -208,8 +214,8 @@ GEM
     rack_csrf (2.6.0)
       rack (>= 1.1.0)
     rb-fsevent (0.10.3)
-    rb-inotify (0.9.10)
-      ffi (>= 0.5.0, < 2)
+    rb-inotify (0.10.0)
+      ffi (~> 1.0)
     ref (2.0.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
@@ -222,7 +228,7 @@ GEM
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    stringex (2.8.4)
+    stringex (2.8.5)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -232,10 +238,10 @@ GEM
       rack (>= 1, < 3)
     thor (0.19.4)
     thread_safe (0.3.6)
-    tilt (2.0.8)
+    tilt (2.0.9)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.19)
+    uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
 
 PLATFORMS
@@ -252,4 +258,4 @@ DEPENDENCIES
   therubyracer
 
 BUNDLED WITH
-   1.16.1
+   1.16.5

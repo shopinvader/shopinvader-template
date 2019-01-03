@@ -1,0 +1,162 @@
+---
+{
+  "name": "Cart Breadcrumb",
+  "class": "",
+  "icon": "list",
+  "keep_icon": true,
+  "keep_name": true,
+  "settings": [
+  	{
+      "label": "Step cell Size",
+      "id": "cells_size",
+      "type": "select",
+      "options": [
+        {"label": "Auto", "value": "auto"},
+        {"label": "Extra-small","value": "xs"},
+        {"label": "Small","value": "sm"},
+        {"label": "Medium", "value": "md"},
+        {"label": "Large", "value": "lg"},
+        {"label": "Extra-large", "value": "xl"}
+      ]
+    },
+    {
+      "label": "Cells Alignment",
+      "id": "cells_align",
+      "type": "select",
+      "options": [
+        {"label": "Left","value": "start"},
+        {"label": "Center","value": "center"},
+        {"label": "Right", "value": "end"},
+        {"label": "Between", "value": "between"},
+        {"label": "Around", "value": "around"}
+      ]
+    },
+    {
+      "label": "Cells inline",
+      "id": "cell_inline",
+      "type": "checkbox"
+    },
+    {
+      "label": "Display step number",
+      "id": "display_number",
+      "type": "checkbox"
+    }
+  ],
+  "blocks": [
+    
+  	{
+	    "name": "step",
+	    "type": "cart_step",
+	    "settings": [
+	      {
+	        "label": "Number",
+	        "id": "step_number",
+	        "type": "text",
+	        "default": "1"
+	      },
+	      {
+	        "label": "Label",
+	        "id": "step_label",
+	        "type": "text",
+	        "default": "My cart",
+	        "html": true,
+	        "line_break": true,
+	        "nb_rows": 3
+	      },
+	      {
+	        "label": "Page",
+	        "id": "step_url",
+	        "type": "url"
+	      },
+	      {
+	        "label": "Step ID",
+	        "id": "step_id",
+	        "type": "text"
+	      }
+	    ]
+  	}
+  ],
+  "default": {
+    "settings" : {
+      "cells_size": "sm",
+      "cells_align": "between",
+      "cell_inline": true,
+      "display_number": true
+    },
+    "blocks": [
+      {
+      	"type": "cart_step",
+      	"settings": {
+      		"step_number": "1",
+      		"step_label": "Cart",
+      		"step_url": "#",
+      		"step_id": "cart_index"
+      	}
+      },
+      {
+      	"type": "cart_step",
+      	"settings": {
+      		"step_number": "2",
+      		"step_label": "Address",
+      		"step_url": "#",
+      		"step_id": "cart_login"
+      	}
+      },
+      {
+      	"type": "cart_step",
+      	"settings": {
+      		"step_number": "2",
+      		"step_label": "Delivery",
+      		"step_url": "#",
+      		"step_id": "cart_address"	
+      	}
+      },
+      {
+      	"type": "cart_step",
+      	"settings": {
+      		"step_number": "2",
+      		"step_label": "Payment",
+      		"step_url": "#",
+      		"step_id": "cart_checkout"
+      	}
+      }
+    ]
+  }
+}
+---
+
+{% if section.settings.cell_inline == true %}
+	{% assign css_cell = "d-flex flex-row" %}
+{% endif %}
+
+{% assign current_step = page.handle %}
+{% if store.cart.step.current == "" %}
+	{% assign current_step = section.blocks.first.settings.step_id %}
+{% endif %}
+
+{% assign steps = store.cart.step.done %}
+<div class="container pt-5 pb-5 lead d-none d-md-flex">
+	<div class="row justify-content-md-{{section.settings.cells_align}} w-100">
+		{% for block in section.blocks %}
+			{% assign css_muted = "text-muted" %}
+			{% for step in steps %}
+				{% if current_step == block.settings.step_id %}
+					{% assign css_muted = "text-dark " %}
+				{% endif %}
+			{% endfor %}
+			{% if page.handle  == block.settings.step_id%}
+				{% assign css_muted = css_muted | append: " font-weight-bold" %}
+			{% endif %}
+			<a class="col-auto text-center {{css_cell}} {{css_muted}}" href="{% path_to block.settings.step_id %}">
+				{% if section.settings.display_number == true %}
+					<div class=" pr-2">
+            {{block.settings.step_number}}
+          </div>
+				{% endif %}
+				<div>
+          {{block.settings.step_label}}
+        </div>
+			</a>
+		{% endfor %}
+	</div>
+</div>

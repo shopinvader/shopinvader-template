@@ -1,4 +1,10 @@
 $(document).ready(function () {
+  $("[data-toggle=nav-sm-display]").click(function(){
+
+    $($(this).data('target')).toggleClass('open-nav');
+    console.log($(this).data('target'), $($(this).data('target')));
+
+  });
   $( ".product-thumbnail-img.loader img" ).load(function() {
     // Handler for .load() called.
     $(this).css('opacity', 1);

@@ -1,5 +1,6 @@
 ---
-title: Cart - Checkout
+title: Cart Step 4
+position: 103
 seo_title: Checkout | Shopinvader demo
 slug: checkout
 handle: cart_checkout
@@ -9,6 +10,74 @@ published: true
 is_layout: false
 editable_elements:
   main/title: Checkout
+sections_content: >
+  {
+    "cart": {
+      "settings": {
+        "large_size": false,
+        "submit_label": "Continue ",
+        "cart_current_step": "cart_address",
+        "cart_next_step": "cart_checkout",
+        "large_size": true
+      },
+      "blocks": [
+
+        {
+          "type": "cart_delivery",
+          "settings": {
+            "cell_size": "lg",
+            "title": "<h3>Delivery</h3>"
+          }
+        },
+        {
+          "type": "cart_address",
+          "settings": {
+            "cell_size": "md",
+            "address_type": "shipping",
+            "title": "<h3>Shipping address</h3>",
+            "is_child": true
+          }
+        },
+        {
+          "type": "cart_address",
+          "settings": {
+            "cell_size": "md",
+            "address_type": "invoicing",
+            "title": "<h3>Invoice address</h3>",
+            "is_child": true
+          }
+        },
+        {
+          "type": "cart_payment",
+          "settings": {
+            "cell_size": "full",
+            "title": "<h3>Payment</h3>",
+            "is_child": true
+          }
+        },
+        
+        {
+          "type": "cart_summary",
+          "settings": {
+            "cell_size": "sm",
+            "display_border": true,
+            "display_submit": true,
+            "title": "Your order",
+            "display_lines": true
+          }
+        },
+        {
+          "type": "cell_text",
+          "settings": {
+            "cell_size": "full",
+            "content": "Call us on 0011220033",
+            "is_child": true
+          }
+        }
+
+      ]
+    }
+  }
 ---
 {% extends 'layouts/checkout' %}
 

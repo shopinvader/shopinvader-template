@@ -8,6 +8,7 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 @import 'components/columns';
 @import 'components/editable';
 @import 'components/footer';
+@import 'components/form';
 @import 'components/loader';
 //@import 'components/nav';
 @import 'components/posts';
@@ -24,6 +25,7 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 /*Section*/
 @import 'sections/cookies_manager';
 @import 'sections/header';
+@import 'sections/cart';
 @import 'sections/section_debug';
 /* Need to fix CDN issue
 @import 'fontawesome/fontawesome';

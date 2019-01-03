@@ -1,0 +1,141 @@
+---
+title: Base layout
+is_layout: false
+---
+{% if locale != default_locale %}
+  {% assign url_base ="/" | append: locale %}
+{% endif%}
+
+{% assign url_base =url_base | prepend: base_url | append:"/"%}
+<!DOCTYPE html>
+<html lang="{{locale}}">
+  <head>
+    <link rel="manifest" href="{% path_to manifest_json%}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#17a2b8">
+    <meta name="generator" content="ShopInvader" />
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": "{{site.name}}",
+      "url": "{{base_url}}",
+      "logo":  "{{site.metafields.theme.logo}}"
+    }
+    </script>
+    <script type='application/ld+json'>
+      {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "{{base_url}}",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "{{base_url}}/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    {% block 'header_meta' %}
+      <link rel="canonical" href="{{base_url}}{% path_to page%}" />
+      {% seo %}
+      {% for locale_code in locales %}
+      <link rel="alternate" href="{% path_to page, locale: locale_code %}" hreflang="{{locale_code}}"/>
+      {% endfor %}
+    {% endblock %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{{ 'favicon.png' | theme_image_url }}">
+
+    {{ 'application.css' | stylesheet_tag }}
+    {{ 'themify-icons.css' | stylesheet_tag }}
+    {% block 'css' %}{% endblock %}
+    {% block 'javascripts_header' %}{% endblock %}
+    {{ 'section-debug.js' | javascript_tag }}
+  </head>
+  <body>
+    {% global_section 'global_theme_settings',  placement: 'top', id:'global_theme_settings'%}
+    <div class="main-loader d-none">
+      <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+      </svg>
+    </div>
+    {% block 'body' %}
+    {% endblock %}
+    
+   
+
+    <div class="modal fade" id="main-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="modal-title text-1xl"></div>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>
+    <div id="product-modal-add" class="d-none" data-shopinvader-container>.
+      {% if params.addtocart_product_id %}
+        {% assign product_id = params.addtocart_product_id | round %}
+        <div class="title">
+          {{ 'cart_item_added' | translate }}
+        </div>
+        <div class="content">
+          <div class="">
+            <div class="row">
+              <div class="col-12">
+                {% include 'cart_list' with cart: store.cart, readonly: true %}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-6 text-center text-sm-left">
+                <a href="{{product.url_key | prepend: url_base}}" class="btn btn-light btn-lg">{{"cart_continue_shopping" | translate }}</a>
+              </div>
+              <div class="col-12 col-sm-6 text-center text-sm-right pt-2 pt-sm-0">
+                <a href="{% path_to 'cart_index' %}" class="btn btn-primary btn-lg">{{"cart_checkout" | translate }} </a>
+              </div>
+            </div>
+          {% if product and product.relateds.cross_sell != null%}
+            <div class="row">
+              <div class="col-lg-12">
+                <h2>{{'product_related_title' | translate }}</h2>
+              </div>
+            </div>
+            <div class="row">
+              {% for cross_seller in product.relateds.cross_sell %}
+                <div class="col-6 col-sm-3 col-xl-2">
+                {% with_scope objectID: [cross_seller.id]%}
+                  {% include 'product_thumbnail' with product: store.products.first%}
+                {% endwith_scope%}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+
+    {{ 'popper.min.js' | javascript_tag }}
+    {{ 'jquery.min.js' | javascript_tag }}
+    {{ 'jquery.slidereveal.min.js' | javascript_tag }}
+    {{ 'jquery.touchSwipe.min.js' | javascript_tag }}
+    {{ 'shopinvader.jquery.js' | javascript_tag }}
+    {{ 'bootstrap4.min.js' | javascript_tag }}
+    {{ 'application.js' | javascript_tag }}
+
+    {% block 'javascripts_algolia', short_name: true %}
+      {% include 'algolia_init' %}
+      <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
+      {{ 'search_autocomplete.js' | javascript_tag }}
+    {% endblock %}
+    {% block 'javascripts', short_name: true %}
+    {% endblock %}
+    {% global_section 'cookies_manager',  placement: 'bottom'  %}
+  </body>
+</html>

@@ -26,6 +26,7 @@
       "id": "text_position",
       "type": "select",
       "options": [
+        {"label": "start","value": "top"},
         {"label": "start","value": "start"},
         {"label": "end","value": "end"}
       ]
@@ -34,6 +35,11 @@
       "label": "Category ID",
       "id": "category_id",
       "type": "text"
+    },
+    {
+      "label": "Slider",
+      "id": "slider",
+      "type": "checkbox"
     },
     {
       "label": "Content",
@@ -45,6 +51,16 @@
       "label": "Picture",
       "id": "picture",
       "type": "image_picker"
+    },
+    {
+      "label": "Item limit",
+      "id": "item_limit",
+      "type": "select",
+      "options": [
+        {"label": "4","value": "4"},
+        {"label": "5","value": "5"},
+        {"label": "6","value": "6"}
+      ]
     }
   ],
   "presets": [{
@@ -54,7 +70,9 @@
       "content" : "<h2><b>Hello</b> World</h2>",
       "category_id": "182",
       "theme_color": "light",
-      "text_position": "start"
+      "text_position": "start",
+      "slider": true,
+      "item_limit": "5"
     }
   }],
   "default": {
@@ -62,7 +80,9 @@
       "content" : "<h2><b>Hello</b> World</h2>",
       "category_id": "182",
       "theme_color": "light",
-      "text_position": "start"
+      "text_position": "start",
+      "slider": false,
+      "item_limit": "5"
     }
   }
 }
@@ -83,64 +103,85 @@
   {% when "none" %}
     {% assign css_banner = ""%}
 {% endcase %}
-{% with_scope id: section.settings.category_id %}
-  {% assign category = store.categories.first %}
-{% endwith_scope %}
-
+{% assign item_limit = section.settings.item_limit | round %}
+{% case section.settings.text_position %}
+  {% when "top" %}
+    {% assign css_title = "col-12 col-sm-12 pt-3 "%}
+  {% when "start" %}
+    {% assign css_title = "col-12 col-sm-12 col-xl-3 pt-4 "%}
+  {% when "end" %}
+    {% assign css_title = "col-12 col-sm-12 col-xl-3 pt-4 order-5"%}
+{% endcase %}
 <div class="container-fluid">
   <div class="row {{css_banner}}">
     <div class="col-12">
       <div class="container mt-4 mb-4">
         <div class="row">
-          <div class="col-12 col-sm-12 col-xl-3 pt-4 {% if section.settings.text_position == 'end'%}order-5{%endif%}">
+          <div class="{{css_title}}">
             {{ section.settings.content }}
             <img src="{{section.settings.picture}}" alt="" class="img-fluid">
           </div>
-          <div class="col-12 col-xl-9">
-            {% assign slide_count = 1 %}
-            {% assign carousel_html_id = "carousel-category-" | append : section.settings.category_id%}
+          <div class="col-12 {% if section.settings.text_position != 'top'%}col-xl-9{%endif%}">
             {% with_scope categories: {id: section.settings.category_id} %}
-              <div id="{{carousel_html_id}}" class="carousel slide" data-ride="carousel">
-
-                <div class="carousel-inner">
-                  <div class="carousel-item active p-1">
-                    <div class="row">
-                    {% assign thumb_order = 0 %}
-                    {% for product in store.products %}
-                      {% assign thumb_order = thumb_order | plus: 1 %}
-                      <div class="col-12 col-sm-6 col-md-3 col-xl-3 p-1">
-                        <div class=" h-100">
-                          {% include 'product_thumbnail' with
-                             product
-                          %}
-                        </div>
-                      </div>
-                      {% if thumb_order == 4 %}
-                        {% assign slide_count = slide_count | plus: 1 %}
+              {% if section.settings.slider == true %}
+                {% assign slide_count = 1 %}
+                {% assign carousel_html_id = "carousel-category-" | append : section.settings.category_id%}
+                <div id="{{carousel_html_id}}" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active p-1">
+                      <div class="row">
                         {% assign thumb_order = 0 %}
+                        {% for product in store.products %}
+                          {% assign thumb_order = thumb_order | plus: 1 %}
+                          <div class="col-12 col-sm-6 col-md-3 col-xl-3 p-1">
+                            <div class=" h-100">
+                              {% include 'product_thumbnail' with
+                                 product
+                              %}
+                            </div>
+                          </div>
+                          {% if thumb_order == 4 %}
+                            {% assign slide_count = slide_count | plus: 1 %}
+                            {% assign thumb_order = 0 %}
+                            </div>
+                          </div>
+                          <div class="carousel-item p-1">
+                            <div class="row">
+                          {%endif%}
+                        {% endfor %}
                         </div>
                       </div>
-                      <div class="carousel-item p-1">
-                        <div class="row">
-                      {%endif%}
-                    {% endfor %}
                     </div>
                   </div>
-
+                  {% if slide_count > 1%}
+                    <div class="pt-2 pb-2 text-right">
+                      <a class="btn btn-outline-gray btn-sm pb-0" href="#{{carousel_html_id}}" role="button" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                      </a>
+                      <a class="btn btn-outline-gray btn-sm pb-0" href="#{{carousel_html_id}}" role="button" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                      </a>
+                    </div>
+                  {% endif %}
                 </div>
-                {% if slide_count > 1%}
-                  <div class="pt-2 pb-2 text-right">
-                    <a class="btn btn-outline-gray btn-sm pb-0" href="#{{carousel_html_id}}" role="button" data-slide="prev">
-                      <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a class="btn btn-outline-gray btn-sm pb-0" href="#{{carousel_html_id}}" role="button" data-slide="next">
-                      <i class="fa fa-angle-right"></i>
-                    </a>
-                  </div>
-                {% endif %}
-              </div>
-            {% endwith_scope%}
-
+              {% else %}
+                <div class="row justify-content-center">
+                  {% assign css_col = 'col-xl-3' %}
+                  {% if item_limit == 5 %}
+                    {% assign css_col = 'col-xl-2' %}
+                  {% endif %}
+                  {% paginate store.products by item_limit %}
+                    {% for product in paginate.collection %}
+                      <div class="col-12 col-sm-6 col-md-3 {{ css_col }} p-1">
+                        {% include 'product_thumbnail' with
+                           product
+                        %}
+                      </div>
+                    {% endfor %}
+                  {% endpaginate %}
+                </div>
+              {% endif %}
+            {% endwith_scope %}
           </div>
         </div>
       </div>

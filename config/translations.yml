@@ -191,6 +191,9 @@ cart_order_ref:
 cart_quantity:
   en: Quatity
   fr: Quantité
+cart_delete:
+  en: Delete item
+  fr: Supprimer l'article
 cart_shipping_address:
   en: Shipping adress
   fr: Adresse de livraison
@@ -272,7 +275,7 @@ cart_submit:
   en: Submit
   fr: Valider
 cart_customer_invoice:
-  en:
+  en: Set invoice address
   fr: Je choisis mon adresse de facturation
 cart_free_delivery:
   en: Free
@@ -280,6 +283,9 @@ cart_free_delivery:
 cart_shipping_method:
   en: Continue
   fr: Continuer
+cart_empty:
+  en: You have no items in your shopping basket.
+  fr: Votre panier est vide
 creditcard_lastname:
   en: Name (as it appears on your card)
   fr: Titulaire de la carte
