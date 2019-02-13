@@ -23,10 +23,11 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 @import 'payments/adyen';
 @import 'payments/stripe';
 /*Section*/
+@import 'sections/carousel';
 @import 'sections/cookies_manager';
 @import 'sections/header';
 @import 'sections/cart';
-@import 'sections/section_debug';
+//@import 'sections/section_debug';
 /* Need to fix CDN issue
 @import 'fontawesome/fontawesome';
 @import 'fontawesome/solid';

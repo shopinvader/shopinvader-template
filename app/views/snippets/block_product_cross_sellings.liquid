@@ -1,0 +1,12 @@
+{{ title }}
+<div class="editable_content">
+  <div class="row">
+    {% for cross_seller in variant.cross_sellings %}
+      <div class="col-12 col-sm-6 col-md-3 col-xl-2">
+      {% with_scope objectID: [cross_seller.id]%}
+        {% include 'product_thumbnail' with product: store.products.first%}
+      {% endwith_scope%}
+      </div>
+    {% endfor %}
+  </div>
+</div>

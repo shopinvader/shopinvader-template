@@ -19,6 +19,18 @@
       ]
     },
     {
+      "label": "Cells Alignment",
+      "id": "cells_align",
+      "type": "select",
+      "options": [
+        {"label": "Left","value": "start"},
+        {"label": "Right", "value": "end"},
+        {"label": "Center","value": "center"},
+        {"label": "Between", "value": "between"},
+        {"label": "Around", "value": "around"}
+      ]
+    },
+    {
       "label": "Fixed header",
       "id": "fixed_position",
       "type": "checkbox"
@@ -394,30 +406,21 @@
       "theme_color": "transparent",
       "fixed_position": false,
       "large_size": true,
-      "message": "<center><i class='fa fa-gift'></i> Save 10% with voucher code <b>SAVE10</b></center>"
+      "message": "<center><i class='fa fa-gift'></i> Save 10% with voucher code <b>SAVE10</b></center>",
+      "cells_align": "arround"
     },
     "blocks": [
     {
       "type": "logo",
       "settings": {
         "picture": "/images/shop-logo.png",
-        "align_block": "auto",
-        "cell_size": "sm",
+        "align_block": "right",
+        "cell_size": "md",
         "align_img": "center"
       }
     },
     
-    {
-      "type": "search",
-      "settings": {
-        "label": "Search product...",
-        "align_block": "left",
-        "cell_size": "auto",
-        "display_sm_icon": true,
-        "icon": "/images/search-icon.png"
-        
-      }
-    },
+    
     {
       "type": "user_icon",
       "settings": {
@@ -454,10 +457,21 @@
     {
       "type": "navigation",
       "settings": {
-        "cell_size": "full",
-        "align_block": "auto",
+        "cell_size": "lg",
+        "align_block": "left",
         "item_align": "center",
         "link_url": ""
+      }
+    },
+    {
+      "type": "search",
+      "settings": {
+        "label": "Search product...",
+        "align_block": "auto",
+        "cell_size": "auto",
+        "display_sm_icon": true,
+        "icon": "/images/search-icon.png"
+        
       }
     }
     ]
@@ -472,7 +486,7 @@
   </div>
   {% endif%}
   <div class="container{% if section.settings.large_size %}-fluid{%endif%}">
-    <div class="row  align-items-center justify-content-between">
+    <div class="row  align-items-center justify-content-{{section.settings.cells_align}}">
       <div class="col-auto header-block header-block-menu d-lg-none order-1">
         <a href="#nav-sm" class="text-primary text-left d-md-none" data-toggle="nav-sm-display" data-target="#nav-sm">
           <i class="fas fa-bars"></i>
@@ -512,7 +526,8 @@
           {% assign display_sm_icon_css = "d-none d-md-flex" %}
         {% endif %}
         
-        <div class="header-block header-block-{{ block.type }} {{css_cell}}">
+        <div class="header-block header-block-{{ block.type }} {{css_cell}} block">
+          {% include 'block_debug' %}
           {% case block.type %}
             {% when "text" %}
               {{ block.settings.content }}

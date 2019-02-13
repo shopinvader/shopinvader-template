@@ -1,0 +1,19 @@
+<div class="container mt-4 mb-4 {{css_card}} {% if section.settings.border %}shadow-sm{% endif %}">
+  {% if variant.variant_count > 0 %}
+    <div class="row pt-3">
+      <div class="col-12">
+        <h2>{{ title }}</h2>
+        <div class="row">
+          <div class="col-12 col-md-3 col-lg-2  p-2">
+            {% include 'product_variant_thumbnail' with product: variant %}
+          </div>
+          {% for variant_product in product.variants %}
+            <div class="col-12 col-md-3 col-lg-2  p-2">
+              {% include 'product_variant_thumbnail' with  product: product.variants %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>

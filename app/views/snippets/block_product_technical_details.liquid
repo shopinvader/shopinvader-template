@@ -1,0 +1,36 @@
+
+<div class="">
+  {{ title  }}
+</div>
+<div class="row">
+  <div class="col-lg-7">
+    <h2>{{'product_spec_title' | translate }}</h2>
+    <table class="table table-striped">
+      <tbody>
+      {% for details in  variant.technical_details %}
+        <tr>
+          <td>{{details.name}}</td>
+          <td>{{details.value}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-7">
+  {% if variant.technical_media.size > 0 %}
+    <h2 class="text-2xl title-separator">
+      {{ 'item_documentation' | translate }}
+    </h2>
+    <ul>
+    {% for media_file in variant.technical_media %}
+      <li>
+        <i class="fa fa-fw fa-lg color-info ico-document-{{ media_file.type }}"></i>&nbsp;
+        <a href="{{media_file.url}}" class="text-lg" target="_blank">
+          {{ media_file.type | prepend: 'product_document_' | translate }}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  </div>
+</div>

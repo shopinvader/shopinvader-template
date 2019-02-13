@@ -9,7 +9,7 @@ is_layout: false
 seo_title: My quotation | Shopinvader demo
 ---
 {% extends 'layouts/account' %}
-{% block 'content/tabcontent' %}
+{% block 'body/content/tabcontent' %}
 {% if params.quotation_id%}
   {% with_scope id: params.quotation_id %}
     {% assign quotation = store.quotations.first%}

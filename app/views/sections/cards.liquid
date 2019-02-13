@@ -159,7 +159,7 @@
         <div class="row">
           {% for item in section.blocks %}
             {% if item.type == "header_text" %}
-              <div class="col-12 pb-3">
+              <div class="col-12 pb-3 block">
                 {{ item.settings.content }}
               </div>
             {% endif %}
@@ -168,7 +168,8 @@
             <div class="card-deck">
               {% for item in section.blocks %}
                 {% if item.type == "card" %}
-                  <div class="card text-left {{theme_card}} {% if section.settings.shadow == true %}shadow{%endif%}">
+                  <div class="block card text-left {{theme_card}} {% if section.settings.shadow == true %}shadow{%endif%} ">
+                    {% include 'block_debug' with block: item %}
                     <div class="card-body">
                       <h3>{{item.settings.title}}</h3>
                       {{item.settings.content}}
@@ -180,7 +181,7 @@
           </div>
           {% for item in section.blocks %}
             {% if item.type == "footer_text" %}
-              <div class="col-12 pb-3">
+              <div class="block col-12 pb-3">
                 {{ item.settings.content }}
               </div>
             {% endif %}

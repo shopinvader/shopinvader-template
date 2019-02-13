@@ -1,0 +1,31 @@
+  <div class="pt-4 pb-4">
+    <div class="">
+      {{ title }}
+    </div>
+    <div>
+    	{% if type == 'text' %}
+      	{{ variant.attributes[attribute_name] }}
+    	{% elsif type == 'table' %}
+    		{% for structured_attribute in variant.structured_attributes %}
+				  {% if structured_attribute.group_name == attribute_name %}
+				    {% for attribute in structured_attribute.fields %}
+				      <div class="row pt-2 pb-2  pb-4">
+				      {% if display_legend %}
+				        <div class="col-6">
+				          <b>{{ attribute.name }}</b>
+				        </div>
+				        <div class="col-6">
+				          {{ attribute.value }}
+				        </div>
+				      {% else %}
+				        <div class="col-12">
+				          {{ attribute.value }}
+				        </div>
+				      {% endif %}
+				      </div>
+				    {% endfor %}
+				  {% endif %}
+				{% endfor %}
+    	{% endif %}
+    </div>
+  </div>

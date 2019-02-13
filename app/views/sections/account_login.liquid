@@ -21,9 +21,27 @@
       "id": "cells_direction",
       "type": "select",
       "options": [
-        {"label": "Row","value": "flex-row"},
-        {"label": "Column","value": "flex-column"}
+        {"label": "Row","value": "row"},
+        {"label": "Column","value": "column"}
       ]
+    },
+    {
+      "label": "Card margin",
+      "id": "cells_margin",
+      "type": "select",
+      "options": [
+        {"label": "None","value": "none"},
+        {"label": "Small","value": "sm"},
+        {"label": "Medium","value": "md"},
+        {"label": "Large","value": "lg"}
+      ]
+    },
+    {
+      "label": "Header",
+      "id": "header_content",
+      "type": "text",
+      "html": true,
+      "nb_rows": 2
     }
   ],
   "blocks": [
@@ -59,6 +77,17 @@
           "id": "display_border",
           "type": "checkbox",
           "default": true
+        },
+        {
+          "label": "Show Shadow",
+          "id": "display_shadow",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "label": "Target URL",
+          "id": "target_url",
+          "type": "url"
         },
         {
           "label": "Title",
@@ -116,6 +145,22 @@
           "default": true
         },
         {
+          "label": "Show Shadow",
+          "id": "display_shadow",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "label": "Target URL",
+          "id": "target_url",
+          "type": "url"
+        },
+        {
+          "label": "Reset Password URL",
+          "id": "reset_url",
+          "type": "url"
+        },
+        {
           "label": "Title",
           "id": "title",
           "type": "text",
@@ -138,27 +183,51 @@
     }
   ],
   "default": {
+    "settings": {
+      "cells_align": "center",
+      "cells_margin": "lg",
+      "cells_direction": "row",
+      "header_content": "<h1>Welcome</h1>"
+    },
     "blocks": [
       {
         "type": "card_login",
         "settings": {
           "cell_size": "md",
-          "btn_label": "Sign In"
+          "display_border": false,
+          "display_shadow": false,
+          "title": "<h2>Sign In</h2>",
+          "btn_label": "SIGN IN",
+          "theme": "none",
+          "target_url": "account/orders",
+          "reset_url": "reset-password-request"
         }
       },
       {
         "type": "card_register",
         "settings": {
           "cell_size": "md",
-          "btn_label": "Register"
+          "display_border": false,
+          "display_shadow": false,
+          "title": "<h2>New to shopinvader demo ? </h2>",
+          "content": "Do more with an account<ul><li>Check out faster</li><li>Save your shipping addresses</li><li>Keep track of your orders</li></ul>",
+          "btn_label": "CREATE AN ACCOUNT ",
+          "theme": "light",
+          "target_url": "account/register"
         }
       }
     ]
   }
 }
 ---
-<div class="container">
-  <div class="row pt-4 pb-4 justify-content-{{section.settings.cells_align}} {{section.settings.cells_direction}}">
+{% assign cell_align = section.settings.cells_align %}
+<div class="container-fluid pt-4 pb-4">
+  <div class="row">
+    <div class="col-12 pt-2 pt-3">
+      {{ section.settings.header }}
+    </div>
+  </div>
+  <div class="row justify-content-{{align}} flex-{{section.settings.cells_direction}}">
     {% for block in section.blocks %}
       {% assign theme = '' %}
       {% assign next_block = section.blocks[forloop.index] %}
@@ -185,12 +254,133 @@
         {% when 'light' %}
           {% assign theme = "text-dark bg-light"%}
       {% endcase %}
+
+       {% case section.settings.cells_margin %}
+        {% when 'sm' %}
+          {% assign theme = theme | append: " m-1"%}
+        {% when 'md' %}
+          {% assign theme = theme | append: " m-2"%}
+        {% when 'lg' %}
+          {% assign theme = theme | append: " m-4"%}
+      {% endcase %}
+
       {% if block.settings.display_border != true %}
         {% assign theme = theme | append :' border-0' %}
       {% endif %}
+      {% if block.settings.display_shadow == true %}
+        {% assign theme = theme | append :' shadow' %}
+      {% endif %}
+
+      {% if section.settings.cells_direction == 'row' %}
+        {% assign theme = theme | append :' h-100' %}
+      {% endif %}
 
       <div class="{{css_cell}} block block_{{block.type}}">
-        <div class="card {{theme}} h-100">
+        <div class="card {{theme}}">
+          <div class="card-body">
+            <div>{{ block.settings.title }}</div>
+            <div>
+              {% case block.type %}
+              {% when 'card_login' %}
+                <form action="{% path_to 'account_login' %}" method="post">
+                  <input type="hidden" name="auth_action" value="sign_in" />
+                  <input type="hidden" name="auth_content_type" value="customers" />
+                  <input type="hidden" name="auth_id_field" value="email" />
+                  <input type="hidden" name="auth_password_field" value="password" />
+                  <input type="hidden" name="auth_callback" value="{{ block.settings.target_url }}" />
+                  <div class="form-group">
+                    <label for="auth-email">{{ 'signin_email' | translate }}</label>
+                    <input type="email" class="form-control" id="auth-email" placeholder="{{ 'signin_email' | translate }}" name="auth_id" value="{{ params.auth_id }}" required="required">
+                  </div>
+                  <div class="form-group">
+                    <label for="auth-password">{{ 'signin_password' | translate }}</label>
+                    <input type="password" class="form-control" id="auth-password" placeholder="{{ 'signin_password' | translate }}" name="auth_password" value="" required="required">
+                    <a href="{{ block.settings.reset_url }}" class="color-white">
+                      {{ 'signin_forgotpassword' | translate }}
+                    </a>
+                  </div>
+                  <div class="text-center">{% if auth_wrong_credentials %}{{ 'signin_wrong' | translate }}{% endif %}</div>
+                  <div class="text-right">
+                    <button type="submit" class="btn btn-primary btn-lg pull-right"><i class="fa fa-lock"></i> {{ block.settings.btn_label  }}</button>
+                  </div>
+
+                </form>
+              {% when 'card_register' %}
+                <div class="pt-4 pb-4">
+                  {{ block.settings.content }}
+                </div>
+                <div class="text-center pt-3">
+                  <a href="{{ block.settings.target_url }}" class="btn btn-dark btn-lg">
+                    {{ block.settings.btn_label  }}
+                  </a>
+                </div>
+              </div>
+            {% endcase %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% comment %}
+{% assign align = section.settings.cells_align%}
+<div class="container-fluid pt-4 pb-4">
+  <div class="row">
+    <div class="col-12 pt-2 pt-3">
+      {{ section.settings.header }}
+    </div>
+  </div>
+  <div class="row justify-content-{{align}} flex-{{section.settings.cells_direction}}">
+    {% for block in section.blocks %}
+      {% assign theme = '' %}
+      {% assign next_block = section.blocks[forloop.index] %}
+      {% case block.settings.cell_size %}
+        {% when 'xs' %}
+          {% assign css_cell = "col-12 col-md-4 col-lg-2 col-xl-2 "%}
+        {% when 'sm' %}
+          {% assign css_cell = "col-12 col-md-6 col-lg-4"%}
+        {% when 'md' %}
+          {% assign css_cell = "col-12 col-lg-12 col-xl-6 "%}
+        {% when 'lg' %}
+          {% assign css_cell = "col-12 col-md-12 col-lg-8 "%}
+        {% when 'xl' %}
+          {% assign css_cell = "col-12 col-lg-10 col-xl-10 "%}
+        {% when 'full' %}
+          {% assign css_cell = "col-12 "%}
+        {% when 'auto' %}
+          {% assign css_cell = "col-auto"%}
+      {% endcase %}
+      
+      {% case block.settings.theme %}
+        {% when 'dark' %}
+          {% assign theme = " bg-dark  text-light"%}
+        {% when 'light' %}
+          {% assign theme = "text-dark bg-light"%}
+      {% endcase %}
+
+       {% case section.settings.cells_margin %}
+        {% when 'sm' %}
+          {% assign theme = theme | append: " m-1"%}
+        {% when 'md' %}
+          {% assign theme = theme | append: " m-2"%}
+        {% when 'lg' %}
+          {% assign theme = theme | append: " m-4"%}
+      {% endcase %}
+
+      {% if block.settings.display_border != true %}
+        {% assign theme = theme | append :' border-0' %}
+      {% endif %}
+      {% if block.settings.display_shadow == true %}
+        {% assign theme = theme | append :' shadow' %}
+      {% endif %}
+
+      {% if section.settings.cells_direction == 'row' %}
+        {% assign theme = theme | append :' h-100' %}
+      {% endif %}
+
+      <div class="{{css_cell}} block block_{{block.type}}">
+        <div class="card {{theme}}">
           <div class="card-body">
             <div>{{ block.settings.title }}</div>
             <div>
@@ -213,24 +403,18 @@
                       {{ 'signin_forgotpassword' | translate }}
                     </a>
                   </div>
-                  <script src="https://www.google.com/recaptcha/api.js?render=6LduOIAUAAAAAIfEIpRUGSyJJZjewBVfFGoJExeN"></script>
-                  <script>
-                  grecaptcha.ready(function() {
-                      grecaptcha.execute('reCAPTCHA_site_key', {action: 'homepage'}).then(function(token) {
-                         
-                      });
-                  });
-                  </script>
                   <div class="text-center">{% if auth_wrong_credentials %}{{ 'signin_wrong' | translate }}{% endif %}</div>
                   <div class="text-right">
-                    <button type="submit" class="btn btn-dark btn-lg pull-right"><i class="fa fa-lock"></i> {{ block.settings.btn_label  }}</button>
+                    <button type="submit" class="btn btn-primary btn-lg pull-right"><i class="fa fa-lock"></i> {{ block.settings.btn_label  }}</button>
                   </div>
 
                 </form>
               {% when 'card_register' %}
-                {{ block.settings.content }}
+                <div class="pt-4 pb-4">
+                  {{ block.settings.content }}
+                </div>
                 <div class="text-center pt-3">
-                  <a href="{% path_to cart_next_step %}" class="btn btn-primary">
+                  <a href="{% path_to cart_next_step %}" class="btn btn-dark btn-lg">
                     {{ block.settings.btn_label  }}
                   </a>
                 </div>
@@ -239,13 +423,10 @@
             </div>
           </div>
         </div>
-        
-        
       </div>
     {% endfor %}
   </div>
 </div>
-{% comment %}
 <div class="d-none">
   <div class="col-12 col-sm-6 {% if inverse_card == true%}order-md-1{%endif%}">
     <div class="p-4">

@@ -7,7 +7,7 @@ is_layout: false
   <div class="page shadow">
     <header>
       {% block header %}
-        {% global_section 'header', id:'page_header'%}
+        {% global_section 'header', id:'page_header',  placement: 'top'%}
       {% endblock %}
     </header>
     <main>
@@ -17,6 +17,8 @@ is_layout: false
       {% block content %}
       {% endblock %}
     </main>
-    {% global_section 'footer',   id:'page_footer',  placement: 'bottom'%}
+    {% block footer %}
+      {% global_section 'footer',   id:'page_footer',  placement: 'bottom'%}
+    {% endblock %}
   </div>
 {% endblock %}

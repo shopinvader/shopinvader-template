@@ -1,19 +1,30 @@
 ---
 title: Page not found
 published: true
+sections_dropzone_content: >
+  [
+    {
+      "type": "cell_row",
+      "settings": {
+        "theme_color": "",
+        "cells_align": "center",
+        "margin": "lg"
+
+      },
+      "blocks": [
+      	{
+          "type": "cell_text",
+          "settings": {
+            "cell_size": "lg",
+            "margin": "lg",
+            "content": "<h1>404- Page not found</h1><br><p>Sorry, we can't find that page.<br> Try using the Search box or click on one of our popular categories</p>"
+            
+          }
+        }
+      ]
+    }
+
+  ]
+
 ---
-{% extends 'layouts/default' %}
-
-{% block content %}
-
-<div class="container">
-  <div class="jumbotron mt-4">
-    {% editable_text jumbotron, rows: 5, priority: 1 %}
-      <h1 class="text-danger font-weight-bold">404 - page not found</h1>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-    {% endeditable_text %}
-  </div>
-</div>
-<link href="http://fonts.googleapis.com/css?family=Open+Sans|Bitter" rel="stylesheet" type="text/css">
-
-{% endblock %}
+{% extends 'layouts/blank' %}

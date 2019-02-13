@@ -60,34 +60,43 @@ handle: product
 
 {% endblock %}
 
-{% block body/content %}
-{% if live_editing %}
-   {% assign product = store.products.first %}
-{% endif %}
-{% assign variant = null %}
-{% assign variant_list = product.variants %}
-{% if params.ref%}
-  {% for product_variant in variant_list %}
-    {% if product_variant.sku == params.ref%}
-      {% assign variant = product_variant %}
+{% block 'body/content' %}
+
+
+  {% if product == null %}
+    {% assign product =store.products.first %}
+  {% endif %}
+  {% assign variant = null %}
+  {% assign variant_list = product.variants %}
+  {% if params.ref%}
+    {% for product_variant in variant_list %}
+      {% if product_variant.sku == params.ref%}
+        {% assign variant = product_variant %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {%if variant == null%}
+    {% assign variant = product %}
+  {% endif %}
+  {% if live_editing == true %}
+    {% if variant != null %}
+      {% action 'set product' %}
+        var variant = getProp('variant');
+        setSessionProp('live_editing_variant', variant);
+      {% endaction %}
     {% endif %}
-  {% endfor %}
-{% endif %}
-{%if variant == null%}
-  {% assign variant = product %}
-{% endif %}
-{% section 'product_page_intro' %}
-{% section 'product_page_section' %}
-{% sections_dropzone %}
-<div class="bottom-nav text-center d-md-none">
-  <form method="POST" action="/invader/cart/add_item" data-shopinvader-form>
-    <input type="hidden" name="invader_success_url" value="{{product.url_key  | prepend: url_base}}?addtocart_product_id={{product.objectID}}" />
-    <input type="hidden" name="invader_error_url" value="{{product.url_key  | prepend: url_base}}" />
-    <input type="hidden" name="product_id" value="{{product.objectID }}">
-    <input type="hidden" name="item_qty" value="1">
-    <button type="submit" name="submit" class="btn btn-success">
-      {{"product_add_to_cart" | translate }}
-    </button>
-  </form>
-</div>
+  {% endif %}
+  {% section 'product_page_section' %}
+  {% sections_dropzone %}
+  <div class="bottom-nav text-center d-md-none">
+    <form method="POST" action="/invader/cart/add_item" data-shopinvader-form>
+      <input type="hidden" name="invader_success_url" value="{{product.url_key  | prepend: url_base}}?addtocart_product_id={{product.objectID}}" />
+      <input type="hidden" name="invader_error_url" value="{{product.url_key  | prepend: url_base}}" />
+      <input type="hidden" name="product_id" value="{{product.objectID }}">
+      <input type="hidden" name="item_qty" value="1">
+      <button type="submit" name="submit" class="btn btn-success">
+        {{"product_add_to_cart" | translate }}
+      </button>
+    </form>
+  </div>
 {% endblock %}

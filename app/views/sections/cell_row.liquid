@@ -22,7 +22,7 @@
         {"label": "Info", "value": "info"},
         {"label": "Danger", "value": "danger"},
         {"label": "Warning", "value": "warning"},
-        {"label": "None", "value": "warning"}
+        {"label": "None", "value": ""}
       ]
     },
     {
@@ -246,11 +246,12 @@
               {% assign css_margin_cell = "mt-4 mb-4 pt-4 pb-4"%}
           {% endcase %}
           {% assign css_cell = css_cell | append : css_margin_cell %}
-          <div class="{{css_cell}}">
+          <div class="block {{css_cell}}">
+            {% include 'block_debug' %}
             {% if cell.type == "cell_image" %}
-            <img src="{{cell.settings.picture}}" alt="{{cell.settings.picture_alt}}" class="img-fluid">
+              <img src="{{cell.settings.picture}}" alt="{{cell.settings.picture_alt}}" class="img-fluid">
             {% else %}
-            {{ cell.settings.content }}
+              {{ cell.settings.content }}
             {% endif %}
           </div>
           {%endfor%}

@@ -15,7 +15,7 @@ is_layout: false
   <script src="{{ 'search.js' | javascript_url }}?category={{category.name}}"></script>
 {% endblock %}
 
-{% block content %}
+{% block body/content %}
   {% if category and category.filters != []%}
     {% assign filters = category.filters %}
   {% else %}

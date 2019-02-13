@@ -135,6 +135,9 @@ account_title:
 account_signout:
   en: Sign out
   fr: Déconnexion
+account_welcome_message:
+  en: Happy to see you again ;)
+  fr: Happy to see you again ;)
 header_cart:
   en: My basket
   fr: Mon panier

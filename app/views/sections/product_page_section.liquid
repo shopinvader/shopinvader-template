@@ -38,9 +38,10 @@
     }
   ],
   "blocks": [
+    //Add to cart
     {
-      "name": "Product description",
-      "type": "description",
+      "name": "Add to cart",
+      "type": "add_to_cart",
       "settings": [
         {
           "label": "Cell Size",
@@ -55,140 +56,44 @@
           ]
         },
         {
-          "label": "Title",
-          "id": "title",
-          "type": "text",
-          "html": true
-
-        }
-      ]
-    },
-    {
-      "name": "Cross Selling",
-      "type": "cross_sellings",
-      "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"}
-          ]
-        },
-        {
-          "label": "Title",
-          "id": "title",
-          "type": "text",
-          "html": true
-
-        }
-      ]
-    },
-    {
-      "name": "Technical Media",
-      "type": "technical_details",
-      "settings": [
-        {
-          "label": "Title",
-          "id": "title",
-          "type": "text",
-          "html": true
-
-        }
-      ]
-    },
-    {
-      "name": "Up Selling",
-      "type": "up_sellings",
-      "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"}
-          ]
-        },
-        {
-          "label": "Title",
-          "id": "title",
-          "type": "text",
-          "html": true
-
-        }
-      ]
-    },
-    {
-      "name": "Review",
-      "type": "review",
-      "settings": [
-        {
-          "label": "Title",
-          "id": "title",
-          "type": "text",
-          "html": true
-
-        }
-      ]
-    },
-    {
-      "name": "Attribute table",
-      "type": "attribute_table",
-      "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"}
-          ]
-        },
-        {
-          "label": "Title",
-          "id": "title",
-          "type": "text",
-          "html": true
-
-        },
-        {
-          "label": "Attribute Groupe",
-          "id": "group_name",
-          "type": "text"
-        },
-        {
-          "label": "Display label",
-          "id": "display_legend",
+          "label": "Display Add to cart section",
+          "id": "display_add_to_cart",
           "type": "checkbox"
         }
       ]
     },
+    // Attribute
     {
-      "name": "Attribute Text",
-      "type": "attribute_text",
+      "name": "Attribute",
+      "type": "attribute",
       "settings": [
+       {
+          "label": "Type",
+          "id": "type",
+          "type": "select",
+          "options": [
+            {"label": "Attribute key","value": "text"},
+            {"label": "Attribute group","value": "table"}
+          ]
+        },
         {
           "label": "Cell Size",
           "id": "cell_size",
           "type": "select",
           "options": [
+            {"label": "Auto", "value": "auto"},
             {"label": "Extra-small","value": "xs"},
             {"label": "Small","value": "sm"},
             {"label": "Medium", "value": "md"},
             {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"}
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
           ]
+        },
+        {
+          "label": "Child of previous block",
+          "id": "is_child",
+          "type": "checkbox"
         },
         {
           "label": "Theme color",
@@ -212,9 +117,366 @@
 
         },
         {
-          "label": "Attribute Name",
+          "label": "Attribute or group key",
           "id": "attribute_name",
           "type": "text"
+        },
+        {
+          "label": "Display label (only for group)",
+          "id": "display_legend",
+          "type": "checkbox"
+        }
+      ]
+    },
+    //Breadcrumb
+    {
+      "name": "Breadcrumb",
+      "type": "breadcrumb",
+      "settings": [
+        {
+          "label": "Child of previous block",
+          "id": "is_child",
+          "type": "checkbox"
+        },
+        {
+          "label": "Display product Name",
+          "id": "display_product_name",
+          "type": "checkbox"
+        }
+      ]
+    },
+    //Cell Text
+    {
+      "name": "Text",
+      "type": "cell_text",
+      "keep_icon": true,
+      "keep_name": true,
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Auto", "value": "auto"},
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"}
+          ]
+        },
+        {
+          "label": "Child of previous block",
+          "id": "is_child",
+          "type": "checkbox"
+        },
+        {
+          "label": "Content",
+          "id": "content",
+          "type": "text",
+          "html": true,
+          "nb_rows": 10
+        }
+      ]
+    },
+    //Cell images
+    {
+      "name": "Picture",
+      "type": "cell_image",
+      "keep_icon": true,
+      "keep_name": true,
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Auto", "value": "auto"},
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"}
+          ]
+        },
+        {
+          "label": "Child of previous block",
+          "id": "is_child",
+          "type": "checkbox"
+        },
+        {
+          "label": "Picture",
+          "id": "picture",
+          "type": "image_picker"
+        },
+        {
+          "label": "Picture Title",
+          "id": "picture_alt",
+          "type": "text"
+        }
+      ]
+    },
+    //Cross Selling
+    {
+      "name": "Cross Selling",
+      "type": "cross_sellings",
+      "settings": [
+         {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Auto", "value": "auto"},
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
+          ]
+        },
+        {
+          "label": "Child of previous block",
+          "id": "is_child",
+          "type": "checkbox"
+        },
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true
+
+        }
+      ]
+    },
+    //Product Data
+    {
+      "name": "Product data",
+      "type": "product_data",
+      "settings": [
+         {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Auto", "value": "auto"},
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
+          ]
+        },
+        {
+          "label": "Margin",
+          "id": "margin",
+          "type": "checkbox"
+        },
+        {
+          "label": "Label inline",
+          "id": "inline",
+          "type": "checkbox"
+        },
+        {
+          "label": "Child of previous block",
+          "id": "is_child",
+          "type": "checkbox"
+        },
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true
+        },
+        {
+          "label": "Data type",
+          "id": "data_type",
+          "type": "select",
+          "options": [
+            {"label": "Brand","value": "brand.name"},
+            {"label": "Full name","value": "name"},
+            {"label": "Long description","value": "description"},
+            {"label": "Model name","value": "model.name"},
+            {"label": "Short description","value": "short_description"},
+            {"label": "SKU","value": "sku"}
+          ]
+        }
+      ]
+    },
+    //Product image
+    {
+      "name": "Product Image",
+      "type": "product_image",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"}
+          ]
+        },
+        {
+          "label": "Child of previous block",
+          "id": "is_child",
+          "type": "checkbox"
+        },
+        {
+          "label": "Thumbnails positions",
+          "id": "thumb_position",
+          "type" : "select",
+          "options": [
+            {"label": "Left", "value": "left"},
+            {"label": "Right", "value": "right"},
+            {"label": "Top", "value": "top"},
+            {"label": "Bottom", "value": "bottom"}
+          ]
+        }
+      ]
+    },
+    //Product title
+    {
+      "name": "Product title",
+      "type": "product_title",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"}
+          ]
+        },
+        {
+          "label": "Child of previous block",
+          "id": "is_child",
+          "type": "checkbox"
+        },
+        {
+          "label": "Display category Link",
+          "id": "display_category_link",
+          "type": "checkbox"
+        },
+        {
+          "label": "Display Rating",
+          "id": "display_rating",
+          "type": "checkbox"
+        }
+      ]
+    },
+    //Product variants
+    {
+      "name": "Product variants",
+      "type": "variants",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"}
+          ]
+        },
+        {
+          "label": "Child of previous block",
+          "id": "is_child",
+          "type": "checkbox"
+        },
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true
+        }
+      ]
+    },
+    //Review
+    {
+      "name": "Review",
+      "type": "review",
+      "settings": [
+         {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Auto", "value": "auto"},
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
+          ]
+        },
+        {
+          "label": "Child of previous block",
+          "id": "is_child",
+          "type": "checkbox"
+        },
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true
+
+        }
+      ]
+    },
+    //Technical Media
+    {
+      "name": "Technical Media",
+      "type": "technical_details",
+      "settings": [
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true
+
+        }
+      ]
+    },
+    //Up Selling
+    {
+      "name": "Up Selling",
+      "type": "up_sellings",
+      "settings": [
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"}
+          ]
+        },
+        {
+          "label": "Child of previous block",
+          "id": "is_child",
+          "type": "checkbox"
+        },
+        {
+          "label": "Title",
+          "id": "title",
+          "type": "text",
+          "html": true
+
         }
       ]
     }
@@ -223,29 +485,80 @@
     "settings": {
       "section_name": "Product data",
       "sku" : "",
-      "border" : true,
+      "border" : false,
       "theme_color": "none",
       "add_to_cart": true
     },
     "blocks": [
       {
-        "type": "description",
+        "type": "product_title",
         "settings": {
-          "title": "Overview",
-          "cell_size": "xl"
+          "display_category_link": true,
+          "cell_size": "lg"
         }
       },
+      {
+        "type": "product_data",
+        "settings": {
+          "margin": "false",
+          "title": "<b>SKU</b>",
+          "cell_size": "xl",
+          "data_type": "sku",
+          "inline": true,
+          "is_child": true
+        }
+      },
+      {
+        "type": "product_image",
+        "settings": {
+          "thumb_position": "left",
+          "cell_size": "lg",
+          "is_child": true
+        }
+      },
+      {
+        "type": "add_to_cart",
+        "settings": {
+          "display_add_to_cart": true,
+          "cell_size": "sm"
+        }
+      },
+      {
+        "type": "product_data",
+        "settings": {
+          "margin": "false",
+          "title": "<h2>Overview</h2>",
+          "cell_size": "md",
+          "data_type": "description",
+          "inline": false,
+          "is_child": false
+        }
+      },
+      {
+        "type": "attribute",
+        "settings": {
+          "title": "<h2>Manufacturing</h2>",
+          "cell_size": "md",
+          "type": "text",
+          "attribute_name": "manufacturing_description",
+          "display_legend": true,
+          "theme_color": "light",
+          "is_child": false
+        }
+      },
+      
       {
         "type": "cross_sellings",
         "settings": {
-          "title": "More In This Collection",
+          "title": "<h2>More In This Collection</h2>",
           "cell_size": "xl"
         }
       },
+      
       {
         "type": "up_sellings",
         "settings": {
-          "title": "More choices",
+          "title": "<h2>More choices</h2>",
           "cell_size": "xl"
         }
       }
@@ -254,12 +567,8 @@
 }
 ---
 {% if live_editing %}
-  {% assign product = store.products.first %}
-{% else %}
-  {% assign variant = product%}
+  {% assign variant = session.live_editing_variant %}
 {% endif %}
-
-
 {% case section.settings.theme_color %}
   {% when "none" %}
     {% assign css_banner = "" %}
@@ -283,7 +592,10 @@
 <div class="container-fluid {{css_banner}} pt-2 pb-2">
   <div class="container mt-3 mb-3 pt-2 pb-2 {{css_card}} {% if section.settings.border %}shadow-sm{% endif %}">
     <div class="row">
+      {% assign has_child = false %}
       {% for block in section.blocks%}
+        
+        {% assign next_block = section.blocks[forloop.index] %}
         {% case block.settings.cell_size %}
           {% when 'xs' %}
             {% assign css_cell = "col-12 col-sm-6 col-lg-2 "%}
@@ -293,7 +605,7 @@
             {% assign css_cell = "col-12 col-sm-6 col-lg-6 "%}
           {% when 'lg' %}
             {% assign css_cell = "col-12 col-sm-6 col-lg-8 "%}
-          {% when 'xl' %}
+          {% else %}
             {% assign css_cell = "col-12"%}
         {% endcase %}
 
@@ -311,225 +623,91 @@
         {% when "info" %}
           {% assign css_cell = css_cell | append: " text-light bg-info"%}
         {% endcase %}
+        {% if block.settings.margin != false %}
+          {% assign css_cell = css_cell | append: " pt-4 pb-4"%}
+        {% endif %}
+        <div class="block {{css_cell}}">
+          {% include 'block_debug' %}
+          {% case block.type %}
+            {% when 'product_title'%}
+              {% include 'block_product_title' with
+                variant
+              %}
+            {% when 'product_image'%}
+              {% include 'product_images' with 
+                product: variant, 
+                thumb_position: block.settings.thumb_position 
+              %}
+            {% when 'product_data'%}
 
-        {% case block.type %}
-        {% when 'description'%}
-          <div class="{{css_cell}} pt-4 pb-4">
-            <div class="">
-              {{ block.settings.title }}
-            </div>
-            <p>
-              {{ variant.description }}
-            </p>
-          </div>
-        {% when 'technical_details'%}
-          <div class="col-12 pt-4 pb-4">
-            <div class="">
-              {{ block.settings.title }}
-            </div>
-            <div class="row">
-              <div class="col-lg-7">
-                <h2>{{'product_spec_title' | translate }}</h2>
-                <table class="table table-striped">
-                  <tbody>
-                  {% for details in  variant.technical_details %}
-                    <tr>
-                      <td>{{details.name}}</td>
-                      <td>{{details.value}}</td>
-                    </tr>
-                  {% endfor %}
-                  </tbody>
-                </table>
+               {% include 'block_product_data' with 
+                title: block.settings.title,
+                inline: block.settings.inline,
+                data_type: block.settings.data_type
+                variant
+              %}
+            {% when 'add_to_cart'%}
+              {% include 'block_product_add_to_cart' with 
+                variant
+              %}
+            {% when 'breadcrumb'%}
+              {% include 'block_product_breadcrumb' with
+                variant
+              %}
+            {% when 'variants'%}
+              {% include 'block_product_variants' with
+                title: block.settings.title,
+                variant
+              %}
+            {% when 'technical_details'%}
+              {% include 'block_product_technical_details' with
+                title: block.settings.title,
+                variant
+              %}
+            {% when 'up_sellings'%}
+              {% include 'block_product_up_sellings' with
+                title: block.settings.title,
+                variant
+              %}
+            {% when 'cross_sellings'%}
+              {% include 'block_product_cross_sellings' with
+                title: block.settings.title,
+                variant
+              %}
+            {% when 'reviews'%}
+              {% include 'block_product_reviews' with
+                title: block.settings.title,
+                variant
+              %}
+            {% when 'attribute'%}
+              {% include 'block_product_attribute' with
+                type: block.settings.type,
+                title: block.settings.title,
+                attribute_name: block.settings.attribute_name,
+                display_legend: block.settings.display_legend,
+                variant
+              %}
+            {% when 'cell_text'%}
+              {{ block.settings.content }}
+            {% when 'cell_image'%}
+              <img src="{{block.settings.picture}}" alt="{{block.settings.picture_alt}}" class="img-fluid">
+          {% endcase%}
+          {% if next_block.settings.is_child == true %}
+            {% if has_child ==  false%}
+              {% assign has_child = true %}
+              <div class="row subchild">
+            {% else %}
               </div>
-              <div class="col-lg-7">
-              {% if variant.technical_media.size > 0 %}
-                <h2 class="text-2xl title-separator">
-                  {{ 'item_documentation' | translate }}
-                </h2>
-                <ul>
-                {% for media_file in variant.technical_media %}
-                  <li>
-                    <i class="fa fa-fw fa-lg color-info ico-document-{{ media_file.type }}"></i>&nbsp;
-                    <a href="{{media_file.url}}" class="text-lg" target="_blank">
-                      {{ media_file.type | prepend: 'product_document_' | translate }}
-                    </a>
-                  </li>
-                {% endfor %}
-                </ul>
-              {% endif %}
-              </div>
-            </div>
-          </div>
-        {% when 'cross_sellings'%}
-          <div class="col-12 pt-4 pb-4">
-            {{ block.settings.title }}
-            <div class="editable_content">
-              <div class="row">
-                {% for cross_seller in variant.cross_sellings %}
-                  <div class="col-12 col-sm-6 col-md-3 col-xl-2">
-                  {% with_scope objectID: [cross_seller.id]%}
-                    {% include 'product_thumbnail' with product: store.products.first%}
-                  {% endwith_scope%}
-                  </div>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-        {% when 'up_sellings'%}
-          <div class="{{css_cell}} pt-4 pb-4">
-            {{ block.settings.title }}
-            <div class="editable_content">
-              <div class="row">
-                {% for up_seller in variant.up_sellings %}
-                  <div class="col-12 col-sm-6 col-md-3 col-xl-2">
-                  {% with_scope objectID: [up_seller.id]%}
-                    {% include 'product_thumbnail' with product: store.products.first%}
-                  {% endwith_scope%}
-                  </div>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-        {% when 'reviews' %}
-          <div class="row ">
-            <div class="col-12 " id="product-section-reviews">
-              <div class="row justify-content-center">
-                <div class="col-12 col-sm-6 col-lg-5 pb-3 ">
-                  <h2>{{'product_reviews_title' | translate }} ({{variant.rating.reviews.size}})</h2>
-                  <div class="text-warning pb-1">
-                    <div class="text-dark text-left font-weight-bold small">{{'rating_average_rate' | translate}}</div>
-                    <span class="h1 font-weight-bold">
-                      {{variant.rating.summary.average | round: 1}}
-                    </span>
-                    <span class="h2 text-warning">
-                      / 5
-                    </span>
-                  </div>
-                  <div class="text-size-6xl">
-                    {% include 'rating_stars' with rating_value: variant.rating.summary.average, rating_nbr: variant.rating.reviews.size %}
-                  </div>
-                  <div class="text-size-1xl">
-                    {{'rating_comment_count' | translate: count: variant.rating.reviews.size}}
-                  </div>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-
-                  {% for rate_count in variant.rating.summary.distribution %}
-                  <div class="pt-1">
-                    {% assign rate_count_pct = rate_count.last | times: 1.0 | divided_by: 16  | times: 100%}
-                    <div class="d-inline-block pr-1 ">
-                      {{rate_count.first}} <i class="fa fa-star small text-warning"></i>
-                    </div>
-                    <div class="d-inline-block w-50">
-                      <div class=" progress">
-                         <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: {{rate_count_pct}}%" aria-valuenow="{{rate_count_pct}}" aria-valuemin="0" aria-valuemax="{{rating.summary.count}}"></div>
-                      </div>
-                    </div>
-                    <div class="d-inline-block">
-                      <i>{{rate_count.last }}</i>
-                    </div>
-                  </div>
-                  {% endfor %}
+            {% endif %}
+            
+          {% else %}
+            {% if has_child ==  true%}
+              {% assign has_child = false %}
                 </div>
               </div>
-              <div class="row justify-content-center">
-                <div class="col-12 col-lg-9">
-                  {% paginate variant.rating.reviews by 10 %}
-                    {% for comment in paginate.collection%}
-                    <div class="row ">
-                      <div class="col-12">
-                        <div class="card mb-0">
-                          <div class="card-body p-2 p-sm-4">
-                            <div class="row">
-                              <div class="col-12 col-sm-4 col-md-3 text-center">
-                                <div class="fa fa-user-circle-o fa-3x text-secondary">
-                                </div>
-                                <div class="">{{comment.nickname}}</div>
-                                <div class="h1 text-primary font-weight-bold">{{comment.rating | round}}<span class="h2 ">/5</span></div>
-                                {% include 'rating_stars' with rating_value: comment.rating %}
-                              </div>
-                              <div class="col-12 col-sm-8 col-md-9">
-                                <strong class="text-size-lg">{{comment.name}}</strong>
-                                <p>{{comment.comment}}</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {% endfor %}
-                    <div class="row">
-                      <div class="col-12 pt-3">
-                        <nav aria-label="Page navigation">
-                          <ul class="pagination pull-right">
-                            {% if paginate.previous %}
-                            <li class="page-item">
-                              <a href="{{paginate.previous.url}}#product-section-advice" aria-label="Previous" class="page-link">
-                                <span aria-hidden="true">&laquo;</span>
-                              </a>
-                            </li>
-                            {% endif %}
-                            {% for part in paginate.parts%}
-                            <li class="page-item {%if part.title == paginate.current_page%}active{%endif%}">
-                              <a href="{% if part.is_link == true%}{{part.url}}#product-section-advice{% endif %}" class="page-link">
-                                {{part.title}}
-                              </a>
-                            </li>
-                            {% endfor %}
-                            {% if paginate.next %}
-                            <li class="page-item">
-                              <a href="{{paginate.next.url}}#product-section-advice" aria-label="Next" class="page-link">
-                                <span aria-hidden="true">&raquo;</span>
-                              </a>
-                            </li>
-                            {% endif %}
-                          </ul>
-                        </nav>
-                      </div>
-                    </div>
-                  {% endpaginate %}
-                </div>
-              </div>
-            </div>
-          </div>
-        {% when 'attribute_table' %}
-          <div class="{{css_cell}}">
-            {% for structured_attribute in variant.structured_attributes %}
-              {% if structured_attribute.group_name == block.settings.group_name %}
-                <div class=" pt-4">
-                  {{ block.settings.title }}
-                </div>
-                {% for attribute in structured_attribute.fields %}
-                  <div class="row pt-2 pb-2  pb-4">
-                  {% if block.settings.display_legend%}
-                    <div class="col-6">
-                      <b>{{ attribute.name }}</b>
-                    </div>
-                    <div class="col-6">
-                      {{ attribute.value }}
-                    </div>
-                  {% else %}
-                    <div class="col-12">
-                      {{ attribute.value }}
-                    </div>
-                  {% endif %}
-                  </div>
-                {% endfor %}
-              {% endif %}
-            {% endfor %}
-          </div>
-        {% when 'attribute_text' %}
-          {% if variant.attributes[block.settings.attribute_name] %}
-            <div class="{{css_cell}} pt-4 pb-4">
-              <div class="">
-                {{ block.settings.title }}
-              </div>
-              <div>
-                {{ variant.attributes[block.settings.attribute_name] }}
-              </div>
+            {% endif %}
             </div>
           {% endif %}
-        {% endcase%}
       {% endfor %}
     </div>
   </div>

@@ -500,7 +500,7 @@
           {% assign theme = "bg-light text-dark"%}
       {% endcase %}
 			<div class="{{css_cell}} block block_{{block.type}}">
-
+				{% include 'block_debug' %}
 				{% case block.type %}
 					{% when 'cell_text' %}
 						<div class="pt-2 pb-2">

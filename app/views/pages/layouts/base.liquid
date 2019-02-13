@@ -49,9 +49,10 @@ is_layout: false
 
     {{ 'application.css' | stylesheet_tag }}
     {{ 'themify-icons.css' | stylesheet_tag }}
+    {{ 'debug.css' | stylesheet_tag }}
     {% block 'css' %}{% endblock %}
     {% block 'javascripts_header' %}{% endblock %}
-    {{ 'section-debug.js' | javascript_tag }}
+    
   </head>
   <body>
     {% global_section 'global_theme_settings',  placement: 'top', id:'global_theme_settings'%}
@@ -126,13 +127,14 @@ is_layout: false
     {{ 'shopinvader.jquery.js' | javascript_tag }}
     {{ 'bootstrap4.min.js' | javascript_tag }}
     {{ 'application.js' | javascript_tag }}
-
+    {{ 'section-debug.js' | javascript_tag }}
     {% block 'javascripts_algolia', short_name: true %}
       {% include 'algolia_init' %}
       <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
       <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
       <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
       {{ 'search_autocomplete.js' | javascript_tag }}
+      
     {% endblock %}
     {% block 'javascripts', short_name: true %}
     {% endblock %}

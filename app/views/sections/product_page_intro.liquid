@@ -1,4 +1,4 @@
----
+--- 
 {
   "name": "Product page intro",
   "class": "",
@@ -287,7 +287,7 @@
 
         {% case block.type %}
           {% when 'breadcrumb'%}
-            <div class="{{css_cell}}">
+            <div class="block {{css_cell}}">
               <nav aria-label="breadcrumb" class="d-none d-sm-block">
                 <ol class="breadcrumb pl-0 d-none d-sm-inline-block">
                   <li class="breadcrumb-item d-inline-block ">
@@ -318,7 +318,7 @@
               </div>
             </div>
           {% when 'product_title' %}
-            <div class="{{css_cell}}">
+            <div class="block {{css_cell}}">
               <div>
                 {% if block.settings.title_link %}
                   <a class="text-center text-md-left h2" href="{{variant.url_key  | prepend: url_base}}">
@@ -353,17 +353,17 @@
               </div>
             </div>
           {% when 'product_image' %}
-            <div class="{{css_cell}}">
+            <div class="block {{css_cell}}">
               <div class="text-center">
                 {% include 'product_images' with product: variant, thumb_position: block.settings.thumb_position %}
               </div>
             </div>
           {% when 'product_short_description' %}
-            <div class="{{css_cell}}">
+            <div class="block {{css_cell}}">
               {{variant.short_description}}
             </div>
           {% when 'add_to_cart' %}
-            <div class="{{css_cell}}">
+            <div class="block {{css_cell}}">
               <div class="bg-light  pt-3">
                 {%if variant.price.discount > 0%}
                 <div class="pb-1">

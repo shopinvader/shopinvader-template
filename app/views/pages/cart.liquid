@@ -25,6 +25,19 @@ sections_content: >
             "content": "<h3>My Shopping cart</h3>"
           }
         },
+        
+        {
+          "type": "cart_summary",
+          "settings": {
+            "cell_size": "sm",
+            "title": "My order",
+            "display_lines": true,
+            "theme": "none",
+            "display_border": false,
+            "display_submit": true
+
+          }
+        },
         {
           "type": "cart_lines",
           "settings": {
@@ -33,18 +46,6 @@ sections_content: >
             "display_border": true,
             "table_layout": "card",
             "readonly": false
-          }
-        },
-        {
-          "type": "cart_summary",
-          "settings": {
-            "cell_size": "sm",
-            "title": "My order",
-            "display_lines": false,
-            "theme": "none",
-            "display_border": false,
-            "display_submit": true
-
           }
         }       
       ]
@@ -113,62 +114,3 @@ sections_dropzone_content: >
   {% endif %}
   {% sections_dropzone %}
 {% endblock %}
-{% comment %}
-
-
-
-<div data-shopinvader-container id="cart-content">
-  <div class="row"  id="cart-index">
-    
-    <div class="col-lg-8 col-xl-9" >
-
-      {% include 'cart_list' with cart: store.cart %}
-    </div>
-    <div class="col-lg-4 col-xl-3 mb-4">
-      {% include 'cart_total' with cart: store.cart %}
-      <form method="post" action="invader/cart/update"  id="cart_update_form">
-        <input type="hidden" name="invader_success_url" value="{% path_to cart_login %}" />
-        <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
-        <input type="hidden" name="step[current]" value="{{ page.handle }}">
-        <input type="hidden" name="step[next]" value="cart_login">
-        <button class="btn btn-primary btn-lg  btn-block btn-block-xs" type="submit">
-          {% editable_text checkout_button, fixed: true, rows: 1 %}
-            Continuer <i class="fa fa-angle-right"></i>
-          {% endeditable_text %}
-        </button>
-      </form>
-    </div>
-    <div class="col-lg-9 col-xl-12">
-      {% editable_text "cart_help", hint: "Cart help message" %}
-      <strong>Questions? We can help</strong>
-      <div class="">
-        Online Customer Support: <br>
-        +33 (0)1 00 00 00 00
-        <br><br>
-        Email : contact@shopinvader.yeah
-      </div>
-      {% endeditable_text %}
-    </div>
-  </div>
-  <div class="bottom-nav text-center d-md-none">
-    <form method="post" action="invader/cart/update"  id="cart_update_form">
-      <input type="hidden" name="invader_success_url" value="{% path_to cart_login %}" />
-      <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
-      <input type="hidden" name="step[current]" value="{{ page.handle }}">
-      <input type="hidden" name="step[next]" value="cart_login">
-      <div class="row">
-        <div class="col-6 pt-2">
-          {{'cart_total_total' | translate }} <b>
-          {% include 'currency' | value: store.cart.amount.total %}</b>
-        </div>
-        <div class="col-6 text-right">
-          <button class="btn btn-success " type="submit">
-            {{page.editable_elements.content.main.checkout_button}}
-          </button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-{% endcomment%}

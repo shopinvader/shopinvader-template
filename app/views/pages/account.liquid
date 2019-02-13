@@ -9,27 +9,35 @@ sections_content: >
     "account_login": {
       "settings": {
         "cells_align": "center",
-        "cells_direction": "flex-row"
+        "cells_margin": "lg",
+        "cells_direction": "row",
+        "header_content": "<h1>Welcome</h1>"
       },
       "blocks": [
         {
           "type": "card_login",
           "settings": {
-            "cell_size": "lg",
+            "cell_size": "md",
             "display_border": false,
-            "title": "<h3>Sign In</h3>",
-            "btn_label": "Sign In",
-            "theme": "light"
+            "display_shadow": false,
+            "title": "<h2>Sign In</h2>",
+            "btn_label": "SIGN IN",
+            "theme": "none",
+            "target_url": "account/orders",
+            "reset_url": "reset-password-request"
           }
         },
         {
           "type": "card_register",
           "settings": {
-            "cell_size": "lg",
-            "display_border": true,
-            "title": "<h3>Account Registration</h3>",
-            "btn_label": "Register",
-            "theme": "none"
+            "cell_size": "md",
+            "display_border": false,
+            "display_shadow": false,
+            "title": "<h2>New to shopinvader demo ? </h2>",
+            "content": "Do more with an account<ul><li>Check out faster</li><li>Save your shipping addresses</li><li>Keep track of your orders</li></ul>",
+            "btn_label": "CREATE AN ACCOUNT ",
+            "theme": "light",
+            "target_url": "account/register"
           }
         }
       ]
@@ -43,90 +51,10 @@ sections_content: >
     redirectTo('account_index');
   }
   {% endaction %}
-  <div class="container">
-    <div class="row">
-      <div class="col-12 mt-3">
-        <h1 class="h1">
-        {% editable_text title, inline: true %}
-          My Account
-        {% endeditable_text %}
-      </h1>
-      </div>
-    </div>
+  <div class="pt-2 pb-2">
     {% section 'account_login' %}
-    <div class="row row-same-height cart-login pb-4 mb-4">
-      <div class="col-12 col-md-6 pb-0 mb-0">
-        <div class="card shadow h-100">
-          <h2 class="h3 card-header bg-dark text-light text-center">
-            {% editable_text "sigin_account_title", label: "Sign in title", rows: 1 %}
-            Sign In
-            {% endeditable_text %}
-          </h2>
-          <div class="card-body">
-            <p>
-              {% editable_text "sigin_account_details", label: "Sign in details", format: "html" %}
-              To continue with your order, simply sign in below.
-              {% endeditable_text %}
-            </p>
-            <form action="{% path_to 'account_login' %}" method="post">
-              <input type="hidden" name="auth_action" value="sign_in" />
-              <input type="hidden" name="auth_content_type" value="customers" />
-              <input type="hidden" name="auth_id_field" value="email" />
-              <input type="hidden" name="auth_password_field" value="password" />
-              <input type="hidden" name="auth_callback" value="{% path_to account_index %}" />
-              <div class="form-group">
-                <label for="auth-email">{{ 'signin_email' | translate }}</label>
-                <input type="email" class="form-control" id="auth-email" placeholder="{{ 'signin_email' | translate }}" name="auth_id" value="{{ params.auth_id }}" required="required">
-              </div>
-              <div class="form-group">
-                <label for="auth-password">{{ 'signin_password' | translate }}</label>
-                <input type="password" class="form-control" id="auth-password" placeholder="{{ 'signin_password' | translate }}" name="auth_password" value="" required="required">
-                <a href="{% path_to reset_password_request %}" class="color-white">
-                  {{ 'signin_forgotpassword' | translate }}
-                </a>
-              </div>
-              <script src="https://www.google.com/recaptcha/api.js?render=6LduOIAUAAAAAIfEIpRUGSyJJZjewBVfFGoJExeN"></script>
-              <script>
-              grecaptcha.ready(function() {
-                  grecaptcha.execute('reCAPTCHA_site_key', {action: 'homepage'}).then(function(token) {
-                     
-                  });
-              });
-              </script>
-              <div class="text-center">{% if auth_wrong_credentials %}{{ 'signin_wrong' | translate }}{% endif %}</div>
-              <div class="text-right">
-                <button type="submit" class="btn btn-dark btn-lg pull-right"><i class="fa fa-lock"></i> {{ 'signin_signin' | translate }}</button>
-              </div>
-
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="card shadow  h-100">
-          <h2 class="h3 card-header bg-primary text-light text-center">
-            {% editable_text "sigin_new_title", label: "Create account title", rows: 1 %}
-              Account Registration
-            {% endeditable_text %}
-          </h2>
-          <div class="card-body">
-            {% editable_text "sigin_new_details", label: "Create account details", format: "html" %}
-              <div class="h3 text-primary"> Join the mission !</div>
-              <p>Do more with an account</p>
-              <ul>
-                <li>Check out faster</li>
-                <li>Save your shipping addresses</li>
-                <li>Keep track of your orders</li>
-              </ul>
-            {% endeditable_text %}
-            <div class="text-right">
-              <a href="{% path_to account_register%}" class="btn btn-primary  btn-lg">
-                {{ 'signin_create_account' | translate }} <i class="fa fa-angle-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  </div>
+  <div class="pt-2 pb-2">
+    {% sections_dropzone %}
   </div>
 {% endblock %}

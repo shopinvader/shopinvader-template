@@ -1,16 +1,48 @@
+$(document).ready(function () {
+	$(document).on('locomotive::section::load', 
+		function(event) {
+			console.log('load', event);
+			$section = $(event.target);
+			console.log($section);
+			$section.addClass('section-selected');
+		}
+	);
+	$(document).on('locomotive::section::select', 
+		function(event) {
+			console.log('event', event);
+			$section = $(event.target);
+			console.log($section);
+			$section.addClass('section-selected');
+		}
+	);
+	$(document).on('locomotive::section::deselect', 
+		function(event) {
+			console.log('event', event);
+			$section = $(event.target);
+			console.log($section);
+			$section.removeClass('section-selected');
+		}
+	);
 /*
-document.addEventListener('locomotive::section::select', event => {
-  const { sectionId } = event.detail;
-
-  const $section  = $(`#locomotive-section-${sectionId}`);
-  $('.locomotive-section').removeClass('section-selected');
-  $(`#locomotive-section-${sectionId}`).addClass('section-selected');
-  console.log('the user is viewing: ', $section);
+	document.addEventListener('locomotive::section::load', event => {
+	  console.log('load: ', event);
+	});
+	document.addEventListener('locomotive::section::unload', event => {
+	  console.log('unload: ', event);
+	});
+	document.addEventListener('locomotive::section::select', event => {
+	  console.log('select: ', event);
+	});
+	document.addEventListener('locomotive::section::deselect', event => {
+	  console.log('deselect: ', event);
+	});
+	document.addEventListener('locomotive::section::reorder', event => {
+	  console.log('reorder: ', event);
+	});
+	document.addEventListener('locomotive::section::block::select', event => {
+	  console.log('blocks select: ', event);
+	});
+	document.addEventListener('locomotive::section::block::load', event => {
+	  console.log('blocks load: ', event);
+	});*/
 });
-document.addEventListener('locomotive::block::load', event => {
-  const { sectionId, blockId } = event.detail;
-  const $section  = $(`#locomotive-section-${sectionId}`);
-  const $block    = $(`[data-locomotive-block="section-${sectionId}-block-${blockId}"]`, $section);
-
-  console.log('the user has updated: ', $block);
-});*/

@@ -147,7 +147,7 @@
 			{% if page.handle  == block.settings.step_id%}
 				{% assign css_muted = css_muted | append: " font-weight-bold" %}
 			{% endif %}
-			<a class="col-auto text-center {{css_cell}} {{css_muted}}" href="{% path_to block.settings.step_id %}">
+			<a class="block col-auto text-center {{css_cell}} {{css_muted}}" href="{% path_to block.settings.step_id %}">
 				{% if section.settings.display_number == true %}
 					<div class=" pr-2">
             {{block.settings.step_number}}

@@ -1,0 +1,28 @@
+<nav aria-label="breadcrumb" class="d-none d-sm-block">
+  <ol class="breadcrumb pl-0 d-none d-sm-inline-block">
+    <li class="breadcrumb-item d-inline-block ">
+      <a href="{% path_to 'home' %} " class="text-gray-darker">
+      {{ 'home' | translate }}
+      </a>
+    </li>
+  {% for category in variant.categories %}
+    <li class="breadcrumb-item d-inline-block" >
+      <a href="{{category.url_key | prepend: url_base}}" class="text-gray-darker">
+        {{category.name}}
+      </a>
+    </li>
+  {% endfor %}
+  {% if block.settings.display_product_name %}
+    <li class="breadcrumb-item active d-none d-xl-inline-block">
+      {{variant.model.name}}
+    </li>
+  {% endif %}
+  </ol>
+</nav>
+<div class="d-block d-sm-none  pt-4">
+  {% for category in variant.categories %}
+  <a href="{{category.url_key | prepend: url_base}}" class="btn btn-outline-dark btn-sm">
+    {{category.name}}
+  </a>
+  {% endfor %}
+</div>
