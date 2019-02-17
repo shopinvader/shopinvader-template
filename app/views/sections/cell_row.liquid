@@ -65,8 +65,14 @@
             {"label": "Small","value": "sm"},
             {"label": "Medium", "value": "md"},
             {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"}
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
           ]
+        },
+        {
+          "label": "Child of previous block",
+          "id": "is_child",
+          "type": "checkbox"
         },
         {
           "label": "Margin",
@@ -104,8 +110,15 @@
             {"label": "Extra-small","value": "xs"},
             {"label": "Small","value": "sm"},
             {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"}
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
           ]
+        },
+        {
+          "label": "Child of previous block",
+          "id": "is_child",
+          "type": "checkbox"
         },
         {
           "label": "Margin",
@@ -213,7 +226,7 @@
   {% when "xl" %}
     {% assign css_margin_row = "mt-4 mb-4 pt-4 pb-4"%}
 {% endcase %}
-
+{% assign has_child = false %}
 <div class="container-fluid">
   <div class="row {{css_banner}}">
 
@@ -221,39 +234,57 @@
       <div class="container {{css_margin_row}}">
         <div class="row justify-content-md-{{section.settings.cells_align}}">
           {% for cell in section.blocks %}
-          {% case cell.settings.cell_size %}
-            {% when 'xs' %}
-              {% assign css_cell = "col-12 col-sm-6 col-lg-2 "%}
-            {% when 'sm' %}
-              {% assign css_cell = "col-12 col-sm-6 col-lg-4 "%}
-            {% when 'md' %}
-              {% assign css_cell = "col-12 col-sm-6 col-lg-6 "%}
-            {% when 'lg' %}
-              {% assign css_cell = "col-12 col-sm-6 col-lg-8 "%}
-            {% when 'xl' %}
-              {% assign css_cell = "col-12"%}
+            {% assign next_block = section.blocks[forloop.index] %}
+            {% case cell.settings.cell_size %}
+              {% when 'auto' %}
+                {% assign css_cell = "col-auto "%}
+              {% when 'xs' %}
+                {% assign css_cell = "col-12 col-sm-6 col-lg-2 "%}
+              {% when 'sm' %}
+                {% assign css_cell = "col-12 col-sm-6 col-lg-4 "%}
+              {% when 'md' %}
+                {% assign css_cell = "col-12 col-sm-6 col-lg-6 "%}
+              {% when 'lg' %}
+                {% assign css_cell = "col-12 col-sm-6 col-lg-8 "%}
+              {% when 'xl' %}
+                {% assign css_cell = "col-12 col-sm-6 col-lg-10 "%}
+              {% else %}
+                {% assign css_cell = "col-12"%}
+            {% endcase %}
+            {% case cell.settings.margin %}
+              {% when "sm" %}
+                {% assign css_margin_cell = " mt-1 mb-1" %}
+              {% when "md" %}
+                {% assign css_margin_cell = " mt-2 mb-2  pt-2 pb-2"%}
+              {% when "lg" %}
+                {% assign css_margin_cell = " mt-3 mb-3  pt-3 pb-3"%}
+              {% when "xl" %}
+                {% assign css_margin_cell = " mt-4 mb-4 pt-4 pb-4"%}
+            {% endcase %}
+            {% assign css_cell = css_cell | append : css_margin_cell %}
+            <div class="block {{css_cell}}">
+              {% include 'block_debug' %}
+              {% if cell.type == "cell_image" %}
+                <img src="{{cell.settings.picture}}" alt="{{cell.settings.picture_alt}}" class="img-fluid">
+              {% else %}
+                {{ cell.settings.content }}
+              {% endif %}
+
+            {% if next_block.settings.is_child == true %}
+              {% if has_child ==  false%}
+                {% assign has_child = true %}
+                <div class="row subchild">
+              {% else %}
+                </div>
+              {% endif %}
             {% else %}
-              {% assign css_cell = "col-auto"%}
-          {% endcase %}
-          {% case cell.settings.margin %}
-            {% when "sm" %}
-              {% assign css_margin_cell = "mt-1 mb-1" %}
-            {% when "md" %}
-              {% assign css_margin_cell = "mt-2 mb-2  pt-2 pb-2"%}
-            {% when "lg" %}
-              {% assign css_margin_cell = "mt-3 mb-3  pt-3 pb-3"%}
-            {% when "xl" %}
-              {% assign css_margin_cell = "mt-4 mb-4 pt-4 pb-4"%}
-          {% endcase %}
-          {% assign css_cell = css_cell | append : css_margin_cell %}
-          <div class="block {{css_cell}}">
-            {% include 'block_debug' %}
-            {% if cell.type == "cell_image" %}
-              <img src="{{cell.settings.picture}}" alt="{{cell.settings.picture_alt}}" class="img-fluid">
-            {% else %}
-              {{ cell.settings.content }}
+              {% if has_child ==  true%}
+                {% assign has_child = false %}
+                  </div>
+                </div>
+              {% endif %}
+              </div>
             {% endif %}
-          </div>
           {%endfor%}
         </div>
       </div>

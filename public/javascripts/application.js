@@ -1,3 +1,8 @@
+$(window).on('beforeunload', function(){
+  $('main, footer').animate({
+    opacity: 0,
+  }, 300);
+});
 $(document).ready(function () {
   $("[data-toggle=nav-sm-display]").click(function(){
 

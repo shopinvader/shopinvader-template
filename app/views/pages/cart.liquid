@@ -10,7 +10,7 @@ sections_content: >
   {
     "cart": {
       "settings": {
-        "large_size": false,
+        "large_size": true,
         "submit_label": "Continue",
         "cart_current_step": "cart_index",
         "cart_next_step": "cart_login",
@@ -25,7 +25,16 @@ sections_content: >
             "content": "<h3>My Shopping cart</h3>"
           }
         },
-        
+        {
+          "type": "cart_lines",
+          "settings": {
+            "cell_size": "lg",
+            "theme": "none",
+            "display_border": true,
+            "table_layout": "card",
+            "readonly": false
+          }
+        },
         {
           "type": "cart_summary",
           "settings": {
@@ -37,17 +46,7 @@ sections_content: >
             "display_submit": true
 
           }
-        },
-        {
-          "type": "cart_lines",
-          "settings": {
-            "cell_size": "lg",
-            "theme": "none",
-            "display_border": true,
-            "table_layout": "card",
-            "readonly": false
-          }
-        }       
+        } 
       ]
     }
   }

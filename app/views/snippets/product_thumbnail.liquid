@@ -39,7 +39,7 @@
         <small>{{ 'product_price_from' | translate }}</small>
       </span>
       <strong class="h5">
-        <span class="font-weight-bold {%if product.price.discount > 0%}text-warning{%else%}text-dark{% endif %}">
+        <span class="font-weight-bold {% if product.price.discount > 0%}text-warning{% else %}text-dark{% endif %}">
           {% include 'currency' | value: product.price.value %}
         </span>
         {% if product.price.discount > 0 %}
@@ -90,9 +90,7 @@
     </a>
     <div class="card-text">
       <a href="{{product.categories.last.url_key  | prepend: url_base }}" class="text-dark"><u>{{product.categories.last.name}}</u></a>
-      {% if product.brand.name%}
-        - <a href="#" class="text-underline text-dark"><u>{{product.brand.name}}</u></a>
-      {% endif %}
+      
     </div>
     {% if product.variant_count > 0%}
     <div class="pt-2 pb-2">

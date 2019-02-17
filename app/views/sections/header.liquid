@@ -7,166 +7,66 @@
   "keep_icon": true,
   "id": "header",
   "settings": [
-    {
-      "label": "Theme color",
-      "id": "theme_color",
-      "type": "select",
-      "keep_name": true,
-      "options": [
-        {"label": "Light","value": "light"},
-        {"label": "Dark","value": "dark"},
-        {"label": "Transparent","value": "transparent"}
-      ]
-    },
-    {
-      "label": "Cells Alignment",
-      "id": "cells_align",
-      "type": "select",
-      "options": [
-        {"label": "Left","value": "start"},
-        {"label": "Right", "value": "end"},
-        {"label": "Center","value": "center"},
-        {"label": "Between", "value": "between"},
-        {"label": "Around", "value": "around"}
-      ]
-    },
+    
     {
       "label": "Fixed header",
       "id": "fixed_position",
       "type": "checkbox"
-    },
-    {
-      "label": "Wide",
-      "id": "large_size",
-      "type": "checkbox"
-    },
-    {
-      "label": "Message",
-      "id": "text",
-      "type": "text"
     }
   ],
   "blocks": [
+    //Brand Logo
     {
       "name": "Brand Logo",
       "type": "logo",
       "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-Large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Force alignment",
-          "id": "align_block",
-          "type": "radio",
-          "keep_name": true,
-          "options": [
-            {"label": "None", "value": "auto"},
-            {"label": "Left", "value": "left"},
-            {"label": "Right", "value": "right"}
-            
-          ]
-        },
         {
           "label": "Align image",
           "id": "align_img",
           "type": "select",
           "keep_name": true,
           "options": [
-            {"label": "left","value": "text-left"},
-            {"label": "right","value": "text-right"},
-            {"label": "center", "value": "text-center"}
+            {"label": "Left","value": "text-left"},
+            {"label": "Right","value": "text-right"},
+            {"label": "Center", "value": "text-center"}
           ]
         },
         {
           "label": "Brand logo",
           "id": "picture",
           "type": "image_picker"
+        },
+        {
+          "label": "Stretch",
+          "id": "stretch",
+          "type": "checkbox"
         }
       ]
     },
+    //Text
     {
       "name": "Text",
       "type": "text",
       "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-Large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Force alignment",
-          "id": "align_block",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "None", "value": "auto"},
-            {"label": "Left", "value": "left"},
-            {"label": "Right", "value": "right"}
-            
-          ]
-        },
         {
           "label": "Content",
           "id": "content",
           "type": "text",
           "html": true,
           "nb_rows": 10
+        },
+        {
+          "label": "Stretch",
+          "id": "stretch",
+          "type": "checkbox"
         }
       ]
     },
+    //Cart icon
     {
       "name": "Cart icon",
       "type": "cart_icon",
       "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-Large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Force alignment",
-          "id": "align_block",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "None", "value": "auto"},
-            {"label": "Left", "value": "left"},
-            {"label": "Right", "value": "right"}
-            
-          ]
-        },
         {
           "label": "side icon",
           "id": "inline_display",
@@ -189,37 +89,11 @@
         }
       ]
     },
+    //Link
     {
       "name": "Link",
       "type": "link_icon",
       "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-Large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Force alignment",
-          "id": "align_block",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "None", "value": "auto"},
-            {"label": "Left", "value": "left"},
-            {"label": "Right", "value": "right"}
-            
-          ]
-        },
         {
           "label": "side icon",
           "id": "inline_display",
@@ -247,37 +121,11 @@
         }
       ]
     },
+    //Account icon
     {
       "name": "Account icon",
       "type": "user_icon",
       "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-Large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Force alignment",
-          "id": "align_block",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "None", "value": "auto"},
-            {"label": "Left", "value": "left"},
-            {"label": "Right", "value": "right"}
-            
-          ]
-        },
         {
           "label": "side icon",
           "id": "inline_display",
@@ -300,26 +148,12 @@
         }
       ]
     },
+    //Search
     {
       "name": "Search",
       "force_name": true,
       "type": "search",
       "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-Large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
         {
           "label": "Force alignment",
           "id": "align_block",
@@ -356,47 +190,71 @@
         }
       ]
     },
+    //Categories navigation
     {
       "name": "Categories navigation",
       "force_name": true,
       "type": "navigation",
       "settings": [
         {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-Large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
+          "label": "Stretch",
+          "id": "stretch",
+          "type": "checkbox"
+        }
+      ]
+    },
+    //Language selector
+    {
+      "name": "Language selector",
+      "force_name": true,
+      "type": "local_selector",
+      "settings": [
         {
-          "label": "Force alignment",
-          "id": "align_block",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "None", "value": "auto"},
-            {"label": "Left", "value": "left"},
-            {"label": "Right", "value": "right"}
-            
-          ]
-        },
+          "label": "Stretch",
+          "id": "stretch",
+          "type": "checkbox"
+        }
+      ]
+    },
+    //Row
+    {
+      "name": "Row",
+      "force_name": true,
+      "type": "row",
+      "settings": [
         {
-          "label": "Item Align",
-          "id": "item_align",
+          "label": "Cells Alignment",
+          "id": "cells_align",
           "type": "select",
           "options": [
-            {"label": "Start","value": "start"},
+            {"label": "Left","value": "start"},
+            {"label": "Right", "value": "end"},
             {"label": "Center","value": "center"},
-            {"label": "End", "value": "end"}
+            {"label": "Between", "value": "between"},
+            {"label": "Around", "value": "around"}
           ]
+        },
+        {
+          "label": "Theme color",
+          "id": "theme_color",
+          "type": "select",
+          "keep_name": true,
+          "options": [
+            {"label": "Light","value": "light"},
+            {"label": "Dark","value": "dark"},
+            {"label": "None","value": "none"}
+          ]
+        },
+        {
+          "label": "Full width",
+          "id": "full_width",
+          "type": "checkbox"
+        },
+        {
+          "label": "Margin",
+          "id": "margin",
+          "type": "checkbox",
+          "default": true
         }
       ]
     }
@@ -411,327 +269,360 @@
     },
     "blocks": [
     {
+      "type": "row",
+      "settings": {
+        "cells_align": "center",
+        "theme_color": "dark",
+        "full_width": true,
+        "margin": true
+      }
+    },
+    {
+      "type": "text",
+      "settings": {
+        "content": "<center><i class='fa fa-gift'></i> Save 10% with voucher code <b>SAVE10</b></center>",
+        "stretch": true
+      }
+    },
+    {
+      "type": "local_selector",
+      "settings": {
+      }
+    },
+    {
+      "type": "row",
+      "settings": {
+        "cells_align": "between",
+        "theme_color": "none",
+        "full_width": true,
+        "vertical_align": "center"
+      }
+    },
+    {
       "type": "logo",
       "settings": {
         "picture": "/images/shop-logo.png",
         "align_block": "right",
-        "cell_size": "md",
-        "align_img": "center"
-      }
-    },
-    
-    
-    {
-      "type": "user_icon",
-      "settings": {
-        "icon": "/images/user-icon.png",
-        "align_block": "auto",
-        "cell_size": "auto",
-        "inline_display":  true,
-        "label": "Sign-in",
-        "display_sm_icon": false
-      }
-    },
-    {
-      "type": "cart_icon",
-      "settings": {
-        "icon": "/images/cart-icon.png",
-        "align_block": "auto",
-        "cell_size": "auto",
-        "inline_display":  true,
-        "label": "My cart",
-        "display_sm_icon": false
-      }
-    },
-    {
-      "type": "link_icon",
-      "settings": {
-        "icon": "/images/cart-icon.png",
-        "align_block": "auto",
-        "cell_size": "auto",
-        "inline_display":  true,
-        "label": "Help",
-        "display_sm_icon": false
-      }
-    },
-    {
-      "type": "navigation",
-      "settings": {
-        "cell_size": "lg",
-        "align_block": "left",
-        "item_align": "center",
-        "link_url": ""
+        "align_img": "center",
+        "stretch": true
       }
     },
     {
       "type": "search",
       "settings": {
         "label": "Search product...",
-        "align_block": "auto",
-        "cell_size": "auto",
         "display_sm_icon": true,
         "icon": "/images/search-icon.png"
-        
+      }
+    },
+    {
+      "type": "user_icon",
+      "settings": {
+        "icon": "/images/user-icon.png",
+        "inline_display":  true,
+        "label": "Sign-in",
+        "display_sm_icon": false
+      }
+    },
+    {
+      "type": "row",
+      "settings": {
+        "cells_align": "start",
+        "theme_color": "light",
+        "full_width": true,
+        "vertical_align": "center"
+      }
+    },
+    {
+      "type": "navigation",
+      "settings": {
+        "link_url": ""
+      }
+    },
+    {
+      "type": "cart_icon",
+      "settings": {
+        "icon": "/images/cart-icon.png",
+        "inline_display":  true,
+        "label": "My cart",
+        "display_sm_icon": false
       }
     }
+    
     ]
   }
 }
 ---
 {% assign category_html = ""%}
+
 <div class="header {% if section.settings.fixed_position %}fixed{%endif%}  header-theme-{{section.settings.theme_color}}">
-  {% if section.settings.message != ''%}
-  <div class="header-message  pt-2 pb-2">
-    {{section.settings.message}}
-  </div>
-  {% endif%}
-  <div class="container{% if section.settings.large_size %}-fluid{%endif%}">
-    <div class="row  align-items-center justify-content-{{section.settings.cells_align}}">
+  <div class="container-fluid">
+    <div class="row align-items-center justify-content-{{section.settings.cells_align}}">
       <div class="col-auto header-block header-block-menu d-lg-none order-1">
         <a href="#nav-sm" class="text-primary text-left d-md-none" data-toggle="nav-sm-display" data-target="#nav-sm">
           <i class="fas fa-bars"></i>
         </a>
       </div>
       {% for block in section.blocks %}
-        {% case block.settings.cell_size %}
-          {% when 'xs' %}
-            {% assign css_cell = "col-auto col-lg-2 col-xl-1 "%}
-          {% when 'sm' %}
-            {% assign css_cell = "col-auto col-lg-3 col-xl-26 "%}
-          {% when 'md' %}
-            {% assign css_cell = "col-auto col-lg-6 col-xl-4 "%}
-          {% when 'lg' %}
-            {% assign css_cell = "col-auto col-lg-8 col-xl-6 "%}
-          {% when 'xl' %}
-            {% assign css_cell = "col-auto col-lg-10 col-xl-10 "%}
-          {% when 'full' %}
-            {% assign css_cell = "col-12 "%}
-          {% when 'auto' %}
-            {% assign css_cell = "col-auto"%}
-        {% endcase %}
+        {% if block.type == 'row'%}
+          {% assign vertical_align_row = block.settings.vertical_align %}
+          {% assign cell_align_row = ' justify-content-' | append: block.settings.cells_align %}
+          {% assign css_container = "container " %}
+          {% if block.settings.full_width == true %}
+            {% assign css_container = "container-fluid" %}
+          {% endif %}
+          {% if block.settings.margin == true %}
+            {% assign css_container = css_container | append: " pt-2 pb-2" %}
+          {% endif %}
+          {% assign css_container = css_container | append: cell_align_row %}
+            </div>
+          </div>
+          <div class="block block-row  {{css_container}} theme-{{block.settings.theme_color}}">
+            <div class="row  align-items-{{block.settings.vertical_align}}">
+        {% else %}
 
-        {% case block.settings.align_block %}
-          {% when 'auto' %}
-            {% assign css_cell = css_cell | append: " "%}
-          {% when 'left' %}
-            {% assign css_cell = css_cell | append: " ml-auto "%}
-          {% when 'right' %}
-            {% assign css_cell = css_cell | append: " mr-auto "%}
-        {% endcase %}
-        {% if block.type == "navigation" or block.settings.display_sm_icon == false%}
-          {% assign css_cell = css_cell | append:" d-none d-md-block"%}
-        {% endif %}
-        {% assign display_sm_icon_css = "" %}
-        {% if block.settings.display_sm_icon == false %}
-          {% assign display_sm_icon_css = "d-none d-md-flex" %}
-        {% endif %}
-        
-        <div class="header-block header-block-{{ block.type }} {{css_cell}} block">
-          {% include 'block_debug' %}
-          {% case block.type %}
-            {% when "text" %}
-              {{ block.settings.content }}
-            {% when "logo" %}
-              <div class="text-{{block.settings.align_img}}">
-                <a class="" href="{% path_to 'home' %}">
-                  <img src="{{ block.settings.picture }}" alt="{{ site.name }}" class="navbar-brand img-fluid"/>
-                </a>
-              </div>
-            {% when "link_icon" %}
-              <div class="{{display_sm_icon_css}}">
+          {% assign css_cell = "align-self-center col-auto"%}
+          {% if block.type == "navigation" or block.settings.display_sm_icon == false%}
+            {% assign css_cell = css_cell | append:" d-none d-md-block"%}
+          {% endif %}
+          {% if block.settings.stretch == true%}
+            {% assign css_cell = css_cell | append: " flex-grow-1"%}
+          {% endif %}
+
+          {% assign display_sm_icon_css = "" %}
+          {% if block.settings.display_sm_icon == false %}
+            {% assign display_sm_icon_css = "d-none d-md-flex" %}
+          {% endif %}
+          
+          <div class="header-block header-block-{{ block.type }} {{css_cell}} block">
+            {% include 'block_debug' %}
+            {% case block.type %}
+              {% when "text" %}
+                {{ block.settings.content }}
+              {% when "local_selector" %}
+                <div class="dropdown">
+                  <button class="btn btn-link dropdown-toggle text-uppercase" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{locale}}
+                  </button>
+                  <div class="dropdown-menu">
+                    {% for locale_nav in locales %}
+                      <a class="dropdown-item text-uppercase" href="{% path_to index, locale: locale_nav%}">
+                        {{locale_nav}}
+                      </a>
+                    {%endfor%}
+                  </div>
+                </div>
+              {% when "logo" %}
+                <div class="{{block.settings.align_img}}">
+                  <a class="" href="{% path_to 'home' %}">
+                    <img src="{{ block.settings.picture }}" alt="{{ site.name }}" class="navbar-brand img-fluid"/>
+                  </a>
+                </div>
+              {% when "link_icon" %}
+                <div class="{{display_sm_icon_css}}">
+                  {% assign css_icon = "" %}
+                  {% if block.settings.inline_display %}
+                    {% assign css_icon = "icon-inline" %}
+                  {% endif %}
+                  <div class="icon {{ css_icon }}">
+                    <a class="icon-link" href="{{ block.settings.link_url }}">
+                      <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
+                      <span class="icon-label d-none d-md-flex">{{ block.settings.label }}</span>
+                    </a>
+                  </div>
+                </div>
+                {% capture 'cart_icon_sm' %}
+                  <a class="d-flex align-items-center text-light" href="{{ block.settings.link_url }}">
+                    <div class=" ">
+                      <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}" class="img-fluid p-0 w-50"/>
+                    </div>
+                    <div class="">
+                      {{ block.settings.label }}
+                    </div>
+                  </a>
+                {% endcapture %}
+              {% when "cart_icon" %}
+                <div class="{{display_sm_icon_css}}">
+                  {% assign css_icon = "" %}
+                  {% if block.settings.inline_display %}
+                    {% assign css_icon = "icon-inline" %}
+                  {% endif %}
+                  <div class="icon {{ css_icon }}">
+                    <a class="icon-link" href="{% path_to 'cart_index'%}">
+                      <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
+                      <span class="icon-label d-none d-md-flex">{{ block.settings.label }}</span>
+                    </a>
+                  </div>
+                </div>
+                {% capture 'cart_icon_sm' %}
+                  <a class="d-flex align-items-center text-light" href="{% path_to cart %}">
+                    <div class=" ">
+                      <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}" class="img-fluid p-0 w-50"/>
+                    </div>
+                    <div class="">
+                      {{ block.settings.label }}
+                    </div>
+                  </a>
+                {% endcapture %}
+              {% when "user_icon" %}
                 {% assign css_icon = "" %}
                 {% if block.settings.inline_display %}
                   {% assign css_icon = "icon-inline" %}
                 {% endif %}
-                <div class="icon {{ css_icon }}">
-                  <a class="icon-link" href="{{ block.settings.link_url }}">
-                    <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
-                    <span class="icon-label d-none d-md-flex">{{ block.settings.label }}</span>
-                  </a>
+                <div class="{{display_sm_icon_css}}">
+                  <div class="icon {{ css_icon }} ">
+                    <a class="icon-link" href="{% path_to 'account_index'%}">
+                      <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
+                      <span class="icon-label d-none d-md-block">
+                        {% if current_customer %}
+                          {{ current_customer.name }}
+                        {% else %}
+                          {{ block.settings.label }}
+                        {% endif %}
+                      </span>
+                    </a>
+                    {% include 'header_icon_account' %}
+                  </div>
                 </div>
-              </div>
-              {% capture 'cart_icon_sm' %}
-                <a class="d-flex align-items-center text-light" href="{{ block.settings.link_url }}">
-                  <div class=" ">
-                    <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}" class="img-fluid p-0 w-50"/>
-                  </div>
-                  <div class="">
-                    {{ block.settings.label }}
-                  </div>
-                </a>
-              {% endcapture %}
-            {% when "cart_icon" %}
-              <div class="{{display_sm_icon_css}}">
-                {% assign css_icon = "" %}
-                {% if block.settings.inline_display %}
-                  {% assign css_icon = "icon-inline" %}
-                {% endif %}
-                <div class="icon {{ css_icon }}">
-                  <a class="icon-link" href="{% path_to 'cart_index'%}">
-                    <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
-                    <span class="icon-label d-none d-md-flex">{{ block.settings.label }}</span>
-                  </a>
-                </div>
-              </div>
-              {% capture 'cart_icon_sm' %}
-                <a class="d-flex align-items-center text-light" href="{% path_to cart %}">
-                  <div class=" ">
-                    <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}" class="img-fluid p-0 w-50"/>
-                  </div>
-                  <div class="">
-                    {{ block.settings.label }}
-                  </div>
-                </a>
-              {% endcapture %}
-            {% when "user_icon" %}
-              {% assign css_icon = "" %}
-              {% if block.settings.inline_display %}
-                {% assign css_icon = "icon-inline" %}
-              {% endif %}
-              <div class="{{display_sm_icon_css}}">
-                <div class="icon {{ css_icon }} ">
-                  <a class="icon-link" href="{% path_to 'account_index'%}">
-                    <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
-                    <span class="icon-label d-none d-md-block">
+                {% capture 'user_icon_sm%}
+                  <a class="d-flex align-items-center text-light" href="{% path_to account%}">
+                    <div class=" ">
+                      <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="img-fluid p-0 w-50"/>
+                    </div>
+                    <div class="">
                       {% if current_customer %}
                         {{ current_customer.name }}
                       {% else %}
                         {{ block.settings.label }}
                       {% endif %}
-                    </span>
+                    </div>
                   </a>
-                  {% include 'header_icon_account' %}
-                </div>
-              </div>
-              {% capture 'user_icon_sm%}
-                <a class="d-flex align-items-center text-light" href="{% path_to account%}">
-                  <div class=" ">
-                    <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="img-fluid p-0 w-50"/>
-                  </div>
-                  <div class="">
-                    {% if current_customer %}
-                      {{ current_customer.name }}
-                    {% else %}
-                      {{ block.settings.label }}
-                    {% endif %}
-                  </div>
-                </a>
-              {% endcapture %}
-            {% when "navigation" %}
-              <div class="w-100 header-block-navigation">
-                <ul class="list-inline m-0 d-flex justify-content-{{block.settings.item_align}} row">
-                  {% for category_level1 in store.categories %}
-                    {% if category_level1.level == 0 %}
-                      <li class="list-inline-item pr-3 pl-3 pt-3 pb-3 col-12 col-md-auto">
-                        <a href="{{category.url_key  | prepend: url_base }}" class="font-weight-bold text-dark">
-                          {{ category_level1.name}}
-                        </a>
-                        <div class="container p-3 p-md-5 list-inline-dropdown">
-                          <div class="row">
-                            <div class="col-12 col-md-8">
-                              <div class="h3 text-uppercase pb-3 d-none d-md-block">{{ category_level1.name}}</div>
-                              <ul class="row p-0">
-                                {% for category_level2 in category_level1.childs %}
-                                  <li class="col-12 col-md-4 pb-2 pt-2">
-                                    <div class="h4">{{ category_level2.name}}</div>
-                                    <ul class="p-0 m-0">
-                                    {% for category_level3 in category_level2.childs %}
-                                      <li class="pb-2 pt-2">
-                                        <a href="#">{{ category_level3.name }}</a>
+                {% endcapture %}
+              {% when "navigation" %}
+                <div class="w-100 header-block-navigation">
+                  <ul class="list-inline m-0 d-flex justify-content-{{block.settings.item_align}} row">
+                    {% for category_level1 in store.categories %}
+                      {% if category_level1.level == 0 %}
+                        <li class="list-inline-item pr-3 pl-3 pt-3 pb-3 col-12 col-md-auto">
+                          <a href="{{category_level1.url_key  | prepend: url_base }}" class="font-weight-bold text-dark">
+                            {{ category_level1.name}}
+                          </a>
+                          <div class="list-inline-dropdown {{cell_align_row}}">
+                            <div class="container p-3 p-md-5 list-inline-dropdown-content">
+                              <div class="row ">
+                                <div class="col-12 col-md-8">
+                                  <div class="h3 text-uppercase pb-3 d-none d-md-block">{{ category_level1.name}}</div>
+                                  <ul class="row p-0">
+                                    {% for category_level2 in category_level1.childs %}
+                                      <li class="col-12 col-md-4 pb-2 pt-2">
+                                        <div >
+                                          <a href="{{ category_level2.url_key | prepend: url_base}}" class="h4">
+                                            {{ category_level2.name}}
+                                          </a>
+                                        </div>
+                                        <ul class="p-0 m-0">
+                                        {% for category_level3 in category_level2.childs %}
+                                          <li class="pb-2 pt-2">
+                                            <a href="{{ category_level3.url_key | prepend: url_base}}">
+                                              {{ category_level3.name }}
+                                            </a>
+                                          </li>
+                                        {% endfor %}
+                                        </ul>
                                       </li>
                                     {% endfor %}
-                                    </ul>
-                                  </li>
-                                {% endfor %}
-                              </ul>
-                            </div>
-                            <div class="col-12 col-md-4">
-                              {{ category_nav.images}}
+                                  </ul>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                  {{ category_nav.images}}
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </li>
-                    {% endif %}
-                  {% endfor%}
-                </ul>
-              </div>
-            {% when "search" %}
-              <div class="{{ css_cell }} header-block header-block-{{ block.type }} {{display_sm_icon_css}}">
-              <div class="icon d-md-none">
-                <a class="icon-link" href="{% path_to 'cart_index'%}">
-                  <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
-                  <span class="icon-label d-none d-md-flex">{{ block.settings.label }}</span>
-                </a>
-              </div>
+                        </li>
+                      {% endif %}
+                    {% endfor%}
+                  </ul>
+                </div>
+              {% when "search" %}
+                <div class="{{ css_cell }} header-block header-block-{{ block.type }} {{display_sm_icon_css}}">
+                <div class="icon d-md-none">
+                  <a class="icon-link" href="{% path_to 'cart_index'%}">
+                    <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
+                    <span class="icon-label d-none d-md-flex">{{ block.settings.label }}</span>
+                  </a>
+                </div>
 
-              <div class="d-none d-md-block w-100">
-                <form method="GET" action="{% path_to search %}" class="search-form d-flex flex-row pt-md-2 pt-md-3 " >
-                  <input type="text" class="form-control search-input" id="header-search-input" placeholder="{{ block.settings.placeholder }}" aria-label="{{ block.settings.placeholder }}" aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q" data-autosubmit>
-                  <button class="btn btn-link btn-lg p-0 search-icon" name="submit" type="submit">
-                    <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"/>
-                  </button>
-                </form>
-                <div class="small text-left pt-2 w-100">
-                <div class="font-weight-bold">
-                  {{ section.settings.baseline }}
-                </div>
-              </div>
-              </div>
-              <div id="header-search-hit" class="d-none search-result">
-                <div id="header-search-product-title">
+                <div class="d-none d-md-block w-100">
+                  <form method="GET" action="{% path_to search %}" class="search-form d-flex flex-row pt-md-2 pt-md-3 " >
+                    <input type="text" class="form-control search-input" id="header-search-input" placeholder="{{ block.settings.placeholder }}" aria-label="{{ block.settings.placeholder }}" aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q" data-autosubmit>
+                    <button class="btn btn-link btn-lg p-0 search-icon" name="submit" type="submit">
+                      <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"/>
+                    </button>
+                  </form>
+                  <div class="small text-left pt-2 w-100">
                   <div class="font-weight-bold">
-                    {{ 'search_product' | translate }}
-                    <span class="nb_hits"></span>
+                    {{ section.settings.baseline }}
                   </div>
                 </div>
-                <div id="header-search-product-link">
-                  <div class="row">
-                    <div class="col-12 text-right pt-2 ">
-                      <a data-href="{% path_to search %}" href="#" class="btn btn-primary btn-search-product">
-                        {{ 'search_product_all' | translate }}
-                        <span class="nb_hits"></span>
-                      </a>
+                </div>
+                <div id="header-search-hit" class="d-none search-result">
+                  <div id="header-search-product-title">
+                    <div class="font-weight-bold">
+                      {{ 'search_product' | translate }}
+                      <span class="nb_hits"></span>
+                    </div>
+                  </div>
+                  <div id="header-search-product-link">
+                    <div class="row">
+                      <div class="col-12 text-right pt-2 ">
+                        <a data-href="{% path_to search %}" href="#" class="btn btn-primary btn-search-product">
+                          {{ 'search_product_all' | translate }}
+                          <span class="nb_hits"></span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="header-search-product-empty">
+                    <div class="pt-3 pb-3">
+                      {{ 'search_product_empty' | translate }}
+                    </div>
+                  </div>
+                  <div id="header-search-category-title" class=" ">
+                    <div class="font-weight-bold">
+                      {{ 'search_category' | translate }}
+                    </div>
+                  </div>
+                  <div id="header-search-category-empty">
+                    <div class="pt-3 pb-3">
+                      {{ 'search_category_empty' | translate }}
+                    </div>
+                  </div>
+                  <div id="header-search-category-link">
+                    <div class="row">
+                      <div class="col-12 text-right ">
+                        <a href="#" class="btn btn-success">
+                          {{ 'search_category_all' | translate }}
+                          <span class="nb_hits"></span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="header-search-hit-content">
+                    <div class="row">
+                      <div class="aa-dataset-product col-12  col-md-8"></div>
+                      <div class="aa-dataset-category col-12 col-md-4 d-none d-md-block"></div>
                     </div>
                   </div>
                 </div>
-                <div id="header-search-product-empty">
-                  <div class="pt-3 pb-3">
-                    {{ 'search_product_empty' | translate }}
-                  </div>
-                </div>
-                <div id="header-search-category-title" class=" ">
-                  <div class="font-weight-bold">
-                    {{ 'search_category' | translate }}
-                  </div>
-                </div>
-                <div id="header-search-category-empty">
-                  <div class="pt-3 pb-3">
-                    {{ 'search_category_empty' | translate }}
-                  </div>
-                </div>
-                <div id="header-search-category-link">
-                  <div class="row">
-                    <div class="col-12 text-right ">
-                      <a href="#" class="btn btn-success">
-                        {{ 'search_category_all' | translate }}
-                        <span class="nb_hits"></span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div id="header-search-hit-content">
-                  <div class="row">
-                    <div class="aa-dataset-product col-12  col-md-8"></div>
-                    <div class="aa-dataset-category col-12 col-md-4 d-none d-md-block"></div>
-                  </div>
-                </div>
               </div>
-            </div>
-          {% endcase %}
-        </div>
+            {% endcase %}
+          </div>
+        {% endif %}
       {% endfor %}
     </div>
   </div>
+  {%comment%}
   <div class="header-category-sm "  >
     <ul class="list-inline" id="nav-sm">
       {% with_scope level: 0 %}
@@ -749,6 +640,7 @@
       
     </ul>
   </div>
+  {%endcomment%}
 </div>
 
 {%comment%}

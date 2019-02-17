@@ -11,6 +11,11 @@
           <div class="font-weight-bold">{{cart_line.product.model.name}}</div>
           <div class="small text-dark">{{cart_line.product.short_name}}</div>
           <div class="small text-dark">SKU {{cart_line.product.sku}}</div>
+          <div class="small text-dark">
+            <a href="{{ cart_line.product.url_key  | prepend: url_base }}">
+              {{ 'show_more' | translate }}
+            </a>
+          </div>
         </div>
         <div class="col-12 col-md-5">
           <div class="row text-right m-0 mt-3 mt-xl-0">

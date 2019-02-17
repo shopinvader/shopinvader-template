@@ -6,6 +6,11 @@
   "keep_icon": true,
   "settings": [
     {
+      "label": "Product SKU (not use for product page)",
+      "id": "sku",
+      "type": "text"
+    },
+    {
       "label": "Section Name",
       "id": "section_name",
       "type": "text"
@@ -16,7 +21,8 @@
       "type": "select",
       "options": [
         {"label": "None","value": "none"},
-        {"label": "Light","value": "light"}
+        {"label": "Light","value": "light"},
+        {"label": "Dark","value": "dark"}
       ]
     },
     {
@@ -48,12 +54,19 @@
           "id": "cell_size",
           "type": "select",
           "options": [
+            {"label": "Auto", "value": "auto"},
             {"label": "Extra-small","value": "xs"},
             {"label": "Small","value": "sm"},
             {"label": "Medium", "value": "md"},
             {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"}
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
           ]
+        },
+        {
+          "label": "Child of previous block",
+          "id": "is_child",
+          "type": "checkbox"
         },
         {
           "label": "Display Add to cart section",
@@ -162,7 +175,8 @@
             {"label": "Small","value": "sm"},
             {"label": "Medium", "value": "md"},
             {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"}
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
           ]
         },
         {
@@ -195,7 +209,9 @@
             {"label": "Extra-small","value": "xs"},
             {"label": "Small","value": "sm"},
             {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"}
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
           ]
         },
         {
@@ -313,11 +329,13 @@
           "id": "cell_size",
           "type": "select",
           "options": [
+            {"label": "Auto", "value": "auto"},
             {"label": "Extra-small","value": "xs"},
             {"label": "Small","value": "sm"},
             {"label": "Medium", "value": "md"},
             {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"}
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
           ]
         },
         {
@@ -348,11 +366,13 @@
           "id": "cell_size",
           "type": "select",
           "options": [
+            {"label": "Auto", "value": "auto"},
             {"label": "Extra-small","value": "xs"},
             {"label": "Small","value": "sm"},
             {"label": "Medium", "value": "md"},
             {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"}
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
           ]
         },
         {
@@ -382,11 +402,13 @@
           "id": "cell_size",
           "type": "select",
           "options": [
+            {"label": "Auto", "value": "auto"},
             {"label": "Extra-small","value": "xs"},
             {"label": "Small","value": "sm"},
             {"label": "Medium", "value": "md"},
             {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"}
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
           ]
         },
         {
@@ -446,6 +468,20 @@
           "type": "text",
           "html": true
 
+        },
+        {
+          "label": "Cell Size",
+          "id": "cell_size",
+          "type": "select",
+          "options": [
+            {"label": "Auto", "value": "auto"},
+            {"label": "Extra-small","value": "xs"},
+            {"label": "Small","value": "sm"},
+            {"label": "Medium", "value": "md"},
+            {"label": "Large", "value": "lg"},
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
+          ]
         }
       ]
     },
@@ -459,11 +495,13 @@
           "id": "cell_size",
           "type": "select",
           "options": [
+            {"label": "Auto", "value": "auto"},
             {"label": "Extra-small","value": "xs"},
             {"label": "Small","value": "sm"},
             {"label": "Medium", "value": "md"},
             {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"}
+            {"label": "Extra-large", "value": "xl"},
+            {"label": "Full", "value": "full"}
           ]
         },
         {
@@ -563,12 +601,66 @@
         }
       }
     ]
-  }
+  },
+  "presets": [{
+    "name": "Products page",
+    "category": "Product",
+    "settings": {
+      "section_name" : "My product",
+      "sku" : "THELMA-GREY",
+      "theme_color": "none"
+    },
+    "blocks": [
+      {
+        "type": "product_image",
+        "settings": {
+          "thumb_position": "left",
+          "cell_size": "md",
+          "is_child": false
+        }
+      },
+      {
+        "type": "product_title",
+        "settings": {
+          "display_category_link": true,
+          "cell_size": "md"
+        }
+      },
+      {
+        "type": "product_data",
+        "settings": {
+          "data_type": "description",
+          "cell_size": "full",
+          "is_child": true
+        }
+      },
+      {
+        "type": "add_to_cart",
+        "settings": {
+          "display_add_to_cart": true,
+          "cell_size": "full",
+          "is_child": true
+        }
+      }
+    ]
+  }]
 }
 ---
+
+{% if section.settings.sku != ""%}
+  {% with_scope sku: [section.settings.sku]%}
+    {% assign variant = store.products | first%}
+  {% endwith_scope%}
+{% elsif product %}
+  {% assign variant = product%}
+{% endif %}
+
 {% if live_editing %}
   {% assign variant = session.live_editing_variant %}
 {% endif %}
+
+
+
 {% case section.settings.theme_color %}
   {% when "none" %}
     {% assign css_banner = "" %}
@@ -584,7 +676,7 @@
   {% when "light" %}
     {% assign css_card = "bg-light" %}
   {% when "dark" %}
-    {% assign css_card = "bg-dark"%}
+    {% assign css_card = "bg-dark text-light"%}
   {% when "white" %}
     {% assign css_card = "bg-white"%}
 {% endcase %}
@@ -597,6 +689,8 @@
         
         {% assign next_block = section.blocks[forloop.index] %}
         {% case block.settings.cell_size %}
+          {% when 'auto' %}
+            {% assign css_cell = "col-auto "%}
           {% when 'xs' %}
             {% assign css_cell = "col-12 col-sm-6 col-lg-2 "%}
           {% when 'sm' %}
@@ -605,23 +699,25 @@
             {% assign css_cell = "col-12 col-sm-6 col-lg-6 "%}
           {% when 'lg' %}
             {% assign css_cell = "col-12 col-sm-6 col-lg-8 "%}
+          {% when 'xl' %}
+            {% assign css_cell = "col-12 col-sm-6 col-lg-10 "%}
           {% else %}
             {% assign css_cell = "col-12"%}
         {% endcase %}
 
         {% case block.settings.theme_color %}
-        {% when "light" %}
-          {% assign css_cell = css_cell | append: " bg-light text-dark" %}
-        {% when "dark" %}
-          {% assign css_cell = css_cell | append: " text-light bg-dark"%}
-        {% when "primary" %}
-          {% assign css_cell = css_cell | append: " text-light bg-primary"%}
-        {% when "warning" %}
-          {% assign css_cell = css_cell | append: " text-dark bg-warning"%}
-        {% when "danger" %}
-          {% assign css_cell = css_cell | append: " text-light bg-danger"%}
-        {% when "info" %}
-          {% assign css_cell = css_cell | append: " text-light bg-info"%}
+          {% when "light" %}
+            {% assign css_cell = css_cell | append: " bg-light text-dark" %}
+          {% when "dark" %}
+            {% assign css_cell = css_cell | append: " text-light bg-dark"%}
+          {% when "primary" %}
+            {% assign css_cell = css_cell | append: " text-light bg-primary"%}
+          {% when "warning" %}
+            {% assign css_cell = css_cell | append: " text-dark bg-warning"%}
+          {% when "danger" %}
+            {% assign css_cell = css_cell | append: " text-light bg-danger"%}
+          {% when "info" %}
+            {% assign css_cell = css_cell | append: " text-light bg-info"%}
         {% endcase %}
         {% if block.settings.margin != false %}
           {% assign css_cell = css_cell | append: " pt-4 pb-4"%}

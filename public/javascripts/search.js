@@ -119,15 +119,17 @@ $(document).ready(function() {
   }
 
   var search = instantsearch(instantsearch_params );
-
-  search.addWidget(
-    instantsearch.widgets.stats({
-      container: '#search-stats',
-      templates: {
-        body: $('#stats-template').html()
-      }
-    })
-  );
+  if($('#search-stats').length > 0) {
+    search.addWidget(
+      instantsearch.widgets.stats({
+        container: '#search-stats',
+        templates: {
+          body: $('#stats-template').html()
+        }
+      })
+    );
+  }
+  
   var page_hits_count = [];
   default_item = true;
   for(i=6; i <=48; i=i+6) {
@@ -140,80 +142,83 @@ $(document).ready(function() {
     );
     default_item = false;
   }
-
-  search.addWidget(
-    instantsearch.widgets.hitsPerPageSelector({
-      container: '#hits-per-page-selector',
-      autoHideContainer: false,
-      items: page_hits_count,
-      cssClasses: {
-        select: " form-control"
-      }
-    })
-  );
-  search.addWidget(
-    instantsearch.widgets.hierarchicalMenu({
-      container: '#hierarchical-categories',
-      attributes: ['hierarchicalCategories.lvl0', 'hierarchicalCategories.lvl1', 'hierarchicalCategories.lvl2'],
-      autoHideContainer: false,
-      showParentLevel: true,
-      templates: {
-        header: "<h4 class='text-uppercase'>Category</h4>",
-      },
-    })
-  );
-
-  var filters = [];
-
-  filters.push({name:'hierarchicalCategories.lvl0', label: 'Category', url_key: 'categories'});
-  search.addWidget(
-    instantsearch.widgets.rangeSlider({
-      container: '#filter-sliderprice',
-      attributeName: 'price.'+default_role+'.value',
-      autoHideContainer: false,
-      searchForFacetValues: true,
-      templates: {
-        header: "<h4>"+algolia_params.translations.price+"</h4>",
-      },
-      collapsible: {
-        collapsed: false,
-      },
-
-      tooltips: {
-        format: function(rawValue) {
-          var number = new Number(rawValue);
-          return number.toLocaleString(
-            algolia_params.locale_code,
-            {
-              style: "currency",
-              currency: algolia_params.currency_code,
-            }
-          );
+  if($('#hits-per-page-selector').length > 0) {
+    search.addWidget(
+      instantsearch.widgets.hitsPerPageSelector({
+        container: '#hits-per-page-selector',
+        autoHideContainer: false,
+        items: page_hits_count,
+        cssClasses: {
+          select: " form-control"
         }
-      }
-    })
-  );
-  filters.push({name:'price.'+default_role+'.value', label: algolia_params.translations.price, 'url_key': 'price'});
+      })
+    );
+  }
+  var filters = [];
+  if($('#hierarchical-categories').length > 0) {
+    search.addWidget(
+      instantsearch.widgets.hierarchicalMenu({
+        container: '#hierarchical-categories',
+        attributes: ['hierarchicalCategories.lvl0', 'hierarchicalCategories.lvl1', 'hierarchicalCategories.lvl2'],
+        autoHideContainer: false,
+        showParentLevel: true,
+        templates: {
+          header: "<h4 class='text-uppercase'>Category</h4>",
+        },
+      })
+    );
+    filters.push({name:'hierarchicalCategories.lvl0', label: 'Category', url_key: 'categories'});
+  }
+  if($('#filter-sliderprice').length > 0) {
+    search.addWidget(
+      instantsearch.widgets.rangeSlider({
+        container: '#filter-sliderprice',
+        attributeName: 'price.'+default_role+'.value',
+        autoHideContainer: false,
+        searchForFacetValues: true,
+        templates: {
+          header: "<h4>"+algolia_params.translations.price+"</h4>",
+        },
+        collapsible: {
+          collapsed: false,
+        },
 
-  search.addWidget(
-    instantsearch.widgets.priceRanges({
-      container: '#filter-rangeprice',
-      attributeName: 'price.default.value',
-      labels: {
-        currency: algolia_params.currency_symbol+' ',
-        separator: '-',
+        tooltips: {
+          format: function(rawValue) {
+            var number = new Number(rawValue);
+            return number.toLocaleString(
+              algolia_params.locale_code,
+              {
+                style: "currency",
+                currency: algolia_params.currency_code,
+              }
+            );
+          }
+        }
+      })
+    );
+    filters.push({name:'price.'+default_role+'.value', label: algolia_params.translations.price, 'url_key': 'price'});
+  }
+  if($('#filter-rangeprice').length > 0) {
+    search.addWidget(
+      instantsearch.widgets.priceRanges({
+        container: '#filter-rangeprice',
+        attributeName: 'price.default.value',
+        labels: {
+          currency: algolia_params.currency_symbol+' ',
+          separator: '-',
 
-      },
-      autoHideContainer: false,
-      cssClasses: {
-        button: 'pr-1 btn btn-sm btn-outline-primary',
-        input: ' form-control',
-        form: ' input-group',
-        label: ' text-dark small',
-      }
-    })
-  );
-
+        },
+        autoHideContainer: false,
+        cssClasses: {
+          button: 'pr-1 btn btn-sm btn-outline-primary',
+          input: ' form-control',
+          form: ' input-group',
+          label: ' text-dark small',
+        }
+      })
+    );
+  }
 
   $('[data-filter-attr]').each(
   function(i, element){
@@ -274,55 +279,59 @@ $(document).ready(function() {
 
   var product_item_css = $('#search-result .product-col').first().attr('class');
   var product_root_css = $('#search-result .row').first().attr('class');
+  if($('#search-result').length > 0) {
+    search.addWidget(
+      instantsearch.widgets.hits({
+        container: '#search-result',
+        hitsPerPage: 18,
 
-  search.addWidget(
-    instantsearch.widgets.hits({
-      container: '#search-result',
-      hitsPerPage: 18,
-
-      templates: {
-        item: $('#product-hit-template').html(),
-        empty: algolia_params.translations.result_empty
-      },
-      cssClasses: {
-        root: product_root_css,
-        item: product_item_css,
-        empty: ' text-center m-4 p-4 lead  d-block'
-      },
-      transformData: {
-        item: function(item) {
-          item.last_categorie = item.categories[item.categories.length-1];
-          item.price = item.price[default_role];
-          if(item.variant_count > 0) {
-            item.varianted = true;
+        templates: {
+          item: $('#product-hit-template').html(),
+          empty: algolia_params.translations.result_empty
+        },
+        cssClasses: {
+          root: product_root_css,
+          item: product_item_css,
+          empty: ' text-center m-4 p-4 lead  d-block'
+        },
+        transformData: {
+          item: function(item) {
+            item.last_categorie = item.categories[item.categories.length-1];
+            item.price = item.price[default_role];
+            if(item.variant_count > 0) {
+              item.varianted = true;
+            }
+            else {
+              item.varianted = false;
+            }
+            return item;
           }
-          else {
-            item.varianted = false;
-          }
-          return item;
         }
-      }
-    })
-  );
-
-  search.addWidget(
-    instantsearch.widgets.pagination({
-      container: '#search-pagination-top',
-      cssClasses: {
-        root: 'pagination-block',
-        link: 'btn btn-default '
-      }
-    })
-  );
-  search.addWidget(
-    instantsearch.widgets.pagination({
-      container: '#search-pagination-bottom',
-      cssClasses: {
-        root: 'pagination-block',
-        link: 'btn btn-default '
-      }
-    })
-  );
+      })
+    );
+  }
+  if($('#search-pagination-top').length > 0) {
+    search.addWidget(
+      instantsearch.widgets.pagination({
+        container: '#search-pagination-top',
+        cssClasses: {
+          root: 'pagination-block',
+          link: 'btn btn-default '
+        }
+      })
+    );
+  }
+  if($('#search-pagination-bottom').length > 0) {
+    search.addWidget(
+      instantsearch.widgets.pagination({
+        container: '#search-pagination-bottom',
+        cssClasses: {
+          root: 'pagination-block',
+          link: 'btn btn-default '
+        }
+      })
+    );
+  }
   search.templatesConfig.helpers.emphasis = function(text, render) {
     return '<em>' + render(text) + '</em>';
   };

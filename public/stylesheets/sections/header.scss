@@ -26,7 +26,6 @@ body.nav-sm-display {
     transition: left 500ms ease-in;
     &.open-nav {
       left:100%;
-
     }
     li {
       &.list-inline-item:not(:last-child) {
@@ -75,10 +74,36 @@ body.nav-sm-display {
   }
 }
 .locomotive-section[data-locomotive-section-type="header"] {
-  border-bottom:  1px solid $border-color;
-  padding-bottom: 0.5rem;
+
+  p {
+    margin-bottom: 0;
+  }
 
   .header  {
+    .block-row:last-child {
+       border-bottom:  1px solid $border-color;
+    }
+
+    & > .container-fluid {
+      //border: 1px solid red;
+      &:last-child {
+       
+      }
+    }
+    .theme-dark {
+      background-color: theme-color('dark');
+      color: $white !important;
+      a, .icon-label {
+        color: $white !important;
+      }
+    }
+    .theme-light {
+      background-color: theme-color('light');
+      color: theme-color('dark') !important;
+      a, .icon-label {
+        color: theme-color('dark') !important;
+      }
+    }
     //border: 1px solid red;
     & .header-block {
       //border: 1px solid red;
@@ -92,35 +117,6 @@ body.nav-sm-display {
       width: 100%;
       z-index: 3000;
       box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
-    }
-    &.header-theme-dark {
-      background-color: theme-color('dark');
-      .header-message {
-        background-color: theme-color('light');
-        color: theme-color('dark');
-      }
-    }
-    &.header-theme-light {
-      background-color: theme-color('light');
-      .header-message {
-        background-color: theme-color('light');
-        color: theme-color('dark');
-      }
-    }
-    &.header-theme-transparent {
-      &.fixed {
-        background-color: transparentize(theme-color('dark'), 0.4);
-      }
-      color: theme-color('light');
-      .header-message {
-        background-color: theme-color('dark');
-        color: $white;
-      }
-    }
-    .header-message {
-      @include media-breakpoint-down(md) {
-        font-size: 0.8rem;
-      }
     }
     .header-block-text {
 
@@ -163,6 +159,7 @@ body.nav-sm-display {
       .algolia-autocomplete {
         width: 100%;
         input {
+          background-color: transparent !important;
           border: 0;
 
           border-radius: 0;
@@ -222,6 +219,7 @@ body.nav-sm-display {
         }
       }
       .icon {
+        text-align: center;
         .icon-img {
           @include media-breakpoint-down(md) {
             height: 25px;
@@ -359,7 +357,7 @@ body.nav-sm-display {
       }
     }
     .header-block-navigation {
-      position: relative;
+      position: initial;
 
       .list-inline {
         .list-inline-item {
@@ -371,21 +369,28 @@ body.nav-sm-display {
             height: 100%;
           }
           .list-inline-dropdown {
-            color: $gray-900;
-            background-color:  $gray-100;
+            position: absolute;
             display: none;
             left: 0;
-            position: absolute;
-            min-width: 100%;
-            width: 100%;
             z-index: 2000;
+            width: 100vw;
             margin-top: 10px;
-            ul {
-              list-style-type: none;
+            display: flex;
+            //justify-content: center;
+            .list-inline-dropdown-content {
+              color: $gray-900;
+              background-color:  $gray-100;
+              
+             // min-width: 100%;
+              width: 75%;
+              ul {
+                list-style-type: none;
 
-              a {
-                color: $gray-900;
+                a {
+                  color: $gray-900;
+                }
               }
+              
             }
           }
 

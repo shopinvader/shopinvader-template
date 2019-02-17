@@ -32,7 +32,8 @@
     "settings": {
       "page_max_width": "1600px",
       "body_bg_color": "",
-      "page_border": false
+      "page_border": true
+
     }
   }
 }
@@ -48,5 +49,18 @@
       box-shadow: unset !important;
       border: none;
     {% endif %}
+  }
+  .header .block-row {
+    {% if section.settings.page_border == false %}
+      box-shadow: unset !important;
+      border: none;
+    {% endif %}
+  }
+  .header .block-row.container {
+    max-width: {{section.settings.page_max_width}};
+    
+  }
+  .locomotive-section[data-locomotive-section-type="header"] .header .header-block-navigation .list-inline .list-inline-item .list-inline-dropdown-content {
+    max-width: {{section.settings.page_max_width}};
   }
 </style>

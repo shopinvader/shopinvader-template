@@ -1,9 +1,12 @@
 //specific Algolia search Client for currency conversion
+
 var customSearchClient = {
    async  search (requests) {
      try {
        var algoliaClient = algoliasearch(algolia_params.app_id, algolia_params.api_key);
-       if(algolia_params.currency_rate != 1) {
+       var currency_code = currencies.selected;
+       var currency = currencies.items[currency_code];
+       if(currency.rate != 1) {
          var price_key = 'price.'+default_role+'.value';
 
          if(typeof(requests) == 'object') {
@@ -17,7 +20,7 @@ var customSearchClient = {
                      var number_position = price_key.length +2;
                      var price = parseFloat(filter.substring(number_position));
                      filter = filter.substring(0, number_position);
-                     price /= algolia_params.currency_rate;
+                     price /= currency.rate;
                    }
                    return filter+String(price);
                  });
@@ -36,7 +39,7 @@ var customSearchClient = {
                var hits = result_set.hits.map(function(hit){
                  if(hit.hasOwnProperty('price')) {
                    if(hit.price.hasOwnProperty(default_role)) {
-                     hit.price[default_role].value *= algolia_params.currency_rate;
+                     hit.price[default_role].value *= currency.rate;
                    }
                  }
                  return hit;
@@ -47,7 +50,7 @@ var customSearchClient = {
 
                  if(result_set.facets_stats.hasOwnProperty(price_key)) {
                    for(key in result_set.facets_stats[price_key]) {
-                     result_set.facets_stats[price_key][key] *= algolia_params.currency_rate;
+                     result_set.facets_stats[price_key][key] *= currency.rate;
                    }
                  }
              }

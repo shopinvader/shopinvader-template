@@ -3,7 +3,6 @@ title: Faceting
 is_layout: false
 ---
 {% extends 'layouts/default' %}
-
 {% block 'css' %}
 
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.9.0/dist/instantsearch.min.css">
@@ -12,148 +11,9 @@ is_layout: false
 {% block 'javascripts'%}
   <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.9.0"></script>
   <script src="{{ 'search_currency.js' | javascript_url }}"></script>
-  <script src="{{ 'search.js' | javascript_url }}?category={{category.name}}"></script>
+  <script src="{{ 'faceting.js' | javascript_url }}?category={{category.name}}"></script>
 {% endblock %}
 
-{% block body/content %}
-  {% if category and category.filters != []%}
-    {% assign filters = category.filters %}
-  {% else %}
-    {% assign filters = store.all_filters %}
-  {% endif %}
-{% assign filters = store.all_filters %}
-<div class="alert alert-info">
-
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12 col-md-3 col-xl-2 p-0  border ">
-      <div id="filters" class="sidebar sidebar-filters collapse">
-        <div class="sidebar-filters-backdrop" href="#filters" data-toggle="collapse">
-
-        </div>
-        <div class="sidebar-filters-content">
-          <div class="sidebar-filters-list  pt-4">
-            <h3 class="pl-3">{{'search_filter_title' | translate}}</h3>
-            <div
-              id="hierarchical-categories"
-              class="filter-block">
-            </div>
-            {% for filter in filters %}
-              <script type="text/html" class="filters-header-template" data-filter-header-id="{{filter.code}}">
-                <div class="row">
-                  <div class="col-12 category-filters-head">
-                    <div>
-                      <h4 class="title-separator">{{filter.name}}</h4>
-                      {% if filter.help %}
-                        <a  data-toggle="modal" data-target="#help-{{filter.name | dasherize}}" href="#help-{{filter.name | dasherize}}" class=" help small btn btn-success">
-                          {{'search_filter_info' | translate}}
-                        </a>
-                      {%endif%}
-                      </div>
-                    </div>
-                  </div>
-              </script>
-              <div
-                data-filter-id="filter-{{filter.code}}"
-                data-filter-widget-type="refinementList"
-                data-filter-attr="{{filter.code}}"
-                data-filter-name="{{filter.name}}"
-                data-show-more-label="{{'search_show_more' | translate}}"
-                data-filter-hit-limit='10'
-                class="filter-block">
-              </div>
-            {% endfor %}
-            <div class="filter-block">
-              <div id="filter-sliderprice" data-filter-name="Price">
-              </div>
-              <div id="filter-rangeprice">
-              </div>
-              <div id="filter-price">
-              </div>
-            </div>
-            <div class="filter-block text-center bg-light" data-current-filter id="current-refined-values-sidebar">
-
-            </div>
-          </div>
-          <div class="sidebar-filter-btn text-center d-md-none">
-            <a href="#filters" class="btn btn-block btn-primary" data-toggle="collapse">
-              <i class="fa fa-times"></i> {{"close" | translate }}
-            </a>
-          </div>
-        </div>
-      </div>
-      {% block side%}
-      {% endblock %}
-    </div>
-    <div class="col-sm-12 col-md-9 col-xl-10 ">
-      <div class=" p-0 pt-sm-3 text-center text-sm-left">
-        {% block intro%}
-        {% endblock %}
-      </div>
-
-      {% block main%}
-        {% block 'result'%}
-          <div class="row  pb-2">
-            <div class="col-4 col-sm-6 col-md-4 col-lg-3 text-left">
-              <div class="d-inline-block d-md-none">
-                <a href="#filters" class="btn btn-outline-primary" data-toggle="collapse">
-                  <i class="fa fa-filter"></i> {{"filters" | translate }}
-                </a>
-              </div>
-              <div class="d-none d-sm-inline-block ml-sm-3 ml-md-0">
-                {% include 'product_display_control'%}
-              </div>
-            </div>
-            <div class="col-4 col-sm-3 col-md-8 col-lg-5 col-xl-5 text-left p-0">
-              <div class=" d-inline-block text-left" id="search-pagination-top">
-                {% include 'paginate' with paginate %}
-              </div>
-            </div>
-            <div class="col-4 col-sm-3  col-md-5  col-lg-4 col-xl-4 text-left text-lg-right ">
-              <div class="d-none d-sm-inline-block" id="hits-per-page-selector" data-label="{{'per_page' | translate}}">
-              </div>
-              <div class="d-inline-block  text-right pl-2 " id="search-stats">
-                {{'search_total_count' | translate: count: paginate.total_entries}}
-              </div>
-            </div>
-            <div class="col-md-7 col-lg-12 ">
-              <div class="p-1 d-none d-sm-block" data-current-filter id="current-refined-values">
-              </div>
-            </div>
-          </div>
-          <div id="search-result" >
-            <div class="row m-0 border border-1 border-left-0 border-bottom-0 border-right-0 ">
-              {% assign product_display = 'grid'%}
-              {% assign css_col = "col-12  col-sm-4 col-lg-3 col-xl-2"%}
-              {%if session.product_display == 'list'%}
-                {% assign display_horizontal =  true%}
-                {% assign css_col = "col-12"%}
-              {%endif%}
-              <div class="{{css_col}} product-col p-2 border border-1 border-left-0 border-top-0 ">
-
-              </div>
-
-            </div>
-            <div class="row">
-              <div class="col-12 text-right">
-              </div>
-            </div>
-          </div>
-          <div class="row pt-2">
-            <div class="col-12 align-content-center text-center">
-              <div class=" d-inline-block text-left align-content-center" id="search-pagination-bottom">
-                {% include 'paginate' with paginate %}
-              </div>
-            </div>
-          </div>
-        {% endblock%}
-      {% endblock %}
-      <div class="p-1 p-sm-3 text-center text-sm-left">
-        {% block footer%}
-        {% endblock %}
-      </div>
-    </div>
-  </div>
-</div>
+{% block 'body/content' %}
+  {% section 'search'%}
 {% endblock %}
