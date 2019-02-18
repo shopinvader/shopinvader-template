@@ -1,23 +1,22 @@
-
-{% if session.currency_code and session.currency_code != ''%}
-  {% assign currency_code = session.currency_code %}
-{% else %}
-  {% assign currency_code = store.currencies_format.first.first %}
-{% endif %}
-
-{% if store.currencies_format[currency_code]%}
-  {% assign currency_data = store.currencies_format[currency_code] %}
-  {% assign rate = 1%}
-  {% if store.currencies_rate[currency_code]%}
-    {% assign rate = store.currencies_rate[currency_code]%}
-  {%endif%}
-  {{
-    value | times: rate | money,
-    unit: currency_data.unit,
-    separator: currency_data.separator,
-    delimiter: currency_data.delimiter,
-    format: currency_data.format
-  }}
-{% else %}
- {{value}}
-{% endif %}
+<div class="currency-list">
+  {% for currency_format in store.currencies_format %}
+    {% assign currency_code = currency_format.first %}
+    {% assign currency_data = currency_format.last %}
+    {% assign rate = 1%}
+    {% if store.currencies_rate[currency_code]%}
+      {% assign rate = store.currencies_rate[currency_code]%}
+    {%endif%}
+    <div class="currency-format" data-currency="{{currency_code}}">
+      {{
+        value | times: rate | money,
+        unit: currency_data.unit,
+        separator: currency_data.separator,
+        delimiter: currency_data.delimiter,
+        format: currency_data.format
+      }}
+    </div>
+  {% endfor %}
+  <div class="currency-format" data-currency="raw">
+    {{value}}
+  </div>
+</div>

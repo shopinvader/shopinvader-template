@@ -17,7 +17,7 @@ $(document).ready(function() {
     },
     [
       {
-        source: autocomplete.sources.hits(product_index, { hitsPerPage: 4 }),
+        source: autocomplete.sources.hits(product_index, { hitsPerPage: 3 }),
         displayKey: 'name',
         name: 'product',
 
@@ -35,15 +35,14 @@ $(document).ready(function() {
                   + search_template_link($('#header-search-product-link'), query, result);
           },
           empty: $('#header-search-product-empty').html(),
-          suggestions: function(suggestions) {
-            return "<div></div>";
 
-          },
           suggestion: function(suggestion) {
             suggestion.last_categorie = suggestion.categories[suggestion.categories.length-1];
             suggestion.price = suggestion.price[default_role];
+
             var template = Hogan.compile($('#product-hit-template').html());
             suggestion.helpers = hogan_helpers;
+            console.log('suggestions');
             return template.render(suggestion);
           }
         }
@@ -83,8 +82,19 @@ $(document).ready(function() {
       }
     ]
   );
+  $('#header-search-input').on('autocomplete:opened',function(e) {
+    $menu = $('.aa-dropdown-menu');
+
+    var window_size = $(window).width() - 50 ;
+
+    var menu_maxoffset = $menu.outerWidth(true) + parseInt($(this).offset().left);
+    console.log('menu_maxoffset', menu_maxoffset);
+    if(menu_maxoffset > window_size){
+      $menu.css('left', (window_size - menu_maxoffset)+'px');
+    }
+
+  });
   $('body').click(function(element){
-    console.log(element);
     if($(element.target).parents('.algolia-autocomplete').length == 0) {
       $('#header-search-input').autocomplete('close');
     }
@@ -122,14 +132,15 @@ var hogan_helpers = {
           n = new Number(text);
         }
       }
-      n*= algolia_params.currency_rate;
-      return n.toLocaleString(
-        algolia_params.locale_code,
+      var currency = currencies.items[currencies.selected];
+      var price = n*currency.rate;
+      return price.toLocaleString(
+        currencies.selected,
         {
           style: "currency",
-          currency: algolia_params.currency_code,
+          currency: currencies.selected,
         }
-      )
+      );
     }
   },
   "imageDefault": function() {

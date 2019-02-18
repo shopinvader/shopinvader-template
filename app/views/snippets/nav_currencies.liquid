@@ -1,0 +1,58 @@
+
+{% action "set current currency"%}
+  var params = getProp('params');
+  var current_currency_code = getCookiesProp('currency');
+  var currencies_format = getProp('store.currencies_format');
+  if(params.hasOwnProperty('new_currency')) {
+    current_currency_code = params.new_currency;
+  }
+  currency = currencies_format[Object.keys(currencies_format)[0]];
+  if(currencies_format.hasOwnProperty(current_currency_code) ) {
+    var currency = currencies_format[current_currency_code];
+  }
+
+  if(getCookiesProp('currency') != currency.code) {
+    setCookiesProp('currency', {
+      'value': currency.code,
+      'path': '/',
+      'max_age': 3153600
+    });
+  }
+  setProp('currency',  currency);
+{% endaction %}
+<script type="text/javascript">
+  var currencies = {
+    items : {
+      {% for currency_data in store.currencies_format %}
+        {% if store.currencies_rate[currency_data.first]%}
+          {% assign rate = store.currencies_rate[currency_data.first]%}
+        {%endif%}
+        {{currency_data.first | json}} : {
+          default_locale: {{ currency_data.last.default_locale | json }},
+          rate: {{rate | json}}
+        },
+      {% endfor %}
+    },
+    selected : {{currency.code | json }}
+  };
+</script>
+
+<div class="list-inline-item d-none d-lg-inline-block mr-4">
+  <div class="dropdown">
+    <a class="btn btn-link dropdown-toggle" id="current_currency" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="badge badge-primary rounded w-25 shadow-sm " >
+        {{currency.unit}}
+      </span> -
+      <u>
+        {{'currency_' | append: currency.code | downcase | translate}}
+      </u>
+    </a>
+    <div class="dropdown-menu  bg-dark">
+    {% for currency in store.currencies_format %}
+      <a href="#" class="dropdown-item pt-2 pb-2 text-dark" data-toggle="change-currency" data-value="{{currency.first}}">
+        <span class="badge badge-primary rounded w-25 shadow-sm">{{currency[1].unit}}</span> - {{'currency_' | append: currency.first | downcase | translate}}
+      </a>
+    {% endfor%}
+    </div>
+  </div>
+</div>

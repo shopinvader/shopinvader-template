@@ -5,10 +5,23 @@ $(window).on('beforeunload', function(){
 });
 $(document).ready(function () {
   $("[data-toggle=nav-sm-display]").click(function(){
-
     $($(this).data('target')).toggleClass('open-nav');
-    console.log($(this).data('target'), $($(this).data('target')));
-
+  });
+  $('[data-toggle="change-currency"]').on('click', function(){
+    console.log($(this).data('value'));
+    var currency_code = $(this).data('value');
+    if(currency_code != '') {
+      Cookies.set('currency', currency_code);
+      if($('.faceting-container').length > 0) {
+        location.reload();
+      }
+      else {
+        $('.currency-list .currency-format').css('display', 'none');
+        $('.currency-list .currency-format[data-currency='+currency_code+']').css('display', 'inline');
+        $('#current_currency').html($(this).html());
+        currencies.selected = currency_code;
+      }
+    }
   });
   $( ".product-thumbnail-img.loader img" ).load(function() {
     // Handler for .load() called.
