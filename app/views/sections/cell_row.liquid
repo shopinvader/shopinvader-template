@@ -141,6 +141,13 @@
           "label": "Picture Title",
           "id": "picture_alt",
           "type": "text"
+        },
+        {
+          "label": "Content",
+          "id": "content",
+          "type": "text",
+          "html": true,
+          "nb_rows": 10
         }
       ]
     }
@@ -266,6 +273,7 @@
               {% include 'block_debug' %}
               {% if cell.type == "cell_image" %}
                 <img src="{{cell.settings.picture}}" alt="{{cell.settings.picture_alt}}" class="img-fluid">
+                {{ cell.settings.content }}
               {% else %}
                 {{ cell.settings.content }}
               {% endif %}

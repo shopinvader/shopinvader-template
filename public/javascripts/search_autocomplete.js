@@ -92,6 +92,9 @@ $(document).ready(function() {
     if(menu_maxoffset > window_size){
       $menu.css('left', (window_size - menu_maxoffset)+'px');
     }
+    else {
+      
+    }
 
   });
   $('body').click(function(element){

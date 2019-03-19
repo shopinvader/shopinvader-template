@@ -159,6 +159,9 @@ currency_usd:
 currency_cad:
   en: Canadian Dollars
   fr: Dollars (Canada)
+currency_xof:
+  en: Franc CFA
+  fr: Franc CFA
 cart_address_add:
   en: Add an address
   fr: Ajouter une adresse

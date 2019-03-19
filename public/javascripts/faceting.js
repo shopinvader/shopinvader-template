@@ -159,14 +159,13 @@ class FacetingSearch {
     }
   }
   init_price_filters() {
-    if($('#filter-sliderprice').length) {
-      this.price_slider = instantsearch.widgets.rangeSlider({
-        container: '#filter-sliderprice',
-        attributeName: this.price_attribute,
+    var $this = this;
+    this.init_widgets('rangeSlider', 'sliderprice', {
+        attributeName: $this.price_attribute,
         autoHideContainer: false,
         searchForFacetValues: true,
         templates: {
-          header: "<h4>"+algolia_params.translations.price+"</h4>",
+          header: "<h4 class='text-uppercase pb-4'>"+algolia_params.translations.price+"</h4>",
         },
         collapsible: {
           collapsed: false,
@@ -186,7 +185,7 @@ class FacetingSearch {
           }
         }
       });
-    }
+    
     this.set_widget(
       this.price_slider
     );
@@ -324,7 +323,7 @@ class FacetingSearch {
     this.instance.templatesConfig.helpers.emphasis = function(text, render) {
       return '<em>' + render(text) + '</em>';
     };
-    this.instance.templatesConfig.helpers.currency = function(text, render) {
+    this.instance.templatesConfig.helpers.format_price_with_currency = function(text, render) {
       var value = 0;
       if(typeof(render) != 'undefined') {
         value = parseFloat(render(text));

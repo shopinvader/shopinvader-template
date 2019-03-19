@@ -47,6 +47,11 @@
           "label": "Display current filter",
           "id": "current_filter",
           "type": "checkbox"
+        },
+        {
+          "label": "Display price filters",
+          "id": "price_filters",
+          "type": "checkbox"
         }
 	    ]
   	},
@@ -80,7 +85,8 @@
     		"settings": {
     			"title": "<h2>Filters</h2>",
           "theme_color": "light",
-          "current_filter": true
+          "current_filter": true,
+          "price_filters": true
     		}
     	},
       {
@@ -142,6 +148,7 @@
             layout: section.settings.layout,
             title: block.settings.title,
             current_filter: block.settings.current_filter,
+            price_filters: block.settings.price_filters,
             title, short_description, description
           %}
         {% when 'result'%}

@@ -141,7 +141,7 @@ $(document).ready(function() {
       }
     );
     default_item = false;
-  }
+  }/*
   if($('#hits-per-page-selector').length > 0) {
     search.addWidget(
       instantsearch.widgets.hitsPerPageSelector({
@@ -153,7 +153,7 @@ $(document).ready(function() {
         }
       })
     );
-  }
+  }*/
   var filters = [];
   if($('#hierarchical-categories').length > 0) {
     search.addWidget(

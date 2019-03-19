@@ -298,12 +298,12 @@
         }
       },
       {
-        "type": "local_selector",
+        "type": "currency_selector",
         "settings": {
         }
       },
       {
-        "type": "currency_selector",
+        "type": "local_selector",
         "settings": {
         }
       },
@@ -428,7 +428,7 @@
             </div>
           </div>
           <div class="block block-row  {{css_container}} theme-{{block.settings.theme_color}}">
-            <div class="row  align-items-{{block.settings.vertical_align}}">
+            <div class="row {{css_container}} align-items-{{block.settings.vertical_align}}">
         {% else %}
 
           {% assign css_cell = "align-self-center col-auto"%}

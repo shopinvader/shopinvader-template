@@ -57,6 +57,9 @@
 		{% if current_filter == true %}
 			<div class="{{css_filter}}" data-filter-widget="current-filter"></div>
 		{% endif %}
+		{% if price_filters == true %}
+			<div class="{{css_filter}}" data-filter-widget="sliderprice"></div>
+		{% endif %}
 	</div>
 	<div class="col-12 d-md-none bg-light text-center pt-2 pb-2">
 		<a href="#filter-list" class="btn btn-outline-dark" data-toggle="collapse">
