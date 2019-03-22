@@ -4,15 +4,10 @@ is_layout: false
 ---
 {% extends 'layouts/default' %}
 
-{% block 'css' %}
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.9.0/dist/instantsearch.min.css">
-{% endblock %}
 
 {% block 'javascripts'%}
-  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.9.0"></script>
-  <script src="{{ 'search_currency.js' | javascript_url }}"></script>
-  <script src="{{ 'search.js' | javascript_url }}?category={{category.name}}"></script>
+  {{ 'vendors.js' | javascript_tag }}
+  {{ 'searchkitSearch.js' | javascript_tag }}
 {% endblock %}
 
 {% block content %}
@@ -26,13 +21,16 @@ is_layout: false
     <div class="col-12 col-md-3 col-xl-2 p-0  border ">
       <div id="filters" class="sidebar sidebar-filters collapse">
         <div class="sidebar-filters-backdrop" href="#filters" data-toggle="collapse">
-
         </div>
         <div class="sidebar-filters-content">
           <div class="sidebar-filters-list  pt-4">
             <h3 class="pl-3">{{'search_filter_title' | translate}}</h3>
             <div
               id="hierarchical-categories"
+              class="filter-block">
+            </div>
+            <div
+              id="price-range"
               class="filter-block">
             </div>
             {% for filter in filters %}
@@ -84,8 +82,6 @@ is_layout: false
     </div>
     <div class="col-sm-12 col-md-9 col-xl-10 ">
       <div class=" p-0 pt-sm-3 text-center text-sm-left">
-        {% block intro%}
-        {% endblock %}
       </div>
 
       {% block main%}
@@ -97,8 +93,8 @@ is_layout: false
                   <i class="fa fa-filter"></i> {{"filters" | translate }}
                 </a>
               </div>
-              <div class="d-none d-sm-inline-block ml-sm-3 ml-md-0">
-                {% include 'product_display_control'%}
+              <div id="layout-option" class="d-none d-sm-inline-block ml-sm-3 ml-md-0">
+                <!-- {% include 'product_display_control'%} -->
               </div>
             </div>
             <div class="col-4 col-sm-3 col-md-8 col-lg-5 col-xl-5 text-left p-0">
@@ -127,9 +123,7 @@ is_layout: false
                 {% assign css_col = "col-12"%}
               {%endif%}
               <div class="{{css_col}} product-col p-2 border border-1 border-left-0 border-top-0 ">
-
               </div>
-
             </div>
             <div class="row">
               <div class="col-12 text-right">

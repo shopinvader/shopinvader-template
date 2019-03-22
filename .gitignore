@@ -26,3 +26,5 @@ app/views/pages/layouts/editable_page.fr.liquid
 app/views/pages/layouts/faceting.fr.liquid
 app/views/pages/layouts/lite.fr.liquid
 app/views/pages/layouts/simple.fr.liquid
+
+npmWebpack/node_modules/

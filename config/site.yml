@@ -30,13 +30,26 @@ metafields:
   theme:
     logo: "/samples/assets/shop-logo.png"
     noimage: "/samples/assets/no-image.jpg"
-  algolia:
-    application_id: 'GH41KF783Z'
-    api_key: "75575d3910b3ac55428bcdfa1b0e6784"
+  # algolia:
+  #   application_id: 'GH41KF783Z'
+  #   api_key: "75575d3910b3ac55428bcdfa1b0e6784"
+  #   indices: >
+  #     [
+  #       { "name": "categories", "index": "demo_site_10_category" },
+  #       { "name": "products", "index": "demo_site_10_product" }
+  #     ]
+  #   routes: >
+  #     [
+  #         ["*", { "name": "category", "template_handle": "category", "index": "categories" } ],
+  #         ["*", { "name": "product", "template_handle": "product", "index": "products" } ]
+  #     ]
+  elasticsearch:
+    server_IP: '127.0.0.1'
+    server_Port: "9200"
     indices: >
       [
-        { "name": "categories", "index": "demo_site_10_category" },
-        { "name": "products", "index": "demo_site_10_product" }
+        { "name": "categories", "index": "demo_elasticsearch_backend_shopinvader_category", "type":"odoo"},
+        { "name": "products", "index": "demo_elasticsearch_backend_shopinvader_variant", "type":"odoo"}
       ]
     routes: >
       [

@@ -1,0 +1,63 @@
+
+{% if site.metafields.elasticsearch %}
+  {% if locale == 'fr'%}
+    {% assign elasticsearch_locale = "fr_fr"%}
+  {%else%}
+    {% assign elasticsearch_locale = "en_us"%}
+  {%endif%}
+  {% if session.currency_code and session.currency_code != ''%}
+    {% assign currency_code = session.currency_code %}
+  {% else %}
+    {% assign currency_code = store.currencies_rate.first.first %}
+  {% endif %}
+  {% if store.currencies_format[currency_code]%}
+    {% assign currency_data = store.currencies_format[currency_code] %}
+    {% assign rate = 1%}
+    {% if store.currencies_rate[currency_code]%}
+      {% assign rate = store.currencies_rate[currency_code]%}
+    {%endif%}
+  {%endif%}
+
+  <script type="text/javascript">
+    {% action 'get elasticsearch parameters' %}
+
+      setProp('elasticsearch_indexes', JSON.parse(site.metafields.elasticsearch.indices));
+    {% endaction %}
+
+
+    var elasticsearch_params = {
+      {% for role in elasticsearch_indexes %}
+        {{role.name}}_index : {{role.index | append:"_" | append: elasticsearch_locale  | json}},
+      {% endfor %}
+      server_IP: {{site.metafields.elasticsearch.server_IP | json}},
+      server_Port: {{site.metafields.elasticsearch.server_Port | json}},
+      locale_code: {{currency_data.default_locale   | replace: "_", "-"   | json}},
+      currency_symbol: {{currency_data.unit | json}},
+      currency_code: {{currency_code | json}},
+      currency_rate: {{rate | json}},
+      translations: {
+        'clear_all' : {{ 'filter_clear' | translate | json }},
+        'result_number': 'Resultat(s)',
+        'per_page' : {{'per_page' | translate | json }},
+        'price':  {{'filter_price' | translate | json }},
+        'result_empty': {{'search_total_count_zero' | translate | json }}
+      },
+    };
+
+    var default_img_url = "{{site.metafields.theme.noimage }}";
+    var default_role = "{{site.metafields.erp.default_role }}";
+    {% if category %}
+      var category_id = {{category.objectID | json}};
+    {% endif %}
+  </script>
+
+    {% include 'algolia_template_product_hit' %}
+    {% include 'algolia_template_category_hit' %}
+    {% include 'algolia_template_noresult' %}
+    {% include 'algolia_template_stat' %}
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hogan.js/3.0.2/hogan.min.js"></script>
+
+{% endif %}

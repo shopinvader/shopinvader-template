@@ -242,6 +242,7 @@ is_layout: false
         </div>
       </div>
     </div>
+
     {{ 'popper.min.js' | javascript_tag }}
     {{ 'jquery.min.js' | javascript_tag }}
     {{ 'jquery.slidereveal.min.js' | javascript_tag }}
@@ -250,13 +251,13 @@ is_layout: false
     {{ 'bootstrap4.min.js' | javascript_tag }}
     {{ 'application.js' | javascript_tag }}
 
-    {% block 'javascripts_algolia', short_name: true %}
-      {% include 'algolia_init' %}
-      <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
-      {{ 'search_autocomplete.js' | javascript_tag }}
+    {% block 'javascripts_elasticsearch', short_name: true %}
+      {% include 'elasticsearch_init' %}
+      {{ 'tempSearchkit.css' | stylesheet_tag }}
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+      {{ 'elasticSearchAutocomplete.js' | javascript_tag }}
     {% endblock %}
+
     {% block 'javascripts', short_name: true %}
     {% endblock %}
     {% include 'cookies_manager' %}
