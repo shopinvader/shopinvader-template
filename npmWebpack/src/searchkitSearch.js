@@ -10,35 +10,21 @@ import { Hits, SearchkitManager,SearchkitProvider,
   ViewSwitcherHits, ViewSwitcherToggle, DynamicRangeFilter,
   GroupedSelectedFilters, Layout, LayoutResults,
   ActionBar, ActionBarRow,PageSizeSelector, Toggle,
-  RangeSliderInput, ItemList,TermQuery,
-  FilteredQuery, BoolShould} from 'searchkit'
+  RangeSliderInput, MatchQuery} from 'searchkit'
 
-
-$(document).ready(function() {
 
   var product_index = elasticsearch_params.products_index;
-  // var category_index = elasticsearch_params.categories_index;
   const host = 'http://'+elasticsearch_params.server_IP+':'+elasticsearch_params.server_Port+'/'+product_index+'/odoo';
   const sk = new SearchkitManager(host, {});
 
 
-  // TODO
-  // if($('#search-result').attr('data-category') != undefined) {
-  //   if($('#search-result').attr('data-category')) {
-  //     console.log('DATA CATEGORY:');
-  //     console.log($('#search-result').attr('data-category'));
-  //     var categories_id = $('#search-result').attr('data-category');
-  //     sk.addDefaultQuery((query)=> {
-  //       return query.addQuery(FilteredQuery({
-  //         filter:BoolShould([
-  //           TermQuery("categories.id", category_id)
-  //         ])
-  //       }))
-  //     })
-  //   }
-  // }
-
-
+  // when accessing a specific category adds a filter to searchkit
+  if($('#search-result').attr('data-category')) {
+    var categories_id = $('#search-result').attr('data-category');
+    sk.addDefaultQuery((query)=> {
+      return query.addQuery(MatchQuery("categories.id", category_id,null))
+    })
+  }
 
   //by creating a InvisibleSearchBar the existing searchbar form in default.liquid will work for search queries
   //the benefit of using the default existing form is that it can easily redirect to the /search
@@ -311,4 +297,3 @@ $(document).ready(function() {
   ReactDOM.render(<SearchResult />, document.getElementById("search-result").firstElementChild);
   ReactDOM.render(<CategoriesFacet />, document.getElementById("hierarchical-categories"));
   ReactDOM.render(<PriceFacet />, document.getElementById("price-range"));
-});
