@@ -249,6 +249,16 @@ import { Hits, SearchkitManager,SearchkitProvider,
     }
   }
 
+  class VariantColorFacet extends React.Component {
+    render() {
+      return (
+        <SearchkitProvider searchkit={sk}>
+          <RefinementListFilter id="color" title="Color" field="variant_attributes.color" operator="AND"/>
+        </SearchkitProvider>
+      );
+    }
+  }
+
   class PriceFacet extends React.Component {
     render() {
       return (
@@ -296,4 +306,5 @@ import { Hits, SearchkitManager,SearchkitProvider,
   ReactDOM.render(<RefinedValues />, document.getElementById("current-refined-values"));
   ReactDOM.render(<SearchResult />, document.getElementById("search-result").firstElementChild);
   ReactDOM.render(<CategoriesFacet />, document.getElementById("hierarchical-categories"));
+  ReactDOM.render(<VariantColorFacet />, document.getElementById("color-filter"));
   ReactDOM.render(<PriceFacet />, document.getElementById("price-range"));
