@@ -253,7 +253,7 @@ import { Hits, SearchkitManager,SearchkitProvider,
     render() {
       return (
         <SearchkitProvider searchkit={sk}>
-          <RefinementListFilter id="color" title="Color" field="variant_attributes.color" operator="AND"/>
+          <RefinementListFilter id="color" title="Color" field="variant_attributes.color" operator="OR"/>
         </SearchkitProvider>
       );
     }
