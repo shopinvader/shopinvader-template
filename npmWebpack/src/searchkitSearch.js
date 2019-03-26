@@ -10,17 +10,36 @@ import { Hits, SearchkitManager,SearchkitProvider,
   ViewSwitcherHits, ViewSwitcherToggle, DynamicRangeFilter,
   GroupedSelectedFilters, Layout, LayoutResults,
   ActionBar, ActionBarRow,PageSizeSelector, Toggle,
-  RangeSliderInput, ItemList} from 'searchkit'
+  RangeSliderInput, ItemList,TermQuery,
+  FilteredQuery, BoolShould} from 'searchkit'
 
 
 $(document).ready(function() {
 
   var product_index = elasticsearch_params.products_index;
-  var category_index = elasticsearch_params.categories_index;
+  // var category_index = elasticsearch_params.categories_index;
   const host = 'http://'+elasticsearch_params.server_IP+':'+elasticsearch_params.server_Port+'/'+product_index+'/odoo';
-  // const host = 'http://192.168.2.94:'+elasticsearch_params.server_Port+'/'+product_index+'/odoo';
-  // const host = "http://localhost:9200/demo_elasticsearch_backend_shopinvader_variant_en_us/odoo";
   const sk = new SearchkitManager(host, {});
+
+
+  // TODO
+  // if($('#search-result').attr('data-category') != undefined) {
+  //   if($('#search-result').attr('data-category')) {
+  //     console.log('DATA CATEGORY:');
+  //     console.log($('#search-result').attr('data-category'));
+  //     var categories_id = $('#search-result').attr('data-category');
+  //     sk.addDefaultQuery((query)=> {
+  //       return query.addQuery(FilteredQuery({
+  //         filter:BoolShould([
+  //           TermQuery("categories.id", category_id)
+  //         ])
+  //       }))
+  //     })
+  //   }
+  // }
+
+
+
   //by creating a InvisibleSearchBar the existing searchbar form in default.liquid will work for search queries
   //the benefit of using the default existing form is that it can easily redirect to the /search
   // where in Searchkit it is more complicated to implement
@@ -238,7 +257,6 @@ $(document).ready(function() {
     render() {
       return (
         <SearchkitProvider searchkit={sk}>
-          {/* <HierarchicalRefinementFilter field="categories" title="Categories" id="categories2"/> */}
           <HierarchicalMenuFilter fields={["categories.name"]} title="Categories" id="categories"/>
         </SearchkitProvider>
       );
@@ -283,7 +301,8 @@ $(document).ready(function() {
     }
   }
 
-  ReactDOM.render(<ResultLayoutToggle />, document.getElementById("layout-option"));
+  // désactiver parceque lors du chargement d'une page de catégorie crée une erreur parceque layout-option n'existe pas
+  // ReactDOM.render(<ResultLayoutToggle />, document.getElementById("layout-option"));
   ReactDOM.render(<SearchPagination />, document.getElementById("search-pagination-top"));
   ReactDOM.render(<SearchPagination />, document.getElementById("search-pagination-bottom"));
   ReactDOM.render(<HitsPerPage />, document.getElementById("hits-per-page-selector"));
