@@ -1,0 +1,95 @@
+{% assign filters = store.all_filters %}
+{% assign product_display = 'grid'%}
+
+{% if  layout == 'column' %}
+	{% assign css_col = "col-12  col-sm-4 col-md-6 col-lg-4 col-xl-3"%}
+	<div class="row">
+	  <div class="col-12 d-none  d-md-block">
+	  	<div class="p-1 pt-4">
+		    <h1 class="title-decorator">
+		      {{title}}
+		    </h1>
+		    {% if category != null %}
+					<nav aria-label="breadcrumb">
+					  <ol class="breadcrumb p-0 ">
+					  	{% if category.parent %}
+					  		<li class="breadcrumb-item">
+				  				<a href="{{cat_parent.parent.url_key}}" class="text-dark">
+				  					{{'home' | translate }}
+				  				</a>
+				  			</li>
+					  		{% assign  cat_parent = category.parent %}
+					  		{% if cat_parent.parent %}
+					  			<li class="breadcrumb-item">
+					  				<a href="{{cat_parent.parent.url_key}}" class="text-dark">{{cat_parent.parent.name}}</a>
+					  			</li>
+					  		{% endif %}
+					  		<li class="breadcrumb-item">
+					  			<a href="{{cat_parent.url_key}}" class="text-dark">{{cat_parent.name}}</a>
+					  		</li>
+					  		<li class="breadcrumb-item">
+					  			<a href="{{category.url_key}}" class="text-dark font-weight-bold">{{category.name}}</a>
+					  		</li>
+					  	{% endif %}
+					  </ol>
+					</nav>
+		    	<p>{{short_description}}</p>
+		    {% endif %}
+		  </div>
+	  </div>
+	</div>
+	{% if  bordered == true %}
+		{% assign css_col = css_col | append: " border border-1 border-left-0 border-top-0"%}
+		{% endif %}
+	{% else %}
+		{% assign css_col = "col-12  col-sm-4 col-lg-3 col-xl-2"%}
+	{% endif %}
+
+<div class="row justify-content-between align-items-center pt-2 pb-2">
+	<div class="col-auto  d-none d-sm-block" id="product_display_control">
+	  <button class="btn" data-toggle="product-list-display" data-value="grid">
+	    <i class="fas fa-th-large mr-1"></i>
+	    <span class="d-none d-md-inline">
+	    	{{'product_display_grid' | translate}}
+	    </span>
+	  </button>
+	  <button class="btn" data-toggle="product-list-display" data-value="list">
+	    <i class="fas fa-align-justify mr-1"></i>
+	    <span class="d-none d-md-inline">
+	    	{{'product_display_list' | translate}}
+	    </span>
+	  </button>
+	</div>
+	<div class="col-auto d-flex justify-content-end align-items-center">
+		<div class="row">
+			<div class="col-auto d-none d-sm-block" data-filter-widget="stats"></div>
+			<div class="col-auto d-none d-sm-block" data-filter-widget="hits-per-page"></div>
+			<div class="col-12 col-sm-auto" data-filter-widget="paginate"></div>
+		</div>
+	</div>
+</div>
+<div class="row d-none d-md-flex pb-2">
+	{% if current_filter == true %}
+		<div class="col-12" data-filter-widget="current-filter"></div>
+	{% endif %}
+</div>
+<div class="row border border-left-0 border-right-0">
+	<div class="col-12" data-filter-widget="results" id="search-result">
+	  <div class="row m-0">
+	    <div class="{{css_col}} product-col p-2  ">
+	    </div>
+	  </div>
+	</div>
+</div>
+<div class="row justify-content-end align-items-center pt-2 pb-2 ">
+	<div class="col-auto" data-filter-widget="stats"></div>
+	<div class="col-auto" data-filter-widget="hits-per-page"></div>
+	<div class="col-auto" data-filter-widget="paginate"></div>
+</div>
+<div class="row">
+	<div class="col-12">
+		<div class="p-1">
+	    <p>{{description}}</p>
+	  </div>
+	</div>
+</div>

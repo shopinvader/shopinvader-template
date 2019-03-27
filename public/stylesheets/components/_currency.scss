@@ -1,0 +1,9 @@
+.currency-list {
+  display: inline;
+  .currency-format {
+	  display: none;
+	  &:first-child {
+			display: block;
+		}
+	}
+}

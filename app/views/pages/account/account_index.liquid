@@ -1,114 +1,191 @@
 ---
-title: Order page
-slug: orders
 handle: account_index
-position: 99
+title: Order page
 listed: false
+meta_description:
+meta_keywords: 
+position: 200
 published: true
-is_layout: false
 seo_title: My sales orders | Shopinvader demo
+slug: orders
 ---
 {% extends 'layouts/account' %}
 {% block 'body/content/tabcontent' %}
 
   {% paginate store.sales by 4 %}
-    <div class="row">
-      <div class="col-12">
-      {%if store.sales == null or store.sales.size == 0 %}
-        <div class="text-center">
-          {{ 'account_order_empty' | translate }}
+    {%if store.sales == null or store.sales.size == 0 %}
+      <div class="text-center">
+        {{ 'account_order_empty' | translate }}
+      </div>
+    {% else %}
+      <div class="row justify-content-between">
+        <div class="col-auto pl-0">
+          <h1 class="h3">
+            {{ 'account_order_title' | translate }}
+          </h1>
         </div>
-      {% else %}
-        <div class="text-right">
+        <div class="col-auto pr-0">      
           {%include 'paginate' with paginate %}
         </div>
+      </div>
+      <div class="row">
         {% for sale in paginate.collection %}
-          <div class="card">
-            <div class="card-header">
-              <div class="row">
-                <div class="col-6 col-sm-4">
-                  <span class="text-primary font-weight-bold">{{sale.name}}</span>
-                  <span class="badge badge-dark ">{{ sale.state }}</span>
-                </div>
-                <div class="col-6 col-sm-4">
-                  {{sale.date   | date:"%d/%m/%Y" }}
-
-                </div>
-                <div class="col-6 col-sm-4">
-                  <div >
-                    <i class="fa fa-map-marker text-primary"></i>
-                    {{ "account_order_address" | translate }}
-                    <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      {{sale.shipping.address.name}}
-                    </button>
-                    <div class="dropdown-menu p-2 small" aria-labelledby="dropdownMenuButton">
-                      <strong>{{sale.shipping.address.name}}</strong>
-                      <div>{{sale.shipping.address.street}}</div>
-                      <div>{{sale.shipping.address.street2}}</div>
-                      <div>
-                        {{sale.shipping.address.zip}}
-                        {{sale.shipping.address.city}}
+          {% assign state_color = 'primary' %}
+          {% assign state_level = 0 %}
+          {% case sale.state %}
+            {% when 'pending' %}
+              {% assign state_color = 'info' %}
+              {% assign state_level = 1 %}
+            {% when 'processing' %}
+              {% assign state_color = 'warning' %}
+              {% assign state_level = 2 %}
+            {% when 'done' %}
+              {% assign state_color = 'success' %}
+              {% assign state_level = 3 %}
+          {% endcase %}
+          <div class="col-12 order mb-3 mt-2">
+            <div class="row">
+              <div class="col-12 order border round  pt-3 ">
+                <div class="row justify-content-between ">
+                  <div class="col-12 col-sm-auto order-header order-state-{{sale.state}}">
+                    <div class="row lead">          
+                      <div class="col-8 col-sm-auto border-right pl-sm-5">
+                        Order #<span class="font-weight-bold">{{sale.name}}</span> 
+                        
                       </div>
-                      <div>{{sale.shipping.address.country_id.name}}</div>
-                      <div>{{sale.shipping.address.phone}}</div>
+                      <div class="col-4 col-sm-auto border-right">
+                        {{sale.date   | format_date }}
+                      </div>
+                      <div class="col-8 col-sm-auto font-weight-bold">
+                        {% include 'currency' | value: sale.amount.total %}
+                      </div>
+                      <div class="col-4 col-sm-auto ">
+                        <div class="badge badge-{{state_color}} text-white">
+                          {{sale.state}}
+                        </div>
+                      </div>
                     </div>
                   </div>
+                  <div class="col-12 col-md-auto text-center">
+                    <a href="#order-data-{{sale.id}}" data-toggle="collapse" class="btn btn-outline-primary">
+                      {{'show_more' | translate}}
+                    </a>
+                  </div>
                 </div>
-                {% if sale.shipping.carrier %}
-                <div class="col-6 col-sm-4">
-                  <i class="fa-li fa fa-truck text-primary"></i>
-                  {{ "account_order_shipping" | translate }}
-                  {{sale.shipping.carrier.name}}
-                  {% for track in sale.shipping.tracking %}
-                    <div>
-                      <a href="{{track.url}}">
-                        {{"account_order_tracking" | translate }} {{track.value}}
-                      </a>
+                <div class="row mt-2 border-top">
+                  <div class="col-12 col-sm-6 border-right pb-2 pt-2">
+                    {{ "account_order_address" | translate }}
+                    <div class="font-weight-bold text-center text-sm-left">
+                      {{sale.shipping.address.name}}
+                      {{sale.shipping.address.street}} 
+                      {{sale.shipping.address.street2}}
+                      - {{sale.shipping.address.zip}} -
+                      {{sale.shipping.address.city}}
+                      {{sale.shipping.address.country_id.name}}
+                      
                     </div>
-                  {% endfor %}
-                </div>
-                {% endif %}
-                <div class="col">
-                  <div class="font-weight-bold">
-                    {% include 'currency' | value: sale.amount.total %}
-                    <div class="small">
-                      {{ 'account_order_shipping' | translate }}
+                  </div>
+                  <div class="col-12 col-sm-6 pb-2 pt-2">
+                    <div class="font-weight-bold">
+                      {{sale.shipping.selected_carrier.name}} 
+                    </div>
+                    <div class="d-flex">
+                      {{"account_order_shipping" | translate }}&nbsp;
                       {% include 'currency' | value: sale.shipping.amount.total %}
+                    </div>
+                    <div>
+                      {% for track in sale.shipping.tracking %}
+                        <div>
+                          <a href="{{track.url}}">
+                            {{"account_order_tracking" | translate }} {{track.value}}
+                          </a>
+                        </div>
+                      {% endfor %}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="card-body">
-            {% for line in sale.lines.items %}
-              <div class="row border border-top-0 border-left-0 border-right-0 pb-4">
-                <div class="col-4 col-sm-2">
-                  <img src="{{line.product.images.first.small.src}}" alt="{{order_line.product.images.first.small.alt }}" class="img-fluid"/>
-                </div>
-                <div class="col-8 col-sm-10">
-                  <a href="{{line.product.url_key | prepend: url_base }}" target="_blank">{{line.product.name}}</a>
-                  <div class="small">
-                    {{ 'account_order_qty' | translate }}
-                    <b>{{line.qty | round}}</b>
-                  </div>
-                  <div class="small">
-                    {{ 'account_order_subtotal' | translate }}
-                    <b>{% include 'currency' | value: line.amount.total %}</b>
-                  </div>
-                </div>
 
+            <div class="row collapse  {% if forloop.index0 == 0 %}show{% endif %}" 
+              id="order-data-{{sale.id}}">
+              <div class="col-12 border border-top-0">
+                <div class="row justify-content-center">
+                  <div class="col-12 col-lg-11 col-xl-10 pt-4">
+                    <div class="row">
+                      <div class="col-12 d-md-flex align-items-start mb-2">
+                        <div class="order-step {% if state_level >= 0 %}done{% endif %}">
+                          <div class="icon">
+                            <i class="fas fa-shopping-basket"></i>
+                          </div>
+                          <div class="label font-weight-bold p-3">
+                            {{'account_order_level0' | translate}}{{sale.date   | format_date }}
+                          </div>
+                        </div>
+                        <div class="order-step {% if state_level >= 1 %}done{% endif %}">
+                          <div class="icon">
+                            <i class="fas fa-money-bill-alt"></i>
+                          </div>
+                          <div class="label font-weight-bold p-3">
+                            <span class="pr-2">
+                              {{'account_order_level1' | translate}}
+                            </span>
+                            {% include 'currency' | value: sale.amount.total %}
+                          </div>
+                        </div>
+                        <div class="order-step {% if state_level >= 2 %}done{% endif %}">
+                          <div class="icon">
+                            <i class="fas fa-truck-loading"></i>
+                          </div>
+                          <div class="label font-weight-bold p-3">
+                            {{'account_order_level2' | translate}}
+                          </div>
+                        </div>
+                        <div class="order-step {% if state_level >= 3 %}done{% endif %} ">
+                          <div class="icon">
+                            <i class="fas fa-box-open"></i>
+                          </div>
+                          <div class="label font-weight-bold p-3">
+                           {{'account_order_level3' | translate}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {% for line in sale.lines.items %}
+                  <div class="row border-top pb-4 pt-4">
+                    <div class="col-4 col-lg-2 d-none d-sm-block">
+                      <div class="pr-xl-3 pl-xl-3">
+                        <img src="{{line.product.images.first.medium.src}}" alt="{{order_line.product.images.first.medium.alt }}" class="img-fluid  border"/>
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-8 col-lg-10">
+                      <a href="{{line.product.url_key | prepend: url_base }}" class="text-dark font-weight-bold" target="_blank">
+                        {{line.product.name}}
+                      </a>
+                      <div class="">
+                        {{ 'account_order_qty' | translate }}
+                        <b>{{line.qty | round}}</b>
+                      </div>
+                      <div class="">
+                        {{ 'account_order_subtotal' | translate }}
+                        <b>{% include 'currency' | value: line.amount.total %}</b>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor%}
               </div>
-
-            {% endfor%}
             </div>
           </div>
         {% endfor %}
-        <div class="text-right">
+      </div>
+      <div class="row justify-content-end">
+        <div class="col-auto pr-0">      
           {%include 'paginate' with paginate %}
         </div>
-
-      {% endif %}
       </div>
-    </div>
+    {% endif %}
   {% endpaginate %}
 {% endblock %}

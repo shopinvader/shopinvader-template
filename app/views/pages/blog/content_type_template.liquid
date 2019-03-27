@@ -9,11 +9,11 @@ is_layout: false
 content_type: posts
 ---
 {% extends 'layouts/default' %}
-{% block "content" %}
+{% block "body/content" %}
 <div class="container">
   <article class="pt-4">
     <header>
-      <h1 title="title-decorator">{{post.name}}</h1>
+      <h1>{{post.name}}</h1>
       <strong>{{post.date | format_date}}</strong>  {{post.post_author}}
       <p>
         {{post.intro}}
@@ -30,9 +30,15 @@ content_type: posts
 
       </div>
       <div class="col-12 col-lg-3">
-        <h2 class="title-decorator"> {% editable_text post_tags_title %}Tags{% endeditable_text %}</h2>
-        {% for posts_groups in post.groups%}
-          <span class="label label-primary">{{posts_groups.name}}</span>
+        <h2>
+          {{'blog_tags_title' | translate }}
+        </h2>
+        {% for group in post.groups%}
+          <a href="{% path_to page %}?tag={{group._slug}}" class="btn btn-outline-dark btn-sm small pt-0 pb-1">
+            <small>
+              <i class="fas fa-tag fa-w"></i> <b>{{group.name}}</b>
+            </small>
+          </a>
         {% endfor %}
       </div>
 
@@ -40,11 +46,6 @@ content_type: posts
     {% if post.relative_posts.size > 0%}
     <div class="row">
       <div class="col-12">
-        <h2 class="title-decorator">
-          {% editable_text post_relative_title %}
-          See also
-          {% endeditable_text %}
-        </h2>
         <div class="row row-same-height">
           {% for post_relative in post.relative_posts %}
           <div class="col-3">

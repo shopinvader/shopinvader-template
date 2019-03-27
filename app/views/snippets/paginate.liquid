@@ -1,21 +1,35 @@
-<div class="pagination-block">
-  {% if paginate.previous_page %}
-    <a class="btn btn-default" href="?page={{paginate.previous_page}}#product-comments-lists">
-      <i class="fa fa-chevron-left"></i>
-    </a>
-  {% endif %}
-  {% for page_pagination in paginate.parts %}
-    {%if page_pagination.hellip_break == true%}
-    <span class="text-lg">{{page_pagination.title}}</span>
-    {%else%}
-    <a class="btn {% if page_pagination.is_link == false%}btn-primary{% else %}btn-default{% endif %}" href="{% if page_pagination.is_link == true%}{{page_pagination.url}}{% endif %}#product-comments-lists">
-      {{page_pagination.title}}
-    </a>
-    {%endif%}
-  {%endfor%}
-  {% if paginate.next %}
-    <a class="btn btn-default" href="?page={{ paginate.next_page }}#product-comments-lists">
-      <i class="fa fa-chevron-right"></i>
-    </a>
-  {% endif %}
-</div>
+<nav>
+  <ul class="pagination">
+    {% if paginate.previous_page %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{paginate.previous_page}}">
+          <i class="fa fa-chevron-left"></i>
+        </a>
+      </li>
+    {% endif %}
+    {% for page_pagination in paginate.parts %}
+      {%if page_pagination.hellip_break == true%}
+        <li class="page-item">
+          <span class="page-link">{{page_pagination.title}}</span>
+        </li>
+      {%else%}
+      {% assign page_url = "#"  %}
+        {% if page_pagination.is_link == true%}
+          {% assign page_url =  page_pagination.url %}
+        {% endif %}
+        <li class="page-item {% if page_pagination.is_link == false%}active{%endif%}">
+          <a class="page-link" href="{{page_url}}">
+            {{page_pagination.title}}
+          </a>
+        </li>
+      {%endif%}
+    {%endfor%}
+    {% if paginate.next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{paginate.next_page}}">
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>

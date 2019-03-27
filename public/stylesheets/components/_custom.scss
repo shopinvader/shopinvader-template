@@ -31,7 +31,7 @@ $pink:    #e83e8c;
 $red:     #DB2E2D;
 $orange:  #fd7e14;
 $yellow:  #ffc107;
-$green:   #0f8914;
+$green:   #a5d34f;
 $teal:    #20c997;
 $cyan:    #17a2b8;
 
@@ -52,7 +52,7 @@ $colors: (
 );
 
 $theme-colors: (
-  primary: #17a2b8,
+  primary: #4CB6D2,
   secondary: #EEEEEE,
   success: $green,
   info: #1B626D,
@@ -106,6 +106,8 @@ $input-btn-padding-y-lg:    .5rem;
 $input-btn-padding-x-lg:    1rem;
 $input-btn-line-height-lg:  1.5;
 
+$input-group-addon-bg: $gray-100;
+$input-group-addon-color: $gray-400;
 // Navs
 $nav-tabs-border-color:                       #ddd;
 $nav-tabs-link-active-border-color:           #ddd;
@@ -124,3 +126,4 @@ $main-showcase-float: true;
 $main-showcase-width: 100%;
 $main-showcase-bg: $cyan;
 $main-showcase-color: $white;
+

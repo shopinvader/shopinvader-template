@@ -4,6 +4,10 @@ $(window).on('beforeunload', function(){
   }, 300);
 });
 $(document).ready(function () {
+  product_display.init();
+  $('[data-toggle="product-list-display"]').on('click', function(){
+    product_display.set_display($(this).data('value'));
+  });
   $("[data-toggle=nav-sm-display]").click(function(){
     $($(this).data('target')).toggleClass('open-nav');
   });
@@ -12,7 +16,7 @@ $(document).ready(function () {
     var currency_code = $(this).data('value');
     if(currency_code != '') {
       Cookies.set('currency', currency_code);
-      if($('.faceting-container').length > 0) {
+      if($('#locomotive-section-page-search').length > 0) {
         location.reload();
       }
       else {
@@ -238,4 +242,59 @@ var main_modal = {
 
 function contact_recaptcha(event){
   $('.form-contact [type=submit]').attr('disabled', false);
+}
+
+class product_display {
+  static init() {
+    if(this.get_cookies() == null){
+      this.set_cookies('list');
+    }
+    else {
+      this.change_controls();
+      if(product_display.get_cookies() != 'list') {
+        //this.set_display();
+      }
+    }
+  }
+  static change_controls(){
+    $('[data-toggle="product-list-display"]')
+      .removeClass('btn-outline-primary')
+      .addClass('btn-outline-dark');
+    var display_mode = this.get_cookies();
+    $('[data-toggle="product-list-display"][data-value="'+display_mode+'"]')
+      .removeClass('btn-outline-dark')
+      .addClass('btn-outline-primary');
+  }
+  static set_cookies(display){
+    Cookies.set('product_display', display);
+  }
+  static get_cookies() {
+    return Cookies.get('product_display');
+  }
+  static set_display(mode){
+    if(mode != null) {
+      product_display.set_cookies(mode);
+    }
+    else {
+      var mode = product_display.get_cookies();
+    }
+    product_display.change_controls();
+    var col_css ="";
+    var $target = $('#search-result');
+    $target.find('.product-col').removeClass (function (index, className) {
+        return (className.match (/(^|\s)col-\S+/g) || []).join(' ');
+    });
+    if(mode  == 'list') {
+      $target.find('.product-thumbnail')
+        .removeClass('product-thumbnail-vertical')
+        .addClass('product-thumbnail-horizontal');
+      col_css = "col-12";
+    } else {
+      $target.find('.product-thumbnail')
+        .removeClass('product-thumbnail-horizontal')
+        .addClass('product-thumbnail-vertical');
+      col_css = "col-12  col-sm-4 col-lg-3 col-xl-2";
+    }
+    $target.find('.product-col').addClass(col_css);
+  }
 }

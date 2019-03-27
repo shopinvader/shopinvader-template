@@ -1,5 +1,6 @@
 $icon-font-path: "../fonts/bootstrap/" !default;
 @import 'components/custom';
+@import 'components/currency';
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300');
 @import 'bootstrap4/bootstrap';
 @import 'components/account';
@@ -28,6 +29,7 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 @import 'sections/header';
 @import 'sections/cart';
 @import 'sections/category';
+@import 'sections/search';
 //@import 'sections/section_debug';
 /* Need to fix CDN issue
 @import 'fontawesome/fontawesome';
@@ -99,35 +101,6 @@ html {
     }
   }
 }
-
-.row,
-.row-fluid {
-  &.nopadding {
-    [class*='col-'] {
-      padding: 0;
-    }
-  }
-
-  .nopadding {
-    padding: 0;
-  }
-
-  &.separator-right > [class*='col-'] {
-    border-right: 1px solid $gray-100;
-
-    &:last-child {
-      border-color: transparent;
-    }
-  }
-
-  &.separator-bottom > [class*='col-'] {
-    border-bottom: 1px solid $gray-100;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-  }
-}
-
-
 
 .modal-dialog {
   @include media-breakpoint-down(sm) {
@@ -303,4 +276,10 @@ html {
   left:0;
   width: 100%;
   margin:0;
+}
+.btn {
+  &.btn-primary,
+  &.btn-success {
+    color: $white;
+  }
 }

@@ -9,9 +9,7 @@ is_layout: false
 {% block 'body' %}
   <div class="page shadow">
     <header>
-      {% block header %}
-        {% global_section 'header', id:'cart_header'%}
-      {% endblock %}
+      {% global_section 'header_lite', id:'cart_header',  placement: 'top'%}
     </header>
     <main>
       <div class="container-fluid">
@@ -48,8 +46,6 @@ is_layout: false
     </main>
   </div>
 {% endblock %}
-
-
 
 {% comment %}
     <div class="row justify-content-center  pt-4 pb-4">

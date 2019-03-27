@@ -15,10 +15,12 @@ seo_title: Update my address | Shopinvader demo
     {% assign form_action = '/invader/addresses/' | append: address.id | append: "/update" %}
   {% endwith_scope%}
 {% endif %}
-
 <div class="pt-4">
   <div class="card">
-    <h2 class="card-header bg-primary text-light"> {{'account_address_update' | translate  }}</h2>
+    <h2 class="card-header bg-white text-dark"> 
+      <i class="fas fa-map-marker-alt text-primary"></i>
+      {{'account_address_update' | translate  }}
+    </h2>
     <div class="card-body">
       <form class="" action="{{form_action}}" method="post" data-autocomplete="address">
         <input type="hidden" name="invader_success_url" value="{% path_to account_address %}" />

@@ -39,7 +39,7 @@
         <small>{{ 'product_price_from' | translate }}</small>
       </span>
       <strong class="h5">
-        <span class="font-weight-bold {% if product.price.discount > 0%}text-warning{% else %}text-dark{% endif %}">
+        <span class="font-weight-bold {% if product.price.discount > 0%}text-warning{% else %}text-primary{% endif %}">
           {% include 'currency' | value: product.price.value %}
         </span>
         {% if product.price.discount > 0 %}
@@ -54,7 +54,7 @@
         <small>{{'product_price_from' | translate}} </small>
       </span>
       <strong class="product-price-value">
-        <span class="font-weight-bold {%if product.price.discount > 0%}text-warning {%else%}text-dark{% endif %}">
+        <span class="font-weight-bold {%if product.price.discount > 0%}text-warning {%else%}text-primary{% endif %}">
           {% include 'currency' | value: product.price.value %}
         </span>
         {%if product.price.discount > 0%}
@@ -76,7 +76,7 @@
   </div>
   <div class="product-thumbnail-name card-body p-1 p-sm-3 p-xl-2">
     <div class="font-weight-bold">
-      <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="card-title">
+      <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="text-dark">
         {{product.name}}
 
       </a>

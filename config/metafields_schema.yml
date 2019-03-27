@@ -1,16 +1,19 @@
-# Site metafield schema
-store:
-  label: My store
-  fields:
-    phone_number:
-      type: string
-    phone_number_link:
-      type: string
-    phone_number_hours:
-      type: string
 theme:
   label: Theme
+  icon: Theme options
   fields:
+    page_max_width:
+      type: select
+      select_options:
+        - 1020px
+        - 1200px
+        - 1600px
+        - 100%
+    page_border:
+      type: boolean
+    body_bg_color:
+      label: Background color
+      type: color
     logo:
       hint: "Displayed at the top right corner, right before the name of the site."
       type: image
@@ -29,10 +32,7 @@ theme:
     noimage:
       hint: Default placeholder image (categories, products...)
       type: image
-    user_icon:
-      type: image
-    cart_icon:
-      type: image
+    
 algolia:
   label: Algolia
   fields:
@@ -60,9 +60,6 @@ erp:
 google:
   label: Google API Integration
   fields:
-    maps_api_key:
-      hint: Google MAPS API Authentication for autocomplete address
-      type: string
     analytics_id:
       hint: Google Analytics ID
       type: string
@@ -77,7 +74,7 @@ payment:
       hint: "Adyen - Hosted JS Library URL"
       type: string
 smtp:
-  label: SMTP Parameters
+  label: Email Parameters
   fields:
     sender:
       type: string
@@ -94,6 +91,7 @@ smtp:
     enable_starttls_auto:
       type: boolean
 _store:
+  label: Store
   fields:
     available_countries:
       type: string

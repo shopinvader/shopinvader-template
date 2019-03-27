@@ -6,105 +6,79 @@ seo_title : My account | Shopinvader demo
 {% authorize "customers", "account" %}
 {% extends 'layouts/default' %}
 {% block 'body/header' %}
-  {% block header %}
-    {% global_section 'header', id:'cart_header'%}
-  {% endblock %}
-  {% endblock %}
+  {% global_section 'header_lite', id:'cart_header',  placement: 'top'%}
+{% endblock %}
 {% block 'body/content' %}
-<div class="container-fluid">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-3 col-xl-2 account-card-menu border-0 bg-secondary mt-3 p-0 pb-md-4  shadow-sm">
-      <div class="p-2 p-md-3 p-lg-4">
-        <div class="row">
-          <div class="col-10 col-md-12">
-            <h1 class="h3 text-primary">{{'account_title' | translate}} <span class="text-warning">{{current_customer.name}}</span></h1>
-            <p class="m-0 mb-md-4">
-              {{ 'account_welcome_message' | translate}}
-            {% editable_text "account_intro", hint: "intro", fixed: true %}
-              Happy to see you again ;)
-            {% endeditable_text %}
-            </p>
+<div class="container mt-4">
+  <div class="row  pt-2 pb-4 justify-content-between justify-content-xl-center align-items-end">
+    <div class="col-10 col-md-auto accound-icon">
+      <div class="d-flex">
+        <div class="p-2 text-primary d-none d-md-block">
+          <i class="far fa-user fa-3x "></i>
+        </div>
+        <div>
+          <div class="lead text-uppercase font-weight-bold">
+            {{'account_title' | translate}} {{current_customer.name}}
           </div>
-          <div class="col-2 d-md-none">
-            <div class="">
-              <a href="#account-menu" data-toggle="collapse" class="btn btn-link btn-lg">
-                <i class="fas fa-bars"></i>
-              </a>
-            </div>
-          </div>
+          {{ 'account_welcome_message' | translate}}
         </div>
       </div>
-      <div class=" collapse d-md-block" id="account-menu">
-        <small class="p-3">{{current_customer.email}}</small>
-        <form method="post" action="{% path_to account %}">
-          <input type="hidden" name="auth_action" value="sign_out" />
-          <input type="hidden" name="auth_content_type" value="customers" />
-          <button type="submit" class="btn btn-link" >
-            <i class="fa fa-power-off"></i>
-            {{ 'account_signout' | translate }}
-          </button>
-        </form>
-        <ul class="nav flex-column pb-4" >
-          <li class="nav-item {%if page.handle == 'account_index'%}active{% endif%}">
-            <a href="{%path_to account_index%}" class="nav-link ">
-              <i class="fas fa-file-alt"></i> {{ "account_order_title" | translate }}
-            </a>
-          </li>
-          <li class="nav-item {%if page.handle == 'account_quotations'%}active{% endif%}">
-            <a href="{%path_to account_quotations%}" class="nav-link ">
-              <i class="fas fa-file-invoice"></i> {{ "account_quotation_title" | translate }}
-            </a>
-          </li>
-          <li class="nav-item {%if page.handle == 'account_profil'%}active{% endif%}">
-            <a href="{%path_to account_profil%}" class="nav-link ">
-              <i class="fas fa-user"></i> {{ "account_profil_title" | translate }}
-            </a>
-          </li>
-          <li class="nav-item {%if page.handle == 'account_address'%}active{% endif%}">
-            <a href="{%path_to account_address%}" class="nav-link ">
-              <i class="fas fa-truck"></i> {{ "account_address_lists" | translate }}
-            </a>
-          </li>
-          <li class="nav-item {%if page.handle == 'account_password'%}active{% endif%}">
-            <a href="{%path_to reset_password_request%}" class="nav-link ">
-              <i class="fas fa-key"></i> {{ "account_password_title" | translate }}
-            </a>
-          </li>
-          <li class="nav-item {%if page.handle == 'account_rma'%}active{% endif%}">
-            <a href="{%path_to account_rma %}" class="nav-link ">
-              <i class="fas fa-backward"></i> {{ "account_rma_title" | translate }}
-            </a>
-          </li>
-        </ul>
-      </div>
     </div>
-    <div class="col-12 col-md-9 col-xl-10  mt-3">
-      {% block 'tabcontent' %}
+    <div class="col-2 col-lg-auto d-block d-lg-none">
+      <a href="#account-menu" data-toggle="collapse" class="btn btn-link btn-lg">
+        <i class="fas fa-bars"></i>
+      </a>
+    </div>
+
+      <ul class="nav accound-menu collapse col-12 col-lg-auto ml-4 ml-xl-0 pl-xl-0 d-lg-flex" id="account-menu">
+        <li class="nav-item {%if page.handle == 'account_index'%}active{% endif%}">
+          <a href="{%path_to account_index%}" class="nav-link ">
+            {{ "account_order_title" | translate }}
+          </a>
+        </li>
+        <li class="nav-item {%if page.handle == 'account_quotations'%}active{% endif%}">
+          <a href="{%path_to account_quotations%}" class="nav-link ">
+            {{ "account_quotation_title" | translate }}
+          </a>
+        </li>
+        <li class="nav-item {%if page.handle == 'account_profil'%}active{% endif%}">
+          <a href="{%path_to account_profil%}" class="nav-link ">
+            {{ "account_profil_title" | translate }}
+          </a>
+        </li>
+        <li class="nav-item {%if page.handle == 'account_address'%}active{% endif%}">
+          <a href="{%path_to account_address%}" class="nav-link ">
+            {{ "account_address_lists" | translate }}
+          </a>
+        </li>
+        <li class="nav-item {%if page.handle == 'account_rma'%}active{% endif%}">
+          <a href="{%path_to account_rma %}" class="nav-link ">
+            {{ "account_rma_title" | translate }}
+          </a>
+        </li>
+        <li class="pl-5">
+          <form method="post" action="{% path_to account %}">
+            <input type="hidden" name="auth_action" value="sign_out" />
+            <input type="hidden" name="auth_content_type" value="customers" />
+            <button type="submit" class="btn btn-outline-primary btn-lg" >
+              <i class="fa fa-power-off"></i>
+              {{ 'account_signout' | translate }}
+            </button>
+          </form>
+        </li>
+      </ul>
+
+  </div>
+  <div class="row">
+    <div class="col-12 pt-3">
+      <div class="container">
+        {% block 'tabcontent' %}
       {% endblock %}
-    </div>
-    <div class="col-12">
-      <div class="row">
-        
-      </div>
-      <div class="row">
-        <div class="col-12 col-md-3 col-xl-2 account-card-menu border-0 bg-secondary p-0 pb-4">
-
-
-          </div>
-
-
-        <div class="col-12 col-lg-9">
-
-          <div class="row">
-            <div class="col-12 pt-2 pb-2">
-
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </div>
+
 {% endblock %}
 {% block 'body/footer' %}
    <div></div>

@@ -1,75 +1,82 @@
 ---
-title: Account addresses
 handle: account_address
+title: Account addresses
+listed: false
+meta_description:
+meta_keywords: 
+position: 200
+published: true
+seo_title: My addresses | Shopinvader demo
 slug: addresses
-seo_title: Shipping addresses | Shopinvader demo
 ---
 {% extends 'layouts/account '%}
 
 {% block 'body/content/tabcontent' %}
-<div class="pt-4">
-    <div class="row">
-    <div class="col-6">
-      <h2>{{'account_address_lists' | translate  }}</h2>
-    </div>
-    <div class="col-6 text-right">
-      <form action="{% path_to account_address_form %}" method="post">
-        <button type="submit" name="button" class="btn btn-warning">
-          <i class="fa fa-plus"></i> {{'account_address_add' | translate}}
-        </button>
-      </form>
-    </div>
+<div class="row justify-content-between">
+  <div class="col-auto">
+    <h1 class="h3">{{'account_address_lists' | translate  }}</h1>
   </div>
-  <div class="row">
-    <div class="col-12">
-      {% with_scope address_type: "address"%}
+  <div class="col-auto">
+    <form action="{% path_to account_address_form %}" method="post">
+      <button type="submit" name="button" class="btn btn-outline-primary">
+        <i class="fa fa-plus"></i> {{'account_address_add' | translate}}
+      </button>
+    </form>
+  </div>
+  <div class="col-12">
+    {% with_scope address_type: "address"%}
       <div class="row">
         {% for address in store.addresses%}
-        <div class="col-12 col-sm-6 col-xl-4  align-items-stretch d-flex">
-          <div class="card w-100">
-            <div class="card-header h4 text-white bg-primary">
-              <strong>{{address.name}}</strong>
-            </div>
-            <div class="card-body">
-              <address>
-                <div class="">
-                  {{address.street}}
+          <div class="col-12  mt-3 mb-2">
+            <div class="card card-body">
+              <div class="row">
+                <div class="col-12 col-lg-4 border-right ">
+                  <div class="row align-items-center">
+                    <div class="col-auto pr-0">
+                      <i class="fas fa-map-marker-alt text-primary fa-2x"></i>
+                    </div>
+                    <div class="col-auto lead font-weight-bold">
+                       {{address.name}}
+                    </div>
+                  </div>
+                  <div class="row small pt-3 pb-2">
+                    <form action="{% path_to account_address_form %}" method="post" class="col-6">
+                      <input type="hidden" name="item_id" value="{{address.id}}">
+                      <button type="submit" name="update_{{address.id}}" class="btn btn-outline-primary btn-block">
+                        <i class="fas fa-pencil-alt"></i> {{'cart_address_update' | translate }}
+                      </button>
+                    </form>
+                    <form method="POST" action="/invader/addresses/{{address.id | round}}/delete" class="col-6">
+                      <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+                      <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+                      <button type="submit" name="button" class="btn btn-outline-danger btn-block">
+                          <i class="fas fa-trash"></i> {{'cart_address_delete' | translate }}
+                      </button>
+                    </form>
+                  </div>
                 </div>
-                <div class="">
-                  {{address.street2}}
+                <div class="col-12 col-lg-8">
+                  <address>
+                    <div class="">
+                      {{address.street}}
+                    </div>
+                    <div class="">
+                      {{address.street2}}
+                    </div>
+                    <div class="">
+                      {{address.zip}} - {{address.city}}
+                    </div>
+                    <div class="">
+                      {{address.country.name}}
+                    </div>
+                  </address>
                 </div>
-                <div class="">
-                  {{address.zip}} - {{address.city}}
-                </div>
-                <div class="">
-                  {{address.country.name}}
-                </div>
-              </address>
-
-            </div>
-            <div class="card-footer bg-white">
-              <div class="row small">
-                <form action="{% path_to account_address_form %}" method="post" class="col-6">
-                  <input type="hidden" name="item_id" value="{{address.id}}">
-                  <button type="submit" name="update_{{address.id}}" class="btn btn-link">
-                    <i class="fas fa-pencil-alt"></i> {{'cart_address_update' | translate }}
-                  </button>
-                </form>
-                <form method="POST" action="/invader/addresses/{{address.id | round}}/delete" class="col-6">
-                  <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
-                  <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
-                  <button type="submit" name="button" class="btn btn-link">
-                      <i class="fas fa-trash"></i> {{'cart_address_delete' | translate }}
-                  </button>
-                </form>
               </div>
             </div>
           </div>
-        </div>
-        {% endfor%}
+        {% endfor %}
       </div>
-      {% endwith_scope%}
-    </div>
+    {% endwith_scope%}
   </div>
 </div>
 {% endblock %}

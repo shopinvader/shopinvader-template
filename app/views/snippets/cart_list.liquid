@@ -8,8 +8,8 @@
           <img src="{{cart_line.product.images.first.medium.src | default: site.metafields.theme.noimage}}" alt="{{cart_line.product.images.first.medium.alt}}" title="{{cart_line.product.name}}"  class="img-fluid">
         </div>
         <div class="col-8 col-sm-10 col-md-5 h4 p-0">
-          <div class="font-weight-bold">{{cart_line.product.model.name}}</div>
-          <div class="small text-dark">{{cart_line.product.short_name}}</div>
+          <div class="font-weight-bold text-truncate">{{cart_line.product.model.name}}</div>
+          <div class="small text-dark text-truncate">{{cart_line.product.short_name}}</div>
           <div class="small text-dark">SKU {{cart_line.product.sku}}</div>
           <div class="small text-dark">
             <a href="{{ cart_line.product.url_key  | prepend: url_base }}">

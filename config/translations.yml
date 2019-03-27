@@ -1,3 +1,7 @@
+btn_back:
+  en: Return
+  fr: Retour
+
 payment_adyen_button:
   en: <i class="fas fa-credit-card"></i>  Pay by credit card
   fr: <i class="fas fa-credit-card"></i>  Payer par carte de crédit
@@ -50,6 +54,18 @@ account_order_subtotal:
 account_order_shipping:
   en: Shipping cost
   fr: Frais de port
+account_order_level0:
+  en: Ordered on 
+  fr: Commandé le 
+account_order_level1:
+  en: Checkout
+  fr: Paiement de 
+account_order_level2:
+  en: Processing
+  fr: En préparation
+account_order_level3:
+  en: Shipped
+  fr: Expédié
 account_quotation_invoicing_address:
   en: Invoicing address
   fr: Adresse de facturation
@@ -84,9 +100,6 @@ account_quotation_name:
 account_quotation_payment:
   en: Pay this quotation
   fr: Payer ce devis
-account_quotation_cancel:
-  en: Return
-  fr: Retour
 account_quotation_status_estimating:
   en: Estimation in progress
   fr: En cours de chiffrage
@@ -135,6 +148,28 @@ account_title:
 account_signout:
   en: Sign out
   fr: Déconnexion
+account_forgetpassword_title:
+  en: Password assistance
+  fr: Assistance mot de passe
+account_forgetpassword_logged:
+  en: >
+    Sorry, password reset is not available when a user is currently logged in.<br>
+    <b>Please logout before</b>
+  fr: >
+    Veuillez vous déconnecter pour poursuivre.  
+account_forgetpassword_instructions_sent:
+  en: The instructions for changing your password have been emailed to you.
+  fr: Les instructions pour procéder au remplacement de votre mot de passe vous a été envoyé par courriel.
+account_forgetpassword_intro:
+  en: >
+    Enter the email address  associated with your account. <br>
+    We will send you an email to reset your password.
+  fr: 
+    Saisissez votre adresse e-mail associée à votre compte.<br>
+    Vous recevrez un e-mail pour procéder à la réinitilisation de votre mot de passe.
+account_forgetpassword_error_email:
+  en: Wrong email address.
+  fr: Adresse e-mail non reconnu.
 account_welcome_message:
   en: Happy to see you again ;)
   fr: Happy to see you again ;)
@@ -144,6 +179,8 @@ header_cart:
 header_login:
   en: Sign in or register
   fr: Mon compte
+category_view_all:
+  en: View all products
 currency_eur:
   en: Euro
   fr: Euro
@@ -293,9 +330,6 @@ cart_invoice_address_different:
 cart_invoice_address:
   en: Invoice address
   fr: Address de facturaton
-cart_return:
-  en: Cancel
-  fr: Retour
 cart_submit:
   en: Submit
   fr: Valider
@@ -341,6 +375,9 @@ filter_clear:
 filter_price:
   en: Price
   fr: Prix
+filter_current:
+  en: Current filters
+  fr: Filtres actifs
 home:
   en: Home
   fr: Accueil
@@ -620,3 +657,11 @@ show_category:
 show_more:
   en: show more
   fr: en savoir plus
+blog_title:
+  en: Blog
+blog_tags_title:
+  en: Tags
+  fr: Catégories
+blog_back:
+  en: Back to main blog page
+

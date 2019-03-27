@@ -3,18 +3,9 @@ title: account
 is_layout: false
 ---
 {% extends 'layouts/default' %}
-{% block 'header' %}
-  <div class="container cart-header">
-    <div class="row">
-      <div class="col-12 brand">
-      {% if site.metafields.theme.logo %}
-      <a href="{% path_to home %}">
-        <img src="{{ site.metafields.theme.logo }}" alt="{{ site.name }}"  class="img-responsive"/>
-      </a>
-      {% endif %}
-      </div>
-    </div>
-  </div>
+
+{% block 'body/header' %}
+  {% global_section 'header_lite', id:'cart_header'%}
 {% endblock %}
 {% block 'content' %}
 {% endblock %}

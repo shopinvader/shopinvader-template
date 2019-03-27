@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  {% assign currency = store.currencies_format.first.last %}
+
   var currencies = {
     items : {
       {% for currency_data in store.currencies_format %}
@@ -45,6 +45,7 @@
       app_id: {{site.metafields.algolia.application_id | json}},
       translations: {
         'clear_all' : {{ 'filter_clear' | translate | json }},
+        'filter_current' : {{ 'filter_current' | translate | json }},
         'filter_other_item': {{ 'filter_other_item' | translate | json }},
         'result_number': 'Resultat(s)',
         'per_page' : {{'per_page' | translate | json }},
@@ -71,3 +72,4 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hogan.js/3.0.2/hogan.min.js"></script>
 
 {% endif %}
+

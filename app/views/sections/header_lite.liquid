@@ -1,0 +1,28 @@
+---
+{
+  "name": "Header lite",
+  "class": "header",
+  "icon": "list",
+  "settings": [
+    {
+      "label": "Brand logo",
+      "id": "picture",
+      "type": "image_picker"
+    }
+  ],
+  "default": {
+    "settings": {
+      "picture": "../images/shop-logo.png"
+    }
+  }
+}
+---
+<div class="container-fluid">
+  <div class="row ">
+    <div class="col-12 pt-4 pb-4 text-center">
+      <a class="" href="{% path_to 'home' %}">
+        <img src="{{ section.settings.picture }}" alt="{{ site.name }}" class="navbar-brand img-fluid"/>
+      </a>
+    </div>
+  </div>
+</div>

@@ -56,7 +56,31 @@ is_layout: false
     
   </head>
   <body>
-    {% global_section 'global_theme_settings',  placement: 'top', id:'global_theme_settings'%}
+    <style media="screen">
+      body {
+        background-color: {{site.metafields.theme.body_bg_color}};
+      }
+      body .page {
+        max-width: {{site.metafields.theme.page_max_width}};
+        {% if site.metafields.theme.page_border == false %}
+          box-shadow: unset !important;
+          border: none;
+        {% endif %}
+      }
+      .header .block-row {
+        {% if site.metafields.theme.page_border == false %}
+          box-shadow: unset !important;
+          border: none;
+        {% endif %}
+      }
+      .header .block-row.container {
+        max-width: {{site.metafields.theme.page_max_width}};
+        
+      }
+      .locomotive-section[data-locomotive-section-type="header"] .header .header-block-navigation .list-inline .list-inline-item .list-inline-dropdown-content {
+        max-width: {{site.metafields.theme.page_max_width}};
+      }
+    </style>
     <div class="main-loader d-none">
       <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
         <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
@@ -82,7 +106,10 @@ is_layout: false
       {% if params.addtocart_product_id %}
         {% assign product_id = params.addtocart_product_id | round %}
         <div class="title">
-          {{ 'cart_item_added' | translate }}
+          <div class=" font-weight-bold">
+            {{ 'cart_item_added' | translate }}
+          </div>
+            
         </div>
         <div class="content">
           <div class="">
@@ -91,12 +118,17 @@ is_layout: false
                 {% include 'cart_list' with cart: store.cart, readonly: true %}
               </div>
             </div>
-            <div class="row">
-              <div class="col-12 col-sm-6 text-center text-sm-left">
-                <a href="{{product.url_key | prepend: url_base}}" class="btn btn-light btn-lg">{{"cart_continue_shopping" | translate }}</a>
+            <div class="row justify-content-between align-items-start">
+              <div class="col-auto text-center text-sm-left">
+                <a href="{{product.url_key | prepend: url_base}}" class="btn btn-outline-dark">
+                  <i class="fas fa-chevron-left"></i>
+                  {{"cart_continue_shopping" | translate }}
+                </a>
               </div>
-              <div class="col-12 col-sm-6 text-center text-sm-right pt-2 pt-sm-0">
-                <a href="{% path_to 'cart_index' %}" class="btn btn-primary btn-lg">{{"cart_checkout" | translate }} </a>
+              <div class="col-auto text-center text-sm-right">
+                <a href="{% path_to 'cart_index' %}" class="btn btn-primary ">
+                  {{"cart_checkout" | translate }} <i class="fas fa-chevron-right"></i>
+                </a>
               </div>
             </div>
           {% if product and product.relateds.cross_sell != null%}
@@ -119,8 +151,6 @@ is_layout: false
         </div>
       {% endif %}
     </div>
-
-
     {{ 'popper.min.js' | javascript_tag }}
     {{ 'jquery.min.js' | javascript_tag }}
     {{ 'jquery.slidereveal.min.js' | javascript_tag }}
@@ -138,8 +168,10 @@ is_layout: false
       {{ 'search_autocomplete.js' | javascript_tag }}
       
     {% endblock %}
+     
     {% block 'javascripts', short_name: true %}
     {% endblock %}
-    {% global_section 'cookies_manager',  placement: 'bottom'  %}
+    {% global_section 'cookies_manager',  placement: 'bottom' %}
+    {{js_footer}}
   </body>
 </html>

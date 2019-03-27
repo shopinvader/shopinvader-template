@@ -36,6 +36,11 @@
               </div>
             </div>
           </li>
+          <li class="list-inline-item">
+            <a href="{{ category_level1.url_key | prepend: url_base}}">
+              {{'category_view_all' | translate }}
+            </a>
+          </li>
           {% for category_level2 in category_level1.childs %}
             <li class="list-inline-item level-2">
               {% if category_level2.childs.size > 0 %}
@@ -57,6 +62,11 @@
                         {{ category_level2.name}}
                       </div>
                     </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="{{ category_level2.url_key | prepend: url_base}}">
+                      {{'category_view_all' | translate }}
+                    </a>
                   </li>
                   {% for category_level3 in category_level2.childs %}
                     <li class="list-inline-item level-2">

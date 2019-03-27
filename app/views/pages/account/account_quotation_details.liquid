@@ -16,16 +16,18 @@ seo_title: My quotation | Shopinvader demo
   {% endwith_scope%}
   {% if quotation %}
     <div class="col-12">
-      <div class="row bg-dark text-light pt-2 pb-2 navbar-quotation">
+      <div class="row bg-secondary text-dark pt-2 pb-2 navbar-quotation">
         <div class="col-12 col-sm-8 col-lg-9">
-          <a class=" text-light btn btn-link btn-lg" href="#">
+          <a href="{% path_to account_quotations %}" class="btn btn-outline-dark">
+            <i class="fas fa-angle-left"></i>
+              {{'btn_back' | translate}}
+          </a>
+          <a class=" text-dark btn btn-link btn-lg" href="#">
             <i class="fa fa-file-invoice"></i>
             {{quotation.name}}
-            <span class="badge badge-primary small">
+            <span class="badge badge-primary text-light small ml-3">
               {{'account_quotation_status_' | append: quotation.state | translate}}
             </span>
-
-
           </a>
         </div>
         <div class="col-6 col-sm-4 col-lg-3 ">
@@ -37,16 +39,17 @@ seo_title: My quotation | Shopinvader demo
             </div>
             <div class="quotation-pay">
               <i class="fas fa-angle-left"></i>
-              {{'account_quotation_cancel' | translate}}
+              {{'btn_back' | translate}}
             </div>
           </button>
           {% endif%}
+          
         </div>
 
       </div>
     </div>
     <div class="collapse show collapse-toggle" id="card-quotation">
-      <div class="card  shadow bg-white p-3 p-lg-4">
+      <div class="card bg-white p-3 p-lg-4">
         <div class="card-body p-3">
           <div class="row">
             <div class="col-12 pb-4">

@@ -1,10 +1,15 @@
 ---
 {
-  "name": "Cells and rows",
+  "name": "Texts & Images",
   "class": "",
   "icon": "image_text",
   "keep_icon": true,
   "settings": [
+    {
+      "label": "Image or texts cells.",
+      "id": "help",
+      "type": "hint"
+    },
     {
       "label": "Section Name",
       "id": "section_name",
@@ -153,7 +158,7 @@
     }
   ],
   "presets": [{
-    "name": "Cells and rows",
+    "name": "Texts & Images",
     "category": "Content",
     "settings": {
       "section_name": "Cells",
@@ -165,17 +170,18 @@
       {
         "type": "cell_text",
         "settings" : {
-          "cell_size": "md",
-          "content":  "<h3>Lorem ipsum dolor sit amet</h3> <br>Vivamus nunc nisi, ultricies sed mollis fringilla, volutpat ac neque. Praesent eget felis tincidunt, efficitur elit eu, varius odio. Aliquam in tortor lacinia, mollis ex eu, venenatis erat",
+          "cell_size": "lg",
+          "content":  "<h3>Lorem ipsum dolor sit amet</h3> <div>Vivamus nunc nisi, ultricies sed mollis fringilla, volutpat ac neque. Praesent eget felis tincidunt, efficitur elit eu, varius odio. Aliquam in tortor lacinia, mollis ex eu, venenatis erat</div>",
           "margin": "sm"
         }
       },
       {
-        "type": "cell_text",
+        "type": "cell_image",
         "settings" : {
-          "cell_size": "md",
-          "content":  "<h3>Lorem ipsum dolor sit amet</h3> <br>Vivamus nunc nisi, ultricies sed mollis fringilla, volutpat ac neque. Praesent eget felis tincidunt, efficitur elit eu, varius odio. Aliquam in tortor lacinia, mollis ex eu, venenatis erat",
-          "margin": "sm"
+          "cell_size": "sm",
+          "picture":  "http://via.placeholder.com/300/dff0f3/107686?text=Replace+this+image",
+          "margin": "sm",
+          "content": ""
         }
       }
     ]
@@ -197,11 +203,12 @@
         }
       },
       {
-        "type": "cell_text",
+        "type": "cell_image",
         "settings" : {
-          "cell_size": "md",
-          "content":  "<h3>Lorem ipsum dolor sit amet</h3> <br>Vivamus nunc nisi, ultricies sed mollis fringilla, volutpat ac neque. Praesent eget felis tincidunt, efficitur elit eu, varius odio. Aliquam in tortor lacinia, mollis ex eu, venenatis erat",
-          "margin": "sm"
+          "cell_size": "sm",
+          "picture":  "http://via.placeholder.com/300/dff0f3/107686?text=Replace+this+image",
+          "margin": "sm",
+          "content": ""
         }
       }
     ]
@@ -273,7 +280,9 @@
               {% include 'block_debug' %}
               {% if cell.type == "cell_image" %}
                 <img src="{{cell.settings.picture}}" alt="{{cell.settings.picture_alt}}" class="img-fluid">
-                {{ cell.settings.content }}
+                <div>
+                  {{ cell.settings.content }}
+                </div>
               {% else %}
                 {{ cell.settings.content }}
               {% endif %}

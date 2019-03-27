@@ -7,20 +7,50 @@ seo_title: My account profile | Shopinvader demo
 {% extends 'layouts/account '%}
 
 {% block 'body/content/tabcontent' %}
-  {% with_scope address_type: "profile"%}
-    {% assign profile = store.addresses.first %}
-    <div class="card">
-      <h2 class="card-header bg-primary text-light"><i class="fas fa-user"></i>  {{'account_profil_title' | translate}}</h2>
-      <div class="card-body">
-        <form action="/invader/addresses/{{profile.id | round}}/update" method="post" data-autocomplete="address">
-          <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
-          <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
-          {% include 'address_form' with address: profile %}
-          <div class="text-right">
-            <input type="submit" name="submit" class="btn btn-primary " value="{{'account_address_submit' | translate}}">
+  <div class="row">
+    <div class="col-12 col-lg-7">
+      {% with_scope address_type: "profile"%}
+        {% assign profile = store.addresses.first %}
+        <div class="card">
+          <h2 class="card-header bg-white">
+            <i class="far fa-user text-primary"></i>  
+            {{'account_profil_title' | translate}}
+          </h2>
+          <div class="card-body">
+            <form action="/invader/addresses/{{profile.id | round}}/update" method="post" data-autocomplete="address">
+              <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+              <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+              {% include 'address_form' with address: profile %}
+              <div class="text-right">
+                <input type="submit" name="submit" class="btn btn-primary " value="{{'account_address_submit' | translate}}">
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
+      {% endwith_scope%}
+    </div>
+    <div class="col-5">
+      <div class="card">
+        <div class="card-body text-center">
+          <h1 class="h3 text-uppercase pb-3">
+            <i class="fa fa-key text-warning"></i>  
+            {{ 'account_forgetpassword_title' | translate }}
+          </h1>
+          {% include 'store_notifications' %}
+          <div class="text-left">
+            <div class="text-left mb-3">
+              {{ 'account_forgetpassword_logged' | translate }}
+            </div>
+            <form method="post" action="{% path_to 'reset_password_request' %}?current_email={{current_customer.email | url_encode}}" class="text-center">
+              <input type="hidden" name="auth_action" value="sign_out" />
+              <input type="hidden" name="auth_content_type" value="customers" />
+              <button type="submit" class="btn btn-outline-primary" >
+                {{ 'account_signout' | translate }}
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-  {% endwith_scope%}
+  </div>
 {% endblock %}

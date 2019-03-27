@@ -264,6 +264,12 @@
           "type": "checkbox"
         },
         {
+          "label": "Hide on mobile",
+          "id": "display_xs",
+          "type": "checkbox",
+          "default": false
+        },
+        {
           "label": "Margin",
           "id": "margin",
           "type": "checkbox",
@@ -287,7 +293,7 @@
           "cells_align": "center",
           "theme_color": "dark",
           "full_width": true,
-          "margin": true
+          "margin": false
         }
       },
       {
@@ -313,7 +319,8 @@
           "cells_align": "between",
           "theme_color": "none",
           "full_width": true,
-          "vertical_align": "center"
+          "vertical_align": "center",
+          "display_xs": true
         }
       },
       {
@@ -357,7 +364,8 @@
           "cells_align": "start",
           "theme_color": "light",
           "full_width": true,
-          "vertical_align": "center"
+          "vertical_align": "center",
+          "display_xs": true
         }
       },
       {
@@ -393,15 +401,13 @@
   setProp('currency',  currency);
 {% endaction %}
 <style media="all">
-  .currency-list {
-    display: inline;
-  }
-  .currency-list .currency-format {
-    display: none;
-  }
+  
   {% for currency_format in store.currencies_format %}
     {% assign currency_format_code = currency_format.first %}
     {% if currency_format_code == currency.code %}
+    .currency-list .currency-format:first-child {
+      display: none;
+    }
     .currency-list .currency-format[data-currency={{currency_format_code}}] {
       display: inline;
     }
@@ -423,6 +429,9 @@
           {% endif %}
           {% if block.settings.margin == true %}
             {% assign css_container = css_container | append: " pt-2 pb-2" %}
+          {% endif %}
+          {% if block.settings.display_xs != true %}
+            {% assign css_container = css_container | append: " d-none d-md-flex" %}
           {% endif %}
           {% assign css_container = css_container | append: cell_align_row %}
             </div>
@@ -540,10 +549,9 @@
                         {% endif %}
                       </span>
                     </a>
-                    {% include 'header_icon_account' %}
                   </div>
                 </div>
-                {% capture 'user_icon_sm%}
+                {% capture 'user_icon_sm' %}
                   <a class="d-flex align-items-center text-light" href="{% path_to account%}">
                     <div class=" ">
                       <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="img-fluid p-0 w-50"/>
@@ -601,6 +609,15 @@
                         </li>
                       {% endif %}
                     {% endfor%}
+                    {% for page_nav in site.pages %}
+                      {% if page_nav.listed? and page_nav.published? and page_nav.depth <= 1%}
+                        <li class="list-inline-item pr-3 pl-3 pt-3 pb-3 col-12 col-md-auto">
+                          <a href="{% path_to page_nav %}" class="font-weight-bold text-dark">
+                            {{ page_nav.title}}
+                          </a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
                   </ul>
                 </div>
               {% when "search" %}
@@ -691,6 +708,15 @@
         level: 1
       %}
     {% endwith_scope%}
+    {% for page_nav in site.pages %}
+      {% if page_nav.listed? and page_nav.published? and page_nav.depth <= 1%}
+        <li class="list-inline-item">
+          <a href="{% path_to page_nav %}" class="">
+            {{ page_nav.title}}
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
     <li class="list-inline-item bg-dark text-light">
       {{ user_icon_sm }}
     </li>

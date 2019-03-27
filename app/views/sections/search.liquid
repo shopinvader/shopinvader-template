@@ -100,6 +100,7 @@
   }
 }
 ---
+
 {% if category != null %}
   {% assign title = category.name %}
   {% assign short_description = category.short_description %}
@@ -110,7 +111,17 @@
   {% assign description = section.settings.description %}
 {% endif %}
 <div class="container-fluid">
-  <div class="row">
+  <div class="row search-layout-{{section.settings.layout}}">
+    {% if section.settings.layout == 'row' %}
+        <div class="col-12 d-none  d-md-block">
+          <div class="p-1 pt-4">
+            <h1 class="title-decorator">
+              {{title}}
+            </h1>
+            <p>{{short_description}}</p>
+          </div>
+        </div>
+    {% endif %}
     {% for block in section.blocks%}
       {% case block.settings.theme_color %}
       {% when "light" %}
@@ -136,23 +147,25 @@
           {% when 'result'%}
             {% assign css_cell = "col-12 col-md-8 col-lg-9 col-xl-10 "%}
         {% endcase%}
+
       {% endif %}
 
-      <div class="block {{css_cell}} block-{{block.type}} ">
+      
 
+      <div class="block {{css_cell}} block-{{block.type}} ">
         {% include 'block_debug' %}
         {% case block.type %}
         {% when 'faceting'%}
-          {% include 'block_category_faceting' with
+          {% include 'block_search_faceting' with
             category
             layout: section.settings.layout,
-            title: block.settings.title,
+            block_title: block.settings.title,
             current_filter: block.settings.current_filter,
             price_filters: block.settings.price_filters,
             title, short_description, description
           %}
         {% when 'result'%}
-          {% include 'block_category_result' with
+          {% include 'block_search_result' with
             layout: section.settings.layout,
             bordered: block.settings.bordered,
             current_filter: block.settings.current_filter,

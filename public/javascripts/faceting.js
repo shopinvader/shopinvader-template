@@ -75,7 +75,7 @@ class FacetingSearch {
     });
     this.init_widgets('pagination', 'paginate', {
       cssClasses: {
-        root: 'pagination-block',
+        root: 'pagination-block m-0',
         link: 'btn btn-outline-dark '
       }
     });
@@ -96,7 +96,7 @@ class FacetingSearch {
       autoHideContainer: false,
       items: page_hits_count,
       cssClasses: {
-        select: " form-control"
+        select: " form-control border-dark"
       }
     });
     /*
@@ -132,7 +132,14 @@ class FacetingSearch {
           limit: 100
         },
         collapsible: {
-          collapsed: false,
+          collapsed: $element.data('filter-collapse'),
+        },
+        cssClasses: {
+          header: ' search-widget-header',
+          root: ' search-widget facet',
+          body: ' search-widget-body',
+          item: ' search-widget-item',
+          active: ' active-item'
         },
         transformData: {
           item: function(element) {
@@ -161,30 +168,35 @@ class FacetingSearch {
   init_price_filters() {
     var $this = this;
     this.init_widgets('rangeSlider', 'sliderprice', {
-        attributeName: $this.price_attribute,
-        autoHideContainer: false,
-        searchForFacetValues: true,
-        templates: {
-          header: "<h4 class='text-uppercase pb-4'>"+algolia_params.translations.price+"</h4>",
-        },
-        collapsible: {
-          collapsed: false,
-        },
-        tooltips: {
-          format(rawValue) {
-            var number = new Number(rawValue);
-            var currency = currencies.items[currencies.selected];
-            return number.toLocaleString(
-              currency.locale_code,
-              {
-                style: "currency",
-                currency: currencies.selected,
-              }
-            );
-
-          }
+      attributeName: $this.price_attribute,
+      autoHideContainer: false,
+      searchForFacetValues: true,
+      templates: {
+        header: "<h4 class='text-uppercase pb-4'>"+algolia_params.translations.price+"</h4>",
+      },
+      collapsible: {
+        collapsed: false,
+      },
+      cssClasses: {
+        header: ' search-widget-header',
+        root: ' search-widget sliderprice',
+        body: ' search-widget-body',
+        item: ' search-widget-item'
+      },
+      tooltips: {
+        format(rawValue) {
+          var number = new Number(rawValue);
+          var currency = currencies.items[currencies.selected];
+          return number.toLocaleString(
+            currency.locale_code,
+            {
+              style: "currency",
+              currency: currencies.selected,
+            }
+          );
         }
-      });
+      }
+    });
     
     this.set_widget(
       this.price_slider
@@ -210,7 +222,7 @@ class FacetingSearch {
             cssClasses: {
               root: $this.product_root_css,
               item: $this.product_item_css,
-              empty: ' text-center m-4 p-4 lead  d-block'
+              empty: ' text-center m-4 p-4 lead d-block'
             },
             transformData: {
               item: function(item) {
@@ -241,6 +253,9 @@ class FacetingSearch {
         function(i, element){
           current.set_widget(
             instantsearch.widgets.currentRefinedValues({
+              templates: {
+                
+              },
               container: element,
               clearAll: 'after',
               clearsQuery: true,
@@ -248,6 +263,10 @@ class FacetingSearch {
               cssClasses: {
                 count: ' d-none',
                 clearAll: ' btn btn-outline-dark btn-sm  btn-sm  d-inline-block',
+                header: ' search-widget-header',
+                root: ' search-widget current-filter',
+                body: ' search-widget-body',
+                item: ' search-widget-item  btn btn-outline-dark btn-sm '
               },
               transformData : {
                 item: function(element) {
@@ -323,7 +342,7 @@ class FacetingSearch {
     this.instance.templatesConfig.helpers.emphasis = function(text, render) {
       return '<em>' + render(text) + '</em>';
     };
-    this.instance.templatesConfig.helpers.format_price_with_currency = function(text, render) {
+    this.instance.templatesConfig.helpers.currency = function(text, render) {
       var value = 0;
       if(typeof(render) != 'undefined') {
         value = parseFloat(render(text));
@@ -363,6 +382,7 @@ class FacetingSearch {
   }
   static format_price_with_currency(value) {
     var price = new Number(value);
+    console.log(currencies.selected);
     var currency = currencies.items[currencies.selected];
     price *= currency.rate;
     var html = price.toLocaleString(currencies.selected,
@@ -374,7 +394,6 @@ class FacetingSearch {
     return html;
   }
   start(callback) {
-
     this.init_templating();
     this.init_all_widgets();
     this.instance.addWidget({
@@ -383,10 +402,7 @@ class FacetingSearch {
 
       },
     });
-
     this.instance.start();
-
-
   }
   resets_hits_widget() {
     if(this.hit_widget != null) {

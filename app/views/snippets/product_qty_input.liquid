@@ -1,4 +1,9 @@
-  <div class="input-group product-qty">
+  {% assign input_css = '' %}
+  {% if small %}
+    {% assign input_css = 'input-group-sm' %}
+  {% endif %}
+
+  <div class="input-group {{input_css}} product-qty ">
     <div class="input-group-prepend" data-field="qty" data-type="minus">
       <div class="btn btn-link ">
         <i href="#" class="fa fa-minus text-dark"></i>
