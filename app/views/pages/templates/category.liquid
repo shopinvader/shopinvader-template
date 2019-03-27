@@ -12,9 +12,7 @@ handle: category
   <p>{{category.description}}</p>
 {% endblock %}
 {% block 'content/main/result'%}
-
   {% with_scope categories: {id: category.objectID}%}
-    {% paginate store.products by 18 %}
     <div class="row  pb-2">
       <div class="col-4 col-sm-6 col-md-4 col-lg-3 text-left">
         <div class="d-inline-block d-md-none">
@@ -28,14 +26,14 @@ handle: category
       </div>
       <div class="col-4 col-sm-3 col-md-8 col-lg-5 col-xl-5 text-left p-0">
         <div class=" d-inline-block text-left" id="search-pagination-top">
-          {% include 'paginate' with paginate %}
+          <!-- {% include 'paginate' with paginate %} -->
         </div>
       </div>
       <div class="col-4 col-sm-3  col-md-5  col-lg-4 col-xl-4 text-left text-lg-right ">
         <div class="d-none d-sm-inline-block" id="hits-per-page-selector" data-label="{{'per_page' | translate}}">
         </div>
         <div class="d-inline-block  text-right pl-2 " id="search-stats">
-          {{'search_total_count' | translate: count: paginate.total_entries}}
+          <!-- {{'search_total_count' | translate: count: paginate.total_entries}} -->
         </div>
       </div>
       <div class="col-md-7 col-lg-12 ">
@@ -51,11 +49,9 @@ handle: category
             {% assign display_horizontal =  true%}
             {% assign css_col = "col-12"%}
           {%endif%}
-          {% for product in paginate.collection %}
           <div class="{{css_col}} product-col p-2 border border-1 border-left-0 border-top-0 ">
-            {% include 'product_thumbnail' with product, display_horizontal, with_richdata: true %}
+            <!-- {% include 'product_thumbnail' with product, display_horizontal, with_richdata: true %} -->
           </div>
-          {% endfor %}
         </div>
     </div>
     <div class="row pt-2">
@@ -65,6 +61,5 @@ handle: category
         </div>
       </div>
     </div>
-    {% endpaginate %}
   {% endwith_scope %}
 {% endblock %}

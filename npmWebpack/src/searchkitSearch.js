@@ -7,10 +7,10 @@ import { Hits, SearchkitManager,SearchkitProvider,
   SearchBox, RefinementListFilter, Pagination,
   HierarchicalMenuFilter,HierarchicalRefinementFilter,
   HitsStats, NoHits,ResetFilters, RangeFilter,
-  ViewSwitcherHits, ViewSwitcherToggle, DynamicRangeFilter,
-  GroupedSelectedFilters, Layout, LayoutResults,
-  ActionBar, ActionBarRow,PageSizeSelector, Toggle,
-  RangeSliderInput, MatchQuery} from 'searchkit'
+  DynamicRangeFilter, GroupedSelectedFilters, Layout,
+  LayoutResults, ActionBar, ActionBarRow,
+  PageSizeSelector, Toggle, RangeSliderInput,
+  MatchQuery} from 'searchkit'
 
 
   var product_index = elasticsearch_params.products_index;
@@ -22,7 +22,7 @@ import { Hits, SearchkitManager,SearchkitProvider,
   if($('#search-result').attr('data-category')) {
     var categories_id = $('#search-result').attr('data-category');
     sk.addDefaultQuery((query)=> {
-      return query.addQuery(MatchQuery("categories.id", category_id,null))
+      return query.addQuery(MatchQuery("categories.id", category_id,null));
     })
   }
 
@@ -44,9 +44,7 @@ import { Hits, SearchkitManager,SearchkitProvider,
             searchOnChange={false}
             prefixQueryFields={[
               "name^2",
-              "hierarchicalCategories.lvl2",
-              "hierarchicalCategories.lvl1",
-              "hierarchicalCategories.lvl0"
+              "categories.name"
             ]}
           />
         </SearchkitProvider>
@@ -54,16 +52,6 @@ import { Hits, SearchkitManager,SearchkitProvider,
     }
   }
   ReactDOM.render(<FakeSearchBar />, document.getElementById("header-search-input"));
-
-  class ResultLayoutToggle extends React.Component {
-    render() {
-      return (
-        <SearchkitProvider searchkit={sk}>
-          <ViewSwitcherToggle/>
-        </SearchkitProvider>
-      );
-    }
-  }
 
   class RefinedValues extends React.Component {
     render() {
@@ -205,33 +193,15 @@ import { Hits, SearchkitManager,SearchkitProvider,
   }
 
   const articleDivClass=$('#search-result .row').first()[0].firstElementChild.className;
-  class ArticleHitsGridItem extends React.Component {
+  class ArticleHitsItem extends React.Component {
     render() {
       const result = this.props.result;
       const item = result._source;
       item.last_categorie = item.categories[item.categories.length-1];
       //check price hasn't been already changed when switching from list to grid view
-      if(!item.price.value)
-        item.price = item.price[default_role];
+      // if(!item.price.value)
+      item.price = item.price[default_role];
       item.helpers=hogan_helpers;
-      const template = $('#product-hit-template').html();
-      return(
-        <ReactHogan className={articleDivClass} template={template} data={item} />
-      );
-    }
-  }
-
-  class ArticleHitsListItem extends React.Component {
-    render() {
-      const result = this.props.result;
-      const item = result._source;
-      item.last_categorie = item.categories[item.categories.length-1];
-      //check price hasn't been already changed when switching from list to grid view
-      if(!item.price.value)
-        item.price = item.price[default_role];
-      item.helpers=hogan_helpers;
-
-      console.log(item);
       const template = $('#product-hit-template').html();
       return(
         <ReactHogan className={articleDivClass} template={template} data={item} />
@@ -278,13 +248,9 @@ import { Hits, SearchkitManager,SearchkitProvider,
       return (
         <SearchkitProvider searchkit={sk}>
           <Layout>
-            <ViewSwitcherHits
-                hitsPerPage={6} highlightFields={["title"]}
-                hitComponents={[
-                  {key:"grid", title:"Grid", itemComponent:ArticleHitsGridItem, defaultOption:true},
-                  {key:"list", title:"List", itemComponent:ArticleHitsListItem}
-                ]}
-                scrollTo="body"
+            <Hits
+              hitsPerPage={6}
+              itemComponent={ArticleHitsItem}
             />
             <NoHits translations={{
               "NoHits.NoResultsFound":"No products were found for {query}",
@@ -297,8 +263,6 @@ import { Hits, SearchkitManager,SearchkitProvider,
     }
   }
 
-  // désactiver parceque lors du chargement d'une page de catégorie crée une erreur parceque layout-option n'existe pas
-  // ReactDOM.render(<ResultLayoutToggle />, document.getElementById("layout-option"));
   ReactDOM.render(<SearchPagination />, document.getElementById("search-pagination-top"));
   ReactDOM.render(<SearchPagination />, document.getElementById("search-pagination-bottom"));
   ReactDOM.render(<HitsPerPage />, document.getElementById("hits-per-page-selector"));
