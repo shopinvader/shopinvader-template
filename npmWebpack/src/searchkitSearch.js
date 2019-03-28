@@ -213,7 +213,7 @@ import { Hits, SearchkitManager,SearchkitProvider,
     render() {
       return (
         <SearchkitProvider searchkit={sk}>
-          <HierarchicalMenuFilter fields={["categories.name"]} title="Categories" id="categories"/>
+          <HierarchicalRefinementFilter field="hierarchicalCategories" title="category" id="categories"/>
         </SearchkitProvider>
       );
     }
