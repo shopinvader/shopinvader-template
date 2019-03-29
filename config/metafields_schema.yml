@@ -2,6 +2,8 @@ theme:
   label: Theme
   icon: Theme options
   fields:
+    debug_section:
+      type: boolean
     page_max_width:
       type: select
       select_options:

@@ -178,7 +178,7 @@
             {"label": "Extra-large", "value": "xl"},
             {"label": "Full", "value": "full"}
           ]
-        },
+        }, 
         {
           "label": "Child of previous block",
           "id": "is_child",
@@ -562,6 +562,14 @@
         }
       },
       {
+        "type": "variants",
+        "settings": {
+          "title": "<h2>Other models</h2>",
+          "cell_size": "full",
+          "is_child": false
+        }
+      },
+      {
         "type": "product_data",
         "settings": {
           "margin": "false",
@@ -592,7 +600,6 @@
           "cell_size": "xl"
         }
       },
-      
       {
         "type": "up_sellings",
         "settings": {
@@ -646,20 +653,18 @@
   }]
 }
 ---
-
 {% if section.settings.sku != ""%}
+
   {% with_scope sku: [section.settings.sku]%}
     {% assign variant = store.products | first%}
   {% endwith_scope%}
 {% elsif product %}
-  {% assign variant = product%}
+  {% assign variant = product %}
 {% endif %}
 
 {% if live_editing %}
   {% assign variant = session.live_editing_variant %}
 {% endif %}
-
-
 
 {% case section.settings.theme_color %}
   {% when "none" %}

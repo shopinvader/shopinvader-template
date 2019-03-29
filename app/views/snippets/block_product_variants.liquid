@@ -5,11 +5,11 @@
         <h2>{{ title }}</h2>
         <div class="row">
           <div class="col-12 col-md-3 col-lg-2  p-2">
-            {% include 'product_variant_thumbnail' with product: variant %}
+            {% include 'product_variant_thumbnail' with product_variant: variant %}
           </div>
-          {% for variant_product in product.variants %}
+          {% for product_variant in variant.variants %}
             <div class="col-12 col-md-3 col-lg-2  p-2">
-              {% include 'product_variant_thumbnail' with  product: product.variants %}
+              {% include 'product_variant_thumbnail' with  product_variant %}
             </div>
           {% endfor %}
         </div>

@@ -6,6 +6,7 @@ is_layout: false
 {% if locale != default_locale %}
   {% assign url_base ="/" | append: locale %}
 {% endif%}
+{% assign css_body = '' %}
 
 {% assign url_base =url_base | prepend: base_url | append:"/"%}
 <!DOCTYPE html>
@@ -38,6 +39,7 @@ is_layout: false
         }
       }
     </script>
+
     {% block 'header_meta' %}
       <link rel="canonical" href="{{base_url}}{% path_to page%}" />
       {% seo %}
@@ -45,19 +47,28 @@ is_layout: false
       <link rel="alternate" href="{% path_to page, locale: locale_code %}" hreflang="{{locale_code}}"/>
       {% endfor %}
     {% endblock %}
+
+    {% block 'css' %}
+    {% endblock %}
+    {% block 'javascripts_header' %}
+     
+    {% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    {{ 'application.css' | stylesheet_tag }}
     <link rel="shortcut icon" href="{{ 'favicon.png' | theme_image_url }}">
 
-    {{ 'application.css' | stylesheet_tag }}
-    {{ 'themify-icons.css' | stylesheet_tag }}
-    {{ 'debug.css' | stylesheet_tag }}
-    {% block 'css' %}{% endblock %}
-    {% block 'javascripts_header' %}{% endblock %}
-    
+    {% if live_editing == true and site.metafields.theme.debug_section == true%}
+      {% assign css_body = 'body-section-debug' %}
+      {{ 'section-debug.js' | javascript_tag }}
+      {{ 'sections/debug.css' | stylesheet_tag }}
+    {% endif %}
+
   </head>
-  <body>
+  <body class="{{css_body}}">
     <style media="screen">
       body {
+        font-family: Comfortaa;
         background-color: {{site.metafields.theme.body_bg_color}};
       }
       body .page {
@@ -153,13 +164,12 @@ is_layout: false
     </div>
     {{ 'popper.min.js' | javascript_tag }}
     {{ 'jquery.min.js' | javascript_tag }}
-    {{ 'jquery.slidereveal.min.js' | javascript_tag }}
     {{ 'jquery.touchSwipe.min.js' | javascript_tag }}
     {{ 'shopinvader.jquery.js' | javascript_tag }}
     {{ 'js-cookie' | javascript_tag }}
     {{ 'bootstrap4.min.js' | javascript_tag }}
     {{ 'application.js' | javascript_tag }}
-    {{ 'section-debug.js' | javascript_tag }}
+    
     {% block 'javascripts_algolia', short_name: true %}
       {% include 'algolia_init' %}
       <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
@@ -173,5 +183,25 @@ is_layout: false
     {% endblock %}
     {% global_section 'cookies_manager',  placement: 'bottom' %}
     {{js_footer}}
+    {% comment %}
+    
+    
+    {% endcomment %}
+
+    <script>
+      var cb = function() {
+        add_stylesheet({{ 'themify-icons.css' | stylesheet_url | json }});
+      };
+      function add_stylesheet(filename) {
+        var l = document.createElement('link'); l.rel = 'stylesheet';
+        l.href = filename;
+        var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+      }
+      var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+          webkitRequestAnimationFrame || msRequestAnimationFrame;
+      if (raf) raf(cb);
+      else window.addEventListener('load', cb);
+      
+    </script>
   </body>
 </html>

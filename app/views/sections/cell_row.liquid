@@ -217,7 +217,7 @@
 ---
 {% case section.settings.theme_color %}
 {% when "light" %}
-  {% assign css_banner = "text-dark" %}
+  {% assign css_banner = "text-dark bg-light" %}
 {% when "dark" %}
   {% assign css_banner = "text-light bg-dark"%}
 {% when "primary" %}
@@ -228,6 +228,8 @@
   {% assign css_banner = "text-light bg-danger"%}
 {% when "info" %}
   {% assign css_banner = "text-light bg-info"%}
+{% when "none" %}
+  {% assign css_banner = "text-dark"%}
 {% endcase %}
 
 {% case section.settings.margin %}

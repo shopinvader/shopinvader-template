@@ -55,7 +55,7 @@ $theme-colors: (
   primary: #4CB6D2,
   secondary: #EEEEEE,
   success: $green,
-  info: #1B626D,
+  info: #57B3A5,
   warning: $yellow,
   danger: $red,
   light: $gray-100,
@@ -76,9 +76,9 @@ $breadcrumb-active-color:       inherit;
 $breadcrumb-divider:            " > ";
 
 //fonts
-$font-family-sans-serif: Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-$font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-sans-serif: 'Comfortaa', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $font-family-base:       $font-family-sans-serif;
+
 
 //Heading
 $h1-font-size: 2.9rem;
@@ -88,7 +88,8 @@ $h4-font-size: 1.3rem;
 $h5-font-size: 1.2rem;
 $h6-font-size: 1rem;
 $headings-line-height:   1.1;
-
+$headings-font-family: 'Montserrat';
+$headings-font-weight: 300;
 // Header
 $header-bg: $white;
 $header-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.3);

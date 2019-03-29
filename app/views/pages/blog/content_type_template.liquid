@@ -12,20 +12,20 @@ content_type: posts
 {% block "body/content" %}
 <div class="container">
   <article class="pt-4">
-    <header>
+    <header class="pt-4 pb-4">
       <h1>{{post.name}}</h1>
       <strong>{{post.date | format_date}}</strong>  {{post.post_author}}
       <p>
         {{post.intro}}
       </p>
     </header>
-    <section class="row" style="back" >
+    <section class="row mb-5" >
       <div class="col-12">
         <img src="{{post.picture.url}}" alt="" class="img-fluid w-100">
         <p>{{post.image_author}}</p>
 
       </div>
-      <div class="col-12 col-lg-9">
+      <div class="col-12 col-lg-9 border-right">
         <p>{{post.content}}</p>
 
       </div>
@@ -41,7 +41,6 @@ content_type: posts
           </a>
         {% endfor %}
       </div>
-
     </section>
     {% if post.relative_posts.size > 0%}
     <div class="row">

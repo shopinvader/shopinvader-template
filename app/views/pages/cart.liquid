@@ -102,12 +102,14 @@ sections_dropzone_content: >
     </div>
   {% else %}
     <div class="container pt-3 pb-5 " id="cart" data-shopinvader-container >
-      <div class="alert alert-info mb-5 mt-5 lead text-center">
+      <div class="alert alert-primary mb-5 mt-5 lead text-center">
         {{"cart_empty" | translate}}
       </div>
-      <a class="btn btn-outline-dark  font-weight-bold text-uppercase btn-lg" href="{% path_to home %}">
-        {{"cart_continue_shopping" | translate}} <i class="fa fa-chevron-right"></i>
-      </a>
+      <div class="text-center">
+        <a class="btn btn-outline-dark  font-weight-bold text-uppercase btn-lg" href="{% path_to home %}">
+          {{"cart_continue_shopping" | translate}} <i class="fa fa-chevron-right"></i>
+        </a>
+      </div>
     </div>
     
   {% endif %}

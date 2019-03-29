@@ -1,13 +1,13 @@
-- 'Everything to know before you buy a tablet':
+- 'Eodem tempore etiam Hymetii praeclarae':
     _slug:
-      en: everything-to-know-before-you-buy-a-tablet
-      fr: everything-to-know-before-you-buy-a-tablet
+      en: my-blog-post-1
+      fr: my-blog-post-1
     name:
-      en: 'Everything to know before you buy a tablet '
-      fr: 'Everything to know before you buy a tablet '
-    date: '2017-06-04T00:00:00+00:00'
-    picture: "/samples/content_entries/rawpixel-com-268376-jumbotron.jpg"
-    thumbnails: "/samples/content_entries/william-iven-5895-thumb.jpg"
+      en: 'Eodem tempore etiam Hymetii praeclarae'
+      fr: 'Eodem tempore etiam Hymetii praeclarae'
+    date: '2019-03-04T00:00:00+00:00'
+    picture: "/images/content_entries/posts/post-1-large.jpg"
+    thumbnails: "/images/content_entries/posts/post-1-thumb.jpg"
     short_description:
       en: "Unc novimus esse textum. cum Africam pro consule regeret \r\nCarthaginiensibus
         victus inopia iam lassatis, ex horreis Romano populo \r\ndestinatis"
@@ -70,16 +70,16 @@
     relative_posts: []
     groups:
     - buying-guide
-- 'How to buy headphones in 2017':
+- 'Nulla eu mauris blandit':
     _slug:
-      en: how-to-buy-headphones-in-2017
-      fr: how-to-buy-headphones-in-2017
+      en: my-blog-post-2
+      fr: my-blog-post-2
     name:
-      en: How to buy headphones in 2017
-      fr: How to buy headphones in 2017
+      en: Nulla eu mauris blandit
+      fr: Nulla eu mauris blandit
     date: '2017-07-05T00:00:00+00:00'
-    picture: "/samples/content_entries/alphacolor-13-172877-jumbotron.jpg"
-    thumbnails: "/samples/content_entries/alphacolor-13-172877-thumb.jpg"
+    picture: "/images/content_entries/posts/post-2-large.jpg"
+    thumbnails: "/images/content_entries/posts/post-2-thumb.jpg"
     short_description:
       en: Vivamus tristique lobortis est, mollis venenatis ex commodo quis
       fr: Vivamus tristique lobortis est, mollis venenatis ex commodo quis
@@ -159,13 +159,13 @@
     seo_title:
       en: How to buy headphones in 2017
       fr: How to buy headphones in 2017
-- 'Wireless Speakers tests':
+- 'Donec sodales non mauris ut volutpat':
     _slug:
-      en: wireless-speakers-tests
-      fr: wireless-speakers-tests
+      en: my-blog-post-3
+      fr: my-blog-post-3
     name:
-      en: Wireless Speakers tests
-      fr: Wireless Speakers tests
+      en: Donec sodales non mauris ut volutpat
+      fr: Donec sodales non mauris ut volutpat
     date: '2017-05-23T00:00:00+00:00'
     post_author:
       en: "<p>John Doe<br></p>"
@@ -175,8 +175,8 @@
         title="Unsplash - Jeff Sheldon">Unsplash - Jeff Sheldon</a><br></p>
       fr: <p>Image credit - <a target="_blank" href="https://unsplash.com/@ugmonk"
         title="Unsplash - Jeff Sheldon">Unsplash - Jeff Sheldon</a><br></p>
-    picture: "/samples/content_entries/jeff-sheldon-3225-jumbotron.jpg"
-    thumbnails: "/samples/content_entries/jeff-sheldon-3225-thumb.jpg"
+    picture: "/images/content_entries/posts/post-3-large.jpg"
+    thumbnails: "/images/content_entries/posts/post-3-thumb.jpg"
     short_description:
       en: "Donec sodales non mauris ut volutpat. Sed vitae accumsan leo. Ut \r\nconsequat
         mauris vel congue maximus."
@@ -269,16 +269,16 @@
     - how-to-buy-headphones-in-2017
     groups:
     - buying-guide
-- 'Make americano great again':
+- 'Unc novimus esse textum':
     _slug:
-      en: make-americano-great-again
-      fr: make-americano-great-again
+      en: my-blog-post-4
+      fr: my-blog-post-4
     name:
-      en: Make americano great again
-      fr: Make americano great again
+      en: Unc novimus esse textum
+      fr: Unc novimus esse textum
     date: '2017-04-04T00:00:00+00:00'
-    picture: "/samples/content_entries/rawpixel-com-211021-jumbotron.jpg"
-    thumbnails: "/samples/content_entries/rawpixel-com-211021-thumb-1.jpg"
+    picture: "/images/content_entries/posts/post-4-large.jpg"
+    thumbnails: "/images/content_entries/posts/post-4-thumb.jpg"
     short_description:
       en: "Unc novimus esse textum. cum Africam pro consule regeret \r\nCarthaginiensibus
         victus inopia iam lassatis, ex horreis Romano populo \r\ndestinatis"
@@ -343,8 +343,8 @@
     - buying-guide
 - 'Sed tamen haec cum ita tutius observentur':
     _slug:
-      en: sed-tamen-haec-cum-ita-tutius-observentur
-      fr: sed-tamen-haec-cum-ita-tutius-observentur
+      en: my-blog-post-5
+      fr: my-blog-post-5
     name:
       en: Sed tamen haec cum ita tutius observentur
       fr: Sed tamen haec cum ita tutius observentur
@@ -354,8 +354,8 @@
         title="Unsplash - Brooke Lark">Unsplash - Brooke Lark</a><br></p>
       fr: <p>Image credit - <a target="_blank" href="https://unsplash.com/@brookelark"
         title="Unsplash - Brooke Lark">Unsplash - Brooke Lark</a><br></p>
-    picture: "/samples/content_entries/brooke-lark-175184-jumbotron.jpg"
-    thumbnails: "/samples/content_entries/brooke-lark-175184-thubnail.jpg"
+    picture: "/images/content_entries/posts/post-5-large.jpg"
+    thumbnails: "/images/content_entries/posts/post-5-thumb.jpg"
     short_description:
       en: Sed tamen haec cum ita tutius observentur, quidam vigore artuum inminuto
         rogati ad nuptias ubi aurum dextris manibus cavatis offertur, inpigre vel

@@ -1,7 +1,6 @@
 ---
 title: account
 is_layout: false
-seo_title : My account | Shopinvader demo
 ---
 {% authorize "customers", "account" %}
 {% extends 'layouts/default' %}
@@ -9,7 +8,7 @@ seo_title : My account | Shopinvader demo
   {% global_section 'header_lite', id:'cart_header',  placement: 'top'%}
 {% endblock %}
 {% block 'body/content' %}
-<div class="container mt-4">
+<div class="container-fluid mt-4">
   <div class="row  pt-2 pb-4 justify-content-between justify-content-xl-center align-items-end">
     <div class="col-10 col-md-auto accound-icon">
       <div class="d-flex">

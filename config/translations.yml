@@ -344,7 +344,7 @@ cart_shipping_method:
   fr: Continuer
 cart_empty:
   en: You have no items in your shopping basket.
-  fr: Votre panier est viewed
+  fr: Votre panier est vide.
 creditcard_lastname:
   en: Name (as it appears on your card)
   fr: Titulaire de la carte

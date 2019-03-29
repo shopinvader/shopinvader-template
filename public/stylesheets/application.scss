@@ -1,25 +1,19 @@
 $icon-font-path: "../fonts/bootstrap/" !default;
 @import 'components/custom';
 @import 'components/currency';
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300');
 @import 'bootstrap4/bootstrap';
 @import 'components/account';
-@import 'components/algolia';
-//@import 'components/cart';
 @import 'components/columns';
 @import 'components/editable';
 @import 'components/footer';
 @import 'components/form';
 @import 'components/loader';
-//@import 'components/nav';
 @import 'components/posts';
 @import 'components/product';
 @import 'components/preloader';
 @import 'components/rating';
-//@import 'components/typo';
 @import 'components/slide';
 @import 'components/showcase';
-@import 'components/wells';
 
 @import 'payments/adyen';
 @import 'payments/stripe';
@@ -31,11 +25,7 @@ $icon-font-path: "../fonts/bootstrap/" !default;
 @import 'sections/category';
 @import 'sections/search';
 //@import 'sections/section_debug';
-/* Need to fix CDN issue
-@import 'fontawesome/fontawesome';
-@import 'fontawesome/solid';
-@import 'fontawesome/regular';
-@import 'fontawesome/brands';*/
+
 html {
   font-size: 14px;
   @include media-breakpoint-down(sm) {

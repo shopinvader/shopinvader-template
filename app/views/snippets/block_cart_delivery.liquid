@@ -23,13 +23,9 @@
           <div class="row ">
             <div class="col-8  ">
               <b>{{ carrier.name }}</b>
-              {% if carrier.id == 2 %}
-                {% include 'delivery_colissimo' with carrier %}
-              {% else %}
-                <div class="pr-3">
-                  {{ carrier.description }}
-                </div>
-              {% endif %}
+              <div class="pr-3">
+                {{ carrier.description }}
+              </div>
             </div>
             <div class="col-4 text-right">
               {% if carrier.price > 0 %}

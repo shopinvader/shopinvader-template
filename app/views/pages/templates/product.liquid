@@ -61,23 +61,25 @@ handle: product
 {% endblock %}
 
 {% block 'body/content' %}
-
-
   {% if product == null %}
-    {% assign product =store.products.first %}
+    {% assign product = store.products.first %}
   {% endif %}
+  
   {% assign variant = null %}
   {% assign variant_list = product.variants %}
+
   {% if params.ref%}
     {% for product_variant in variant_list %}
-      {% if product_variant.sku == params.ref%}
+      {% if product_variant.sku == params.ref %}
         {% assign variant = product_variant %}
       {% endif %}
     {% endfor %}
   {% endif %}
+
   {%if variant == null%}
     {% assign variant = product %}
   {% endif %}
+
   {% if live_editing == true %}
     {% if variant != null %}
       {% action 'set product' %}
@@ -86,6 +88,7 @@ handle: product
       {% endaction %}
     {% endif %}
   {% endif %}
+
   {% section 'product_page', placement: 'top' %}
   {% sections_dropzone %}
  
