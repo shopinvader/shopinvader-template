@@ -20,7 +20,6 @@
 
   <script type="text/javascript">
     {% action 'get elasticsearch parameters' %}
-
       setProp('elasticsearch_indexes', JSON.parse(site.metafields.elasticsearch.indices));
     {% endaction %}
 

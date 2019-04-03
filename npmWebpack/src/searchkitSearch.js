@@ -12,11 +12,11 @@ import { Hits, SearchkitManager,SearchkitProvider,
   PageSizeSelector, Toggle, RangeSliderInput,
   MatchQuery} from 'searchkit'
 
-
+$(document).ready(function(){
+  
   var product_index = elasticsearch_params.products_index;
   const host = 'http://'+elasticsearch_params.server_IP+':'+elasticsearch_params.server_Port+'/'+product_index+'/odoo';
   const sk = new SearchkitManager(host, {});
-
 
   // when accessing a specific category adds a filter to searchkit
   if($('#search-result').attr('data-category')) {
@@ -272,3 +272,4 @@ import { Hits, SearchkitManager,SearchkitProvider,
   ReactDOM.render(<CategoriesFacet />, document.getElementById("hierarchical-categories"));
   ReactDOM.render(<VariantColorFacet />, document.getElementById("color-filter"));
   ReactDOM.render(<PriceFacet />, document.getElementById("price-range"));
+});

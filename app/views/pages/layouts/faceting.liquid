@@ -4,18 +4,25 @@ is_layout: false
 ---
 {% extends 'layouts/default' %}
 
-
-{% block 'javascripts'%}
-  {{ 'vendors.js' | javascript_tag }}
-  {{ 'searchkitSearch.js' | javascript_tag }}
-{% endblock %}
-
 {% block content %}
   {% if category %}
     {% assign filters = category.filters %}
   {% else %}
     {% assign filters = store.all_filters %}
   {% endif %}
+
+
+  {{ 'jquery.min.js' | javascript_tag }}
+  {% if site.metafields.elasticsearch.server_IP %}
+    {{ 'tempSearchkit.css' | stylesheet_tag }}
+    {{ 'vendors.js' | javascript_tag }}
+    {{ 'searchkitSearch.js' | javascript_tag }}
+  {% elsif site.metafields.algolia.application_id %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.9.0/dist/instantsearch.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.9.0"></script>
+    <script src="{{ 'search_currency.js' | javascript_url }}"></script>
+    <script src="{{ 'search.js' | javascript_url }}?category={{category.name}}"></script>
+  {% endif%}
 
   <div class="row">
     <div class="col-12 col-md-3 col-xl-2 p-0  border ">
