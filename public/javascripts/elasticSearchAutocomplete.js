@@ -167,7 +167,7 @@ $(document).ready(function() {
         nbrOfProducts=res.hits.hits.length;
         //shows number of results of products if nbResults>0
         if(nbrOfProducts>0)
-        $(".nb_hits").html("("+nbrOfProducts+")");
+        $(".nb_hits").html("("+res.hits.total+")");
         else
         $(".nb_hits").html("");
 
@@ -229,7 +229,7 @@ $(document).ready(function() {
             template=$('#header-search-product-link');
             var search_path = template.find('.btn-search-product').data('href');
             template.find('.btn-search-product').attr('href', search_path+'?q='+searchQuery)
-            template.find('.nb_hits').html(' ('+nbrOfProducts+')');
+            template.find('.nb_hits').html(' ('+res.hits.total+')');
             $(".aa-dataset-product").append(template.html());
           }
         }
