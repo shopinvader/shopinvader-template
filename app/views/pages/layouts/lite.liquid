@@ -2,15 +2,21 @@
 title: account
 is_layout: false
 ---
-{% extends 'layouts/default' %}
-
-{% block 'body/header' %}
-  {% global_section 'header_lite', id:'cart_header'%}
-{% endblock %}
-{% block 'content' %}
-{% endblock %}
-
-{% block 'css' %}
-{% endblock %}
-{% block 'javascripts' %}
+{% extends 'layouts/base' %}
+{% block 'body' %}
+  <header>
+    {% block 'header' %}
+      {% global_section 'header_lite', id:'cart_header',  placement: 'top'%}
+    {% endblock %}
+  </header>
+  <div class="page shadow">
+    <main>
+      <div class="container-fluid">
+        {% include 'store_notifications' %}
+      </div>
+      
+      {% block content %}
+      {% endblock %}
+    </main>
+  </div>
 {% endblock %}

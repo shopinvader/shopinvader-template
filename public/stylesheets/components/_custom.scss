@@ -51,17 +51,21 @@ $colors: (
   gray-dark: $gray-800
 );
 
-$theme-colors: (
-  primary: #4CB6D2,
-  secondary: #EEEEEE,
-  success: $green,
-  info: #57B3A5,
-  warning: $yellow,
-  danger: $red,
-  light: $gray-100,
-  gray: #6a7a88,
-  dark: $gray-800
-
+$theme-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(
+  (
+    primary: $cyan,
+    secondary: #EEEEEE,
+    success: $green,
+    info: #1B626D,
+    warning: $yellow,
+    danger: $red,
+    light: $gray-100,
+    gray: #6a7a88,
+    dark: $gray-800
+  ),
+  $theme-colors
 );
 $enable-rounded: true;
 $enable-shadows: true;

@@ -100,7 +100,7 @@
     {% assign css_banner = "text-light bg-danger"%}
   {% when "info" %}
     {% assign css_banner = "text-light bg-info"%}
-  {% when "none" %}
+  {% else %}
     {% assign css_banner = ""%}
 {% endcase %}
 {% assign item_limit = section.settings.item_limit | round %}

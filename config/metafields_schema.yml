@@ -10,6 +10,7 @@ theme:
         - 1020px
         - 1200px
         - 1600px
+        - 1920px
         - 100%
     page_border:
       type: boolean

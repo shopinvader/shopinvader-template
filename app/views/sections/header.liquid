@@ -7,7 +7,6 @@
   "keep_icon": true,
   "id": "header",
   "settings": [
-    
     {
       "label": "Fixed header",
       "id": "fixed_position",
@@ -463,18 +462,20 @@
                   {{ block.settings.content }}
                 </div>
               {% when "local_selector" %}
-                <div class="dropdown">
-                  <button class="btn btn-link dropdown-toggle text-uppercase" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{locale}}
-                  </button>
-                  <div class="dropdown-menu">
-                    {% for locale_nav in locales %}
-                      <a class="dropdown-item text-uppercase" href="{% path_to index, locale: locale_nav%}">
-                        {{locale_nav}}
-                      </a>
-                    {%endfor%}
+                {% if locales.size > 1 %}
+                  <div class="dropdown">
+                    <button class="btn btn-link dropdown-toggle text-uppercase" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{locale}}
+                    </button>
+                    <div class="dropdown-menu bg-dark">
+                      {% for locale_nav in locales %}
+                        <a class="dropdown-item text-uppercase" href="{{base_url}}/{{locale_nav}}">
+                          {{locale_nav}}
+                        </a>
+                      {%endfor%}
+                    </div>
                   </div>
-                </div>
+                {% endif %}
               {% when "logo" %}
                 <div class="{{block.settings.align_img}}">
                   <div class="header-block-menu d-inline d-md-none">
