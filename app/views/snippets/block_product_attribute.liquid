@@ -1,9 +1,10 @@
 {% assign attr_content = '' %}
+
 {% if type == 'text' %}
-	{% assign attr_content = variant.attributes[attribute_name] %}
+	{% assign attr_content = product_variant.attributes[attribute_name] %}
 {% elsif type == 'table' %}
 	{% capture attr_content %}
-		{% for structured_attribute in variant.structured_attributes %}
+		{% for structured_attribute in product_variant.structured_attributes %}
 		  {% if structured_attribute.group_name == attribute_name %}
 		    {% for attribute in structured_attribute.fields %}
 		      <div class="row pt-2 pb-2  pb-4">
@@ -25,7 +26,7 @@
 		{% endfor %}
 	{% endcapture %}
 {% endif %}
-{% assign attr_content = '' %}
+
 {% if attr_content != "" and attr_content != false and attr_content != null %}
 	<div class="pt-4 pb-4">
     <div class="">

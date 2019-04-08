@@ -1,10 +1,13 @@
-{{ title }}
-<div class="row">
-  {% for up_seller in variant.up_sellings %}
-    <div class="col-12 col-sm-6 col-md-3 col-xl-2">
-    {% with_scope objectID: [up_seller.id]%}
-      {% include 'product_thumbnail' with product: store.products.first%}
-    {% endwith_scope%}
-    </div>
-  {% endfor %}
-</div>
+
+{% if product_variant.up_sellings.size > 0 %}
+	{{ title }}
+	<div class="row">
+	  {% for up_seller in product_variant.up_sellings %}
+	    <div class="col-12 col-sm-6 col-md-3 col-xl-2">
+	    {% with_scope objectID: [up_seller.id]%}
+	      {% include 'product_thumbnail' with product: store.products.first%}
+	    {% endwith_scope%}
+	    </div>
+	  {% endfor %}
+	</div>
+{% endif %}

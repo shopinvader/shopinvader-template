@@ -5,7 +5,7 @@
       {{ 'home' | translate }}
       </a>
     </li>
-  {% for category in variant.categories %}
+  {% for category in product_variant.categories %}
     <li class="breadcrumb-item d-inline-block" >
       <a href="{{category.url_key | prepend: url_base}}" class="text-gray-darker">
         {{category.name}}
@@ -14,13 +14,13 @@
   {% endfor %}
   {% if block.settings.display_product_name %}
     <li class="breadcrumb-item active d-none d-xl-inline-block">
-      {{variant.model.name}}
+      {{product_variant.model.name}}
     </li>
   {% endif %}
   </ol>
 </nav>
 <div class="d-block d-sm-none  pt-4">
-  {% for category in variant.categories %}
+  {% for category in product_variant.categories %}
   <a href="{{category.url_key | prepend: url_base}}" class="btn btn-outline-dark btn-sm">
     {{category.name}}
   </a>

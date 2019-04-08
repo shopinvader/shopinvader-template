@@ -61,30 +61,28 @@ handle: product
 {% endblock %}
 
 {% block 'body/content' %}
-  {% if product == null %}
-    {% assign product = store.products.first %}
-  {% endif %}
-  
-  {% assign variant = null %}
-  {% assign variant_list = product.variants %}
 
-  {% if params.ref%}
-    {% for product_variant in variant_list %}
-      {% if product_variant.sku == params.ref %}
-        {% assign variant = product_variant %}
+  {% if product == null %}
+    {% assign product_variant = store.products.first %}
+  {% endif %}
+
+  {% if params.ref %}    
+    {% for var in product.variants %}
+      {% if var.sku == params.ref %}
+        {% assign product_variant = var %}
       {% endif %}
     {% endfor %}
   {% endif %}
-
-  {%if variant == null%}
-    {% assign variant = product %}
+  {% if product_variant == null %}
+    {% assign product_variant = product %}
   {% endif %}
 
+
   {% if live_editing == true %}
-    {% if variant != null %}
+    {% if product != null %}
       {% action 'set product' %}
-        var variant = getProp('variant');
-        setSessionProp('live_editing_variant', variant);
+        var product = getProp('product');
+        setSessionProp('live_editing_product', product);
       {% endaction %}
     {% endif %}
   {% endif %}

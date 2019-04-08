@@ -2,26 +2,26 @@
   <div class="col-12 " id="product-section-reviews">
     <div class="row justify-content-center">
       <div class="col-12 col-sm-6 col-lg-5 pb-3 ">
-        <h2>{{'product_reviews_title' | translate }} ({{variant.rating.reviews.size}})</h2>
+        <h2>{{'product_reviews_title' | translate }} ({{product_variant.rating.reviews.size}})</h2>
         <div class="text-warning pb-1">
           <div class="text-dark text-left font-weight-bold small">{{'rating_average_rate' | translate}}</div>
           <span class="h1 font-weight-bold">
-            {{variant.rating.summary.average | round: 1}}
+            {{product_variant.rating.summary.average | round: 1}}
           </span>
           <span class="h2 text-warning">
             / 5
           </span>
         </div>
         <div class="text-size-6xl">
-          {% include 'rating_stars' with rating_value: variant.rating.summary.average, rating_nbr: variant.rating.reviews.size %}
+          {% include 'rating_stars' with rating_value: product_variant.rating.summary.average, rating_nbr: product_variant.rating.reviews.size %}
         </div>
         <div class="text-size-1xl">
-          {{'rating_comment_count' | translate: count: variant.rating.reviews.size}}
+          {{'rating_comment_count' | translate: count: product_variant.rating.reviews.size}}
         </div>
       </div>
       <div class="col-12 col-sm-6 col-lg-4">
 
-        {% for rate_count in variant.rating.summary.distribution %}
+        {% for rate_count in product_variant.rating.summary.distribution %}
         <div class="pt-1">
           {% assign rate_count_pct = rate_count.last | times: 1.0 | divided_by: 16  | times: 100%}
           <div class="d-inline-block pr-1 ">
@@ -41,7 +41,7 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-12 col-lg-9">
-        {% paginate variant.rating.reviews by 10 %}
+        {% paginate product_variant.rating.reviews by 10 %}
           {% for comment in paginate.collection%}
           <div class="row ">
             <div class="col-12">

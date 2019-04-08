@@ -6,7 +6,7 @@
 {% endif %}
 
 {% assign keys = data_type | split:'.' %}
-{% assign data = variant%}
+{% assign data = product_variant%}
 
 {% for key in keys %}
 	{% assign data = data[key] %}

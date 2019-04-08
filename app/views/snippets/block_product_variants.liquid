@@ -1,19 +1,83 @@
+{% if product.variant_count > 1 %}
 <div class="container mt-4 mb-4 {{css_card}} {% if section.settings.border %}shadow-sm{% endif %}">
-  {% if variant.variant_count > 0 %}
-    <div class="row pt-3">
+  <div class="row pt-3 align-items-center">
+  {% case variant_display %}
+    {% when 'list' %}
       <div class="col-12">
         <h2>{{ title }}</h2>
         <div class="row">
           <div class="col-12 col-md-3 col-lg-2  p-2">
-            {% include 'product_variant_thumbnail' with product_variant: variant %}
+            {% include 'product_variant_thumbnail' with product_variant: product %}
           </div>
-          {% for product_variant in variant.variants %}
+          {% for variant in product.variants %}
             <div class="col-12 col-md-3 col-lg-2  p-2">
-              {% include 'product_variant_thumbnail' with  product_variant %}
+              {% include 'product_variant_thumbnail' with  product_variant: variant %}
             </div>
           {% endfor %}
         </div>
       </div>
-    </div>
-  {% endif %}
+    {% when 'select' %}
+      <div class="col-auto">
+        <h4>{{ title }}<h4>
+      </div>
+      <div class="col-auto flex-grow-1">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             {% for attr in product_variant.variant_attributes %}
+                <span class="pr-2">{{attr[0]}}  <b>{{attr[1]}}</b></span>
+              {% endfor %}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% for variant in product.variants %}
+              <a class="dropdown-item" href="{{variant.url_key  | prepend: url_base }}?ref={{variant.sku}}">
+                <div class="row align-items-center">
+                  <div class="col-4 pr-0">
+                    <img class="img-fluid img-thumbnail" src="{{variant.images.first.small.src  | default: site.metafields.theme.noimage }}" alt="{{variant.images.first.medium.alt}}" />
+                  </div>
+                  <div class="col-auto">
+                    {% for attr in variant.variant_attributes %}
+                      <span class="pr-2">{{attr[0]}}  <b>{{attr[1]}}</b></span>
+                    {% endfor %}
+                  </div>
+                </div>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% when 'button' %}
+      <div class="col-auto">
+        <h4>{{ title }}<h4>
+      </div>
+      <div class="col-12 ">
+        {% assign btn_class = 'btn-outline-dark' %}
+        {% if  product_variant == product %}
+          {% assign btn_class = 'btn-dark' %}  
+        {% endif %}
+        <a href="{{ product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="btn {{btn_class}} btn-sm mr-2 mb-2 h-100">
+          {% for attr in product.variant_attributes %}
+            <span class="pr-2">
+              {{attr[0]}} 
+              <b>{{attr[1]}}</b>
+            </span>
+          {% endfor %}
+        </a>
+        {% for variant in product.variants %}
+          {% assign btn_class = 'btn-outline-dark' %}
+          {% if product_variant == variant %}
+            {% assign btn_class = 'btn-dark' %}
+          {% endif %}
+          <a href="{{ variant.url_key  | prepend: url_base }}?ref={{variant.sku}}" class="btn {{btn_class}} btn-sm mr-2 mb-2 h-100">
+            {% for attr in variant.variant_attributes %}
+              <span class="pr-2">
+                {{attr[0]}} 
+                <b>{{attr[1]}}</b>
+              </span>
+            {% endfor %}
+          </a>
+        {% endfor %}
+      </div>
+  {% endcase %}
+  </div>
 </div>
+{% endif %}

@@ -81,7 +81,7 @@
       "type": "attribute",
       "settings": [
        {
-          "label": "Type",
+          "label": "Attribute type",
           "id": "type",
           "type": "select",
           "options": [
@@ -412,6 +412,16 @@
           ]
         },
         {
+          "label": "Variant display",
+          "id": "variant_display",
+          "type": "select",
+          "options": [
+            {"label": "Select", "value": "select"},
+            {"label": "Product list","value": "list"},
+            {"label": "Button","value": "button"}
+          ]
+        },
+        {
           "label": "Child of previous block",
           "id": "is_child",
           "type": "checkbox"
@@ -529,6 +539,12 @@
     },
     "blocks": [
       {
+        "type": "breadcrumb",
+        "settings": {
+          "display_product_name": true
+        }
+      },
+      {
         "type": "product_title",
         "settings": {
           "display_category_link": true,
@@ -564,11 +580,22 @@
       {
         "type": "variants",
         "settings": {
-          "title": "<h2>Other models</h2>",
+          "title": "Models",
           "cell_size": "full",
-          "is_child": false
+          "is_child": true,
+          "variant_display": "button"
         }
       },
+      {
+        "type": "variants",
+        "settings": {
+          "title": "Models",
+          "cell_size": "full",
+          "is_child": false,
+          "variant_display": "list"
+        }
+      },
+      
       {
         "type": "product_data",
         "settings": {
@@ -597,14 +624,14 @@
         "type": "cross_sellings",
         "settings": {
           "title": "<h2>More In This Collection</h2>",
-          "cell_size": "xl"
+          "cell_size": "full"
         }
       },
       {
         "type": "up_sellings",
         "settings": {
           "title": "<h2>More choices</h2>",
-          "cell_size": "xl"
+          "cell_size": "full"
         }
       }
     ]
@@ -656,14 +683,12 @@
 {% if section.settings.sku != ""%}
 
   {% with_scope sku: [section.settings.sku]%}
-    {% assign variant = store.products | first%}
+    {% assign product_variant = store.products | first%}
   {% endwith_scope%}
-{% elsif product %}
-  {% assign variant = product %}
 {% endif %}
 
 {% if live_editing %}
-  {% assign variant = session.live_editing_variant %}
+  {% assign product_variant = session.live_editing_product %}
 {% endif %}
 
 {% case section.settings.theme_color %}
@@ -732,11 +757,11 @@
           {% case block.type %}
             {% when 'product_title'%}
               {% include 'block_product_title' with
-                variant
+                product_variant
               %}
             {% when 'product_image'%}
               {% include 'product_images' with 
-                product: variant, 
+                product_variant, 
                 thumb_position: block.settings.thumb_position 
               %}
             {% when 'product_data'%}
@@ -744,40 +769,42 @@
                 title: block.settings.title,
                 inline: block.settings.inline,
                 data_type: block.settings.data_type
-                variant
+                product_variant
               %}
             {% when 'add_to_cart'%}
               {% include 'block_product_add_to_cart' with 
-                variant
+                product_variant
               %}
             {% when 'breadcrumb'%}
+            ddd
               {% include 'block_product_breadcrumb' with
-                variant
+                product_variant
               %}
             {% when 'variants'%}
               {% include 'block_product_variants' with
                 title: block.settings.title,
-                variant
+                variant_display: block.settings.variant_display,
+                product
               %}
             {% when 'technical_details'%}
               {% include 'block_product_technical_details' with
                 title: block.settings.title,
-                variant
+                product_variant
               %}
             {% when 'up_sellings'%}
               {% include 'block_product_up_sellings' with
                 title: block.settings.title,
-                variant
+                product_variant
               %}
             {% when 'cross_sellings'%}
               {% include 'block_product_cross_sellings' with
                 title: block.settings.title,
-                variant
+                product_variant
               %}
             {% when 'reviews'%}
               {% include 'block_product_reviews' with
                 title: block.settings.title,
-                variant
+                product_variant
               %}
             {% when 'attribute'%}
               {% include 'block_product_attribute' with
@@ -785,7 +812,7 @@
                 title: block.settings.title,
                 attribute_name: block.settings.attribute_name,
                 display_legend: block.settings.display_legend,
-                variant
+                product_variant
               %}
             {% when 'cell_text'%}
               {{ block.settings.content }}
