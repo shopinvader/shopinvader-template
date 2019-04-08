@@ -16,6 +16,7 @@ var customSearchClient = {
                if(request.params.hasOwnProperty('numericFilters')) {
                  request.params.numericFilters = request.params.numericFilters
                  .map(function(filter) {
+
                    if(filter.indexOf(price_key) != -1) {
                      var number_position = price_key.length +2;
                      var price = parseFloat(filter.substring(number_position));

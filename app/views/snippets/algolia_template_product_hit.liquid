@@ -72,15 +72,9 @@
             </span>
           <%/price.discount %>
         </strong>
-        <form method="POST" action="/invader/cart/add_item"  method="post" data-shopinvader-form>
-          <input type="hidden" name="invader_success_url" value="{%path_to home%}?addtocart_product_id=<% objectID %>" />
-          <input type="hidden" name="invader_error_url" value="{%path_to home%}" />
-          <input type="hidden" name="item_qty" value="1">
-          <input type="hidden" name="product_id" value="<% objectID %>">
-          <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart ">
-            <i class="fa fa-shopping-basket"></i> {{'product_add_to_cart' | translate}}
-          </button>
-        </form>
+        <a href="{{url_base}}<% url_key %>?ref=<% sku %>"  class="btn btn-primary btn-block ">
+          {{'show_more' | translate}}
+        </a>
       </div>
     </div>
     <div class="product-thumbnail-name card-bodyp-0 p-md-3 p-xl-2">
@@ -115,17 +109,6 @@
           <%& short_description %>
         </div>
       </div>
-    </div>
-    <div class="product-thumbnail-btn d-vertical-only pr-2 pl-2">
-      <form method="POST" action="/invader/cart/add_item" method="post" data-shopinvader-form>
-        <input type="hidden" name="invader_success_url" value="{%path_to home%}?addtocart_product_id=<% objectID %>" />
-        <input type="hidden" name="invader_error_url" value="{%path_to home%}" />
-        <input type="hidden" name="item_qty" value="1">
-        <input type="hidden" name="product_id" value="<% objectID %>">
-        <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart ">
-          <i class="fa fa-shopping-basket"></i> {{'product_add_to_cart' | translate}}
-        </button>
-      </form>
     </div>
   </div>
 </script>

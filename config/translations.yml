@@ -628,7 +628,7 @@ store_advantage_return:
   en: easy return
   fr: retour gratuit
 payment_method_stripe:
-  en: Credit card with Stripe
+  en: Credit card
   fr: Carte Bancaire
 payment_method_adyen:
   en: Credit card with Adyen
