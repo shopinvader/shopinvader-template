@@ -213,7 +213,13 @@ $(document).ready(function(){
     render() {
       return (
         <SearchkitProvider searchkit={sk}>
-          <HierarchicalRefinementFilter field="hierarchicalCategories" title="category" id="categories"/>
+          <HierarchicalRefinementFilter
+            field="hierarchicalCategories"
+            title="category"
+            id="categories"
+            orderKey="hierarchicalCategories.order"
+            orderDirection="asc"
+          />
         </SearchkitProvider>
       );
     }
