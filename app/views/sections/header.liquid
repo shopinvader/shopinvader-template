@@ -162,7 +162,7 @@
             {"label": "None", "value": "auto"},
             {"label": "Left", "value": "left"},
             {"label": "Right", "value": "right"}
-            
+
           ]
         },
         {
@@ -400,7 +400,7 @@
   setProp('currency',  currency);
 {% endaction %}
 <style media="all">
-  
+
   {% for currency_format in store.currencies_format %}
     {% assign currency_format_code = currency_format.first %}
     {% if currency_format_code == currency.code %}
@@ -417,7 +417,7 @@
 <div class="header {% if section.settings.fixed_position %}fixed{%endif%}  header-theme-{{section.settings.theme_color}}">
   <div class="container-fluid">
     <div class="row align-items-center justify-content-{{section.settings.cells_align}}">
-      
+
       {% for block in section.blocks %}
         {% if block.type == 'row'%}
           {% assign vertical_align_row = block.settings.vertical_align %}
@@ -451,7 +451,7 @@
           {% if block.settings.display_sm_icon == false %}
             {% assign display_sm_icon_css = "d-none d-md-flex" %}
           {% endif %}
-          
+
           <div class="header-block header-block-{{ block.type }} {{css_cell}} block">
             {% include 'block_debug' %}
             {% case block.type %}
@@ -584,7 +584,7 @@
                           </div>
                         {% endif %}
                       </div>
-                      
+
                     </a>
                     <a class="icon-link d-none" href="{% path_to 'account_index'%}">
                       <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
@@ -615,8 +615,8 @@
               {% when "navigation" %}
                 <div class="w-100 header-block-navigation collapse d-md-block" >
                   <ul class="list-inline m-0 d-flex row">
-                    {% for category_level1 in store.categories %}
-                      {% if category_level1.level == 0 %}
+                    {% with_scope level: 0 %}
+                      {% for category_level1 in store.categories %}
                         <li class="list-inline-item pr-3 pl-3 pt-3 pb-3 col-12 col-md-auto">
                           <a href="{{category_level1.url_key  | prepend: url_base }}" class="font-weight-bold text-dark">
                             {{ category_level1.name}}
@@ -654,8 +654,8 @@
                             </div>
                           </div>
                         </li>
-                      {% endif %}
-                    {% endfor%}
+                      {% endfor%}
+                    {% endwith_scope %}
                     {% for page_nav in site.pages %}
                       {% if page_nav.listed? and page_nav.published? and page_nav.depth <= 1%}
                         <li class="list-inline-item pr-3 pl-3 pt-3 pb-3 col-12 col-md-auto">
@@ -756,7 +756,7 @@
       {% endfor %}
     </div>
   </div>
-  
+
 </div>
 <div class="header-category-sm">
   <ul class="list-inline" id="nav-sm">
