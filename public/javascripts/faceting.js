@@ -36,6 +36,7 @@ class FacetingSearch {
       },
       searchClient: customSearchClient
     };
+
     if($('[data-filter-widget=results]').attr('data-category') != undefined) {
       if($('[data-filter-widget=results]').attr('data-category')) {
         instantsearch_params.searchParameters= {

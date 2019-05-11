@@ -14,21 +14,21 @@
 					  <ol class="breadcrumb p-0 ">
 					  	{% if category.parent %}
 					  		<li class="breadcrumb-item">
-				  				<a href="{{cat_parent.parent.url_key}}" class="text-dark">
+				  				<a href="{{cat_parent.parent.url_key | prepend: url_base}}" class="text-dark">
 				  					{{'home' | translate }}
 				  				</a>
 				  			</li>
 					  		{% assign  cat_parent = category.parent %}
 					  		{% if cat_parent.parent %}
 					  			<li class="breadcrumb-item">
-					  				<a href="{{cat_parent.parent.url_key}}" class="text-dark">{{cat_parent.parent.name}}</a>
+					  				<a href="{{cat_parent.parent.url_key | prepend: url_base }}" class="text-dark">{{cat_parent.parent.name}}</a>
 					  			</li>
 					  		{% endif %}
 					  		<li class="breadcrumb-item">
-					  			<a href="{{cat_parent.url_key}}" class="text-dark">{{cat_parent.name}}</a>
+					  			<a href="{{cat_parent.url_key | prepend: url_base }}" class="text-dark">{{cat_parent.name}}</a>
 					  		</li>
 					  		<li class="breadcrumb-item">
-					  			<a href="{{category.url_key}}" class="text-dark font-weight-bold">{{category.name}}</a>
+					  			<a href="{{category.url_key | prepend: url_base }}" class="text-dark font-weight-bold">{{category.name}}</a>
 					  		</li>
 					  	{% endif %}
 					  </ol>
@@ -74,7 +74,7 @@
 	{% endif %}
 </div>
 <div class="row border border-left-0 border-right-0">
-	<div class="col-12" data-filter-widget="results" id="search-result">
+	<div class="col-12" data-filter-widget="results" id="search-result" {% if category %}data-category="{{category.objectID}}"{% endif %}>
 	  <div class="row m-0">
 	    <div class="{{css_col}} product-col p-2  ">
 	    </div>

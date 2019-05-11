@@ -1,0 +1,161 @@
+---
+{
+  "name": "contact form",
+  "class": "",
+  "icon": "list",
+  "keep_name": true,
+  "keep_icon": true,
+  "settings": [
+    
+    {
+      "label": "Card direction",
+      "id": "cells_direction",
+      "type": "select",
+      "options": [
+        {"label": "Row","value": "row"},
+        {"label": "Column","value": "column"}
+      ]
+    },
+    {
+      "label": "Card margin",
+      "id": "cells_margin",
+      "type": "select",
+      "options": [
+        {"label": "None","value": "none"},
+        {"label": "Small","value": "sm"},
+        {"label": "Medium","value": "md"},
+        {"label": "Large","value": "lg"}
+      ]
+    },
+    {
+      "label": "Header",
+      "id": "header_content",
+      "type": "text",
+      "html": true,
+      "nb_rows": 2
+    }
+  ],
+  "blocks": [
+    
+  ],
+  "default": {
+    "settings": {
+      "cells_align": "center",
+      "cells_margin": "lg",
+      "cells_direction": "row",
+      "header_content": "<h1>Welcome</h1>"
+    },
+    "blocks": [
+    
+    ]
+  }
+}
+---
+<div class="container-fluid mt-4 mb-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-11 col-lg-10 col-xl-9  card card-body">
+            <form method="post" action="/invader/lead/create" data-shopinvader-form>
+              <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+              <input type="hidden" name="invader_error_url" value="" />
+              <div class="">
+                {% assign store_notification = store.notifications%}
+                {% if store_notification != null %}
+                  {% for notification in store_notification%}
+                    <div class="alert alert-{{notification.type}} text-center alert-maintenance">
+                    {{notification.message}}
+                    </div>
+                  {% endfor%}
+                {% endif%}
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label for="contact_email">
+                    Email
+                  </label>
+                  <input type="email" name="email" class="form-control" id="contact_email" required="required">
+                </div>
+                <div class="col-12 col-md-6 form-group">
+                  <label for="contact_name">
+                    Name
+                  </label>
+                  <input type="text" name="name" class="form-control" id="contact_name" required="required">
+                </div>
+                <div class="col-12 col-md-6 form-group">
+                  <label for="contact_company">
+                    Company
+                  </label>
+                  <input type="text" name="company" class="form-control" id="contact_company" required="required">
+                </div>
+                <div class="col-12 form-group">
+                  <label for="contact_street1">
+                    Street 1
+                  </label>
+                  <input type="text" name="street" class="form-control" id="contact_street1" required="required">
+                </div>
+                <div class="col-12 form-group">
+                  <label for="contact_street2">
+                    Street 2
+                  </label>
+                  <input type="text" name="street2" class="form-control" id="contact_street2">
+                </div>
+                <div class="col-3 form-group">
+                  <label for="contact_zip">
+                    Zip
+                  </label>
+                  <input type="text" name="zip" class="form-control" id="contact_zip" required="">
+                </div>
+                <div class="col-6 form-group">
+                  <label for="contact_city">
+                    City
+                  </label>
+                  <input type="text" name="city" class="form-control" id="contact_city" required="">
+                </div>
+                <div class="col-3 form-group">
+                  <label for="contact_city">
+                    Country
+                  </label>
+                  <select name="country_id" class="form-control">
+                    {% for country in store.available_countries %}
+                      <option id="{{ country.id }}">
+                        {{ country.name }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-6 form-group">
+                  <label for="contact_phone">
+                    Phone
+                  </label>
+                  <input type="text" name="phone" class="form-control" id="contact_phone">
+                </div>
+                <div class="col-6 form-group">
+                  <label for="contact_mobile">
+                    Mobile
+                  </label>
+                  <input type="text" name="mobile" class="form-control" id="contact_mobile">
+                </div>
+                <div class="col-12 form-group">
+                  <label for="contact_mobile">
+                    Message
+                  </label>
+                  <textarea class="form-control" name="description">
+                    
+                  </textarea>
+                </div>
+                <div class="col-12 text-right">
+                  <button type="submit" class="btn btn-primary">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>      
+  </div>
+</div>
+
