@@ -33,6 +33,18 @@ theme:
       type: image
     cart_icon:
       type: image
+elasticsearch:
+  label: ElasticSearch
+  fields:
+    url:
+      hint: "Elastic URL"
+      type: string
+    indices:
+      hint: "Elastic indices"
+      type: string
+    routes:
+      hint: "Elastic routes"
+      type: string
 algolia:
   label: Algolia
   fields:

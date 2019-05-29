@@ -30,6 +30,19 @@ metafields:
   theme:
     logo: "/samples/assets/shop-logo.png"
     noimage: "/samples/assets/no-image.jpg"
+  elasticsearch:
+    url: 'http://elastic:9200'
+    indices: >
+      [
+        { "name": "categories", "index": "demo_elasticsearch_backend_shopinvader_category" },
+        { "name": "products", "index": "demo_elasticsearch_backend_shopinvader_variant" }
+      ]
+    routes: >
+      [
+          ["*", { "name": "category", "template_handle": "category", "index": "categories" } ],
+          ["*", { "name": "product", "template_handle": "product", "index": "products" } ]
+      ]
+
   algolia:
     application_id: 'GH41KF783Z'
     api_key: "75575d3910b3ac55428bcdfa1b0e6784"
