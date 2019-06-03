@@ -1,0 +1,82 @@
+---
+{
+  "name": "Products Discounted List",
+  "class": "",
+  "icon": "list",
+  "settings": [
+    {
+      "label": "Header",
+      "id": "header",
+      "type": "text",
+      "html": true
+    }
+  ],
+  "presets": [{
+    "name": "Posts",
+    "category": "Blog",
+    "settings": {
+      "header": "<h1>Best deal today !</h1>",
+      "item_limit": 6
+    }
+  }]
+}
+---
+{% with_scope price.gt: {default: {discount: 0}} %}
+  {% if store.products | count > 0 %}
+    <div class="container pt-5 pb-5">
+      <div class="row pb-4">
+        <div class="col-12">
+          {{ section.settings.header }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          {% assign slide_count = 1 %}
+          <div id="product-slide-discount" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active p-1">
+                <div class="row">
+                  {% assign thumb_order = 0 %}
+                    {% for product in store.products %}
+                      {% assign thumb_order = thumb_order | plus: 1 %}
+                      <div class="col-12 col-sm-6 col-md-3 col-xl-3 p-1">
+                        <div class=" h-100">
+
+                          {% include 'product_thumbnail' with
+                             product
+                          %}
+                          
+                        </div>
+                      </div>
+                      {% if thumb_order == 4 %}
+                        {% assign slide_count = slide_count | plus: 1 %}
+                        {% assign thumb_order = 0 %}
+                        </div>
+                      </div>
+                      {% if forloop.rindex0 != 0 %}
+                        <div class="carousel-item p-1">
+                          <div class="row">
+                      {% endif %}
+
+                      
+                      {%endif%}
+                    {% endfor %}
+                </div>
+              </div>
+            </div>
+            {% if slide_count > 1%}
+              <div class="pt-2 pb-2 text-right">
+                <a class="btn btn-outline-gray btn-sm pb-0" href="#product-slide-discount" role="button" data-slide="prev">
+                  <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="btn btn-outline-gray btn-sm pb-0" href="#product-slide-discount" role="button" data-slide="next">
+                  <i class="fa fa-angle-right"></i>
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endwith_scope %}
