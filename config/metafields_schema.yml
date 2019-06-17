@@ -66,6 +66,12 @@ google:
     analytics_id:
       hint: Google Analytics ID
       type: string
+    recaptcha_site_key:
+      hint: reCAPTCHA - Site key
+      type: string
+    recaptcha_secret:
+      hint: reCAPTCHA - Secret key
+      type: string
 
 payment:
   label: Payment

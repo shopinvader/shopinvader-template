@@ -19,6 +19,7 @@ editable_elements:
     {% endeditable_text %}
     </h1>
     {% include 'store_notifications' %}
+    
     <form action="{% path_to page.handle %}" method="post" data-form-password-validation data-autocomplete="address">
       <input type="hidden" name="auth_action" value="sign_up" />
       <input type="hidden" name="auth_disable_email" value="true" />
@@ -27,8 +28,17 @@ editable_elements:
       <input type="hidden" name="auth_password_field" value="password" />
       <input type="hidden" name="auth_callback" value="{% path_to 'account_register_validation' %}?context={{params.context}}" />
       <input type="hidden" name="auth_entry[role]" value="{{site.metafields.erp.default_role}}">
+      <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
       {% include 'signup_form' with email: params.email %}
     </form>
   </div>
 </div>
+<script src="https://www.google.com/recaptcha/api.js?render={{site.metafields.google.recaptcha_site_key}}"></script>
+<script>
+  grecaptcha.ready(function() {
+      grecaptcha.execute('{{site.metafields.google.recaptcha_site_key}}', {action: 'register'}).then(function(token) {
+        document.getElementById('g-recaptcha-response').value  = token;
+      });
+  });
+</script>
 {% endblock %}
