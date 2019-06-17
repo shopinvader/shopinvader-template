@@ -35,7 +35,18 @@ theme:
     noimage:
       hint: Default placeholder image (categories, products...)
       type: image
-    
+elasticsearch:
+  label: ElasticSearch
+  fields:
+    url:
+      hint: "Elastic URL"
+      type: string
+    indices:
+      hint: "Elastic indices"
+      type: string
+    routes:
+      hint: "Elastic routes"
+      type: string
 algolia:
   label: Algolia
   fields:

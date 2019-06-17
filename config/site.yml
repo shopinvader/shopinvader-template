@@ -30,6 +30,19 @@ metafields:
   theme:
     logo: "/samples/assets/shop-logo.png"
     noimage: "/samples/assets/no-image.jpg"
+  elasticsearch:
+    url: 'http://elastic:9200'
+    indices: >
+      [
+        { "name": "categories", "index": "demo_elasticsearch_backend_shopinvader_category" },
+        { "name": "products", "index": "demo_elasticsearch_backend_shopinvader_variant" }
+      ]
+    routes: >
+      [
+          ["*", { "name": "category", "template_handle": "category", "index": "categories" } ],
+          ["*", { "name": "product", "template_handle": "product", "index": "products" } ]
+      ]
+
   algolia:
     application_id: 'GH41KF783Z'
     api_key: "75575d3910b3ac55428bcdfa1b0e6784"
@@ -44,17 +57,17 @@ metafields:
           ["*", { "name": "product", "template_handle": "product", "index": "products" } ]
       ]
   erp:
-    api_key: < Your ERP API KEY >
-    api_url: < Your ERP API URL >
+    api_key: demo1234
+    api_url: http://odoo:8069
     default_role: default
   payment:
-    stripe_api_key: < Your stripe API KEY >
+    stripe_api_key: pk_test_FcNCqsbwmVR5YZ0ak2bpe1xd
   smtp:
-    sender: < Your sender email address >
-    address: < Your SMTP Server address >
-    port: < Your SMTP Server port >
-    user_name: < Your SMTP user ID >
-    password: < Your SMTP User password >
+    sender: Shopinvader is comming
+    address: revolution@shopinvader.com
+    port: 1022
+    user_name: revolution
+    password: shopinvader
     authentication: plain
     enable_starttls_auto: true
   _store:
