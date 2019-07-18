@@ -31,9 +31,7 @@ See [https://akretion.github.io/shopinvader-documentation/](https://akretion.git
 Clone this repository and move into your LocomotiveCMS folder.
 
 ```bash
-$ git clone https://github.com/akretion/shopinvader-template.git YOUR_SITE_NAME
-bundle exec wagon serve
-
+$ git clone https://github.com/shopinvader/shopinvader-template.git YOUR_SITE_NAME
 ```
 
 ### Launch with docker-compose
