@@ -57,8 +57,8 @@ metafields:
           ["*", { "name": "product", "template_handle": "product", "index": "products" } ]
       ]
   erp:
-    api_key: demo1234
-    api_url: http://odoo:8069
+    api_key: 12345
+    api_url: http://odoo:8069/locomotive
     default_role: default
   payment:
     stripe_api_key: pk_test_FcNCqsbwmVR5YZ0ak2bpe1xd
