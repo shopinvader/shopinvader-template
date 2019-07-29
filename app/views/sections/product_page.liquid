@@ -41,6 +41,11 @@
       "id": "border",
       "type": "checkbox"
 
+    },
+    {
+      "label": "Full width",
+      "id": "full_width",
+      "type": "checkbox"
     }
   ],
   "blocks": [
@@ -535,7 +540,8 @@
       "sku" : "",
       "border" : false,
       "theme_color": "none",
-      "add_to_cart": true
+      "add_to_cart": true,
+      "full_width": false
     },
     "blocks": [
       {
@@ -642,7 +648,8 @@
     "settings": {
       "section_name" : "My product",
       "sku" : "THELMA-GREY",
-      "theme_color": "none"
+      "theme_color": "none",
+      "full_width": false
     },
     "blocks": [
       {
@@ -688,7 +695,7 @@
 {% endif %}
 
 {% if live_editing %}
-  {% assign product_variant = session.live_editing_product %}
+  {% assign product_variant = store.products | first %}
 {% endif %}
 
 {% case section.settings.theme_color %}
@@ -712,7 +719,7 @@
 {% endcase %}
 
 <div class="container-fluid {{css_banner}} pt-2 pb-2">
-  <div class="container mt-3 mb-3 pt-2 pb-2 {{css_card}} {% if section.settings.border %}shadow-sm{% endif %}">
+  <div class="container{% if section.settings.full_width %}-fluid{% endif %} mt-3 mb-3 pt-2 pb-2 {{css_card}} {% if section.settings.border %}shadow-sm{% endif %}">
     <div class="row">
       {% assign has_child = false %}
       {% for block in section.blocks%}
@@ -752,7 +759,7 @@
         {% if block.settings.margin != false %}
           {% assign css_cell = css_cell | append: " pt-4 pb-4"%}
         {% endif %}
-        <div class="block {{css_cell}}">
+        <div class="block  block-{{block.type}} {{css_cell}}">
           {% include 'block_debug' %}
           {% case block.type %}
             {% when 'product_title'%}
@@ -776,7 +783,6 @@
                 product_variant
               %}
             {% when 'breadcrumb'%}
-            ddd
               {% include 'block_product_breadcrumb' with
                 product_variant
               %}

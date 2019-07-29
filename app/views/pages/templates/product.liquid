@@ -78,15 +78,6 @@ handle: product
   {% endif %}
 
 
-  {% if live_editing == true %}
-    {% if product != null %}
-      {% action 'set product' %}
-        var product = getProp('product');
-        setSessionProp('live_editing_product', product);
-      {% endaction %}
-    {% endif %}
-  {% endif %}
-
   {% section 'product_page', placement: 'top' %}
   {% sections_dropzone %}
  
