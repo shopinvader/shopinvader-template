@@ -1,14 +1,11 @@
-
-{% if store.cart.shipping.available_carriers.items != null %}
-  {% assign selected_payment = store.cart.payment.available_methods.items | first %}
-  {% if store.cart.shipping.available_carriers.count > 0 %}
-    {% assign selected_carrier = store.cart.shipping.selected_carrier %}
-  {% endif %}
+{% erp get 'cart/get_delivery_methods' as delivery_methods %}
+{% if delivery_methods.size > 0 %}
+  {% assign selected_carrier = store.cart.shipping.selected_carrier %}
   <div>{{title}}</div>
-  <form method="post" action="/invader/cart/add_carrier" id="cart_carrier_form" data-shopinvader-form>
+  <form method="post" action="/invader/cart/apply_delivery_method" id="cart_carrier_form" data-shopinvader-form>
     <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
     <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
-    {%for carrier in store.cart.shipping.available_carriers.items %}
+    {%for carrier in delivery_methods %}
       <div class="cart-item-list">
         <input data-autosubmit 
           type="radio" 
@@ -39,4 +36,8 @@
       </div>
     {% endfor %}
   </form>
+{% else %}
+  <div class="alert alert-warning">
+    {{ 'cart_carrier_unavailable' | translate }}
+  </div>
 {% endif %}

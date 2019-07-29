@@ -601,11 +601,11 @@
     <input type="hidden" name="step[current]" value="{{ section.settings.cart_current_step }}">
     <input type="hidden" name="step[next]" value="{{section.settings.cart_next_step}}">
     <div class="row">
-    	<div class="col-6 text-left">
+    	<div class="col-6 text-left d-none d-sm-flex">
     		{{'cart_total_total' | translate }}<br>
     		<b>{% include 'currency' | value: cart.amount.total %}</b>
     	</div>
-    	<div class="col-6 text-right">
+    	<div class="col-12 col-6 text-center text-sm-right">
     		<button type="submit" name="submit" class="btn btn-outline-primary">
 		      {{"cart_checkout" | translate }} <i class="ti-angle-right"></i>
 		    </button>
@@ -614,13 +614,3 @@
   </form>
 </div>
 {% endif %}
-<script type="text/javascript">
-	
-	document.addEventListener('locomotive::section::load', event => {
-	  const { sectionId } = event.detail;
-	  const $section  = $(`#locomotive-section-${sectionId}`);
-
-	  console.log('the user is viewing: ', $section);
-
-	});
-</script>

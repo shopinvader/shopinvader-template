@@ -5,7 +5,7 @@
 		<div class="border-bottom pt-2 pb-2 d-none d-md-block">
 			<div class="row font-weight-bold ">
 				<div class="col-7 col-sm-10 col-md-7">
-					Article
+					{{ 'cart_item_desc' | translate }}
 				</div>
 				{% if cell_size != 'md'%}
 					<div class="col-md-3">
@@ -44,7 +44,7 @@
 
 		        <div class="col-12 {% if cell_size != 'md' %}col-md-5{% endif %}">
 		          <div class="row text-right m-0 mt-3 mt-xl-0">
-		            <div class="col-6 col-sm-5 {% if cell_size != 'md' %}col-md-7{% endif %} pt-3">
+		            <div class="col-6 col-sm-5 {% if cell_size != 'md' %}col-md-7{% endif %}">
 		              <form class="cart-line-qty" method="POST" action="/invader/cart/update_item" data-shopinvader-form>
 		                <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
 		                <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
