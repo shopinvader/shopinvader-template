@@ -1,0 +1,121 @@
+.main-showcase{
+  position: relative;
+  &.main-showcase-float {
+    //margin: auto;
+    &::before {
+      background-color: #EEEEEE;
+      position: absolute;
+      height: 80%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      content: " ";
+    }
+    .container {
+      background: $white;
+      width: $main-showcase-width;
+      box-shadow: $main-showcase-shadow;
+      @include media-breakpoint-up(md) {
+        margin: 0;
+        margin-top: -3rem;
+      }
+    }
+    .border {
+      border: 0;
+    }
+  }
+  .container {
+    margin: 1rem;
+    position: relative;
+
+    .showcase-desc {
+      background-color: $main-showcase-bg;
+      color: $main-showcase-color;
+      &.showcase-desc-float {
+        @if $main-showcase-float{
+          @include media-breakpoint-up(md) {
+            box-shadow: -3px 2px 19px 0px #4950575e;
+            position: absolute;
+            top: 2rem;
+            left: -2rem;
+          }
+        }
+      }
+    }
+
+    figure {
+      position: relative;
+      img {
+        filter: contrast(60%);
+      }
+      figcaption {
+        position: absolute;
+        top: 20%;
+        left: 0;
+        color: #fff;
+        text-align: center;
+        width: 100%;
+        font-size: 2rem;
+        //font-weight: bold;
+        text-transform: uppercase;
+
+      }
+      @include media-breakpoint-down(md) {
+        img {
+          filter: contrast(100%);
+        }
+        figcaption {
+          font-size: 0.8rem;
+          background: transparentize(theme-color('primary'), 0.2);
+          top: auto;
+          bottom: 0;
+        }
+      }
+    }
+  }
+  .showcase-carousel {
+    height: 480px;
+    @include media-breakpoint-up(sm) {
+      height: 430px;
+    }
+    @include media-breakpoint-up(md) {
+      height: 470px;
+    }
+    @include media-breakpoint-up(lg) {
+      height: 550px;
+    }
+    .showcase-carousel-item {
+      height: 100%;
+      .showcase-carousel-item-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 100%;
+        .showcase-carousel-link {
+          display: block;
+          position: relative;
+          text-align: center;
+          width: 100%;
+          &:before{
+            content: "";
+            display: block;
+            padding-top: 80%;
+          }
+          img {
+            position: absolute;
+            top: 0;
+            left:0;
+            right:0;
+            margin-left:auto;
+            margin-right:auto;
+            display: inline-block;
+          }
+        }
+        .showcase-carousel-item-desc {
+
+          padding-top: 0.5rem;
+        }
+      }
+    }
+  }
+}

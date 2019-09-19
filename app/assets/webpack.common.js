@@ -1,5 +1,6 @@
 const path = require('path');
 const Webpack = require('webpack');
+const globImporter = require('node-sass-glob-importer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
@@ -21,8 +22,19 @@ module.exports = {
         }
       },
       {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.scss$/,
-        use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+        use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', {
+          loader: 'sass-loader',
+          options: {
+            sassOptions: {
+              importer: globImporter()
+            }
+          }
+        }]
       },
       {
         test: /\.(woff2?|svg)$/,

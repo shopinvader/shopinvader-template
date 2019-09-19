@@ -1,1 +1,6 @@
 // Wagon main stylesheet file
+
+@import "custom_theme/_bootstrap_custom";
+@import "components/_variables";
+@import "~bootstrap/scss/bootstrap";
+@import "sections/*";

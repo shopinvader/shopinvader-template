@@ -1,0 +1,169 @@
+.account-card-menu {
+  .nav {
+    a {
+      color: $gray-800;
+      .fas {
+        color: theme-color('primary');
+      }
+    }
+    .active {
+
+      background: theme-color('primary');
+      & > a {
+        color: $white;
+      }
+      .fas {
+        color: $white;
+      }
+    }
+  }
+}
+.navbar-quotation {
+  .quotation-pay {
+    display: none;
+  }
+  .btn:not(.collapsed) {
+    .quotation-details {
+      display: none;
+    }
+    .quotation-pay {
+      display: block;
+    }
+  }
+}
+.accound-icon {
+  @include media-breakpoint-up(xl) {
+    border-bottom: 3px solid $gray-700;
+  }
+}
+.accound-menu {
+  li.nav-item {
+    a.nav-link {
+      color: $gray-700;
+      font-weight: bold;
+
+    }
+    border-bottom: 3px solid $gray-700;
+    &.active {
+      a.nav-link {
+        color: theme-color('primary');
+      }
+      border-bottom-color: theme-color('primary');
+    }
+  }
+  @include media-breakpoint-down(md) {
+    border-bottom: 3px solid  $gray-700;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+
+    li.nav-item {
+      width: 100%;
+      border:0;
+      padding-bottom: .5rem;
+      padding-top: .5rem;
+    }
+  }
+}
+.order {
+  .order-header {
+    &:before {
+      content: ' ';
+      width: 10px;
+      background-color: theme-color('primary');
+      height: calc(100% + 23px);
+      position: absolute;
+      margin: -15px;
+    }
+    &.order-state-pending {
+      &:before {
+        background-color: theme-color('info');
+      }
+    }
+    &.order-state-processing {
+      &:before {
+        background-color: theme-color('warning');
+      }
+    }
+    &.order-state-done {
+      &:before {
+        background-color: theme-color('success');
+      }
+    }
+
+  }
+  .order-step {
+    text-align:center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 25%;
+    &:not(:first-child):after {
+      content: ' ';
+      background-color: theme-color('secondary');
+      height: 3px;
+      width: calc(50% + 3rem - 8px);
+      position: absolute;
+      top: 3rem;
+      right: calc(50% + 3rem);
+    }
+
+    .icon {
+      align-items: center;
+      align-self: center;
+      justify-content: center;
+      display: flex;
+      border: 3px solid theme-color('secondary');
+      border-radius: 50%;
+      width: 6rem;
+      height: 6rem;
+      color: theme-color('secondary');
+      background-color: $white;
+      text-align: center;
+      line-height: 100%;
+      i {
+        font-size: 1.8rem;
+      }
+      &:after {
+        content: " ";
+        display: block;
+
+      }
+
+    }
+
+    &.done {
+       &:after {
+        background-color: theme-color('success');
+       }
+      .icon {
+        border-color: theme-color('success');
+        color: theme-color('success');
+      }
+    }
+    @include media-breakpoint-down(lg) {
+      flex-direction: row;
+      width: 100%;
+      justify-content: start;
+      padding-bottom: .1rem;
+      &:not(:first-child):after {
+        background-color: transparent;
+        width: 0; 
+      }
+      .label {
+        flex-grow: 1;
+        display: flex;
+        text-align: left;
+      }
+      .icon {
+        width: 4rem;
+        height: 4rem;
+        i {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}

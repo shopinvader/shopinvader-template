@@ -27,4 +27,5 @@ app/views/pages/layouts/faceting.fr.liquid
 app/views/pages/layouts/lite.fr.liquid
 app/views/pages/layouts/simple.fr.liquid
 Gemfile
+node_modules/
 

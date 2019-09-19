@@ -50,25 +50,16 @@ is_layout: false
 
     {% block 'css' %}
     {% endblock %}
+
     {% block 'javascripts_header' %}
-     
     {% endblock %}
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Montserrat" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    {{ 'application.css' | stylesheet_tag }}
-    <link rel="shortcut icon" href="{{ 'favicon.png' | theme_image_url }}">
 
-    {% if live_editing == true and site.metafields.theme.debug_section == true%}
-      {% assign css_body = 'body-section-debug' %}
-      {{ 'section-debug.js' | javascript_tag }}
-      {{ 'sections/debug.css' | stylesheet_tag }}
-    {% endif %}
-
+    {{ 'bundle.css' | stylesheet_tag }}
   </head>
   <body class="{{css_body}}">
     <style media="screen">
       body {
-        font-family: Comfortaa;
+        font-family: 'Comfortaa', Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         background-color: {{site.metafields.theme.body_bg_color}};
       }
       body .page {
@@ -168,26 +159,14 @@ is_layout: false
     {{ 'shopinvader.jquery.js' | javascript_tag }}
     {{ 'js-cookie' | javascript_tag }}
     {{ 'bootstrap4.min.js' | javascript_tag }}
+
     {{ 'application.js' | javascript_tag }}
+    {{ 'bundle.js' | javascript_tag }}
     
-    {% block 'javascripts_algolia', short_name: true %}
-      {% include 'algolia_init' %}
-      <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
-      {{ 'search_autocomplete.js' | javascript_tag }}
-      
-    {% endblock %}
-     
     {% block 'javascripts', short_name: true %}
     {% endblock %}
     {% global_section 'cookies_manager',  placement: 'bottom' %}
     {{js_footer}}
-    {% comment %}
-    
-    
-    {% endcomment %}
-
     <script>
       var cb = function() {
         add_stylesheet({{ 'themify-icons.css' | stylesheet_url | json }});
