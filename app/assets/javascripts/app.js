@@ -11,13 +11,15 @@ import '@fortawesome/fontawesome-free/js/fontawesome'
 import '@fortawesome/fontawesome-free/js/solid'
 import '@fortawesome/fontawesome-free/js/regular'
 import '@fortawesome/fontawesome-free/js/brands'
-import "~unpoly/dist/unpoly.css";
-import style from '../stylesheets/sections/_test_section.scss';
+//import "~unpoly/dist/unpoly.git css";
+
+
 document.addEventListener('DOMContentLoaded', event => {
 
   // Load all the sections
   const sectionsManager = new SectionsManager();
   // Register sections here. DO NOT REMOVE OR UPDATE THIS LINE
+  sectionsManager.registerSection('searchkit_faceting', Sections.SearchkitFaceting);
 
   sectionsManager.start();
 

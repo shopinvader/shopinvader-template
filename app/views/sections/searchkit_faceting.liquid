@@ -1,0 +1,64 @@
+---
+name: Searchkit faceting
+class: section-searchkit-faceting
+icon: default
+settings:
+- label: Title
+  id: title
+  type: text
+- label: short description
+  id: short_description
+  type: text
+  format: html
+- label: Description
+  id: description
+  type: text
+  format: html
+blocks: []
+default:
+  settings:
+    title: Search
+---
+
+{% assign elasticsearch_locale = store.locale_mapping | downcase %}
+{% action 'get elasticsearch parameters' %}
+  setProp('elasticsearch_indexes', JSON.parse(site.metafields.elasticsearch.indices));
+{% endaction %}
+{% if category != null %}
+  {% assign title = category.name %}
+  {% assign short_description = category.short_description %}
+  {% assign description = category.description %}
+{% else %}
+  {% assign title = section.settings.title %}
+  {% assign short_description = section.settings.short_description %}
+  {% assign description = section.settings.description %}
+{% endif %}
+<script type="text/javascript"></script>
+
+<div id="searchkit-faceting-container"
+  data-product-noimage={{ site.metafields.theme.noimage | json }}
+  data-elastic-url={{ site.metafields.elasticsearch.url | json }}
+  data-locale={{ store.locale_mapping | json }}
+  {% for role in elasticsearch_indexes %}
+    data-elastic-index-{{role.name}}={{role.index | append:"_" | append: elasticsearch_locale  | json}}
+  {% endfor %}
+  {% if category %}
+    data-filter-key="categories.id"
+    data-filter-value={{category.objectID | json }}
+  {% endif %} >
+  <div class="searchkit-header">
+    <h1>{{title}}</h1>
+    <div>
+      {{ short_desciption }}
+    </div>
+  </div>
+  {% for facet in store.all_filters %}
+    <div 
+      data-facet-code="{{facet.code}}"
+      data-facet-name="{{facet.name}}">
+    </div>
+  {% endfor %}
+  <div class="searchkit-footer">
+    {{ description }}
+  </div>
+</div>
