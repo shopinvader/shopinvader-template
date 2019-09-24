@@ -28,8 +28,8 @@ metafields:
   google:
     analytics_id:
   theme:
-    logo: "/samples/assets/shop-logo.png"
-    noimage: "/samples/assets/no-image.jpg"
+    logo: "/images/shop-logo.png"
+    noimage: "/images/no-image.jpg"
   elasticsearch:
     url: 'http://elastic:9200'
     indices: >
