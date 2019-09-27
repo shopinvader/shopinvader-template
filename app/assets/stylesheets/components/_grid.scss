@@ -1,8 +1,4 @@
 
-$columns: 100;
-.grid-cell-auto {
-	@include make-col-ready();
-}
 .grid-row {
 	display: flex;
 	flex-wrap: wrap;
@@ -10,27 +6,39 @@ $columns: 100;
 	margin-right: -15px !important;
 	justify-content: center;
 }
-//10, 25, 33, 50, 66, 75, 100
-$sizes: (
-	'xs': (xs: 25, lg: 25),
-	'sm': (xs:100, md: 50, lg: 33),
-	'md': (xs:100, lg: 50),
-	'lg': (xs:100, lg: 66),
-	'xl': (xs:100, lg: 75),
-	'full': (xs:100)
-);
-
-@each $name, $sizes_list in $sizes {
-  .grid-cell-#{$name} {
+.grid-cell-auto {
+	@include make-col-ready();
+}
+$i: 100;
+$columns: 100;
+@while $i > 0 {
+	$sm_size: $i;
+	$md_size: $i;
+	@if $sm_size < 50 {
+		$sm_size: 50;
+	} @else {
+		$sm_size: 100;
+	}
+	@if $md_size < 33 {
+		$md_size: 50;
+	}
+	$sizes_list: (
+		'sm': $sm_size,
+		'md': $md_size,
+		'lg': $i
+	);
+  .grid-cell-#{$i} {
   	overflow: hidden;
 		@include make-col-ready();
 		@include make-col($columns, $columns);
 		@each $breakpoint, $size in $sizes_list {
+			border: 1xp solid red; 
 			@include media-breakpoint-up($breakpoint) {
 				@include make-col($size, $columns);
 			}
 		}
 	}
+	$i: $i - 5;
 }
 //margin (rem)
 $paddings: (
