@@ -3,28 +3,32 @@ title: Home page
 published: true
 handle: home
 sections_dropzone_content:
-  - type: carousel
+  - type: dynamic_carousel
     settings:
-      section_name: Main carousel
-      identifier: main
-      display_control: 'true'
-      full_width: false
-      display_sm: true
-      page_border: true
+      theme_color: none
+      text_position: top
+      section_name: Carousel
     blocks:
-    - type: list_item
+    - type: slide
       settings:
-        title: 'Slide #1'
-        picture: "/samples/slide-1.png"
-        link: ''
-        align_caption: center
-    - type: list_item
+        title: Lorem ipsum dolor sit amet
+        content: >
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer id mollis mi. Curabitur vitae egestas lorem, feugiat porttitor erat. Aenean commodo rutrum tortor quis aliquam.</p>
+        picture:
+          height: 43
+          source: "/samples/assets/armchair-black.png"
+          width: 123
+        img_position: right
+    - type: slide
       settings:
-        title: 'Slide #2'
-        picture: "/samples/slide-2.png"
-        link: ''
-        caption: "<h5>Slide #2</h5><p>Maecenas varius nibh a maximus vehicula</p>"
-        align_caption: end
+        title: Nulla porttitor nulla ac laoreet volutpat
+        content: >
+          <p>Etiam quis turpis magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse consequat aliquet semper. Cras volutpat leo eu risus scelerisque, nec rutrum ligula pellentesque. </p>
+        picture:
+          height: 43
+          source: "/samples/assets/armchair-yellow.png"
+          width: 123
+        img_position: left
   - type: category_products_list
     settings:
       category_id: '202'
