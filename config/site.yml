@@ -11,7 +11,7 @@ name: "Shopinvader demo (Shopinvader Demo)"
 # The locale listed first is the site's default locale
 # Locales are specified using ISO language codes
 # Possible locales include: en, de, fr, pl, pt-BR, it, nl, nb, es, ru, et, ja, zh-CN
-locales: [en, fr]
+locales: [en,fr]
 
 seo_title: Shopinvader demo | May the discount be with you
 meta_keywords: "the Shopinvader  demo web store"
@@ -28,37 +28,17 @@ metafields:
   google:
     analytics_id:
   theme:
-    logo: "/images/shop-logo.png"
-    noimage: "/images/no-image.jpg"
+    logo: "/samples/assets/shop-logo.png"
+    noimage: "/samples/assets/no-image.jpg"
   elasticsearch:
-    url: 'http://elastic:9200'
+    url: https://elastic.site.demo.shopinvader.com:4443/
     indices: >
-      [
-        { "name": "categories", "index": "demo_elasticsearch_backend_shopinvader_category" },
-        { "name": "products", "index": "demo_elasticsearch_backend_shopinvader_variant" }
-      ]
+      [  { "name": "categories", "index": "krapahute_shopinvader_category", "type":"odoo"},  { "name": "products", "index": "krapahute_shopinvader_variant", "type":"odoo"}]
     routes: >
-      [
-          ["*", { "name": "category", "template_handle": "category", "index": "categories" } ],
-          ["*", { "name": "product", "template_handle": "product", "index": "products" } ]
-      ]
-
-  algolia:
-    application_id: 'GH41KF783Z'
-    api_key: "75575d3910b3ac55428bcdfa1b0e6784"
-    indices: >
-      [
-        { "name": "categories", "index": "demo_site_10_category" },
-        { "name": "products", "index": "demo_site_10_product" }
-      ]
-    routes: >
-      [
-          ["*", { "name": "category", "template_handle": "category", "index": "categories" } ],
-          ["*", { "name": "product", "template_handle": "product", "index": "products" } ]
-      ]
+      [    ["*", { "name": "category", "template_handle": "category", "index": "categories" } ],    ["*", { "name": "product", "template_handle": "product", "index": "products" } ]]
   erp:
-    api_key: demo1234
-    api_url: http://odoo:8069
+    api_key: 2HhCfjvKuEcAC7sPwtM3N23LyqiCVTukHa6h2i7YbQu7e6ZyRWeBHKkF28tz2fmp
+    api_url: https://acdc.akretion.com/shopinvader
     default_role: default
   payment:
     stripe_api_key: pk_test_FcNCqsbwmVR5YZ0ak2bpe1xd
@@ -87,15 +67,25 @@ metafields:
     all_filters: >
       {
         "fr": [
+          {"code": "type.name", "name": "Type"},
+          {"code": "brand.name", "name": "Marque"},
+          {"code": "product_model.name", "name": "Modèle"},
+          {"code": "color.name", "name": "Couleur"},
+          {"code": "capacity.name", "name": "Capacité", "type": "numeric"},
+          {"code": "grade.name", "name": "Grade"}
         ],
-        "en": [
-        ]
+        "en": []
       }
     currencies_rate: >
       {
         "EUR" : 1,
-        "USD" : 1.17,
-        "CAD" : 1.54
+        "USD" : 1.10,
+        "CAD" : 1.46
+      }
+    locale_mapping: >
+      {
+        "fr": "fr_FR",
+        "en": "fr_FR"
       }
     currencies_format: >
       {
