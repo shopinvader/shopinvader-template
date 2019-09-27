@@ -1,693 +1,553 @@
 ---
-{
-  "name": "Product page",
-  "class": "",
-  "icon": "image_text",
-  "keep_icon": true,
-  "settings": [
-    {
-      "label": "Product SKU (not use for product page)",
-      "id": "sku",
-      "type": "text"
-    },
-    {
-      "label": "Section Name",
-      "id": "section_name",
-      "type": "text"
-    },
-    {
-      "label": "Container color",
-      "id": "theme_color",
-      "type": "select",
-      "options": [
-        {"label": "None","value": "none"},
-        {"label": "Light","value": "light"},
-        {"label": "Dark","value": "dark"}
-      ]
-    },
-    {
-      "label": "Card color",
-      "id": "card_color",
-      "type": "select",
-      "options": [
-        {"label": "None","value": "none"},
-        {"label": "Light","value": "light"},
-        {"label": "White","value": "white"},
-        {"label": "Dark","value": "dark"}
-      ]
-    },
-    {
-      "label": "Card Border",
-      "id": "border",
-      "type": "checkbox"
+name: Product page
+class: section-product-page
+icon: image_text
+keep_icon: true
+settings:
+- label: Product SKU (not use for product page)
+  id: sku
+  type: text
+- label: Section Name
+  id: section_name
+  type: text
+- label: Theme color
+  id: theme_color
+  type: select
+  options:
+    - label: Light
+      value: light
+    - label: Border
+      value: border
+    - label: Header
+      value: header
+    - label: None
+      value: none
+- label: Full width
+  id: full_width
+  type: checkbox
+blocks:
+- name: Add to cart
+  type: add_to_cart
+  settings:
+  - label: Cell Size
+    id: cell_size
+    type: select
+    options:
+    - label: Auto
+      value: auto
+    - label: Extra-small
+      value: xs
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+    - label: Full
+      value: full
+  - label: Child of previous block
+    id: is_child
+    type: checkbox
+  - label: Display Add to cart section
+    id: display_add_to_cart
+    type: checkbox
+- name: Attribute
+  type: attribute
+  settings:
+  - label: Attribute type
+    id: type
+    type: select
+    options:
+    - label: Attribute key
+      value: text
+    - label: Attribute group
+      value: table
+  - label: Cell Size
+    id: cell_size
+    type: select
+    options:
+    - label: Auto
+      value: auto
+    - label: Extra-small
+      value: xs
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+    - label: Full
+      value: full
+  - label: Child of previous block
+    id: is_child
+    type: checkbox
+  - label: Theme color
+    id: theme_color
+    type: select
+    options:
+    - label: Light
+      value: light
+    - label: Dark
+      value: dark
+    - label: Primary
+      value: primary
+    - label: Border
+      value: border
+    - label: Warning
+      value: warning
+    - label: None
+      value: none
+  - label: Title
+    id: title
+    type: text
+    html: true
+  - label: Attribute or group key
+    id: attribute_name
+    type: text
+  - label: Display label (only for group)
+    id: display_legend
+    type: checkbox
+- name: Breadcrumb
+  type: breadcrumb
+  settings:
+  - label: Child of previous block
+    id: is_child
+    type: checkbox
+  - label: Display product Name
+    id: display_product_name
+    type: checkbox
+- name: Text
+  type: cell_text
+  keep_icon: true
+  keep_name: true
+  settings:
+  - label: Cell Size
+    id: cell_size
+    type: select
+    options:
+    - label: Auto
+      value: auto
+    - label: Extra-small
+      value: xs
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+    - label: Full
+      value: full
+  - label: Child of previous block
+    id: is_child
+    type: checkbox
+  - label: Content
+    id: content
+    type: text
+    html: true
+    nb_rows: 10
+- name: Picture
+  type: cell_image
+  keep_icon: true
+  keep_name: true
+  settings:
+  - label: Cell Size
+    id: cell_size
+    type: select
+    options:
+    - label: Auto
+      value: auto
+    - label: Extra-small
+      value: xs
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+    - label: Full
+      value: full
+  - label: Child of previous block
+    id: is_child
+    type: checkbox
+  - label: Picture
+    id: picture
+    type: image_picker
+  - label: Picture Title
+    id: picture_alt
+    type: text
+- name: Cross Selling
+  type: cross_sellings
+  settings:
+  - label: Cell Size
+    id: cell_size
+    type: select
+    options:
+    - label: Auto
+      value: auto
+    - label: Extra-small
+      value: xs
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+    - label: Full
+      value: full
+  - label: Child of previous block
+    id: is_child
+    type: checkbox
+  - label: Title
+    id: title
+    type: text
+    html: true
+- name: Product data
+  type: product_data
+  settings:
+  - label: Cell Size
+    id: cell_size
+    type: select
+    options:
+    - label: Auto
+      value: auto
+    - label: Extra-small
+      value: xs
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+    - label: Full
+      value: full
+  - label: Margin
+    id: margin
+    type: checkbox
+  - label: Label inline
+    id: inline
+    type: checkbox
+  - label: Child of previous block
+    id: is_child
+    type: checkbox
+  - label: Title
+    id: title
+    type: text
+    html: true
+  - label: Data type
+    id: data_type
+    type: select
+    options:
+    - label: Brand
+      value: brand.name
+    - label: Full name
+      value: name
+    - label: Long description
+      value: description
+    - label: Model name
+      value: model.name
+    - label: Short description
+      value: short_description
+    - label: SKU
+      value: sku
+- name: Product Image
+  type: product_image
+  settings:
+  - label: Cell Size
+    id: cell_size
+    type: select
+    options:
+    - label: Auto
+      value: auto
+    - label: Extra-small
+      value: xs
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+    - label: Full
+      value: full
+  - label: Child of previous block
+    id: is_child
+    type: checkbox
+  - label: Thumbnails positions
+    id: thumb_position
+    type: select
+    options:
+    - label: Left
+      value: left
+    - label: Right
+      value: right
+    - label: Top
+      value: top
+    - label: Bottom
+      value: bottom
+- name: Product title
+  type: product_title
+  settings:
+  - label: Cell Size
+    id: cell_size
+    type: select
+    options:
+    - label: Auto
+      value: auto
+    - label: Extra-small
+      value: xs
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+    - label: Full
+      value: full
+  - label: Child of previous block
+    id: is_child
+    type: checkbox
+  - label: Display category Link
+    id: display_category_link
+    type: checkbox
+  - label: Display Rating
+    id: display_rating
+    type: checkbox
+- name: Product variants
+  type: variants
+  settings:
+  - label: Cell Size
+    id: cell_size
+    type: select
+    options:
+    - label: Auto
+      value: auto
+    - label: Extra-small
+      value: xs
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+    - label: Full
+      value: full
+  - label: Variant display
+    id: variant_display
+    type: select
+    options:
+    - label: Select
+      value: select
+    - label: Product list
+      value: list
+    - label: Button
+      value: button
+  - label: Child of previous block
+    id: is_child
+    type: checkbox
+  - label: Title
+    id: title
+    type: text
+    html: true
+- name: Review
+  type: review
+  settings:
+  - label: Cell Size
+    id: cell_size
+    type: select
+    options:
+    - label: Auto
+      value: auto
+    - label: Extra-small
+      value: xs
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+    - label: Full
+      value: full
+  - label: Child of previous block
+    id: is_child
+    type: checkbox
+  - label: Title
+    id: title
+    type: text
+    html: true
+- name: Technical Media
+  type: technical_details
+  settings:
+  - label: Title
+    id: title
+    type: text
+    html: true
+  - label: Cell Size
+    id: cell_size
+    type: select
+    options:
+    - label: Auto
+      value: auto
+    - label: Extra-small
+      value: xs
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+    - label: Full
+      value: full
+- name: Up Selling
+  type: up_sellings
+  settings:
+  - label: Cell Size
+    id: cell_size
+    type: select
+    options:
+    - label: Auto
+      value: auto
+    - label: Extra-small
+      value: xs
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+    - label: Full
+      value: full
+  - label: Child of previous block
+    id: is_child
+    type: checkbox
+  - label: Title
+    id: title
+    type: text
+    html: true
+default:
+  settings:
+    section_name: Product data
+    sku: ''
+    theme_color: none
+    full_width: false
+  blocks:
+  - type: breadcrumb
+    settings:
+      display_product_name: true
+  - type: product_title
+    settings:
+      display_category_link: true
+      cell_size: full
+  - type: product_data
+    settings:
+      margin: false
+      title: "<b>SKU</b>"
+      cell_size: full
+      data_type: sku
+      inline: true
+      is_child: true
+  - type: product_image
+    settings:
+      margin: true
+      thumb_position: left
+      cell_size: lg
+      is_child: true
+  - type: add_to_cart
+    settings:
+      display_add_to_cart: true
+      cell_size: sm
+      is_child: true
+  - type: variants
+    settings:
+      title: Models
+      cell_size: full
+      is_child: true
+      variant_display: button
+  - type: variants
+    settings:
+      title: Models
+      cell_size: full
+      is_child: false
+      variant_display: list
+  - type: product_data
+    settings:
+      margin: false
+      title: "<h2>Overview</h2>"
+      cell_size: md
+      data_type: description
+      inline: false
+      is_child: false
+  - type: attribute
+    settings:
+      title: "<h2>Manufacturing</h2>"
+      cell_size: md
+      type: text
+      attribute_name: manufacturing_description
+      display_legend: true
+      theme_color: light
+      is_child: false
+  - type: cross_sellings
+    settings:
+      title: "<h2>More In This Collection</h2>"
+      cell_size: full
+  - type: up_sellings
+    settings:
+      title: "<h2>More choices</h2>"
+      cell_size: full
+presets:
+- name: Products page
+  category: Product
+  settings:
+    section_name: My product
+    sku: THELMA-GREY
+    theme_color: none
+    full_width: false
+  blocks:
+  - type: product_image
+    settings:
+      thumb_position: left
+      cell_size: md
+      is_child: false
+  - type: product_title
+    settings:
+      display_category_link: true
+      cell_size: md
+  - type: product_data
+    settings:
+      data_type: description
+      cell_size: full
+      is_child: true
+  - type: add_to_cart
+    settings:
+      display_add_to_cart: true
+      cell_size: full
+      is_child: true
 
-    },
-    {
-      "label": "Full width",
-      "id": "full_width",
-      "type": "checkbox"
-    }
-  ],
-  "blocks": [
-    //Add to cart
-    {
-      "name": "Add to cart",
-      "type": "add_to_cart",
-      "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Child of previous block",
-          "id": "is_child",
-          "type": "checkbox"
-        },
-        {
-          "label": "Display Add to cart section",
-          "id": "display_add_to_cart",
-          "type": "checkbox"
-        }
-      ]
-    },
-    // Attribute
-    {
-      "name": "Attribute",
-      "type": "attribute",
-      "settings": [
-       {
-          "label": "Attribute type",
-          "id": "type",
-          "type": "select",
-          "options": [
-            {"label": "Attribute key","value": "text"},
-            {"label": "Attribute group","value": "table"}
-          ]
-        },
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Child of previous block",
-          "id": "is_child",
-          "type": "checkbox"
-        },
-        {
-          "label": "Theme color",
-          "id": "theme_color",
-          "type": "select",
-          "options": [
-            {"label": "Light","value": "light"},
-            {"label": "Dark","value": "dark"},
-            {"label": "Primary", "value": "primary"},
-            {"label": "Secondary", "value": "secondary"},
-            {"label": "Info", "value": "info"},
-            {"label": "Danger", "value": "danger"},
-            {"label": "Warning", "value": "warning"}
-          ]
-        },
-        {
-          "label": "Title",
-          "id": "title",
-          "type": "text",
-          "html": true
-
-        },
-        {
-          "label": "Attribute or group key",
-          "id": "attribute_name",
-          "type": "text"
-        },
-        {
-          "label": "Display label (only for group)",
-          "id": "display_legend",
-          "type": "checkbox"
-        }
-      ]
-    },
-    //Breadcrumb
-    {
-      "name": "Breadcrumb",
-      "type": "breadcrumb",
-      "settings": [
-        {
-          "label": "Child of previous block",
-          "id": "is_child",
-          "type": "checkbox"
-        },
-        {
-          "label": "Display product Name",
-          "id": "display_product_name",
-          "type": "checkbox"
-        }
-      ]
-    },
-    //Cell Text
-    {
-      "name": "Text",
-      "type": "cell_text",
-      "keep_icon": true,
-      "keep_name": true,
-      "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        }, 
-        {
-          "label": "Child of previous block",
-          "id": "is_child",
-          "type": "checkbox"
-        },
-        {
-          "label": "Content",
-          "id": "content",
-          "type": "text",
-          "html": true,
-          "nb_rows": 10
-        }
-      ]
-    },
-    //Cell images
-    {
-      "name": "Picture",
-      "type": "cell_image",
-      "keep_icon": true,
-      "keep_name": true,
-      "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Child of previous block",
-          "id": "is_child",
-          "type": "checkbox"
-        },
-        {
-          "label": "Picture",
-          "id": "picture",
-          "type": "image_picker"
-        },
-        {
-          "label": "Picture Title",
-          "id": "picture_alt",
-          "type": "text"
-        }
-      ]
-    },
-    //Cross Selling
-    {
-      "name": "Cross Selling",
-      "type": "cross_sellings",
-      "settings": [
-         {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Child of previous block",
-          "id": "is_child",
-          "type": "checkbox"
-        },
-        {
-          "label": "Title",
-          "id": "title",
-          "type": "text",
-          "html": true
-
-        }
-      ]
-    },
-    //Product Data
-    {
-      "name": "Product data",
-      "type": "product_data",
-      "settings": [
-         {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Margin",
-          "id": "margin",
-          "type": "checkbox"
-        },
-        {
-          "label": "Label inline",
-          "id": "inline",
-          "type": "checkbox"
-        },
-        {
-          "label": "Child of previous block",
-          "id": "is_child",
-          "type": "checkbox"
-        },
-        {
-          "label": "Title",
-          "id": "title",
-          "type": "text",
-          "html": true
-        },
-        {
-          "label": "Data type",
-          "id": "data_type",
-          "type": "select",
-          "options": [
-            {"label": "Brand","value": "brand.name"},
-            {"label": "Full name","value": "name"},
-            {"label": "Long description","value": "description"},
-            {"label": "Model name","value": "model.name"},
-            {"label": "Short description","value": "short_description"},
-            {"label": "SKU","value": "sku"}
-          ]
-        }
-      ]
-    },
-    //Product image
-    {
-      "name": "Product Image",
-      "type": "product_image",
-      "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Child of previous block",
-          "id": "is_child",
-          "type": "checkbox"
-        },
-        {
-          "label": "Thumbnails positions",
-          "id": "thumb_position",
-          "type" : "select",
-          "options": [
-            {"label": "Left", "value": "left"},
-            {"label": "Right", "value": "right"},
-            {"label": "Top", "value": "top"},
-            {"label": "Bottom", "value": "bottom"}
-          ]
-        }
-      ]
-    },
-    //Product title
-    {
-      "name": "Product title",
-      "type": "product_title",
-      "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Child of previous block",
-          "id": "is_child",
-          "type": "checkbox"
-        },
-        {
-          "label": "Display category Link",
-          "id": "display_category_link",
-          "type": "checkbox"
-        },
-        {
-          "label": "Display Rating",
-          "id": "display_rating",
-          "type": "checkbox"
-        }
-      ]
-    },
-    //Product variants
-    {
-      "name": "Product variants",
-      "type": "variants",
-      "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Variant display",
-          "id": "variant_display",
-          "type": "select",
-          "options": [
-            {"label": "Select", "value": "select"},
-            {"label": "Product list","value": "list"},
-            {"label": "Button","value": "button"}
-          ]
-        },
-        {
-          "label": "Child of previous block",
-          "id": "is_child",
-          "type": "checkbox"
-        },
-        {
-          "label": "Title",
-          "id": "title",
-          "type": "text",
-          "html": true
-        }
-      ]
-    },
-    //Review
-    {
-      "name": "Review",
-      "type": "review",
-      "settings": [
-         {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Child of previous block",
-          "id": "is_child",
-          "type": "checkbox"
-        },
-        {
-          "label": "Title",
-          "id": "title",
-          "type": "text",
-          "html": true
-
-        }
-      ]
-    },
-    //Technical Media
-    {
-      "name": "Technical Media",
-      "type": "technical_details",
-      "settings": [
-        {
-          "label": "Title",
-          "id": "title",
-          "type": "text",
-          "html": true
-
-        },
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        }
-      ]
-    },
-    //Up Selling
-    {
-      "name": "Up Selling",
-      "type": "up_sellings",
-      "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Child of previous block",
-          "id": "is_child",
-          "type": "checkbox"
-        },
-        {
-          "label": "Title",
-          "id": "title",
-          "type": "text",
-          "html": true
-
-        }
-      ]
-    }
-  ],
-  "default": {
-    "settings": {
-      "section_name": "Product data",
-      "sku" : "",
-      "border" : false,
-      "theme_color": "none",
-      "add_to_cart": true,
-      "full_width": false
-    },
-    "blocks": [
-      {
-        "type": "breadcrumb",
-        "settings": {
-          "display_product_name": true
-        }
-      },
-      {
-        "type": "product_title",
-        "settings": {
-          "display_category_link": true,
-          "cell_size": "lg"
-        }
-      },
-      {
-        "type": "product_data",
-        "settings": {
-          "margin": "false",
-          "title": "<b>SKU</b>",
-          "cell_size": "xl",
-          "data_type": "sku",
-          "inline": true,
-          "is_child": true
-        }
-      },
-      {
-        "type": "product_image",
-        "settings": {
-          "thumb_position": "left",
-          "cell_size": "lg",
-          "is_child": true
-        }
-      },
-      {
-        "type": "add_to_cart",
-        "settings": {
-          "display_add_to_cart": true,
-          "cell_size": "sm"
-        }
-      },
-      {
-        "type": "variants",
-        "settings": {
-          "title": "Models",
-          "cell_size": "full",
-          "is_child": true,
-          "variant_display": "button"
-        }
-      },
-      {
-        "type": "variants",
-        "settings": {
-          "title": "Models",
-          "cell_size": "full",
-          "is_child": false,
-          "variant_display": "list"
-        }
-      },
-      
-      {
-        "type": "product_data",
-        "settings": {
-          "margin": "false",
-          "title": "<h2>Overview</h2>",
-          "cell_size": "md",
-          "data_type": "description",
-          "inline": false,
-          "is_child": false
-        }
-      },
-      {
-        "type": "attribute",
-        "settings": {
-          "title": "<h2>Manufacturing</h2>",
-          "cell_size": "md",
-          "type": "text",
-          "attribute_name": "manufacturing_description",
-          "display_legend": true,
-          "theme_color": "light",
-          "is_child": false
-        }
-      },
-      
-      {
-        "type": "cross_sellings",
-        "settings": {
-          "title": "<h2>More In This Collection</h2>",
-          "cell_size": "full"
-        }
-      },
-      {
-        "type": "up_sellings",
-        "settings": {
-          "title": "<h2>More choices</h2>",
-          "cell_size": "full"
-        }
-      }
-    ]
-  },
-  "presets": [{
-    "name": "Products page",
-    "category": "Product",
-    "settings": {
-      "section_name" : "My product",
-      "sku" : "THELMA-GREY",
-      "theme_color": "none",
-      "full_width": false
-    },
-    "blocks": [
-      {
-        "type": "product_image",
-        "settings": {
-          "thumb_position": "left",
-          "cell_size": "md",
-          "is_child": false
-        }
-      },
-      {
-        "type": "product_title",
-        "settings": {
-          "display_category_link": true,
-          "cell_size": "md"
-        }
-      },
-      {
-        "type": "product_data",
-        "settings": {
-          "data_type": "description",
-          "cell_size": "full",
-          "is_child": true
-        }
-      },
-      {
-        "type": "add_to_cart",
-        "settings": {
-          "display_add_to_cart": true,
-          "cell_size": "full",
-          "is_child": true
-        }
-      }
-    ]
-  }]
-}
 ---
-{% if section.settings.sku != ""%}
+
+{% if section.settings.sku != "" and section.settings.sku != null %}
 
   {% with_scope sku: [section.settings.sku]%}
     {% assign product_variant = store.products | first%}
@@ -698,14 +558,6 @@
   {% assign product_variant = store.products | first %}
 {% endif %}
 
-{% case section.settings.theme_color %}
-  {% when "none" %}
-    {% assign css_banner = "" %}
-  {% when "light" %}
-    {% assign css_banner = "bg-light" %}
-  {% when "dark" %}
-    {% assign css_banner = "bg-dark"%}
-{% endcase %}
 
 {% case section.settings.card_color %}
   {% when "none" %}
@@ -718,130 +570,103 @@
     {% assign css_card = "bg-white"%}
 {% endcase %}
 
-<div class="container-fluid {{css_banner}} pt-2 pb-2">
-  <div class="container{% if section.settings.full_width %}-fluid{% endif %} mt-3 mb-3 pt-2 pb-2 {{css_card}} {% if section.settings.border %}shadow-sm{% endif %}">
-    <div class="row">
-      {% assign has_child = false %}
-      {% for block in section.blocks%}
-        
-        {% assign next_block = section.blocks[forloop.index] %}
-        {% case block.settings.cell_size %}
-          {% when 'auto' %}
-            {% assign css_cell = "col-auto "%}
-          {% when 'xs' %}
-            {% assign css_cell = "col-12 col-sm-6 col-lg-2 "%}
-          {% when 'sm' %}
-            {% assign css_cell = "col-12 col-sm-6 col-lg-4 "%}
-          {% when 'md' %}
-            {% assign css_cell = "col-12 col-sm-6 col-lg-6 "%}
-          {% when 'lg' %}
-            {% assign css_cell = "col-12 col-sm-6 col-lg-8 "%}
-          {% when 'xl' %}
-            {% assign css_cell = "col-12 col-sm-6 col-lg-10 "%}
-          {% else %}
-            {% assign css_cell = "col-12"%}
-        {% endcase %}
+<div class="container{% if section.settings.full_width %}-fluid{% endif %} product-theme-{{section.settings.theme_color}}">
+  <div class="grid-row product-page-content">
+    {% assign has_child = false %}
+    {% for block in section.blocks%}
+      {% assign next_block = section.blocks[forloop.index] %}
+      {% if block.settings.margin == true %}
+        {% assign margin = 'md'%}
+      {% endif %}
+      {% assign css_cell = 
+        'block block-' | append: block.type 
+        | append: ' grid-padding-vertical-' | append: margin | default: 'none' 
+        | append: ' grid-cell-' | append: block.settings.cell_size | default: 'full' 
+        | append: ' grid-theme-' | append: block.settings.theme_color | default: 'full' 
+      %}
 
-        {% case block.settings.theme_color %}
-          {% when "light" %}
-            {% assign css_cell = css_cell | append: " bg-light text-dark" %}
-          {% when "dark" %}
-            {% assign css_cell = css_cell | append: " text-light bg-dark"%}
-          {% when "primary" %}
-            {% assign css_cell = css_cell | append: " text-light bg-primary"%}
-          {% when "warning" %}
-            {% assign css_cell = css_cell | append: " text-dark bg-warning"%}
-          {% when "danger" %}
-            {% assign css_cell = css_cell | append: " text-light bg-danger"%}
-          {% when "info" %}
-            {% assign css_cell = css_cell | append: " text-light bg-info"%}
-        {% endcase %}
-        {% if block.settings.margin != false %}
-          {% assign css_cell = css_cell | append: " pt-4 pb-4"%}
-        {% endif %}
-        <div class="block  block-{{block.type}} {{css_cell}}">
-          {% include 'block_debug' %}
-          {% case block.type %}
-            {% when 'product_title'%}
-              {% include 'block_product_title' with
-                product_variant
-              %}
-            {% when 'product_image'%}
-              {% include 'product_images' with 
-                product_variant, 
-                thumb_position: block.settings.thumb_position 
-              %}
-            {% when 'product_data'%}
-               {% include 'block_product_data' with 
-                title: block.settings.title,
-                inline: block.settings.inline,
-                data_type: block.settings.data_type
-                product_variant
-              %}
-            {% when 'add_to_cart'%}
-              {% include 'block_product_add_to_cart' with 
-                product_variant
-              %}
-            {% when 'breadcrumb'%}
-              {% include 'block_product_breadcrumb' with
-                product_variant
-              %}
-            {% when 'variants'%}
-              {% include 'block_product_variants' with
-                title: block.settings.title,
-                variant_display: block.settings.variant_display,
-                product
-              %}
-            {% when 'technical_details'%}
-              {% include 'block_product_technical_details' with
-                title: block.settings.title,
-                product_variant
-              %}
-            {% when 'up_sellings'%}
-              {% include 'block_product_up_sellings' with
-                title: block.settings.title,
-                product_variant
-              %}
-            {% when 'cross_sellings'%}
-              {% include 'block_product_cross_sellings' with
-                title: block.settings.title,
-                product_variant
-              %}
-            {% when 'reviews'%}
-              {% include 'block_product_reviews' with
-                title: block.settings.title,
-                product_variant
-              %}
-            {% when 'attribute'%}
-              {% include 'block_product_attribute' with
-                type: block.settings.type,
-                title: block.settings.title,
-                attribute_name: block.settings.attribute_name,
-                display_legend: block.settings.display_legend,
-                product_variant
-              %}
-            {% when 'cell_text'%}
-              {{ block.settings.content }}
-            {% when 'cell_image'%}
-              <img src="{{block.settings.picture}}" alt="{{block.settings.picture_alt}}" class="img-fluid">
-          {% endcase%}
-          {% if next_block.settings.is_child == true %}
-            {% if has_child ==  false%}
-              {% assign has_child = true %}
-              <div class="row subchild">
-            {% else %}
-              </div>
-            {% endif %}
-            
+      <div class="block {{ css_cell }}">
+        {% include 'block_debug' %}
+        {% case block.type %}
+          {% when 'product_title'%}
+            {% include 'block_product_title' with
+              product_variant
+            %}
+          {% when 'product_image'%}
+            {% include 'product_images' with 
+              product_variant, 
+              thumb_position: block.settings.thumb_position 
+            %}
+          {% when 'product_data'%}
+             {% include 'block_product_data' with 
+              title: block.settings.title,
+              inline: block.settings.inline,
+              data_type: block.settings.data_type
+              product_variant
+            %}
+          {% when 'add_to_cart'%}
+            {% include 'block_product_add_to_cart' with 
+              product_variant
+            %}
+          {% when 'breadcrumb'%}
+            {% include 'block_product_breadcrumb' with
+              product_variant
+            %}
+          {% when 'variants'%}
+            {% include 'block_product_variants' with
+              title: block.settings.title,
+              variant_display: block.settings.variant_display,
+              product
+            %}
+          {% when 'technical_details'%}
+            {% include 'block_product_technical_details' with
+              title: block.settings.title,
+              product_variant
+            %}
+          {% when 'up_sellings'%}
+            {% include 'block_product_up_sellings' with
+              title: block.settings.title,
+              product_variant
+            %}
+          {% when 'cross_sellings'%}
+            {% include 'block_product_cross_sellings' with
+              title: block.settings.title,
+              product_variant
+            %}
+          {% when 'reviews'%}
+            {% include 'block_product_reviews' with
+              title: block.settings.title,
+              product_variant
+            %}
+          {% when 'attribute'%}
+            {% include 'block_product_attribute' with
+              type: block.settings.type,
+              title: block.settings.title,
+              attribute_name: block.settings.attribute_name,
+              display_legend: block.settings.display_legend,
+              product_variant
+            %}
+          {% when 'cell_text'%}
+            {{ block.settings.content }}
+          {% when 'cell_image'%}
+            <img src="{{block.settings.picture}}" alt="{{block.settings.picture_alt}}" class="img-fluid">
+        {% endcase%}
+        {% if next_block.settings.is_child == true %}
+          {% if has_child ==  false%}
+            {% assign has_child = true %}
+            <div class="grid-row subchild">
           {% else %}
-            {% if has_child ==  true%}
-              {% assign has_child = false %}
-                </div>
-              </div>
-            {% endif %}
             </div>
           {% endif %}
-      {% endfor %}
-    </div>
+          
+        {% else %}
+          {% if has_child ==  true%}
+            {% assign has_child = false %}
+              </div>
+            </div>
+          {% endif %}
+          </div>
+        {% endif %}
+    {% endfor %}
   </div>
 </div>
