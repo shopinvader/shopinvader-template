@@ -43,8 +43,7 @@ const Section = {
             var render = super.render();
             var results = this.getResults();
             var button = null;
-            console.log(results);
-            
+
             if(results != null && results.hits.total.value > 0) {
               button = (
                 <div className="text-center p-2 pb-3" key="autocomplete-allresult">
@@ -98,8 +97,6 @@ const Section = {
             else {
               parent.state.search_value = '';
             }
-
-            console.log('setQueryProcessor', query_params);
             return query_params;
           });
         }
