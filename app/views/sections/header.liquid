@@ -538,6 +538,31 @@ default:
                 {% action 'get elasticsearch parameters' %}
                   setProp('elasticsearch_indexes', JSON.parse(site.metafields.elasticsearch.indices));
                 {% endaction %}
+                <script type="text/javascript">
+                  var searchkit_translation = {
+                    'reset.clear_all': {{'filter_clear' | translate | json}},
+                    'facets.view_more': {{'filter_more' | translate | json}},
+                    'facets.view_more': {{'filter_more' | translate | json}},
+                    'facets.view_less': {{'filter_less' | translate | json}},
+                    'facets.view_all': {{'filter_all' | translate | json}},
+                    'facets.price': {{'filter_price' | translate | json}},
+                    'facets.filters': {{'filters' | translate | json}},
+                    'facets.category': {{'search_category' | translate | json}},
+                    'NoHits.NoResultsFound': {{'filter_noresult_found' | translate | json}},
+                    'NoHits.DidYouMean': {{'filter_didyoumean' | translate | json}},
+                    'NoHits.SearchWithoutFilters': {{'filter_searchwithout_filter' | translate | json}},
+                    'NoHits.NoResultsFoundDidYouMean': {{'filter_searchwithout_filter' | translate | json}},
+                    'hitstats.results_found': {{'filter_result_count' | translate | json}},
+                    'pagination.previous': {{'filter_paginate_previous' | translate | json}},
+                    'pagination.next': {{'filter_paginate_next' | translate | json}},
+                    'searchbox.placeholder': {{'filter_placeholder' | translate | json}},
+                    'product.grid': {{'product_display_grid' | translate | json}},
+                    'product.list': {{'product_display_list' | translate | json}},
+                    'sort.price_default': {{'filter_price_default' | translate | json}},
+                    'sort.price_asc': {{'filter_price_asc' | translate | json}},
+                    'sort.price_desc': {{'filter_price_desc' | translate | json}},
+                  }
+                </script>
                 <div class="container"
                   data-product-noimage={{ site.metafields.theme.noimage | json }}
                   data-elastic-url={{ site.metafields.elasticsearch.url | json }}
@@ -546,92 +571,7 @@ default:
                     data-elastic-index-{{role.name}}={{role.index | append:"_" | append: elasticsearch_locale  | json}}
                   {% endfor %}
                 >
-
                 </div>
-                {% comment %}
-                <div class="{{ css_cell }} header-block header-block-{{ block.type }} {{display_sm_icon_css}}">
-                  <div class="icon d-lg-none">
-                    <a class="icon-link" href=".search-bar" data-toggle="collapse">
-                      <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
-                      <span class="icon-label d-none d-lg-flex">{{ block.settings.label }}</span>
-                    </a>
-                  </div>
-                  <div class="collapse d-lg-block w-100 search-bar">
-                    <div class="d-flex p-2 pr-3 pl-3 justify-content-between d-lg-none">
-                      <div>
-                        <span class="h4">
-                          {{ block.settings.label }}
-                        </span>
-                      </div>
-                      <div>
-                        <a  href=".search-bar" data-toggle="collapse">
-                          <i class="fas fa-times text-dark fa-2x"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <form method="GET" action="{% path_to search %}" class="search-form d-flex flex-row pt-md-2 pt-md-3 " >
-                      <input type="text" class="form-control search-input" id="header-search-input" placeholder="{{ block.settings.placeholder }}" aria-label="{{ block.settings.placeholder }}" aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q" data-autosubmit>
-                      <button class="btn btn-link btn-lg p-0 search-icon" name="submit" type="submit">
-                        <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"/>
-                      </button>
-                    </form>
-                    <div class="small text-left pt-2 w-100">
-                      <div class="font-weight-bold ">
-                        {{ section.settings.baseline }}
-                      </div>
-                    </div>
-                  </div>
-                  <div id="header-search-hit" class="d-none search-result">
-                    <div id="header-search-product-title">
-                      <div class="font-weight-bold">
-                        {{ 'search_product' | translate }}
-                        <span class="nb_hits"></span>
-                      </div>
-                    </div>
-                    <div id="header-search-product-link">
-                      <div class="row">
-                        <div class="col-12 text-right pt-2 ">
-                          <a data-href="{% path_to search %}" href="#" class="btn btn-primary btn-search-product">
-                            {{ 'search_product_all' | translate }}
-                            <span class="nb_hits"></span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                    <div id="header-search-product-empty">
-                      <div class="pt-3 pb-3">
-                        {{ 'search_product_empty' | translate }}
-                      </div>
-                    </div>
-                    <div id="header-search-category-title" class=" ">
-                      <div class="font-weight-bold">
-                        {{ 'search_category' | translate }}
-                      </div>
-                    </div>
-                    <div id="header-search-category-empty">
-                      <div class="pt-3 pb-3">
-                        {{ 'search_category_empty' | translate }}
-                      </div>
-                    </div>
-                    <div id="header-search-category-link">
-                      <div class="row">
-                        <div class="col-12 text-right ">
-                          <a href="#" class="btn btn-success">
-                            {{ 'search_category_all' | translate }}
-                            <span class="nb_hits"></span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                    <div id="header-search-hit-content">
-                      <div class="row">
-                        <div class="aa-dataset-product col-12  col-md-8"></div>
-                        <div class="aa-dataset-category col-12 col-md-4 d-none d-md-block"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {% endcomment %}
             {% endcase %}
           </div>
         {% endif %}
