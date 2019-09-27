@@ -1,284 +1,259 @@
 ---
-{
-  "name": "Texts & Images",
-  "class": "",
-  "icon": "image_text",
-  "keep_icon": true,
-  "settings": [
-    {
-      "label": "Image or texts cells.",
-      "id": "help",
-      "type": "hint"
-    },
-    {
-      "label": "Section Name",
-      "id": "section_name",
-      "type": "text"
-    },
-    {
-      "label": "Theme color",
-      "id": "theme_color",
-      "type": "select",
-      "options": [
-        {"label": "Light","value": "light"},
-        {"label": "Dark","value": "dark"},
-        {"label": "Primary", "value": "primary"},
-        {"label": "Secondary", "value": "secondary"},
-        {"label": "Info", "value": "info"},
-        {"label": "Danger", "value": "danger"},
-        {"label": "Warning", "value": "warning"},
-        {"label": "None", "value": ""}
-      ]
-    },
-    {
-      "label": "Cells Alignment",
-      "id": "cells_align",
-      "type": "select",
-      "options": [
-        {"label": "Left","value": "start"},
-        {"label": "Center","value": "center"},
-        {"label": "Right", "value": "end"}
-      ]
-    },
-    {
-      "label": "Row Margin",
-      "id": "margin",
-      "type": "select",
-      "options": [
-        {"label": "None","value": ""},
-        {"label": "Small","value": "sm"},
-        {"label": "Medium", "value": "md"},
-        {"label": "Large", "value": "lg"},
-        {"label": "Extra-large", "value": "xl"}
-      ]
-    }
-  ],
-  "blocks": [
-    {
-      "name": "Text",
-      "type": "cell_text",
-      "keep_icon": true,
-      "keep_name": true,
-      "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Child of previous block",
-          "id": "is_child",
-          "type": "checkbox"
-        },
-        {
-          "label": "Margin",
-          "id": "margin",
-          "type": "select",
-          "options": [
-            {"label": "None","value": ""},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"}
-          ]
-        },
-        {
-          "label": "Content",
-          "id": "content",
-          "type": "text",
-          "html": true,
-          "nb_rows": 10
-        }
-      ]
-    },
-    {
-      "name": "Picture",
-      "type": "cell_image",
-      "keep_icon": true,
-      "keep_name": true,
-      "settings": [
-        {
-          "label": "Cell Size",
-          "id": "cell_size",
-          "type": "select",
-          "options": [
-            {"label": "Auto", "value": "auto"},
-            {"label": "Extra-small","value": "xs"},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"},
-            {"label": "Full", "value": "full"}
-          ]
-        },
-        {
-          "label": "Child of previous block",
-          "id": "is_child",
-          "type": "checkbox"
-        },
-        {
-          "label": "Margin",
-          "id": "margin",
-          "type": "select",
-          "options": [
-            {"label": "None","value": ""},
-            {"label": "Small","value": "sm"},
-            {"label": "Medium", "value": "md"},
-            {"label": "Large", "value": "lg"},
-            {"label": "Extra-large", "value": "xl"}
-          ]
-        },
-        {
-          "label": "Picture",
-          "id": "picture",
-          "type": "image_picker"
-        },
-        {
-          "label": "Picture Title",
-          "id": "picture_alt",
-          "type": "text"
-        },
-        {
-          "label": "Content",
-          "id": "content",
-          "type": "text",
-          "html": true,
-          "nb_rows": 10
-        }
-      ]
-    }
-  ],
-  "presets": [{
-    "name": "Texts & Images",
-    "category": "Content",
-    "settings": {
-      "section_name": "Cells",
-      "theme_color": "light",
-      "cells_align": "left",
-      "margin": "xl"
-    },
-    "blocks": [
-      {
-        "type": "cell_text",
-        "settings" : {
-          "cell_size": "lg",
-          "content":  "<h3>Lorem ipsum dolor sit amet</h3> <div>Vivamus nunc nisi, ultricies sed mollis fringilla, volutpat ac neque. Praesent eget felis tincidunt, efficitur elit eu, varius odio. Aliquam in tortor lacinia, mollis ex eu, venenatis erat</div>",
-          "margin": "sm"
-        }
-      },
-      {
-        "type": "cell_image",
-        "settings" : {
-          "cell_size": "sm",
-          "picture":  "http://via.placeholder.com/300/dff0f3/107686?text=Replace+this+image",
-          "margin": "sm",
-          "content": ""
-        }
-      }
-    ]
-  }],
-  "default": {
-    "settings" : {
-      "section_name": "Cells",
-      "theme_color": "light",
-      "cells_align": "left",
-      "margin": "xl"
-    },
-    "blocks": [
-      {
-        "type": "cell_text",
-        "settings" : {
-          "cell_size": "md",
-          "content":  "<h3>Lorem ipsum dolor sit amet</h3> <br>Vivamus nunc nisi, ultricies sed mollis fringilla, volutpat ac neque. Praesent eget felis tincidunt, efficitur elit eu, varius odio. Aliquam in tortor lacinia, mollis ex eu, venenatis erat",
-          "margin": "sm"
-        }
-      },
-      {
-        "type": "cell_image",
-        "settings" : {
-          "cell_size": "sm",
-          "picture":  "http://via.placeholder.com/300/dff0f3/107686?text=Replace+this+image",
-          "margin": "sm",
-          "content": ""
-        }
-      }
-    ]
-  }
-}
+name: Texts & Images
+class: ''
+icon: image_text
+keep_icon: true
+settings:
+- label: Image or texts cells.
+  id: help
+  type: hint
+- label: Section Name
+  id: section_name
+  type: text
+- label: Full size container
+  id: container_fuild
+  type: checkbox
+- label: Theme color
+  id: theme_color
+  type: select
+  options:
+    - label: Light
+      value: light
+    - label: Dark
+      value: dark
+    - label: Primary
+      value: primary
+    - label: Border
+      value: border
+    - label: Warning
+      value: warning
+    - label: None
+      value: none
+- label: Cells Alignment
+  id: cells_align
+  type: select
+  options:
+  - label: Left
+    value: start
+  - label: Center
+    value: center
+  - label: Right
+    value: end
+- label: Row Padding
+  id: padding
+  type: select
+  options:
+  - label: None
+    value: none
+  - label: Small
+    value: sm
+  - label: Medium
+    value: md
+  - label: Large
+    value: lg
+  - label: Extra-large
+    value: xl
+blocks:
+- name: Text
+  type: cell_text
+  keep_icon: true
+  keep_name: true
+  settings:
+  - label: Cell Size
+    id: cell_size
+    type: select
+    options:
+    - label: Auto
+      value: auto
+    - label: Extra-small
+      value: xs
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+    - label: Full
+      value: full
+  - label: Child of previous block
+    id: is_child
+    type: checkbox
+  - label: Padding
+    id: padding
+    type: select
+    options:
+    - label: None
+      value: none
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+  - label: Theme color
+    id: theme_color
+    type: select
+    options:
+    - label: Light
+      value: light
+    - label: Dark
+      value: dark
+    - label: Primary
+      value: primary
+    - label: Border
+      value: border
+    - label: Warning
+      value: warning
+    - label: None
+      value: none
+  - label: Content
+    id: content
+    type: text
+    html: true
+    nb_rows: 10
+- name: Picture
+  type: cell_image
+  keep_icon: true
+  keep_name: true
+  settings:
+  - label: Cell Size
+    id: cell_size
+    type: select
+    options:
+    - label: Auto
+      value: auto
+    - label: Extra-small
+      value: xs
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+    - label: Full
+      value: full
+  - label: Child of previous block
+    id: is_child
+    type: checkbox
+  - label: Padding
+    id: padding
+    type: select
+    options:
+    - label: None
+      value: none
+    - label: Small
+      value: sm
+    - label: Medium
+      value: md
+    - label: Large
+      value: lg
+    - label: Extra-large
+      value: xl
+  - label: Theme color
+    id: theme_color
+    type: select
+    options:
+    - label: Light
+      value: light
+    - label: Dark
+      value: dark
+    - label: Primary
+      value: primary
+    - label: Border
+      value: border
+    - label: Warning
+      value: warning
+    - label: None
+      value: none
+  - label: Picture
+    id: picture
+    type: image_picker
+  - label: Picture Title
+    id: picture_alt
+    type: text
+  - label: Content
+    id: content
+    type: text
+    html: true
+    nb_rows: 10
+presets:
+- name: Texts & Images
+  category: Content
+  settings:
+    section_name: Cells
+    theme_color: light
+    cells_align: left
+    padding: xl
+  blocks:
+  - type: cell_text
+    settings:
+      cell_size: lg
+      content: "<h3>Lorem ipsum dolor sit amet</h3> <div>Vivamus nunc nisi, ultricies
+        sed mollis fringilla, volutpat ac neque. Praesent eget felis tincidunt, efficitur
+        elit eu, varius odio. Aliquam in tortor lacinia, mollis ex eu, venenatis erat</div>"
+      padding: sm
+  - type: cell_image
+    settings:
+      cell_size: sm
+      picture: http://via.placeholder.com/300/dff0f3/107686?text=Replace+this+image
+      padding: sm
+      content: ''
+default:
+  settings:
+    section_name: Cells
+    theme_color: light
+    cells_align: left
+    padding: xl
+  blocks:
+  - type: cell_text
+    settings:
+      cell_size: md
+      content: "<h3>Lorem ipsum dolor sit amet</h3> <br>Vivamus nunc nisi, ultricies
+        sed mollis fringilla, volutpat ac neque. Praesent eget felis tincidunt, efficitur
+        elit eu, varius odio. Aliquam in tortor lacinia, mollis ex eu, venenatis erat"
+      padding: sm
+  - type: cell_image
+    settings:
+      cell_size: sm
+      picture: http://via.placeholder.com/300/dff0f3/107686?text=Replace+this+image
+      padding: sm
+      content: ''
+
 ---
-{% case section.settings.theme_color %}
-{% when "light" %}
-  {% assign css_banner = "text-dark bg-light" %}
-{% when "dark" %}
-  {% assign css_banner = "text-light bg-dark"%}
-{% when "primary" %}
-  {% assign css_banner = "text-light bg-primary"%}
-{% when "warning" %}
-  {% assign css_banner = "text-dark bg-warning"%}
-{% when "danger" %}
-  {% assign css_banner = "text-light bg-danger"%}
-{% when "info" %}
-  {% assign css_banner = "text-light bg-info"%}
-{% when "none" %}
-  {% assign css_banner = "text-dark"%}
-{% endcase %}
 
-{% case section.settings.margin %}
-  {% when "sm" %}
-    {% assign css_margin_row = "mt-1 mb-1" %}
-  {% when "md" %}
-    {% assign css_margin_row = "mt-2 mb-2  pt-2 pb-2"%}
-  {% when "lg" %}
-    {% assign css_margin_row = "mt-3 mb-3  pt-3 pb-3"%}
-  {% when "xl" %}
-    {% assign css_margin_row = "mt-4 mb-4 pt-4 pb-4"%}
-{% endcase %}
 {% assign has_child = false %}
-<div class="container-fluid">
-  <div class="row {{css_banner}}">
+{% assign css_row = 
+  'block block-' | append: cell.type 
+  | append: ' grid-padding-' | append: section.settings.padding | default: 'none' 
+  | append: ' grid-theme-' | append: section.settings.theme_color | default: 'none' 
+%}
+{%if section.settings.container_fuild == true%}
+  {% assign css_container = 'container-fluid' %}
+{%else%}
+  {% assign css_container = 'container' %}
+{%endif%}
 
+<div class="container-fluid">
+  <div class="row {{css_row}}">
     <div class="col-12">
-      <div class="container {{css_margin_row}}">
-        <div class="row justify-content-md-{{section.settings.cells_align}}">
+      <div class="{{css_container}}">
+        <div class="grid-row justify-content-md-{{section.settings.cells_align}}">
           {% for cell in section.blocks %}
+            {% assign css_cell = 
+              'block block-' | append: cell.type 
+              | append: ' grid-padding-' | append: cell.settings.padding | default: 'none' 
+              | append: ' grid-cell-' | append: cell.settings.cell_size | default: 'full' 
+              | append: ' grid-theme-' | append: cell.settings.theme_color | default: 'full' 
+            %}
             {% assign next_block = section.blocks[forloop.index] %}
-            {% case cell.settings.cell_size %}
-              {% when 'auto' %}
-                {% assign css_cell = "col-auto "%}
-              {% when 'xs' %}
-                {% assign css_cell = "col-12 col-sm-6 col-lg-2 "%}
-              {% when 'sm' %}
-                {% assign css_cell = "col-12 col-sm-6 col-lg-4 "%}
-              {% when 'md' %}
-                {% assign css_cell = "col-12 col-sm-6 col-lg-6 "%}
-              {% when 'lg' %}
-                {% assign css_cell = "col-12 col-sm-6 col-lg-8 "%}
-              {% when 'xl' %}
-                {% assign css_cell = "col-12 col-sm-6 col-lg-10 "%}
-              {% else %}
-                {% assign css_cell = "col-12"%}
-            {% endcase %}
-            {% case cell.settings.margin %}
-              {% when "sm" %}
-                {% assign css_margin_cell = " mt-1 mb-1" %}
-              {% when "md" %}
-                {% assign css_margin_cell = " mt-2 mb-2  pt-2 pb-2"%}
-              {% when "lg" %}
-                {% assign css_margin_cell = " mt-3 mb-3  pt-3 pb-3"%}
-              {% when "xl" %}
-                {% assign css_margin_cell = " mt-4 mb-4 pt-4 pb-4"%}
-            {% endcase %}
-            {% assign css_cell = css_cell | append : css_margin_cell %}
-            <div class="block {{css_cell}}">
+                       
+            <div class="block {{ css_cell }}">
               {% include 'block_debug' %}
               {% if cell.type == "cell_image" %}
                 <img src="{{cell.settings.picture}}" alt="{{cell.settings.picture_alt}}" class="img-fluid">
@@ -292,7 +267,7 @@
             {% if next_block.settings.is_child == true %}
               {% if has_child ==  false%}
                 {% assign has_child = true %}
-                <div class="row subchild">
+                <div class="grid-row subchild">
               {% else %}
                 </div>
               {% endif %}

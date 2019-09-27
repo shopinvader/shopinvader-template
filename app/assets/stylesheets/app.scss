@@ -1,6 +1,24 @@
 // Wagon main stylesheet file
 
 @import "custom_theme/_bootstrap_custom";
-@import "components/_variables";
+
 @import "~bootstrap/scss/bootstrap";
+@import "components/*";
 @import "sections/*";
+@import "custom_theme/*";
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+.bottom-nav {
+  background-color: $white;
+  padding: 0.5rem;
+  position: fixed;
+
+  box-shadow: 0px -3px 5px rgba(0,0,0,.26);
+  position: fixed;
+  z-index: 1010;
+  bottom: 0;
+  left:0;
+  width: 100%;
+  margin:0;
+}

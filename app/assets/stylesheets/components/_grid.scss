@@ -1,0 +1,84 @@
+
+$columns: 100;
+.grid-cell-auto {
+	@include make-col-ready();
+}
+.grid-row {
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: -15px !important;
+	margin-right: -15px !important;
+	justify-content: center;
+}
+//10, 25, 33, 50, 66, 75, 100
+$sizes: (
+	'xs': (xs: 25, lg: 25),
+	'sm': (xs:100, md: 50, lg: 33),
+	'md': (xs:100, lg: 50),
+	'lg': (xs:100, lg: 66),
+	'xl': (xs:100, lg: 75),
+	'full': (xs:100)
+);
+
+@each $name, $sizes_list in $sizes {
+  .grid-cell-#{$name} {
+  	overflow: hidden;
+		@include make-col-ready();
+		@include make-col($columns, $columns);
+		@each $breakpoint, $size in $sizes_list {
+			@include media-breakpoint-up($breakpoint) {
+				@include make-col($size, $columns);
+			}
+		}
+	}
+}
+//margin (rem)
+$paddings: (
+	'none': (xs: 0),
+	'sm': (xs:.5, md: .7, lg: .9),
+	'md': (xs:1, md: 1.5, lg: 2),
+	'lg': (xs:1.5, md: 2, lg: 2.5),
+	'xl': (xs:2, md: 3, lg: 4),
+);
+@each $name, $paddings_list in $paddings {
+  .grid-padding-#{$name} {
+		@each $breakpoint, $size in $paddings_list {
+			@include media-breakpoint-up($breakpoint) {
+				padding: #{$size}rem;
+			}
+		}
+	}
+	.grid-padding-vertical-#{$name} {
+		@each $breakpoint, $size in $paddings_list {
+			@include media-breakpoint-up($breakpoint) {
+				padding-bottom: #{$size}rem;
+				padding-top: #{$size}rem;
+			}
+		}
+	}
+}
+
+.grid-theme-dark{
+	background-color: theme-color('dark');
+	color: $white;
+}
+.grid-theme-light{
+	background-color: theme-color('light');
+	color: theme-color('dark');
+}
+.grid-theme-warning{
+	background-color: theme-color('warning');
+	color: $white;
+}
+.grid-theme-primary{
+	background-color: theme-color('primary');
+	color: $white;
+}
+.grid-theme-border{
+	background-color: theme-color('primary');
+	color: $white;
+}
+.grid-theme-border{
+	border: 1px solid theme-color('dark');
+	color: $white;
+}
