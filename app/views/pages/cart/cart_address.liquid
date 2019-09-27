@@ -19,30 +19,31 @@ sections_content:
     blocks:
     - type: cell_text
       settings:
-        cell_size: full
+        cell_size: 100
         content: "<h3>My shipping address</h3>"
     - type: cart_address_list
       settings:
-        cell_size: lg
-    - type: cart_summary
-      settings:
-        cell_size: sm
-        display_border: true
-        display_submit: true
-        title: Your order
-        display_lines: true
+        cell_size: 65
     - type: cart_address
       settings:
-        cell_size: full
+        cell_size: 50
         title: "<h3>Shipping address</h3>"
         address_type: shipping
         is_child: true
     - type: cart_address
       settings:
-        cell_size: full
+        cell_size: 50
         title: "<h3>Ivoice address</h3>"
         address_type: invoicing
         is_child: true
+    - type: cart_summary
+      settings:
+        cell_size: 35
+        display_border: true
+        display_submit: true
+        title: Your order
+        display_lines: true
+    
 ---
 
 {% extends 'layouts/checkout' %}
