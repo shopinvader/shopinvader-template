@@ -1,0 +1,164 @@
+[data-locomotive-section-type="dynamic_carousel"] {
+	z-index: 100;
+	.carousel {
+		display: flex;
+		justify-content: center;
+
+		.carousel-control-next ,
+		.carousel-control-prev {
+			background: none;
+			position: relative;
+		}
+		.carousel-inner {
+			min-height: 460px;
+			position: relative;
+			
+			.carousel-item {
+				transition: ease-in 300ms all;
+				opacity: 0;
+				
+				.slide-image {
+					overflow: hidden;
+		    	img {
+		    		transition: ease-in 1s all;
+				    opacity: 0;
+		    	}
+
+		    }
+				&.active {
+					animation-name: slide_show;
+					animation-delay: 300ms;
+					animation-duration: 1.5s;
+					animation-fill-mode: forwards;
+					.slide-image {
+						img {
+							animation-name: slide_img_transition;
+							animation-delay: 1.2s;
+							animation-duration: 1s;
+							animation-fill-mode: forwards;
+						}
+			    }
+			    .slide-content {
+			    	width: 100%;
+			    	h1 {
+			    		font-size: 2.8rem;
+			    	}
+			    	.slide-title {
+			    		b, strong {
+			    			font-weight: 800;
+			    		}
+			    	}
+			    	@include media-breakpoint-down(md) {
+			    		h1 {
+				    		font-size: 2rem;
+				    	}
+			    	}
+			    	p {
+			    		& > a:first-child {
+				    		display: inline-block;
+							  font-size: 1.4rem;
+								text-transform: uppercase;
+								font-weight: 700;
+							  text-align: center;
+							  white-space: nowrap;
+							  vertical-align: middle;
+							  user-select: none;
+							  border: $btn-border-width solid transparent;
+							  border-radius: 0;
+							  background: linear-gradient(to left, mix(theme-color('info'), theme-color('primary'), 45%), theme-color('primary')) !important;
+							  @include transition($btn-transition);
+							  @include button-size($btn-padding-y, $btn-padding-x, $font-size-base, $btn-line-height, $btn-border-radius);
+							  text-transform: uppercase;
+							  color: $white;
+							  box-shadow: $box-shadow-sm;
+							  & + a {
+							  	margin-left: .5rem;
+							  	display: inline-block;
+								  font-weight: $btn-font-weight;
+								  text-align: center;
+								  white-space: nowrap;
+								  vertical-align: middle;
+								  user-select: none;
+								  border: $btn-border-width solid transparent;
+								  border-radius: 0;
+								  text-transform: uppercase;
+								  box-shadow: $box-shadow-sm;
+								  @include button-variant(theme-color('dark'), theme-color('dark'));
+								  @include button-outline-variant(theme-color('dark'));
+								  @include transition($btn-transition);
+								  @include button-size($btn-padding-y, $btn-padding-x, $font-size-base, $btn-line-height, $btn-border-radius);
+							  }
+				    	}
+				    	@include media-breakpoint-up(md) {
+				    		& > a:first-child {
+				    			@include button-size($btn-padding-y-lg, $btn-padding-x-lg, $font-size-lg, $btn-line-height-lg, $btn-border-radius-lg);
+				    			& + a {
+				    				margin-left: 1.5rem;
+				    				@include button-size($btn-padding-y-lg, $btn-padding-x-lg, $font-size-lg, $btn-line-height-lg, $btn-border-radius-lg);
+				    			}
+				    		}
+				    	}
+			    	}
+			    }
+					&.carousel-item-left,
+					&.carousel-item-right {
+						opacity: 1;
+						animation-name: slide_hide;
+						animation-duration: 1s;
+						animation-fill-mode: forwards;
+						.carousel-control-next,
+						.carousel-control-prev {
+							opacity: 0;
+						}
+					}
+				}
+				&.carousel-item-left,
+				&.carousel-item-right {
+					transform: none;
+					//opacity: 0;
+				}
+				&.carousel-item-next,
+				&.active.carousel-item-right {
+					transform: none;
+
+					
+				}
+				.slide-image {
+					
+				}
+
+			}
+		}
+	}
+}
+@keyframes slide_show {
+	 from {
+    opacity: 0;
+    
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slide_hide {
+	 from {
+    opacity: 1;
+    
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+@keyframes slide_img_transition {
+	 from {
+    opacity: 0;
+    
+  }
+
+  to {
+    //margin-left: 0;
+		opacity: 1;
+  }
+}

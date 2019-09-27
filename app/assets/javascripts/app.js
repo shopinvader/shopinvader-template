@@ -5,7 +5,7 @@ import '../stylesheets/app.scss';
 import * as Sections from './sections';
 // Import the classes required to handle sections
 import SectionsManager from './sections/_manager';
-import 'unpoly';
+//import 'unpoly';
 import 'bootstrap';
 import '@fortawesome/fontawesome-free/js/fontawesome'
 import '@fortawesome/fontawesome-free/js/solid'
@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', event => {
 	  easing: 'linear'
 	});*/
   // Register sections here. DO NOT REMOVE OR UPDATE THIS LINE
+  sectionsManager.registerSection('dynamic_carousel', Sections.DynamicCarousel);
+  sectionsManager.registerSection('carousel', Sections.Carousel);
   sectionsManager.registerSection('header', Sections.Header);
   sectionsManager.registerSection('searchkit_faceting', Sections.SearchkitFaceting);
   sectionsManager.start();
