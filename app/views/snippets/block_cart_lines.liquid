@@ -24,7 +24,10 @@
 	      <div class="card-body {{css_line}}">
 	      	<div class="row">
 		        <div class="col-4 col-sm-2 col-md-2 ">
-		          <img src="{{cart_line.product.images.first.medium.src | default: site.metafields.theme.noimage}}" alt="{{cart_line.product.images.first.medium.alt}}" title="{{cart_line.product.name}}"  class="img-fluid">
+		          <img src="{{cart_line.product.images.first.medium.src | default: site.metafields.theme.noimage}}" 
+		          alt="{{cart_line.product.images.first.medium.alt}}" 
+		          title="{{cart_line.product.name}}"
+		          class="img-fluid" />
 		        </div>
 		        {% if cell_size == 'md' %}
             	{% assign cell_label_css = "col-6 col-sm-5 col-md-10" %}
@@ -41,7 +44,6 @@
 		            </a>
 		          </div>
 		        </div>
-
 		        <div class="col-12 {% if cell_size != 'md' %}col-md-5{% endif %}">
 		          <div class="row text-right m-0 mt-3 mt-xl-0">
 		            <div class="col-6 col-sm-5 {% if cell_size != 'md' %}col-md-7{% endif %}">
