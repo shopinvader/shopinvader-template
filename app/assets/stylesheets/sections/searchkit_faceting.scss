@@ -6,7 +6,14 @@ $sk-selector-active-background: theme-color('primary');
 $sk-font-family: $font-family-sans-serif;
 
 @import "~searchkit/theming/theme.scss";
-
+#searchkit-faceting-container {
+	opacity: 0;
+	transition: opacity 300ms ease-in;
+	min-height: 600px;
+	&.loaded {
+		opacity: 1;
+	}
+}
 .section-searchkit-faceting {
 	.sk-layout {
 		.sk-filters-collapser {
@@ -221,9 +228,48 @@ $sk-font-family: $font-family-sans-serif;
 	align-self: stretch;
 	.image {
 		text-align: center;
+		display: block;
+		text-decoration: none;
 		img {
 			max-height: 100%;
 			max-width: 100%;
+		}
+		.carousel  {
+
+			.carousel-control-prev,
+			.carousel-control-next {
+				opacity: 0;
+				.carousel-control-prev-icon,
+				.carousel-control-next-icon
+				 {
+					background-color: none;
+					&:after {
+						content:"<";
+						display: block;
+						font-size: .9rem;
+						font-weight: bold;
+						color: $white;
+						border-radius: 30px;
+						background-color: $gray-900;
+						width: 30px;
+						height: 30px;
+						line-height: 30px;
+						text-align: center;
+						box-shadow: $box-shadow;
+					}
+				}
+				.carousel-control-next-icon {
+					&:after {
+						content:">";
+					}
+				}
+			}
+			&:hover {
+				.carousel-control-prev,
+				.carousel-control-next {
+					opacity: .9;
+				}
+			}
 		}
 	}
 	.content {
@@ -304,6 +350,28 @@ $sk-font-family: $font-family-sans-serif;
 		padding-right: 1.5rem;
 		margin-top: 1.5rem;
 		margin-bottom: 1.5rem;
+		@include media-breakpoint-down(sm) {
+			border-right: 0;
+			flex-direction: row;
+			border-bottom: 1px solid $border-color;
+			.image {
+				flex-basis: 25%;
+				padding-right: 1rem;
+			}
+			.content {
+				padding-top: 0rem;
+				flex-grow: 1;
+				.short_description {
+					font-size: .8rem;
+					display: block;
+					p {
+						display: inline;
+						padding-bottom: 0;
+						padding-right: .2rem;
+					}
+				}
+			}
+		}
 	}
 	&.list {
 		flex-direction: row;
@@ -351,6 +419,10 @@ $sk-font-family: $font-family-sans-serif;
 			}
 		}
 		@include media-breakpoint-down(md) {
+			.image {
+				width: 20%;
+				padding-right: 1rem;
+			}
 			.content {
 				.price {
 					.add-to-cart {
@@ -396,25 +468,5 @@ $sk-font-family: $font-family-sans-serif;
 			padding-top: 1.5rem;
 		}
 	}
-	@include media-breakpoint-down(sm) {
-		flex-direction: row;
-		border-bottom: 1px solid $border-color;
-		.image {
-			width: 20%;
-			padding-right: 1rem;
-		}
-		.content {
-			padding-top: 0rem;
-			flex-grow: 1;
-			.short_description {
-				font-size: .8rem;
-				display: block;
-				p {
-					display: inline;
-					padding-bottom: 0;
-					padding-right: .2rem;
-				}
-			}
-		}
-	}
+
 }

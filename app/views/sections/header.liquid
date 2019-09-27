@@ -1,381 +1,247 @@
 ---
-{
-  "name": "Header",
-  "class": "",
-  "icon": "header",
-  "keep_name": true,
-  "keep_icon": true,
-  "id": "header",
-  "settings": [
-    {
-      "label": "Fixed header",
-      "id": "fixed_position",
-      "type": "checkbox"
-    }
-  ],
-  "blocks": [
-    //Brand Logo
-    {
-      "name": "Brand Logo",
-      "type": "logo",
-      "settings": [
-        {
-          "label": "Align image",
-          "id": "align_img",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "Left","value": "text-left"},
-            {"label": "Right","value": "text-right"},
-            {"label": "Center", "value": "text-center"}
-          ]
-        },
-        {
-          "label": "Brand logo",
-          "id": "picture",
-          "type": "image_picker"
-        },
-        {
-          "label": "Stretch",
-          "id": "stretch",
-          "type": "checkbox"
-        }
-      ]
-    },
-    //Text
-    {
-      "name": "Text",
-      "type": "text",
-      "settings": [
-        {
-          "label": "Content",
-          "id": "content",
-          "type": "text",
-          "html": true,
-          "nb_rows": 10
-        },
-        {
-          "label": "Stretch",
-          "id": "stretch",
-          "type": "checkbox"
-        }
-      ]
-    },
-    //Cart icon
-    {
-      "name": "Cart icon",
-      "type": "cart_icon",
-      "settings": [
-        {
-          "label": "side icon",
-          "id": "inline_display",
-          "type": "checkbox"
-        },
-        {
-          "label": "icon",
-          "id": "icon",
-          "type": "image_picker"
-        },
-        {
-          "label": "label",
-          "id": "label",
-          "type": "text"
-        },
-        {
-          "label": "Display icon in mobile navbar",
-          "id": "display_sm_icon",
-          "type": "checkbox"
-        }
-      ]
-    },
-    //Link
-    {
-      "name": "Link",
-      "type": "link_icon",
-      "settings": [
-        {
-          "label": "side icon",
-          "id": "inline_display",
-          "type": "checkbox"
-        },
-        {
-          "label": "icon",
-          "id": "icon",
-          "type": "image_picker"
-        },
-        {
-          "label": "label",
-          "id": "label",
-          "type": "text"
-        },
-        {
-          "label": "URL",
-          "id": "link_url",
-          "type": "url"
-        },
-        {
-          "label": "Display icon in mobile navbar",
-          "id": "display_sm_icon",
-          "type": "checkbox"
-        }
-      ]
-    },
-    //Account icon
-    {
-      "name": "Account icon",
-      "type": "user_icon",
-      "settings": [
-        {
-          "label": "side icon",
-          "id": "inline_display",
-          "type": "checkbox"
-        },
-        {
-          "label": "icon",
-          "id": "icon",
-          "type": "image_picker"
-        },
-        {
-          "label": "label",
-          "id": "label",
-          "type": "text"
-        },
-        {
-          "label": "Display icon in mobile navbar",
-          "id": "display_sm_icon",
-          "type": "checkbox"
-        }
-      ]
-    },
-    //Search
-    {
-      "name": "Search",
-      "force_name": true,
-      "type": "search",
-      "settings": [
-        {
-          "label": "Force alignment",
-          "id": "align_block",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "None", "value": "auto"},
-            {"label": "Left", "value": "left"},
-            {"label": "Right", "value": "right"}
+name: Header
+class: section-header
+icon: header
+keep_name: true
+keep_icon: true
+id: header
+settings:
+- label: Fixed header
+  id: fixed_position
+  type: checkbox
+blocks:
+- name: Brand Logo
+  type: logo
+  settings:
+  - label: Align image
+    id: align_img
+    type: select
+    keep_name: true
+    options:
+    - label: Left
+      value: text-left
+    - label: Right
+      value: text-right
+    - label: Center
+      value: text-center
+  - label: Brand logo
+    id: picture
+    type: image_picker
+  - label: Stretch
+    id: stretch
+    type: checkbox
+- name: Text
+  type: text
+  settings:
+  - label: Content
+    id: content
+    type: text
+    html: true
+    nb_rows: 10
+  - label: Stretch
+    id: stretch
+    type: checkbox
+- name: Cart icon
+  type: cart_icon
+  settings:
+  - label: side icon
+    id: inline_display
+    type: checkbox
+  - label: icon
+    id: icon
+    type: image_picker
+  - label: label
+    id: label
+    type: text
+  - label: Display icon in mobile navbar
+    id: display_sm_icon
+    type: checkbox
+- name: Link
+  type: link_icon
+  settings:
+  - label: side icon
+    id: inline_display
+    type: checkbox
+  - label: icon
+    id: icon
+    type: image_picker
+  - label: label
+    id: label
+    type: text
+  - label: URL
+    id: link_url
+    type: url
+  - label: Display icon in mobile navbar
+    id: display_sm_icon
+    type: checkbox
+- name: Account icon
+  type: user_icon
+  settings:
+  - label: side icon
+    id: inline_display
+    type: checkbox
+  - label: icon
+    id: icon
+    type: image_picker
+  - label: label
+    id: label
+    type: text
+  - label: Display icon in mobile navbar
+    id: display_sm_icon
+    type: checkbox
+- name: Search
+  force_name: true
+  type: search
+  settings:
+  - label: Force alignment
+    id: align_block
+    type: select
+    keep_name: true
+    options:
+    - label: None
+      value: auto
+    - label: Left
+      value: left
+    - label: Right
+      value: right
+  - label: Placeholder
+    id: placeholder
+    type: text
+  - label: Baseline
+    id: baseline
+    type: text
+    html: true
+    nb_rows: 2
+  - label: icon
+    id: icon
+    type: image_picker
+  - label: Display icon in mobile navbar
+    id: display_sm_icon
+    type: checkbox
+- name: Currency navigation
+  force_name: true
+  type: currency_selector
+  settings:
+  - label: Stretch
+    id: stretch
+    type: checkbox
+- name: Categories navigation
+  force_name: true
+  type: navigation
+  settings:
+  - label: Stretch
+    id: stretch
+    type: checkbox
+- name: Language selector
+  force_name: true
+  type: local_selector
+  settings:
+  - label: Stretch
+    id: stretch
+    type: checkbox
+- name: Row
+  force_name: true
+  type: row
+  settings:
+  - label: Cells Alignment
+    id: cells_align
+    type: select
+    options:
+    - label: Left
+      value: start
+    - label: Right
+      value: end
+    - label: Center
+      value: center
+    - label: Space Between
+      value: between
+    - label: Around
+      value: around
+  - label: Theme color
+    id: theme_color
+    type: select
+    keep_name: true
+    options:
+    - label: Light
+      value: light
+    - label: Dark
+      value: dark
+    - label: None
+      value: none
+  - label: Full width
+    id: full_width
+    type: checkbox
+  - label: Hide on mobile
+    id: display_xs
+    type: checkbox
+    default: false
+  - label: Margin
+    id: margin
+    type: checkbox
+    default: true
+default:
+  settings:
+    theme_color: transparent
+    fixed_position: false
+    large_size: true
+    message: "<center><i class='fa fa-gift'></i> Save 10% with voucher code <b>SAVE10</b></center>"
+    cells_align: arround
+  blocks:
+  - type: row
+    settings:
+      cells_align: center
+      theme_color: dark
+      full_width: true
+      margin: false
+  - type: text
+    settings:
+      content: "<center><i class='fa fa-gift'></i> Save 10% with voucher code <b>SAVE10</b></center>"
+      stretch: true
+  - type: currency_selector
+    settings: {}
+  - type: local_selector
+    settings: {}
+  - type: row
+    settings:
+      cells_align: between
+      theme_color: none
+      full_width: true
+      vertical_align: center
+      display_xs: true
+  - type: logo
+    settings:
+      picture: "/images/shop-logo.png"
+      align_block: right
+      align_img: center
+      stretch: true
+  - type: search
+    settings:
+      label: Search product...
+      display_sm_icon: true
+      icon: "/images/search-icon.png"
+  - type: user_icon
+    settings:
+      icon: "/images/user-icon.png"
+      inline_display: true
+      label: Sign-in
+      display_sm_icon: false
+  - type: cart_icon
+    settings:
+      icon: "/images/cart-icon.png"
+      inline_display: true
+      label: My cart
+      display_sm_icon: true
+  - type: row
+    settings:
+      cells_align: start
+      theme_color: light
+      full_width: true
+      vertical_align: center
+      display_xs: true
+  - type: navigation
+    settings:
+      link_url: ''
 
-          ]
-        },
-        {
-          "label": "Placeholder",
-          "id": "placeholder",
-          "type": "text"
-        },
-        {
-          "label": "Baseline",
-          "id": "baseline",
-          "type": "text",
-          "html": true,
-          "nb_rows": 2
-        },
-        {
-          "label": "icon",
-          "id": "icon",
-          "type": "image_picker"
-        },
-        {
-          "label": "Display icon in mobile navbar",
-          "id": "display_sm_icon",
-          "type": "checkbox"
-        }
-      ]
-    },
-    //Currency navigation
-    {
-      "name": "Currency navigation",
-      "force_name": true,
-      "type": "currency_selector",
-      "settings": [
-        {
-          "label": "Stretch",
-          "id": "stretch",
-          "type": "checkbox"
-        }
-      ]
-    },
-    //Categories navigation
-    {
-      "name": "Categories navigation",
-      "force_name": true,
-      "type": "navigation",
-      "settings": [
-        {
-          "label": "Stretch",
-          "id": "stretch",
-          "type": "checkbox"
-        }
-      ]
-    },
-    //Language selector
-    {
-      "name": "Language selector",
-      "force_name": true,
-      "type": "local_selector",
-      "settings": [
-        {
-          "label": "Stretch",
-          "id": "stretch",
-          "type": "checkbox"
-        }
-      ]
-    },
-    //Row
-    {
-      "name": "Row",
-      "force_name": true,
-      "type": "row",
-      "settings": [
-        {
-          "label": "Cells Alignment",
-          "id": "cells_align",
-          "type": "select",
-          "options": [
-            {"label": "Left","value": "start"},
-            {"label": "Right", "value": "end"},
-            {"label": "Center","value": "center"},
-            {"label": "Space Between", "value": "between"},
-            {"label": "Around", "value": "around"}
-          ]
-        },
-        {
-          "label": "Theme color",
-          "id": "theme_color",
-          "type": "select",
-          "keep_name": true,
-          "options": [
-            {"label": "Light","value": "light"},
-            {"label": "Dark","value": "dark"},
-            {"label": "None","value": "none"}
-          ]
-        },
-        {
-          "label": "Full width",
-          "id": "full_width",
-          "type": "checkbox"
-        },
-        {
-          "label": "Hide on mobile",
-          "id": "display_xs",
-          "type": "checkbox",
-          "default": false
-        },
-        {
-          "label": "Margin",
-          "id": "margin",
-          "type": "checkbox",
-          "default": true
-        }
-      ]
-    }
-  ],
-  "default": {
-    "settings": {
-      "theme_color": "transparent",
-      "fixed_position": false,
-      "large_size": true,
-      "message": "<center><i class='fa fa-gift'></i> Save 10% with voucher code <b>SAVE10</b></center>",
-      "cells_align": "arround"
-    },
-    "blocks": [
-      {
-        "type": "row",
-        "settings": {
-          "cells_align": "center",
-          "theme_color": "dark",
-          "full_width": true,
-          "margin": false
-        }
-      },
-      {
-        "type": "text",
-        "settings": {
-          "content": "<center><i class='fa fa-gift'></i> Save 10% with voucher code <b>SAVE10</b></center>",
-          "stretch": true
-        }
-      },
-      {
-        "type": "currency_selector",
-        "settings": {
-        }
-      },
-      {
-        "type": "local_selector",
-        "settings": {
-        }
-      },
-      {
-        "type": "row",
-        "settings": {
-          "cells_align": "between",
-          "theme_color": "none",
-          "full_width": true,
-          "vertical_align": "center",
-          "display_xs": true
-        }
-      },
-      {
-        "type": "logo",
-        "settings": {
-          "picture": "/images/shop-logo.png",
-          "align_block": "right",
-          "align_img": "center",
-          "stretch": true
-        }
-      },
-      {
-        "type": "search",
-        "settings": {
-          "label": "Search product...",
-          "display_sm_icon": true,
-          "icon": "/images/search-icon.png"
-        }
-      },
-      {
-        "type": "user_icon",
-        "settings": {
-          "icon": "/images/user-icon.png",
-          "inline_display":  true,
-          "label": "Sign-in",
-          "display_sm_icon": false
-        }
-      },
-      {
-        "type": "cart_icon",
-        "settings": {
-          "icon": "/images/cart-icon.png",
-          "inline_display":  true,
-          "label": "My cart",
-          "display_sm_icon": true
-        }
-      },
-      {
-        "type": "row",
-        "settings": {
-          "cells_align": "start",
-          "theme_color": "light",
-          "full_width": true,
-          "vertical_align": "center",
-          "display_xs": true
-        }
-      },
-      {
-        "type": "navigation",
-        "settings": {
-          "link_url": ""
-        }
-      }
-    ]
-  }
-}
 ---
 {% assign category_html = ""%}
 {% action "set current currency"%}
@@ -668,6 +534,21 @@
                   </ul>
                 </div>
               {% when "search" %}
+                {% assign elasticsearch_locale = store.locale_mapping | downcase %}
+                {% action 'get elasticsearch parameters' %}
+                  setProp('elasticsearch_indexes', JSON.parse(site.metafields.elasticsearch.indices));
+                {% endaction %}
+                <div class="container"
+                  data-product-noimage={{ site.metafields.theme.noimage | json }}
+                  data-elastic-url={{ site.metafields.elasticsearch.url | json }}
+                  data-locale={{ store.locale_mapping | json }}
+                  {% for role in elasticsearch_indexes %}
+                    data-elastic-index-{{role.name}}={{role.index | append:"_" | append: elasticsearch_locale  | json}}
+                  {% endfor %}
+                >
+
+                </div>
+                {% comment %}
                 <div class="{{ css_cell }} header-block header-block-{{ block.type }} {{display_sm_icon_css}}">
                   <div class="icon d-lg-none">
                     <a class="icon-link" href=".search-bar" data-toggle="collapse">
@@ -750,6 +631,7 @@
                     </div>
                   </div>
                 </div>
+                {% endcomment %}
             {% endcase %}
           </div>
         {% endif %}

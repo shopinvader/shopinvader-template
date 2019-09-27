@@ -18,9 +18,13 @@ document.addEventListener('DOMContentLoaded', event => {
 
   // Load all the sections
   const sectionsManager = new SectionsManager();
+	/*up.animate('warning', 'fade-in', {
+	  delay: 1000,
+	  duration: 250,
+	  easing: 'linear'
+	});*/
   // Register sections here. DO NOT REMOVE OR UPDATE THIS LINE
+  sectionsManager.registerSection('header', Sections.Header);
   sectionsManager.registerSection('searchkit_faceting', Sections.SearchkitFaceting);
-
   sectionsManager.start();
-
 });

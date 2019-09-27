@@ -387,12 +387,57 @@ filters:
 filter_clear:
   en: Clear All
   fr: Effacer la recherche
+filter_more:
+  en: View more
+  fr: Voir plus
+filter_less:
+  en: View less
+  fr: Réduire
+filter_all:
+  en: View all
+  fr: Voir tous
+filter_noresult_found:
+  en: No results found for {query}.
+  fr: Aucun résultats pour {query}.
+filter_didyoumean:
+  en: Search for {suggestion}. 
+  fr: Lancer une recherche avec {suggestion}.
+filter_searchwithout_filter:
+  en: Search for {query} without filters
+  fr: Rechercher pour {query} sans filtre
+filter_searchwithout_filter:
+  en: No results found for {query}. Did you mean {suggestion}?
+  fr: Aucun résultat pour {query}. Voulez-vous dire {suggestion}?
+filter_result_count:
+  en: "{hitCount} results found."
+  fr: "{hitCount} résultat(s) trouvé(s)."
+filter_result_count:
+  en: "{hitCount} results found."
+  fr: "{hitCount} résultat(s) trouvé(s)."
+filter_paginate_previous:
+  en: Previous
+  fr: Précédent
+filter_paginate_next:
+  en: Next
+  fr: Suivant
+filter_placeholder:
+  en: Search
+  fr: Rechercher
 filter_price:
   en: Price
   fr: Prix
 filter_current:
   en: Current filters
   fr: Filtres actifs
+filter_price_default:
+  en: 
+  fr: Trier par pertinence
+filter_price_desc:
+  en:
+  fr: Trier par du plus cher au moins cher
+filter_price_asc:
+  en:
+  fr: Trier par du moins cher au plus cher
 home:
   en: Home
   fr: Accueil

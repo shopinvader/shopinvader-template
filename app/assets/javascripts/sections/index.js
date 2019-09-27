@@ -5,3 +5,4 @@
 //
 
 export { default as SearchkitFaceting } from './searchkit_faceting';
+export { default as Header } from './header';
