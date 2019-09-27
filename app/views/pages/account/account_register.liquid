@@ -5,9 +5,6 @@ slug: register
 seo_title: Account registration | Shopinvader demo
 display_settings:
   hidden: false
-editable_elements:
-  main/title: "Create an account"
-  main/body: ""
 ---
 {% extends 'layouts/lite' %}
 {% block 'body/content' %}
@@ -16,7 +13,9 @@ editable_elements:
     <h1 class="h1">
     {{'signin_create_account' | translate}}
     </h1>
-    {% include 'store_notifications' %}
+    <div>
+      {% include 'store_notifications' %}
+    </div>
     
     <form action="{% path_to page.handle %}" method="post" data-form-password-validation data-autocomplete="address">
       <input type="hidden" name="auth_action" value="sign_up" />

@@ -2,86 +2,60 @@
 title: Home page
 published: true
 handle: home
-sections_dropzone_content: >
-  [
-    {
-      "type": "carousel",
-      "settings": {
-        "section_name": "Main carousel",
-        "identifier": "main",
-        "display_control": "true",
-        "full_width": false,
-        "display_sm": true,
-        "page_border": true
-      },
-      "blocks": [
-        {
-          "type": "list_item",
-          "settings": {
-            "title": "Slide #1",
-            "picture": "/images/slides/slide-1.png",
-            "link": "",
-            "align_caption": "center"
-          }
-        },
-        {
-          "type": "list_item",
-          "settings": {
-            "title": "Slide #2",
-            "picture": "/images/slides/slide-2.png",
-            "link": "",
-            "caption": "<h5>Slide #2</h5><p>Maecenas varius nibh a maximus vehicula</p>",
-            "align_caption": "end"
-          }
-        }
-      ]
-    },
-    {
-      "type": "category_products_list",
-      "settings": {
-        "category_id": "202",
-        "text_position": "start",
-        "content": "<h2><b>Dining</b> Room</h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "slider": false,
-        "item_limit": 4
-      },
-      "blocks": []
-    },
-    {
-      "type": "products_discounted_list",
-      "settings": {
-        "header": "<h2>Best deal today !</h2>",
-        "item_limit": 4
-      },
-      "blocks": []
-    },
-    {
-      "type": "category_products_list",
-      "settings": {
-        "category_id": "199",
-        "text_position": "end",
-        "content": "<h2><b>Dining</b> Room</h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "slider": false,
-        "item_limit": 4
-      },
-      "blocks": []
-    },
-    {
-      "type": "posts",
-      "settings": {
-        "header": "<h2>Latest News</h2>"
-
-      },
-      "blocks": []
-    },
-    {
-      "type": "contact_form",
-      "settings": {
-        "header": "<h2>Latest News</h2>"
-      },
-      "blocks": []
-    }
-  ]
+sections_dropzone_content:
+  - type: carousel
+    settings:
+      section_name: Main carousel
+      identifier: main
+      display_control: 'true'
+      full_width: false
+      display_sm: true
+      page_border: true
+    blocks:
+    - type: list_item
+      settings:
+        title: 'Slide #1'
+        picture: "/samples/slide-1.png"
+        link: ''
+        align_caption: center
+    - type: list_item
+      settings:
+        title: 'Slide #2'
+        picture: "/samples/slide-2.png"
+        link: ''
+        caption: "<h5>Slide #2</h5><p>Maecenas varius nibh a maximus vehicula</p>"
+        align_caption: end
+  - type: category_products_list
+    settings:
+      category_id: '202'
+      text_position: start
+      content: "<h2><b>Dining</b> Room</h1>Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit."
+      slider: false
+      item_limit: 4
+    blocks: []
+  - type: products_discounted_list
+    settings:
+      header: "<h2>Best deal today !</h2>"
+      item_limit: 4
+    blocks: []
+  - type: category_products_list
+    settings:
+      category_id: '199'
+      text_position: end
+      content: "<h2><b>Dining</b> Room</h1>Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit."
+      slider: false
+      item_limit: 4
+    blocks: []
+  - type: posts
+    settings:
+      header: "<h2>Latest News</h2>"
+    blocks: []
+  - type: contact_form
+    settings:
+      header: "<h2>Latest News</h2>"
+    blocks: []
 
 ---
 {% extends 'layouts/blank' %}
