@@ -140,7 +140,7 @@ class ProductHit extends React.Component {
     var id = 'product-hit-'+this.get_thumb_layout()+product.objectID
     return (
       <div className={class_name} key={id} id={id}>
-        <div className="image" href={'./'+product.url_key}>
+        <div className="image" data-link={'./'+product.url_key}>
           {this.images()}
         </div>
         <div className="content">
@@ -151,12 +151,12 @@ class ProductHit extends React.Component {
           </div>
           <div className="price">
             {this.price()}
-            {product.main}
             <div className="add-to-cart">
               <form method="POST" action="/invader/cart/add_item" data-shopinvader-form>
-                <input type="hidden" name="invader_success_url" value="{page}?addtocart_product_id={product.objectID}" />
-                <input type="hidden" name="invader_error_url" value="{page}" />
-                <input type="hidden" name="product_id" value="{product.objectID}" />
+                <input type="hidden" name="invader_success_url" value={page+'?addtocart_product_id='+product.objectID} />
+                <input type="hidden" name="invader_error_url" value={page} />
+                <input type="hidden" name="item_qty" value="1" />
+                <input type="hidden" name="product_id" value={product.objectID} />
                 <a href={'./'+product.url_key} className="btn-product-page" dangerouslySetInnerHTML={{__html: "Details"}} />
                 <button type="submit" className="btn-add-to-cart" dangerouslySetInnerHTML={{__html: "Ajouter au panier"}} />
               </form>

@@ -12,7 +12,6 @@ $(document).ready(function () {
     $($(this).data('target')).toggleClass('open-nav');
   });
   $('[data-toggle="change-currency"]').on('click', function(){
-    console.log($(this).data('value'));
     var currency_code = $(this).data('value');
     if(currency_code != '') {
       Cookies.set('currency', currency_code);

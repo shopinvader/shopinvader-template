@@ -50,11 +50,6 @@ is_layout: false
             {{ "account_address_lists" | translate }}
           </a>
         </li>
-        <li class="nav-item {%if page.handle == 'account_rma'%}active{% endif%}">
-          <a href="{%path_to account_rma %}" class="nav-link ">
-            {{ "account_rma_title" | translate }}
-          </a>
-        </li>
         <li class="pl-5">
           <form method="post" action="{% path_to account %}">
             <input type="hidden" name="auth_action" value="sign_out" />

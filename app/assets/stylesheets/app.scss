@@ -1,5 +1,19 @@
 // Wagon main stylesheet file
-
+@font-face {
+  font-family: "Montserrat";
+  font-weight: 300;
+  src: url("../fonts/Montserrat-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Montserrat";
+  font-weight: 400;
+  src: url("../fonts/Montserrat-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Montserrat";
+  font-weight: 700;
+  src: url("../fonts/Montserrat-Bold.ttf") format("truetype");
+}
 @import "custom_theme/_bootstrap_custom";
 
 @import "~bootstrap/scss/bootstrap";

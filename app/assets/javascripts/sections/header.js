@@ -123,7 +123,7 @@ const Section = {
             <SearchkitProvider searchkit={this.state.searchkit}>
               <Layout>
                 <SearchBox
-                  autofocus={true}
+                  autofocus={false}
                   searchOnChange={true}
                   queryOptions={{analyzer:"standard"}}
                   queryFields={["name", "model.name^3", "short_description", "description"]}
