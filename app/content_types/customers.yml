@@ -23,7 +23,7 @@ order_by: manually
 # public_submission_enabled: false
 
 # Make recaptcha mandatory for creating this content (from public submission or from sign_up)
-recaptcha_required: True
+recaptcha_required: false
 
 # Array of emails to be notified of new entries made with the public API
 # public_submission_accounts: ['john@example.com']
