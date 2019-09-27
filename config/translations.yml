@@ -430,7 +430,7 @@ filter_current:
   en: Current filters
   fr: Filtres actifs
 filter_price_default:
-  en: 
+  en: Default
   fr: Trier par pertinence
 filter_price_desc:
   en:
