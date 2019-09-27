@@ -29,7 +29,7 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {% for variant in product.variants %}
-              <a class="dropdown-item" href="{{variant.url_key  | prepend: url_base }}?ref={{variant.sku}}">
+              <a class="dropdown-item" href="{{variant.url_key  | prepend: url_base }}?ref={{variant.sku}}" up-target=".product-page-content">
                 <div class="row align-items-center">
                   <div class="col-4 pr-0">
                     <img class="img-fluid img-thumbnail" src="{{variant.images.first.small.src  | default: site.metafields.theme.noimage }}" alt="{{variant.images.first.medium.alt}}" />
@@ -54,7 +54,7 @@
         {% if  product_variant == product %}
           {% assign btn_class = 'btn-dark' %}  
         {% endif %}
-        <a href="{{ product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="btn {{btn_class}} btn-sm mr-2 mb-2 h-100">
+        <a href="{{ product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="btn {{btn_class}} btn-sm mr-2 mb-2 h-100" up-target=".product-page-content">
           {% for attr in product.variant_attributes %}
             <span class="pr-2">
               {{attr[0]}} 
@@ -67,7 +67,7 @@
           {% if product_variant == variant %}
             {% assign btn_class = 'btn-dark' %}
           {% endif %}
-          <a href="{{ variant.url_key  | prepend: url_base }}?ref={{variant.sku}}" class="btn {{btn_class}} btn-sm mr-2 mb-2 h-100">
+          <a href="{{ variant.url_key  | prepend: url_base }}?ref={{variant.sku}}" class="btn {{btn_class}} btn-sm mr-2 mb-2 h-100" up-target=".product-page-content" >
             {% for attr in variant.variant_attributes %}
               <span class="pr-2">
                 {{attr[0]}} 

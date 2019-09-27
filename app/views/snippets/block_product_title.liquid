@@ -1,13 +1,14 @@
-<div>
-  <a class="text-center text-md-left h2" href="{{product_variant.url_key  | prepend: url_base}}">
-    {{product_variant.name}}
-  </a>
-</div>
+<a class="product-title" href="{{product_variant.url_key  | prepend: url_base}}">
+  <span class="product-model-name">{{product_variant.model.name}}</span>
+  <span class="product-variant-name">{{product_variant.variant.name}}</span>
+</a>
 <div class="">
-  <div class="d-none d-sm-inline-block  pr-4">
-    {{product_variant.brand.name }}
-  </div>
-  <div class="d-none d-sm-inline-block  pr-4">
+  {% if product_variant.brand.name %}
+    <div class="product-brand">
+      {{product_variant.brand.name }}
+    </div>
+  {% endif %}
+  <div class="product-category">
     <a href="{{ variant.categories.last.url_key | prepend: url_base }}">
       <u>{{ product_variant.categories.last.name}}</u>
     </a>

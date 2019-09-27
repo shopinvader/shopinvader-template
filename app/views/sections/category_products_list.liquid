@@ -122,7 +122,7 @@
             <img src="{{section.settings.picture}}" alt="" class="img-fluid">
           </div>
           <div class="col-12 {% if section.settings.text_position != 'top'%}col-xl-9{%endif%}">
-            {% with_scope categories: {id: section.settings.category_id} %}
+            {% with_scope categories: {id: section.settings.category_id, main: true} %}
               {% if section.settings.slider == true %}
                 {% assign slide_count = 1 %}
                 {% assign carousel_html_id = "carousel-category-" | append : section.settings.category_id%}
