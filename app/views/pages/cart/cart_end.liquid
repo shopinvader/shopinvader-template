@@ -8,74 +8,50 @@ listed: false
 published: true
 is_layout: false
 seo_title: thank you for your order | Shopinvader demo
-sections_content: >
-  {
-    "cart": {
-      "settings": {
-        "large_size": false,
-        "submit_label": "Continue",
-        "cart_current_step": "cart_index",
-        "cart_next_step": "cart_login",
-        "cart_next_page": "cart/login",
-        "origin_data": "last_sale"
-      },
-      "blocks": [
-        {
-          "type": "cell_text",
-          "settings": {
-            "cell_size": "full",
-            "content": "<h1>Thank you !</h1><p>Thank you for your order.</p>"
-          }
-        },
-        {
-          "type": "cart_lines",
-          "settings": {
-            "cell_size": "lg",
-            "theme": "none",
-            "display_border": true,
-            "table_layout": "card"
-          }
-        },
-        {
-          "type": "cart_address",
-          "settings": {
-            "cell_size": "md",
-            "address_type": "shipping",
-            "title": "<h3>Shipping address</h3>",
-            "is_child": true
-          }
-        },
-        {
-          "type": "cart_address",
-          "settings": {
-            "cell_size": "md",
-            "address_type": "invoicing",
-            "title": "<h3>Invoice address</h3>",
-            "is_child": true
-          }
-        },
-        {
-          "type": "cart_summary",
-          "settings": {
-            "cell_size": "sm",
-            "title": "My order",
-            "display_lines": false,
-            "theme": "none",
-            "display_border": false,
-            "display_submit": false
-
-          }
-        },
-        {
-          "type": "cell_text",
-          "settings": {
-            "cell_size": "full",
-            "content": "<p>Thank you for your order.</p>"
-          }
-        }      
-      ]
-    }
-  }
+sections_content:
+  cart:
+    settings:
+      large_size: false
+      submit_label: Continue
+      cart_current_step: cart_index
+      cart_next_step: cart_login
+      cart_next_page: cart/login
+      origin_data: last_sale
+    blocks:
+    - type: cell_text
+      settings:
+        cell_size: full
+        content: "<h1>Thank you !</h1><p>Thank you for your order.</p>"
+    - type: cart_lines
+      settings:
+        cell_size: lg
+        theme: none
+        display_border: true
+        table_layout: card
+    - type: cart_address
+      settings:
+        cell_size: md
+        address_type: shipping
+        title: "<h3>Shipping address</h3>"
+        is_child: true
+    - type: cart_address
+      settings:
+        cell_size: md
+        address_type: invoicing
+        title: "<h3>Invoice address</h3>"
+        is_child: true
+    - type: cart_summary
+      settings:
+        cell_size: sm
+        title: My order
+        display_lines: false
+        theme: none
+        display_border: false
+        display_submit: false
+    - type: cell_text
+      settings:
+        cell_size: full
+        content: "<p>Thank you for your order.</p>"
 ---
 {% extends 'layouts/default' %}
 {% block 'googletag_data_layer'%}

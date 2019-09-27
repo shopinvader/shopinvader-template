@@ -3,65 +3,46 @@ title: Cart Step 3
 position: 102
 slug: shipping
 handle: cart_address
+slug: cart-address
 position: 4
 listed: false
 published: true
 is_layout: false
 seo_title: Shipping address | Shopinvader demo
-sections_content: >
-  {
-    "cart": {
-      "settings": {
-        "large_size": false,
-        "submit_label": "Continue ",
-        "cart_current_step": "cart_address",
-        "cart_next_step": "cart_checkout"
-      },
-      "blocks": [
-        {
-          "type": "cell_text",
-          "settings": {
-            "cell_size": "full",
-            "content": "<h3>My shipping address</h3>"
-          }
-        },
-        {
-          "type": "cart_address_list",
-          "settings": {
-            "cell_size": "lg"
-          }
-        },
-        {
-          "type": "cart_summary",
-          "settings": {
-            "cell_size": "sm",
-            "display_border": true,
-            "display_submit": true,
-            "title": "Your order",
-            "display_lines": true
-          }
-        },
-        {
-          "type": "cart_address",
-          "settings": {
-            "cell_size": "full",
-            "title": "<h3>Shipping address</h3>",
-            "address_type": "shipping",
-            "is_child": true
-          }
-        },
-        {
-          "type": "cart_address",
-          "settings": {
-            "cell_size": "full",
-            "title": "<h3>Ivoice address</h3>",
-            "address_type": "invoicing",
-            "is_child": true
-          }
-        }
-        
-      ]
-    }
-  }
+sections_content:
+  cart:
+    settings:
+      large_size: false
+      submit_label: Continue
+      cart_current_step: cart_address
+      cart_next_step: cart_checkout
+    blocks:
+    - type: cell_text
+      settings:
+        cell_size: full
+        content: "<h3>My shipping address</h3>"
+    - type: cart_address_list
+      settings:
+        cell_size: lg
+    - type: cart_summary
+      settings:
+        cell_size: sm
+        display_border: true
+        display_submit: true
+        title: Your order
+        display_lines: true
+    - type: cart_address
+      settings:
+        cell_size: full
+        title: "<h3>Shipping address</h3>"
+        address_type: shipping
+        is_child: true
+    - type: cart_address
+      settings:
+        cell_size: full
+        title: "<h3>Ivoice address</h3>"
+        address_type: invoicing
+        is_child: true
 ---
+
 {% extends 'layouts/checkout' %}
