@@ -100,12 +100,6 @@ const Section = {
             return query_params;
           });
         }
-        test() {
-          if(this.state.search_value != '') {
-            return 'visible';
-          }
-          return '';
-        }
         menu_visible() {
           if(this.state.menu_visible) {
             return 'visible';
@@ -128,7 +122,7 @@ const Section = {
                   queryOptions={{analyzer:"standard"}}
                   queryFields={["name", "model.name^3", "short_description", "description"]}
                  />
-                <div className={'autocomplete '+this.test()}>
+                <div className='autocomplete'>
                   <NoHits 
                     errorComponent={NoHitsErrorDisplay}
                     suggestionsField="name"

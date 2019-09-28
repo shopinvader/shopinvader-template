@@ -181,11 +181,7 @@ blocks:
     default: true
 default:
   settings:
-    theme_color: transparent
     fixed_position: false
-    large_size: true
-    message: "<center><i class='fa fa-gift'></i> Save 10% with voucher code <b>SAVE10</b></center>"
-    cells_align: arround
   blocks:
   - type: row
     settings:
@@ -210,7 +206,7 @@ default:
       display_xs: true
   - type: logo
     settings:
-      picture: "/images/shop-logo.png"
+      picture: "/samples/assets/shop-logo.png"
       align_block: right
       align_img: center
       stretch: true
@@ -218,16 +214,16 @@ default:
     settings:
       label: Search product...
       display_sm_icon: true
-      icon: "/images/search-icon.png"
+      icon: "/samples/assets/search-icon.png"
   - type: user_icon
     settings:
-      icon: "/images/user-icon.png"
+      icon: "/samples/assets/user-icon.png"
       inline_display: true
       label: Sign-in
       display_sm_icon: false
   - type: cart_icon
     settings:
-      icon: "/images/cart-icon.png"
+      icon: "/samples/assets/cart-icon.png"
       inline_display: true
       label: My cart
       display_sm_icon: true
@@ -329,19 +325,13 @@ default:
                 </div>
               {% when "local_selector" %}
                 {% if locales.size > 1 %}
-                  <div class="dropdown">
-                    <button class="btn btn-link dropdown-toggle text-uppercase" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      {{locale}}
-                    </button>
-                    <div class="dropdown-menu bg-dark">
-                      {% for locale_nav in locales %}
-                        <a class="dropdown-item text-uppercase" href="{{base_url}}/{{locale_nav}}">
-                          {{locale_nav}}
-                        </a>
-                      {%endfor%}
-                    </div>
-                  </div>
+                  {% for locale_nav in locales %}
+                    <a class="text-white text-uppercase pr-2" href="{{base_url}}/{{locale_nav}}">
+                      {{locale_nav}}
+                    </a>
+                  {%endfor%}
                 {% endif %}
+                
               {% when "logo" %}
                 <div class="{{block.settings.align_img}}">
                   <div class="header-block-menu d-inline d-md-none">
@@ -455,15 +445,15 @@ default:
                           </a>
                           <div class="list-inline-dropdown p-3 p-md-4">
                             <div class="row ">
-                              <div class="col-12 col-md-8">
-                                <div class="h3 text-uppercase pb-3 d-none d-md-block">
+                              <div class="col-12">
+                                <div class="h4 text-uppercase pb-3 d-none d-md-block">
                                   {{ category_level1.name}}
                                 </div>
                                 <ul class="row p-0">
                                   {% for category_level2 in category_level1.childs %}
                                     <li class="col-12 col-md-4 pb-2 pt-2">
                                       <div >
-                                        <a href="{{ category_level2.url_key | prepend: url_base}}" class="h4">
+                                        <a href="{{ category_level2.url_key | prepend: url_base}}" class="h5">
                                           {{ category_level2.name}}
                                         </a>
                                       </div>
@@ -518,8 +508,7 @@ default:
                       data-elastic-index-{{role.name}}={{role.index | append:"_" | append: elasticsearch_locale  | json}}
                     {% endfor %}
                   >
-                </div>
-                
+                  </div>
                 </div>
             {% endcase %}
           </div>
@@ -527,7 +516,6 @@ default:
       {% endfor %}
     </div>
   </div>
-
 </div>
 <div class="header-category-sm">
   <ul class="list-inline" id="nav-sm">
