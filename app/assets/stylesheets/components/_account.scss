@@ -81,12 +81,17 @@
         background-color: theme-color('info');
       }
     }
+    &.order-state-cancel {
+      &:before {
+        background-color: theme-color('danger');
+      }
+    }
     &.order-state-processing {
       &:before {
         background-color: theme-color('warning');
       }
     }
-    &.order-state-done {
+    &.order-state-shipped {
       &:before {
         background-color: theme-color('success');
       }
@@ -102,12 +107,13 @@
     width: 25%;
     &:not(:first-child):after {
       content: ' ';
-      background-color: theme-color('secondary');
+      background-color: $gray-400;
       height: 3px;
-      width: calc(50% + 3rem - 8px);
+      width: calc(50% + 5rem);
       position: absolute;
       top: 3rem;
       right: calc(50% + 3rem);
+      z-index: 1;
     }
 
     .icon {
@@ -115,15 +121,16 @@
       align-self: center;
       justify-content: center;
       display: flex;
-      border: 3px solid theme-color('secondary');
+      border: 3px solid $gray-400;
       border-radius: 50%;
       width: 6rem;
       height: 6rem;
-      color: theme-color('secondary');
+      color: $gray-400;
       background-color: $white;
       text-align: center;
       line-height: 100%;
-      i {
+      z-index: 10;
+      i, svg {
         font-size: 1.8rem;
       }
       &:after {

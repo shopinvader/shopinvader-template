@@ -1,43 +1,58 @@
 {% erp get 'cart/get_delivery_methods' as delivery_methods %}
+{% assign selected_carrier = store.cart.shipping.selected_carrier %}
 {% if delivery_methods.size > 0 %}
-  {% assign selected_carrier = store.cart.shipping.selected_carrier %}
-  <div>{{title}}</div>
-  <form method="post" action="/invader/cart/apply_delivery_method" id="cart_carrier_form" data-shopinvader-form>
+  <form method="post" action="/invader/cart/apply_delivery_method" id="carrier_form"  class=" " data-shopinvader-form>
     <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
     <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
-    {%for carrier in delivery_methods %}
-      <div class="cart-item-list">
-        <input data-autosubmit 
-          type="radio" 
-          value="{{carrier.id | round}}" 
-          {%if carrier.id == selected_carrier.id %} checked="checked" {%endif%} 
-          name="carrier[id]" 
-          autocomplete="off" 
-          class="form-radio" 
-          id="carrier_{{carrier.id | round}}" 
-        />
-        <label class="container pt-3 pb-3" for="carrier_{{carrier.id | round}}">
-          <div class="row ">
-            <div class="col-8  ">
-              <b>{{ carrier.name }}</b>
-              <div class="pr-3">
-                {{ carrier.description }}
+    <div>{{title}}</div>
+    <div>
+      {%for carrier in delivery_methods %}
+        <div class="cart-item-list mb-3">
+          <input data-autosubmit 
+            type="radio" 
+            value="{{carrier.id | round}}" 
+            {%if carrier.id == selected_carrier.id %} checked="checked" {%endif%} 
+            name="carrier[id]" 
+            autocomplete="off" 
+            class="form-radio" 
+            id="carrier_{{carrier.id | round}}" 
+          />
+          <label class="container card card-body " for="carrier_{{carrier.id | round}}">
+            <div class="row justify-content-between">
+              <div class="col-auto  ">
+                <b>{{ carrier.name }}</b>
+                <div class="pr-3">
+                  {{ carrier.description }}
+                </div>
+              </div>
+              <div class="col-auto text-left border-left d-flex align-items-center">
+                <div class="pr-3 font-weight-bold">
+                  {% if carrier.price > 0 %}
+                    {% include 'currency' | value: carrier.price %}
+                  {% else %}
+                    {{ 'cart_free_delivery' | translate }}
+                  {% endif %}
+                </div>
               </div>
             </div>
-            <div class="col-4 text-right">
-              {% if carrier.price > 0 %}
-                {% include 'currency' | value: carrier.price %}
-              {% else %}
-                {{ 'cart_free_delivery' | translate }}
-              {% endif %}
-            </div>
-          </div>
-        </label>
-      </div>
-    {% endfor %}
+          </label>
+        </div>
+      {% endfor %}
+    </div>
   </form>
-{% else %}
-  <div class="alert alert-warning">
-    {{ 'cart_carrier_unavailable' | translate }}
-  </div>
+  {% if selected_carrier.id != null  %}
+      <div class="row justify-content-center justify-content-md-end">
+        <form method="post" action="/invader/cart/update"  class="col-auto">
+          <input type="hidden" name="invader_success_url" value="{% path_to cart_next_page%}" />
+          <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+          <input type="hidden" name="step[current]" value="{{ cart_current_step }}">
+          <input type="hidden" name="step[next]" value="{{ cart_next_step }}">
+          <button class="btn btn-lg btn-primary " type="submit">
+            {{submit_label}}
+          </button>
+        </form>
+      </div>
+    
+  {% endif %}
+
 {% endif %}

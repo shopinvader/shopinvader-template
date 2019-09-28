@@ -1,48 +1,44 @@
 <div>{{title}}</div>
 {% assign selected_payment = store.cart.payment.available_methods.items | first %}
-<div class="card  card-payment text-center">
-  <div class="card-header ">
-    <ul class="nav nav-tabs card-header-tabs nav-justified" role="tablist">
-    {% for payment_method in store.cart.payment.available_methods.items%}
-      <li class="nav-item "  >
-        <a class="nav-link {% if selected_payment.id == payment_method.id %} active{%endif%}"  data-toggle="tab" href="#tab-{{payment_method.id}}"  role="tab" aria-controls="{{payment_method.id}}" aria-selected="{% if selected_payment.id == payment_method.id %}true{%else%}false{%endif%}">
-          {{'payment_method_' | append: payment_method.name | downcase | underscore | translate}}
-        </a>
-      </li>
-    {% endfor%}
-    </ul>
-  </div>
-  <div class="card-body">
-    <div class="tab-content" id="payment-tabs">
-    {% for payment_method in  store.cart.payment.available_methods.items%}
-      <div class="tab-pane fade {% if selected_payment.id == payment_method.id %}show active{%endif%}" id="tab-{{payment_method.id}}" role="tabpanel" aria-labelledby="home-tab">
-        {% case payment_method.code %}
-        {% when 'stripe' %}
-          {% include 'payment_stripe' with payment_method,
-            amount: store.cart.amount.total,
-            action: '/invader/cart/add_payment' %}
-        {% when 'adyen' %}
-          {% include 'payment_adyen' with payment_method,
-            amount: store.cart.amount.total,
-            action: '/invader/cart/add_payment' %}
-        {% when 'paypal' %}
-          {% include 'payment_paypal' with payment_method,
-            amount: store.cart.amount.total,
-            action: '/invader/cart/add_payment' %}
-        {% when 'bank_transfert' %}
-          {% include 'payment_bank_transfert' with payment_method,
-            amount: store.cart.amount.total,
-            action: '/invader/cart/add_payment' %}
-        {% when 'check' %}
-          {% include 'payment_check' with payment_method,
-            amount: store.cart.amount.total,
-            action: '/invader/cart/add_payment' %}
-        {% else %}
-          Indisponible
-        {% endcase %}
-      </div>
-    {% endfor%}
-
+<div id="payments-panel">
+  <div class="container card card-body mb-3" >
+      {% include 'payment_stripe' with payment_method,
+          amount: store.cart.amount.total,
+          target: 'current_cart',
+          action: '/cart/add_payment' %}
+        </div>
+  {% for payment_method in store.cart.payment.available_methods.items %}
+    <div class="container card card-body mb-3" >
+    {% case payment_method.code %}
+      {% when 'stripe' %}
+        {% include 'payment_stripe' with payment_method,
+          amount: store.cart.amount.total,
+          target: 'current_cart',
+          action: '/cart/add_payment' %}
+      {% when 'sips' %}
+        {% include 'payment_sips' with payment_method,
+          amount: store.cart.amount.total,
+          target: 'current_cart',
+          action: '/payment_sips/prepare_payment' %}
+      {% when 'banktransfer' %}
+        {% include 'payment_bank_transfert' with payment_method,
+          amount: store.cart.amount.total,
+          target: 'current_cart',
+          success_handle: 'cart_end'
+        %}
+      {% when 'checkmo' %}
+        {% include 'payment_check' with payment_method,
+          amount: store.cart.amount.total,
+          target: 'current_cart',
+          success_handle: 'cart_end'
+        %}
+      {% when 'paypal' %}
+        {% include 'payment_paypal' with payment_method,
+          amount: store.cart.amount.total,
+          target: 'current_cart',
+          success_handle: 'cart_end'
+        %}
+    {% endcase %}
     </div>
-  </div>
+  {% endfor%}
 </div>

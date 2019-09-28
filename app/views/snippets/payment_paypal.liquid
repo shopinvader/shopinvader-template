@@ -1,39 +1,75 @@
-
-{% editable_text form_creditcard_title, label: 'Formulaire paiement - titre', rows: 1 %}
-  <div class="h2 pt-4">
-    Checkout with PayPal – Fast. Easy.
-  </div>
-  <p>
-    Pay your order with PayPal.Safe an easy way to pay.<br>
-  <!-- PayPal Logo -->
-  <a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="About PayPal" onclick="javascript:window.open('https://www.paypal.com/fr/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;">
-    <img src="https://www.paypalobjects.com/webstatic/mktg/logo-center/logo_paypal_paiements_securises_fr.jpg" border="0" alt="PayPal Acceptance Mark" />
-  </a>
-  </p>
-{% endeditable_text %}
-<div class="row pt-2">
-  <div class="col-12 col-sm-6 text-center text-sm-right font-weight-bold lead">
-    <div class="pt-2">
-      {{'cart_total_total' | translate }}
-      {% include 'currency' | value: amount %}
+<div class="row justify-content-center" id="payment-sips">
+  <div class="col-12 col-md-8 col-lg-12 col-xl-8 d-flex">
+     <div class="text-primary pr-2 h4">
+      <i class="fab fa-paypal"></i>
     </div>
-
+    <div>
+      <b class="h5 font-weight-bold">
+        {{'payment_method_paypal_title' | translate }}
+      </b>
+      {{payment_method.description}}
+    </div>
   </div>
-  <div class="col-12 col-sm-6 text-center text-sm-left">
-    <form method="POST" action="{{action}}">
-      <input type="hidden" name="invader_success_url" value="{% path_to 'cart_end' %}" />
-      <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
-      <input type="hidden" name="payment_mode[id]" value="{{payment_method.id }}">
-      <input type="hidden" name="paypal[redirect_success_url]" value="{% path_to cart_end %}">
-      <input type="hidden" name="paypal[redirect_cancel_url]" value="{% path_to page %}">
-      <button type="submit" name="button" class="btn btn-warning btn-lg text-dark ">
-        <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal Logo">
-        <span class="">
-        {% editable_text form_creditcard_title, label: 'Formulaire paiement - titre', rows: 1 %}
-           checkout
-        {% endeditable_text %}
-        </span>
-      </button>
-    </form>
+  <div class="col-12 col-sm-5 col-md-4 col-lg-5 col-xl-4 text-center">
+    <button  id="button-pay-paypal" type="submit" class="btn btn-outline-primary"
+      data-paymentmode="{{payment_method.id }}"
+      data-successurl="{{success_url}}"
+      data-cancelurl="{{base_url}}{% path_to page %}"
+      data-target="{{target}}"
+      data-quotation="{{ quotation_id}}">
+      {{'payment_method_paypal_btn' | translate }}
+    </button>
   </div>
 </div>
+<script defer="true">
+  'use strict';
+  window.addEventListener("load", function() {
+    var button = document.getElementById("button-pay-paypal");
+    button.addEventListener('click', function(event){
+      event.preventDefault();
+      var options_paypal = {
+        target: button.dataset.target,
+        payment_mode_id: button.dataset.paymentmode,
+        return_url: window.location.origin + '/invader/payment_paypal/normal_return?force_apply_redirection=true&success_redirect=' + 
+        button.dataset.successurl + "&cancel_redirect=" + button.dataset.cancelurl + "?canceled_payment=paypal&target=" + button.dataset.target,
+        cancel_url: button.dataset.cancelurl
+      };
+
+      if(button.dataset.quotation != '') {
+        options_paypal.quotation_id = button.dataset.quotation;
+      }
+
+      $('.main-loader').removeClass('d-none');
+      fetch('/invader/payment_paypal/checkout_order', {
+        credentials: "include", 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(options_paypal)
+      }).then(function(result) {
+        if(result.ok) {
+          result.json().then(function(response) {
+            if(response.redirect_to) {
+              document.location = response.redirect_to;
+            }
+            else {
+              $('.main-loader').addClass('d-none');
+              $('#generic-error-message').modal('show');
+            }
+          }).catch(function(error) {
+            $('.main-loader').addClass('d-none');
+            $('#generic-error-message').modal('show');
+          });
+        }
+        else {
+          $('.main-loader').addClass('d-none');
+          $('#generic-error-message').modal('show');
+        }
+      }).catch(function(error) {
+        $('.main-loader').addClass('d-none');
+        $('#generic-error-message').modal('show');
+      });
+    });
+  }, false);
+</script>

@@ -1,0 +1,127 @@
+<div class="row justify-content-center" id="payment-sips">
+  <div class="col-12 col-md-8 col-lg-12 col-xl-8 d-flex">
+    <div class="text-primary pr-2 h4">
+      <i class="fas fa-credit-card"></i>
+    </div>
+    <div>
+      <b class="h5 font-weight-bold">
+        {{'payment_method_sips_title' | translate }}
+      </b>
+      {% if payment_method.description and payment_method.description != false %}
+        <div class="small">
+          {{payment_method.description}}
+        </div>
+      {% endif %}
+      <div class="text-dark text-left">
+        <i class="fab fa-cc-visa"></i>
+        <i class="fab fa-cc-mastercard"></i>
+        <i class="fab fa-cc-amex"></i>
+        <i class="fas fa-credit-card"></i>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-5 col-md-4 col-lg-5 col-xl-4 text-center">
+    <button id="button-pay-sips" type="button" class="btn btn-outline-primary"
+        data-paymentmode="{{payment_method.id }}"
+        data-successurl="{{ base_url }}{% path_to success_handle %}"
+        data-cancelurl="{% path_to page %}?canceled_payment=sips"
+        data-target="{{target}}"
+        data-quotation="{{ quotation_id}}">
+      {{'payment_method_stripe_btn' | translate }}
+    </button>
+    <form method="POST" id="sips_form">
+      <input type="hidden" name="Data" id="sips_data">
+      <input type="hidden" name="Seal" id="sips_seal">
+      <input type="hidden" name="InterfaceVersion" id="sips_interface_version">
+    </form>
+  </div>
+</div>
+{% if params.canceled_payment == 'sips' %}
+  <div class="modal fade" id="modal-sips-error" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title h5 d-flex align-items-center">
+            <div class="text-primary pr-2 h4 mb-0">
+              <i class="fas fa-credit-card"></i>
+            </div>
+            <div>
+              {{ 'payment_method_sips_error_title' | translate }}
+            </div>
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <b>
+            {{ 'payment_method_sips_error_subtitle' | translate }}
+          </b>
+          <p>
+            {{ 'payment_method_stripe_error_details' | translate }}
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">
+            {{'btn_back' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+{% capture js_sips %}
+<script defer="true">
+  'use strict';
+  function modal_error() {
+    $('.main-loader').addClass('d-none');
+    $('#generic-error-message').modal('show');
+  }
+  window.addEventListener("load", function() {
+    {% if params.canceled_payment == 'sips' %}
+      $('#modal-sips-error').modal('show');
+    {% endif %}
+    var button = document.getElementById("button-pay-sips");
+    button.addEventListener('click', function(event){
+      event.preventDefault();
+      var options = {
+        target: button.dataset.target,
+        payment_mode_id: button.dataset.paymentmode,
+        automatic_response_url: window.location.origin + '/invader/payment_sips/automatic_response',
+        normal_return_url: window.location.origin + '/invader/payment_sips/normal_return?success_redirect=' + button.dataset.successurl + "&cancel_redirect=" + button.dataset.cancelurl + "&target=" + button.dataset.target,
+      };
+      if(button.dataset.quotation != '') {
+        options.quotation_id = button.dataset.quotation;
+      }
+      $('.main-loader').removeClass('d-none');
+      fetch('/invader/payment_sips/prepare_payment', {
+        credentials: "include", // default on modern browser but required but for some old browsers
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(options)
+      }).then(function(result) {
+        if(result.ok) {
+          result.json().then(function(json) {
+            var $form = $("#sips_form");
+            $form.attr("action", json.sips_form_action_url);
+            $form.find("#sips_data").val(json.sips_data);
+            $form.find("#sips_seal").val(json.sips_seal);
+            $form.find("#sips_interface_version").val(json.sips_interface_version);
+            $form[0].submit();
+          }).catch(function(error) {
+            modal_error('show', error.message);
+          });
+        }
+        else {
+          modal_error('show');
+        }
+      }).catch(function(error) {
+        modal_error('show', error.message);
+      });
+    });
+  }, false);
+</script>
+{% endcapture %}
+{% assign js_footer = js_footer | append: js_sips %}

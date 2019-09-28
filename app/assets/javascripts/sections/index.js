@@ -8,3 +8,4 @@ export { default as SearchkitFaceting } from './searchkit_faceting';
 export { default as Header } from './header';
 export { default as Carousel } from './carousel';
 export { default as DynamicCarousel } from './dynamic_carousel';
+export { default as CookiesManager } from './cookies_manager';

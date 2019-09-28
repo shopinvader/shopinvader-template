@@ -352,7 +352,11 @@ default:
 						%}
 					{% when 'cart_delivery' %}
 						{% include block_cart_delivery with
-							title: block.settings.title
+							title: block.settings.title,
+              submit_label: section.settings.submit_label,
+              cart_next_step: section.settings.cart_next_step,
+              cart_current_step: section.settings.cart_current_step,
+              cart_next_page: section.settings.cart_next_page
 						%}
 					{% when 'cart_address_list' %}
 						{% include block_cart_address_list %}
