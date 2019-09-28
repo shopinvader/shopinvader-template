@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', event => {
 	  easing: 'linear'
 	});*/
   // Register sections here. DO NOT REMOVE OR UPDATE THIS LINE
+  sectionsManager.registerSection('cookies_manager', Sections.CookiesManager);
   sectionsManager.registerSection('dynamic_carousel', Sections.DynamicCarousel);
   sectionsManager.registerSection('carousel', Sections.Carousel);
   sectionsManager.registerSection('header', Sections.Header);
