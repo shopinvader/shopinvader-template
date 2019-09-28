@@ -693,24 +693,78 @@ store_advantage_price:
 store_advantage_return:
   en: easy return
   fr: retour gratuit
-payment_method_stripe:
+payment_method_sips_title:
   en: Credit card
   fr: Carte Bancaire
-payment_method_adyen:
+payment_method_sips_title_btn:
+  en: Pay by credit card
+  fr: Payer par carte
+payment_method_sips_btn:
+  fr: Payer par carte bancaire
+payment_method_sips_error_title:
+  fr: Votre paiement a échoué
+payment_method_sips_error_subtitle:
+  fr: Une erreur est survenue durant le paiement.
+payment_method_sips_error_details:
+  fr: >
+    Nous vous invitons à réessayer ou à utiliser 
+    un autre mode de paiement. Si le problème 
+    persiste, contactez le support.
+payment_method_stripe_title:
+  en: Credit card
+  fr: Carte Bancaire
+payment_method_stripe_title_btn:
+  en: Pay by credit card
+  fr: Payer par carte
+payment_method_stripe_btn:
+  fr: Payer par carte bancaire
+payment_method_stripe_error_title:
+  fr: Votre paiement a échoué
+payment_method_stripe_error_subtitle:
+  fr: Une erreur est survenue durant le paiement.
+payment_method_stripe_error_details:
+  fr: >
+    Nous vous invitons à réessayer ou à utiliser 
+    un autre mode de paiement. Si le problème 
+    persiste, contactez le support.
+
+payment_stripe_form_title:
+  en: Pay my order
+  fr: Payer ma commande
+payment_stripe_form_subtitle:
+  en: Secured credit card payment
+  fr: Paiement sécurisé par carte bancaire
+payment_stripe_ckeckout_button:
+  en: PAY
+  fr: PAYER
+
+payment_method_adyen_title:
   en: Credit card with Adyen
   fr: Carte Bancaire
-payment_method_bank_transfert:
+payment_method_adyen_title_btn:
+  en: Pay by credit card
+  fr: Payer par carte
+payment_method_banktransfert_title:
   en: Bank transfert
   fr: Virement bancaire
-payment_method_check:
+payment_method_banktransfert_btn:
+  en: Bank transfert
+  fr: Payer par virement
+payment_method_check_title:
   en: Check
   fr: Chèque
+payment_method_check_btn:
+  en: Pay by check
+  fr: Payer par chèque
 payment_method_stripe:
   en: Credit card with Stripe
   fr: Carte Bancaire
-payment_method_paypal:
+payment_method_paypal_title:
   en: PayPal
   fr: PayPal
+payment_method_paypal_btn:
+  en: Pay by PayPal
+  fr: Payer par PayPal
 recommandation_title:
   en: Our new deals
   fr: Nos bonnes affaires

@@ -20,38 +20,34 @@ sections_content:
     blocks:
     - type: cell_text
       settings:
-        cell_size: full
+        cell_size: 100
         content: "<h1>Thank you !</h1><p>Thank you for your order.</p>"
     - type: cart_lines
       settings:
-        cell_size: lg
+        cell_size: 70
         theme: none
         display_border: true
         table_layout: card
     - type: cart_address
       settings:
-        cell_size: md
+        cell_size: 50
         address_type: shipping
         title: "<h3>Shipping address</h3>"
         is_child: true
     - type: cart_address
       settings:
-        cell_size: md
+        cell_size: 50
         address_type: invoicing
         title: "<h3>Invoice address</h3>"
         is_child: true
     - type: cart_summary
       settings:
-        cell_size: sm
+        cell_size: 30
         title: My order
         display_lines: false
         theme: none
         display_border: false
         display_submit: false
-    - type: cell_text
-      settings:
-        cell_size: full
-        content: "<p>Thank you for your order.</p>"
 ---
 {% extends 'layouts/default' %}
 {% block 'googletag_data_layer'%}

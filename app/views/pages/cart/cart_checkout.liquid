@@ -1,6 +1,6 @@
 ---
-title: Cart Step 4
-position: 103
+title: Cart Step 5
+position: 104
 seo_title: Checkout | Shopinvader demo
 slug: checkout
 handle: cart_checkout
@@ -18,10 +18,10 @@ sections_content:
       cart_next_step: cart_checkout
       origin_data: cart
     blocks:
-    - type: cart_delivery
+    - type: cart_payment
       settings:
-        cell_size: 50
-        title: "<h3>Delivery</h3>"
+        cell_size: 75
+        title: "<h3>Payment</h3>"
     - type: cart_address
       settings:
         cell_size: 50
@@ -33,11 +33,6 @@ sections_content:
         cell_size: 50
         address_type: invoicing
         title: "<h3>Invoice address</h3>"
-        is_child: true
-    - type: cart_payment
-      settings:
-        cell_size: 100
-        title: "<h3>Payment</h3>"
         is_child: true
     - type: cart_summary
       settings:

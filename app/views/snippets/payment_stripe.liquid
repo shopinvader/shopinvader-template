@@ -1,23 +1,25 @@
 {% if site.metafields.payment.stripe_api_key %}
-  <div>
-    <p>
-      {{payment_method.description}}
-    </p>
-    <button type="button" class="btn btn-dark btn-lg font-weight-bold text-uppercase"  data-toggle="modal" data-target="#modal-stripe">
-      {% editable_text  stripe_showmodal_label, label: 'Stripe  - Show modal button', rows: 1 %}
-         <i class="fas fa-credit-card"></i>  Pay by credit card
-      {% endeditable_text %}
-    </button>
-    <div class="pt-3">
-      {% editable_text stripe_description, label: 'Stripe - description', rows: 1 %}
-        Secured checkout with Stripe
-      {% endeditable_text %}
-      <div class=" fa-2x">
-        <i class="fab fa-cc-visa"></i>
-        <i class="fab fa-cc-mastercard"></i>
-        <i class="fab fa-cc-amex"></i>
+  <div class="row justify-content-center" id="payment-sips">
+    <div class="col-12 col-md-8 col-lg-12 col-xl-8 d-flex">
+       <div class="text-primary pr-2 h4">
         <i class="fas fa-credit-card"></i>
       </div>
+      <div>
+        <b class="h5 font-weight-bold">
+          {{'payment_method_stripe_title' | translate }}
+        </b>
+        {{payment_method.description}}
+      </div>
+    </div>
+    <div class="col-12 col-sm-5 col-md-4 col-lg-5 col-xl-4 text-center">
+      <button  id="button-pay-stripe" type="submit" class="btn btn-outline-primary"
+        data-paymentmode="{{payment_method.id }}"
+        data-successurl="{{success_url}}"
+        data-cancelurl="{{base_url}}{% path_to page %}"
+        data-target="{{target}}"
+        data-quotation="{{ quotation_id}}">
+        {{'payment_method_stripe_btn' | translate }}
+      </button>
     </div>
   </div>
   <div class="modal fade modal-payment stripe-popup" id="modal-stripe" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
@@ -25,10 +27,8 @@
       <div class="modal-content text-left">
         <div class="modal-header">
           <h4 class="modal-title" id="">
-            <i class="fa fa-credit-card-alt"></i>
-            {% editable_text stripe_form_title, label: 'Stripe Form - title', rows: 1 %}
-              Pay my order
-            {% endeditable_text %}
+            <i class="far fa-credit-card"></i>
+            {{'payment_stripe_form_title' | translate}}
           </h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
@@ -38,14 +38,8 @@
           </div>
           <form action="" method="post" id="payment-form" >
             <h3 class="d-none d-md-block">
-              {% editable_text stripe_form_subtitle, label: 'Stripe Form - sub-title', rows: 1 %}
-              Secured credit card payment
-              {% endeditable_text %}
+              {{'payment_stripe_form_subtitle' | translate}}
             </h3>
-
-            {% editable_text stripe_form_details, label: 'Stripe Form - details', rows: 3, format: 'html'%}
-            <p>Secured credit card payment with Stripe.</p>
-            {% endeditable_text %}
             <div class="payment-card-row">
               <div class="form-group">
                 <label for="creditcard-owner">{{'creditcard_lastname' | translate}}</label>
@@ -57,7 +51,7 @@
                   <div id="stripe-card-number" class="form-control"></div>
                 </div>
                 <div class="col-12 col-sm-5 col-lg-4">
-                  <label ><i class="fa fa-calendar-o text-primary"></i>  {{'creditcard_expiry' | translate}}</label>
+                  <label ><i class="fas fa-calendar text-primary"></i>  {{'creditcard_expiry' | translate}}</label>
                   <div id="stripe-card-expiry" class="form-control"></div>
                 </div>
               </div>
@@ -72,16 +66,16 @@
                   {{'creditcard_cvc_help' | translate}}
                 </small>
               </div>
+              <div id="stripe-card-errors" class="text-danger pt-2" role="alert"></div>
             </div>
             <div class="form-group text-center">
               <button type="submit" class="btn btn-success w-75" id="" placeholder="">
-                {% editable_text stripe_ckeckout_button, label: 'Stripe Form - checkout label', rows: 3, format: 'html'%}
-                  PAY
-                {% endeditable_text %} <span id="payement_total_label" data-shopinvader-container>
+                {{'payment_stripe_ckeckout_button' | translate}}
+                <span id="payement_total_label" data-shopinvader-container>
                   {% include 'currency' | value: amount %}
                 </span>
               </button>
-              <div id="stripe-card-errors" class="text-danger pt-2" role="alert"></div>
+              
             </div>
             <div class="text-center text-large text-secondary">
               <i class="fab fa-cc-visa"></i>
@@ -94,9 +88,7 @@
         <div class="modal-footer bg-light text-dark">
           <div class="text-left w-50">
             <i class="fa fa-lock text-success"></i>
-            {% editable_text stripe_security_details, label: 'Stripe Form - security details', rows: 1 %}
-            Secured Area
-            {% endeditable_text %}
+            {{'payment_stripe_form_subtitle' | translate}}
           </div>
           <div class="w-50 text-right">
             <i class="fab fa-cc-stripe fa-2x"></i>
@@ -106,88 +98,186 @@
 
     </div>
   </div>
-  <form method="POST" action="{{action}}" id="stripe-checkout-form">
-    <input type="hidden" name="invader_success_url" value="{% path_to 'cart_end' %}" />
-    <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
-    <input type="hidden" name="payment_mode[id]" value="{{payment_method.id }}">
-    <input type="hidden" id="stripe_token" name="stripe[token]" value="" autocomplete="off">
-    <input type="hidden" name="stripe[redirect_success_url]" value="{% path_to cart_end %}">
-    <input type="hidden" name="stripe[redirect_cancel_url]" value="{% path_to page %}">
-  </form>
-  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://js.stripe.com/v3/" data-locale="fr"></script>
 
   <script defer="true">
-  window.addEventListener("load", function() {
-    $('#modal-stripe').on('shown.bs.modal', function (e) {
-     init_stripe_form();
-    });
-  },false);
-
-  function init_stripe_form() {
-    var stripe = Stripe('{{site.metafields.payment.stripe_api_key}}');
-    if(stripe) {
-      var elements = stripe.elements();
-      var style = {
-        base: {
-          color: '#32325d',
-          lineHeight: '24px',
-          fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-          fontSmoothing: 'antialiased',
-          fontSize: '16px',
-          '::placeholder': {
-            color: '#aab7c4'
-          }
-        },
-        invalid: {
-          color: '#EE392D',
-          iconColor: '#EE392D'
+    
+    window.addEventListener("load", function() {
+      
+      var button = document.getElementById("button-pay-stripe");
+      button.addEventListener('click', function(event){
+        event.preventDefault();
+        var options_stripe = {
+          target: button.dataset.target,
+          payment_mode_id: button.dataset.paymentmode,
+        };
+        if(button.dataset.quotation != '') {
+          options_stripe.quotation_id = button.dataset.quotation;
         }
-      };
-      var card = elements.create('cardNumber', {style: style});
-      card.mount('#stripe-card-number');
-      var card_expiry = elements.create('cardExpiry', {style: style});
-      card_expiry.mount('#stripe-card-expiry');
-      var card_cvc = elements.create('cardCvc', {style: style});
-      card_cvc.mount('#stripe-card-cvc');
-
-      card.on('ready', function() {
+        init_stripe_form(options_stripe);
+        $('#modal-stripe').modal('show');
+      });
+    },false);
+    function display_generic_error_stripe(status) {
+      if(status == 'show') {
+        display_error_stripe_form({{'payment_stripe_form_error' | translate | json}});
+      }
+      else {
+        display_error_stripe_form('');
+      }
+    }
+    function display_error_stripe_form(message) {
+      $('#stripe-card-errors').html(message);
+      if(message != null || message != '') {
         $('#modal-stripe .modal-loader').hide();
         $('#modal-stripe #payment-form').css('opacity', 1);
-      });
-
-      card.addEventListener('change', function(event) {
-        var $displayError =$('#stripe-card-errors');
-        if (event.error) {
-          $displayError.html(event.error.message);
-        } else {
-          $displayError.html();
-        }
-      });
-
-      var $form = $('#modal-stripe #payment-form');
-      $form.on('submit', function(event) {
-        event.preventDefault();
-        $form = $(this);
-        var extraDetails = {
-          name: $('input#creditcard-owner').value,
+      }
+    }
+    function init_stripe_form(options) {
+      display_error_stripe_form('');
+      var stripe = Stripe({{site.metafields.payment.stripe_api_key | json}}, {locale: {{locale | json}}});
+      if(stripe) {
+        var elements = stripe.elements();
+        var style = {
+          base: {
+            color: '#32325d',
+            lineHeight: '24px',
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: 'antialiased',
+            fontSize: '16px',
+            '::placeholder': {
+              color: '#aab7c4'
+            }
+          },
+          invalid: {
+            color: '#EE392D',
+            iconColor: '#EE392D'
+          }
         };
-        stripe.createSource(card, extraDetails).then(function(result){
-          if(result.error) {
-            $('#stripe-card-errors').html(result.error.message);
-          }
-          else {
-            $('#modal-stripe #payment-form').css('opacity', 0);
-            $('#modal-stripe .modal-loader').show();
-            $form = $('#stripe-checkout-form');
-            $form.find('#stripe_token').val(result.source.id);
-            $form.submit();
+        var card = elements.create('cardNumber', {style: style});
+        card.mount('#stripe-card-number');
+        var card_expiry = elements.create('cardExpiry', {style: style});
+        card_expiry.mount('#stripe-card-expiry');
+        var card_cvc = elements.create('cardCvc', {style: style});
+        card_cvc.mount('#stripe-card-cvc');
 
+        card.on('ready', function() {
+          $('#modal-stripe .modal-loader').hide();
+          $('#modal-stripe #payment-form').css('opacity', 1);
+        });
+
+        card.addEventListener('change', function(event) {
+          var error = '';
+          if(event.error) {
+            error = event.error.message
           }
-        })
+          display_error_stripe_form(error);
+        });
+
+        var $form = $('#modal-stripe #payment-form');
+        $form.on('submit', function(event) {
+          event.preventDefault();
+
+          $('#modal-stripe .modal-loader').show();
+          $('#modal-stripe #payment-form').css('opacity', 0);
+          
+          $form = $(this);
+          var extraDetails = {
+            name: $('input#creditcard-owner').value,
+          };
+          stripe.createPaymentMethod(
+            'card',
+            card
+          ).then(function(result) {
+            if (result.error) {
+              if(result.error.type == 'invalid_request_error') {
+                display_generic_error_stripe('show');
+              }
+              else {
+                // Show error in payment form
+                display_error_stripe_form(result.error);
+              }
+            } else {
+              // Send paymentMethod.id to server
+              var request_option = {
+                stripe_payment_method_id : result.paymentMethod.id
+              };
+
+              fetch('/invader/payment_stripe/confirm_payment', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({...options, ...request_option})
+              }).then(function(result) {
+                if(result.status != 200) {
+                  display_generic_error_stripe('show');
+                }
+                else {
+                  // Handle server response (see Step 3)
+                  result.json().then(function(json) {
+                    handleServerResponse(json, options);
+                  })
+                }
+                
+              });
+            }
+          }).catch(function(error) {
+            display_generic_error_stripe('show');
+          });
+        });
+      }
+    }
+
+    function handleServerResponse(response, options) {
+      if (response.error) {
+        display_generic_error_stripe('show');
+      } else if (response.requires_action) {
+        // Use Stripe.js to handle required card action
+        handleAction(response, options);
+      } else {
+        // Show success message
+        document.location = {{ success_url | json}};
+      }
+    }
+
+    function handleAction(response, options) {
+      var stripe = Stripe('{{site.metafields.payment.stripe_api_key}}',{locale: {{locale | json}}});
+      stripe.handleCardAction(
+        response.payment_intent_client_secret
+      ).then(function(result) {
+        if (result.error) {
+          // Show error in payment form
+          display_error_stripe_form(result.error.message);
+        } else {
+          // The card action has been handled
+          // The PaymentIntent can be confirmed again on the server
+
+          var request_option = {
+            stripe_payment_intent_id : result.paymentIntent.id
+          };
+          fetch('/invader/payment_stripe/confirm_payment', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({...options, ...request_option})
+          }).then(function(confirmResult) {
+            if(confirmResult.ok) {
+              return confirmResult.json();
+            }
+            else {
+              display_generic_error_stripe('show');
+            }
+          }).then(handleServerResponse)
+          .catch(function(error) {
+            display_generic_error_stripe('show');
+          });
+        }
+      }).catch(function(error) {
+        display_generic_error_stripe('show');
       });
     }
-  }
-
   </script>
 {%else%}
   <div class="alert alert-warning">
