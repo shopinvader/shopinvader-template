@@ -79,10 +79,11 @@ const Section = {
       class App extends React.Component {
         constructor() {
           super();
-          const searchkit = new SearchkitManager(
-            container.dataset.elasticUrl+container.dataset.elasticIndexProducts
+          var url = new URL(
+            container.dataset.elasticIndexProducts,
+            container.dataset.elasticUrl
           );
-
+          const searchkit = new SearchkitManager(url.href);
           this.state = {
             results: 0,
             search_value: '',
