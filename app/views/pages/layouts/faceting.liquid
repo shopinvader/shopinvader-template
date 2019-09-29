@@ -3,16 +3,6 @@ title: Faceting
 is_layout: false
 ---
 {% extends 'layouts/default' %}
-{% block 'css' %}
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.9.0/dist/instantsearch.min.css">
-{% endblock %}
-
-{% block 'javascripts'%}
-  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.9.0"></script>
-  <script src="{{ 'search_currency.js' | javascript_url }}"></script>
-  <script src="{{ 'faceting.js' | javascript_url }}?category={{category.name}}"></script>
-{% endblock %}
 
 {% block 'body/content' %}
   {% section 'searchkit_faceting', placement: 'center' %}
