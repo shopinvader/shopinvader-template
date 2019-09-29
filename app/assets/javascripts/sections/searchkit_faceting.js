@@ -35,7 +35,11 @@ const Section = {
     var get = require("lodash/get");
     const container = document.querySelector('#searchkit-faceting-container');
     const noimage = container.dataset.productNoimage;
-    const searchkit = new SearchkitManager(container.dataset.elasticUrl+container.dataset.elasticIndexProducts);
+    var url = new URL(
+      container.dataset.elasticIndexProducts,
+      container.dataset.elasticUrl
+    );
+    const searchkit = new SearchkitManager(url.href);
     const locale = container.dataset.locale.replace('_', '-');
     if(container.dataset.filterKey) {
       searchkit.addDefaultQuery((query)=> {
