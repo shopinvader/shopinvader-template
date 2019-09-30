@@ -113,8 +113,8 @@ account_profil_title:
   en: My account profile
   fr: Mes informations
 account_address_lists:
-  en: My shipping addresses
-  fr: Mes adresses de livraison
+  en: My addresses
+  fr: Mes adresses
 account_password_reset:
   en: Reset my password
   fr: Réinitialiser mon mot de passe
