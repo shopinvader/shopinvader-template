@@ -39,7 +39,10 @@ is_layout: false
         }
       }
     </script>
-
+    <script type="text/javascript">
+      const url_base= {{ url_base | json }};
+      const noimage= {{ site.metafields.theme.noimage | json }};
+    </script>
     {% block 'header_meta' %}
       <link rel="canonical" href="{{base_url}}{% path_to page%}" />
       {% seo %}
