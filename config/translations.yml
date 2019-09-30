@@ -713,11 +713,12 @@ payment_method_sips_error_details:
 payment_method_stripe_title:
   en: Credit card
   fr: Carte Bancaire
-payment_method_stripe_title_btn:
+payment_method_stripe_btn:
   en: Pay by credit card
   fr: Payer par carte
-payment_method_stripe_btn:
-  fr: Payer par carte bancaire
+payment_stripe_form_error:
+  fr: Une erreur est survenue, merci d'essayer à nouveau.
+  en: An error has occurred please try again
 payment_method_stripe_error_title:
   fr: Votre paiement a échoué
 payment_method_stripe_error_subtitle:

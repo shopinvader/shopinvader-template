@@ -14,7 +14,6 @@
     <div class="col-12 col-sm-5 col-md-4 col-lg-5 col-xl-4 text-center">
       <button  id="button-pay-stripe" type="submit" class="btn btn-outline-primary"
         data-paymentmode="{{payment_method.id }}"
-        data-successurl="{{success_url}}"
         data-cancelurl="{{base_url}}{% path_to page %}"
         data-target="{{target}}"
         data-quotation="{{ quotation_id}}">
@@ -22,6 +21,7 @@
       </button>
     </div>
   </div>
+
   <div class="modal fade modal-payment stripe-popup" id="modal-stripe" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content text-left">
@@ -237,7 +237,7 @@
         handleAction(response, options);
       } else {
         // Show success message
-        document.location = {{ success_url | json}};
+        document.location = "{{ base_url }}{% path_to success_handle %}";
       }
     }
 

@@ -1,12 +1,6 @@
 <div>{{title}}</div>
 {% assign selected_payment = store.cart.payment.available_methods.items | first %}
 <div id="payments-panel">
-  <div class="container card card-body mb-3" >
-      {% include 'payment_stripe' with payment_method,
-          amount: store.cart.amount.total,
-          target: 'current_cart',
-          action: '/cart/add_payment' %}
-        </div>
   {% for payment_method in store.cart.payment.available_methods.items %}
     <div class="container card card-body mb-3" >
     {% case payment_method.code %}
@@ -14,19 +8,19 @@
         {% include 'payment_stripe' with payment_method,
           amount: store.cart.amount.total,
           target: 'current_cart',
-          action: '/cart/add_payment' %}
+          success_handle: 'cart_end' %}
       {% when 'sips' %}
         {% include 'payment_sips' with payment_method,
           amount: store.cart.amount.total,
           target: 'current_cart',
           action: '/payment_sips/prepare_payment' %}
-      {% when 'banktransfer' %}
+      {% when 'bank_transfer' %}
         {% include 'payment_bank_transfert' with payment_method,
           amount: store.cart.amount.total,
           target: 'current_cart',
           success_handle: 'cart_end'
         %}
-      {% when 'checkmo' %}
+      {% when 'check' %}
         {% include 'payment_check' with payment_method,
           amount: store.cart.amount.total,
           target: 'current_cart',
