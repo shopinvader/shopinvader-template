@@ -1,127 +1,98 @@
 ---
-{
-  "name": "Cart Breadcrumb",
-  "class": "",
-  "icon": "list",
-  "keep_icon": true,
-  "keep_name": true,
-  "settings": [
-    {
-      "label": "Step cell Size",
-      "id": "cells_size",
-      "type": "select",
-      "options": [
-        {"label": "Auto", "value": "auto"},
-        {"label": "Extra-small","value": "xs"},
-        {"label": "Small","value": "sm"},
-        {"label": "Medium", "value": "md"},
-        {"label": "Large", "value": "lg"},
-        {"label": "Extra-large", "value": "xl"}
-      ]
-    },
-    {
-      "label": "Cells Alignment",
-      "id": "cells_align",
-      "type": "select",
-      "options": [
-        {"label": "Left","value": "start"},
-        {"label": "Center","value": "center"},
-        {"label": "Right", "value": "end"},
-        {"label": "Between", "value": "between"},
-        {"label": "Around", "value": "around"}
-      ]
-    },
-    {
-      "label": "Cells inline",
-      "id": "cell_inline",
-      "type": "checkbox"
-    },
-    {
-      "label": "Display step number",
-      "id": "display_number",
-      "type": "checkbox"
-    }
-  ],
-  "blocks": [
-    {
-      "name": "step",
-      "type": "cart_step",
-      "settings": [
-        {
-          "label": "Number",
-          "id": "step_number",
-          "type": "text",
-          "default": "1"
-        },
-        {
-          "label": "Label",
-          "id": "step_label",
-          "type": "text",
-          "default": "My cart",
-          "html": true,
-          "line_break": true,
-          "nb_rows": 3
-        },
-        {
-          "label": "Page",
-          "id": "step_url",
-          "type": "url"
-        },
-        {
-          "label": "Step ID",
-          "id": "step_id",
-          "type": "text"
-        }
-      ]
-    }
-  ],
-  "default": {
-    "settings" : {
-      "cells_size": "sm",
-      "cells_align": "between",
-      "cell_inline": true,
-      "display_number": true
-    },
-    "blocks": [
-      {
-        "type": "cart_step",
-        "settings": {
-          "step_number": "1",
-          "step_label": "Panier",
-          "step_url": "#",
-          "step_id": "cart_index"
-        }
-      },
-      {
-        "type": "cart_step",
-        "settings": {
-          "step_number": "2",
-          "step_label": "Adresse",
-          "step_url": "#",
-          "step_id": "cart_login"
-        }
-      },
-      {
-        "type": "cart_step",
-        "settings": {
-          "step_number": "2",
-          "step_label": "Livraison",
-          "step_url": "#",
-          "step_id": "cart_address" 
-        }
-      },
-      {
-        "type": "cart_step",
-        "settings": {
-          "step_number": "2",
-          "step_label": "Paiement",
-          "step_url": "#",
-          "step_id": "cart_checkout"
-        }
-      }
-    ]
-  }
-}
+name: Cart Breadcrumb
+class: ''
+icon: list
+keep_icon: true
+keep_name: true
+settings:
+- label: Step cell Size
+  id: cells_size
+  type: select
+  options:
+  - label: Auto
+    value: auto
+  - label: Extra-small
+    value: xs
+  - label: Small
+    value: sm
+  - label: Medium
+    value: md
+  - label: Large
+    value: lg
+  - label: Extra-large
+    value: xl
+- label: Cells Alignment
+  id: cells_align
+  type: select
+  options:
+  - label: Left
+    value: start
+  - label: Center
+    value: center
+  - label: Right
+    value: end
+  - label: Between
+    value: between
+  - label: Around
+    value: around
+- label: Cells inline
+  id: cell_inline
+  type: checkbox
+- label: Display step number
+  id: display_number
+  type: checkbox
+blocks:
+- name: step
+  type: cart_step
+  settings:
+  - label: Number
+    id: step_number
+    type: text
+    default: '1'
+  - label: Label
+    id: step_label
+    type: text
+    default: My cart
+    html: true
+    line_break: true
+    nb_rows: 3
+  - label: Page
+    id: step_url
+    type: url
+  - label: Step ID
+    id: step_id
+    type: text
+default:
+  settings:
+    cells_size: sm
+    cells_align: between
+    cell_inline: true
+    display_number: true
+  blocks:
+  - type: cart_step
+    settings:
+      step_number: '1'
+      step_label: Cart
+      step_url: "#"
+      step_id: cart_index
+  - type: cart_step
+    settings:
+      step_number: '2'
+      step_label: Address
+      step_url: "#"
+      step_id: cart_login
+  - type: cart_step
+    settings:
+      step_number: '3'
+      step_label: Delivery
+      step_url: "#"
+      step_id: cart_address
+  - type: cart_step
+    settings:
+      step_number: '4'
+      step_label: Checkout
+      step_url: "#"
+      step_id: cart_checkout
 ---
 
 {% if section.settings.cell_inline == true %}
