@@ -34,7 +34,6 @@ const Section = {
     }
     var get = require("lodash/get");
     const container = document.querySelector('#searchkit-faceting-container');
-    const noimage = container.dataset.productNoimage;
     var url = new URL(
       container.dataset.elasticIndexProducts,
       container.dataset.elasticUrl

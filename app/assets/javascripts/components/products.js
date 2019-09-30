@@ -8,6 +8,7 @@ class ProductHit extends React.Component {
     this.state = {
       'product': this.props.result._source,
       'locale': locale,
+      'base_url': base_url,
     };
   }
   get_role() {
@@ -129,7 +130,7 @@ class ProductHit extends React.Component {
     }
     else {
       return (
-        <img src="" alt={this.state.product.name} title={this.state.product.name}/>
+        <img src={noimage} alt={this.state.product.name} title={this.state.product.name}/>
       );
     }
   }
@@ -137,15 +138,16 @@ class ProductHit extends React.Component {
     var product = this.state.product;
     var class_name = 'product-thumbnail '+this.get_thumb_layout();
     var page = document.location;
-    var id = 'product-hit-'+this.get_thumb_layout()+product.objectID
+    var id = 'product-hit-'+this.get_thumb_layout()+product.objectID;
+    var product_url = new URL(product.url_key, base_url);
     return (
-      <div className={class_name} key={id} id={id}>
+      <div className={class_name} key={id} id={id} data-link={product_url}>
         <div className="image" data-link={'./'+product.url_key}>
           {this.images()}
         </div>
         <div className="content">
           <div className="description">
-            <a href={'./'+product.url_key}  className="title" dangerouslySetInnerHTML={{__html: product.model.name}} />
+            <a href={product_url}  className="title" dangerouslySetInnerHTML={{__html: product.model.name}} />
             <div className="short_description" dangerouslySetInnerHTML={{__html: product.short_description}} />
             <a className="category" dangerouslySetInnerHTML={{__html: this.get_first_category()}} />
           </div>
@@ -153,11 +155,11 @@ class ProductHit extends React.Component {
             {this.price()}
             <div className="add-to-cart">
               <form method="POST" action="/invader/cart/add_item" data-shopinvader-form>
-                <input type="hidden" name="invader_success_url" value={page+'?addtocart_product_id='+product.objectID} />
-                <input type="hidden" name="invader_error_url" value={page} />
+                <input type="hidden" name="invader_success_url" value={product_url+'?addtocart_product_id='+product.objectID} />
+                <input type="hidden" name="invader_error_url" value={product_url} />
                 <input type="hidden" name="item_qty" value="1" />
                 <input type="hidden" name="product_id" value={product.objectID} />
-                <a href={'./'+product.url_key} className="btn-product-page" dangerouslySetInnerHTML={{__html: "Details"}} />
+                <a href={product_url} className="btn-product-page" dangerouslySetInnerHTML={{__html: "Details"}} />
                 <button type="submit" className="btn-add-to-cart" dangerouslySetInnerHTML={{__html: "Ajouter au panier"}} />
               </form>
             </div>

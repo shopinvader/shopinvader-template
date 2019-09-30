@@ -279,7 +279,6 @@ default:
 <div class="header {% if section.settings.fixed_position %}fixed{%endif%}  header-theme-{{section.settings.theme_color}}">
   <div class="container-fluid">
     <div class="row align-items-center justify-content-{{section.settings.cells_align}}">
-
       {% for block in section.blocks %}
         {% if block.type == 'row'%}
           {% assign vertical_align_row = block.settings.vertical_align %}
