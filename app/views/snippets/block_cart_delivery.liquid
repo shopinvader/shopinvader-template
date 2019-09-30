@@ -1,5 +1,6 @@
 {% erp get 'cart/get_delivery_methods' as delivery_methods %}
 {% assign selected_carrier = store.cart.shipping.selected_carrier %}
+{% assign is_selected_carrier = false %}
 {% if delivery_methods.size > 0 %}
   <form method="post" action="/invader/cart/apply_delivery_method" id="carrier_form"  class=" " data-shopinvader-form>
     <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
@@ -7,6 +8,9 @@
     <div>{{title}}</div>
     <div>
       {%for carrier in delivery_methods %}
+        {%if carrier.id == selected_carrier.id %} 
+          {% assign is_selected_carrier = true %}
+        {%endif%}
         <div class="cart-item-list mb-3">
           <input data-autosubmit 
             type="radio" 
@@ -40,7 +44,7 @@
       {% endfor %}
     </div>
   </form>
-  {% if selected_carrier.id != null  %}
+  {% if is_selected_carrier == true  %}
       <div class="row justify-content-center justify-content-md-end">
         <form method="post" action="/invader/cart/update"  class="col-auto">
           <input type="hidden" name="invader_success_url" value="{% path_to cart_next_page%}" />
