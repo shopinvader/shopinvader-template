@@ -1,91 +1,81 @@
 ---
-{
-  "name": "Category products list",
-  "class": "",
-  "icon": "list",
-  "keep_name": true,
-  "keep_icon": true,
-  "settings": [
-    {
-      "label": "Theme color",
-      "id": "theme_color",
-      "type": "select",
-      "options": [
-        {"label": "Light","value": "light"},
-        {"label": "Dark","value": "dark"},
-        {"label": "Primary", "value": "primary"},
-        {"label": "Secondary", "value": "secondary"},
-        {"label": "Info", "value": "info"},
-        {"label": "Danger", "value": "danger"},
-        {"label": "Warning", "value": "warning"},
-        {"label": "None", "value": "none"}
-      ]
-    },
-    {
-      "label": "Text position",
-      "id": "text_position",
-      "type": "select",
-      "options": [
-        {"label": "start","value": "top"},
-        {"label": "start","value": "start"},
-        {"label": "end","value": "end"}
-      ]
-    },
-    {
-      "label": "Category ID",
-      "id": "category_id",
-      "type": "text"
-    },
-    {
-      "label": "Slider",
-      "id": "slider",
-      "type": "checkbox"
-    },
-    {
-      "label": "Content",
-      "id": "content",
-      "type": "text",
-      "html": "true"
-    },
-    {
-      "label": "Picture",
-      "id": "picture",
-      "type": "image_picker"
-    },
-    {
-      "label": "Item limit",
-      "id": "item_limit",
-      "type": "select",
-      "options": [
-        {"label": "4","value": "4"},
-        {"label": "5","value": "5"},
-        {"label": "6","value": "6"}
-      ]
-    }
-  ],
-  "presets": [{
-    "name": "Category products list",
-    "category": "Category",
-    "settings": {
-      "content" : "<h2><b>Hello</b> World</h2>",
-      "category_id": "182",
-      "theme_color": "light",
-      "text_position": "start",
-      "slider": true,
-      "item_limit": "5"
-    }
-  }],
-  "default": {
-    "settings": {
-      "content" : "<h2><b>Hello</b> World</h2>",
-      "category_id": "182",
-      "theme_color": "light",
-      "text_position": "start",
-      "slider": false,
-      "item_limit": "5"
-    }
-  }
-}
+name: Category products list
+class: ''
+icon: list
+keep_name: true
+keep_icon: true
+settings:
+- label: Theme color
+  id: theme_color
+  type: select
+  options:
+  - label: Light
+    value: light
+  - label: Dark
+    value: dark
+  - label: Primary
+    value: primary
+  - label: Secondary
+    value: secondary
+  - label: Info
+    value: info
+  - label: Danger
+    value: danger
+  - label: Warning
+    value: warning
+  - label: None
+    value: none
+- label: Text position
+  id: text_position
+  type: select
+  options:
+  - label: start
+    value: top
+  - label: start
+    value: start
+  - label: end
+    value: end
+- label: Category ID
+  id: category_id
+  type: text
+- label: Slider
+  id: slider
+  type: checkbox
+- label: Content
+  id: content
+  type: text
+  html: 'true'
+- label: Picture
+  id: picture
+  type: image_picker
+- label: Item limit
+  id: item_limit
+  type: select
+  options:
+  - label: '4'
+    value: '4'
+  - label: '5'
+    value: '5'
+  - label: '6'
+    value: '6'
+presets:
+- name: Category products list
+  category: Category
+  settings:
+    content: "<h2><b>Hello</b> World</h2>"
+    category_id: '20'
+    theme_color: light
+    text_position: start
+    slider: true
+    item_limit: '5'
+default:
+  settings:
+    content: "<h2><b>Hello</b> World</h2>"
+    category_id: '20'
+    theme_color: light
+    text_position: start
+    slider: false
+    item_limit: '5'
 ---
 {% case section.settings.theme_color %}
   {% when "light" %}
@@ -122,7 +112,7 @@
             <img src="{{section.settings.picture}}" alt="" class="img-fluid">
           </div>
           <div class="col-12 {% if section.settings.text_position != 'top'%}col-xl-9{%endif%}">
-            {% with_scope categories: {id: section.settings.category_id, main: true} %}
+            {% with_scope categories: {id: section.settings.category_id} %}
               {% if section.settings.slider == true %}
                 {% assign slide_count = 1 %}
                 {% assign carousel_html_id = "carousel-category-" | append : section.settings.category_id%}
