@@ -4,7 +4,11 @@ const globImporter = require('node-sass-glob-importer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: './app/assets/javascripts/app.js',
+  entry: [
+    './app/assets/javascripts/app.js',
+    './public/javascripts/shopinvader.jquery.js',
+    './public/javascripts/application.js',
+  ],
   output: {
     path:     path.resolve(__dirname, '../../public'),
     filename: 'javascripts/bundle.js'

@@ -2,17 +2,18 @@ import React, { Component }  from 'react';
 import {
   Carousel
 } from 'react-bootstrap';
+var cookies = require('browser-cookies');
+
 class ProductHit extends React.Component {
   constructor(props, locale) {
     super(props);
     this.state = {
       'product': this.props.result._source,
-      'locale': locale,
-      'base_url': base_url,
+      'locale': locale
     };
   }
   get_role() {
-    var role = Cookies.get('role');
+    var role = cookies.get('role');
     if(role == null || role == '') {
       role = 'default';
     }
@@ -108,21 +109,26 @@ class ProductHit extends React.Component {
       }
       else {
         var slides = [];
+        var id = 'product-hit-'+this.get_thumb_layout()+this.state.product.objectID+'-carousel';
+        var i=0;
         images.map((item) => {
           slides.push(
-            <Carousel.Item>
+            <Carousel.Item key={id+'_'+i}>
               <img
                 className="d-block w-100"
                 src={item.medium.src}
                 alt={item.medium.alt}
+                key={id+'_'+i+'image'}
               />
             </Carousel.Item>
-          )
+          );
+          i++;
         });
         return (
           <Carousel 
             controls={true}
-            interval={null}>
+            interval={null}
+            key={id}>
             {slides}
           </Carousel>
         );
@@ -139,10 +145,10 @@ class ProductHit extends React.Component {
     var class_name = 'product-thumbnail '+this.get_thumb_layout();
     var page = document.location;
     var id = 'product-hit-'+this.get_thumb_layout()+product.objectID;
-    var product_url = new URL(product.url_key, base_url);
+    var product_url = new URL(product.url_key, url_base).href;
     return (
-      <div className={class_name} key={id} id={id} data-link={product_url}>
-        <div className="image" data-link={'./'+product.url_key}>
+      <div className={class_name} key={product} id={id}>
+        <div className="image">
           {this.images()}
         </div>
         <div className="content">
