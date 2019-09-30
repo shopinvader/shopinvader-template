@@ -14,10 +14,13 @@ import {
   Button
 } from 'react-bootstrap';
 import ProductHit from '../components/products.js';
+var cookies = require('browser-cookies');
+
 const Section = {
 
   load: (section) => {
     Section.set_autocomplete(section);
+    Section.set_currency();
   },
   set_autocomplete(section) {
     if(document.querySelector('.section-searchkit-faceting') == null) {
@@ -146,8 +149,24 @@ const Section = {
         <App />, container
       );
     }
+  },
+  set_currency(){
+    $('[data-toggle="change-currency"]').on('click', function(){
+      var currency_code = $(this).data('value');
+      if(currency_code != '') {
+        cookies.set('currency', currency_code);
+        if($('#searchkit-faceting-container').length > 0) {
+          location.reload();
+        }
+        else {
+          $('.currency-list .currency-format').css('display', 'none');
+          $('.currency-list .currency-format[data-currency='+currency_code+']').css('display', 'inline');
+          $('#current_currency').html($(this).html());
+          currencies.selected = currency_code;
+        }
+      }
+    });
   }
-
 }
 
 export default Section;

@@ -22,6 +22,7 @@ import {
   Carousel
 } from 'react-bootstrap';
 import ProductHit from '../components/products.js';
+var cookies = require('browser-cookies');
 
 const Section = {
   load: (section) => {
@@ -67,7 +68,7 @@ const Section = {
       });
     }
 
-    var role = Cookies.get('role');
+    var role = cookies.get('role');
     if(role == null || role == '') {
       role = 'default';
     }

@@ -58,6 +58,7 @@ is_layout: false
     {% endblock %}
 
     {{ 'bundle.css' | stylesheet_tag }}
+    {{ 'themify-icons.css' | stylesheet_tag }}
   </head>
   <body class="{{css_body}}">
     <style media="screen">
@@ -153,34 +154,11 @@ is_layout: false
         </div>
       {% endif %}
     </div>
-    {{ 'popper.min.js' | javascript_tag }}
-    {{ 'jquery.min.js' | javascript_tag }}
-    {{ 'jquery.touchSwipe.min.js' | javascript_tag }}
-    {{ 'shopinvader.jquery.js' | javascript_tag }}
-    {{ 'js-cookie' | javascript_tag }}
-    {{ 'bootstrap4.min.js' | javascript_tag }}
-
-    {{ 'application.js' | javascript_tag }}
     {{ 'bundle.js' | javascript_tag }}
-    
+   
     {% block 'javascripts', short_name: true %}
     {% endblock %}
     {% global_section 'cookies_manager',  placement: 'bottom' %}
     {{js_footer}}
-    <script>
-      var cb = function() {
-        add_stylesheet({{ 'themify-icons.css' | stylesheet_url | json }});
-      };
-      function add_stylesheet(filename) {
-        var l = document.createElement('link'); l.rel = 'stylesheet';
-        l.href = filename;
-        var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
-      }
-      var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-          webkitRequestAnimationFrame || msRequestAnimationFrame;
-      if (raf) raf(cb);
-      else window.addEventListener('load', cb);
-      
-    </script>
   </body>
 </html>
