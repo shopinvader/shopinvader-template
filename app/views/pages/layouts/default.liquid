@@ -10,11 +10,8 @@ is_layout: false
     {% endblock %}
   </header>
   <div class="page shadow">
-    <main>
-      <div class="container-fluid">
-        {% include 'store_notifications' %}
-      </div>
-      
+    <main class="container-fluid">
+      {% include 'store_notifications' %}
       {% block content %}
       {% endblock %}
     </main>
