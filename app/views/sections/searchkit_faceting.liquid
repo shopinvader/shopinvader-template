@@ -32,6 +32,11 @@ default:
   {% assign title = section.settings.title %}
   {% assign short_description = section.settings.short_description %}
   {% assign description = section.settings.description %}
+  {% if page.handle == 'discount' %}
+    {% assign only_discount = true %}
+  {% else %}
+    {% assign only_discount = false %}
+  {% endif %}
 {% endif %}
 <script type="text/javascript">
   var searchkit_translation = {
@@ -60,12 +65,18 @@ default:
 </script>
 
 <div id="searchkit-faceting-container"
+  class="page-{{page.handle}}"
   data-product-noimage={{ site.metafields.theme.noimage | json }}
   data-elastic-url={{ site.metafields.elasticsearch.url | json }}
   data-locale={{ store.locale_mapping | json }}
   {% for role in elasticsearch_indexes %}
     data-elastic-index-{{role.name}}={{role.index | append:"_" | append: elasticsearch_locale  | json}}
   {% endfor %}
+  {% if only_discount %}
+    data-filter-key="price.default.discount"
+    data-filter-value="0"
+    data-filter-type='gt'
+  {% endif %}
   {% if category %}
     data-filter-key="categories.id"
     data-filter-value={{category.objectID | json }}
