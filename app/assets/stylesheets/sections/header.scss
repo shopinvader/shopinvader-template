@@ -289,15 +289,26 @@ body.nav-sm-display {
     }
     .header-block-navigation {
       width: 100%;
-      min-width: 300px;
       .list-inline {
         .list-inline-item {
           margin: 0;
           position:  initial;
+          padding: .7rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
           a {
             display: inline-block;
             width: 100%;
             height: 100%;
+            
+          }
+          .title {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding-left: .5rem;
+            padding-right: .5rem;
+            padding-bottom: 1rem;
           }
           .list-inline-dropdown {
             box-shadow: 0rem 0.4rem 0.5rem rgba(0, 0, 0, 0.1);
@@ -306,14 +317,34 @@ body.nav-sm-display {
             left: 0;
             z-index: 2000;
             width: calc(100% - 40px);
+            padding: 1.5rem;
             margin-left: 20px;
             margin-right: 20px;
-            margin-top: 10px;
             background-color:  $gray-100;
             color: $gray-900;
+            .items {
+              display: flex;
+              flex-wrap: wrap;
+              .column {
+                width: 100%;
+                padding-left: .5rem;
+                padding-right: .5rem;
+                @include media-breakpoint-up(md) {
+                  width: 25%;
+                }
+                @include media-breakpoint-up(xl) {
+                  width: 20%;
+                }
+
+              }
+            }
             ul {
               list-style-type: none;
-
+              padding:0;
+              margin: 0;
+              li {
+                padding-bottom: .2rem;
+              }
               a {
                 color: $gray-900;
               }
