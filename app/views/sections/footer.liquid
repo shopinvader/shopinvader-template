@@ -1,97 +1,53 @@
 ---
-{
-  "name": "Footer",
-  "class": "",
-  "icon": "footer",
-  "keep_name": true,
-  "keep_icon": true,
-  "id": "footer",
-  "settings": [
-
-    {
-      "label": "Display categories",
-      "id": "categories_display",
-      "type": "checkbox"
-    },
-    {
-      "label": "Categories Background",
-      "id": "categories_background",
-      "type": "image_picker"
-    },
-    {
-      "label": "Footer text",
-      "id": "footer_content",
-      "type": "text",
-      "html": true
-    },
-    {
-      "label": "Cookies manager link label",
-      "id": "cookies_link_label",
-      "type": "text"
-    },
-    {
-      "label": "Logo Footer",
-      "id": "footer_logo",
-      "type": "image_picker"
-    }
-  ],
-  "blocks": [
-    {
-      "name": "Reinsurance undertaking ",
-      "type": "reinsurance",
-      "settings": [
-        {
-          "label": "Label",
-          "id": "label",
-          "type": "text"
-        },
-        {
-          "label": "Picture",
-          "id": "icon",
-          "type": "image_picker"
-        }
-      ]
-    }
-  ],
-  "default": {
-    "settings": {
-      "categories_display" : true,
-      "categories_background" : "images/banner-categories.jpg",
-      "cookies_link_label": "Manage cookies",
-      "footer_logo": "images/powered-by-shopinvader-logo.png"
-    },
-    "blocks": [
-      {
-        "type": "reinsurance",
-        "settings": {
-          "label": "free shipping",
-          "icon": "images/free-delivery.png"
-        }
-      },
-      {
-        "type": "reinsurance",
-        "settings": {
-          "label": "Easy return ",
-          "icon": "images/free-return.png"
-        }
-      },
-      {
-        "type": "reinsurance",
-        "settings": {
-          "label":  "lowest price guarantee",
-          "icon": "images/lowest-price.png"
-        }
-      },
-      {
-        "type": "reinsurance",
-        "settings": {
-          "label":  "Free Holine",
-          "icon": "images/free-hotline.png"
-        }
-      }
-    ]
-  }
-}
+name: Footer
+class: ''
+icon: footer
+keep_name: true
+keep_icon: true
+id: footer
+settings:
+- label: Footer text
+  id: footer_content
+  type: text
+  html: true
+- label: Cookies manager link label
+  id: cookies_link_label
+  type: text
+- label: Logo Footer
+  id: footer_logo
+  type: image_picker
+blocks:
+- name: 'Reinsurance undertaking'
+  type: reinsurance
+  settings:
+  - label: Content
+    id: label
+    type: text
+    html: true
+  - label: Picture
+    id: icon
+    type: image_picker
+default:
+  settings:
+    cookies_link_label: Manage cookies
+    footer_logo: images/powered-by-shopinvader-logo.png
+  blocks:
+  - type: reinsurance
+    settings:
+      label: free shipping
+      icon: images/free-delivery.png
+  - type: reinsurance
+    settings:
+      label: 'Easy return '
+      icon: images/free-return.png
+  - type: reinsurance
+    settings:
+      label: lowest price guarantee
+      icon: images/lowest-price.png
+  - type: reinsurance
+    settings:
+      label: Free Holine
+      icon: images/free-hotline.png
 ---
 
 <footer class="bg-light w-100">
@@ -103,7 +59,7 @@
           <ul class="row  pt-2 pb-2 list-inline">
           {%with_scope level: 0%}
             {% for category_lv1 in store.categories%}
-            <li class="col-12 col-sm-6 col-md-4 pt-2 pb-4 pb-md-2list-inline-item m-0">
+            <li class="col-12 col-sm-6 col-md-4 pt-2 pb-4 pb-md-2 list-inline-item m-0">
               <a href="{{category_lv1.url_key | prepend: url_base}}" class="h4 text-white font-weight-bold text-uppercase">
                 {{category_lv1.name}}
               </a>
