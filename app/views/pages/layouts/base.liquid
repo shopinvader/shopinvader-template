@@ -115,8 +115,17 @@ is_layout: false
         <div class="content">
           <div class="">
             <div class="row">
-              <div class="col-12">
-                {% include 'cart_list' with cart: store.cart, readonly: true %}
+              <div class="col-12 cart-modal">
+                {% assign product_added_id = params.addtocart_product_id | round %}
+                {% for cart_line in store.cart.lines.items %}
+                  {% if cart_line.product.id == product_added_id %}
+                    {% include 'cart_line' with 
+                      cart_line, 
+                      readonly: true
+                    %}
+                  {% endif %}
+                {% endfor %}
+                
               </div>
             </div>
             <div class="row justify-content-between align-items-start">
@@ -135,7 +144,9 @@ is_layout: false
           {% if product and product.relateds.cross_sell != null%}
             <div class="row">
               <div class="col-lg-12">
-                <h2>{{'product_related_title' | translate }}</h2>
+                <h2>
+                  {{'product_related_title' | translate }}
+                </h2>
               </div>
             </div>
             <div class="row">
