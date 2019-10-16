@@ -18,83 +18,46 @@
     }
   </script>
 {% endif%}
-<div class="card product-thumbnail  bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%elsif display_lite == true%}product-thumbnail-lite{%endif%}" >
-  <div class="product-thumbnail-img">
-    <img class="group list-group-image card-img-top pr-2 pr-md-0"
+{% assign layout = 'grid' %}
+{% assign product_url = product.url_key  | prepend: url_base | prepend:'?ref='| prepend:product.sku %}
+<div class="product-thumbnail {{layout}}" id="product-hit-{{layout}}-{{product.objectID}}">
+  <div class="image">
+    <img
     src="{{product.images.first.medium.src  | default: site.metafields.theme.noimage }}"
     alt="{{product.images.first.medium.alt}}"
-    data-link="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}"/>
-    {%if product.price.discount > 0%}
-    <div class="pb-1">
-      <div class="badge badge-warning p-2 badge-discount">
-        {{'product_discount_label' | translate}} <b>  -{{product.price.discount | round }} %</b>
-      </div>
-    </div>
-    {%endif%}
+    data-link="{{product_url}}"/>
   </div>
-  <div class="product-thumbnail-price card-body p-0 p-md-3 p-xl-2" data-link="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}">
-    <div class="d-vertical-only">
-      <span class="small">
-        <small>{{ 'product_price_from' | translate }}</small>
-      </span>
-      <strong class="h5">
-        <span class="font-weight-bold {% if product.price.discount > 0%}text-warning{% else %}text-primary{% endif %}">
-          {% include 'currency' | value: product.price.value %}
-        </span>
-        {% if product.price.discount > 0 %}
-          <span class="text-dark small">
-            <s>{% include 'currency' | value: product.price.original_value %}</s>
-          </span>
-        {% endif %}
-      </strong>
-    </div>
-    <div class="d-horizontal-only">
-      <span class="small">
-        <small>{{'product_price_from' | translate}} </small>
-      </span>
-      <strong class="product-price-value">
-        <span class="font-weight-bold {%if product.price.discount > 0%}text-warning {%else%}text-primary{% endif %}">
-          {% include 'currency' | value: product.price.value %}
-        </span>
-        {%if product.price.discount > 0%}
-          <span class="text-dark small">
-            <s>{% include 'currency' | value: product.price.original_value %}</s>
-          </span>
-        {% endif %}
-      </strong>
-      
-    </div>
-  </div>
-  <div class="product-thumbnail-name card-body p-1 p-sm-3 p-xl-2">
-    <div class="font-weight-bold">
-      <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="text-dark">
-        {{product.name}}
-
+  <div class="content">
+    <div class="description">
+      <a href={{product_url}}  class="title">
+        {{product.model.name}}
       </a>
-    </div>
-    <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}#product-section-reviews" class="small">
-    {%if product.rating.summary.size > 0 %}
-      {% include 'rating_stars'
-         with rating_value: product.rating.summary.average
-      %}
-    {% endif%}
-    </a>
-    <div class="card-text">
-      <a href="{{product.categories.last.url_key  | prepend: url_base }}" class="text-dark"><u>{{product.categories.last.name}}</u></a>
-      
-    </div>
-    {% if product.variant_count > 0%}
-    <div class="pt-2 pb-2">
-      <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="badge badge-secondary p-1">
-        {{'product_variants' | translate}}
-      </a>
-    </div>
-    {% endif%}
-    <div class="small d-horizontal-only">
-      <div class="product-short-description">
+      <div class="short_description">
         {{product.short_description}}
       </div>
+      {% if product.categories.size > 0 %}
+        <a class="category">
+          {{product.categories[0].name}}
+        </a>
+      {% endif %}
+    </div>
+    <div class="price">
+      {% assign discount_css = '' %}
+      {% if product.price.discount > 0 %}
+        <div class="price_orignal">
+          {% include 'currency' with value: product.price.original_value %}
+        </div>
+        {% assign discount_css = 'discounted' %}
+      {% endif %}
+      <div class="price_value {{discount_css}}">
+        {% include 'currency' with value: product.price.value %}
+      </div>
+      <div class="add-to-cart">
+        <a href={{product_url}} class="btn-product-page">
+          {{ 'product_details' | translate }}
+        </a>
+      </div>
     </div>
   </div>
-  
 </div>
+
