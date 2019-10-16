@@ -1,3 +1,4 @@
+/* autoprefixer grid: autoplace */
 // Wagon main stylesheet file
 @font-face {
   font-family: "Montserrat";
@@ -21,8 +22,12 @@
 @import "sections/*";
 @import "payments/*";
 @import "custom_theme/*";
+
 *, ::before, ::after {
   box-sizing: border-box;
+}
+.container-fluid {
+  max-width: $page-max-width;
 }
 .bottom-nav {
   background-color: $white;
