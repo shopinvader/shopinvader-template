@@ -122,7 +122,7 @@ $card-border-radius: 0;
 
 //Theme
 $max-content-width: 1200px; // container max size
-$page-max-width: 2000px;
+$page-max-width: 2000px !default;
 $page-shadow: none;
 $main-bg:  transparent;
 
