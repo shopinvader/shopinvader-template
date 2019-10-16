@@ -6,9 +6,14 @@ position: 150
 listed: false
 published: true
 is_layout: false
-editable_elements:
-  main/sidebar/widget_delivery/carriers: "/images/carriers.jpg"
-  header/customers_ref/advantage_1: Ils nous ont fait confiance
-
+sections_content:
+  searchkit_faceting:
+    settings:
+      title: "Search product"
+      
 ---
-{% extends 'layouts/faceting' %}
+{% extends 'layouts/default' %}
+
+{% block 'body/content' %}
+  {% section 'searchkit_faceting', placement: 'center' %}
+{% endblock %}
