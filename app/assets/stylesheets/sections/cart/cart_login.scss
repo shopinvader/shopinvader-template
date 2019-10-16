@@ -1,0 +1,52 @@
+.cart.cart-login {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	grid-template: "login"
+								"register"
+								1fr !important;
+	grid-row-gap: 0 !important;
+	grid-column-gap: 0 !important;
+	& > div {
+		max-width: 100%;
+		min-width: 320px;
+		width: 20vw; 
+		border: 1px solid $border-color;
+		
+		.title {
+			font-size: 1.4rem;
+			font-weight: lighter;
+			padding-bottom: .5rem;
+			text-transform: uppercase;
+			font-family: $headings-font-family;
+		}
+		.desc {
+			font-size: .9rem;
+			padding-bottom: .5rem;
+		}
+		.btn {
+			width: 80%;
+		}
+		&.cart-login-form {
+			grid-area: "login";
+			box-shadow: $box-shadow-sm;
+			border-bottom: 0;
+			padding: 1rem;
+			z-index: 10; 
+		}
+		&.cart-login-register {
+			grid-area: "register";
+			background-color: $gray-700;
+			color: $white;
+			
+			padding: 1rem; 
+			border-bottom-left-radius: .5rem;
+			border-bottom-right-radius: .5rem;
+			.button {
+				text-align: center;
+			}
+		}
+	}
+}

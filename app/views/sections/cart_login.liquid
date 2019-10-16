@@ -1,0 +1,109 @@
+---
+name: Cart Login
+icon: list
+keep_icon: true
+keep_name: true
+settings:
+- label: "Login : Title"
+  id: login_title
+  type: text
+- label: "Login : Description"
+  id: login_desc
+  type: text
+  format: html
+- label: "Login :  Button label"
+  id: login_label
+  type: text
+- label: "Register : Title"
+  id: register_title
+  type: text
+- label: "Register : Description"
+  id: register_desc
+  type: text
+  format: html
+- label: "Register :  Button label"
+  id: register_label
+  type: text
+blocks: []
+---
+
+{% if current_customer and live_editing != true%}
+  {% action 'redirection to next step'%}
+    redirectTo('cart_address');
+  {% endaction %}
+{% endif %}
+
+<div class="cart cart-login" id="{{ section.anchor_id }}" {{ section.locomotive_attributes }}>
+  <div class="cart-login-form">
+    <div class="title">
+      {{section.settings.login_title}}
+    </div>
+    <div class="desc">
+      {{section.settings.login_desc}}
+    </div>
+    <form action="#" method="post">
+      <input type="hidden" name="auth_action" value="sign_in" />
+      <input type="hidden" name="auth_content_type" value="customers" />
+      <input type="hidden" name="auth_id_field" value="email" />
+      <input type="hidden" name="auth_password_field" value="password" />
+      <input type="hidden" name="auth_callback" value="{% path_to cart_address %}" />
+      <div class="form-group">
+        <label for="auth-email" class="font-weight-bold small mb-0">
+          {{ 'signin_email' | translate }}
+        </label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text  border-right-0" >
+              <i class="fas fa-envelope"></i>
+            </span>
+          </div>
+          <input type="email" class="form-control border-left-0" id="auth-email" placeholder="{{ 'signin_email' | translate }}" name="auth_id" value="{{ params.auth_id }}" required="required">
+        </div>
+        
+      </div>
+      <div class="form-group">
+        <label for="auth-password" class="font-weight-bold small mb-0">
+          {{ 'signin_password' | translate }}
+        </label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text  border-right-0" >
+              <i class="fas fa-key"></i>
+            </span>
+          </div>
+          <input type="password" class="form-control border-left-0 " id="auth-password" placeholder="{{ 'signin_password' | translate }}" name="auth_password" value="" required="required">
+        </div>
+        <a href="{% path_to reset_password_request %}" class="mb-3">
+          {{ 'signin_forgotpassword' | translate }}
+        </a>
+      </div>
+      <div class="text-center">
+        {% if auth_wrong_credentials %}
+          {{ 'signin_wrong' | translate }}
+        {% endif %}
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">
+          {{section.settings.login_label}}
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="cart-login-register">
+    <div class="title">
+      {{ section.settings.register_title }}
+    </div>
+    <div class="desc">
+      {{ section.settings.register_desc }}
+    </div>
+    <div class="button">
+      <a href="{% path_to account_register %}?context=cart" 
+          class="btn btn-light">
+        {{ section.settings.register_label }}
+      </a>
+    </div>
+  </div>
+</div>
+
+
+

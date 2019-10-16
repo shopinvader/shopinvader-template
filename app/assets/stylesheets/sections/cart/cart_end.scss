@@ -1,0 +1,26 @@
+.cart.cart-end {
+	.cart-account {
+		background-color: lighten(theme-color('info'), 20%);
+		color: lighten(theme-color('info'), 80%);
+		padding: 1rem;
+		border: 2 0 0 2px solid lighten(theme-color('info'), 50%);
+
+		.cart-account-title {
+			font-weight: bold;
+			font-size: 1.5rem;
+			text-transform: uppercase;
+		}
+		.cart-account-button {
+			margin-top: 1rem;
+			text-align: center;
+			a.btn {
+				font-weight: bold;
+				padding-left: 2rem;
+				padding-right: 2rem;
+
+				color: theme-color('info');
+				background-color: lighten(theme-color('info'), 80%);
+			}
+		}
+	}
+}

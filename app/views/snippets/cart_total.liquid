@@ -1,50 +1,66 @@
-
-<div class="">
-  <div class="">
-    <h2 class="display-4 text-uppercase d-none d-md-block">{{'cart_total_total' | translate}}</h2>
-    <table class="table">
-      <tbody>
-        <tr>
-          <td class="font-weight-bold border-0">
-            {{'cart_total_subtotal' | translate }}
-          </td>
-          <td class="font-weight-bold text-right border-0">
-            {% include 'currency' | value: cart.lines.amount.total %}
-          </td>
-        </tr>
-        {% if cart.shipping.selected_carrier.id != null%}
-        <tr>
-          <td class="">
-            {{'cart_total_shipping' | translate }}
-            <div class="small">
-              {{ cart.shipping.selected_carrier.name }}
-            </div>
-          </td>
-          <td class="text-right">
-            {% include 'currency' | value: cart.shipping.amount.total %}
-          </td>
-        </tr>
-
-        {%endif%}
-        <tr>
-          <td class="">
-            <div class="h3 font-weight-bold  ">
-              {{'cart_total_total' | translate }}
-            </div>
-            <div class="">
-              {{'cart_total_vat' | translate }}
-            </div>
-          </td>
-          <td class="text-right">
-            <div class="h3 text-primary font-weight-bold ">
-              {% include 'currency' | value: cart.amount.total %}
-            </div>
-            <div class="">
-              {% include 'currency' | value: cart.amount.tax %}
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="cart-total ">
+  <div class="cart-total-content">
+    <div class="cart-total-title">
+      {{'cart_total_total' | translate}}
+    </div>
+    {% if display_lines %}
+      <div class="cart-content">
+        {% for cart_line in cart.lines.items %}
+          {% include 'cart_line' 
+              with cart_line,
+              readonly: true
+          %}
+        {% endfor%}
+      </div>
+      
+    {% endif %}
+    {% if cart.shipping.selected_carrier.size > 0 %}
+      <div class="line cart-subtotal">
+        <div class="label">
+          {{'cart_total_subtotal' | translate }}
+        </div>
+        <div class="value">
+          {% include 'currency' | value: cart.lines.amount.total %}
+        </div>
+      </div>
+      <div class="line cart-shipping">
+        <div class="label">
+          {{'cart_total_shipping' | translate }}
+        </div>
+        <div class="value">
+          {% include 'currency' | value: cart.shipping.amount.total %}
+        </div>
+      </div>
+      <div class="line cart-carrier">
+        {{ cart.shipping.selected_carrier.name }}
+      </div>
+    {% endif %}
+    <div class="line cart-grand-total">
+      <div class="label">
+        {{'cart_total_total' | translate }}
+      </div>
+      <div class="value">
+        {% include 'currency' | value: cart.amount.total %}
+      </div>
+    </div>
+    <div class="line cart-taxe">
+      <div class="label">
+        {{'cart_total_vat' | translate }}
+      </div>
+      <div class="value">
+        {% include 'currency' | value: cart.amount.tax %}
+      </div>
+    </div>
+    {% if display_submit %}
+        <form method="post" action="/invader/cart/update" class="line cart-submit" id="cart_update_form">
+          <input type="hidden" name="invader_success_url" value="{% path_to cart_next_step %}" />
+          <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+          <input type="hidden" name="step[current]" value="{{ cart_current_step }}">
+          <input type="hidden" name="step[next]" value="{{ cart_next_step }}">
+          <button class="btn btn-primary btn-block" type="submit">
+            {{submit_label}}
+          </button>
+        </form>
+    {% endif %}
   </div>
 </div>

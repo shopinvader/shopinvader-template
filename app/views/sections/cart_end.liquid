@@ -1,0 +1,73 @@
+---
+name: Cart End
+icon: list
+keep_icon: true
+keep_name: true
+settings:
+- label: "Title"
+  id: title
+  type: text
+- label: "Description"
+  id: title
+  type: text
+  format: html
+- label: "Account Title"
+  id: account_title
+  type: text
+- label: "Account Desc"
+  id: account_desc
+  type: text
+  html: true
+- label: "Account :  Button label"
+  id: account_button
+  type: text
+blocks: []
+---
+{% assign order = store.last_sale%}
+{% assign submit_label = section.settings.submit_label %}
+
+{% if order.lines.count > 0 %}
+  <div class="container cart cart-end" id="{{ section.anchor_id }}" {{ section.locomotive_attributes }}>
+    <div class="cart-title">
+      {{section.settings.title}}
+    </div>
+    <div class="cart-items">
+      {% for cart_line in order.lines.items %}
+
+        <div class="cart-item">
+          {% include 'cart_line' 
+            with cart_line,
+            readonly: true
+          %}
+        </div>
+      {% endfor%}
+    </div>
+    <div class="cart-desc">
+      {{section.settings.desc}}
+    </div>
+    {% include 'cart_total' 
+      with cart: order,
+      display_lines: false,
+      display_submit: false,
+      cart_current_step: 'cart_index',
+      cart_next_step: 'cart_login'
+    %}
+    <div class="cart-desc cart-account">
+      <div class="cart-account-title">
+        {{section.settings.account_title}}
+      </div>
+      <div  class="cart-account-desc">
+        {{section.settings.account_desc}}
+      </div>
+      <div class="cart-account-button">
+        <a href="{% path_to account_index %}" class="btn btn-sm">
+          {{section.settings.account_button}}
+        </a>
+      </div>
+    </div>
+  </div>
+{% else %}
+  <div class="container text-center pt-3 pb-3">
+    {{'cart_empty' | translate }}
+  </div>
+{% endif %}

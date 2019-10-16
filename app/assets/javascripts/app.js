@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', event => {
   const sectionsManager = new SectionsManager();
 
   // Register sections here. DO NOT REMOVE OR UPDATE THIS LINE
+  sectionsManager.registerSection('cart_address', Sections.CartAddress);
+  sectionsManager.registerSection('cart_end', Sections.CartEnd);
+  sectionsManager.registerSection('cart_checkout', Sections.CartCheckout);
+  sectionsManager.registerSection('cart_delivery', Sections.CartDelivery);
+  sectionsManager.registerSection('cart_login', Sections.CartLogin);
+  sectionsManager.registerSection('cart_summary', Sections.CartSummary);
   sectionsManager.registerSection('cookies_manager', Sections.CookiesManager);
   sectionsManager.registerSection('dynamic_carousel', Sections.DynamicCarousel);
   sectionsManager.registerSection('carousel', Sections.Carousel);
