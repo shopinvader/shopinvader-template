@@ -169,7 +169,6 @@
               {% for item in section.blocks %}
                 {% if item.type == "card" %}
                   <div class="block card text-left {{theme_card}} {% if section.settings.shadow == true %}shadow{%endif%} ">
-                    {% include 'block_debug' with block: item %}
                     <div class="card-body">
                       <h3>{{item.settings.title}}</h3>
                       {{item.settings.content}}
