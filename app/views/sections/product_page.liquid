@@ -4,27 +4,24 @@ class: section-product-page
 icon: image_text
 keep_icon: true
 settings:
-- label: Product SKU (not use for product page)
-  id: sku
-  type: text
-- label: Section Name
-  id: section_name
-  type: text
-- label: Theme color
-  id: theme_color
-  type: select
-  options:
-    - label: Light
-      value: light
-    - label: Border
-      value: border
-    - label: Header
-      value: header
-    - label: None
-      value: none
-- label: Full width
-  id: full_width
-  type: checkbox
+  - label: SKU
+    id: sku
+    type: text
+  - label: display Add to cart
+    id: display_addtocart
+    type: checkbox
+  - label: Thumbnails positions
+    id: thumb_position
+    type: select
+    options:
+    - label: Left
+      value: left
+    - label: Right
+      value: right
+    - label: Top
+      value: top
+    - label: Bottom
+      value: bottom
 blocks:
 - name: Add to cart
   type: add_to_cart
@@ -208,18 +205,7 @@ blocks:
   - label: Child of previous block
     id: is_child
     type: checkbox
-  - label: Thumbnails positions
-    id: thumb_position
-    type: select
-    options:
-    - label: Left
-      value: left
-    - label: Right
-      value: right
-    - label: Top
-      value: top
-    - label: Bottom
-      value: bottom
+  
 - name: Product title
   type: product_title
   settings:
@@ -315,6 +301,11 @@ blocks:
     type: text
     html: true
 default:
+  settings:
+    display_addtocart: false
+    thumb_position: 'bottom'
+    sku: B00RX-001
+defaults:
   settings:
     section_name: Product data
     sku: ''
@@ -414,127 +405,80 @@ presets:
       is_child: true
 
 ---
-
 {% if section.settings.sku != "" and section.settings.sku != null %}
-
-  {% with_scope sku: [section.settings.sku]%}
-    {% assign product_variant = store.products | first%}
-  {% endwith_scope%}
-{% endif %}
-
-{% if live_editing %}
-  {% assign product_variant = store.products | first %}
-{% endif %}
-
-
-{% case section.settings.card_color %}
-  {% when "none" %}
-    {% assign css_card = "" %}
-  {% when "light" %}
-    {% assign css_card = "bg-light" %}
-  {% when "dark" %}
-    {% assign css_card = "bg-dark text-light"%}
-  {% when "white" %}
-    {% assign css_card = "bg-white"%}
-{% endcase %}
-
-<div class="container{% if section.settings.full_width %}-fluid{% endif %} product-theme-{{section.settings.theme_color}}">
-  <div class="grid-row product-page-content">
-    {% assign has_child = false %}
-    {% for block in section.blocks%}
-      {% assign next_block = section.blocks[forloop.index] %}
-      {% if block.settings.margin == true %}
-        {% assign margin = 'md'%}
-      {% endif %}
-      {% assign css_cell = 
-        'block block-' | append: block.type 
-        | append: ' grid-padding-vertical-' | append: margin | default: 'none' 
-        | append: ' grid-cell-' | append: block.settings.cell_size | default: 'full' 
-        | append: ' grid-theme-' | append: block.settings.theme_color | default: 'full' 
-      %}
-
-      <div class="block {{ css_cell }}">
-        {% include 'block_debug' %}
-        {% case block.type %}
-          {% when 'product_title'%}
-            {% include 'block_product_title' with
-              product_variant
-            %}
-          {% when 'product_image'%}
-            {% include 'product_images' with 
-              product_variant, 
-              thumb_position: block.settings.thumb_position 
-            %}
-          {% when 'product_data'%}
-             {% include 'block_product_data' with 
-              title: block.settings.title,
-              inline: block.settings.inline,
-              data_type: block.settings.data_type
-              product_variant
-            %}
-          {% when 'add_to_cart'%}
-            {% include 'block_product_add_to_cart' with 
-              product_variant
-            %}
-          {% when 'breadcrumb'%}
-            {% include 'block_product_breadcrumb' with
-              product_variant
-            %}
-          {% when 'variants'%}
-            {% include 'block_product_variants' with
-              title: block.settings.title,
-              variant_display: block.settings.variant_display,
-              product
-            %}
-          {% when 'technical_details'%}
-            {% include 'block_product_technical_details' with
-              title: block.settings.title,
-              product_variant
-            %}
-          {% when 'up_sellings'%}
-            {% include 'block_product_up_sellings' with
-              title: block.settings.title,
-              product_variant
-            %}
-          {% when 'cross_sellings'%}
-            {% include 'block_product_cross_sellings' with
-              title: block.settings.title,
-              product_variant
-            %}
-          {% when 'reviews'%}
-            {% include 'block_product_reviews' with
-              title: block.settings.title,
-              product_variant
-            %}
-          {% when 'attribute'%}
-            {% include 'block_product_attribute' with
-              type: block.settings.type,
-              title: block.settings.title,
-              attribute_name: block.settings.attribute_name,
-              display_legend: block.settings.display_legend,
-              product_variant
-            %}
-          {% when 'cell_text'%}
-            {{ block.settings.content }}
-          {% when 'cell_image'%}
-            <img src="{{block.settings.picture}}" alt="{{block.settings.picture_alt}}" class="img-fluid">
-        {% endcase%}
-        {% if next_block.settings.is_child == true %}
-          {% if has_child ==  false%}
-            {% assign has_child = true %}
-            <div class="grid-row subchild">
-          {% else %}
-            </div>
-          {% endif %}
-          
-        {% else %}
-          {% if has_child ==  true%}
-            {% assign has_child = false %}
-              </div>
-            </div>
-          {% endif %}
-          </div>
-        {% endif %}
-    {% endfor %}
+  <div class="alert alert-info">
+    SKU Forced on {{section.settings.sku | json}}
+  
+    {% with_scope sku.in: ["B00RX-001"] %}
+      {% assign product_variant = store.products | first%}
+      {{ store.products | first }}
+    {% endwith_scope%}
   </div>
-</div>
+{% endif %}
+{% if product_variant != null %}
+  <div class="container product-page {{container_css}}" id="{{ section.anchor_id }}" {{ section.locomotive_attributes }}>
+    <nav aria-label="breadcrumb" class="product-breadcrumb">
+      <ol class="breadcrumb pl-0 d-none d-sm-inline-block">
+        <li class="breadcrumb-item d-inline-block ">
+          <a href="{% path_to 'home' %}">
+            {{ 'home' | translate }}
+          </a>
+        </li>
+      {% for category in product_variant.categories %}
+        <li class="breadcrumb-item d-inline-block" >
+          <a href="{{category.url_key | prepend: url_base}}" class="text-gray-darker">
+            {{category.name}}
+          </a>
+        </li>
+      {% endfor %}
+      {% if block.settings.display_product_name %}
+        <li class="breadcrumb-item active d-none d-xl-inline-block">
+          {{product_variant.model.name}}
+        </li>
+      {% endif %}
+      </ol>
+    </nav>
+    <div class="d-block d-sm-none  pt-4">
+      {% for category in product_variant.categories %}
+      <a href="{{category.url_key | prepend: url_base}}" class="btn btn-outline-dark btn-sm">
+        {{category.name}}
+      </a>
+      {% endfor %}
+    </div>
+    <a class="product-title" href="{{product_variant.url_key  | prepend: url_base}}">
+      <h1 class="product-model-name">{{product_variant.model.name}}</h1>
+      <div class="product-variant-name">{{product_variant.variant.name}}</div>
+    </a>
+    <div class="product-shortdesc">
+      {{product_variant.short_description}}
+    </div>
+    <div class="product-category">
+      <a href="{{ variant.categories.last.url_key | prepend: url_base }}">
+        <u>{{ product_variant.categories.last.name}}</u>
+      </a>
+    </div>
+    {% if product_variant.brand.name %}
+      <div class="product-brand">
+        {{product_variant.brand.name }}
+      </div>
+    {% endif %}
+    <div class="product-image">
+      {% include 'product_images' with 
+        product_variant, 
+        thumb_position: section.settings.thumb_position
+      %}
+    </div>
+    <div class="product-cart">
+      {% include 'product_cart' with 
+         settings: section.settings 
+      %}
+    </div>
+    <div class="product-variant">
+      {% for attr in product_variant.variant_attributes %}
+        <a class="btn btn-outline-dark">
+          {{attr[0]}} <b>{{attr[1]}}</b>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
