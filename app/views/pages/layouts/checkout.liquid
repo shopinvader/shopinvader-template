@@ -31,17 +31,16 @@ is_layout: false
           redirectTo('cart_index');
         {% endaction %}
       {% endif %}
-      {% block 'main' %}
-        <div class="row ">
-          <div class="col-12">
-            {% global_section 'cart_breadcrumb' %}
-            <div class="pt-4 pb-4">
-              {% section 'cart' %}
-            </div>
-            {% sections_dropzone %}
+      <div class="row">
+        <div class="col-12" data-shopinvader-container id="cart-content">
+          {% global_section 'cart_breadcrumb' %}
+          <div class="pt-4 pb-4">
+            {% block 'cart_content' %}
+            {% endblock %}
           </div>
+          {% sections_dropzone %}
         </div>
-      {% endblock %}
+      </div>
     </main>
   </div>
 {% endblock %}

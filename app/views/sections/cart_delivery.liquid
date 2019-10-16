@@ -1,0 +1,84 @@
+---
+name: Cart delivery
+icon: list
+keep_icon: true
+keep_name: true
+settings:
+- label: "Title"
+  id: title
+  type: text
+- label: "Description"
+  id: title
+  type: text
+  format: html
+- label: "Button label"
+  id: submit_label
+  type: text
+blocks: []
+---
+{% erp get 'cart/get_delivery_methods' as delivery_methods %}
+{% assign selected_carrier = store.cart.shipping.selected_carrier %}
+{% assign is_selected_carrier = false %}
+{% if delivery_methods.size > 0 %}
+  <div class="container cart cart-delivery" id="{{ section.anchor_id }}" {{ section.locomotive_attributes }}>
+    <div class="cart-title">
+      {{section.settings.title}}
+    </div>
+    <div class="cart-items cart-carriers">
+      <form method="post" action="/invader/cart/apply_delivery_method" id="carrier_form"  class=" " data-shopinvader-form>
+        <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+        <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+        {% for carrier in delivery_methods %}
+          {%if carrier.id == selected_carrier.id %} 
+            {% assign is_selected_carrier = true %}
+          {%endif%}
+          <input data-autosubmit 
+            type="radio" 
+            value="{{carrier.id | round}}" 
+            {%if carrier.id == selected_carrier.id %} checked="checked" {%endif%} 
+            name="carrier[id]" 
+            autocomplete="off" 
+            id="carrier_{{carrier.id | round}}" 
+          />
+          <label class="cart-carrier" for="carrier_{{carrier.id | round}}">
+            <div class="cart-carrier-selector"></div>
+            <div class="cart-carrier-name">
+              {{ carrier.name }}
+            </div>
+            <div class="cart-carrier-description">
+              {{ carrier.description }}
+            </div>
+            <div class="cart-carrier-price">
+              {% if carrier.price > 0 %}
+                {% include 'currency' | value: carrier.price %}
+              {% else %}
+                {{ 'cart_free_delivery' | translate }}
+              {% endif %}
+            </div>
+          </label>
+        {% endfor%}
+      </form>
+    </div>
+    <div class="cart-desc">
+      {{section.settings.desc}}
+    </div>
+
+    {% if is_selected_carrier == true %}
+      {% assign display_submit = true %}
+    {% else %}
+      {% assign display_submit = false %}
+    {% endif %}
+    {% include 'cart_total' 
+      with cart: store.cart,
+      display_lines: false,
+      display_submit: display_submit,
+      cart_current_step: 'cart_delivery',
+      cart_next_step: 'cart_checkout',
+      submit_label: section.settings.submit_label
+    %}
+  </div>
+{% else %}
+  <div class="container text-center pt-3 pb-3">
+    {{'cart_empty' | translate }}
+  </div>
+{% endif %}

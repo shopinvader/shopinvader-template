@@ -1,0 +1,78 @@
+---
+name: Cart payment
+icon: list
+keep_icon: true
+keep_name: true
+settings:
+- label: "Title"
+  id: title
+  type: text
+- label: "Description"
+  id: title
+  type: text
+  format: html
+- label: "Button label"
+  id: submit_label
+  type: text
+blocks: []
+---
+
+{% if store.cart.step.done contains 'cart_delivery' %}
+  <div class="container cart cart-payment" id="{{ section.anchor_id }}" {{ section.locomotive_attributes }}>
+    <div class="cart-title">
+      {{section.settings.title}}
+    </div>
+    <div class="cart-items cart-payments">
+      {% assign selected_payment = store.cart.payment.available_methods.items | first %}
+      {% for payment_method in store.cart.payment.available_methods.items %}
+        <div class="cart-item" >
+        {% case payment_method.code %}
+          {% when 'stripe' %}
+            {% include 'payment_stripe' with payment_method,
+              amount: store.cart.amount.total,
+              target: 'current_cart',
+              success_handle: 'cart_end' %}
+          {% when 'sips' %}
+            {% include 'payment_sips' with payment_method,
+              amount: store.cart.amount.total,
+              target: 'current_cart',
+              action: '/payment_sips/prepare_payment' %}
+          {% when 'bank_transfer' %}
+            {% include 'payment_bank_transfert' with payment_method,
+              amount: store.cart.amount.total,
+              target: 'current_cart',
+              success_handle: 'cart_end'
+            %}
+          {% when 'check' %}
+            {% include 'payment_check' with payment_method,
+              amount: store.cart.amount.total,
+              target: 'current_cart',
+              success_handle: 'cart_end'
+            %}
+          {% when 'paypal' %}
+            {% include 'payment_paypal' with payment_method,
+              amount: store.cart.amount.total,
+              target: 'current_cart',
+              success_handle: 'cart_end'
+            %}
+        {% endcase %}
+        </div>
+      {% endfor%}
+    </div>
+    <div class="cart-desc">
+      {{section.settings.desc}}
+    </div>
+    {% include 'cart_total' 
+      with cart: store.cart,
+      display_lines: true,
+      display_submit: false,
+      cart_current_step: 'cart_delivery',
+      cart_next_step: 'cart_checkout',
+      submit_label: section.settings.submit_label
+    %}
+  </div>
+{% else %}
+  <div class="container text-center pt-3 pb-3">
+    {{'cart_empty' | translate }}
+  </div>
+{% endif %}

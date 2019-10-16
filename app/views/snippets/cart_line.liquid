@@ -1,0 +1,53 @@
+<div class="cart-line">
+  <div class="cart-line-image">
+    <img src="{{cart_line.product.images.first.medium.src | default: site.metafields.theme.noimage}}" 
+    alt="{{cart_line.product.images.first.medium.alt}}" 
+    title="{{cart_line.product.name}}"
+    class="img-fluid" />
+  </div>
+  <div class="cart-line-desc">
+    <div class="model-name">
+      {{cart_line.product.model.name}}
+    </div>
+    <div class="short-name">
+      {{cart_line.product.short_name}}
+    </div>
+    <div>
+      <a href="{{cart_line.product.url_key}}">
+        {{'show_more' | translate }}
+      </a>
+    </div>
+  </div>
+  <div class="cart-line-qty">
+    <form  method="POST" action="/invader/cart/update_item" data-shopinvader-form>
+      <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+      <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+      <input type="hidden" name="item_id" value="{{cart_line.id}}">
+      {% if readonly == true%}
+        <span class="small label">
+          {{ 'cart_quantity' | translate }}
+        </span>
+        {{cart_line.qty | round }}
+      {% else %}
+        {% include 'product_qty_input' with qty: cart_line.qty %}
+      {% endif %}
+    </form>
+  </div>
+  {% if readonly != true%}
+    <div class="cart-line-delete">
+      <form  method="POST" action="/invader/cart/delete_item" data-shopinvader-form>
+        <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+        <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+        <input type="hidden" name="item_id" value="{{cart_line.id}}">
+        <button type="submit" class="btn btn-link text-dark pl-0">
+          <span class="text-darker ti-close small"></span> {{ 'cart_delete' | translate }}
+        </button>
+      </form>
+    </div>
+  {% endif %}
+  <div class="cart-line-price">
+    <div class="price">
+      {% include 'currency' | value: cart_line.amount.total %}
+    </div>
+  </div>
+</div>
