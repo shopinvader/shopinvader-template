@@ -1,5 +1,5 @@
 {% if variant %}
-  <div class="product-variant-thumbnail" data-link="{{variant.url_key  | prepend: url_base }}?ref={{variant.sku}}">
+  <div class="product-variant-thumbnail" up-target=".product-page"  up-href="{{variant.url_key  | prepend: url_base }}?ref={{variant.sku}}">
     <div class="image">
       <img class="img-fluid" src="{{variant.images.first.medium.src  | default: site.metafields.theme.noimage }}" alt="{{variant.images.first.medium.alt}}" />
     </div>
@@ -15,7 +15,7 @@
         {% endif %}
       </div>
       <div class="name">
-        <a href="{{variant.url_key  | prepend: url_base }}?ref={{variant.sku}}" class="text-dark">
+        <a href="{{variant.url_key  | prepend: url_base }}?ref={{variant.sku}}" up-target=".product-page"  class="text-dark">
           {% for attr in variant.variant_attributes %}
             <span class="badge badge-secondary">
               {{attr[0]}} {{attr[1] | downcase | replace: attr[0], ''}}

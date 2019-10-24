@@ -32,7 +32,7 @@
     "react-hogan": "^0.1.1",
     "searchkit": "^2.3.1-alpha.9",
     "transfer-webpack-plugin": "^0.1.4",
-    "unpoly": "^0.60.3",
+    "unpoly": "^0.61.0",
     "url-loader": "^2.1.0"
   },
   "devDependencies": {
