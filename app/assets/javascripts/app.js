@@ -5,7 +5,7 @@ import '../stylesheets/app.scss';
 import * as Sections from './sections';
 // Import the classes required to handle sections
 import SectionsManager from './sections/_manager';
-//import 'unpoly';
+import 'unpoly';
 var jQuery = require("jquery")
 window.$ = jQuery;
 window.jQuery = jQuery;
@@ -17,9 +17,18 @@ import '@fortawesome/fontawesome-free/js/solid';
 import '@fortawesome/fontawesome-free/js/regular';
 import '@fortawesome/fontawesome-free/js/brands';
 var cookies = require('browser-cookies');
-
+document.addEventListener('up:link:follow', event => {
+  event.target.setAttribute("disabled", "disabled");
+  var spinner = document.createElement('span');
+  spinner.className = "spinner-border spinner-border-sm";
+  if(event.target.classList.contains('btn')) {
+    event.target.prepend(spinner);
+  }
+  else {
+    event.target.classList.add('loader-element');
+  }
+});
 document.addEventListener('DOMContentLoaded', event => {
-
   // Load all the sections
   const sectionsManager = new SectionsManager();
 

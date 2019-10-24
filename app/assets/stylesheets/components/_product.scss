@@ -11,7 +11,6 @@
       max-width: 100%;
     }
     .carousel  {
-
       .carousel-control-prev,
       .carousel-control-next {
         opacity: 0;
@@ -289,6 +288,10 @@ $product-attr-gap: 2rem;
       flex-wrap: wrap;
 
       .item {
+        &.active {
+          border: 3px solid $gray-900;
+          box-shadow: $box-shadow-sm;
+        }
         width: 100%;
         @include media-breakpoint-up(sm) {
           width: 50%;
