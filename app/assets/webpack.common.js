@@ -21,6 +21,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
+            sourceMap: true,
             presets: ['@babel/preset-env']
           }
         }
@@ -31,6 +32,7 @@ module.exports = {
           'style-loader',
           { loader: 'css-loader', options: { importLoaders: 1 } },
           { loader: 'postcss-loader', options: {
+            sourceMap: true,
             ident: 'postcss',
             plugins: () => [
               postcssGapProperties(/* pluginOptions */)
@@ -40,14 +42,31 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', {
-          loader: 'sass-loader',
-          options: {
-            sassOptions: {
-              importer: globImporter()
+        use: [
+          'style-loader', 
+          MiniCssExtractPlugin.loader, 
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                sourceMap: true,
+                importer: globImporter()
+              }
             }
           }
-        }]
+        ]
       },
       {
         test: /\.(woff2?|svg)$/,
