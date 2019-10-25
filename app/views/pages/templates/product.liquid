@@ -16,14 +16,14 @@ handle: product
   <title>{{product.seo_title}}</title>
   <link rel="canonical" href="{{base_url | append: '/' | append: product.url_key}}" />
 
-  {%  if product.stock_state != null and  product.stock_state != ''%}
-    {% if product.stock_state == 'in_stock'%}
+  {%  if product.stock.global.state != null and  product.stock.global.state != ''%}
+    {% if product.stock.global.state == 'in_stock'%}
       {% assign schema_stock = "http://schema.org/InStock"%}
-    {% elsif product.stock_state == 'resupplying'%}
+    {% elsif product.stock.global.state == 'resupplying'%}
       {% assign schema_stock = "http://schema.org/OutOfStock"%}
-    {% elsif product.stock_state == 'in_limited_stock'%}
+    {% elsif product.stock.global.state == 'in_limited_stock'%}
       {% assign schema_stock = "http://schema.org/LimitedAvailability"%}
-    {% elsif product.stock_state == 'out_of_stock'%}
+    {% elsif product.stock.global.state == 'out_of_stock'%}
       {% assign schema_stock = "http://schema.org/OutOfStock"%}
     {% endif %}
   {% endif %}
@@ -170,18 +170,20 @@ handle: product
           </div>
         </div>
         <div class="row">
-        {% if variant.stock_state != null and  variant.stock_state != ''%}
+        {% if variant.stock.global.state != null and  variant.stock.global.state != ''%}
           <div class="col-12 text-left product-stock-state">
-            <span class="{{product_variant.stock_state}} text-size-1xl">
-              {{variant.stock_state | prepend: 'product_stock_state_' | translate}}
+            <span class="{{variant.stock.global.state}}">
+              {{variant.stock.global.state | prepend: 'product_stock_state_' | translate}}
             </span>
           </div>
         {% endif %}
+        {% if variant.stock.global.state =='in_stock' or variant.stock.global.state == 'in_limited_stock' %}
           <div class="col-12  text-right d-none d-sm-block">
             <button type="submit" class="btn btn-success btn-lg btn-block">
               {{"product_add_to_cart" | translate }}
             </button>
           </div>
+        {% endif %}
         </div>
       </form>
     </div>
@@ -196,22 +198,31 @@ handle: product
               {{ variant_item.name }}
             </div>
             <div>
-              {% for item in variant_item.values %}
-                {% if item.available %}
-                  {% assign item_disable = '' %}
-                  {% if item.selected %}
-                    {% assign item_css = 'btn-primary' %}
-                  {% else %}
-                    {% assign item_css = 'btn-outline-dark' %}
-                  {% endif %}
-                  {% if item.available != true %}
-                    {% assign item_disable = "disabled='disabled" %}
-                  {% endif %}
-                  <button class="btn btn-sm {{item_css}}" {{item_disable}} 
-                    up-target=".product-page" 
-                    up-href="{{variant.url_key}}?ref={{item.sku}}">
-                    {{item.name}}
-                  </button>
+              {% for variant_item in variant.variant_selector %}
+                {% if variant_item.values.size > 1 %}
+                  <div>
+                    <div class="variant-title">
+                      {{ variant_item.name }}
+                    </div>
+                    <div>
+                      {% for item in variant_item.values %}
+                        {% assign item_disabled = '' %}
+                        {% if item.selected %}
+                          {% assign item_css = 'btn-primary' %}
+                        {% else %}
+                          {% assign item_css = 'btn-outline-dark' %}
+                        {% endif %}
+                        {% if item.available != true %}
+                          {% assign item_disabled = "disabled='disabled'" %}
+                        {% endif %}
+                        <button class="btn btn-sm {{item_css}}" {{item_disabled}} 
+                          up-target=".product-page" 
+                          up-href="{{variant.url_key}}?ref={{item.sku}}">
+                          {{item.name}}
+                        </button>
+                      {% endfor %}
+                    </div>
+                  </div>
                 {% endif %}
               {% endfor %}
             </div>
