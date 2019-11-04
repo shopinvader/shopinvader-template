@@ -17,7 +17,8 @@ display_settings:
       {% include 'store_notifications' %}
     </div>
     
-    <form action="{% path_to page.handle %}" method="post" data-form-password-validation data-autocomplete="address">
+    <form name="account_register" class="register-form"
+          action="{% path_to page.handle %}" method="post" data-form-password-validation data-autocomplete="address">
       <input type="hidden" name="auth_action" value="sign_up" />
       <input type="hidden" name="auth_disable_email" value="true" />
       <input type="hidden" name="auth_content_type" value="customers" />
