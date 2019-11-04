@@ -19,17 +19,19 @@ var cookies = require('browser-cookies');
 const Section = {
 
   load: (section) => {
-    Section.set_autocomplete(section);
+    if(section.querySelector('.searchkit_autocomplete') != null) {
+      Section.set_elasticsearch_autocomplete(section);
+    }
     Section.set_currency();
   },
-  set_autocomplete(section) {
+  set_elasticsearch_autocomplete(section) {
     if(document.querySelector('.section-searchkit-faceting') == null) {
       //Only if it's not a faceting page
       function translate(key){
         return searchkit_translation[key];
       }
       var get = require("lodash/get");
-      var container = section.querySelector('.header-block-search .container');
+      var container = section.querySelector('.header-block-search .searchkit_autocomplete');
       const locale = container.dataset.locale.replace('_', '-');
       SearchkitManager.prototype.getHitsCount= function () {
         //PATCH FOR COMPATIBILITY WITH ELASTICSEARCH v7
