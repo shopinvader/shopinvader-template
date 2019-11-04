@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', event => {
   const sectionsManager = new SectionsManager();
 
   // Register sections here. DO NOT REMOVE OR UPDATE THIS LINE
+  sectionsManager.registerSection('algolia_faceting', Sections.AlgoliaFaceting);
   sectionsManager.registerSection('cart_address', Sections.CartAddress);
   sectionsManager.registerSection('cart_end', Sections.CartEnd);
   sectionsManager.registerSection('cart_checkout', Sections.CartCheckout);

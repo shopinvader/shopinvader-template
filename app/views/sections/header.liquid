@@ -475,9 +475,13 @@ default:
                   </ul>
                 </div>
               {% when "search" %}
-                {% if elasticsearch_params != null and elasticsearch_params.indices != null%}
-                  {% include 'searchkit_autocomplete' with
+                {% if site.metafields.elasticsearch != null and site.metafields.elasticsearch.indices != null%}
+                  {% include 'searchkit_autocomplete' with 
                     elasticsearch_params: site.metafields.elasticsearch
+                  %}
+                {% elsif site.metafields.algolia != null and site.metafields.algolia.indices != null%}
+                  {% include 'algolia_autocomplete' with
+                    algolia_params: site.metafields.algolia
                   %}
                 {% endif %}
             {% endcase %}

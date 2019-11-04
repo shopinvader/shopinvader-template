@@ -17,10 +17,11 @@
 </script>
 
 {% if site.metafields.algolia %}
+  
   {% if locale == 'fr'%}
     {% assign algolia_locale = "fr_FR"%}
   {%else%}
-    {% assign algolia_locale = "en_US"%}
+    {% assign algolia_locale = "fr_FR"%}
   {%endif%}
   {% if session.currency_code and session.currency_code != ''%}
     {% assign currency_code = session.currency_code %}
@@ -72,4 +73,3 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hogan.js/3.0.2/hogan.min.js"></script>
 
 {% endif %}
-

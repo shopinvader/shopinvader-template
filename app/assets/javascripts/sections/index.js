@@ -15,3 +15,4 @@ export { default as CartDelivery } from './cart_delivery';
 export { default as CartCheckout } from './cart_checkout';
 export { default as CartEnd } from './cart_end';
 export { default as CartAddress } from './cart_address';
+export { default as AlgoliaFaceting } from './algolia_faceting';

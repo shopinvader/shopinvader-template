@@ -1,0 +1,103 @@
+---
+# Name of the section displayed in the editor UI
+# (only if keep_name is set to true)
+name: Instantsearch
+
+# By default, the first text type setting will be used as
+# the name of the section in the editor UI.
+# To keep the name of the section instead, uncomment the following line.
+# keep_name: true
+
+# Icon of the section in the editor UI
+# Values: header, default, slide, text, image_text, list, footer
+icon: default
+
+# By default, the first image_picker type setting will be used
+# as the icon of the section in the editor UI.
+# To keep the icon of the section instead, uncomment the following line.
+# keep_icon: true
+
+# Definition of the settings:
+settings:
+- label: "My awesome title"
+  id: title
+  type: text
+  
+- label: "An image"
+  id: image
+  type: image_picker
+  
+
+# Definition of the blocks.
+# You can define as many types of blocks you want.
+blocks:
+- name: List item
+  type: list_item
+  settings:
+  - label: "Item title"
+    id: title
+    type: text
+    default: "my title"
+  - label: "Item image"
+    id: image
+    type: image_picker
+    default: "/samples/images/default.svg"
+
+# By default, in the editor UI, blocks will be listed below the "Content" title.
+# The title can be changed with the following property:
+# blocks_label: "My list of items"
+
+# Presets can be seen as different versions of a same section.
+# Useless if the section is not aimed tobe used along with section_dropzone liquid tag
+presets:
+  - name: "Instantsearch"
+    category: "Category"
+    settings:
+      title: "Hello world"
+    blocks:
+    - type: list_item
+      settings:
+        title: "Item #1"
+    - type: list_item
+      settings:
+        title: "Item #2"
+
+---
+{% assign algolia_locale = store.locale_mapping | downcase %}
+{% action 'get algolia parameters' %}
+  setProp('algolia_indexes', JSON.parse(site.metafields.algolia.indices));
+{% endaction %}
+<div id="instantsearch-faceting-container"
+  class="page-{{page.handle}}"
+  data-product-noimage={{ site.metafields.theme.noimage | json }}
+  data-algolia-application={{ site.metafields.algolia.application_id | json }}
+  data-algolia-api={{ site.metafields.algolia.api_key | json }}
+  data-locale={{ store.locale_mapping | json }}
+  {% for role in algolia_indexes %}
+    data-algolia-index-{{role.name}}={{role.index | append:"_" | append: algolia_locale  | json}}
+  {% endfor %}
+  {% if only_discount %}
+    data-filter-key="price.default.discount"
+    data-filter-value="0"
+    data-filter-type='gt'
+  {% endif %}
+  {% if category %}
+    data-filter-key="categories.id"
+    data-filter-value={{category.objectID | json }}
+  {% endif %} >
+  <div class="searchkit-header">
+    <h1>{{title}}</h1>
+    <div>
+      {{ short_desciption }}
+    </div>
+  </div>
+  {% for facet in store.all_filters %}
+    <div 
+      data-facet-code="{{facet.code}}"
+      data-facet-name="{{facet.name}}">
+    </div>
+  {% endfor %}
+  <div class="searchkit-footer">
+    {{ description }}
+  </div>
+</div>
