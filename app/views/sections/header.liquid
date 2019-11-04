@@ -475,26 +475,11 @@ default:
                   </ul>
                 </div>
               {% when "search" %}
-                {% assign elasticsearch_locale = store.locale_mapping | downcase %}
-                {% action 'get elasticsearch parameters' %}
-                  setProp('elasticsearch_indexes', JSON.parse(site.metafields.elasticsearch.indices));
-                {% endaction %}
-                <script type="text/javascript">
-                  var searchkit_translation = {
-                    'facets.view_all': {{'filter_all' | translate | json}}
-                  };
-                </script>
-                <div class="d-none d-md-flex">
-                  <div class="container" id="search-bar"
-                    data-product-noimage={{ site.metafields.theme.noimage | json }}
-                    data-elastic-url={{ site.metafields.elasticsearch.url | json }}
-                    data-locale={{ store.locale_mapping | json }}
-                    {% for role in elasticsearch_indexes %}
-                      data-elastic-index-{{role.name}}={{role.index | append:"_" | append: elasticsearch_locale  | json}}
-                    {% endfor %}
-                  >
-                  </div>
-                </div>
+                {% if elasticsearch_params != null and elasticsearch_params.indices != null%}
+                  {% include 'searchkit_autocomplete' with
+                    elasticsearch_params: site.metafields.elasticsearch
+                  %}
+                {% endif %}
             {% endcase %}
           </div>
         {% endif %}
