@@ -6,8 +6,9 @@ handle: category
 {% extends 'layouts/default' %}
 
 {% block 'body/content' %}
-  {% comment %}
-  	{% section 'searchkit_faceting' %}
+  
+  {% section 'searchkit_faceting' %}
+ 	{% comment %}
+  	{% section 'algolia_faceting' %}
   {% endcomment %}
-  {% section 'algolia_faceting' %}
 {% endblock %}
