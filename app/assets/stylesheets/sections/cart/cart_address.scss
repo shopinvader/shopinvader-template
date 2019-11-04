@@ -1,0 +1,116 @@
+.cart.cart-address {
+	.cart-addresses {
+		input[type="radio"] {
+			display: none;
+			& + label .cart-address-selector {
+				padding-left: 25px;
+				position: relative;
+				&:before {
+					cursor: pointer;
+					border: 1px solid $gray-900;
+					border-radius: 50%;
+					display: block;
+					content: "";
+					height: 20px;
+					width: 20px;
+					top: 5px;
+					left: 8px;
+					position: absolute;
+				}
+
+			}
+			&:checked + label .cart-address-selector {
+				&:after {
+					content: "";
+					background-color: $gray-900;
+					border-radius: 50%;
+					height: 14px;
+					width: 14px;
+					top: 8px;
+					left: 11px;
+					position: absolute;
+				}
+			}
+		}
+		input[type="radio"]:checked + label {
+			background-color: $gray-100;
+		}
+		.cart-address {
+			margin-top: 1rem;
+			display: grid; 
+
+			grid-column-gap: 1rem;
+			grid-template:"selector name update" 
+										". address address"
+										". phone ."
+										/ auto 1fr auto;
+			.cart-address-selector {
+				grid-area: selector;
+				
+			}
+			.cart-address-name {
+				grid-area: name;
+				font-weight: bold;
+			}
+			.cart-address-address {
+				grid-area: address;
+				display: flex;
+				align-items: start;
+				
+			}
+			.cart-address-phone {
+				grid-area: phone;
+				display: flex;
+				align-items: start;
+			}
+			.cart-address-update {
+				grid-area: update;
+			}
+			/*
+			input[type="radio"].form-radio {
+				display: none;
+				& + label {
+					padding-left: 45px;
+					position: relative;
+					&:before {
+						cursor: pointer;
+						border: 1px solid $gray-900;
+						border-radius: 50%;
+						display: block;
+						content: "";
+						height: 20px;
+						width: 20px;
+						top: 16px;
+						left: 16px;
+						position: absolute;
+					}
+
+				}
+				&:checked + label {
+					&:after {
+						content: "";
+						background-color: $gray-900;
+						border-radius: 50%;
+						height: 14px;
+						width: 14px;
+						top: 19px;
+						left: 19px;
+						position: absolute;
+					}
+				}
+			}
+			input[type="radio"]:checked + label {
+				background-color: $gray-100;
+			}
+			.cart-address-content {
+				.address {
+					display: flex;
+				}
+				.phone {
+					display: flex;
+				}
+			}*/
+		}
+	}
+
+}

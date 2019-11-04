@@ -47,3 +47,31 @@
 
   }
 }
+.loader-element {
+  position: relative;
+  &:after {
+    background-color: transparentize($white, .1);
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+  &:before {
+    content: ' ';
+    text-align: center;
+    position: absolute;
+    z-index: 3;
+    @extend .spinner-border; 
+    @extend .spinner-border; 
+    margin: auto;
+    width: 5vw;
+    height: 5vw;
+    color: theme-color('primary');
+    top: calc(50% - 2.5vw);
+    left: calc(50% - 2.5vw);
+  }
+}

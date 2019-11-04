@@ -6,79 +6,353 @@ handle: product
 {% extends 'layouts/default' %}
 
 {% block 'header_meta' %}
-<meta name="og:site_name" content="{{site.name}}">
-<meta name="og:title" content="{{product.seo_title}}">
-<meta name="og:url" content="{{ product.url_key | prepend: url_base }}?ref={{product.objectID }}">
-<meta name="og:description" content="{{product.meta_description}}">
-<meta name="og:image" content="{{ product.images.first.medium.src }}">
-<meta name="description" content="{{product.meta_description}}">
-<meta name="keywords" content="{{product.meta_keywords}}">
-<title>{{product.seo_title}}</title>
-<link rel="canonical" href="{{base_url | append: '/' | append: product.url_key}}" />
+  <meta name="og:site_name" content="{{site.name}}">
+  <meta name="og:title" content="{{product.seo_title}}">
+  <meta name="og:url" content="{{ product.url_key | prepend: url_base }}?ref={{product.objectID }}">
+  <meta name="og:description" content="{{product.meta_description}}">
+  <meta name="og:image" content="{{ product.images.first.medium.src }}">
+  <meta name="description" content="{{product.meta_description}}">
+  <meta name="keywords" content="{{product.meta_keywords}}">
+  <title>{{product.seo_title}}</title>
+  <link rel="canonical" href="{{base_url | append: '/' | append: product.url_key}}" />
 
-{%  if product.stock_state != null and  product.stock_state != ''%}
-  {% if product.stock_state == 'in_stock'%}
-    {% assign schema_stock = "http://schema.org/InStock"%}
-  {% elsif product.stock_state == 'resupplying'%}
-    {% assign schema_stock = "http://schema.org/OutOfStock"%}
-  {% elsif product.stock_state == 'in_limited_stock'%}
-    {% assign schema_stock = "http://schema.org/LimitedAvailability"%}
-  {% elsif product.stock_state == 'out_of_stock'%}
-    {% assign schema_stock = "http://schema.org/OutOfStock"%}
+  {%  if product.stock.global.state != null and  product.stock.global.state != ''%}
+    {% if product.stock.global.state == 'in_stock'%}
+      {% assign schema_stock = "http://schema.org/InStock"%}
+    {% elsif product.stock.global.state == 'resupplying'%}
+      {% assign schema_stock = "http://schema.org/OutOfStock"%}
+    {% elsif product.stock.global.state == 'in_limited_stock'%}
+      {% assign schema_stock = "http://schema.org/LimitedAvailability"%}
+    {% elsif product.stock.global.state == 'out_of_stock'%}
+      {% assign schema_stock = "http://schema.org/OutOfStock"%}
+    {% endif %}
   {% endif %}
-{% endif %}
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org/",
-    "@type": "Product",
-    "name": {{product.model.name | json}},
-    "url": "{{product.url_key  | prepend: url_base }}?ref={{product.sku}}",
-    "image": [
-      {% for image in product.images%}
-        "{{image.medium.src}}"{%if forloop.last == false%},{%endif%}
-      {% endfor %}
-     ],
-    "description": {{product.description | json}},
-    "sku": {{product.sku | json}},
-    "brand": {
-      "@type": "Thing",
-      "name": {{product.brand.name | json}}
-    },
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "EUR",
-      "price": "{{product.price.value}}",
-      "itemCondition": "http://schema.org/UsedCondition",
-      "availability": "{{schema_stock}}",
-      "seller": {
-        "@type": "Organization",
-        "name": {{site.name | json}}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@type": "Product",
+      "name": {{product.model.name | json}},
+      "url": "{{product.url_key  | prepend: url_base }}?ref={{product.sku}}",
+      "image": [
+        {% for image in product.images%}
+          "{{image.medium.src}}"{%if forloop.last == false%},{%endif%}
+        {% endfor %}
+       ],
+      "description": {{product.description | json}},
+      "sku": {{product.sku | json}},
+      "brand": {
+        "@type": "Thing",
+        "name": {{product.brand.name | json}}
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "EUR",
+        "price": "{{product.price.value}}",
+        "itemCondition": "http://schema.org/UsedCondition",
+        "availability": "{{schema_stock}}",
+        "seller": {
+          "@type": "Organization",
+          "name": {{site.name | json}}
+        }
       }
     }
-  }
-</script>
-
+  </script>
 {% endblock %}
 
 {% block 'body/content' %}
-
   {% if product == null %}
-    {% assign product_variant = store.products.first %}
+    {% assign variant = store.products.first %}
   {% endif %}
 
   {% if params.ref %}    
     {% for var in product.variants %}
       {% if var.sku == params.ref %}
-        {% assign product_variant = var %}
+        {% assign variant = var %}
       {% endif %}
     {% endfor %}
   {% endif %}
-  {% if product_variant == null %}
-    {% assign product_variant = product %}
+  {% if variant == null %}
+    {% assign variant = product %}
   {% endif %}
 
+  <div class="product-page" up-viewport id="product-page-{{variant.objectID}}">
+    <nav aria-label="breadcrumb" class="product-breadcrumb">
+      <ol class="breadcrumb pl-0 d-none d-sm-inline-block">
+        <li class="breadcrumb-item d-inline-block ">
+          <a href="{% path_to 'home' %}">
+            {{ 'home' | translate }}
+          </a>
+        </li>
+      {% for category in variant.categories %}
+        <li class="breadcrumb-item d-inline-block" >
+          <a href="{{category.url_key | prepend: url_base}}" class="text-gray-darker">
+            {{category.name}}
+          </a>
+        </li>
+      {% endfor %}
+        <li class="breadcrumb-item active d-none d-xl-inline-block">
+          {{variant.model.name}}
+        </li>
+      </ol>
+    </nav>
+    <div class="d-block d-sm-none  pt-4">
+      {% for category in variant.categories %}
+      <a href="{{category.url_key | prepend: url_base}}" class="btn btn-outline-dark btn-sm">
+        {{category.name}}
+      </a>
+      {% endfor %}
+    </div>
+    <a class="product-attr product-title" href="{{product_variant.url_key  | prepend: url_base}}">
+      <h1 class="product-model-name">
+        {{variant.model.name}}
+      </h1>
+    </a>
+    <div class="product-attr product-social-share">
+      {% include social_share %}
+    </div>
+    <div class="product-attr product-shortdesc" id="product-shortdesc">
+      <div class="content">
+        {{variant.short_description}}
+      </div>
+      {% if variant.description != "" and  variant.description != null %}
+        <a href="#product-description" class="product-desc-link">
+          {{'product_desc_link' | translate }}
+        </a>
+      {% endif %}
+    </div>
+    <div class="product-attr product-category" id="product-category">
+      <a href="{{ variant.categories.last.url_key | prepend: url_base }}">
+        <u>{{ variant.categories.last.name}}</u>
+      </a>
+    </div>
+    {% if variant.brand.name %}
+      <div class="product-attr product-brand">
+        {{variant.brand.name }}
+      </div>
+    {% endif %}
+    <div class="product-attr product-image">
+      {% include 'product_images' with 
+        product_variant: variant, 
+        thumb_position: 'left'
+      %}
+    </div>
 
-  {% section 'product_page', placement: 'top' %}
+    <div class="product-attr product-price">
+      {%if variant.price.discount > 0%}
+        <div class="badge badge-discount p-2">
+          <div class="label">{{'product_discount_label' | translate}}</div>
+          <div class="value">
+            -{{variant.price.discount | round }} %
+          </div> 
+        </div>
+        <s class="price-original">
+          {% include 'currency' | value: variant.price.original_value %}  
+        </s>
+      {% endif %}
+      <span class="price-value">
+        {% include 'currency' | value: variant.price.value %}
+      </span>
+      {% if variant.pricelist.tax_included == true %}
+        <sub>{{'product_vat_inc' | translate}}</sub>
+      {% endif %}
+    </div>
+    <div class="product-attr product-cart">
+      <form method="POST" action="/invader/cart/add_item" data-shopinvader-form class="add-to-cart">
+        <input type="hidden" name="invader_success_url" value="{{variant.url_key  | prepend: url_base}}?addtocart_product_id={{variant.objectID}}" />
+        <input type="hidden" name="invader_error_url" value="{{variant.url_key  | prepend: url_base}}" />
+        <input type="hidden" name="product_id" value="{{variant.objectID }}">
+        <div class="row form-horizontal product-form-qty d-none d-sm-block">
+          <label for="qty" class="col-4 col-sm-5 col-xl-12 control-label text-right text-xl-center">
+            {{'product_quantity' | translate}}
+          </label>
+          <div class="col-8 col-xl-12">
+            {% include 'product_qty_input' with qty:1 %}
+          </div>
+        </div>
+        <div class="row">
+        {% if variant.stock.global.state != null and  variant.stock.global.state != ''%}
+          <div class="col-12 text-left product-stock-state">
+            <span class="{{variant.stock.global.state}}">
+              {{variant.stock.global.state | prepend: 'product_stock_state_' | translate}}
+            </span>
+          </div>
+        {% endif %}
+        {% if variant.stock.global.state =='in_stock' or variant.stock.global.state == 'in_limited_stock' %}
+          <div class="col-12  text-right d-none d-sm-block">
+            <button type="submit" class="btn btn-success btn-lg btn-block">
+              {{"product_add_to_cart" | translate }}
+            </button>
+          </div>
+        {% endif %}
+        </div>
+      </form>
+    </div>
+    <div class="product-attr product-variant-selector data" id="variant-selector">
+      {% if variant.variant_selector.size > 0 %}
+        <div class="title">
+          {{'product_variant_title' | translate }}
+        </div>
+        {% for variant_item in variant.variant_selector %}
+          <div>
+            <div class="variant-title">
+              {{ variant_item.name }}
+            </div>
+            <div>
+              {% for variant_item in variant.variant_selector %}
+                {% if variant_item.values.size > 1 %}
+                  <div>
+                    <div class="variant-title">
+                      {{ variant_item.name }}
+                    </div>
+                    <div>
+                      {% for item in variant_item.values %}
+                        {% assign item_disabled = '' %}
+                        {% if item.selected %}
+                          {% assign item_css = 'btn-primary' %}
+                        {% else %}
+                          {% assign item_css = 'btn-outline-dark' %}
+                        {% endif %}
+                        {% if item.available != true %}
+                          {% assign item_disabled = "disabled='disabled'" %}
+                        {% endif %}
+                        <button class="btn btn-sm {{item_css}}" {{item_disabled}} 
+                          up-target=".product-page" 
+                          up-href="{{variant.url_key}}?ref={{item.sku}}">
+                          {{item.name}}
+                        </button>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class="product-attr product-desc data" id="product-description">
+    {% if variant.description != "" and  variant.description != null %}
+      <div class="title">
+        {{'product_overview_tab' | translate }}
+      </div>
+      <div class="content">
+        {{variant.description}}
+      </div>
+    {% endif %}
+    </div>
+    <div class="product-attr product-model-attr">
+      {% if variant.variant_attributes.size > 0 %}
+        {% for attr in variant.variant_attributes %}
+          <span class="badge badge-secondary">
+            {{attr[0]}} <b>{{attr[1]}}</b>
+          </span>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class="product-attr product-variant-list">
+      {% if product.variants.size > 0 %}
+        <div class="title">
+          {{'product_variant_title' | translate }}
+        </div>
+        <div class="list">
+          {% assign css_item = '' %}
+          {% if product == variant %}
+            {% assign css_item = 'active' %}
+          {% endif %}
+          <div class="item {{css_item}}">
+            {% include 'product_variant_thumbnail' with variant: product %}
+          </div>
+          {% for product_variant in product.variants %}
+            {% assign css_item = '' %}
+            {% if product_variant == variant %}
+              {% assign css_item = 'active' %}
+            {% endif %}
+            <div class="item {{css_item}}">
+              {% include 'product_variant_thumbnail' with variant: product_variant %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+    <div class="product-attr product-cross-sellings">
+      {% if variant.cross_sellings.size > 0 %}
+        <div class="title">
+          {{'product_cross_sellings_title' | translate }}
+        </div>
+        <div class="list">
+          {% for cross in variant.cross_sellings %}
+            {% assign cross_sellings = cross_sellings | append: cross.id | append:','%}
+          {% endfor %}
+          {% assign cross_sellings = cross_sellings | split:','%}
+          {% with_scope objectID.in: cross_sellings, objectID.nin:[variant.objectID], main: true %}
+            {% for product_cross in store.products %}
+              <div class="item">
+                {% include 'product_thumbnail' with product: product_cross %}
+              </div>
+            {% endfor %}
+          {% endwith_scope %}
+        </div>
+      {% endif %}
+    </div>
+    <div class="product-attr product-up-sellings">
+      {% if variant.up_sellings.size > 0 %}
+        <div class="title">
+          {{'product_up_sellings_title' | translate }}
+        </div>
+        <div class="list">
+          {% for cross in variant.up_sellings %}
+            {% assign up_sellings = up_sellings | append: cross.id | append:','%}
+          {% endfor %}
+          {% assign up_sellings = up_sellings | split:','%}
+          {% with_scope objectID.in: up_sellings, objectID.nin:[variant.objectID], main: true %}
+            {% for product_up in store.products %}
+              <div class="item">
+                {% include 'product_thumbnail' with product: product_up %}
+              </div>
+            {% endfor %}
+          {% endwith_scope %}
+        </div>
+      {% endif %}
+    </div>
+    <div class="product-attr product-technical_details">
+      {% if variant.technical_details.size > 0 %}
+        <div class="title">
+          {{ 'product_variant_title' | translate  }}
+        </div>
+        <div class="row">
+          <div class="col-lg-7">
+            <h2>{{'product_spec_title' | translate }}</h2>
+            <table class="table table-striped">
+              <tbody>
+              {% for details in variant.technical_details %}
+                <tr>
+                  <td>{{details.name}}</td>
+                  <td>{{details.value}}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="col-lg-7">
+          {% if variant.technical_media.size > 0 %}
+            <h2 class="text-2xl title-separator">
+              {{ 'item_documentation' | translate }}
+            </h2>
+            <ul>
+            {% for media_file in variant.technical_media %}
+              <li>
+                <i class="fa fa-fw fa-lg color-info ico-document-{{ media_file.type }}"></i>&nbsp;
+                <a href="{{media_file.url}}" class="text-lg" target="_blank">
+                  {{ media_file.type | prepend: 'product_document_' | translate }}
+                </a>
+              </li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
   {% sections_dropzone %}
- 
 {% endblock %}

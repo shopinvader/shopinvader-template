@@ -5,10 +5,7 @@ icon: header
 keep_name: true
 keep_icon: true
 id: header
-settings:
-- label: Fixed header
-  id: fixed_position
-  type: checkbox
+settings: []
 blocks:
 - name: Brand Logo
   type: logo
@@ -180,8 +177,6 @@ blocks:
     type: checkbox
     default: true
 default:
-  settings:
-    fixed_position: false
   blocks:
   - type: row
     settings:
@@ -276,7 +271,7 @@ default:
   {% endfor %}
 </style>
 
-<div class="header {% if section.settings.fixed_position %}fixed{%endif%}  header-theme-{{section.settings.theme_color}}">
+<div class="header">
   <div class="container-fluid">
     <div class="row align-items-center justify-content-{{section.settings.cells_align}}">
       {% for block in section.blocks %}
@@ -302,7 +297,7 @@ default:
 
           {% assign css_cell = "align-self-center col-auto "%}
           {% if block.type == "navigation" or block.settings.display_sm_icon == false%}
-            {% assign css_cell = css_cell | append:" d-none d-md-block"%}
+            {% assign css_cell = css_cell | append:" d-none d-md-flex"%}
           {% endif %}
           {% if block.settings.stretch == true%}
             {% assign css_cell = css_cell | append: " flex-grow-1"%}
@@ -314,7 +309,6 @@ default:
           {% endif %}
 
           <div class="header-block header-block-{{ block.type }} {{css_cell}} block">
-            {% include 'block_debug' %}
             {% case block.type %}
               {% when "currency_selector" %}
                 {% include 'nav_currencies' %}
@@ -330,7 +324,6 @@ default:
                     </a>
                   {%endfor%}
                 {% endif %}
-                
               {% when "logo" %}
                 <div class="{{block.settings.align_img}}">
                   <div class="header-block-menu d-inline d-md-none">
@@ -434,53 +427,46 @@ default:
                   </a>
                 {% endcapture %}
               {% when "navigation" %}
-                <div class="w-100 header-block-navigation collapse d-md-block" >
+                <div class="navigation collapse d-md-flex" >
                   <ul class="list-inline m-0 d-flex row">
                     {% with_scope level: 0 %}
                       {% for category_level1 in store.categories %}
-                        <li class="list-inline-item pr-3 pl-3 pt-3 pb-3 col-12 col-md-auto">
-                          <a href="{{category_level1.url_key  | prepend: url_base }}" class="font-weight-bold text-dark">
+                        <li class="list-inline-item category col-12 col-md-auto">
+                          <a href="{{category_level1.url_key  | prepend: url_base }}">
                             {{ category_level1.name}}
                           </a>
-                          <div class="list-inline-dropdown p-3 p-md-4">
-                            <div class="row ">
-                              <div class="col-12">
-                                <div class="h4 text-uppercase pb-3 d-none d-md-block">
-                                  {{ category_level1.name}}
-                                </div>
-                                <ul class="row p-0">
-                                  {% for category_level2 in category_level1.childs %}
-                                    <li class="col-12 col-md-4 pb-2 pt-2">
-                                      <div >
-                                        <a href="{{ category_level2.url_key | prepend: url_base}}" class="h5">
-                                          {{ category_level2.name}}
-                                        </a>
-                                      </div>
-                                      <ul class="p-0 m-0">
-                                      {% for category_level3 in category_level2.childs %}
-                                        <li class="pb-2 pt-2">
-                                          <a href="{{ category_level3.url_key | prepend: url_base}}">
-                                            {{ category_level3.name }}
-                                          </a>
-                                        </li>
-                                      {% endfor %}
-                                      </ul>
+                          <div class="list-inline-dropdown">
+                            <div class="title">
+                              {{ category_level1.name}}
+                            </div>
+                            <ul class="items">
+                              {% for category_level2 in category_level1.childs %}
+                                <li class="column">
+                                  <div >
+                                    <a href="{{ category_level2.url_key | prepend: url_base}}" class="h5">
+                                      {{ category_level2.name}}
+                                    </a>
+                                  </div>
+                                  <ul>
+                                  {% for category_level3 in category_level2.childs %}
+                                    <li>
+                                      <a href="{{ category_level3.url_key | prepend: url_base}}">
+                                        {{ category_level3.name }}
+                                      </a>
                                     </li>
                                   {% endfor %}
-                                </ul>
-                              </div>
-                              <div class="col-12 col-md-4">
-                                {{ category_nav.images}}
-                              </div>
-                            </div>
+                                  </ul>
+                                </li>
+                              {% endfor %}
+                            </ul>
                           </div>
                         </li>
                       {% endfor%}
                     {% endwith_scope %}
                     {% for page_nav in site.pages %}
                       {% if page_nav.listed? and page_nav.published? and page_nav.depth <= 1%}
-                        <li class="list-inline-item pr-3 pl-3 pt-3 pb-3 col-12 col-md-auto">
-                          <a href="{% path_to page_nav %}" class="font-weight-bold text-dark">
+                        <li class="list-inline-item page page-{{page_nav.handle}} col-12 col-md-auto">
+                          <a href="{% path_to page_nav %}" >
                             {{ page_nav.title}}
                           </a>
                         </li>

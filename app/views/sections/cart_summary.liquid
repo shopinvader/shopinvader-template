@@ -1,0 +1,52 @@
+---
+name: Cart Summary
+icon: list
+keep_icon: true
+keep_name: true
+settings:
+- label: "Title"
+  id: title
+  type: text
+- label: "Description"
+  id: title
+  type: desc
+  html: true
+- label: "Button label"
+  id: submit_label
+  type: text
+blocks: []
+---
+{% assign cart = store.cart %}
+{% assign title = section.settings.total_title %}
+{% assign submit_label = section.settings.submit_label %}
+{% if cart.lines.count > 0 %}
+  <div class="container cart cart-summary" id="{{ section.anchor_id }}" {{ section.locomotive_attributes }}>
+    <div class="cart-title">
+      {{section.settings.title}}
+    </div>
+    <div class="cart-items">
+      {% for cart_line in cart.lines.items %}
+        <div class="cart-item">
+          {% include 'cart_line' 
+            with cart_line,
+            readonly: false
+          %}
+        </div>
+      {% endfor%}
+    </div>
+    <div class="cart-desc">
+      {{section.settings.desc}}
+    </div>
+    {% include 'cart_total' 
+      with cart: store.cart,
+      display_lines: false,
+      display_submit: true,
+      cart_current_step: 'cart_index',
+      cart_next_step: 'cart_login'
+    %}
+  </div>
+{% else %}
+  <div class="container text-center pt-3 pb-3">
+    {{'cart_empty' | translate }}
+  </div>
+{% endif %}

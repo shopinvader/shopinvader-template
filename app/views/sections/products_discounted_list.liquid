@@ -1,27 +1,20 @@
 ---
-{
-  "name": "Products Discounted List",
-  "class": "",
-  "icon": "list",
-  "settings": [
-    {
-      "label": "Header",
-      "id": "header",
-      "type": "text",
-      "html": true
-    }
-  ],
-  "presets": [{
-    "name": "Posts",
-    "category": "Blog",
-    "settings": {
-      "header": "<h1>Best deal today !</h1>",
-      "item_limit": 6
-    }
-  }]
-}
+name: Products Discounted List
+class: ''
+icon: list
+settings:
+- label: Header
+  id: header
+  type: text
+  html: true
+presets:
+- name: Posts
+  category: Blog
+  settings:
+    header: "<h1>Best deal today !</h1>"
+    item_limit: 6
 ---
-{% with_scope price.gt: {default: {discount: 0}} %}
+{% with_scope price.gt: {default: {discount: 0}}, main: true %}
   {% if store.products | count > 0 %}
     <div class="container pt-5 pb-5">
       <div class="row pb-4">
@@ -41,7 +34,6 @@
                       {% assign thumb_order = thumb_order | plus: 1 %}
                       <div class="col-12 col-sm-6 col-md-3 col-xl-3 p-1">
                         <div class=" h-100">
-
                           {% include 'product_thumbnail' with
                              product
                           %}

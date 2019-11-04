@@ -233,7 +233,6 @@ default:
             {% assign next_block = section.blocks[forloop.index] %}
                        
             <div class="block {{ css_cell }}">
-              {% include 'block_debug' %}
               {% if cell.type == "cell_image" %}
                 <img src="{{cell.settings.picture}}" alt="{{cell.settings.picture_alt}}" class="img-fluid">
                 <div>

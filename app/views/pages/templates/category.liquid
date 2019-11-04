@@ -3,4 +3,8 @@ title: Category
 published: true
 handle: category
 ---
-{% extends 'layouts/faceting' %}
+{% extends 'layouts/default' %}
+
+{% block 'body/content' %}
+  {% section 'searchkit_faceting' %}
+{% endblock %}

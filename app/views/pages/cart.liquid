@@ -7,35 +7,11 @@ slug: cart
 seo_title: My shopping cart | Shopinvader demo
 position: 100
 sections_content:
-  cart:
+  cart_summary:
     settings:
-      large_size: false
-      submit_label: Continue
-      cart_current_step: cart_index
-      cart_next_step: cart_login
-      cart_next_page: cart/login
-      origin_data: cart
-    blocks:
-    - type: cell_text
-      settings:
-        cell_size: 100
-        content: "<h3>My Shopping cart</h3>"
-    - type: cart_lines
-      settings:
-        cell_size: 70
-        display_border: true
-        table_layout: card
-        readonly: false
-        theme_color: border
-    - type: cart_summary
-      settings:
-        cell_size: 30
-        title: My order
-        display_lines: false
-        theme_color: border
-        display_border: false
-        display_submit: true
-
+      title: "My Shopping cart"
+      desc: "Lorem Ipsum..."
+      submit_label: "Continue"
 sections_dropzone_content:
   - type: cards
     settings:
@@ -67,22 +43,9 @@ sections_dropzone_content:
 ---
 {% extends 'layouts/default' %}
 {% block 'body/content' %}
-  {% if store.cart.lines.count > 0 %}
-    <div class="pt-5">
-      {% section 'cart' %}
-    </div>
-  {% else %}
-    <div class="container pt-3 pb-5 " id="cart" data-shopinvader-container >
-      <div class="alert alert-primary mb-5 mt-5 lead text-center">
-        {{"cart_empty" | translate}}
-      </div>
-      <div class="text-center">
-        <a class="btn btn-outline-dark  font-weight-bold text-uppercase btn-lg" href="{% path_to home %}">
-          {{"cart_continue_shopping" | translate}} <i class="fa fa-chevron-right"></i>
-        </a>
-      </div>
-    </div>
-    
-  {% endif %}
+  {% global_section 'cart_breadcrumb' %}
+  <div data-shopinvader-container id="cart-content">
+    {% section 'cart_summary' %}
+  </div>
   {% sections_dropzone %}
 {% endblock %}

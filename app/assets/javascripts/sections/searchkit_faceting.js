@@ -42,14 +42,25 @@ const Section = {
     const searchkit = new SearchkitManager(url.href);
     const locale = container.dataset.locale.replace('_', '-');
     if(container.dataset.filterKey) {
-      searchkit.addDefaultQuery((query)=> {
-        return query.addQuery(
-          MatchQuery(
-            container.dataset.filterKey, 
-            container.dataset.filterValue, 
-            null)
-          );
-      });
+      if (container.dataset.filterType == 'gt') {
+        searchkit.addDefaultQuery((query)=> {
+          return query.addQuery(
+            RangeQuery(
+              container.dataset.filterKey, 
+              {'gt': container.dataset.filterValue})
+            );
+        });
+      }
+      else {
+        searchkit.addDefaultQuery((query)=> {
+          return query.addQuery(
+            MatchQuery(
+              container.dataset.filterKey, 
+              container.dataset.filterValue, 
+              null)
+            );
+        });
+      }
     }
     searchkit.addDefaultQuery((query)=> {
       return query.addQuery(

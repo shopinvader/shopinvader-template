@@ -1,25 +1,20 @@
 ---
-title: Cart Step 4
+title: Cart Step 3
 position: 103
-seo_title: Livraison - Ediwall
-slug: delivery
-handle: cart_delivery
-listed: false
 published: true
-is_layout: false
-sections_content: 
-  cart:
+listed: false
+handle: cart_delivery
+slug: delivery
+seo_title: Choose your carrier | Shopinvader demo
+sections_content:
+  cart_delivery:
     settings:
-      large_size: false
-      submit_label: Continuer
-      cart_current_step: cart_delivery
-      cart_next_step: cart_checkout
-      cart_next_page: cart_checkout
-      origin_data: cart
-    blocks:
-    - type: cart_delivery
-      settings:
-        cell_size: 75
-        title: "<h3>Delivery</h3>"
+      title: Delivery
+      submit_label: Continue
+    blocks: []
 ---
+
 {% extends 'layouts/checkout' %}
+{% block 'body/cart_content' %}
+  {% section cart_delivery %}
+{% endblock %}

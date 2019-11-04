@@ -2,7 +2,7 @@ const path = require('path');
 const Webpack = require('webpack');
 const globImporter = require('node-sass-glob-importer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const postcssGapProperties = require('postcss-gap-properties');
 module.exports = {
   entry: [
     './app/assets/javascripts/app.js',
@@ -21,24 +21,52 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
+            sourceMap: true,
             presets: ['@babel/preset-env']
           }
         }
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          { loader: 'postcss-loader', options: {
+            sourceMap: true,
+            ident: 'postcss',
+            plugins: () => [
+              postcssGapProperties(/* pluginOptions */)
+            ]
+          } }
+        ],
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', {
-          loader: 'sass-loader',
-          options: {
-            sassOptions: {
-              importer: globImporter()
+        use: [
+          'style-loader', 
+          MiniCssExtractPlugin.loader, 
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                sourceMap: true,
+                importer: globImporter()
+              }
             }
           }
-        }]
+        ]
       },
       {
         test: /\.(woff2?|svg)$/,

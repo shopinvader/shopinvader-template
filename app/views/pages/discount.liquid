@@ -1,0 +1,19 @@
+---
+title: Discount
+slug: discount
+position: 100
+listed: true
+published: true
+is_layout: false
+handle: discount
+sections_content:
+  searchkit_faceting:
+    settings:
+      title: "Best deals !"
+      only_discount: true
+---
+{% extends 'layouts/default' %}
+
+{% block 'body/content' %}
+  {% section 'searchkit_faceting' %}
+{% endblock %}
