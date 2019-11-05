@@ -98,6 +98,21 @@ $(document).ready(function() {
       $('#header-search-input').autocomplete('close');
     }
   });
+  $('.algolia-autocomplete').on('click', '.btn-search-product', function(event) {
+    var search_queries = get_search_history();
+    if(search_queries.indexOf($(this).data('search')) == -1) {
+      search_queries.push($(this).data('search'));
+      document.cookie = 'search_queries='+JSON.stringify(search_queries);
+      document.location =  $(this).data('href')+'?q='+$(this).data('search');
+    }
+
+  });
+  $('.algolia-autocomplete').on('click', '.btn-history-clear', function(event) {
+    $queries_history = $(this).parents('.queries-history');
+    $queries_history.hide();
+    $queries_history.find('.items').html('');
+    document.cookie = 'search_queries=[]';
+  });
 });
 
 var hogan_helpers = {
@@ -185,13 +200,38 @@ var hogan_helpers = {
     }
   }
 }
-
+function get_search_history() {
+  var cookies_str = document.cookie.split('; ');
+  var cookies = [];
+  for( var i in cookies_str) {
+    var cookie = cookies_str[i].split('=');
+    cookies[cookie[0]] = cookie[1];
+  }
+  var search_queries = cookies['search_queries'];
+  if(search_queries != '' && search_queries != null) {
+    return JSON.parse(search_queries);
+  }
+  else {
+    return [];
+  }
+}
 
 function search_template_link(template, query, result) {
   if(result.nbHits > 1) {
-    var search_path = template.find('.btn-search-product').data('href');
-    template.find('.btn-search-product').attr('href', search_path+'?q='+query.query)
+    var $btn_search = template.find('.btn-search-product');
+    var search_path = $btn_search.data('href');
+    $btn_search.attr('data-search', query.query);
     template.find('.nb_hits').html(' ('+result.nbHits+')');
+    var last_queries = get_search_history();
+    if(last_queries.length > 0) {
+      var $queries_history = template.find('.queries-history');
+      $queries_history.show();
+      $queries_history.find('.items').html('');
+      for(var i in last_queries) {
+        var $item_query = $('<a>').html(last_queries[i]).attr('href', search_path+'?q='+last_queries[i]);
+        $item_query.appendTo($queries_history.find('.items'));
+      }
+    }
     return template.html();
   }
   else {

@@ -253,9 +253,36 @@
 		}
 	} 
 	.aa-dataset-category {
+		padding-bottom: .5rem;
+		padding-top: .5rem;
 		.category-link {
 			font-size: .85rem;
+			line-height: 1.1;
 			color: theme-color('dark') !important;
+		}
+	}
+
+}
+.queries-history {
+	border-bottom: 1px solid $border-color;
+	text-align: left;
+	padding-bottom: .8rem;
+	padding-top: .8rem;
+	display: none;
+	.title {
+		font-size: .85rem;
+		font-weight: bold;
+		line-height: 1.1;
+	}
+	.items {
+		padding-top: .5rem;
+		a {
+			font-size: .8rem;
+			padding: .2rem;
+			color: theme-color('dark');
+			border: 1px solid theme-color('dark');
+			border-radius: .2rem;
+			margin-right: .5rem;
 		}
 	}
 }

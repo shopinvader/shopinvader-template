@@ -618,6 +618,12 @@ rating_comment_count_other:
 rating_last_review:
   en: Last review
   fr: Avis le plus récent
+search_history:
+  en: Latest search
+  fr: Dernières recherches
+search_history_clear:
+  en: Clear history
+  fr: Supprimer l'historique
 search_filter_title:
   en: Search
   fr: Rechercher

@@ -29,10 +29,21 @@
     <div id="header-search-product-link">
       <div class="row">
         <div class="col-12 text-center pt-2 ">
-          <a data-href="{% path_to search %}" href="#" class="btn btn-primary btn-sm btn-search-product">
+          <button data-href="{% path_to search %}" type="button" class="btn btn-primary btn-sm btn-search-product">
             {{ 'search_product_all' | translate }}
             <span class="nb_hits"></span>
-          </a>
+          </button>
+          <div class="queries-history">
+            <div class="title">
+              {{ 'search_history' | translate }}
+            </div>
+            <div class="items"></div>
+            <div>
+              <button class="btn btn-link btn-sm btn-history-clear" type="button">
+                {{ 'search_history_clear' | translate }}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
