@@ -127,6 +127,7 @@ class FacetingSearch {
         attributeName: $element.data('filter-attr'),
         sortBy: ['isRefined', 'name:asc'],
         operator: 'or',
+
         templates: {
           header: '<h4 class="text-uppercase">'+$element.data('filter-name')+'</h4>'
         },
@@ -156,7 +157,7 @@ class FacetingSearch {
             return element;
           }
         },
-        autoHideContainer: false,
+        autoHideContainer: true,
       };
       this.set_widget(
         instantsearch.widgets[widget_type](search_widget)
@@ -209,7 +210,6 @@ class FacetingSearch {
     );
   }
   init_hits_container() {
-    console.log('init_hits_container', $('[data-filter-widget=results]'));
     if($('[data-filter-widget=results]')) {
       var $this = this;
       $('[data-filter-widget=results]').html('');
@@ -429,7 +429,6 @@ class FacetingSearch {
 }
 class product_display {
   static init() {
-    console.log('init product display');
     if(this.get_cookies() == null){
       this.set_cookies('list');
     }
@@ -452,7 +451,6 @@ class product_display {
     $('[data-toggle="product-list-display"][data-value="'+display_mode+'"]')
       .removeClass('btn-outline-dark')
       .addClass('btn-primary');
-    console.log('display_mode', display_mode);
   }
   static set_cookies(display){
     document.cookie = "product_display="+display; 
@@ -462,13 +460,9 @@ class product_display {
     var cookies = [];
     for( var i in cookies_str) {
       var cookie = cookies_str[i].split('=');
-      console.log(cookies_str[i]);
       cookies[cookie[0]] = cookie[1];
     }
-    console.log('cookies', cookies_str);
     return cookies['product_display'];
-    
-    //return Cookies.get('product_display');
   }
   static set_display(mode){
     if(mode != null) {
@@ -503,7 +497,6 @@ var faceting_search = null;
 
 function faceting_start() {
   product_display.init();
-  console.log('algolia_params', algolia_params);
   faceting_search = new FacetingSearch(algolia_params);
   faceting_search.start();
   $('[data-locomotive-section-type="algolia_faceting"]').delay(300).animate({opacity: 1}, 1000);
