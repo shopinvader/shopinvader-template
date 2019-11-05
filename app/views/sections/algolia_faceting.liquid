@@ -35,6 +35,9 @@ default:
   {% assign short_description = category.short_description %}
   {% assign description = category.description %}
   {% assign filters = category.filters %}
+  {% if filters.size == 0 %}
+    {% assign filters = store.all_filters %}
+  {% endif %}
 {% else %}
   {% assign title = section.settings.title %}
   {% assign short_description = section.settings.short_description %}
@@ -67,7 +70,6 @@ default:
           <div class="row flex-nowrap justify-content-between">
             <div class="col-auto pt-4 pb-4 h3">
               {{'filters' | translate}}
-
             </div>
             <div class="col-auto pt-4 pb-4 d-md-none">
               <a href="#filter-list" class="text-dark" data-toggle="collapse">
