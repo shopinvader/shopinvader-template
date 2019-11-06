@@ -1,0 +1,20 @@
+.form-group {
+	label {
+		padding-bottom: .1rem;
+		margin-bottom: 0rem; 
+		&:not(.form-check-label) {
+			font-weight: bold;
+			font-size: .8rem;
+		}
+		&.required {
+			&:after {
+				content:'*';
+				color:theme-color('danger');
+				padding-left: .2rem;
+			}
+		}
+	}
+	.form-control {
+		border-radius: 0;
+	}
+}
