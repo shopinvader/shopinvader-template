@@ -640,11 +640,17 @@ signin_password:
   en: Password
   fr: Mot de passe
 signin_password_confirm:
-    en: Confirm password
-    fr: Confirmer mon mot de passe
+  en: Confirm password
+  fr: Confirmer mon mot de passe
 signin_password_new:
-    en: New password
-    fr: Nouveau mot de passe
+  en: New password
+  fr: Nouveau mot de passe
+signin_password_spec:
+  en: Password must be at least 6 characters
+  fr: Votre mot de passe doit contenir 6 caractères
+signin_newsletter:
+  en: Tick here if you want to receive informations and offers about products and services by email.
+  fr: Je m'abonne à la Newsletter pour bénéficier des meilleurs offres.
 signin_submit:
   en: Register my account
   fr: Créer mon compte

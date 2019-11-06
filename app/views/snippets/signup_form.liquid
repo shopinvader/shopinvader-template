@@ -1,9 +1,6 @@
 {% if auth_invalid_entry %}
 <div class="alert alert-danger">
-  {% editable_text "register_error", label: "Register error", format: "html" %}
-    <div class="h3">Something went wrong</div>
-    <p>Please check input form and try again</p>
-  {% endeditable_text %}
+  {{'account_password_reset_error' | translate }}
 </div>
 {% endif %}
 <div class="card  shadow-sm">
@@ -54,9 +51,7 @@
     </div>
     <div class="row">
       <div class="col-12 text-muted small">
-        {% editable_text "signup_password_help", label: "Signup password help block", format: "html" %}
-          Password must be at least 6 characters
-        {% endeditable_text %}
+        {{'signin_password_spec' | translate }}
       </div>
     </div>
   </div>
@@ -72,9 +67,7 @@
       <div class="form-check">
         <label class="form-check-label">
           <input class="form-check-input" type="checkbox"  name="opt_in" autocomplete="off">
-          {% editable_text "signup_newsletter_label", label: "Signup newsletter label", format: "html" %}
-            Tick here if you want to receive informations and offers about products and services by email.
-          {% endeditable_text %}
+          {{'signin_newsletter' | translate }}
         </label>
       </div>
     </div>
