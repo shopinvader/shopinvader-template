@@ -1,0 +1,211 @@
+---
+name: Algolia faceting
+class: section-algolia-faceting
+icon: default
+settings:
+- label: Title
+  id: title
+  type: text
+- label: short description
+  id: short_description
+  type: text
+  html: true
+- label: Description
+  id: description
+  type: text
+  html: true
+blocks: []
+default:
+  settings:
+    title: Search
+---
+
+{% capture js_algolia %}
+  {% include algolia_init %}  
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.9.0/dist/instantsearch.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.9.0"></script>
+  <script src="{{ 'algolia_faceting_currency.js' | javascript_url }}"></script>
+  <script src="{{ 'algolia_faceting.js' | javascript_url }}?category={{category.name}}"></script>
+{% endcapture %}
+{% assign js_footer = js_footer | append: js_algolia %}
+
+
+{% if category != null %}
+  {% assign title = category.name %}
+  {% assign short_description = category.short_description %}
+  {% assign description = category.description %}
+  {% assign filters = category.filters %}
+  {% if filters.size == 0 %}
+    {% assign filters = store.all_filters %}
+  {% endif %}
+{% else %}
+  {% assign title = section.settings.title %}
+  {% assign short_description = section.settings.short_description %}
+  {% assign description = section.settings.description %}
+  {% assign filters = store.all_filters %}
+{% endif %}
+
+<div class="container-fluid algolia-faceting">
+  <div class="row search-layout-column">
+    <div class="col-12 col-md-4 col-lg-3 col-xl-2 border-right">
+      <div class="row d-flex d-md-none align-items-center">
+        <div class="col-8 ">
+          <div class="pt-2 pb-0 pt-md-4 pb-md-4">
+            <h1 class="m-0 text-truncate">
+              {{title}}
+            </h1>
+          </div>
+        </div>
+        <div class="col-4 text-center">
+          <a href="#filter-list" class="btn btn-outline-dark" data-toggle="collapse">
+            <i class="fas fa-filter"></i> {{'filters' | translate}}
+          </a>
+        </div>
+        <div class="col-12">
+          <p class="m-0">{{short_description}}</p>
+        </div>
+      </div>
+      <div class="row collapse d-md-flex" id="filter-list">
+        <div class="col-12">
+          <div class="row flex-nowrap justify-content-between">
+            <div class="col-auto pt-4 pb-4 h3">
+              {{'filters' | translate}}
+            </div>
+            <div class="col-auto pt-4 pb-4 d-md-none">
+              <a href="#filter-list" class="text-dark" data-toggle="collapse">
+                <i class="fas fa-times fa-2x"></i>
+              </a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="small col-12 text-left font-weight-light d-md-none" data-filter-widget="stats"></div>
+            {% for filter in filters %}
+              <div class="col-12 col-sm-6 col-md-12 pb-4">
+                <script type="text/html" class="filters-header-template" data-filter-header-id="{{filter.code}}">
+                  <div class="row">
+                    <div class="col-12">
+                      <div>
+                        <div class="h5">{{filter.name}}</div>
+                        {% if filter.help %}
+                          <a  data-toggle="modal" data-target="#help-{{filter.name | dasherize}}" href="#help-{{filter.name | dasherize}}" class=" help small btn btn-success">
+                            {{'search_filter_info' | translate}}
+                          </a>
+                        {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                </script>
+                <div
+                  data-filter-id="filter-{{filter.code}}"
+                  data-filter-widget-type="refinementList"
+                  data-filter-attr="{{filter.code}}"
+                  data-filter-name="{{filter.name}}"
+                  data-show-more-label="{{'search_show_more' | translate}}"
+                  data-filter-hit-limit='10'
+                  data-filter-collapse="false"
+                  >
+                </div>
+              </div>
+            {% endfor %}
+            <div class="col-12 col-sm-6 col-md-12 pb-4" data-filter-widget="sliderprice"></div>
+            <div class="col-12 col-sm-6 col-md-12 pb-4" data-filter-widget="current-filter"></div>
+          </div>
+        </div>
+        <div class="col-12 d-md-none bg-light text-center pt-2 pb-2">
+          <a href="#filter-list" class="btn btn-outline-dark" data-toggle="collapse">
+            {{'close' | translate}}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-8 col-lg-9 col-xl-10">
+      <div class="row">
+        <div class="col-12 d-none d-md-block">
+          <div class="p-1 pt-4">
+            <h1 class="h2">
+              {{title}}
+            </h1>
+            {% if category != null %}
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb p-0 ">
+                  <li class="breadcrumb-item">
+                      <a href="{{cat_parent.parent.url_key | prepend: url_base}}" class="text-dark">
+                        {{'home' | translate }}
+                      </a>
+                    </li>
+                  {% if category.parent %}
+                    {% assign  cat_parent = category.parent %}
+                    {% if cat_parent.parent %}
+                      <li class="breadcrumb-item">
+                        <a href="{{cat_parent.parent.url_key | prepend: url_base }}" class="text-dark">
+                          {{cat_parent.parent.name}}
+                        </a>
+                      </li>
+                    {% endif %}
+                    <li class="breadcrumb-item">
+                      <a href="{{cat_parent.url_key | prepend: url_base }}" class="text-dark">
+                        {{cat_parent.name}}
+                      </a>
+                    </li>
+                  {% endif %}
+                    <li class="breadcrumb-item">
+                      <a href="{{category.url_key | prepend: url_base }}" class="text-dark font-weight-bold"> {{category.name}}
+                      </a>
+                    </li>
+                  
+                </ol>
+              </nav>
+              <p>{{short_description}}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-between align-items-center pt-2 pb-2">
+        <div class="col-auto  d-none d-sm-block pt-2" id="product_display_control">
+          <button class="btn btn-sm " data-toggle="product-list-display" data-value="grid">
+            <i class="fas fa-th-large mr-1"></i>
+            <span class="d-none d-md-inline">
+              {{'product_display_grid' | translate}}
+            </span>
+          </button>
+          <button class="btn btn-sm " data-toggle="product-list-display" data-value="list">
+            <i class="fas fa-align-justify mr-1"></i>
+            <span class="d-none d-md-inline">
+              {{'product_display_list' | translate}}
+            </span>
+          </button>
+        </div>
+        <div class="col-auto d-flex justify-content-end align-items-center pt-2">
+          <div class="row">
+            <div class="col-auto d-none d-sm-block" data-filter-widget="stats"></div>
+            <div class="col-auto d-none d-sm-block" data-filter-widget="hits-per-page"></div>
+            <div class="col-12 col-sm-auto" data-filter-widget="paginate"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row d-none d-md-flex pb-2">
+        <div class="col-12" data-filter-widget="current-filter"></div>
+      </div>
+      <div class="row border border-left-0 border-right-0">
+        <div class="col-12" data-filter-widget="results" id="search-result" {% if category %}data-category="{{category.objectID}}"{% endif %}>
+          <div class="row m-0">
+            <div class="col-12 col-sm-4 col-md-6 col-lg-4 col-xl-3 product-col p-2  ">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-end align-items-center pt-2 pb-2 ">
+        <div class="col-auto" data-filter-widget="stats"></div>
+        <div class="col-auto" data-filter-widget="hits-per-page"></div>
+        <div class="col-auto" data-filter-widget="paginate"></div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="p-1">
+            <p>{{description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

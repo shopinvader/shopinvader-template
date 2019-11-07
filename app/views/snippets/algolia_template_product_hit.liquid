@@ -13,99 +13,41 @@
   {{=<% %>=}}
 
   {% endraw %}
-  
-  <div class="card product-thumbnail bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%endif%}" >
-    <div class="product-thumbnail-img ">
-      <div class="loader-icon"></div>
-      <a href="{{url_base}}<% url_key %>?ref=<% default_code %>">
-        <img class="group list-group-image card-img-top pr-2 pr-md-0" src="<%#helpers.imageDefault%>
+  <div class="product-thumbnail grid" id="product-hit-grid- <% objectID %>">
+    <div class="image">
+      <img
+      src="<%#helpers.imageDefault%>
         <% images.0.medium.src  %>
-        <%/helpers.imageDefault%>" class="img-responsive" alt="<% images.0.medium.alt  %>">
-      </a>
-      <%#price.discount %>
-      <div class="pb-1">
-        <div class="badge badge-warning p-2 badge-discount">
-          {{'product_discount_label' | translate}} <b>  -<% price.discount %> %</b>
-        </div>
-      </div>
-      <%/price.discount %>
+        <%/helpers.imageDefault%>"
+      alt="<% images.0.medium.alt  %>"
+      data-link="{{url_base}}<% url_key %>?ref=<% default_code %>"/>
     </div>
-    <div class="product-thumbnail-price card-body p-0 p-md-3 p-xl-2">
-      <div class="d-vertical-only">
-        <span class="small">
-          <small>{{'product_price_from' | translate}} </small>
-        </span>
-        <strong class="h5">
-          <span class="font-weight-bold <%#price.discount %>text-warning<%/price.discount %>">
+    <div class="content">
+      <div class="description">
+        <a href="{{url_base}}<% url_key %>?ref=<% default_code %>"  class="title">
+          <% model.name %>
+        </a>
+        <a href="{{url_base}}<% last_categorie.url_key %>" class="category">
+          <% last_categorie.name %>
+        </a>
+      </div>
+      <div class="price">
+        <%#price.discount %>
+          <div class="price_orignal">
+            <%#helpers.currency%>
+              <% price.original_value %>
+            <%/helpers.currency%>
+          </div>
+        <%/price.discount %>
+        <div class="price_value <%#price.discount %>discounted<%/price.discount %>">
           <%#helpers.currency%>
             <% price.value %>
           <%/helpers.currency%>
-          </span>
-          <%#price.discount %>
-            <span class="text-dark small">
-              <s>
-                <%#helpers.currency%>
-                  <% price.original_value %>
-                <%/helpers.currency%>
-              </s>
-            </span>
-          <%/price.discount %>
-        </strong>
-      </div>
-      <div class="d-horizontal-only">
-        <span class="small">
-          <small>{{'product_price_from' | translate}} </small>
-        </span>
-        <strong class="product-price-value">
-          <span class="font-weight-bold <%#price.discount %>text-warning<%/price.discount %>">
-            <%#helpers.currency%>
-              <% price.value %>
-            <%/helpers.currency%>
-          </span>
-          <%#price.discount %>
-            <span class="text-dark small">
-              <s>
-                <%#helpers.currency%>
-                  <% price.original_value %>
-                <%/helpers.currency%>
-              </s>
-            </span>
-          <%/price.discount %>
-        </strong>
-        <a href="{{url_base}}<% url_key %>?ref=<% sku %>"  class="btn btn-primary btn-block ">
-          {{'show_more' | translate}}
-        </a>
-      </div>
-    </div>
-    <div class="product-thumbnail-name card-bodyp-0 p-md-3 p-xl-2">
-      <div class="font-weight-bold">
-        <a href="{{url_base}}<% url_key %>?ref=<% sku %>" class="card-title">
-          <% model.name %>
-          <div class="small">
-            <%#short_name%>
-              <% short_name %>
-            <%/short_name%>
-          </div>
-        </a>
-      </div>
-      <a href="{{ url_base }}<% url_key %>?ref=<% sku %>#product-section-reviews" >
-        <%#helpers.ratingsStars%>
-          <% rating.summary.average  %>
-        <%/helpers.ratingsStars%>
-      </a>
-      <div class="card-text ">
-        <a href="{{url_base}}<% last_categorie.url_key %>" class="text-underline text-dark"><u><% last_categorie.name %></u></a>
-      </div>
-      <%#varianted%>
-      <div class=" pb-2">
-        <a href="{{url_base}}<% url_key %>?ref=<% sku %>" class="badge badge-secondary p-1">
-          {{'product_variants' | translate}}
-        </a>
-      </div>
-      <%/varianted%>
-      <div class="small d-horizontal-only">
-        <div class="product-short-description">
-          <%& short_description %>
+        </div>
+        <div class="add-to-cart">
+          <a href="{{url_base}}<% url_key %>?ref=<% default_code %" class="btn-product-page">
+            {{ 'product_details' | translate }}
+          </a>
         </div>
       </div>
     </div>

@@ -1,0 +1,80 @@
+<div class="header-block">
+  <div class="icon d-md-none">
+    <a class="icon-link" href="{% path_to 'cart_index'%}">
+      <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
+      <span class="icon-label d-none d-md-flex">{{ block.settings.label }}</span>
+    </a>
+  </div>
+
+  <div class="d-none d-md-block w-100">
+    <form method="GET" action="{% path_to search %}" class="search-form d-flex flex-row pt-md-2 pt-md-3 " >
+      <input type="text" class="form-control search-input" id="header-search-input" placeholder="{{ block.settings.placeholder }}" aria-label="{{ block.settings.placeholder }}" aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q" data-autosubmit>
+      <button class="btn btn-link btn-lg p-0 search-icon" name="submit" type="submit">
+        <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"/>
+      </button>
+    </form>
+    <div class="small text-left pt-2 w-100">
+    <div class="font-weight-bold">
+      {{ section.settings.baseline }}
+    </div>
+  </div>
+  </div>
+  <div id="header-search-hit" class="d-none search-result">
+    <div id="header-search-product-title">
+      <div class="font-weight-bold">
+        {{ 'search_product' | translate }}
+        <span class="nb_hits"></span>
+      </div>
+    </div>
+    <div id="header-search-product-link">
+      <div class="row">
+        <div class="col-12 text-center pt-2 ">
+          <button data-href="{% path_to search %}" type="button" class="btn btn-primary btn-sm btn-search-product">
+            {{ 'search_product_all' | translate }}
+            <span class="nb_hits"></span>
+          </button>
+          <div class="queries-history">
+            <div class="title">
+              {{ 'search_history' | translate }}
+            </div>
+            <div class="items"></div>
+            <div>
+              <button class="btn btn-link btn-sm btn-history-clear" type="button">
+                {{ 'search_history_clear' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="header-search-product-empty">
+      <div class="pt-3 pb-3">
+        {{ 'search_product_empty' | translate }}
+      </div>
+    </div>
+    <div id="header-search-category-title" class=" ">
+      <div class="font-weight-bold">
+        {{ 'search_category' | translate }}
+      </div>
+    </div>
+    <div id="header-search-category-empty">
+      <div class="pt-3 pb-3">
+        {{ 'search_category_empty' | translate }}
+      </div>
+    </div>
+    <div id="header-search-category-link">
+      <div class="row">
+        <div class="col-12 text-right ">
+          <a href="#" class="btn btn-success">
+            {{ 'search_category_all' | translate }}
+            <span class="nb_hits"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div id="header-search-hit-content">
+      <div class="aa-dataset-product"></div>
+      <div class="aa-dataset-category"></div>
+    </div>
+  </div>
+</div>

@@ -170,6 +170,20 @@ is_layout: false
     {% block 'javascripts', short_name: true %}
     {% endblock %}
     {% global_section 'cookies_manager',  placement: 'bottom' %}
+    
+    {% if site.metafields.elasticsearch.indices != null%}
+      <script type="text/javascript">
+        var searchkit_translation = {
+          'facets.view_all': {{'filter_all' | translate | json}}
+        };
+      </script>
+    {% elsif site.metafields.algolia.indices != null %}
+      {% include 'algolia_init' %}
+      <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
+      {{ 'algolia_autocomplete.js' | javascript_tag }}
+    {% endif %}
     {{js_footer}}
   </body>
 </html>

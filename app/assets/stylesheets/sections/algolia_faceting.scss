@@ -1,0 +1,288 @@
+.algolia-faceting {
+	.search-layout-row {
+		.block-faceting {
+			border: 0 !important; 
+			& > .row {
+				background-color: theme-color('light');
+				margin: 0 !important;  
+			}
+		}
+		.search-widget {
+			&.sliderprice {
+				display: flex;
+				justify-content: start;
+				align-items: center;
+				margin-top: -10px;
+				.search-widget-body {
+					flex-grow: 1;
+				}
+				.search-widget-header {
+					h4 {
+						padding-bottom: 0 !important; 
+					}
+				}
+			}
+			&.facet {
+				.search-widget-body {
+					background-color: $white;
+					border: 1px solid $border-color;
+					position: absolute;
+					padding: 1rem; 
+					box-shadow: $box-shadow;
+					width: calc(100% - 2rem);
+					z-index: 100;
+				}
+				.search-widget-header {
+					background-color: $white;
+					border: 1px solid $border-color;
+					padding: .5rem;
+					h4 {
+						font-size: 1rem;
+						margin: 0;
+						padding: 0;
+					}
+					&:after {
+						content: "\f078";
+						display: block;
+						font-family: "Font Awesome 5 Free";
+				    font-weight: 900;
+				    position: absolute;
+				    top: 0;
+						right: 2rem;
+						line-height: 30px;
+						color:  $gray-500;
+					}
+				}
+			}
+
+		}
+	}
+	.search-layout-column {
+		.block-faceting {
+			.search-widget {
+				&.current-filter {
+					.search-widget-body > div {
+						flex-direction: column;
+						justify-content: start;
+					}
+				}
+			}
+		}
+	}
+	.search-widget {
+		.search-widget-item {
+
+		}
+		.search-widget-header {
+
+		}
+		&.current-filter {
+			.search-widget-body > div {
+				display: flex;
+				align-items: center;
+			}
+
+			.search-widget-item, .ais-current-refined-values--clear-all {
+				display: inline-block;
+				margin-bottom: .3rem;
+				margin-right: .3rem;
+				a {
+					color: theme-color('dark');
+				}
+			}
+		}
+		&.sliderprice {
+	    .rheostat {
+	      margin-left: auto;
+	      margin-right: auto;
+	      width: calc(100% - 40px);
+
+	      .rheostat-progress {
+	        background: theme-color-level("primary", -3);
+	        top: -2px;
+	      }
+	      .ais-range-slider--base {
+		      border-color: theme-color("secondary");
+		    }
+
+		    .ais-range-slider--connect {
+		      background: theme-color("primary");
+		    }
+
+		    .ais-range-slider--handle {
+		      border-color: theme-color("primary");
+		      //background: theme-color("info");
+		      bottom: 5px;
+		      height: 12px;
+		      width: 12px;
+		    }
+	      .ais-range-slider--marker {
+		      background: none;
+		      &.ais-range-slider--marker-large {
+		        background: theme-color("secondary");
+		      }
+		    }
+	      .rheostat-background {
+	        top: -3px;
+	      }
+	      .rheostat-handle {
+	      	border-color: theme-color("primary");
+		      //background: theme-color("info");
+		      bottom: 5px;
+		      height: 12px;
+		      width: 12px;
+	        & > div {
+	          background-color: theme-color("secondary");
+	          border-radius: 3px;
+	          font-size: 0.6rem;
+	          padding-left: 4px;
+	          padding-right: 4px;
+	          width: auto;
+	        }
+
+	      }
+	    }
+		}
+		&.facet {
+			.search-widget-item {
+				cursor: pointer;
+	      display: block;
+	      font-size: $font-size-sm;
+	      font-weight: normal;
+	      line-height: 16px;
+	      position: relative;
+	      transition: .3s;
+	      width: 100%;
+	      padding-bottom: .5rem;
+				input	{
+					display: none;
+				}
+				& > div {
+					display: inline-block;
+					label {
+						margin-bottom: 0;
+						margin-left: .5rem;
+						line-height: 16px;
+					}
+				}
+				&.active-item {
+					&:hover {
+	          color: theme-color("primary");
+	          text-decoration: line-through;
+	          &:after  {
+	            background-color: theme-color-level("primary", -0.1);
+	          }
+	        }
+
+	        &:after,  {
+	          background-color: theme-color("primary");
+	          content: " ";
+	          display: inline-block;
+	          height: 10px;
+	          left: 2px;
+	          position: absolute;
+	          top: 2px;
+	          width: 10px;
+	        }
+				}
+				&:before {
+	        border: 1px solid $gray-600;
+	        content: " ";
+	        height: 14px;
+	        width: 14px;
+	        background-color: transparent;
+	        display: inline-block;
+	        font-size: 22px;
+	      }
+	      &:hover {
+	        color: theme-color("primary");
+	      }
+	      &:hover:before {
+	        background-color: $gray-600;
+	      }
+			}
+		}
+	}
+}
+.search-input {
+	z-index: 1002;
+	border-color: $border-color;
+	border-radius: 0;
+	box-shadow: none;
+}
+.search-icon {
+	img {
+		width: 30px;
+		margin-left: 1rem;
+	}
+}
+.header-dropdown-menu {
+	box-shadow: $box-shadow-sm;
+	background-color: $white;
+	z-index: 1000;
+	width: 100%;
+	padding-top: 3rem;
+	.aa-dataset-product {
+		.product-thumbnail {
+			font-size: .9;
+			.image {
+				padding-right: .8rem;
+				padding-bottom: .8rem;
+				padding-top: .8rem;
+			}
+			.content {
+				padding-bottom: .8rem;
+				padding-top: .8rem;
+				.description {
+					.title {
+						font-size: .85rem;
+						font-weight: normal;
+						line-height: 1.1;
+					}
+					.short_description {
+						display: none;
+					}
+					.category {
+						display: none;
+					}
+				}
+			}
+			.price {
+				display: none;
+			}
+		}
+	} 
+	.aa-dataset-category {
+		padding-bottom: .5rem;
+		padding-top: .5rem;
+		.category-link {
+			font-size: .85rem;
+			line-height: 1.1;
+			color: theme-color('dark') !important;
+		}
+	}
+
+}
+.queries-history {
+	border-bottom: 1px solid $border-color;
+	text-align: left;
+	padding-bottom: .8rem;
+	padding-top: .8rem;
+	display: none;
+	.title {
+		font-size: .85rem;
+		font-weight: bold;
+		line-height: 1.1;
+	}
+	.items {
+		padding-top: .5rem;
+		a {
+			font-size: .8rem;
+			padding: .2rem;
+			color: theme-color('dark');
+			border: 1px solid theme-color('dark');
+			border-radius: .2rem;
+			margin-right: .5rem;
+		}
+	}
+}

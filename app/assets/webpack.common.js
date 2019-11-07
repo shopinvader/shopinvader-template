@@ -87,6 +87,13 @@ module.exports = {
           },
           { loader: 'image-webpack-loader', options: { bypassOnDebug: true } }
         ]
+      },
+      {
+        test: require.resolve('jquery'),
+        use: [{
+            loader: 'expose-loader',
+            options: 'jQuery'
+        }]
       }
     ]
   },
