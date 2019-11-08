@@ -26,21 +26,29 @@
   }
 
 {% endaction %}
+{% if disabled %}
+  {% assign field_disabled = "disabled='disabled'" %}
+{% endif %}
+
 <div class="address-form">
-  <input type="hidden" id="id" name="{{ 'id' | prepend: prefix | append: suffix }}" value="{{address.id | round}}">
-  <div class="row">
-    <div class="col-12">
-      <div class="form-group">
-        <label for="{{ 'name' | prepend: prefix_id }}" class="required">{{ "partner_name" | translate }}</label>
-        <input type="text" name="{{ 'name' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'name' | prepend: prefix_id }}" placeholder="{{ 'partner_name' | translate }}" {{require}} value="{{address.name}}" autocomplete="off">
+  {% if address.id != null %}
+    <input type="hidden" id="id" name="{{ 'id' | prepend: prefix | append: suffix }}" value="{{address.id | round}}">
+  {% endif %}
+  {% if hide_name != true %}
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="{{ 'name' | prepend: prefix_id }}" class="required">{{ "partner_name" | translate }}</label>
+          <input type="text" name="{{ 'name' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'name' | prepend: prefix_id }}" placeholder="{{ 'partner_name' | translate }}" {{require}} {{field_disabled}} value="{{address.name}}" autocomplete="off">
+        </div>
       </div>
     </div>
-  </div>
+  {% endif %}
   <div class="row">
     <div class="col-12">
       <div class="form-group">
         <label for="{{ 'street' | prepend: prefix_id }}" >{{ 'partner_address1' | translate }}</label>
-        <input type="text" name="{{ 'street' | prepend: prefix | append: suffix }}" class="form-control" data-toggle="autocomplete" id="{{ 'street' | prepend: prefix_id }}" placeholder="{{ 'partner_address1' | translate }}" {{require}} data-bind="route" autocomplete="off" value="{{address.street}}">
+        <input type="text" name="{{ 'street' | prepend: prefix | append: suffix }}" class="form-control" data-toggle="autocomplete" id="{{ 'street' | prepend: prefix_id }}" placeholder="{{ 'partner_address1' | translate }}" {{require}} {{field_disabled}} data-bind="route" autocomplete="off" value="{{address.street}}">
       </div>
     </div>
   </div>
@@ -48,7 +56,7 @@
     <div class="col-12">
       <div class="form-group">
         <label for="{{ 'street2' | prepend: prefix_id }}"> {{ 'partner_address2' | translate }}</label>
-        <input type="text" name="{{ 'street2' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'street2' | prepend: prefix_id }}" value="{{address.street2}}" placeholder="{{ 'partner_address2' | translate }}" autocomplete="off">
+        <input type="text" name="{{ 'street2' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'street2' | prepend: prefix_id }}" value="{{address.street2}}" placeholder="{{ 'partner_address2' | translate }}" {{field_disabled}} autocomplete="off">
       </div>
     </div>
   </div>
@@ -56,32 +64,38 @@
     <div class="col-5 col-sm-3">
       <div class="form-group">
         <label for="{{ 'zip' | prepend: prefix_id }}" class="required">{{ 'partner_zipcode' | translate }}</label>
-        <input type="text" name="{{ 'zip' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'zip' | prepend: prefix_id }}" value="{{address.zip}}" placeholder="{{ 'partner_zipcode' | translate }}" {{require}} data-bind="postal_code" autocomplete="off">
+        <input type="text" name="{{ 'zip' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'zip' | prepend: prefix_id }}" value="{{address.zip}}" placeholder="{{ 'partner_zipcode' | translate }}" {{require}} {{field_disabled}} autocomplete="off">
       </div>
     </div>
     <div class="col-7 col-sm-6">
       <div class="form-group">
         <label for="{{ 'city' | prepend: prefix_id }}" class="required">{{ 'partner_city' | translate }}</label>
-        <input type="text" name="{{ 'city' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'city' | prepend: prefix_id }}" value="{{address.city}}" placeholder="{{ 'partner_city' | translate }}" {{require}} data-bind="locality" autocomplete="off">
+        <input type="text" name="{{ 'city' | prepend: prefix | append: suffix }}" class="form-control" id="{{ 'city' | prepend: prefix_id }}" value="{{address.city}}" placeholder="{{ 'partner_city' | translate }}" {{require}} {{field_disabled}} autocomplete="off">
       </div>
     </div>
     <div class="col-12 col-sm-3">
       <div class="form-group">
-        <label for="{{ 'country_id' | prepend: prefix_id }}" class="required">{{ 'partner_country' | translate }}</label>
-        <select class="form-control" id="{{ 'country_id' | prepend: prefix_id }}" name="{{ 'country[id]' | prepend: prefix | append: suffix }}">
-        {% for country in store.available_countries %}
-          <option value="{{country.id}}" {%if country.id == adresse.country_id %}selected="selected"{%endif%}>{{country.name}}</option>
-        {% endfor %}
-        </select>
+        <label for="{{ 'country_id' | prepend: prefix_id }}" class="required">
+          {{ 'partner_country' | translate }}
+        </label>
+        {% include 'form_m2o_field' with
+          values: store.available_countries,
+          value: address.country.id,
+          field_name: 'country[id]',
+          field_id: 'country_id',
+          label: 'partner_country' | translate
+          disabled
+        %}
       </div>
     </div>
-    <div class="col-12 col-sm-6">
-      <div class="form-group">
-        <label for="{{ 'phone' | prepend: prefix_id }}" class="required">{{ 'partner_phone' | translate }}</label>
-        <input type="tel" class="form-control" id="{{ 'phone' | prepend: prefix_id }}" name="{{ 'phone' | prepend: prefix | append: suffix }}" placeholder="{{ 'partner_phone' | translate }}" value="{{address.phone}}" autocomplete="off" {{require}}>
+    {% if hide_phone != true %}
+      <div class="col-12 col-sm-6">
+        <div class="form-group">
+          <label for="{{ 'phone' | prepend: prefix_id }}" class="required">{{ 'partner_phone' | translate }}</label>
+          <input type="tel" class="form-control" id="{{ 'phone' | prepend: prefix_id }}" name="{{ 'phone' | prepend: prefix | append: suffix }}" placeholder="{{ 'partner_phone' | translate }}" value="{{address.phone}}" autocomplete="off" {{require}} {{field_disabled}}>
+        </div>
       </div>
-    </div>
-
+    {% endif %}
   </div>
 </div>
 {% endblock %}

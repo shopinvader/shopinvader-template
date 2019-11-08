@@ -115,6 +115,18 @@ account_profil_title:
 account_address_lists:
   en: My addresses
   fr: Mes adresses
+account_address_disabled:
+  en: This address is not activated yet
+  fr: Cette adresse n'est pas encore activée
+account_address_no_update:
+  en: You can not edit this address
+  fr: Vous ne pouvez pas modifier cette adresse
+account_address_no_create:
+  en: You can not create a new address
+  fr: Vous ne pouvez pas créer une nouvelle adresse
+account_user_disabled:
+  en: Your account is not activated. You can not use it now. Please disconnect to continue.
+  fr: Votre compte n'est pas activé. Vous ne pouvez pas l'utiliser maintenant. Veuillez vous déconnecter pour continuer.
 account_password_reset:
   en: Reset my password
   fr: Réinitialiser mon mot de passe
