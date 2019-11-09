@@ -170,14 +170,15 @@ handle: product
           </div>
         </div>
         <div class="row">
-        {% if variant.stock.global.state != null and  variant.stock.global.state != ''%}
+        {% assign stock_state = variant.stock.global.state %}
+        {% if stock_state != null and  stock_state != ''%}
           <div class="col-12 text-left product-stock-state">
             <span class="{{variant.stock.global.state}}">
               {{variant.stock.global.state | prepend: 'product_stock_state_' | translate}}
             </span>
           </div>
         {% endif %}
-        {% if variant.stock.global.state =='in_stock' or variant.stock.global.state == 'in_limited_stock' %}
+        {% if stock_state == null or stock_state =='in_stock' or stock_state == 'in_limited_stock' %}
           <div class="col-12  text-right d-none d-sm-block">
             <button type="submit" class="btn btn-success btn-lg btn-block">
               {{"product_add_to_cart" | translate }}
