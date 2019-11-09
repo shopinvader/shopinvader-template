@@ -1,0 +1,26 @@
+---
+handle: account_user_disabled
+title: Account User disabled
+listed: false
+position: 200
+published: true
+seo_title: Your account is not enable yet | Shopinvader demo
+slug: addresses-user-disabled
+---
+{% extends 'layouts/account '%}
+
+{% block 'body/content/tabcontent' %}
+	<div class="text-center">
+		<p>
+			{{ 'account_user_disabled' | translate }}
+		</p>
+		<form method="post" action="{% path_to account %}">
+	    <input type="hidden" name="auth_action" value="sign_out" />
+	    <input type="hidden" name="auth_content_type" value="customers" />
+	    <button type="submit" class="btn btn-outline-primary " >
+	      <i class="fa fa-power-off"></i>
+	      {{ 'account_signout' | translate }}
+	    </button>
+	  </form>
+	</div>
+{% endblock %}
