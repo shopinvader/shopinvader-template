@@ -170,7 +170,7 @@ handle: product
           </div>
         </div>
         <div class="row">
-        {% assign stock_state = variant.stocks %}
+        {% assign stock_state = variant.stock.global.state %}
         {% if stock_state != null and  stock_state != ''%}
           <div class="col-12 text-left product-stock-state">
             <span class="{{variant.stock.global.state}}">
