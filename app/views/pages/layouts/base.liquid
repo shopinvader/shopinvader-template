@@ -4,7 +4,7 @@ title: Base layout
 is_layout: false
 ---
 {% if current_customer and page.handle != 'account_user_disabled' %}
-  {% if store.customer.enable != true %}
+  {% if store.customer.enabled != true %}
     {% action 'redirect to account_user_disabled' %}
       redirectTo('account_user_disabled');
     {% endaction %}
