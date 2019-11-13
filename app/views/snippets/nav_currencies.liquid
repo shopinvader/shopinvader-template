@@ -29,7 +29,7 @@
         {%endif%}
         {{currency_data.first | json}} : {
           default_locale: {{ currency_data.last.default_locale | json }},
-          rate: {{rate | json}}
+          rate: {{rate | default: 1 | round: 3 | json}}
         },
       {% endfor %}
     },
