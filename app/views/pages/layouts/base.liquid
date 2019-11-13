@@ -174,7 +174,27 @@ is_layout: false
     {% if site.metafields.elasticsearch.indices != null%}
       <script type="text/javascript">
         var searchkit_translation = {
-          'facets.view_all': {{'filter_all' | translate | json}}
+          'reset.clear_all': {{'filter_clear' | translate | json}},
+          'facets.view_more': {{'filter_more' | translate | json}},
+          'facets.view_more': {{'filter_more' | translate | json}},
+          'facets.view_less': {{'filter_less' | translate | json}},
+          'facets.view_all': {{'filter_all' | translate | json}},
+          'facets.price': {{'filter_price' | translate | json}},
+          'facets.filters': {{'filters' | translate | json}},
+          'facets.category': {{'search_category' | translate | json}},
+          'NoHits.NoResultsFound': {{'filter_noresult_found' | translate | json}},
+          'NoHits.DidYouMean': {{'filter_didyoumean' | translate | json}},
+          'NoHits.SearchWithoutFilters': {{'filter_searchwithout_filter' | translate | json}},
+          'NoHits.NoResultsFoundDidYouMean': {{'filter_searchwithout_filter' | translate | json}},
+          'hitstats.results_found': {{'filter_result_count' | translate | json}},
+          'pagination.previous': {{'filter_paginate_previous' | translate | json}},
+          'pagination.next': {{'filter_paginate_next' | translate | json}},
+          'searchbox.placeholder': {{'filter_placeholder' | translate | json}},
+          'product.grid': {{'product_display_grid' | translate | json}},
+          'product.list': {{'product_display_list' | translate | json}},
+          'sort.price_default': {{'filter_price_default' | translate | json}},
+          'sort.price_asc': {{'filter_price_asc' | translate | json}},
+          'sort.price_desc': {{'filter_price_desc' | translate | json}},
         };
       </script>
     {% elsif site.metafields.algolia.indices != null %}

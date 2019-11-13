@@ -430,13 +430,13 @@ filter_current:
   en: Current filters
   fr: Filtres actifs
 filter_price_default:
-  en: Default
+  en: Relevance
   fr: Trier par pertinence
 filter_price_desc:
-  en:
+  en: Price - High to Low 
   fr: Trier par du plus cher au moins cher
 filter_price_asc:
-  en:
+  en: Price - Low to High
   fr: Trier par du moins cher au plus cher
 home:
   en: Home
