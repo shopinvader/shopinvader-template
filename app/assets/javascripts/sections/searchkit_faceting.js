@@ -141,7 +141,16 @@ const Section = {
         return filters;
       }
       render() {
-        
+        const autocompleteQueryBuilder = (query, options) => {
+          return {
+            "multi_match": {
+              "query": query,
+              "fields" : [ "name", "description"],
+              'fuzziness': 'AUTO',
+              "operator":   "and"
+            }
+          }
+        }
         return (
           <SearchkitProvider searchkit={searchkit}>
             <Layout>
@@ -201,8 +210,8 @@ const Section = {
                       <SearchBox
                       autofocus={true}
                       searchOnChange={true}
-                      queryOptions={{analyzer:"standard"}}
-                      queryFields={["name", "model.name^3", "short_description", "description","categories"]}/>
+                      queryBuilder={autocompleteQueryBuilder}
+                      prefixQueryFields={["name"]}/>
                     </ActionBarRow>
                     <ActionBarRow>
                       <HitsStats/>
