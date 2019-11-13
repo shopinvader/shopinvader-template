@@ -33,13 +33,16 @@ slug: orders
           {% assign state_color = 'primary' %}
           {% assign state_level = 0 %}
           {% case sale.state %}
+            {% when 'cancel' %}
+              {% assign state_color = 'danger' %}
+              {% assign state_level = -1 %}
             {% when 'pending' %}
               {% assign state_color = 'info' %}
               {% assign state_level = 1 %}
             {% when 'processing' %}
               {% assign state_color = 'warning' %}
               {% assign state_level = 2 %}
-            {% when 'done' %}
+            {% when 'shipped' %}
               {% assign state_color = 'success' %}
               {% assign state_level = 3 %}
           {% endcase %}
