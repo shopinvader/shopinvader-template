@@ -1,4 +1,6 @@
 // === Wagon main javascript file ===
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 
 // Tell Webpack to load the style
 import '../stylesheets/app.scss';
