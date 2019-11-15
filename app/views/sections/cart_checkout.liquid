@@ -38,7 +38,7 @@ blocks: []
               target: 'current_cart',
               action: '/payment_sips/prepare_payment' %}
           {% when 'bank_transfer' %}
-            {% include 'payment_bank_transfert' with payment_method,
+            {% include 'payment_bank_transfer' with payment_method,
               amount: store.cart.amount.total,
               target: 'current_cart',
               success_handle: 'cart_end'

@@ -216,8 +216,8 @@ seo_title: My quotation | Shopinvader demo
                 {% include 'payment_adyen' with payment_method,
                   amount: quotation.amount.total,
                   action %}
-              {% when 'bank_transfert' %}
-                {% include 'payment_bank_transfert' with payment_method,
+              {% when 'bank_transfer' %}
+                {% include 'payment_bank_transfer' with payment_method,
                   amount: quotation.amount.total,
                   action %}
               {% else %}
