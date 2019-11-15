@@ -19,6 +19,10 @@ class ProductHit extends React.Component {
     }
     return role;
   }
+  get_url() {
+    var url_key =  this.props.result._source.url_key
+    return new URL(url_key, url_base).href;
+  }
   get_first_category() {
     var categories = this.props.result._source.categories;
     if (categories.length > 0) {
@@ -119,6 +123,7 @@ class ProductHit extends React.Component {
                 src={item.medium.src}
                 alt={item.medium.alt}
                 key={id+'_'+i+'image'}
+                data-link={this.get_url()}
               />
             </Carousel.Item>
           );
@@ -136,7 +141,7 @@ class ProductHit extends React.Component {
     }
     else {
       return (
-        <img src={noimage} alt={this.state.product.name} title={this.state.product.name}/>
+        <img src={noimage} alt={this.state.product.name} title={this.state.product.name} data-link={this.get_url()}/>
       );
     }
   }
@@ -145,7 +150,7 @@ class ProductHit extends React.Component {
     var class_name = 'product-thumbnail '+this.get_thumb_layout();
     var page = document.location;
     var id = 'product-hit-'+this.get_thumb_layout()+product.objectID;
-    var product_url = new URL(product.url_key, url_base).href;
+    var product_url = this.get_url();
     return (
       <div className={class_name} key={product} id={id}>
         <div className="image">

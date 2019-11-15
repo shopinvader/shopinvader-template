@@ -4,11 +4,6 @@
   {% action 'get search parameters' %}
     setProp('search_indexes', JSON.parse(getProp('elasticsearch_params.indices')));
   {% endaction %}
-  <script type="text/javascript">
-    var searchkit_translation = {
-      'facets.view_all': {{'filter_all' | translate | json}}
-    };
-  </script>
   <div class="d-none d-md-flex">
     <div class="container searchkit_autocomplete" id="search-bar"
       data-product-noimage={{ site.metafields.theme.noimage | json }}

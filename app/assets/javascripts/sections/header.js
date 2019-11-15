@@ -88,7 +88,9 @@ const Section = {
             container.dataset.elasticIndexProducts,
             container.dataset.elasticUrl
           );
-          const searchkit = new SearchkitManager(url.href);
+          const searchkit = new SearchkitManager(url.href, {
+            searchOnLoad: false
+          });
           this.state = {
             results: 0,
             search_value: '',
@@ -118,15 +120,24 @@ const Section = {
           if(this.state.search_value != '') {
             autocomplete_css.push('visible');
           }
-          
+          const autocompleteQueryBuilder = (query, options) => {
+            return {
+              "multi_match": {
+                "query": query,
+                "fields" : [ "name", "description"],
+                'fuzziness': 'AUTO',
+                "operator":   "and"
+              }
+            }
+          }
           return (
             <SearchkitProvider searchkit={this.state.searchkit}>
               <Layout>
                 <SearchBox
                   autofocus={false}
                   searchOnChange={true}
-                  queryOptions={{analyzer:"standard"}}
-                  queryFields={["name", "model.name^3", "short_description", "description"]}
+                  queryBuilder={autocompleteQueryBuilder}
+                  prefixQueryFields={["name"]}
                  />
                 <div className='autocomplete'>
                   <NoHits 
