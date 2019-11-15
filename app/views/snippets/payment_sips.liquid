@@ -7,10 +7,8 @@
       <b class="h5 font-weight-bold">
         {{'payment_method_sips_title' | translate }}
       </b>
-      {% if payment_method.description and payment_method.description != false %}
-        <div class="small">
-          {{payment_method.description}}
-        </div>
+      {% if payment_method.description %}
+        <p class="description">{{payment_method.description}}</p>
       {% endif %}
       <div class="text-dark text-left">
         <i class="fab fa-cc-visa"></i>

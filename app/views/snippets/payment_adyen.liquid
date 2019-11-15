@@ -1,8 +1,8 @@
 {% if site.metafields.payment.adyen_url %}
   <div>
-    <p>
-      {{payment_method.description}}
-    </p>
+    {% if payment_method.description %}
+      <p class="description">{{payment_method.description}}</p>
+    {% endif %}
     <button type="button" class="btn btn-dark btn-lg font-weight-bold text-uppercase"  data-toggle="modal" data-target="#modal-adyen">
       {{ 'payment_adyen_button' | translate }}
     </button>

@@ -7,7 +7,9 @@
       <b class="h5 font-weight-bold">
         {{'payment_method_paypal_title' | translate }}
       </b>
-      {{payment_method.description}}
+      {% if payment_method.description %}
+        <p class="description">{{payment_method.description}}</p>
+      {% endif %}
     </div>
   </div>
   <div class="col-12 col-sm-5 col-md-4 col-lg-5 col-xl-4 text-center">
