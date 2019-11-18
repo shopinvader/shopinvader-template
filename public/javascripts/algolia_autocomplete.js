@@ -30,7 +30,8 @@ $(document).ready(function() {
           },
           footer:  function(query, result) {
             return "</div>"
-                  + search_template_link($('#header-search-product-link'), query, result);
+                  + search_template_link($('#header-search-product-link'), query, result)
+                  + search_template_history($('#header-search-history'));
           },
           empty: $('#header-search-product-empty').html(),
 
@@ -203,31 +204,30 @@ var hogan_helpers = {
   }
 }
 
-function search_template_link(template, query, result) {
+function search_template_link($template, query, result) {
   if(result.nbHits > 1) {
-    var $btn_search = template.find('.btn-search-product');
-    var search_path = $btn_search.data('href');
-    $btn_search.attr('data-search', query.query);
-    template.find('.nb_hits').html(' ('+result.nbHits+')');
-    var last_queries = JSON.parse(Cookie.get('search_queries'));
-    
-    var $queries_history = template.find('.queries-history');
-    $queries_history.find('.items').html('');
-
-    if(last_queries != null && last_queries.length > 0) {
-      $queries_history.show();
-      for(var i in last_queries) {
-        var $item_query = $('<a>').html(last_queries[i]).attr('href', search_path+'?q='+last_queries[i]);
-        $item_query.appendTo($queries_history.find('.items'));
-      }
-    }
-    else {
-      $queries_history.hide();
-    }
-    return template.html();
+    $template.find('.nb_hits').html(' ('+result.nbHits+')');
+    return $template.html();
   }
   else {
-    return "";
+    return '';
+  }
+}
+
+function search_template_history($template) {
+  var last_queries = JSON.parse(Cookie.get('search_queries'));
+  var $items = $template.find('.items');
+  $items.html('');
+  var search_path = $items.data('href');
+  if(last_queries != null && last_queries.length > 0) {
+    for(var i in last_queries) {
+      var $item_query = $('<a>').html(last_queries[i]).attr('href', $items.data('href')+'?q='+last_queries[i]);
+      $item_query.appendTo($items);
+    }
+    return $template.html();
+  }
+  else {
+    return '';
   }
 }
 
