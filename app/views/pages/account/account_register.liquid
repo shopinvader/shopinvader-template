@@ -8,6 +8,12 @@ display_settings:
 ---
 {% extends 'layouts/lite' %}
 {% block 'body/content' %}
+  {% if current_customer %}
+    {% action 'redirect to account_index if customer is logged' %}
+      redirectTo('account_index');
+    {% endaction %}
+  {% endif %}
+
   <div class="row justify-content-center">
     <div class="col-12 col-lg-9 col-xl-7 pt-4 pb-4">
       <h1>
