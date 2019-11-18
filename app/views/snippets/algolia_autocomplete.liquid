@@ -8,8 +8,8 @@
 
   <div class="d-none d-md-block w-100">
     <form method="GET" action="{% path_to search %}" class="search-form d-flex flex-row pt-md-2 pt-md-3 " >
-      <input type="text" class="form-control search-input" id="header-search-input" placeholder="{{ block.settings.placeholder }}" aria-label="{{ block.settings.placeholder }}" aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q" data-autosubmit>
-      <button class="btn btn-link btn-lg p-0 search-icon" name="submit" type="submit">
+      <input type="text" class="form-control search-input" id="header-search-input" placeholder="{{ block.settings.placeholder }}" aria-label="{{ block.settings.placeholder }}" aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q">
+      <button class="btn btn-link btn-lg p-0 search-icon" name="search-icon" type="submit">
         <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"/>
       </button>
     </form>
@@ -29,7 +29,7 @@
     <div id="header-search-product-link">
       <div class="row">
         <div class="col-12 text-center pt-2 ">
-          <button data-href="{% path_to search %}" type="button" class="btn btn-primary btn-sm btn-search-product">
+          <button data-href="{% path_to search %}" type="submit" name="search-all" class="btn btn-primary btn-sm btn-search-product">
             {{ 'search_product_all' | translate }}
             <span class="nb_hits"></span>
           </button>

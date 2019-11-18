@@ -79,6 +79,21 @@ $(document).ready(function() {
       }
     ]
   );
+  $('form.search-form').on('submit', function(e) {
+    e.preventDefault();
+    var search_query = $(this).find('#header-search-input').val();
+    if (search_query != '') {
+      var last_queries = JSON.parse(Cookie.get('search_queries'));
+      if(last_queries == null) {
+        last_queries = [];
+      }
+      if(last_queries.indexOf(search_query) == -1 ) {
+        last_queries.push(search_query);
+        Cookie.set('search_queries', JSON.stringify(last_queries));
+      }
+      $(this)[0].submit();
+    }
+  });
   $('#header-search-input').on('autocomplete:opened',function(e) {
     $menu = $('.aa-dropdown-menu');
 
@@ -88,30 +103,17 @@ $(document).ready(function() {
     if(menu_maxoffset > window_size){
       $menu.css('left', (window_size - menu_maxoffset)+'px');
     }
-    else {
-      
-    }
-
   });
   $('body').click(function(element){
     if($(element.target).parents('.algolia-autocomplete').length == 0) {
       $('#header-search-input').autocomplete('close');
     }
   });
-  $('.algolia-autocomplete').on('click', '.btn-search-product', function(event) {
-    var search_queries = get_search_history();
-    if(search_queries.indexOf($(this).data('search')) == -1) {
-      search_queries.push($(this).data('search'));
-      document.cookie = 'search_queries='+JSON.stringify(search_queries);
-      document.location =  $(this).data('href')+'?q='+$(this).data('search');
-    }
-
-  });
   $('.algolia-autocomplete').on('click', '.btn-history-clear', function(event) {
     $queries_history = $(this).parents('.queries-history');
     $queries_history.hide();
     $queries_history.find('.items').html('');
-    document.cookie = 'search_queries=[]';
+    Cookie.erase('search_queries');
   });
 });
 
@@ -200,21 +202,6 @@ var hogan_helpers = {
     }
   }
 }
-function get_search_history() {
-  var cookies_str = document.cookie.split('; ');
-  var cookies = [];
-  for( var i in cookies_str) {
-    var cookie = cookies_str[i].split('=');
-    cookies[cookie[0]] = cookie[1];
-  }
-  var search_queries = cookies['search_queries'];
-  if(search_queries != '' && search_queries != null) {
-    return JSON.parse(search_queries);
-  }
-  else {
-    return [];
-  }
-}
 
 function search_template_link(template, query, result) {
   if(result.nbHits > 1) {
@@ -222,15 +209,20 @@ function search_template_link(template, query, result) {
     var search_path = $btn_search.data('href');
     $btn_search.attr('data-search', query.query);
     template.find('.nb_hits').html(' ('+result.nbHits+')');
-    var last_queries = get_search_history();
-    if(last_queries.length > 0) {
-      var $queries_history = template.find('.queries-history');
+    var last_queries = JSON.parse(Cookie.get('search_queries'));
+    
+    var $queries_history = template.find('.queries-history');
+    $queries_history.find('.items').html('');
+
+    if(last_queries != null && last_queries.length > 0) {
       $queries_history.show();
-      $queries_history.find('.items').html('');
       for(var i in last_queries) {
         var $item_query = $('<a>').html(last_queries[i]).attr('href', search_path+'?q='+last_queries[i]);
         $item_query.appendTo($queries_history.find('.items'));
       }
+    }
+    else {
+      $queries_history.hide();
     }
     return template.html();
   }
