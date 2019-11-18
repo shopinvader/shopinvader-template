@@ -94,6 +94,13 @@ module.exports = {
             loader: 'expose-loader',
             options: 'jQuery'
         }]
+      },
+      {
+        test: require.resolve('browser-cookies'),
+        use: [{
+            loader: 'expose-loader',
+            options: 'Cookie'
+        }]
       }
     ]
   },
