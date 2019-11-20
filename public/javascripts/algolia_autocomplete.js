@@ -113,7 +113,7 @@ $(document).ready(function() {
   $('.algolia-autocomplete').on('click', '.btn-history-clear', function(event) {
     $queries_history = $(this).parents('.queries-history');
     $queries_history.hide();
-    $queries_history.find('.items').html('');
+    $queries_history.find('.items').empty();
     Cookie.erase('search_queries');
   });
 });
@@ -217,7 +217,7 @@ function search_template_link($template, query, result) {
 function search_template_history($template) {
   var last_queries = JSON.parse(Cookie.get('search_queries'));
   var $items = $template.find('.items');
-  $items.html('');
+  $items.empty();
   var search_path = $items.data('href');
   if(last_queries != null && last_queries.length > 0) {
     for(var i in last_queries) {
@@ -237,7 +237,7 @@ function search_template_title(template, result) {
       template.find('.nb_hits').html(' ('+result.nbHits+')');
     }
     else {
-      template.find('.nb_hits').html('');
+      template.find('.nb_hits').empty();
     }
   }
   return template.html();
