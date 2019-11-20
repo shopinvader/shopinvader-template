@@ -118,6 +118,10 @@ $(document).ready(function() {
   });
 });
 
+$('#header-search-input').on('focus', function(){
+  $(this).autocomplete('open');
+});
+
 var hogan_helpers = {
   "emphasis": function() {
     return function(text, render) {
