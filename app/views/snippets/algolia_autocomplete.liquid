@@ -8,8 +8,8 @@
 
   <div class="d-none d-md-block w-100">
     <form method="GET" action="{% path_to search %}" class="search-form d-flex flex-row pt-md-2 pt-md-3 " >
-      <input type="text" class="form-control search-input" id="header-search-input" placeholder="{{ block.settings.placeholder }}" aria-label="{{ block.settings.placeholder }}" aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q" data-autosubmit>
-      <button class="btn btn-link btn-lg p-0 search-icon" name="submit" type="submit">
+      <input type="text" class="form-control search-input" id="header-search-input" placeholder="{{ block.settings.placeholder }}" aria-label="{{ block.settings.placeholder }}" aria-describedby="Product search" autocomplete="off" value="{{params.q}}" name="q">
+      <button class="btn btn-link btn-lg p-0 search-icon" name="search-icon" type="submit">
         <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"/>
       </button>
     </form>
@@ -28,22 +28,24 @@
     </div>
     <div id="header-search-product-link">
       <div class="row">
-        <div class="col-12 text-center pt-2 ">
-          <button data-href="{% path_to search %}" type="button" class="btn btn-primary btn-sm btn-search-product">
+        <div class="col-12 text-center pt-2 pb-2">
+          <button type="submit" name="search-all" class="btn btn-primary btn-sm btn-search-product">
             {{ 'search_product_all' | translate }}
             <span class="nb_hits"></span>
           </button>
-          <div class="queries-history">
-            <div class="title">
-              {{ 'search_history' | translate }}
-            </div>
-            <div class="items"></div>
-            <div>
-              <button class="btn btn-link btn-sm btn-history-clear" type="button">
-                {{ 'search_history_clear' | translate }}
-              </button>
-            </div>
-          </div>
+        </div>
+      </div>
+    </div>
+    <div id="header-search-history">
+      <div class="queries-history">
+        <div class="title">
+          {{ 'search_history' | translate }}
+        </div>
+        <div class="items" data-href="{% path_to search %}"></div>
+        <div>
+          <button class="btn btn-link btn-sm btn-history-clear" type="button">
+            {{ 'search_history_clear' | translate }}
+          </button>
         </div>
       </div>
     </div>
@@ -62,19 +64,10 @@
         {{ 'search_category_empty' | translate }}
       </div>
     </div>
-    <div id="header-search-category-link">
-      <div class="row">
-        <div class="col-12 text-right ">
-          <a href="#" class="btn btn-success">
-            {{ 'search_category_all' | translate }}
-            <span class="nb_hits"></span>
-          </a>
-        </div>
-      </div>
-    </div>
+    
     <div id="header-search-hit-content">
-      <div class="aa-dataset-product"></div>
       <div class="aa-dataset-category"></div>
+      <div class="aa-dataset-product"></div>
     </div>
   </div>
 </div>

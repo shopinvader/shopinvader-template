@@ -62,14 +62,13 @@ class FacetingSearch {
     return instance;
   }
   init_search_container() {
-    /*
     if($('#header-search-input').length > 0) {
       this.set_widget(
         instantsearch.widgets.searchBox({
           container: '#header-search-input'
         })
       );
-    }*/
+    }
     this.init_widgets('stats', 'stats', {
       templates: {
         body: $('#stats-template').html()
