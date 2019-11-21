@@ -30,6 +30,24 @@ seo_title: My account profile | Shopinvader demo
       {% endwith_scope%}
     </div>
     <div class="col-5">
+      {% if store.customer.is_company && store.customer.company_token %}
+      <div class="card mb-3 company-token">
+        <div class="card-body text-center">
+          <h1 class="h3 text-uppercase pb-3">
+            <i class="fa fa-info-circle text-info"></i>
+            Company token
+          </h1>
+          <div class="text-left">
+            <div class="text-left mb-3">
+              <p>Share this token to allow users to create new accounts for you company</p>
+              <div class="alert alert-info text-center">
+                <strong>{{ store.customer.company_token }}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
       <div class="card">
         <div class="card-body text-center">
           <h1 class="h3 text-uppercase pb-3">
