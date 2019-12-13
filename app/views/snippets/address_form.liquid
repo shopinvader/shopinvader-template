@@ -39,7 +39,7 @@
   <div class="row">
     <div class="col-12">
       <div class="form-group">
-        <label for="{{ 'street' | prepend: prefix_id }}" >{{ 'partner_address1' | translate }}</label>
+        <label for="{{ 'street' | prepend: prefix_id }}" class="required">{{ 'partner_address1' | translate }}</label>
         <input type="text" name="{{ 'street' | prepend: prefix | append: suffix }}" class="form-control" data-toggle="autocomplete" id="{{ 'street' | prepend: prefix_id }}" placeholder="{{ 'partner_address1' | translate }}" {{require}} data-bind="route" autocomplete="off" value="{{address.street}}">
       </div>
     </div>
