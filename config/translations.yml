@@ -763,11 +763,11 @@ payment_method_adyen_title:
 payment_method_adyen_title_btn:
   en: Pay by credit card
   fr: Payer par carte
-payment_method_banktransfert_title:
-  en: Bank transfert
+payment_method_banktransfer_title:
+  en: Bank transfer
   fr: Virement bancaire
-payment_method_banktransfert_btn:
-  en: Bank transfert
+payment_method_banktransfer_btn:
+  en: Bank transfer
   fr: Payer par virement
 payment_method_check_title:
   en: Check

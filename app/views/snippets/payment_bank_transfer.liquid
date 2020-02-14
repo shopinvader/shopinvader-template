@@ -1,13 +1,15 @@
-<div class="row justify-content-center" id="payment-bank-transfert">
+<div class="row justify-content-center" id="payment-bank-transfer">
   <div class="col-12 col-md-8 col-lg-12 col-xl-8 d-flex">
      <div class="text-primary pr-2 h4">
       <i class="fas fa-long-arrow-alt-right"></i>
     </div>
     <div>
       <b class="h5 font-weight-bold">
-        {{'payment_method_banktransfert_title' | translate }}
+        {{'payment_method_banktransfer_title' | translate }}
       </b>
-      {{payment_method.description}}
+      {% if payment_method.description %}
+        <p class="description">{{payment_method.description}}</p>
+      {% endif %}
     </div>
   </div>
   <div class="col-12 col-sm-5 col-md-4 col-lg-5 col-xl-4 text-center">
@@ -16,7 +18,7 @@
       data-cancelurl="{{base_url}}{% path_to page %}"
       data-target="{{target}}"
       data-quotation="{{ quotation_id}}">
-      {{'payment_method_banktransfert_btn' | translate }}
+      {{'payment_method_banktransfer_btn' | translate }}
     </button>
   </div>
 </div>
