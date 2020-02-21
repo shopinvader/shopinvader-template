@@ -86,11 +86,12 @@ is_layout: false
         max-width: {{site.metafields.theme.page_max_width}};
       }
     </style>
-    <div class="main-loader d-none">
-      <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-      </svg>
+    <div class="main-loader">
+      <div class="spinner-grow" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
     </div>
+    {% include 'generic_error' %}
     {% block 'body' %}
     {% endblock %}
     <div class="modal fade" id="main-modal" tabindex="-1" role="dialog">

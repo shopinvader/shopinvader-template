@@ -1,17 +1,38 @@
 .main-loader {
-  background: transparentize($gray-800, 0.8);
+  background: $white;
+  display: none;
   height: 100%;
   position: fixed;
   text-align: center;
   vertical-align: middle;
   width: 100%;
   z-index: 3000;
-  svg {
+  transition: opacity 300ms ease-in-out;
+  opacity: 0;
+  &.show {
+    display: block;
+    //opacity: 1;
+    opacity: 0;
+    animation-duration: 200ms;
+    animation-delay: 600ms;
+    animation-name: show-loader;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+  .spinner-grow {
+    background-color: theme-color('primary');
     margin-top: calc(50vh - 33px);
+    height: 4rem;
+    width: 4rem;
 
   }
 }
 
+@keyframes show-loader {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+/*
 $offset: 187;
 $duration: 1.4s;
 
@@ -52,3 +73,4 @@ $duration: 1.4s;
    transform:rotate(450deg);
  }
 }
+*/

@@ -139,6 +139,22 @@ $container-max-widths: (
   xl: 1140px
 ) !default;
 */
+// Toasts
+
+$toast-max-width:                   450px !default;
+$toast-padding-x:                   .75rem !default;
+$toast-padding-y:                   .25rem !default;
+$toast-font-size:                   .7rem !default;
+$toast-color:                       null !default;
+$toast-background-color:            rgba($white, .85) !default;
+$toast-border-width:                0px !default;
+$toast-border-color:                rgba(0, 0, 0, .1) !default;
+$toast-border-radius:               .25rem !default;
+$toast-box-shadow:                  0 .25rem .75rem rgba($black, .1) !default;
+
+$toast-header-color:                $gray-900 !default;
+$toast-header-background-color:     $white !default;
+$toast-header-border-color:         rgba(0, 0, 0, .05) !default;
 
 /*Carousel*/
 $carousel-control-color:             $gray-900;

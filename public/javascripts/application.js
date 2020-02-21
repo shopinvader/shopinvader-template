@@ -1,4 +1,6 @@
 $(window).on('beforeunload', function(){
+  $('.modal').modal('hide');
+  $('.main-loader').addClass('show');
   $('main, footer').animate({
     opacity: 0,
   }, 300);
@@ -28,26 +30,25 @@ $(document).ready(function () {
           }
       }
   });
-  
   $(document).on('ShopinvaderForm:after-error',
     function (element)
     {
       $('.main-loader').addClass('d-none');
-      $('#generic-error-message').modal('show');
+      $('#generic-error-message').toast('show');
     }
   );
 
   $(document).on('ShopinvaderForm:before-submit',
     function (element)
     {
-      $('.main-loader').removeClass('d-none');
+      $('.main-loader').removeClass('show');
     }
   );
 
   $(document).on('ShopinvaderForm:after-submit',
     function (event, element)
     {
-      $('.main-loader').addClass('d-none');
+      $('.main-loader').addClass('show');
       var new_document = $('<div></div>').append($.parseHTML(element.ajaxpage));
       if($(element.target).attr('action') == '/invader/cart/add_item') {
         main_modal.show(
