@@ -447,9 +447,9 @@ $product-attr-gap: 2rem;
       }
       .carousel-inner {
         .carousel-item {
-          display: flex;
-          justify-content: center;
+          text-align: center;
           img {
+            display: inline-block;
             max-width: 500px;
           }
         }
@@ -525,6 +525,7 @@ $product-attr-gap: 2rem;
         }
       }
       .product-qty-input {
+        padding-bottom: 1rem;
         display: block;
         width: 100%;
       }
@@ -561,6 +562,7 @@ $product-attr-gap: 2rem;
         }
         .product-qty-input {
           max-width: 170px;
+          padding-bottom: 0;
           label {
             display: none;
           }

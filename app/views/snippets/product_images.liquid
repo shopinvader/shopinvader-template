@@ -2,14 +2,14 @@
   <div class="carousel slide row align-items-start justify-content-center flex-md-nowrap" data-ride="carousel" id="slide-{{product_variant.objectID}}">
     <div class="col-12 col-lg">
       <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        {% for image in product_variant.images %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.index0}}" class="active"></li>
+        {% endfor %}
       </ol>
       <div class="carousel-inner" role="listbox">
         {% for image in product_variant.images %}
           <div class="carousel-item px-5 px-lg-4 {%if forloop.index == 1 %}active{%endif%}">
-            <img src="{{image.large.src}}" alt="{{image.large.alt}}" class="d-block img-fluid w-100"/>
+            <img src="{{image.large.src}}" alt="{{image.large.alt}}" class="img-fluid w-100"/>
           </div>
         {% endfor %}
         <a class="carousel-control-prev" href="#slide-{{product_variant.objectID}}" role="button" data-slide="prev">
