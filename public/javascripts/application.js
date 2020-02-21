@@ -8,9 +8,7 @@ $(window).on('beforeunload', function(){
 $(document).ready(function () {
   $("[data-toggle=nav-sm-display]").click(function(){
     $($(this).data('target')).toggleClass('open-nav');
-  });
-  
-  
+  }); 
   $('.carousel-multi-item').on('slide.bs.carousel', function (e) {
       var $e = $(e.relatedTarget);
       var idx = $e.index();
@@ -33,7 +31,7 @@ $(document).ready(function () {
   $(document).on('ShopinvaderForm:after-error',
     function (element)
     {
-      $('.main-loader').addClass('d-none');
+      $('.main-loader').removeClass('show');
       $('#generic-error-message').toast('show');
     }
   );
@@ -41,14 +39,14 @@ $(document).ready(function () {
   $(document).on('ShopinvaderForm:before-submit',
     function (element)
     {
-      $('.main-loader').removeClass('show');
+      $('.main-loader').addClass('show');
     }
   );
 
   $(document).on('ShopinvaderForm:after-submit',
     function (event, element)
     {
-      $('.main-loader').addClass('show');
+      $('.main-loader').removeClass('show');
       var new_document = $('<div></div>').append($.parseHTML(element.ajaxpage));
       if($(element.target).attr('action') == '/invader/cart/add_item') {
         main_modal.show(
