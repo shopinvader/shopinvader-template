@@ -62,14 +62,6 @@ const Section = {
         });
       }
     }
-    searchkit.addDefaultQuery((query)=> {
-      return query.addQuery(
-        MatchQuery(
-          'main', 
-          true, 
-          null)
-        );
-    });
     searchkit.translateFunction = translate;
     var facets = [];
     for(var facet of container.querySelectorAll('[data-facet-code]')) {
@@ -187,6 +179,8 @@ const Section = {
                       rangeFormatter={(count)=> Math.ceil(count) + "€"}
                       title={translate('facets.price')}
                     />
+                    <SelectedFilters/>
+                    <ResetFilters/>
                     <ButtonToolbar className="sk-filters-footer sk-filters-btn">
                       <Button 
                         variant="primary"
@@ -201,12 +195,12 @@ const Section = {
                   </SideBar>
                 </Collapse>
                 <LayoutResults className="sk-content">
-                  <ActionBar className="sk-action">
+                  <ActionBar className="sk-action sk-header">
                     <div className="header" dangerouslySetInnerHTML={{__html: this.props.header}} />
+                    <HitsStats/>
                   </ActionBar>
                   <ActionBar className="sk-action">
                     <ActionBarRow>
-                      
                       <SearchBox
                       autofocus={true}
                       searchOnChange={true}
@@ -214,19 +208,18 @@ const Section = {
                       prefixQueryFields={["name"]}/>
                     </ActionBarRow>
                     <ActionBarRow>
-                      <HitsStats/>
-                    </ActionBarRow>
-                    <ActionBarRow>
+                      <ViewSwitcherToggle/>
                       <PageSizeSelector 
                         options={[6,12,24]} 
                         listComponent={Select}
+                        className="sk-pagesize"
                       />
                       <Pagination
                         showNumbers={false}
                       />
                     </ActionBarRow>
                   </ActionBar>
-                  <ActionBar className="sk-action">
+                  <ActionBar className="sk-action sk-action-ctrl">
                     <ActionBarRow className="sk-filters-btn">
                       <Button 
                         variant="secondary"
@@ -237,14 +230,11 @@ const Section = {
                         {translate('facets.filters')}
                       </Button>
                     </ActionBarRow>
-                    <ActionBarRow className="sk-filters-toggle">
-                      <ViewSwitcherToggle/>
-                    </ActionBarRow>
-                    <ActionBarRow>
+                    <ActionBarRow className="sk-filters-filter">
                       <SelectedFilters/>
                       <ResetFilters/>
                     </ActionBarRow>
-                    <ActionBarRow>
+                    <ActionBarRow  className="sk-filters-sort">
                       <SortingSelector
                       options={[
                         {label: translate('sort.price_default'), field:"_score", order:"desc", defaultOption:true},
