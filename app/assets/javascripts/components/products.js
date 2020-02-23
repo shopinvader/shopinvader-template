@@ -103,7 +103,7 @@ class ProductHit extends React.Component {
     );
   }
   images() {
-    var images = this.state.product.images;
+    var images = this.state.product.images || [];
     if(images.length > 0) {
       if(images.length == 1) {
         var image = images[0].medium;
