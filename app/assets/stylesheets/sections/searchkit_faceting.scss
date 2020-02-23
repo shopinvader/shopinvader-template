@@ -15,6 +15,7 @@ $sk-font-family: $font-family-sans-serif;
 	}
 }
 .section-searchkit-faceting {
+	@include make-row();
 	.sk-layout {
 		.sk-filters-collapser {
 			display: none;
@@ -29,6 +30,17 @@ $sk-font-family: $font-family-sans-serif;
 			padding-right: 15px;
 			padding-left: 15px;
 			width: 100%;
+			min-width: unset;
+			.sk-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				//width: 100%;
+				.sk-hits-stats {
+					align-self: center;
+					text-align: right;
+				}
+			}
 			.sk-filters {
 				box-shadow: none;
 				border-right: 1px solid $border-color;
@@ -36,10 +48,13 @@ $sk-font-family: $font-family-sans-serif;
 				flex-basis: 20%;
 				margin: 0;
 			}
+			.sk-action-bar {
+				margin-left: 0;
+				margin-right: 0;
+			}
 			.sk-results-list {
 				flex-basis: 80%;
 				box-shadow: none;
-				margin: 0;
 				.sk-action {
 					display: flex;
 					flex-direction: row;
@@ -51,11 +66,12 @@ $sk-font-family: $font-family-sans-serif;
 				}
 				.sk-hits-grid {
 					display: flex;
-					margin: 0;
+					
 					padding: 0;
 				}
 				.sk-hits-list,
 				.sk-hits-grid {
+					margin: 0;
 					margin-top: 1rem;
 					border-top: 1px solid $border-color;
 				}
@@ -131,6 +147,16 @@ $sk-font-family: $font-family-sans-serif;
 				}
 			}
 			@include media-breakpoint-down(md) {
+				padding-left: 0;
+				padding-right: 0;
+				.sk-results-list {
+					
+					.sk-hits-list,
+					.sk-hits-grid {
+						border-top: none;
+						margin-top: 0;
+					}
+				}
 				.sk-hits-grid > div {
 					width: 33%;
 				}
@@ -152,15 +178,18 @@ $sk-font-family: $font-family-sans-serif;
 				}
 				.sk-filters {
 					align-items: stretch;
+
 					display: none;
-					flex-direction: row;
-					flex-wrap: wrap;
+					
 					margin: 0;
 					padding: 1.5rem;
 					&.show {
 						background-color: $white;
 						display: flex;
 						position: fixed;
+						justify-content: flex-start;
+						flex-direction: row;
+						flex-wrap: wrap;
 						top: 0;
 						left: 0;
 						width: 100vw;
@@ -171,7 +200,6 @@ $sk-font-family: $font-family-sans-serif;
 					
 					.sk-filters-header {
 						display: flex;
-						flex-grow: 1;
 						width: 100%;
 						justify-content: space-between;
 						height: 2rem;
@@ -181,38 +209,114 @@ $sk-font-family: $font-family-sans-serif;
 						}
 					}
 					.sk-filters-footer {
-						flex-grow: 1;
+						display: flex;
+						flex-grow: 2;
 						width: 100%;
-						padding: 2rem;
+						padding: 1rem;
+						align-items: flex-end;
+					}
+					.sk-selected-filters {
+						align-items: flex-start;
 					}
 					.sk-panel {
-						width: 50%;
 						min-width: 200px;
 						padding-left: .5rem;
 						padding-right: .5rem;
-						border-bottom: 1px solid $gray-600;
+						border-bottom: 1px solid $border-color;
 					}
 				}
-
+				.sk-action-ctrl {
+					
+					.sk-filters-filter {
+						display: none;
+					}
+				}
 				.sk-results-list {
 					 
 					.sk-action {
 						margin-bottom: 0.5rem;
 					}
 				}
-				.sk-action-bar-row {
-					width: 100%;
-
-				}
 			}
 			@include media-breakpoint-down(sm) {
-				.sk-hits-grid > div {
+				.sk-action-bar-row {
+					justify-content: space-between;
 					width: 100%;
+				}
+				
+				.sk-hits-grid > div {
+					width: 50%;
+				}
+				.sk-action.sk-action-ctrl {
+					/*Fixed on bottom*/
+		      position: fixed;
+		      bottom: 0;
+		      left: 0;
+		      z-index: 900;
+		      background-color: $white;
+		      box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
+		      width: 100%;
+		      margin-bottom: 0;
+					.sk-filters-btn,
+					.sk-filters-sort {
+						margin-bottom: 0rem;
+						width: 50%;
+						border: 0;
+						
+						text-transform: uppercase;
+						&.sk-filters-btn {
+							border-right: 1px solid $border-color;
+						}
+						.btn, .sk-select {
+							border: 0;
+							display: inline-block;
+							background-color: transparent;
+							width: 100%;
+							text-align: center;
+							text-transform: uppercase;
+							padding: 1rem;
+							text-overflow: ellipsis;
+							&.sk-select {
+								padding: 0;
+								&:after {
+									margin-top: 3px;
+								}
+								select {
+
+									text-transform: uppercase;
+									font-weight: normal;
+									padding: 1rem;
+									padding-left: 0;
+									padding-right: 0;
+									margin: 0;
+									border: none;
+									height: unset;
+									width: 80%;
+									text-overflow: ellipsis;
+									background-color: transparent;
+								}
+							}
+						}
+					}
+					.sk-filters-filter {
+						order: 3;
+						width: 100%;
+						& > div {
+							display: flex;
+							justify-content: center;
+							text-align: center;
+							width: 100%;
+						}
+						
+					}
 				}
 			}
 			@include media-breakpoint-down(xs) {
 				.sk-hits-grid > div {
-					width: 100%;
+					width: 50%;
+				}
+				.sk-pagesize {
+					display: none;
 				}
 				.sk-filters {
 					& > div {

@@ -1,29 +1,15 @@
-
-{% case thumb_position %}
-  {% when 'left' %}
-    {% assign css_slide = 'flex-row'%}
-    {% assign css_image = 'order-2'%}
-    {% assign css_thumb= 'order-1 d-flex flex-column mt-2 mb-2'%}
-  {% when 'right' %}
-    {% assign css_slide = 'flex-row'%}
-    {% assign css_image = 'order-1'%}
-    {% assign css_thumb= 'order-2 d-flex flex-column mt-2 mb-2'%}
-  {% when 'top' %}
-    {% assign css_slide = 'flex-column'%}
-    {% assign css_image = 'order-2'%}
-    {% assign css_thumb= 'order-1 mt-2 mb-2 d-flex flex-row justify-content-center'%}
-  {% else %}
-    {% assign css_slide = 'flex-column'%}
-    {% assign css_image = 'order-1'%}
-    {% assign css_thumb= 'order-2 mt-2 mb-2 d-flex flex-row justify-content-center'%}
-{% endcase %}
 {% if product_variant.images.size > 1 %}
-  <div class="d-flex {{css_slide}}">
-    <div class="carousel slide {{css_image}}" data-ride="carousel" id="slide-{{product_variant.objectID}}">
+  <div class="carousel slide row align-items-start justify-content-center flex-md-nowrap" data-ride="carousel" id="slide-{{product_variant.objectID}}">
+    <div class="col-12 col-lg">
+      <ol class="carousel-indicators">
+        {% for image in product_variant.images %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.index0}}" class="active"></li>
+        {% endfor %}
+      </ol>
       <div class="carousel-inner" role="listbox">
         {% for image in product_variant.images %}
-          <div class="carousel-item {%if forloop.index == 1 %}active{%endif%}">
-            <img src="{{image.large.src}}" alt="{{image.large.alt}}" class="d-block img-fluid w-100"/>
+          <div class="carousel-item px-5 px-lg-4 {%if forloop.index == 1 %}active{%endif%}">
+            <img src="{{image.large.src}}" alt="{{image.large.alt}}" class="img-fluid w-100"/>
           </div>
         {% endfor %}
         <a class="carousel-control-prev" href="#slide-{{product_variant.objectID}}" role="button" data-slide="prev">
@@ -36,12 +22,14 @@
         </a>
       </div>
     </div>
-    <div class=" {{css_thumb}}">
-      {% for image in product_variant.images %}
-      <div data-target="#slide-{{product_variant.objectID}}" data-slide-to="{{forloop.index0}}" class="{%if forloop.index == 1 %}active{%endif%} border carousel-thumbails d-flex mb-2 mr-2">
-        <img src="{{image.small.src}}" alt="{{image.small.alt}}" class="img-fluid"/>
+    <div class="col-12 col-lg-auto order-lg-first d-none d-lg-flex">
+      <div class="d-flex flex-row flex-lg-column justify-content-center">
+        {% for image in product_variant.images %}
+        <div data-target="#slide-{{product_variant.objectID}}" data-slide-to="{{forloop.index0}}" class="{%if forloop.index == 1 %}active{%endif%} border carousel-thumbails d-flex mb-2 mr-2">
+          <img src="{{image.small.src}}" alt="{{image.small.alt}}" class="img-fluid"/>
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
   </div>
 {% else %}

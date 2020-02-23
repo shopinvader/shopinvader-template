@@ -83,7 +83,7 @@ handle: product
             {{ 'home' | translate }}
           </a>
         </li>
-      {% for category in variant.categories %}
+      {% for category in variant.categories reversed%}
         <li class="breadcrumb-item d-inline-block" >
           <a href="{{category.url_key | prepend: url_base}}" class="text-gray-darker">
             {{category.name}}
@@ -94,14 +94,14 @@ handle: product
           {{variant.model.name}}
         </li>
       </ol>
+      <div class="d-block d-sm-none  pt-4">
+        {% for category in variant.categories %}
+        <a href="{{category.url_key | prepend: url_base}}" class="btn btn-outline-dark btn-sm">
+          {{category.name}}
+        </a>
+        {% endfor %}
+      </div>
     </nav>
-    <div class="d-block d-sm-none  pt-4">
-      {% for category in variant.categories %}
-      <a href="{{category.url_key | prepend: url_base}}" class="btn btn-outline-dark btn-sm">
-        {{category.name}}
-      </a>
-      {% endfor %}
-    </div>
     <a class="product-attr product-title" href="{{product_variant.url_key  | prepend: url_base}}">
       <h1 class="product-model-name">
         {{variant.model.name}}
@@ -132,8 +132,7 @@ handle: product
     {% endif %}
     <div class="product-attr product-image">
       {% include 'product_images' with 
-        product_variant: variant, 
-        thumb_position: 'left'
+        product_variant: variant
       %}
     </div>
 
@@ -161,31 +160,27 @@ handle: product
         <input type="hidden" name="invader_success_url" value="{{variant.url_key  | prepend: url_base}}?addtocart_product_id={{variant.objectID}}" />
         <input type="hidden" name="invader_error_url" value="{{variant.url_key  | prepend: url_base}}" />
         <input type="hidden" name="product_id" value="{{variant.objectID }}">
-        <div class="row form-horizontal product-form-qty d-none d-sm-block">
-          <label for="qty" class="col-4 col-sm-5 col-xl-12 control-label text-right text-xl-center">
+        <div class="product-qty-input">
+          <label for="qty" class="">
             {{'product_quantity' | translate}}
           </label>
-          <div class="col-8 col-xl-12">
-            {% include 'product_qty_input' with qty:1 %}
-          </div>
+          {% include 'product_qty_input' with qty: 1 %}
         </div>
-        <div class="row">
         {% assign stock_state = variant.stock.global.state %}
         {% if stock_state != null and  stock_state != ''%}
-          <div class="col-12 text-left product-stock-state">
+          <div class="product-stock-state">
             <span class="{{variant.stock.global.state}}">
               {{variant.stock.global.state | prepend: 'product_stock_state_' | translate}}
             </span>
           </div>
         {% endif %}
         {% if stock_state == null or stock_state =='in_stock' or stock_state == 'in_limited_stock' %}
-          <div class="col-12  text-right d-none d-sm-block">
-            <button type="submit" class="btn btn-success btn-lg btn-block">
+          <div class="product-addtocart">
+            <button type="submit" class="btn btn-addtocart">
               {{"product_add_to_cart" | translate }}
             </button>
           </div>
         {% endif %}
-        </div>
       </form>
     </div>
     <div class="product-attr product-variant-selector data" id="variant-selector">

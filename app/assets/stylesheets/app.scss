@@ -42,3 +42,34 @@
   width: 100%;
   margin:0;
 }
+.generic-error {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: $page-max-width; 
+  //margin-bottom: 3rem;
+  left: 50%;
+  z-index: 2600;
+  transform: translateX(-50%);
+  $generic-error-bg: darken(theme-color('danger'), 5%);
+  .toast {
+    background-color: $generic-error-bg;
+    color: $white;
+    
+    transform: translateX(50%);
+    opacity: 0;
+    .toast-header {
+      background-color: darken($generic-error-bg, 5%);
+      color: $white;
+    }
+    &.show {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+    &.fade {
+      transition: all 0.35s ease-in;
+    }
+  }
+}

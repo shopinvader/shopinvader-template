@@ -6,7 +6,8 @@ import * as Sections from './sections';
 // Import the classes required to handle sections
 import SectionsManager from './sections/_manager';
 import 'unpoly';
-var jQuery = require("jquery")
+var jQuery = require("jquery");
+var util = require('util');
 window.$ = jQuery;
 window.jQuery = jQuery;
 var $ = jQuery;

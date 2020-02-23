@@ -803,4 +803,11 @@ blog_tags_title:
   fr: Catégories
 blog_back:
   en: Back to main blog page
-
+generic_error_title:
+  en: The application has encountered an unknown error.
+generic_error_message:
+  en: >
+    It doesn't appear to have affected your data, 
+    but our technical staff have been automatically 
+    notified and will be looking into this with the 
+    utmost urgency.

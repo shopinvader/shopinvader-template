@@ -81,7 +81,11 @@ body.nav-sm-display {
   }
 
   .header  {
+    @include media-breakpoint-down(sm) {
+      box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
+    }
 
+      
     & > .container-fluid {
       //border: 1px solid red;
       &:last-child {
@@ -143,8 +147,7 @@ body.nav-sm-display {
     }
     .header-block-cart_icon,
     .header-block-user_icon,
-    .header-block-link_icon{
-
+    .header-block-link_icon {
       display: flex;
       .icon {
         text-align: center;
