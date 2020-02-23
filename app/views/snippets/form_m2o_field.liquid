@@ -1,0 +1,17 @@
+{% if values != null and values.size > 0 %}
+  {% if field_id == null %}
+    {% assign field_id = field_name %}
+  {% endif %}
+  {% if disabled == true %}
+    {% assign field_disabled = "disabled='disabled'" %}
+  {% endif %}
+  <select class="form-control" id="{{ field_id }}" name="{{ field_name }}" {{field_disabled}}>
+  {% for item in values %}
+    {% assign item_value = item.id | append:'' %}
+    {% assign value = value | append:'' %}
+    <option value="{{item.id}}" {%if item_value == value %}selected="selected"{%endif%}>
+      {{item.name}}
+    </option>
+  {% endfor %}
+  </select>
+{% endif %}

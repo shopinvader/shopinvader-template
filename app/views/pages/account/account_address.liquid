@@ -17,18 +17,29 @@ slug: addresses
     <h1 class="h3">{{'account_address_lists' | translate  }}</h1>
   </div>
   <div class="col-auto">
+  {% if store.customer.permission.address.create == true %}
     <form action="{% path_to account_address_form %}" method="post">
       <button type="submit" name="button" class="btn btn-outline-primary">
         <i class="fa fa-plus"></i> {{'account_address_add' | translate}}
       </button>
     </form>
+  {% endif %}
   </div>
   <div class="col-12">
     {% with_scope address_type: "address"%}
       <div class="row">
-        {% for address in store.addresses%}
-          <div class="col-12  mt-3 mb-2">
-            <div class="card card-body">
+        {% for address in store.addresses %}
+          {% assign address_css = "" %}
+          {% if address.enabled != true %}
+            {% assign address_css = "card-disabled" %}
+          {% endif %}
+          <div class="col-12 mt-3 mb-2">
+            <div class="card card-body {{address_css}}">
+              {% if address.enabled != true %}
+                <div class="card-disabled-message">
+                  {{ 'account_address_disabled' | translate }}
+                </div>
+              {% endif %}
               <div class="row">
                 <div class="col-12 col-lg-4 border-right ">
                   <div class="row align-items-center">
@@ -39,21 +50,27 @@ slug: addresses
                        {{address.name}}
                     </div>
                   </div>
-                  <div class="row small pt-3 pb-2">
-                    <form action="{% path_to account_address_form %}" method="post" class="col-6">
-                      <input type="hidden" name="item_id" value="{{address.id}}">
-                      <button type="submit" name="update_{{address.id}}" class="btn btn-outline-primary btn-block">
-                        <i class="fas fa-pencil-alt"></i> {{'cart_address_update' | translate }}
-                      </button>
-                    </form>
-                    <form method="POST" action="/invader/addresses/{{address.id | round}}/delete" class="col-6">
-                      <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
-                      <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
-                      <button type="submit" name="button" class="btn btn-outline-danger btn-block">
-                          <i class="fas fa-trash"></i> {{'cart_address_delete' | translate }}
-                      </button>
-                    </form>
-                  </div>
+                  {% if address.enabled %}
+                    <div class="row small pt-3 pb-2">
+                      {% if address.access.update %}
+                        <form action="{% path_to account_address_form %}" method="post" class="col-6">
+                          <input type="hidden" name="item_id" value="{{address.id}}">
+                          <button type="submit" name="update_{{address.id}}" class="btn btn-sm btn-outline-primary btn-block">
+                            <i class="fas fa-pencil-alt"></i> {{'cart_address_update' | translate }}
+                          </button>
+                        </form>
+                      {% endif %}
+                      {% if address.access.delete %}
+                        <form method="POST" action="/invader/addresses/{{address.id | round}}/delete" class="col-6">
+                          <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+                          <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+                          <button type="submit" name="button" class="btn btn-sm btn-outline-danger btn-block">
+                            <i class="fas fa-trash"></i> {{'cart_address_delete' | translate }}
+                          </button>
+                        </form>
+                      {% endif %}
+                    </div>
+                  {% endif %}
                 </div>
                 <div class="col-12 col-lg-8">
                   <address>
@@ -68,6 +85,9 @@ slug: addresses
                     </div>
                     <div class="">
                       {{address.country.name}}
+                    </div>
+                    <div class="">
+                      {{address.phone}}
                     </div>
                   </address>
                 </div>

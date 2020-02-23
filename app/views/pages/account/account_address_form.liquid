@@ -7,13 +7,26 @@ seo_title: Update my address | Shopinvader demo
 {% extends 'layouts/account '%}
 
 {% block 'body/content/tabcontent' %}
-{% assign form_action = '/invader/addresses/create' %}
-{% if params.item_id %}
-  {% with_scope id: params.item_id %}
-    {% assign address = store.addresses.first %}
 
-    {% assign form_action = '/invader/addresses/' | append: address.id | append: "/update" %}
+{% assign disabled = true %}
+{% if params.item_id %}
+  {% assign item_id = params.item_id | round %}
+  {% with_scope id: item_id %}
+    {% assign address = store.addresses.first %}
+    {% if address.enabled and address.access.update %}
+      {% assign form_action = '/invader/addresses/' | append: address.id | append: "/update" %}
+      {% assign disabled = false %}
+    {% else %}
+      {% assign error_msg = 'account_address_no_update' | translate %}
+    {% endif %}
   {% endwith_scope%}
+{% else %}
+  {% if store.customer.permission.address.create == true%}
+    {% assign form_action = '/invader/addresses/create' %}
+    {% assign disabled = false %}
+  {% else %}
+      {% assign error_msg = 'account_address_no_create' | translate %}
+  {% endif %}
 {% endif %}
 <div class="pt-4">
   <div class="card">
@@ -22,19 +35,49 @@ seo_title: Update my address | Shopinvader demo
       {{'account_address_update' | translate  }}
     </h2>
     <div class="card-body">
-      <form class="" action="{{form_action}}" method="post" data-autocomplete="address">
-        <input type="hidden" name="invader_success_url" value="{% path_to account_address %}" />
-        <input type="hidden" name="invader_error_url" value="{% path_to page %}{{form_params}}" />
-        {% include 'address_form' with address, with_require: true %}
+      {% if disabled == true %}
         <div class="row">
-          <div class="col-6 text-left">
-            <a href="{% path_to account_address %}" class="btn btn-default " >{{'account_address_cancel' | translate}}</a>
-          </div>
-          <div class="col-6 text-right">
-            <input type="submit" name="submit" class="btn btn-primary " value="{{'account_address_submit' | translate}}">
+          <div class="col-12">
+            <div class="text-danger text-center">
+              <i class="fas fa-exclamation-triangle"></i>
+              {{error_msg}}
+            </div>
           </div>
         </div>
-      </form>
+        {% if address %}
+          {% include 'address_form' with 
+            address,
+            disabled: true
+          %}
+        {% endif %}
+        <div class="row pt-2">
+          <div class="col-12 text-center">
+            <a href="{% path_to account_address %}" class="btn btn-dark ">
+              {{'btn_back' | translate}}
+            </a>
+          </div>
+        </div>
+      {% else %}
+        <form class="" action="{{form_action}}" method="post" data-autocomplete="address">
+          <input type="hidden" name="invader_success_url" value="{% path_to account_address %}" />
+          <input type="hidden" name="invader_error_url" value="{% path_to page %}{{form_params}}" />
+          {% include 'address_form' with 
+             address, 
+             with_require: true,
+             disabled: false
+          %}
+          <div class="row">
+            <div class="col-6 text-left">
+              <a href="{% path_to account_address %}" class="btn btn-outline-dark ">
+                {{'account_address_cancel' | translate}}
+              </a>
+            </div>
+            <div class="col-6 text-right">
+              <input type="submit" name="submit" class="btn btn-primary " value="{{'account_address_submit' | translate}}">
+            </div>
+          </div>
+        </form>
+      {% endif %}
     </div>
   </div>
 </div>

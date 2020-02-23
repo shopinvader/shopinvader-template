@@ -1,0 +1,39 @@
+.card {
+	.card-disabled-message {
+		display: none;
+	}
+	&.card-disabled {
+		position: relative;
+		.card-disabled-message {
+			background-color: theme-color('danger');
+			border-radius: $border-radius;
+			color: $white;
+			display: block;
+			font-weight: bold;
+			font-size: .7rem;
+			left: 50%;
+			opacity: .7;
+			padding: .3rem;
+			padding-left: 1rem;
+			padding-right: 1rem;
+			position: absolute;
+			text-align: center;
+			text-transform: uppercase;
+			bottom: -.5rem;
+			transform: translate(-50%, -50%);
+			z-index: 11;
+		}
+		&:after {
+			$strip-color-1: transparentize(theme-color('danger'), .7);
+			$strip-color-2: transparentize(theme-color('danger'), .8);
+			background-image: repeating-linear-gradient(45deg, $strip-color-1, $strip-color-1 30px, $strip-color-2 30px, $strip-color-2 60px);
+			content: ' ';
+			height: 100%;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 100%;
+			z-index: 10;
+		}
+	}
+}
