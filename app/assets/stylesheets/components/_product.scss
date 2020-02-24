@@ -340,7 +340,7 @@ $product-attr-gap: 2rem;
                 "cart cart cart"
                 "shortdesc shortdesc shortdesc"
                 "models models models"
-                
+                "structured structured structured"
                 "desc desc desc"
                 "variant variant variant"
                 "cross cross cross"
@@ -360,7 +360,7 @@ $product-attr-gap: 2rem;
                 "image shortdesc"
                 "image variant"
                 "desc desc"
-
+                "structured structured"
                 "models models"
                 "cross cross"
                 "up up"
@@ -378,8 +378,7 @@ $product-attr-gap: 2rem;
                 "image variant" 1fr
                 "models models"
                 "desc desc"
-
-                
+                "structured structured"
                 "cross cross"
                 "up up"
                 / 2fr 1fr;
@@ -602,7 +601,29 @@ $product-attr-gap: 2rem;
     
   }
 }
-
+.product-structured-attr {
+  grid-area: structured;
+  
+  .group {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    .group-attrs {
+      font-size: .85rem;
+      .attr {
+        border-bottom: 1px solid $border-color; 
+        display: flex;
+        & > div {
+          &.name {
+            background-color: $gray-100;
+            padding-left: 1rem;
+          }
+          width: 50%;
+          padding: .5rem;
+        }
+      }
+    }
+  }
+}
 .product-variant-thumbnail {
   display: flex;
   padding: 1rem;
