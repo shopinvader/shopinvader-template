@@ -78,7 +78,7 @@ const Section = {
     
     class HitGridItem extends ProductHit {
       constructor(props) {
-        super(props, locale);
+        super(props, searchkit_translation, locale);
       }
       get_thumb_layout() {
         return 'grid';
@@ -86,7 +86,7 @@ const Section = {
     }
     class HitListItem extends ProductHit {
       constructor(props) {
-        super(props, locale);
+        super(props, searchkit_translation, locale);
       }
       get_thumb_layout() {
         return 'list';

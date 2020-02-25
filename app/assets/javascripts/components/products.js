@@ -5,12 +5,16 @@ import {
 var cookies = require('browser-cookies');
 
 class ProductHit extends React.Component {
-  constructor(props, locale) {
+  constructor(props, translations, locale) {
     super(props);
     this.state = {
       'product': this.props.result._source,
-      'locale': locale
+      'locale': locale,
+      'translations': translations
     };
+  }
+  translate(key){
+    return this.state.translations[key];
   }
   get_role() {
     var role = cookies.get('role');
@@ -33,7 +37,7 @@ class ProductHit extends React.Component {
   get_price_currency(price) {
     var currency = currencies.items[currencies.selected];
     return new Intl.NumberFormat(
-      this.state.locale, { 
+      this.state.locale, {
         style: 'currency', 
         currency: currencies.selected 
       }
@@ -42,6 +46,7 @@ class ProductHit extends React.Component {
   get_thumb_layout() {
     return 'grid';
   }
+
   variants() {
     var product = this.state.product;
     const items = []
@@ -145,12 +150,36 @@ class ProductHit extends React.Component {
       );
     }
   }
+  form_add_to_cart(){
+    var product = this.state.product;
+    var product_url = this.get_url();
+    var stock_state = product.stock.global.state;
+    if(stock_state == 'null' || stock_state == 'in_stock' || stock_state == 'in_limited_stock') {
+      return (
+        <form method="POST" action="/invader/cart/add_item" data-shopinvader-form>
+          <input type="hidden" name="invader_success_url" value={product_url+'?addtocart_product_id='+product.objectID} />
+          <input type="hidden" name="invader_error_url" value={product_url} />
+          <input type="hidden" name="item_qty" value="1" />
+          <input type="hidden" name="product_id" value={product.objectID} />
+          <a href={product_url} className="btn-product-page" dangerouslySetInnerHTML={{__html: "Details"}} />
+          <button type="submit" className="btn-add-to-cart" dangerouslySetInnerHTML={{__html: "Ajouter au panier"}} />
+        </form>
+      );
+    }
+    else {
+      return (
+        <div>
+          <a href={product_url} className="btn-product-page" dangerouslySetInnerHTML={{__html: "Details"}} />
+          <div className={"stock_state " + stock_state} dangerouslySetInnerHTML={{__html: this.translate('product.'+stock_state)}} />
+        </div>
+      );
+    }
+  }
   render() {
     var product = this.state.product;
     var class_name = 'product-thumbnail '+this.get_thumb_layout();
     var page = document.location;
     var id = 'product-hit-'+this.get_thumb_layout()+product.objectID;
-    var product_url = this.get_url();
     return (
       <div className={class_name} key={product} id={id}>
         <div className="image">
@@ -158,21 +187,14 @@ class ProductHit extends React.Component {
         </div>
         <div className="content">
           <div className="description">
-            <a href={product_url}  className="title" dangerouslySetInnerHTML={{__html: product.model.name}} />
+            <a href={this.get_url()}  className="title" dangerouslySetInnerHTML={{__html: product.model.name}} />
             <div className="short_description" dangerouslySetInnerHTML={{__html: product.short_description}} />
             <a className="category" dangerouslySetInnerHTML={{__html: this.get_first_category()}} />
           </div>
           <div className="price">
             {this.price()}
             <div className="add-to-cart">
-              <form method="POST" action="/invader/cart/add_item" data-shopinvader-form>
-                <input type="hidden" name="invader_success_url" value={product_url+'?addtocart_product_id='+product.objectID} />
-                <input type="hidden" name="invader_error_url" value={product_url} />
-                <input type="hidden" name="item_qty" value="1" />
-                <input type="hidden" name="product_id" value={product.objectID} />
-                <a href={product_url} className="btn-product-page" dangerouslySetInnerHTML={{__html: "Details"}} />
-                <button type="submit" className="btn-add-to-cart" dangerouslySetInnerHTML={{__html: "Ajouter au panier"}} />
-              </form>
+              {this.form_add_to_cart()}
             </div>
           </div>
         </div>

@@ -117,6 +117,9 @@
         @include button-outline-variant(theme-color('primary'));
       }
     }
+    .stock_state {
+     line-height: 2.8rem;
+    }
     .desc {
 
     }

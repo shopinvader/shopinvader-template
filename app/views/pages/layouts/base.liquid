@@ -196,6 +196,10 @@ is_layout: false
           'sort.price_default': {{'filter_price_default' | translate | json}},
           'sort.price_asc': {{'filter_price_asc' | translate | json}},
           'sort.price_desc': {{'filter_price_desc' | translate | json}},
+          'product.out_of_stock': {{'product_stock_state_out_of_stock' | translate | json}},
+          'product.in_stock': {{'product_stock_state_in_stock' | translate | json}},
+          'product.resupplying': {{'product_stock_state_resupplying' | translate | json}},
+          'product.in_limited_stock': {{'product_stock_state_in_limited_stock' | translate | json}}
         };
       </script>
     {% elsif site.metafields.algolia.indices != null %}
