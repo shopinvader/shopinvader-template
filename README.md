@@ -34,6 +34,20 @@ Clone this repository and move into your LocomotiveCMS folder.
 $ git clone https://github.com/shopinvader/shopinvader-template.git YOUR_SITE_NAME
 ```
 
+### Build assets
+
+You have to build javascripts and css, it can be done locally 
+if you have yarn installed.
+
+
+```bash
+# install dependencies
+yarn
+# build
+yarn build:dev
+```
+
+
 ### Launch with docker-compose
 
 Run the container with bash
