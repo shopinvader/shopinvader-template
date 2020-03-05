@@ -609,17 +609,22 @@ $product-attr-gap: 2rem;
     padding-top: 1rem;
     .group-attrs {
       font-size: .85rem;
+      width: 100%;
       .attr {
+        width: 100%;
         border-bottom: 1px solid $border-color; 
         display: flex;
-        & > div {
-          &.name {
-            background-color: $gray-100;
-            padding-left: 1rem;
-          }
-          width: 50%;
+        .name {
+          background-color: $gray-100;
+          padding-left: 1rem;
           padding: .5rem;
+          width: 50%;
         }
+        .value {
+          padding-left: 1rem;
+          padding: .5rem;
+          width: 50%;
+        }         
       }
     }
   }

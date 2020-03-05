@@ -243,14 +243,16 @@ handle: product
             <h3 class="group-title">
               {{group.group_name}}
             </h3>
-            <div class="group-attrs">
-              {% for attr in group.fields %}
-                <div class="attr">
-                  <div class="name">{{attr.name}}</div>
-                  <div class="value">{{attr.value}}</div>
-                </div>
-              {% endfor %}
-            </div>
+            <table class="group-attrs">
+              <tbody>
+                {% for attr in group.fields %}
+                  <tr class="attr">
+                    <td class="name">{{attr.name}}</td>
+                    <td class="value">{{attr.value}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           {% endfor %}
         {% endif %}
       </div>
