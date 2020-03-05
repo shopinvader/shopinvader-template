@@ -236,6 +236,27 @@ handle: product
       </div>
     {% endif %}
     </div>
+    <div class="product-attr product-structured-attr">
+      <div class="group">
+        {% if variant.structured_attributes.size > 0 %}
+          {% for group in variant.structured_attributes %}
+            <h3 class="group-title">
+              {{group.group_name}}
+            </h3>
+            <table class="group-attrs">
+              <tbody>
+                {% for attr in group.fields %}
+                  <tr class="attr">
+                    <td class="name">{{attr.name}}</td>
+                    <td class="value">{{attr.value}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
     <div class="product-attr product-model-attr">
       {% if variant.variant_attributes.size > 0 %}
         {% for attr in variant.variant_attributes %}
