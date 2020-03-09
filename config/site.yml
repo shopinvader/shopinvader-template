@@ -30,15 +30,22 @@ metafields:
   theme:
     logo: "/images/shop-logo.png"
     noimage: "/images/no-image.jpg"
+    page_max_width: 100%
   elasticsearch:
-    url: http://elastic.localtest.me:9200
+    url: https://krapahute.elastic-fr-1.shopinvader.com
+    indices: >
+      [  { "name": "categories", "index": "krapahute_shopinvader_category", "type":"odoo"},  { "name": "products", "index": "krapahute_shopinvader_variant", "type":"odoo"}]
+    routes: >
+      [    ["*", { "name": "category", "template_handle": "category", "index": "categories" } ],    ["*", { "name": "product", "template_handle": "product", "index": "products" } ]]
+  elasticsearch-:
+    url: https://elastic.site.demo.shopinvader.com:4443
     indices: >
       [{"index": "demo_elasticsearch_backend_shopinvader_category", "name": "categories"}, {"index": "demo_elasticsearch_backend_shopinvader_variant", "name": "products"}]
     routes: >
-      [    ["*", { "name": "category", "template_handle": "category", "index": "categories" } ],    ["*", { "name": "product", "template_handle": "product", "index": "products" } ]]
+      [["*", {"template_handle": "category", "index": "categories", "name": "category"}], ["*", {"template_handle": "product", "index": "products", "name": "product"}]]
   erp:
     api_key: key1
-    api_url: http://odoo.localtest.me:8069/shopinvader
+    api_url: https://default.odoo.demo.shopinvader.com/shopinvader
     default_role: default
   payment:
     stripe_api_key: pk_test_FcNCqsbwmVR5YZ0ak2bpe1xd
@@ -71,7 +78,7 @@ metafields:
       }
     locale_mapping: >
       {
-        "en": "en_US"
+        "en": "fr_FR"
       }
     currencies_format: >
       {

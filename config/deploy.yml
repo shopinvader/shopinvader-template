@@ -1,5 +1,5 @@
-test:
-  host: http://locomotive:3000
-  handle: shopinvader
-  email: demo@shopinvader.com
-  api_key: d49cd50f6f0d2b163f48fc73cb249f0244c37074
+production:
+  host: https://default.site.demo.shopinvader.com
+  handle: khaki-garden-5173
+  email: thibault.rey@akretion.com
+  api_key: d1faf47d7d46b4e69ae9ac4b0f7bc18148b08a3c

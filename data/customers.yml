@@ -1,6 +1,6 @@
-- john.doe@shopinvader.com:
-    _slug: john-dot-doe-at-shopinvader-dot-com
-    name: John Doe
-    email: john.doe@shopinvader.com
+- thibault.rey@akretion.com:
+    _slug: thibault-dot-rey-at-akretion-dot-com
+    name: Thibault REY
+    email: thibault.rey@akretion.com
     password: password
     role: default

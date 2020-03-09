@@ -15,8 +15,9 @@ $sk-font-family: $font-family-sans-serif;
 	}
 }
 .section-searchkit-faceting {
-	@include make-row();
+	
 	.sk-layout {
+		@include make-row();
 		.sk-filters-collapser {
 			display: none;
 			@include media-breakpoint-down(md) {

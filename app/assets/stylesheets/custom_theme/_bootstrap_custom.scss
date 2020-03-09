@@ -122,7 +122,7 @@ $card-border-radius: 0;
 
 //Theme
 $max-content-width: 100%; // container max size
-$page-max-width: 1400px;
+$page-max-width: 100%;
 $page-shadow: none;
 $main-bg:  transparent;
 
@@ -131,14 +131,15 @@ $main-showcase-float: true;
 $main-showcase-width: 100%;
 $main-showcase-bg: $cyan;
 $main-showcase-color: $white;
-/*
+
 $container-max-widths: (
-  sm: 100%,
-  md: 100%,
-  lg: 100%,
-  xl: 1140px
+  xs: 540px,
+  sm: 700px,
+  md: 960px,
+  lg: 1140px,
+  xl: 1300px,
 ) !default;
-*/
+
 // Toasts
 
 $toast-max-width:                   450px !default;

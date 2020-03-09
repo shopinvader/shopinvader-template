@@ -100,7 +100,7 @@ body.nav-sm-display {
       }
     }
     .theme-light {
-      background-color: transparent;
+      background-color: theme-color('light');
       color: theme-color('dark') !important;
       a, .icon-label {
         color: theme-color('dark') !important;
@@ -291,7 +291,6 @@ body.nav-sm-display {
       }
     }
     .header-block-navigation {
-      width: 100%;
       .list-inline {
         .list-inline-item {
           margin: 0;
@@ -314,15 +313,17 @@ body.nav-sm-display {
             padding-bottom: 1rem;
           }
           .list-inline-dropdown {
+            @include make-container-max-widths();
+            width: 100vw;
             box-shadow: 0rem 0.4rem 0.5rem rgba(0, 0, 0, 0.1);
             position: absolute;
             display: none;
             left: 0;
             z-index: 2000;
-            width: calc(100% - 40px);
+            
             padding: 1.5rem;
-            margin-left: 20px;
-            margin-right: 20px;
+            //margin-left: 20px;
+            //margin-right: 20px;
             background-color:  $gray-100;
             color: $gray-900;
             .items {

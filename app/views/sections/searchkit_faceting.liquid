@@ -40,7 +40,7 @@ default:
     {% endif %}
   {% endif %}
   <div id="searchkit-faceting-container"
-    class="page-{{page.handle}}"
+    class="page-{{page.handle}} container"
     data-product-noimage={{ site.metafields.theme.noimage | json }}
     data-elastic-url={{ search_params.url | json }}
     data-locale={{ store.locale_mapping | json }}
