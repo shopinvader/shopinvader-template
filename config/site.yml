@@ -11,7 +11,7 @@ name: "Shopinvader demo (Shopinvader Demo)"
 # The locale listed first is the site's default locale
 # Locales are specified using ISO language codes
 # Possible locales include: en, de, fr, pl, pt-BR, it, nl, nb, es, ru, et, ja, zh-CN
-locales: [en]
+locales: [en, fr]
 
 seo_title: Shopinvader demo | May the discount be with you
 meta_keywords: "the Shopinvader  demo web store"
@@ -31,14 +31,14 @@ metafields:
     logo: "/images/shop-logo.png"
     noimage: "/images/no-image.jpg"
   elasticsearch:
-    url: http://elastic.localtest.me:9200
+    url: http://elastic.localhost
     indices: >
       [{"index": "demo_elasticsearch_backend_shopinvader_category", "name": "categories"}, {"index": "demo_elasticsearch_backend_shopinvader_variant", "name": "products"}]
     routes: >
       [    ["*", { "name": "category", "template_handle": "category", "index": "categories" } ],    ["*", { "name": "product", "template_handle": "product", "index": "products" } ]]
   erp:
     api_key: key1
-    api_url: http://odoo.localtest.me:8069/shopinvader
+    api_url: http://odoo.localhost/shopinvader
     default_role: default
   payment:
     stripe_api_key: pk_test_FcNCqsbwmVR5YZ0ak2bpe1xd
@@ -72,6 +72,7 @@ metafields:
     locale_mapping: >
       {
         "en": "en_US"
+        "fr": "fr_FR"
       }
     currencies_format: >
       {
