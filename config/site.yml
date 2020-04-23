@@ -71,7 +71,7 @@ metafields:
       }
     locale_mapping: >
       {
-        "en": "en_US"
+        "en": "en_US",
         "fr": "fr_FR"
       }
     currencies_format: >
