@@ -77,11 +77,7 @@ is_layout: false
 {% block 'body/footer' %}
    <div></div>
 {% endblock %}
-{% block 'css' %}
-  {{ 'jquery.webui-popover.css' | stylesheet_tag }}
-{% endblock %}
 {% block 'javascripts' %}
-  {{ 'jquery.webui-popover.js' | javascript_tag }}
   {{ 'application.account.js' | javascript_tag }}
   {{ 'address_autocomplete.js' | javascript_tag }}
   <script src="https://maps.googleapis.com/maps/api/js?key={{site.metafields.google.maps_api_key}}&libraries=places&callback=initAddressAutocomplete"></script>

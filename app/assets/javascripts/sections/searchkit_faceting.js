@@ -1,7 +1,6 @@
 import React, { Component }  from 'react';
 import ReactDOM from 'react-dom';
 
-//import HoganHelpers from './_hogan_helpers';
 import 'rc-slider/assets/index.css';
 
 import { Hits, SearchkitManager,SearchkitProvider,
