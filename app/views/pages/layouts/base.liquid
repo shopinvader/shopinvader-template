@@ -60,7 +60,7 @@ is_layout: false
     {{ 'bundle.css' | stylesheet_tag }}
     {{ 'themify-icons.css' | stylesheet_tag }}
   </head>
-  <body class="{{css_body}}">
+  <body class="{{css_body}} {% if current_customer %}user-authenticated{% else %}user-anonymous{% endif %}">
     <style media="screen">
       body {
         background-color: {{site.metafields.theme.body_bg_color}};
