@@ -16,7 +16,8 @@ settings:
   type: text
 blocks: []
 ---
-{% erp get 'cart/get_delivery_methods' as delivery_methods %}
+{% erp get 'delivery_carriers' as delivery_carriers with target: 'current_cart' %}
+{% assign delivery_methods = delivery_carriers.data %}
 {% assign selected_carrier = store.cart.shipping.selected_carrier %}
 {% assign is_selected_carrier = false %}
 {% if delivery_methods.size > 0 %}
