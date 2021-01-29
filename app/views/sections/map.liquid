@@ -1,0 +1,147 @@
+---
+{
+  "name": "Map",
+  "class": "",
+  "icon": "image",
+  "keep_name": true,
+  "keep_icon": true,
+  "settings": [
+    {
+      "label": "JSON style file URL",
+      "id": "style_json_url",
+      "type": "string"
+    },
+    {
+      "label": "Latitude",
+      "id": "latitude",
+      "type": "number"
+    },
+    {
+      "label": "Longitude",
+      "id": "longitude",
+      "type": "number"
+    },
+    {
+      "label": "Zoom Level",
+      "id": "zoom",
+      "type": "number"
+    }
+  ],
+  "blocks": [
+    {
+        "name": "Marker",
+        "type": "list_item",
+        "settings": [
+            {
+                "label": "Latitude",
+                "id": "latitude",
+                "type": "number"
+            },
+            {
+                "label": "Longitude",
+                "id": "longitude",
+                "type": "number"
+            }
+        ]
+    }
+  ],
+
+  "presets": [{
+    "name": "Map",
+    "category": "Content",
+    "settings": {
+      "style_json_url": "https://maps.tilehosting.com/styles/streets/style.json?key=Cjk6rA56NBYE3crdH8QT",
+      "latitude": 45.77121,
+      "longitude": 4.86324,
+      "zoom": 12
+    },
+    "blocks": [
+        {
+            "type": "list_item",
+            "settings": {
+                "latitude": 45.77121,
+                "longitude": 4.86324
+            }
+        }
+    ]
+  }],
+  "default": {
+    "settings": {
+      "style_json_url": "https://maps.tilehosting.com/styles/streets/style.json?key=Cjk6rA56NBYE3crdH8QT",
+      "latitude": 45.77121,
+      "longitude": 4.86324,
+      "zoom": 12
+    },
+    "blocks": [
+        {
+            "type": "list_item",
+            "settings": {
+                "latitude": 45.77121,
+                "longitude": 4.86324
+            }
+        }
+    ]
+  }
+}
+---
+
+<div class="container-fluid">
+  <script src="https://cdn.klokantech.com/mapbox-gl-js/v0.53.0/mapbox-gl.js"></script>
+  <link href="https://cdn.klokantech.com/mapbox-gl-js/v0.53.0/mapbox-gl.css" rel="stylesheet" />
+  <style>
+    #map {height: 60vh}
+  </style>
+  <div id="map" class="border"></div>
+  <p><a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a></p>
+  <script>
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: '{{section.settings.style_json_url}}',
+        center: [{{section.settings.longitude}}, {{section.settings.latitude}}],
+        zoom: {{section.settings.zoom}}
+    });
+
+    var markers = {
+        'type': 'FeatureCollection',
+        'features': []
+    }
+    {% for marker in section.blocks %}
+        markers.features.push({
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [{{marker.settings.longitude}}, {{marker.settings.latitude}}]
+            },
+            'properties': {
+            }
+        });
+    {% endfor %}
+
+    map.on('load', function() {
+        map.addSource('markers', {
+            'type': 'geojson',
+            'data': markers
+        });
+    });
+
+    markers.features.forEach(function(marker, i) {
+        // Create an img element for the marker
+        //var el = document.createElement('div');
+        //el.id = "marker-" + i;
+        //el.className = 'marker';
+        // Add markers to the map at all points
+        var mapMarker = new mapboxgl.Marker({
+            offset: [0, -23]
+        })
+        mapMarker.setLngLat(marker.geometry.coordinates).addTo(map);
+        console.log(mapMarker)
+
+        mapMarker._element.addEventListener('click', function(e){
+            map.flyTo({
+                center: marker.geometry.coordinates,
+                zoom: 15
+            });
+        });
+    });
+  </script>
+</div>
