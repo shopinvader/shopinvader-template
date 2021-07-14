@@ -11,7 +11,7 @@ name: "Shopinvader demo (Shopinvader Demo)"
 # The locale listed first is the site's default locale
 # Locales are specified using ISO language codes
 # Possible locales include: en, de, fr, pl, pt-BR, it, nl, nb, es, ru, et, ja, zh-CN
-locales: [en, fr]
+locales: [en, fr, pt-BR]
 
 seo_title: Shopinvader demo | May the discount be with you
 meta_keywords: "the Shopinvader  demo web store"
@@ -72,7 +72,8 @@ metafields:
     locale_mapping: >
       {
         "en": "en_US",
-        "fr": "fr_FR"
+        "fr": "fr_FR",
+        "pt-BR": "pt_BR"
       }
     currencies_format: >
       {

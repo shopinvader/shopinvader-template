@@ -1,177 +1,233 @@
 btn_back:
   en: Return
   fr: Retour
+  pt-BR: Voltar
 
 payment_adyen_button:
   en: <i class="fas fa-credit-card"></i>  Pay by credit card
   fr: <i class="fas fa-credit-card"></i>  Payer par carte de crédit
+  pt-BR: <i class="fas fa-credit-card"></i>  Pagar com cartão de crédito
 payment_adyen_description:
   en: Secured checkout with Adyen
   fr: Paiement sécurisé avec Adyen
+  pt-BR: Pagamento seguro com Adyen
 payment_adyen_form_title:
   en: Pay my order
   fr: Payer ma commande
+  pt-BR: Pagar meu pedido
 payment_adyen_form_subtitle:
   en: Secured credit card payment
   fr: Paiement sécurisé par carte bancaire
+  pt-BR: Pagamento com cartão de crédito com segurança
 payment_adyen_ckeckout_button:
   en: PAY
   fr: PAYER
+  pt-BR: PAGAR
 payment_adyen_security_details:
   en: Secured Area
   fr: Espace sécurisé
-
+  pt-BR: Área segura
 account_address_submit:
   en: Submit
   fr: Valider
+  pt-BR: Validar
 account_address_add:
   en: Add an address
   fr: Ajouter une adresse
+  pt-BR: Adicionar um endereço
 account_address_cancel:
   en: Cancel
   fr: Annuler
+  pt-BR: Cancelar
 account_address_update:
   en: Shipping adresses
   fr: Mes adresses de livraison
+  pt-BR: Endereço de envio
 account_order_address:
   en: address
   fr: Adresse
+  pt-BR: Endereços
 account_order_empty:
   en: You don't have orders :(
   fr: Vous n'avez pas de commande
+  pt-BR: Você não tem pedidos :(
 account_order_qty:
   en: Quantity
   fr: Quantité
+  pt-BR: Quantidade
 account_order_title:
   en: My sales orders
   fr: Mes commandes
+  pt-BR: Meus pedidos de venda
 account_order_payment :
   en: Payment method
   fr: Méthode de paiement
+  pt-BR: Forma de Pagamento
 account_order_subtotal:
   en: Total
   fr: Total
+  pt-BR: Total
 account_order_shipping:
   en: Shipping cost
   fr: Frais de port
+  pt-BR: Custos de envio
 account_order_level0:
   en: Ordered on 
-  fr: Commandé le 
+  fr: Commandé le
+  pt-BR: Encomendado em
 account_order_level1:
   en: Checkout
-  fr: Paiement de 
+  fr: Paiement de
+  pt-BR: Checkout
 account_order_level2:
   en: Processing
   fr: En préparation
+  pt-BR: Processando
 account_order_level3:
   en: Shipped
   fr: Expédié
+  pt-BR: Enviado
 account_quotation_invoicing_address:
   en: Invoicing address
   fr: Adresse de facturation
+  pt-BR: Endereço de Faturamento
 account_quotation_shipping_address:
   en: Shipping address
   fr: Adresse de livraison
-
+  pt-BR: Endereço de envio
 account_quotation_total_title:
   en: Total
   fr: Total
+  pt-BR: Total
 account_quotation_total_subtotal:
   en: Total without tax
   fr: Montant HT
+  pt-BR: Total sem impostos
 account_quotation_total_taxes:
   en: Taxes
   fr: Taxes
+  pt-BR: Impostos
 account_quotation_total_amount:
   en: Total VAT Inc
   fr: Total T.T.C
+  pt-BR: Total com Impostos
 account_quotation_empty:
   en: You don't have quotation :(
   fr: Vous n'avez pas de devis
+  pt-BR: Você não tem nenhuma cotação :(
 account_quotation_title:
   en: My quotations
   fr: Mes devis
+  pt-BR: Minhas cotações
 account_quotation_lines:
   en: More details
   fr: Voir le devis
+  pt-BR: Mais detalhes
 account_quotation_name:
   en: Quotation
   fr: Devis
+  pt-BR: Quotação
 account_quotation_payment:
   en: Pay this quotation
   fr: Payer ce devis
+  pt-BR: Pagar esta cotação
 account_quotation_status_estimating:
   en: Estimation in progress
   fr: En cours de chiffrage
+  pt-BR: Estimativa em progesso
 account_quotation_status_estimated:
   en: Pending payment
   fr: En attente de paiement
+  pt-BR: Pagamento pendente
 account_quotation_shipping:
   en: Shipping cost
   fr: Frais de port
+  pt-BR: Custos de envio
 account_profil_title:
   en: My account profile
   fr: Mes informations
+  pt-BR: Meu perfil
 account_address_lists:
   en: My addresses
   fr: Mes adresses
+  pt-BR: Meus endereços
 account_password_reset:
   en: Reset my password
   fr: Réinitialiser mon mot de passe
+  pt-BR: Resetar minha senha
 account_password_title:
   en: Reset my password
   fr: Changer de mot de passe
+  pt-BR: Resenhar minha senha
 account_password_reset_tooshort:
   en: Password too short
   fr: Mot de passe trop court
+  pt-BR: Senha muito curta
 account_password_reset_validation:
   en: Thank you, your password has been successfully updated 
   fr: Merci, votre mot de passe a été mis à jour.
+  pt-BR: Obrigado, sua senha foi atualizada com sucesso.
 account_password_reset_logout_help:
   en: Sorry, password reset is not available when a user is currently logged in. Please logout before
   fr: La réinitilisation de mot de passe n'est pas disponible lorsqu'un utilisateur est connecté à son compte client. Merci de vous déconnecter
+  pt-BR: Desculpe, o reset da senha não é permitido quando o usuário esta logado. Por favor efetue o logout.
 account_password_reset_error:
   en: <b>Sorry, something went wrong</b><br>Your request isn't valid. Please try to request again password reset.
   fr: <b>Une erreur est survenue</b><br>Votre requête n'est pas valide ou a expirée. Merci de faire à nouveau une demande de réinitilisation de mot de passe.
+  pt-BR: <b>Desculpe, algo deu errado</b><br>Sua solicitação não é válida. Por favor tente resetar a senha novamente.
 account_password_reset_subtitle:
   en: Enter your new password below.
   fr: Veuillez saisir votre nouveau mot de passe ci-dessous.
+  pt-BR: Digite sua nova senha abaixo.
 account_rma_order:
   en: Order
   fr: Commande
+  pt-BR: Ordem
 account_rma_return:
   en: Product
   fr: Produit
+  pt-BR: Produto
 account_rma_message :
   en: Message
   fr: Message
+  pt-BR: Mensagem
 account_rma_item:
   en: Product
   fr: Produit
+  pt-BR: Produto
 account_rma_qty:
   en: Quantity
   fr: Quantité
+  pt-BR: Quantidade
 account_rma_title:
   en: Claims
   fr: Retour marchandise
+  pt-BR: Reclamações
 account_rma_submit:
   en: Submit
   fr: Valider
+  pt-BR: Enviar
 account_title:
   en: Hello
   fr: Bonjour
+  pt-BR: Olá
 account_signout:
   en: Sign out
   fr: Déconnexion
+  pt-BR: Sair
 account_forgetpassword_title:
   en: Password assistance
   fr: Assistance mot de passe
+  pt-BR: Não consigo acessar minha conta
 account_forgetpassword_logged:
   en: >
     Sorry, password reset is not available when a user is currently logged in.<br>
     <b>Please logout before</b>
   fr: >
-    Veuillez vous déconnecter pour poursuivre.  
+    Veuillez vous déconnecter pour poursuivre.
+  pt-BR: >
+    Desculpe, o reset da senha não esta disponível quando o usuario esta logado.<br>
+    <b>Por favor efetue o logoff</b>
 account_forgetpassword_instructions_sent:
   en: The instructions for changing your password have been emailed to you.
   fr: Les instructions pour procéder au remplacement de votre mot de passe vous a été envoyé par courriel.
