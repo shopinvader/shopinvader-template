@@ -226,11 +226,12 @@ account_forgetpassword_logged:
   fr: >
     Veuillez vous déconnecter pour poursuivre.
   pt-BR: >
-    Desculpe, o reset da senha não esta disponível quando o usuario esta logado.<br>
+    Desculpe, a recuperação de senha não está disponível enquanto o usuário está logado.<br>
     <b>Por favor efetue o logoff</b>
 account_forgetpassword_instructions_sent:
   en: The instructions for changing your password have been emailed to you.
   fr: Les instructions pour procéder au remplacement de votre mot de passe vous a été envoyé par courriel.
+  pt-BR: As instruções de recuperação de conta foram enviadas para o seu email.
 account_forgetpassword_intro:
   en: >
     Enter the email address  associated with your account. <br>
@@ -238,23 +239,32 @@ account_forgetpassword_intro:
   fr: 
     Saisissez votre adresse e-mail associée à votre compte.<br>
     Vous recevrez un e-mail pour procéder à la réinitilisation de votre mot de passe.
+  pt-BR:
+    Insira o email associado a sua conta. <br>
+    Iremos enviar um email com as instruções de recuperação de conta.
 account_forgetpassword_error_email:
   en: Wrong email address.
   fr: Adresse e-mail non reconnu.
+  pt-BR: Email inválido.
 account_welcome_message:
   en: Happy to see you again ;)
   fr: Happy to see you again ;)
+  pt-BR: Feliz em vê-lo de novo ;)
 header_cart:
   en: My basket
   fr: Mon panier
+  pt-BR: Meu carrinho
 header_login:
   en: Sign in or register
   fr: Mon compte
+  pt-BR: Entrar ou registrar
 category_view_all:
   en: View all products
+  pt-BR: Todos os produtos
 currency_eur:
   en: Euro
   fr: Euro
+  pt-BR: Euro
 currency_chf:
   en: Swiss franc
   fr: Franc Suisse
@@ -267,581 +277,785 @@ currency_usd:
 currency_cad:
   en: Canadian Dollars
   fr: Dollars (Canada)
+currency_brl:
+  pt-BR: Reais
 currency_xof:
   en: Franc CFA
   fr: Franc CFA
+  pt-BR: Franc CFA
 cart_address_add:
   en: Add an address
   fr: Ajouter une adresse
+  pt-BR: Adicionar um endereço
 cart_address_update:
   en: Update
   fr: Modifier l'adresse
+  pt-BR: Editar
 cart_address_delete:
   en: Delete
   fr: Supprimer l'adresse
+  pt-BR: Deletar
 cart_checkout:
   en: "Checkout"
   fr: "Passer ma commande"
+  pt-BR: "Pagar"
 cart_continue_shopping:
   en: "Continue shopping"
   fr: "Poursuivre mes achats"
+  pt-BR: "Continuar comprando"
 cart_customer_shipping:
   en: My shipping address
   fr: Mon adresse de livraison
+  pt-BR: Meu endereço de entrega
 cart_head_price:
   en: "Unit Price"
   fr: "Prix"
+  pt-BR: "Preço"
 cart_head_qty:
   en: "Quantity"
   fr: "Quantité"
+  pt-BR: "Quantidade"
 cart_head_total:
   en: "Item Total"
   fr: "Total"
+  pt-BR: "Total"
 cart_invoice_address:
   en: Invoice address
   fr: Adresse de facturation
+  pt-BR: Endereço de cobrança
 cart_item_added:
   en: "1 Item Added to Cart"
   fr: "Votre article a été ajouté au panier"
+  pt-BR: "1 item adicionado ao carrinho"
 cart_item_count_zero:
   en: "{{ count }} item"
   fr: "Aucun article"
+  pt-BR: "Sem itens"
 cart_item_count_one:
   en: "{{ count }} item"
   fr: "{{ count }} article"
+  pt-BR: "{{ count }} item"
 cart_item_count_two:
   en: "{{ count }} items"
   fr: "{{ count }} articles"
+  pt-BR: "{{ count }} itens"
 cart_item_count_other:
   en: "{{ count }} items"
   fr: "{{ count }} articles"
+  pt-BR: "{{ count }} itens"
 cart_item_desc:
   en: "Items"
   fr: "Articles"
+  pt-BR: "Itens"
 cart_order_ref:
   en: Order number
   fr: Référence
+  pt-BR: Referência
 cart_quantity:
   en: Quatity
   fr: Quantité
+  pt-BR: Quantidade
 cart_delete:
   en: Delete item
   fr: Supprimer l'article
+  pt-BR: Deletar item
 cart_shipping_address:
   en: Shipping address
   fr: Adresse de livraison
+  pt-BR: Endereço de entrega
 cart_total_subtotal:
   en: "Subtotal"
   fr: "Sous-total"
+  pt-BR: "Subtotal"
 cart_total_total:
   en: "Total"
   fr: "Total"
+  pt-BR: "Total"
 cart_total_vat:
   en: "Sales Tax"
   fr: "dont T.V.A."
+  pt-BR: "Taxas"
 cart_total_shipping:
   en: "Shipping"
   fr: "Frais de livraison"
+  pt-BR: "Entrega"
 cart_payment_secure:
   en: Secured Payment
   fr: Paiement sécurisé
+  pt-BR: Pagamento seguro
 cart_title:
   en: My cart
   fr: Mon panier
+  pt-BR: Meu carrinho
 cart_password:
   en: Password
   fr: Mot de passe
+  pt-BR: Senha
 cart_reset_password:
   en: Reset Password
   fr: Mot de passe oublié ?
+  pt-BR: Esqueceu sua senha?
 cart_login:
   en: Email
   fr: Email
+  pt-BR: Email
 cart_login_btn:
   en: Login
   fr: Connexion
+  pt-BR: Entrar
 cart_without_account_btn:
   en: Continue
   fr: Continuer
+  pt-BR: Continuar
 cart_step_step1:
   en: Shopping cart
   fr: Panier
+  pt-BR: Carrinho
 cart_step_step2:
   en: Shipping address
   fr: Coordonnées
+  pt-BR: Endereço de entega
 cart_step_step3:
   en: Checkout
   fr: Paiement
+  pt-BR: Pagamento
 cart_step_step4:
   en: End
   fr: Terminé
+  pt-BR: Terminar
 cart_carrier_title:
   en: Carrier
   fr: Mode de livraison
+  pt-BR: Método de entrega
 cart_carrier_unavailable:
   en: No Shipping mode avaible
   fr: Aucun mode de livraison n'est disponible.
+  pt-BR: Nenhum método de entrega disponível
 cart_comment_title:
   en: Comment
   fr: Commentaire
+  pt-BR: Comentário
 cart_payment_title:
   en: Payment
   fr: Mode de paiement
+  pt-BR: Pagamento
 cart_payment_desc:
   en: Choose your payment mode to checkout
   fr: Sélectionnez votre mode de paiement pour finaliser votre commande.
+  pt-BR: Selecione o método de pagamento para continuar
 
 cart_invoice_address_different:
   en: Choose invoice address
   fr: je souhaite une adresse de facturation différente
+  pt-BR: Selecione um endereço de cobrança
 
 cart_submit:
   en: Submit
   fr: Valider
+  pt-BR: Enviar
 cart_customer_invoice:
   en: Set invoice address
   fr: Je choisis mon adresse de facturation
+  pt-BR: Insira um endereço de cobrança
 cart_free_delivery:
   en: Free
   fr: Offert
+  pt-BR: Grátis
 cart_shipping_method:
   en: Continue
   fr: Continuer
+  pt-BR: Continuar
 cart_empty:
   en: You have no items in your shopping basket.
   fr: Votre panier est vide.
+  pt-BR: Você não tem itens no seu carrinho.
 creditcard_lastname:
   en: Name (as it appears on your card)
   fr: Titulaire de la carte
+  pt-BR: Nome (como mostrado no cartão)
 creditcard_number:
   en: Card number
   fr: Numéro de carte
+  pt-BR: Numero do cartão
 creditcard_expiry:
   en: Expiration date
   fr: Date d'expiration
+  pt-BR: Data de validade
 creditcard_cvc:
   en: Security code
   fr: Cryptogramme visuel
+  pt-BR: Código de segurança
 creditcard_cvc_help:
   en: 3 last numbers on back
   fr: 3 derniers chiffres au dos de votre carte, à droite de la signature
+  pt-BR: 3 últimos digítos no verso
 close :
   en: Close
   fr: Fermer
+  pt-BR: Fechar
 email_resetpassword_subject:
   en: Reset your password - ShopInvader
   fr: Réinitilisation de votre mot de passe - ShopInvader
+  pt-BR: Resetar sua senha - ShopInvader
 filters:
   en: Filters
   fr: Filtrer
+  pt-BR: Filtros
 filter_clear:
   en: Clear All
   fr: Effacer la recherche
+  pt-BR: Limpar Tudo
 filter_more:
   en: View more
   fr: Voir plus
+  pt-BR: Mostar mais
 filter_less:
   en: View less
   fr: Réduire
+  pt-BR: Mostrar menos
 filter_all:
   en: View all
   fr: Voir tous
+  pt-BR: Ver todos
 filter_noresult_found:
   en: No results found for {query}.
   fr: Aucun résultats pour {query}.
+  pt-BR: Nenhum resultado encontrado para {query}.
 filter_didyoumean:
   en: Search for {suggestion}. 
   fr: Lancer une recherche avec {suggestion}.
+  pt-BR: Buscar por {suggestion}.
 filter_searchwithout_filter:
   en: No results found for {query}. Did you mean {suggestion}?
   fr: Aucun résultat pour {query}. Voulez-vous dire {suggestion}?
+  pt-BR: Nenhum resultado encontrado para {query}. Você quis dizer {suggestion}?
 filter_result_count:
   en: "{hitCount} results found."
   fr: "{hitCount} résultat(s) trouvé(s)."
+  pt-BR: "{hitCount} resultado(s) encontrado(s)."
 filter_paginate_previous:
   en: Previous
   fr: Précédent
+  pt-BR: Anterior
 filter_paginate_next:
   en: Next
   fr: Suivant
+  pt-BR: Próximo
 filter_placeholder:
   en: Search
   fr: Rechercher
+  pt-BR: Buscar
 filter_price:
   en: Price
   fr: Prix
+  pt-BR: Preço
 filter_current:
   en: Current filters
   fr: Filtres actifs
+  pt-BR: Filtros
 filter_price_default:
   en: Relevance
   fr: Trier par pertinence
+  pt-BR: Relevância
 filter_price_desc:
   en: Price - High to Low 
   fr: Trier par du plus cher au moins cher
+  pt-BR: Preço - Maior para Menor
 filter_price_asc:
   en: Price - Low to High
   fr: Trier par du moins cher au plus cher
+  pt-BR: Preço - Menor para Maior
 home:
   en: Home
   fr: Accueil
+  pt-BR: Casa
 partner_email:
   en: Email
   fr: Adresse e-mail
+  pt-BR: Email
 partner_name:
   en: Name
   fr: Nom
+  pt-BR: Nome
 partner_firstname:
   en: First name
   fr: Prénom
+  pt-BR: Nome
 partner_lastname:
   en: Last name
   fr: Nom
+  pt-BR: Sobrenome
 partner_address1:
   en: Adresse line 1
   fr: Adresse
+  pt-BR: Endereço
 partner_address2:
   en: Address line 2
   fr: Complément
+  pt-BR: Complemento
 partner_zipcode:
   en: Zip Code
   fr: Code postal
+  pt-BR: CEP
 partner_city:
   en: City
   fr: Ville
+  pt-BR: Cidade
 partner_country:
   en: Country
   fr: Pays
+  pt-BR: País
 partner_phone:
   en: Phone
   fr: Téléphone
+  pt-BR: Telefone
 partner_business:
   en: Company name
   fr: Société
+  pt-BR: Empresa
 partner_business_info:
   en:
   fr: "(livraison sur un lieu de travail)"
+  pt-BR: "(entrega em um local de trabalho)"
 per_page:
   en: per page
   fr: par page
+  pt-BR: por página
 popular_product:
   en: Popular product
   fr: Les plus vues
+  pt-BR: Produtos populares
 product_details:
   en: View more
   fr: Details
+  pt-BR: Detalhes
 product_add_to_cart:
   en: Add to cart
   fr: Ajouter au panier
+  pt-BR: Adicionar ao carrinho
 product_display_variant:
   en: View all versions
   fr: Voir toutes les versions
+  pt-BR: Visualizar todas as versões
 product_add_to_cart_discount:
   en: Shop now !
   fr: J'en profite !
+  pt-BR: Comprar agora !
 product_code:
   en: Product code
   fr: Référence
+  pt-BR: Referência
 product_desc_link:
   en: Read more
   fr: Voir la présentation produit 
+  pt-BR: Ler Mais
 product_discount_label:
   en: SAVE
   fr: BON PLAN
+  pt-BR: SALVAR
 product_display_grid:
   en: Grid
   fr: Mosaïque
+  pt-BR: Grade
 product_display_list:
   en: List
   fr: Liste
+  pt-BR: Lista
 product_price_from:
   en: Up to
   fr: à partir de
+  pt-BR: à partir de
 product_quantity:
   en: Quantity
   fr: Quantité
+  pt-BR: Quantidade
 product_advice_tab:
   en: Advices
   fr: Conseils
+  pt-BR: Recomendações
 product_advice_title:
   en: Our advices
   fr: Nos conseils
+  pt-BR: Nossas recomendações
 product_reviews_tab:
   en: Reviews
   fr: Avis client
+  pt-BR: Avaliações
 product_reviews_title:
   en: All Reviews
   fr: Tous les avis client
+  pt-BR: Todas as Avaliações
 product_overview_tab:
   en: Overview
   fr: Détails
+  pt-BR: Detalhes
 product_overview_title:
   en: Overview
   fr: Les plus du produit
+  pt-BR: Resumo
 product_spec_tab:
   en: Details & Specs
   fr: Spécification
+  pt-BR: Espicificações
 product_spec_title:
   en: Details & Specs
   fr: Spécification
+  pt-BR: Espicificações
 product_variant_title:
   en: Product models
   fr: Toutes les modèles
+  pt-BR: Modelos
 product_vat_inc:
   en: V.A.T. Inc.
   fr: T.T.C.
+  pt-BR: CNPJ
 product_rating_average:
   en: "Rating"
   fr: "Note moyenne :"
+  pt-BR: "Nota"
 product_related_tab:
   en: "Related Products"
   fr: "Produits complémentaire"
+  pt-BR: "Produtos Relacionados"
 product_related_title:
   en: "Customers who viewed this item bought …"
   fr: "Les clients ayant vu ce produit ont également acheté"
+  pt-BR: "Clientes que viram este produto compraram"
 product_stock_state_in_stock:
   en: In stock
   fr: En stock
+  pt-BR: Em estoque
 product_stock_state_out_of_stock:
   en: Out of stock
   fr: Epuisé
+  pt-BR: Fora de estoque
 product_stock_state_resupplying:
   en: Resupplying
   fr: En cours de réapprovisionnement
+  pt-BR: Fora de estoque
 product_stock_state_in_limited_stock:
   en: in stock
   fr: en stock
+  pt-BR: em estoque
 product_cross_sellings_tab:
   en: Customers also shopped for
   fr: More In This Collection
+  pt-BR: Clientes também buscaram por
 product_cross_sellings_title:
   en: More In This Collection
   fr: More In This Collection
+  pt-BR: Mais Dessa Coleção
 product_up_sellings_tab:
   en: products related to this item
   fr: More In This Collection
+  pt-BR: produtos relacionados a este item
 product_up_sellings_title:
   en: Other product
   fr: Autre produit
+  pt-BR: Outro produto
 product_variants:
   en: More buying choices
   fr: Plusieurs choix disponibles
+  pt-BR: Mais opções disponíveis
 product_zoom:
   en: Zoom
   fr: Zoom
+  pt-BR: Zoom
 rating_average_rate:
   en: "Average rate"
   fr: "Noté par nos clients"
+  pt-BR: "Nota média"
 rating_count_other:
   en: "{{count | round}} review"
   fr: "{{count | round}} avis"
+  pt-BR: "{{count | round}} avaliação"
 rating_count_one:
   en: "{{count | round}} review"
   fr: "{{count | round}} avis"
+  pt-BR: "{{count | round}} avaliação"
 rating_count_two:
   en: "{{count | round}} reviews"
   fr: "{{count | round}} avis"
+  pt-BR: "{{count | round}} avaliações"
 rating_comment_count_one:
   en: "{{count | round}} customer comment this product"
   fr: "{{count | round}} client a laissé un commentaire sur ce produit "
+  pt-BR: "{{count | round}} cliente deixou um comentário neste produto "
 rating_comment_count_two:
   en: "{{count | round}} customers comment this product"
   fr: "{{count | round}} clients ont laissé un commentaire sur ce produit "
+  pt-BR: "{{count | round}} clientes deixaram comentários sobre este produto "
 rating_comment_count_other:
   en: "{{count | round}} customers comment this product"
   fr: "{{count | round}} clients ont laissé un commentaire sur ce produit "
+  pt-BR: "{{count | round}} clients ont laissé un commentaire sur ce produit "
 rating_last_review:
   en: Last review
   fr: Avis le plus récent
+  pt-BR: Última avaliação
 search_history:
   en: Latest search
   fr: Dernières recherches
+  pt-BR: Últimas buscas
 search_history_clear:
   en: Clear history
   fr: Supprimer l'historique
+  pt-BR: Limpar histórico
 search_filter_title:
   en: Search
   fr: Rechercher
+  pt-BR: Buscar
 search_total_count_zero:
   en: "no result"
   fr: "aucun résultat"
+  pt-BR: "nenhum resultado"
 search_total_count_one:
   en: "{{ count }} result"
   fr: "{{ count }} résultat"
+  pt-BR: "{{ count }} resultado"
 search_total_count_two:
   en: "{{ count }} results"
   fr: "{{ count }} résultats"
+  pt-BR: "{{ count }} resultados"
 search_total_count_other:
   en: "{{ count }} results"
   fr: "{{ count }} résultats"
+  pt-BR: "{{ count }} resultados"
 signin_email:
   en: Email
   fr: Email
+  pt-BR: Email
 signin_password:
   en: Password
   fr: Mot de passe
+  pt-BR: Senha
 signin_password_confirm:
   en: Confirm password
   fr: Confirmer mon mot de passe
+  pt-BR: Confirmar senha
 signin_password_new:
   en: New password
   fr: Nouveau mot de passe
+  pt-BR: Nova senha
 signin_password_spec:
   en: Password must be at least 6 characters
   fr: Votre mot de passe doit contenir 6 caractères
+  pt-BR: Sua senha deve conter 6 caracteres
 signin_newsletter:
   en: Tick here if you want to receive informations and offers about products and services by email.
   fr: Je m'abonne à la Newsletter pour bénéficier des meilleurs offres.
+  pt-BR: Quero receber as melhores ofertas.
 signin_submit:
   en: Register my account
   fr: Créer mon compte
+  pt-BR: Criar uma conta
 signin_cancel:
   en: Cancel
   fr: Annuler
+  pt-BR: Cancelar
 signin_signin:
   en: Sign in
   fr: Connexion
+  pt-BR: Entrar
 signin_reset:
   en: Reset password
   fr: Continuer
+  pt-BR: Resetar senha
 signin_wrong:
   en: Wrong credentials!
   fr: Email ou mot de passe incorrect.
+  pt-BR: Senha ou email incorretos.
 signin_forgotpassword:
   en: Reset password
   fr: Mot de passe oublié ?
+  pt-BR: Esqueceu sua senha?
 signin_create_account:
   en: Register my account
   fr: Créer un compte
+  pt-BR: Criar uma conta
 signin_validation_title:
   en: Thank you
   fr: Merci 
+  pt-BR: Obrigado
 signin_validation_details:
   en: Your customer account as been succefully created.
   fr: Votre compte client a été créé avec succès.
+  pt-BR: Sua conta de cliente foi criada com sucesso.
 search_product:
   en: Products
   fr: Produits
+  pt-BR: Produtos
 search_product_empty:
   en: No product found.
   fr: Aucun produit trouvé.
+  pt-BR: Nenhum produto encontrado.
 search_product_all:
   en: View all results
   fr: Voir tous les résultats
+  pt-BR: Ver todos os resultados
 search_category:
   en: Categories
   fr: Categories
+  pt-BR: Categorias
 search_category_empty:
   en: No category found.
   fr: Aucune catégorie trouvée.
+  pt-BR: Nenhuma categoria encontrada.
 store_advantage_shipping:
   en: free shipping
   fr: livraison gratuite
+  pt-BR: frete grátis
 store_advantage_hotline:
   en: free Hotline
   fr: Assistance gratuite
+  pt-BR: assistência gratuíta
 store_advantage_price:
   en: lowest price guarantee
   fr: Les prix le plus bas !
+  pt-BR: melhor preço garantido
 store_advantage_return:
   en: easy return
   fr: retour gratuit
+  pt-BR: devolução fácil
 payment_method_sips_title:
   en: Credit card
   fr: Carte Bancaire
+  pt-BR: Cartão de crédito
 payment_method_sips_title_btn:
   en: Pay by credit card
   fr: Payer par carte
+  pt-BR: Pagar com cartão
 payment_method_sips_btn:
   fr: Payer par carte bancaire
+  pt-BR: Pagar com cartão de crédito
 payment_method_sips_error_title:
   fr: Votre paiement a échoué
+  pt-BR: Seu pagamento falhou
 payment_method_sips_error_subtitle:
   fr: Une erreur est survenue durant le paiement.
+  pt-BR: Ocorreu um erro durante o pagamento.
 payment_method_sips_error_details:
   fr: >
-    Nous vous invitons à réessayer ou à utiliser 
-    un autre mode de paiement. Si le problème 
+    Nous vous invitons à réessayer ou à utiliser
+    un autre mode de paiement. Si le problème
     persiste, contactez le support.
+  pt-BR: >
+    Convidamos você a tentar novamente ou usar
+    outro método de pagamento. Se o problema
+    persistir, entre em contato com o suporte.
+
 payment_method_stripe_title:
   en: Credit card
   fr: Carte Bancaire
+  pt-BR: Cartão de crédito
 payment_method_stripe_btn:
   en: Pay by credit card
   fr: Payer par carte
+  pt-BR: Pagar com cartão
 payment_stripe_form_error:
   fr: Une erreur est survenue, merci d'essayer à nouveau.
+  pt-BR: Ocorreu um erro, por favor tente novamente.
   en: An error has occurred please try again
 payment_method_stripe_error_title:
   fr: Votre paiement a échoué
+  pt-BR: Seu pagamento falhou
 payment_method_stripe_error_subtitle:
   fr: Une erreur est survenue durant le paiement.
+  pt-BR: Ocorreu um erro durante o pagamento.
 payment_method_stripe_error_details:
   fr: >
-    Nous vous invitons à réessayer ou à utiliser 
-    un autre mode de paiement. Si le problème 
+    Nous vous invitons à réessayer ou à utiliser
+    un autre mode de paiement. Si le problème
     persiste, contactez le support.
+  pt-BR: >
+    Te convidamos a tentar novamente ou utilizar
+    uma outra forma de pagamento. Se o problema
+    persistir, entre em contato com nosso suporte
 
 payment_stripe_form_title:
   en: Pay my order
   fr: Payer ma commande
+  pt-BR: Pagar meu pedido
 payment_stripe_form_subtitle:
   en: Secured credit card payment
   fr: Paiement sécurisé par carte bancaire
+  pt-BR: Pagamento por cartão assegurado
 payment_stripe_ckeckout_button:
   en: PAY
   fr: PAYER
+  pt-BR: PAGAR
 
 payment_method_adyen_title:
   en: Credit card with Adyen
   fr: Carte Bancaire
+  pt-BR: Cartão de crédito com Adyen
 payment_method_adyen_title_btn:
   en: Pay by credit card
   fr: Payer par carte
+  pt-BR: Pagar com cartão de crédito
 payment_method_banktransfer_title:
   en: Bank transfer
   fr: Virement bancaire
+  pt-BR: Transferência bancária
 payment_method_banktransfer_btn:
   en: Bank transfer
   fr: Payer par virement
+  pt-BR: Transferência bancária
 payment_method_check_title:
   en: Check
   fr: Chèque
+  pt-BR: Cheque
 payment_method_check_btn:
   en: Pay by check
   fr: Payer par chèque
+  pt-BR: Pagar com cheque
 payment_method_stripe:
   en: Credit card with Stripe
   fr: Carte Bancaire
+  pt-BR: Cartão de crédito com Stripe
 payment_method_paypal_title:
   en: PayPal
   fr: PayPal
+  pt-BR: PayPal
 payment_method_paypal_btn:
   en: Pay by PayPal
   fr: Payer par PayPal
+  pt-BR: Pagar com PayPal
 recommandation_title:
   en: Our new deals
   fr: Nos bonnes affaires
+  pt-BR: Nossas ofertas
 search_show_more:
   en: more
   fr: afficher plus
+  pt-BR: mais
 show_category:
   en: Show all product in category
   fr: Voir la catégories
+  pt-BR: Ir para categoria
 show_more:
   en: show more
   fr: en savoir plus
+  pt-BR: mostrar mais
 blog_title:
   en: Blog
 blog_tags_title:
   en: Tags
   fr: Catégories
+  pt-BR: Categorias
 blog_back:
   en: Back to main blog page
+  pt-BR: Voltar para o blog
 generic_error_title:
   en: The application has encountered an unknown error.
+  pt-BR: A aplicação encontrou um erro desconhecido.
 generic_error_message:
   en: >
+    It doesn't appear to have affected your data,
+    but our technical staff have been automatically
+    notified and will be looking into this with the
+    utmost urgency.
+  pt-BR: >
     It doesn't appear to have affected your data, 
     but our technical staff have been automatically 
     notified and will be looking into this with the 
