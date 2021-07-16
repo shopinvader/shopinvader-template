@@ -391,16 +391,10 @@ cart_payment_desc:
   en: Choose your payment mode to checkout
   fr: Sélectionnez votre mode de paiement pour finaliser votre commande.
 
-cart_payment_secure:
-  en: Payment Secured
-  fr: Vous êtes sur un espace sécurisé.
 cart_invoice_address_different:
   en: Choose invoice address
   fr: je souhaite une adresse de facturation différente
 
-cart_invoice_address:
-  en: Invoice address
-  fr: Address de facturaton
 cart_submit:
   en: Submit
   fr: Valider
@@ -459,14 +453,8 @@ filter_didyoumean:
   en: Search for {suggestion}. 
   fr: Lancer une recherche avec {suggestion}.
 filter_searchwithout_filter:
-  en: Search for {query} without filters
-  fr: Rechercher pour {query} sans filtre
-filter_searchwithout_filter:
   en: No results found for {query}. Did you mean {suggestion}?
   fr: Aucun résultat pour {query}. Voulez-vous dire {suggestion}?
-filter_result_count:
-  en: "{hitCount} results found."
-  fr: "{hitCount} résultat(s) trouvé(s)."
 filter_result_count:
   en: "{hitCount} results found."
   fr: "{hitCount} résultat(s) trouvé(s)."
@@ -551,9 +539,6 @@ product_display_variant:
 product_add_to_cart_discount:
   en: Shop now !
   fr: J'en profite !
-product_advice_title:
-  en: Help & Advice
-  fr: Aide & conseils
 product_code:
   en: Product code
   fr: Référence
@@ -602,9 +587,6 @@ product_spec_title:
 product_variant_title:
   en: Product models
   fr: Toutes les modèles
-product_stock_state_in_stock:
-  en: In-stock
-  fr: En stock
 product_vat_inc:
   en: V.A.T. Inc.
   fr: T.T.C.
@@ -657,9 +639,6 @@ rating_count_one:
   en: "{{count | round}} review"
   fr: "{{count | round}} avis"
 rating_count_two:
-  en: "{{count | round}} reviews"
-  fr: "{{count | round}} avis"
-rating_count_other:
   en: "{{count | round}} reviews"
   fr: "{{count | round}} avis"
 rating_comment_count_one:
