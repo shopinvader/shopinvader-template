@@ -56,7 +56,8 @@ metafields:
         "en": [
           { "name": "France", "id": 76 },
           { "name": "Belgium", "id": 21 },
-          { "name": "Spain", "id": 69 }
+          { "name": "Spain", "id": 69 },
+          { "name": "Brazil", "id": 55 }
         ]
       }
     all_filters: >
@@ -84,6 +85,14 @@ metafields:
           "delimiter": " ",
           "code": "EUR",
           "default_locale": "fr-FR"
+        },
+        "BRL" : {
+          "format": "%u %n",
+          "unit": "R$",
+          "separator": ",",
+          "delimiter": " ",
+          "code": "BRL",
+          "default_locale": "pt-BR"
         },
         "USD" : {
           "format": "%u %n",
