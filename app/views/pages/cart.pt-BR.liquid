@@ -1,0 +1,51 @@
+---
+title: Cart Step 1
+published: true
+listed: false
+handle: cart_index
+slug: cart
+seo_title: Meu carrinho | Shopinvader demo
+position: 100
+sections_content:
+  cart_summary:
+    settings:
+      title: "Meu carrinho"
+      desc: "Lorem Ipsum..."
+      submit_label: "Continuar"
+sections_dropzone_content:
+  - type: cards
+    settings:
+      margin: none
+    blocks:
+    - type: card
+      settings:
+        title: "<h4><i class='ti-help-alt pr-1'></i>  <b>Ajuda</b></h4>"
+        content: "<p>Call us on 00112233445566<br> Monday - Friday: 8am - 8pm<br> Saturday
+          - Sunday: 9am - 7pm</p>"
+    - type: card
+      settings:
+        title: "<h4><i class='ti-truck pr-1'></i>  <b>Entrega</b></h4>"
+        content: "<p>Acompanhe seu pedido em tempo real.</p>"
+    - type: card
+      settings:
+        title: "<h4><i class='ti-back-left pr-1'></i>  <b>Garantido</b></h4>"
+        content: "<p>1 month money-back returns if you change your mind.</p>"
+  - type: category_products_list
+    settings:
+      category_id: '202'
+      text_position: top
+      content: "<h4><b>Confira também</b></h4>"
+      slider: false
+      item_limit: 5
+    blocks: []
+
+
+---
+{% extends 'layouts/default' %}
+{% block 'body/content' %}
+  {% global_section 'cart_breadcrumb' %}
+  <div data-shopinvader-container id="cart-content">
+    {% section 'cart_summary' %}
+  </div>
+  {% sections_dropzone %}
+{% endblock %}

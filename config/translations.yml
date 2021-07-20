@@ -78,7 +78,7 @@ account_order_level0:
 account_order_level1:
   en: Checkout
   fr: Paiement de
-  pt-BR: Checkout
+  pt-BR: Pagamento
 account_order_level2:
   en: Processing
   fr: En préparation
@@ -1037,6 +1037,10 @@ show_more:
   en: show more
   fr: en savoir plus
   pt-BR: mostrar mais
+order_number:
+  en: Order
+  fr: Order
+  pt-BR: Pedido
 blog_title:
   en: Blog
 blog_tags_title:
