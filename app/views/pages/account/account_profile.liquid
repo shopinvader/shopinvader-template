@@ -9,7 +9,7 @@ seo_title: My account profile | Shopinvader demo
 {% block 'body/content/tabcontent' %}
   <div class="row">
     <div class="col-12 col-lg-7">
-      {% with_scope address_type: "profile"%}
+      {% with_scope address_type = "invoicing" %}
         {% assign profile = store.addresses.first %}
         <div class="card">
           <h2 class="card-header bg-white">
