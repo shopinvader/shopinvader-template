@@ -11,7 +11,7 @@ name: "Shopinvader demo (Shopinvader Demo)"
 # The locale listed first is the site's default locale
 # Locales are specified using ISO language codes
 # Possible locales include: en, de, fr, pl, pt-BR, it, nl, nb, es, ru, et, ja, zh-CN
-locales: [en, fr]
+locales: [en, fr, pt-BR]
 
 seo_title: Shopinvader demo | May the discount be with you
 meta_keywords: "the Shopinvader  demo web store"
@@ -56,12 +56,20 @@ metafields:
         "en": [
           { "name": "France", "id": 76 },
           { "name": "Belgium", "id": 21 },
-          { "name": "Spain", "id": 69 }
+          { "name": "Spain", "id": 69 },
+          { "name": "Brazil", "id": 55 }
+        ],
+        "pt-BR": [
+          { "name": "France", "id": 76 },
+          { "name": "Belgium", "id": 21 },
+          { "name": "Spain", "id": 69 },
+          { "name": "Brazil", "id": 55 }
         ]
       }
     all_filters: >
       {
-        "en": []
+        "en": [],
+        "pt-BR": []
       }
     currencies_rate: >
       {
@@ -72,7 +80,8 @@ metafields:
     locale_mapping: >
       {
         "en": "en_US",
-        "fr": "fr_FR"
+        "fr": "fr_FR",
+        "pt-BR": "pt_BR"
       }
     currencies_format: >
       {
@@ -83,6 +92,14 @@ metafields:
           "delimiter": " ",
           "code": "EUR",
           "default_locale": "fr-FR"
+        },
+        "BRL" : {
+          "format": "%u %n",
+          "unit": "R$",
+          "separator": ",",
+          "delimiter": " ",
+          "code": "BRL",
+          "default_locale": "pt-BR"
         },
         "USD" : {
           "format": "%u %n",

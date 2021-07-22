@@ -1,0 +1,23 @@
+---
+title: Cart Step 3
+position: 102
+slug: shipping
+handle: cart_address
+slug: address
+position: 4
+listed: false
+published: true
+is_layout: false
+seo_title: Endereço de entrega | Shopinvader demo
+sections_content:
+  cart_address:
+    settings:
+      title: "Meu endereço"
+      submit_label: Continuar
+    blocks: []  
+---
+
+{% extends 'layouts/checkout' %}
+{% block 'body/cart_content' %}
+  {% section cart_address %}
+{% endblock %}

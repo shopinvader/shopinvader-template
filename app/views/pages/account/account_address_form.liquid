@@ -9,7 +9,7 @@ seo_title: Update my address | Shopinvader demo
 {% block 'body/content/tabcontent' %}
 {% assign form_action = '/invader/addresses/create' %}
 {% if params.item_id %}
-  {% with_scope id: params.item_id %}
+  {% with_scope id = params.item_id %}
     {% assign address = store.addresses.first %}
 
     {% assign form_action = '/invader/addresses/' | append: address.id | append: "/update" %}

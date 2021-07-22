@@ -1,0 +1,19 @@
+---
+title: "Recherche"
+slug: search
+handle: search
+position: 150
+listed: false
+published: true
+is_layout: false
+sections_content:
+  searchkit_faceting:
+    settings:
+      title: "Buscar produto"
+      
+---
+{% extends 'layouts/default' %}
+
+{% block 'body/content' %}
+  {% section 'searchkit_faceting' %}
+{% endblock %}

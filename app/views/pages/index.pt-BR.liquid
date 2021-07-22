@@ -1,0 +1,60 @@
+---
+title: Início
+published: true
+handle: home
+sections_dropzone_content:
+  - type: dynamic_carousel
+    settings:
+      theme_color: none
+      text_position: top
+      section_name: Carousel
+    blocks:
+    - type: slide
+      settings:
+        title: Lorem ipsum dolor sit amet
+        content: >
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer id mollis mi. Curabitur vitae egestas lorem, feugiat porttitor erat. Aenean commodo rutrum tortor quis aliquam.</p>
+        picture:
+          height: 43
+          source: "/samples/assets/armchair-black.png"
+          width: 123
+        img_position: right
+    - type: slide
+      settings:
+        title: Nulla porttitor nulla ac laoreet volutpat
+        content: >
+          <p>Etiam quis turpis magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse consequat aliquet semper. Cras volutpat leo eu risus scelerisque, nec rutrum ligula pellentesque. </p>
+        picture:
+          height: 43
+          source: "/samples/assets/armchair-yellow.png"
+          width: 123
+        img_position: left
+  - type: category_products_list
+    settings:
+      category_id: '20'
+      text_position: start
+      content: "<h2><b>Dining</b> Room</h1>Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit."
+      slider: false
+      item_limit: 4
+    blocks: []
+  - type: products_discounted_list
+    settings:
+      header: "<h2>Melhor oferta do dia !</h2>"
+      item_limit: 4
+    blocks: []
+  - type: posts
+    settings:
+      header: "<h2>Últimas notícias</h2>"
+    blocks: []
+  - type: contact_form
+    settings:
+      header: "<h2>Últimas notícias</h2>"
+    blocks: []
+  - type: category_sitemap
+    settings:
+      title : "Categorias"
+      background : "images/banner-categories.jpg"
+    blocks: []
+---
+{% extends 'layouts/blank' %}

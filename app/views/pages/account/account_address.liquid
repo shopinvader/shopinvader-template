@@ -24,7 +24,7 @@ slug: addresses
     </form>
   </div>
   <div class="col-12">
-    {% with_scope address_type: "address"%}
+    {% with_scope address_type = "address"%}
       <div class="row">
         {% for address in store.addresses%}
           <div class="col-12  mt-3 mb-2">
