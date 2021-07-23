@@ -147,8 +147,16 @@ body.nav-sm-display {
     }
     .header-block-cart_icon,
     .header-block-user_icon,
+    .header-block-nav_link,
     .header-block-link_icon {
       display: flex;
+      .selected {
+        background: #7ac142;
+        color: #ffffff !important;
+        padding: 8px 32px;
+        border-radius: 93px;
+        text-decoration: none !important;
+      }
       .icon {
         text-align: center;
         .icon-img {
