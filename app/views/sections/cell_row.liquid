@@ -13,6 +13,9 @@ settings:
 - label: Full size container
   id: container_fuild
   type: checkbox
+- label: No margin
+  id: container_no_margin
+  type: checkbox
 
 - label: Theme color
   id: theme_color
@@ -218,7 +221,10 @@ default:
   {% assign css_container = 'container' %}
 {%endif%}
 
-<div class="container-fluid">
+{%if section.settings.container_no_margin == true%}
+  {% assign container_no_margin = 'container-no-margin' %}
+{%endif%}
+<div class="container-fluid {{ container_no_margin }}">
   <div class="row {{css_row}}">
     <div class="col-12">
       <div class="{{css_container}}">

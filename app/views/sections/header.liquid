@@ -366,9 +366,10 @@ default:
                   {% assign selected = "" %}
                   {% if block.settings.selected %}
                     {% assign selected = "selected" %}
+                    {% assign decoration = "no-decoration" %}
                   {% endif %}
                   <div class="icon {{ css_icon }} ">
-                    <a class="icon-link" href="{{ block.settings.link_url }}">
+                    <a class="icon-link {{ decoration }} " href="{{ block.settings.link_url }}">
                       <h3 class="icon-label d-none d-md-flex {{ selected }} ">{{ block.settings.label }}</h3>
                     </a>
                   </div>

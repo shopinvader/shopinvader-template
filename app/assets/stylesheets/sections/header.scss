@@ -150,6 +150,9 @@ body.nav-sm-display {
     .header-block-nav_link,
     .header-block-link_icon {
       display: flex;
+      .no-decoration {
+        text-decoration: none !important;
+      }
       .selected {
         background: #7ac142;
         color: #ffffff !important;
