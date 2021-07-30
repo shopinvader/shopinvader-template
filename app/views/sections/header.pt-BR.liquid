@@ -71,18 +71,6 @@ blocks:
   - label: Display icon in mobile navbar
     id: display_sm_icon
     type: checkbox
-- name: Nav Link
-  type: nav_link
-  settings:
-  - label: label
-    id: label
-    type: text
-  - label: URL
-    id: link_url
-    type: url
-  - label: Selected
-    id: selected
-    type: checkbox
 - name: Account icon
   type: user_icon
   settings:
@@ -98,7 +86,7 @@ blocks:
   - label: Display icon in mobile navbar
     id: display_sm_icon
     type: checkbox
-- name: Search
+- name: Buscar
   force_name: true
   type: search
   settings:
@@ -219,20 +207,20 @@ default:
       stretch: true
   - type: search
     settings:
-      label: Search product...
+      label: Buscar produto...
       display_sm_icon: true
       icon: "/samples/assets/search-icon.png"
   - type: user_icon
     settings:
       icon: "/samples/assets/user-icon.png"
       inline_display: true
-      label: Sign-in
+      label: Entrar
       display_sm_icon: false
   - type: cart_icon
     settings:
       icon: "/samples/assets/cart-icon.png"
       inline_display: true
-      label: My cart
+      label: Meu Carrinho
       display_sm_icon: true
   - type: row
     settings:
@@ -357,20 +345,6 @@ default:
                     <a class="icon-link" href="{{ block.settings.link_url }}">
                       <img src="{{ block.settings.icon }}" alt="{{ block.settings.label }}"  class="icon-img"/>
                       <span class="icon-label d-none d-md-flex">{{ block.settings.label }}</span>
-                    </a>
-                  </div>
-                </div>
-              {% when "nav_link" %}
-                <div class="{{display_sm_icon_css}}">
-                  {% assign css_icon = "" %}
-                  {% assign selected = "" %}
-                  {% if block.settings.selected %}
-                    {% assign selected = "selected" %}
-                    {% assign decoration = "no-decoration" %}
-                  {% endif %}
-                  <div class="icon {{ css_icon }} ">
-                    <a class="icon-link {{ decoration }} " href="{{ block.settings.link_url }}">
-                      <h3 class="icon-label d-none d-md-flex {{ selected }} ">{{ block.settings.label }}</h3>
                     </a>
                   </div>
                 </div>

@@ -26,6 +26,11 @@
       "type": "checkbox"
     },
     {
+      "label": "No margin",
+      "id": "container_no_margin",
+      "type": "checkbox"
+    },
+    {
       "label": "Display Controls",
       "id": "display_control",
       "type": "radio",
@@ -158,8 +163,10 @@
   }]
 }
 ---
-
-<div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+{%if section.settings.container_no_margin == true%}
+  {% assign container_no_margin = 'container-no-margin' %}
+{%endif%}
+<div class="container{% if section.settings.full_width %}-fluid{% endif %} {{ container_no_margin }}">
   <div class="row text-center {% if section.settings.display_sm != true %}d-none d-sm-block{% endif %}" id="slider">
     <div class="carousel slide" id="carousel-{{section.settings.identifier}}" data-ride="carousel">
       <div class="carousel-inner">

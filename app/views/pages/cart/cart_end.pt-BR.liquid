@@ -1,0 +1,24 @@
+---
+title: Cart Step 5
+position: 104
+slug: validation
+handle: cart_end
+position: 4
+listed: false
+published: true
+is_layout: false
+seo_title: obrigado pelo seu pedido | Shopinvader demo
+sections_content:
+  cart_end:
+    settings:
+      title: "Obrigado !"
+      account_desc: "Obrigado pelo seu pedido"
+      account_title: Acompanhar pedido
+      account_desc:  Você pode acompanhar seu pedido pela sua conta
+      account_button: Ver pedidos
+    blocks: []
+---
+{% extends 'layouts/checkout' %}
+{% block 'body/cart_content' %}
+  {% section cart_end %}
+{% endblock %}
