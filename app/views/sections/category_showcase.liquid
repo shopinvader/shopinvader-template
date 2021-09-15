@@ -58,7 +58,7 @@
   {%assign category = store.categories.last%}
 {%endwith_scope%}
 {%if category %}
-  {% with_scope categories: {id: category.objectID}, main: true %}
+  {% with_scope categories: {id: category.id}, main: true %}
 <div class="container-fluid">
   <div class="row justify-content-center  main-showcase {% if section.settings.main_float %}main-showcase-float{% endif%}">
     <div class="container">
@@ -176,7 +176,7 @@
     <div class="row">
       <div class="col-12">
         <div class="row">
-          {%with_scope parent: {id: category.objectID}%}
+          {%with_scope parent: {id: category.id}%}
             {% paginate store.categories by 4 %}
               {%for category in paginate.collection%}
                 {% if category.images  and category.images.size > 0%}
