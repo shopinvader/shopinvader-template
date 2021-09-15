@@ -8,7 +8,7 @@ handle: product
 {% block 'header_meta' %}
   <meta name="og:site_name" content="{{site.name}}">
   <meta name="og:title" content="{{product.seo_title}}">
-  <meta name="og:url" content="{{ product.url_key | prepend: url_base }}?ref={{product.objectID }}">
+  <meta name="og:url" content="{{ product.url_key | prepend: url_base }}?ref={{product.id }}">
   <meta name="og:description" content="{{product.meta_description}}">
   <meta name="og:image" content="{{ product.images.first.medium.src }}">
   <meta name="description" content="{{product.meta_description}}">
@@ -75,7 +75,7 @@ handle: product
     {% assign variant = product %}
   {% endif %}
 
-  <div class="product-page" up-viewport id="product-page-{{variant.objectID}}">
+  <div class="product-page" up-viewport id="product-page-{{variant.id}}">
     <nav aria-label="breadcrumb" class="product-breadcrumb">
       <ol class="breadcrumb pl-0 d-none d-sm-inline-block">
         <li class="breadcrumb-item d-inline-block ">
@@ -157,9 +157,9 @@ handle: product
     </div>
     <div class="product-attr product-cart">
       <form method="POST" action="/invader/cart/add_item" data-shopinvader-form class="add-to-cart">
-        <input type="hidden" name="invader_success_url" value="{{variant.url_key  | prepend: url_base}}?addtocart_product_id={{variant.objectID}}" />
+        <input type="hidden" name="invader_success_url" value="{{variant.url_key  | prepend: url_base}}?addtocart_product_id={{variant.id}}" />
         <input type="hidden" name="invader_error_url" value="{{variant.url_key  | prepend: url_base}}" />
-        <input type="hidden" name="product_id" value="{{variant.objectID }}">
+        <input type="hidden" name="product_id" value="{{variant.id }}">
         <div class="product-qty-input">
           <label for="qty" class="">
             {{'product_quantity' | translate}}
@@ -301,7 +301,7 @@ handle: product
             {% assign cross_sellings = cross_sellings | append: cross.id | append:','%}
           {% endfor %}
           {% assign cross_sellings = cross_sellings | split:','%}
-          {% with_scope objectID.in: cross_sellings, objectID.nin:[variant.objectID], main: true %}
+          {% with_scope id.in: cross_sellings, id.nin:[variant.id], main: true %}
             {% for product_cross in store.products %}
               <div class="item">
                 {% include 'product_thumbnail' with product: product_cross %}
@@ -321,7 +321,7 @@ handle: product
             {% assign up_sellings = up_sellings | append: cross.id | append:','%}
           {% endfor %}
           {% assign up_sellings = up_sellings | split:','%}
-          {% with_scope objectID.in: up_sellings, objectID.nin:[variant.objectID], main: true %}
+          {% with_scope id.in: up_sellings, id.nin:[variant.id], main: true %}
             {% for product_up in store.products %}
               <div class="item">
                 {% include 'product_thumbnail' with product: product_up %}

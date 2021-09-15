@@ -22,9 +22,9 @@
     <strong>{{product_variant.sku}}</strong>
   </div>
   <form method="POST" action="/invader/cart/add_item" data-shopinvader-form class="add-to-cart">
-    <input type="hidden" name="invader_success_url" value="{{product_variant.url_key  | prepend: url_base}}?addtocart_product_id={{product_variant.objectID}}" />
+    <input type="hidden" name="invader_success_url" value="{{product_variant.url_key  | prepend: url_base}}?addtocart_product_id={{product_variant.id}}" />
     <input type="hidden" name="invader_error_url" value="{{product_variant.url_key  | prepend: url_base}}" />
-    <input type="hidden" name="product_id" value="{{product_variant.objectID }}">
+    <input type="hidden" name="product_id" value="{{product_variant.id }}">
 
     <div class="row form-horizontal product-form-qty d-none d-sm-block">
       <label for="qty" class="col-4 col-sm-5 col-xl-12 control-label text-right text-xl-center">
