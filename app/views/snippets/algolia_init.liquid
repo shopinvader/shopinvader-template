@@ -61,7 +61,7 @@
     var default_img_url = "{{site.metafields.theme.noimage }}";
     var default_role = "{{site.metafields.erp.default_role }}";
     {% if category %}
-      var category_id = {{category.objectID | json}};
+      var category_id = {{category.id | json}};
     {% endif %}
   </script>
   {% include 'algolia_template_product_hit' %}

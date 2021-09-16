@@ -153,7 +153,7 @@ is_layout: false
             <div class="row">
               {% for cross_seller in product.relateds.cross_sell %}
                 <div class="col-6 col-sm-3 col-xl-2">
-                {% with_scope objectID: [cross_seller.id]%}
+                {% with_scope id: [cross_seller.id]%}
                   {% include 'product_thumbnail' with 
                     product: store.products.first
                   %}

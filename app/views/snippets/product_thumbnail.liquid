@@ -20,7 +20,7 @@
 {% endif%}
 {% assign layout = 'grid' %}
 {% assign product_url = product.url_key  | prepend: url_base | append:'?ref='| append: product.sku%}
-<div class="product-thumbnail {{layout}}" id="product-hit-{{layout}}-{{product.objectID}}">
+<div class="product-thumbnail {{layout}}" id="product-hit-{{layout}}-{{product.id}}">
   <div class="image">
     <img
     src="{{product.images.first.medium.src  | default: site.metafields.theme.noimage }}"

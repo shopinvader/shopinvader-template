@@ -1,5 +1,5 @@
 {% if product_variant.images.size > 1 %}
-  <div class="carousel slide row align-items-start justify-content-center flex-md-nowrap" data-ride="carousel" id="slide-{{product_variant.objectID}}">
+  <div class="carousel slide row align-items-start justify-content-center flex-md-nowrap" data-ride="carousel" id="slide-{{product_variant.id}}">
     <div class="col-12 col-lg">
       <ol class="carousel-indicators">
         {% for image in product_variant.images %}
@@ -12,11 +12,11 @@
             <img src="{{image.large.src}}" alt="{{image.large.alt}}" class="img-fluid w-100"/>
           </div>
         {% endfor %}
-        <a class="carousel-control-prev" href="#slide-{{product_variant.objectID}}" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#slide-{{product_variant.id}}" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#slide-{{product_variant.objectID}}" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#slide-{{product_variant.id}}" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
@@ -25,7 +25,7 @@
     <div class="col-12 col-lg-auto order-lg-first d-none d-lg-flex">
       <div class="d-flex flex-row flex-lg-column justify-content-center">
         {% for image in product_variant.images %}
-        <div data-target="#slide-{{product_variant.objectID}}" data-slide-to="{{forloop.index0}}" class="{%if forloop.index == 1 %}active{%endif%} border carousel-thumbails d-flex mb-2 mr-2">
+        <div data-target="#slide-{{product_variant.id}}" data-slide-to="{{forloop.index0}}" class="{%if forloop.index == 1 %}active{%endif%} border carousel-thumbails d-flex mb-2 mr-2">
           <img src="{{image.small.src}}" alt="{{image.small.alt}}" class="img-fluid"/>
         </div>
         {% endfor %}
@@ -52,7 +52,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-12 col-md-9 col-lg-10 order-2 order-md-1">
-            <div class="carousel slide" data-ride="false" id="slide-zoom-{{product_variant.objectID}}">
+            <div class="carousel slide" data-ride="false" id="slide-zoom-{{product_variant.id}}">
               <div class="carousel-inner" role="listbox">
                 {% for image in product_variant.images %}
                 <div class="carousel-item text-center {%if forloop.index == 1 %}active{%endif%}">
@@ -60,11 +60,11 @@
                   <img src="{{image.xlarge.src}}" alt="{{image.xlarge.alt}}" class="img-fluid"/>
                 </div>
                 {% endfor %}
-                <a class="carousel-control-prev" href="#slide-{{product_variant.objectID}}" role="button" data-slide="prev">
+                <a class="carousel-control-prev" href="#slide-{{product_variant.id}}" role="button" data-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="sr-only">Previous</span>
                 </a>
-                <a class="carousel-control-next" href="#slide-{{product_variant.objectID}}" role="button" data-slide="next">
+                <a class="carousel-control-next" href="#slide-{{product_variant.id}}" role="button" data-slide="next">
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="sr-only">Next</span>
                 </a>
@@ -75,7 +75,7 @@
             <div class="">
               {% for image in product_variant.images %}
               <div class=" mt-1 mb-2 d-inline-block d-md-block">
-                <div data-target="#slide-zoom-{{product_variant.objectID}}" data-slide-to="{{forloop.index0}}" class="{%if forloop.index == 1 %}active{%endif%} border carousel-thumbails ">
+                <div data-target="#slide-zoom-{{product_variant.id}}" data-slide-to="{{forloop.index0}}" class="{%if forloop.index == 1 %}active{%endif%} border carousel-thumbails ">
                   <img src="{{image.small.src}}" alt="{{image.small.alt}}" class="img-fluid"/>
                 </div>
               </div>

@@ -1,183 +1,202 @@
-import React, { Component }  from 'react';
-import {
-  Carousel
-} from 'react-bootstrap';
-var cookies = require('browser-cookies');
+import React, {Component} from "react"
+import {Carousel} from "react-bootstrap"
+var cookies = require("browser-cookies")
 
 class ProductHit extends React.Component {
   constructor(props, locale) {
-    super(props);
+    super(props)
     this.state = {
-      'product': this.props.result._source,
-      'locale': locale
-    };
+      product: this.props.result._source,
+      locale: locale,
+    }
   }
   get_role() {
-    var role = cookies.get('role');
-    if(role == null || role == '') {
-      role = 'default';
+    var role = cookies.get("role")
+    if (role == null || role == "") {
+      role = "default"
     }
-    return role;
+    return role
   }
   get_url() {
-    var url_key =  this.props.result._source.url_key
-    return new URL(url_key, url_base).href;
+    var url_key = this.props.result._source.url_key
+    return new URL(url_key, url_base).href
   }
   get_first_category() {
-    var categories = this.props.result._source.categories;
+    var categories = this.props.result._source.categories
     if (categories.length > 0) {
-      return categories[0].name;
+      return categories[0].name
     }
-    return null;
+    return null
   }
   get_price_currency(price) {
-    var currency = currencies.items[currencies.selected];
-    return new Intl.NumberFormat(
-      this.state.locale, { 
-        style: 'currency', 
-        currency: currencies.selected 
-      }
-    ).format(price*currency.rate);
+    var currency = currencies.items[currencies.selected]
+    return new Intl.NumberFormat(this.state.locale, {
+      style: "currency",
+      currency: currencies.selected,
+    }).format(price * currency.rate)
   }
   get_thumb_layout() {
-    return 'grid';
+    return "grid"
   }
   variants() {
-    var product = this.state.product;
+    var product = this.state.product
     const items = []
-    if(product.variant_selector.length > 1){
-      
+    if (product.variant_selector.length > 1) {
       product.variant_selector.map((group) => {
-        var item_variant = [];
+        var item_variant = []
 
         group.values.map((variant) => {
-          var name = variant.name.replace(group.name.trim(), '').trim();
+          var name = variant.name.replace(group.name.trim(), "").trim()
           item_variant.push(
-            <div className="variant-item"
-            dangerouslySetInnerHTML={{__html: name}}
+            <div
+              className="variant-item"
+              dangerouslySetInnerHTML={{__html: name}}
             />
-          );
-        });
+          )
+        })
         items.push(
-          <div key={product.id+'_'+group.name.toLowerCase()} className="variant-group">
+          <div
+            key={product.id + "_" + group.name.toLowerCase()}
+            className="variant-group"
+          >
             <span
               className="variant-group-title"
               dangerouslySetInnerHTML={{__html: group.name}}
             />
-            <div className="variant-group-items">
-              {item_variant}
-            </div>
+            <div className="variant-group-items">{item_variant}</div>
           </div>
-        );
-      });
-      return (
-        <div>
-          {items}
-        </div>
-      );
+        )
+      })
+      return <div>{items}</div>
     }
   }
   price() {
-    var price = this.state.product.price[this.get_role()];
-    var components = [];
-    var discount_css = '';
-    if(price.discount > 0) {
-      var discount_css="discounted"
+    var price = this.state.product.price[this.get_role()]
+    var components = []
+    var discount_css = ""
+    if (price.discount > 0) {
+      var discount_css = "discounted"
       components.push(
-        <div 
+        <div
           className="price_orignal"
-          dangerouslySetInnerHTML={{__html: this.get_price_currency(price.original_value)}}
+          dangerouslySetInnerHTML={{
+            __html: this.get_price_currency(price.original_value),
+          }}
         />
-      );
+      )
     }
     components.push(
-      <div 
-        className={"price_value "+discount_css}
+      <div
+        className={"price_value " + discount_css}
         dangerouslySetInnerHTML={{__html: this.get_price_currency(price.value)}}
       />
-    );
-    return (
-      <div key={'price-'+this.state.product.objectID}>
-        {components}
-      </div>
-    );
+    )
+    return <div key={"price-" + this.state.product.id}>{components}</div>
   }
   images() {
-    var images = this.state.product.images || [];
-    if(images.length > 0) {
-      if(images.length == 1) {
-        var image = images[0].medium;
-        return (
-          <img src={image.src} alt={image.alt} title={image.alt}/>
-        );
-      }
-      else {
-        var slides = [];
-        var id = 'product-hit-'+this.get_thumb_layout()+this.state.product.objectID+'-carousel';
-        var i=0;
+    var images = this.state.product.images || []
+    if (images.length > 0) {
+      if (images.length == 1) {
+        var image = images[0].medium
+        return <img src={image.src} alt={image.alt} title={image.alt} />
+      } else {
+        var slides = []
+        var id =
+          "product-hit-" +
+          this.get_thumb_layout() +
+          this.state.product.objectID +
+          "-carousel"
+        var i = 0
         images.map((item) => {
           slides.push(
-            <Carousel.Item key={id+'_'+i}>
+            <Carousel.Item key={id + "_" + i}>
               <img
                 className="d-block w-100"
-                src={item.medium.src}
-                alt={item.medium.alt}
-                key={id+'_'+i+'image'}
+                key={id + "_" + i + "image"}
                 data-link={this.get_url()}
               />
             </Carousel.Item>
-          );
-          i++;
-        });
+          )
+          i++
+        })
         return (
-          <Carousel 
-            controls={true}
-            interval={null}
-            key={id}>
+          <Carousel controls={true} interval={null} key={id}>
             {slides}
           </Carousel>
-        );
+        )
       }
-    }
-    else {
+    } else {
       return (
-        <img src={noimage} alt={this.state.product.name} title={this.state.product.name} data-link={this.get_url()}/>
-      );
+        <img
+          src={noimage}
+          alt={this.state.product.name}
+          title={this.state.product.name}
+          data-link={this.get_url()}
+        />
+      )
     }
   }
   render() {
-    var product = this.state.product;
-    var class_name = 'product-thumbnail '+this.get_thumb_layout();
-    var page = document.location;
-    var id = 'product-hit-'+this.get_thumb_layout()+product.objectID;
-    var product_url = this.get_url();
+    var product = this.state.product
+    var class_name = "product-thumbnail " + this.get_thumb_layout()
+    var page = document.location
+    var id = "product-hit-" + this.get_thumb_layout() + product.id
+    var product_url = this.get_url()
     return (
       <div className={class_name} key={product} id={id}>
-        <div className="image">
-          {this.images()}
-        </div>
+        <div className="image">{this.images()}</div>
         <div className="content">
           <div className="description">
-            <a href={product_url}  className="title" dangerouslySetInnerHTML={{__html: product.model.name}} />
-            <div className="short_description" dangerouslySetInnerHTML={{__html: product.short_description}} />
-            <a className="category" dangerouslySetInnerHTML={{__html: this.get_first_category()}} />
+            <a
+              href={product_url}
+              className="title"
+              dangerouslySetInnerHTML={{__html: product.model.name}}
+            />
+            <div
+              className="short_description"
+              dangerouslySetInnerHTML={{__html: product.short_description}}
+            />
+            <a
+              className="category"
+              dangerouslySetInnerHTML={{__html: this.get_first_category()}}
+            />
           </div>
           <div className="price">
             {this.price()}
             <div className="add-to-cart">
-              <form method="POST" action="/invader/cart/add_item" data-shopinvader-form>
-                <input type="hidden" name="invader_success_url" value={product_url+'?addtocart_product_id='+product.objectID} />
-                <input type="hidden" name="invader_error_url" value={product_url} />
+              <form
+                method="POST"
+                action="/invader/cart/add_item"
+                data-shopinvader-form
+              >
+                <input
+                  type="hidden"
+                  name="invader_success_url"
+                  value={product_url + "?addtocart_product_id=" + product.id}
+                />
+                <input
+                  type="hidden"
+                  name="invader_error_url"
+                  value={product_url}
+                />
                 <input type="hidden" name="item_qty" value="1" />
-                <input type="hidden" name="product_id" value={product.objectID} />
-                <a href={product_url} className="btn-product-page" dangerouslySetInnerHTML={{__html: "Details"}} />
-                <button type="submit" className="btn-add-to-cart" dangerouslySetInnerHTML={{__html: "Ajouter au panier"}} />
+                <input type="hidden" name="product_id" value={product.id} />
+                <a
+                  href={product_url}
+                  className="btn-product-page"
+                  dangerouslySetInnerHTML={{__html: "Details"}}
+                />
+                <button
+                  type="submit"
+                  className="btn-add-to-cart"
+                  dangerouslySetInnerHTML={{__html: "Ajouter au panier"}}
+                />
               </form>
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
-export default ProductHit;
+export default ProductHit
